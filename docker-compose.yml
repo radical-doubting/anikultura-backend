@@ -33,8 +33,6 @@ services:
 #            - sailmysql:/var/lib/mysql
         networks:
             - sail
-        healthcheck:
-            test: ["CMD", "mysqladmin", "ping"]
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         networks:
