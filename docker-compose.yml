@@ -29,12 +29,23 @@ services:
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-        volumes:
-            - 'sailmysql:/var/lib/mysql'
+#        volumes:
+#            - sailmysql:/var/lib/mysql
         networks:
             - sail
         healthcheck:
-          test: ["CMD", "mysqladmin", "ping"]
+            test: ["CMD", "mysqladmin", "ping"]
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        networks:
+            - sail
+        ports:
+            - 8000:80
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            PMA_HOST: mysql
 networks:
     sail:
         driver: bridge
