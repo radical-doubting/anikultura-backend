@@ -24,12 +24,17 @@ Having different dependency versions can create problems for us later.
 
 * Clone the repository in your machine.
 * Do `composer install`
+* Do `npm install`
+* Copy your `.env` from `.env.example`. Generate the Laravel app key.
+* Done!
 
 ## Setup using Docker and Laravel Sail
 
 * You need to have Ubuntu WSL2 distro. Download it from the Microsoft Store and up your dev folders in Ubuntu.
 * Clone the repository in your Ubuntu dev folder.
 * Have Docker Desktop running in the background.
+* Navigate to the repository folder.
+* Execute `docker run --rm \ -u "$(id -u):$(id -g)" \ -v $(pwd):/opt \ -w /opt \ laravelsail/php80-composer:latest \ composer install --ignore-platform-reqs`
 * Navigate to the `smfi-crpm-app` folder then run `./vendor/laravel/sail/bin/sail build`
 * After the image is built, run `./vendor/laravel/sail/bin/sail up`
 * Open `smfi-crpm-app` (which is in Ubuntu) using VS Code.
