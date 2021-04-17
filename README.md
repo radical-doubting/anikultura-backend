@@ -4,8 +4,8 @@ A web application built in the Tailwind, Alpine.js, Laravel, Livewire (TALL) sta
 
 ## Setup using XAMPP
 
-* First, make sure that you are running the exact versions. If not, update them accordingly. 
-Having different dependency versions can create problems for us later.
+* First, make sure that you are running the exact versions.
+* If you are running a different version of a dependency, update them to our exact versions. Having different dependency versions can create problems for us later.
 
 ### Tooling Dependencies
 
@@ -29,6 +29,8 @@ Having different dependency versions can create problems for us later.
 * Done!
 
 ## Setup using Docker and Laravel Sail
+
+Reference: https://laravel.com/docs/8.x/sail
 
 * You need to have Ubuntu WSL2 distro. Download it from the Microsoft Store and up your dev folders in Ubuntu.
 * Clone the repository in your Ubuntu dev folder.
