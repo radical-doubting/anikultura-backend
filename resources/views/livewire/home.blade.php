@@ -1,3 +1,3 @@
 <div>
-    {{-- Stop trying to control. --}}
+    <h1>I am home</h1>
 </div>
