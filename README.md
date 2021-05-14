@@ -1,4 +1,4 @@
-# SMFI Crop Monitoring App
+# SM KSK SAP Anikultura
 
 A web application built in the Tailwind, Alpine.js, Laravel, Livewire (TALL) stack.
 
