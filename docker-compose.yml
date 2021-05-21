@@ -29,8 +29,8 @@ services:
             MYSQL_USER: '${DB_USERNAME}'
             MYSQL_PASSWORD: '${DB_PASSWORD}'
             MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
-#        volumes:
-#            - sailmysql:/var/lib/mysql
+        volumes:
+            - sailmysql:/var/lib/mysql
         networks:
             - sail
     phpmyadmin:
