@@ -17,6 +17,7 @@ class Province extends Model
      */
     protected $fillable = [
         'name',
+        'region_id',
     ];
 
     /**
@@ -40,4 +41,12 @@ class Province extends Model
         'updated_at',
         'created_at',
     ];
+
+    /**
+     * Get the region that owns this province.
+     */
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
 }

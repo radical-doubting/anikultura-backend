@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Site\Province\ProvinceEditScreen;
+use App\Orchid\Screens\Site\Province\ProvinceListScreen;
 use App\Orchid\Screens\Site\Region\RegionEditScreen;
 use App\Orchid\Screens\Site\Region\RegionListScreen;
 use Illuminate\Support\Facades\Route;
@@ -32,4 +34,31 @@ Route::screen('sites/regions', RegionListScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Regions'), route('platform.sites.regions'));
+    });
+
+// Sites > Province > Edit Province
+Route::screen('sites/provinces/{province}/edit', ProvinceEditScreen::class)
+    ->name('platform.sites.provinces.edit')
+    ->breadcrumbs(function (Trail $trail, $province) {
+        return $trail
+            ->parent('platform.sites.provinces')
+            ->push(__('Edit Province'), route('platform.sites.provinces.edit', $province));
+    });
+
+// Sites > Province > Create Province
+Route::screen('sites/provinces/create', ProvinceEditScreen::class)
+    ->name('platform.sites.provinces.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.sites.provinces')
+            ->push(__('Create Province'), route('platform.sites.provinces.create'));
+    });
+
+// Sites > Provinces
+Route::screen('sites/provinces', ProvinceListScreen::class)
+    ->name('platform.sites.provinces')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Provinces'), route('platform.sites.provinces'));
     });
