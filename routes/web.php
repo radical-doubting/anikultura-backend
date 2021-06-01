@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/batch', function () {
+    return view('batch');
+});
+
+
 Route::get('/profile', function () {
     return view('profile');
 });
@@ -24,3 +29,7 @@ Route::get('/profile', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/create-crops', function () {
+    return view('create-crops');
+});
