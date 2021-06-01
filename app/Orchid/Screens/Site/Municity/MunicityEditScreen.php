@@ -132,6 +132,6 @@ class MunicityEditScreen extends Screen
 
         Toast::info(__('Municity was saved successfully'));
 
-        return redirect()->route('platform.sites.municitys');
+        return redirect()->route('platform.sites.municities');
     }
 }

@@ -31,7 +31,7 @@ class MunicityListScreen extends Screen
     public function query(): array
     {
         return [
-            'municitys' => Municity::with('region')
+            'municities' => Municity::with('region')
                 ->with('province')
                 ->filters()
                 ->defaultSort('id')

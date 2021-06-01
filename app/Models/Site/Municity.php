@@ -17,6 +17,8 @@ class Municity extends Model
      */
     protected $fillable = [
         'name',
+        'province_id',
+        'region_id',
     ];
 
     /**
@@ -41,4 +43,20 @@ class Municity extends Model
         'updated_at',
         'created_at',
     ];
+
+    /**
+     * Get the province that owns this municity.
+     */
+    public function province()
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    /**
+     * Get the region that owns this municity.
+     */
+    public function region()
+    {
+        return $this->belongsTo(Region::class);
+    }
 }
