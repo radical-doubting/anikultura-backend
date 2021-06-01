@@ -15,6 +15,7 @@ class CreateMunicitiesTable extends Migration
     {
         Schema::create('municities', function (Blueprint $table) {
             $table->id();
+            $table->name();
             $table->unsignedBigInteger('region_id');
             $table->foreign('region_id')
                 ->references('id')
