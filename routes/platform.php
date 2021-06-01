@@ -17,7 +17,11 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-
+use App\Orchid\Screens\Farmer\FarmerCreateScreen;
+use App\Orchid\Screens\Farmer\FarmerListScreen;
+use App\Orchid\Screens\Farmer\FarmerEditScreen;
+use App\Orchid\Screens\Farmer\FarmerListOneScreen;
+use App\Orchid\Screens\Farmland\FarmlandCreateScreen;
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -90,6 +94,26 @@ Route::screen('roles', RoleListScreen::class)
             ->parent('platform.index')
             ->push(__('Roles'), route('platform.systems.roles'));
     });
+
+// Platform > System > Farmer Profile > Create
+Route::screen('enroll/farmer', FarmerCreateScreen::class)
+    ->name('platform.systems.farmer.profiles.edit');
+
+// Platform > System > Farmer Profile > List
+Route::screen('view/all/farmer', FarmerListScreen::class)
+    ->name('platform.systems.farmer.profiles.list');
+
+// Platform > System > Farmer Profile > List One
+Route::screen('view/farmer/{id}', FarmerListOneScreen::class)
+->name('platform.systems.farmer.profiles.list.one');
+
+// Platform > System > Farmer Profile > Edit
+Route::screen('edit/farmer/{id}', FarmerEditScreen::class)
+    ->name('platform.systems.farmer.profiles.edit');
+
+// Platform > System > Farmland > Create
+Route::screen('create/farmland', FarmlandCreateScreen::class)
+    ->name('platform.systems.farmland.create');
 
 // Example...
 Route::screen('example', ExampleScreen::class)
