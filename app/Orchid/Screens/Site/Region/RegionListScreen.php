@@ -2,6 +2,9 @@
 
 namespace App\Orchid\Screens\Site\Region;
 
+use App\Models\Site\Region;
+use App\Orchid\Layouts\Site\Region\RegionListLayout;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
 class RegionListScreen extends Screen
@@ -11,14 +14,14 @@ class RegionListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'RegionListScreen';
+    public $name = 'Regions';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'RegionListScreen';
+    public $description = 'List of all regions under SM KSK SAP';
 
     /**
      * Query data.
@@ -27,7 +30,11 @@ class RegionListScreen extends Screen
      */
     public function query(): array
     {
-        return [];
+        return [
+            'regions' => Region::filters()
+                ->defaultSort('id')
+                ->paginate()
+        ];
     }
 
     /**
@@ -37,7 +44,11 @@ class RegionListScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Link::make(__('Add'))
+                ->icon('plus')
+                ->route('platform.sites.regions.create'),
+        ];
     }
 
     /**
@@ -47,6 +58,8 @@ class RegionListScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+        return [
+            RegionListLayout::class
+        ];
     }
 }

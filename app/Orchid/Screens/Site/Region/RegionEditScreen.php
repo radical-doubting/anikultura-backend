@@ -2,7 +2,14 @@
 
 namespace App\Orchid\Screens\Site\Region;
 
+use App\Models\Site\Region;
+use App\Orchid\Layouts\Site\Region\RegionEditLayout;
+use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class RegionEditScreen extends Screen
 {
@@ -25,9 +32,18 @@ class RegionEditScreen extends Screen
      *
      * @return array
      */
-    public function query(): array
+    public function query(Region $region): array
     {
-        return [];
+        $this->region = $region;
+
+        if (!$region->exists) {
+            $this->name = 'Create Region';
+            $this->description = 'Create a new region';
+        }
+
+        return [
+            'region' => $region
+        ];
     }
 
     /**
@@ -37,7 +53,17 @@ class RegionEditScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the region is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->region->exists),
+
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
+        ];
     }
 
     /**
@@ -47,6 +73,59 @@ class RegionEditScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+        return [
+            Layout::block(RegionEditLayout::class)
+                ->title(__('Region Information'))
+                ->description(__('Update the region\'s details.'))
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::DEFAULT())
+                        ->icon('check')
+                        ->canSee($this->region->exists)
+                        ->method('save')
+                ),
+        ];
+    }
+
+
+    /**
+     * @param Region $region
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(Region $region)
+    {
+        $region->delete();
+
+        Toast::info(__('Region was removed'));
+
+        return redirect()->route('platform.sites.regions');
+    }
+
+    /**
+     * @param Region    $region
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(Region $region, Request $request)
+    {
+        $request->validate([
+            'region.name' => [
+                'required'
+            ]
+        ]);
+
+        $regionData = $request->get('region');
+
+        $region
+            ->fill($regionData)
+            ->save();
+
+        Toast::info(__('Region was saved'));
+
+        return redirect()->route('platform.sites.regions');
     }
 }

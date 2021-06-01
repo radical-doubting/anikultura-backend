@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Site\Region;
 
 use Orchid\Screen\Field;
+use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Rows;
 
 class RegionEditLayout extends Rows
@@ -22,7 +23,12 @@ class RegionEditLayout extends Rows
     protected function fields(): array
     {
         return [
-            
+            Input::make('region.name')
+                ->type('text')
+                ->max(255)
+                ->required()
+                ->title(__('Name'))
+                ->placeholder(__('Name')),
         ];
     }
 }
