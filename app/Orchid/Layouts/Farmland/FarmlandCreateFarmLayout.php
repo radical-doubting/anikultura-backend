@@ -25,6 +25,11 @@ class FarmlandCreateFarmLayout extends Rows
     protected function fields(): array
     {
         return [
+            Select::make('farmland_status')
+                ->title('Farm Status:')
+                ->required()
+                ->options(["Owned", "Rented", "Borrowed"]),
+
             Select::make('farm_type')
                 ->title('Farm Type:')
                 ->required()
@@ -35,15 +40,31 @@ class FarmlandCreateFarmLayout extends Rows
                 ->required()
                 ->title('Farm Size:'),
 
-            Input::make('watering_system_used')
-                ->title('Watering System Used:')
-                ->placeholder('-')
-                ->required(),
             
-            Input::make('crop_buyer')
-            ->title('Usual Crop Buyers:')
-            ->placeholder('-')
-            ->required(),
+            Select::make('watering_system_used')
+                ->options([
+                    'well'   => 'Well',
+                    'nia' => 'NIA Canal/Irrigation',
+                    'spring' => 'Spring',
+                    'shallowtubewell' => 'Shallow Tube Well',
+                    'creek' => 'Creek',
+                    'faucet' => 'Faucet',
+                    'rainwater' => 'Rain Water',
+                ])
+                ->multiple()
+                ->title('Watering System Used:'),
+
+            Select::make('crop_buyer')
+            ->options([
+                'biyahedor'   => 'Biyahedor',
+                'dizon_farm' => 'Dizon Farm',
+                'wholesaler' => 'Wholesaler',
+                'market' => 'Market',
+                'fca' => 'FCA',
+                'others' => 'Others',
+            ])
+            ->multiple()
+            ->title('Crop Buyer:'),
         ];
     }
 }

@@ -55,7 +55,7 @@ class FarmlandCreateScreen extends Screen
     {
         return [
             Layout::block(FarmlandCreateAddressLayout::class)
-                ->title('Farmland Information')
+                ->title('Farmland Address')
                 ->description('Insert Description.'),
             Layout::block(FarmlandCreateFarmLayout::class)
                 ->title('Farmland Information')
