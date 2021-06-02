@@ -3,15 +3,19 @@
 namespace App\Orchid\Screens\Farmer;
 
 use Orchid\Screen\Screen;
+use Orchid\Screen\Action;
 use App\Orchid\Layouts\Farmer\FarmerCreateLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateSkillLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateSalaryLayout;
-use App\Models\Farmer\Farmer_profile;
+use App\Models\Farmer_profile;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Field;
+use Orchid\Screen\Actions\Button;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
 
 class FarmerCreateScreen extends Screen
 {
@@ -34,8 +38,10 @@ class FarmerCreateScreen extends Screen
      *
      * @return array
      */
-    public function query(): array
+    public function query(Farmer_profile $farmer_profile): array
     {
+        $this->farmer_profile = $farmer_profile;
+
         return [];
     }
 
@@ -75,7 +81,17 @@ class FarmerCreateScreen extends Screen
 
             Layout::block(FarmerCreateSalaryLayout::class)
             ->title('Salary Information')
-            ->description("This information collects farmer's salary information."),
+            ->description("This information collects farmer's salary information.")
+            ->commands(
+                Button::make('Next')
+                ->method('next')
+                ->type(Color::DEFAULT()),
+            ),
         ];
+    }
+
+    public function next()
+    {
+        Alert::warning('Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.');
     }
 }
