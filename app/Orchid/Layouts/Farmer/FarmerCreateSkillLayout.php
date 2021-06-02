@@ -68,16 +68,14 @@ class FarmerCreateSkillLayout extends Rows
             ]),
 
             Group::make([
-                Select::make('salary_periodicity')
-                    ->title('Salary Periodicity:')
-                    ->options(["Everyday", "Every 15 Days", "Monthly", "Every 3 Months", "Every 6 Months", "Annually"])
+                Input::make('tesda_training_joined')
+                    ->title('TESDA Training Joined:')
+                    ->placeholder('Sustainable Agricultural Program')
                     ->required(),
 
-                Input::make('estimated_salary')
-                    ->title('Estimated Salary:')
-                    ->type('number')
-                    ->placeholder('15,000')
-                    ->required(),
+                Select::make('nc_passer_status')
+                ->title('MC Passer?')
+                ->options(["Yes", "No"]),
             ]),
         ];
     }

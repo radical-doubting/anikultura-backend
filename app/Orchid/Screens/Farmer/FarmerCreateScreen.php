@@ -7,6 +7,7 @@ use App\Orchid\Layouts\Farmer\FarmerCreateLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateSkillLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateAddressLayout;
+use App\Orchid\Layouts\Farmer\FarmerCreateSalaryLayout;
 use App\Models\Farmer\Farmer_profile;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -71,6 +72,10 @@ class FarmerCreateScreen extends Screen
             Layout::block(FarmerCreateSkillLayout::class)
             ->title('Job and Education Information')
             ->description("This information collects farmer's job and education information."),
+
+            Layout::block(FarmerCreateSalaryLayout::class)
+            ->title('Salary Information')
+            ->description("This information collects farmer's salary information."),
         ];
     }
 }

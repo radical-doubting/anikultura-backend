@@ -32,23 +32,6 @@ class FarmerCreateProfileLayout extends Rows
     {
         return [
             Group::make([
-                Input::make('lastname')
-                    ->title('Last Name:')
-                    ->placeholder('Enter Last name')
-                    ->required(),
-        
-                Input::make('firstname')
-                    ->title('First Name:')
-                    ->placeholder('Enter first name')
-                    ->required(),
-
-                Input::make('middlename')
-                    ->title('Middle Name:')
-                    ->placeholder('Enter middle name')
-                    ->required(),
-            ]),
-
-            Group::make([
                 Select::make('gender')
                     ->title('Gender')
                     ->required()
@@ -58,12 +41,6 @@ class FarmerCreateProfileLayout extends Rows
                     ->title('Civil Status')
                     ->required()
                     ->options(["Single", "Married", "Widow", "Annuled", "Separated"]),
-
-                Input::make('contact_number')
-                    ->type('number')
-                    ->placeholder('09123456789')
-                    ->required()
-                    ->title('Mobile Number'),
             ]),
 
             Group::make([
@@ -78,27 +55,27 @@ class FarmerCreateProfileLayout extends Rows
                 ->title('Age')
                 ->value(42)
                 ->disabled(),
+            ]),
 
+            Group::make([
                 Input::make('quantity_family_members')
                 ->type('number')
                 ->title('Number of Family Members')
                 ->required()
                 ->value(3),
-            ]),
-
-            Group::make([
+                
                 Input::make('quantity_dependents')
                     ->type('number')
                     ->title('Number of Dependents')
                     ->required()
                     ->value(2),
-
-                Input::make('quantity_working_dependents')
-                    ->type('number')
-                    ->title('Number of Working Dependents')
-                    ->required()
-                    ->value(2),
             ]),
+
+            Input::make('quantity_working_dependents')
+            ->type('number')
+            ->title('Number of Working Dependents')
+            ->required()
+            ->value(2),
         ];
     }
 }

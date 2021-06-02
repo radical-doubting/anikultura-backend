@@ -33,24 +33,44 @@ class FarmerCreateLoginLayout extends Rows
     {
         return [
             Group::make([
+                Input::make('lastname')
+                    ->title('Last Name:')
+                    ->placeholder('Enter Last name')
+                    ->required(),
+        
+                Input::make('firstname')
+                    ->title('First Name:')
+                    ->placeholder('Enter first name')
+                    ->required(),
+
+                Input::make('middlename')
+                    ->title('Middle Name:')
+                    ->placeholder('Enter middle name')
+                    ->required(),
+            ]),
+
+            Group::make([
                 Input::make('username')
                 ->title('Username')
                 ->placeholder('Username')
-                ->help("Please choose a unique username.")
                 ->disabled(),
 
                 Input::make('email')
                 ->type('email')
                 ->title('Email')
                 ->placeholder('bootstrap@example.com')
-                ->required()
-                ->help('Please choose an email you can access.'),
+                ->required(),
 
                 Password::make('password')
                 ->title('Password')
-                ->required()
-                ->placeholder('Please choose a strong password.'),
+                ->required(),
             ]),
+
+            Input::make('contact_number')
+            ->type('number')
+            ->placeholder('09123456789')
+            ->required()
+            ->title('Mobile Number'),
         ];
     }
 }
