@@ -34,6 +34,7 @@ class ProvinceEditLayout extends Rows
                 ->placeholder(__('Name')),
             Relation::make('province.region_id')
                 ->fromModel(Region::class, 'name')
+                ->required()
                 ->title('Region')
                 ->placeholder(__('Region')),
         ];
