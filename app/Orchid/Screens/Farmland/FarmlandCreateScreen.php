@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\Farmland;
 use Orchid\Screen\Screen;
 use App\Orchid\Layouts\Farmland\FarmlandCreateFarmLayout;
 use App\Orchid\Layouts\Farmland\FarmlandCreateAddressLayout;
+use App\Orchid\Layouts\Farmland\FarmlandCreateAppStatusLayout;
 use App\Models\Farmer\Farmer_profile;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -17,7 +18,7 @@ class FarmlandCreateScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Create Farmland';
+    public $name = "Enroll Farmer's Farmland";
 
     /**
      * Display header description.
@@ -59,6 +60,9 @@ class FarmlandCreateScreen extends Screen
                 ->description('Insert Description.'),
             Layout::block(FarmlandCreateFarmLayout::class)
                 ->title('Farmland Information')
+                ->description('Insert Description.'),
+            Layout::block(FarmlandCreateAppStatusLayout::class)
+                ->title('Application Verification')
                 ->description('Insert Description.'),
         ];
     }

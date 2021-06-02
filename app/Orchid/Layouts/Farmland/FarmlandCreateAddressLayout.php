@@ -28,34 +28,34 @@ class FarmlandCreateAddressLayout extends Rows
             Group::make([
                 Input::make('house_number')
                     ->title('House Number:')
-                    ->placeholder('Enter house number.')
+                    ->placeholder('Enter house number')
                     ->required(),
         
                 Input::make('street')
                     ->title('Street:')
-                    ->placeholder('Enter street.')
+                    ->placeholder('Enter street name')
                     ->required(),
 
                 Input::make('barangay')
                     ->title('Barangay:')
-                    ->placeholder('Enter Barangay.')
+                    ->placeholder('Enter Barangay name')
                     ->required(),
             ]),
 
             Group::make([
                 Input::make('city')
                     ->title('City:')
-                    ->placeholder('Enter city.')
+                    ->placeholder('Enter city name')
                     ->required(),
         
                 Input::make('province')
                     ->title('Province:')
-                    ->placeholder('Enter Province')
+                    ->placeholder('Enter Province name')
                     ->required(),
 
                 Input::make('region')
                     ->title('Region:')
-                    ->placeholder('Enter Region.')
+                    ->placeholder('Enter Region name')
                     ->required(),
             ]),
         ];
