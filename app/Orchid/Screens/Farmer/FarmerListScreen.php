@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\Farmer;
 
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
-use App\Models\Farmer\Farmer_profile;
+use App\Models\Farmer_profile;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 

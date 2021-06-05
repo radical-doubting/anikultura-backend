@@ -27,29 +27,26 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::get('/test-create', function () {
     farmer_profile::create([
-        'lastname' => 'Da Anton',
-        'firstname' => 'Steven',
-        'middlename' => 'J',
         'gender' => 'Male',
+        'civil_status' => 'Single',
         'birthday' => '1898-06-12',
         'age' => 122,
-        'civil_status' => 'Single',
-        'contact_number' => 9123456789,
         'quantity_family_members' => 5,
         'quantity_dependents' => 3,
         'quantity_working_dependents' => 1,
-        'crop_name_planted' => 'Talong, Sigarilyas, Mani',
-        'training_name_joined' => 'SAP',
+        'trainings_joined' => 'SAP',
         'highest_educational_status' => 'High School',
         'college_course' => 'N/A',
-        'farming_years' => 3,
         'current_job' => 'Farmer',
+        'farming_years' => 3,
+        'usual_crops_planted' => 'Talong, Sigarilyas, Mani',
         'affiliated_organization' => 'N/A',
+        'tesda_training_joined' => 'N/A',
+        'nc_passer_status' => 'Yes',
         'salary_periodicity' => 'Every three months',
         'estimated_salary' => 40000,
         'social_status' => 'Poor',
-        'social_status_reason' => 'None',
-        'mode_of_application' => 'Manual'
+        'social_status_reason' => 'None'
     ]);
 });
 

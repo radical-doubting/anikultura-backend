@@ -17,10 +17,8 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-use App\Orchid\Screens\Farmer\FarmerCreateScreen;
 use App\Orchid\Screens\Farmer\FarmerListScreen;
 use App\Orchid\Screens\Farmer\FarmerEditScreen;
-use App\Orchid\Screens\Farmer\FarmerListOneScreen;
 use App\Orchid\Screens\Farmland\FarmlandCreateScreen;
 /*
 |--------------------------------------------------------------------------
@@ -96,7 +94,7 @@ Route::screen('roles', RoleListScreen::class)
     });
 
 // Platform > System > Farmer Profile > Create
-Route::screen('enroll/farmer', FarmerCreateScreen::class)
+Route::screen('enroll/farmer', FarmerEditScreen::class)
     ->name('platform.systems.farmer.profiles.edit');
 
 // Platform > System > Farmer Profile > List
@@ -104,7 +102,7 @@ Route::screen('view/all/farmer', FarmerListScreen::class)
     ->name('platform.systems.farmer.profiles.list');
 
 // Platform > System > Farmer Profile > List One
-Route::screen('view/farmer/{id}', FarmerListOneScreen::class)
+Route::screen('view/farmer/{id}', FarmerListScreen::class)
 ->name('platform.systems.farmer.profiles.list.one');
 
 // Platform > System > Farmer Profile > Edit
