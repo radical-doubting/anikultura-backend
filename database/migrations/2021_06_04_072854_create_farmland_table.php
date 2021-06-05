@@ -15,13 +15,7 @@ class CreateFarmlandTable extends Migration
     {
         Schema::create('farmland', function (Blueprint $table) {
             $table->id();
-            $table->string('farmland_type');
-            $table->string('farmland_status');
-            $table->integer('farm_size');
-            $table->string('watering_system');
-            $table->string('crop_buyer');
-            $table->dateTime('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
         });
     }
 

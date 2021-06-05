@@ -16,6 +16,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Actions\Button;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
+use Illuminate\Http\Request;
 
 class FarmerCreateScreen extends Screen
 {
@@ -42,7 +43,14 @@ class FarmerCreateScreen extends Screen
     {
         $this->farmer_profile = $farmer_profile;
 
-        return [];
+        if (!$farmer_profile->exists) {
+            $this->name = 'Enroll Farmer';
+            $this->description = 'Enroll New Farmer';
+        }
+
+        return [
+            'farmer_profile' => $farmer_profile
+        ];
     }
 
     /**
@@ -52,7 +60,11 @@ class FarmerCreateScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Button::make(__('Save'))
+            ->icon('check')
+            ->method('save'),
+        ];
     }
 
     /**
@@ -83,15 +95,28 @@ class FarmerCreateScreen extends Screen
             ->title('Salary Information')
             ->description("This information collects farmer's salary information.")
             ->commands(
-                Button::make('Next')
-                ->method('next')
-                ->type(Color::DEFAULT()),
+                Button::make(__('Save'))
+                ->type(Color::DEFAULT())
+                ->icon('check')
+                ->canSee($this->farmer_profile->exists)
+                ->method('save')
             ),
         ];
     }
 
-    public function next()
+    public function save(Farmer_profile $farmer_profile, Request $request)
     {
-        Alert::warning('Provide contextual feedback messages for typical user actions with the handful of available and flexible alert messages.');
+        $request->validate([
+        ]);
+
+        $farmerprofileData = $request->get('farmer_profile');
+
+        $farmer_profile
+            ->fill($farmerprofileData)
+            ->save();
+
+        Toast::info(__('Farmer information was saved'));
+
+        return redirect()->route('platform.systems.farmer.profiles.list');
     }
 }
