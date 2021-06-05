@@ -42,7 +42,11 @@ class FarmerListScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Link::make(__('Add'))
+                ->icon('plus')
+                ->route('platform.farmer.profile.create'),
+        ];
     }
 
     /**
