@@ -87,7 +87,6 @@ class ProvinceEditScreen extends Screen
         ];
     }
 
-
     /**
      * @param Province $province
      *

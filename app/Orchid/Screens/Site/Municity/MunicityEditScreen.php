@@ -87,7 +87,6 @@ class MunicityEditScreen extends Screen
         ];
     }
 
-
     /**
      * @param Municity $municity
      *
@@ -99,7 +98,7 @@ class MunicityEditScreen extends Screen
     {
         $municity->delete();
 
-        Toast::info(__('Municity was removed'));
+        Toast::info(__('Municity was removed successfully'));
 
         return redirect()->route('platform.sites.municities');
     }

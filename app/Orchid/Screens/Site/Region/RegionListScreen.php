@@ -6,6 +6,7 @@ use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Toast;
 
 class RegionListScreen extends Screen
 {
@@ -61,5 +62,21 @@ class RegionListScreen extends Screen
         return [
             RegionListLayout::class
         ];
+    }
+
+    /**
+     * @param Region $region
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(Region $region)
+    {
+        $region->delete();
+
+        Toast::info(__('Region was removed successfully'));
+
+        return redirect()->route('platform.sites.regions');
     }
 }

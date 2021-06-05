@@ -87,7 +87,6 @@ class RegionEditScreen extends Screen
         ];
     }
 
-
     /**
      * @param Region $region
      *
@@ -99,7 +98,7 @@ class RegionEditScreen extends Screen
     {
         $region->delete();
 
-        Toast::info(__('Region was removed'));
+        Toast::info(__('Region was removed successfully'));
 
         return redirect()->route('platform.sites.regions');
     }

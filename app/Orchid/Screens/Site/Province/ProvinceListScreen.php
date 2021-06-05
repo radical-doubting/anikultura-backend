@@ -6,6 +6,7 @@ use App\Models\Site\Province;
 use App\Orchid\Layouts\Site\Province\ProvinceListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Toast;
 
 class ProvinceListScreen extends Screen
 {
@@ -62,5 +63,21 @@ class ProvinceListScreen extends Screen
         return [
             ProvinceListLayout::class
         ];
+    }
+
+    /**
+     * @param Province $province
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(Province $province)
+    {
+        $province->delete();
+
+        Toast::info(__('Province was removed'));
+
+        return redirect()->route('platform.sites.provinces');
     }
 }
