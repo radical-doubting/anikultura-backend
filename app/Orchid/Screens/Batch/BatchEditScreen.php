@@ -9,7 +9,8 @@ use Orchid\Screen\Actions\Button;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Models\Batch\Batches;
 use App\Orchid\Layouts\Batch\AddFarmersLayout;
-use Orchid\Alert\Toast;
+use App\Orchid\Layouts\Batch\AddSiteLayout;
+use Orchid\Support\Facades\Toast;
 use Illuminate\Http\Request;
 
 class BatchEditScreen extends Screen
@@ -90,6 +91,19 @@ class BatchEditScreen extends Screen
                     ->canSee($this->batches->exists)
                     ->method('save')
             ),
+
+            /*
+            //AddSiteLayout::class
+            Layout::block(AddSiteLayout::class)
+            ->title(__('Batch Site'))
+            ->description(__('Enter where is the assigned site of the batch'))
+            ->commands(
+                Button::make(__('Save'))
+                    ->type(Color::DEFAULT())
+                    ->icon('check')
+                    ->canSee($this->batches->exists)
+                    ->method('save')
+            ),*/
 
             //AddFarmersLayout::class
             Layout::block(AddFarmersLayout::class)

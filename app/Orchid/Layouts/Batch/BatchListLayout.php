@@ -73,12 +73,12 @@ class BatchListLayout extends Table
                     return Link::make($batches-> farmer_names)
                         ->route('platform.batch.edit', $batches->id);
                 }),
-                /*
+                
                 TD::make('updated_at', __('Last edit'))
                 ->sort()
                 ->render(function (Batches $batches) {
                     return $batches->updated_at->toDateTimeString();
-                }),*/
+                }),
 
                 TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)

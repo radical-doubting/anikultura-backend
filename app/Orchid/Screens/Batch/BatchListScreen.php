@@ -6,6 +6,7 @@ use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 use App\Orchid\Layouts\Batch\BatchListLayout;
 use App\Models\Batch\Batches;
+use Orchid\Support\Facades\Toast;
 
 class BatchListScreen extends Screen
 {
@@ -62,5 +63,21 @@ class BatchListScreen extends Screen
         return [
             BatchListLayout::class
         ];
+    }
+
+     /**
+     * @param Batches $batches
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(Batches $batches)
+    {
+        $batches->delete();
+
+        Toast::info(__('Batch was removed'));
+
+        return redirect()->route('platform.batches');
     }
 }
