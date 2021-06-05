@@ -32,25 +32,25 @@ class FarmerCreateProfileLayout extends Rows
     {
         return [
             Group::make([
-                Select::make('gender')
+                Select::make('farmer_profile.gender')
                     ->title('Gender')
                     ->required()
                     ->options(["Male", "Female", "I'd rather not say."]),
 
-                Select::make('civil_status')
+                Select::make('farmer_profile.civil_status')
                     ->title('Civil Status')
                     ->required()
                     ->options(["Single", "Married", "Widow", "Annuled", "Separated"]),
             ]),
 
             Group::make([
-                Input::make('birthday')
+                Input::make('farmer_profile.birthday')
                 ->type('date')
                 ->title('Birthdate')
                 ->required()
                 ->value('2011-08-19'),
 
-                Input::make('age')
+                Input::make('farmer_profile.age')
                 ->type('number')
                 ->title('Age')
                 ->value(42)
@@ -58,20 +58,20 @@ class FarmerCreateProfileLayout extends Rows
             ]),
 
             Group::make([
-                Input::make('quantity_family_members')
+                Input::make('farmer_profile.quantity_family_members')
                 ->type('number')
                 ->title('Number of Family Members')
                 ->required()
                 ->value(3),
                 
-                Input::make('quantity_dependents')
+                Input::make('farmer_profile.quantity_dependents')
                     ->type('number')
                     ->title('Number of Dependents')
                     ->required()
                     ->value(2),
             ]),
 
-            Input::make('quantity_working_dependents')
+            Input::make('farmer_profile.quantity_working_dependents')
             ->type('number')
             ->title('Number of Working Dependents')
             ->required()
