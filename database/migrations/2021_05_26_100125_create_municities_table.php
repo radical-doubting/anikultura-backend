@@ -16,15 +16,23 @@ class CreateMunicitiesTable extends Migration
         Schema::create('municities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('region_id');
+
+            $table->unsignedBigInteger('region_id')
+                ->nullable();
             $table->foreign('region_id')
                 ->references('id')
-                ->on('regions');
+                ->on('regions')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
 
-            $table->unsignedBigInteger('province_id');
+            $table->unsignedBigInteger('province_id')
+                ->nullable();
             $table->foreign('province_id')
                 ->references('id')
-                ->on('provinces');
+                ->on('provinces')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
             $table->timestamps();
         });
     }
