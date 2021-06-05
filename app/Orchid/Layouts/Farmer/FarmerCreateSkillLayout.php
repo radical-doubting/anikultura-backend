@@ -32,23 +32,23 @@ class FarmerCreateSkillLayout extends Rows
     {
         return [
             Group::make([
-                Select::make('highest_educational_status')
+                Select::make('farmer_profile.highest_educational_status')
                     ->title('Highest Educational Status:')
                     ->options(["Elementary", "High School", "College"]),
                 
-                Input::make('course')
+                Input::make('farmer_profile.course')
                     ->title('College Course:')
                     ->placeholder('BS in Agriculture')
                     ->required(),
             ]),
 
             Group::make([
-                Input::make('current_job')
+                Input::make('farmer_profile.current_job')
                     ->title('Current Job:')
                     ->placeholder('Farmer')
                     ->required(),
 
-                Input::make('farming_years')
+                Input::make('farmer_profile.farming_years')
                     ->type('number')
                     ->required()
                     ->placeholder('10')
@@ -56,24 +56,24 @@ class FarmerCreateSkillLayout extends Rows
             ]),
 
             Group::make([
-                Input::make('usual_crops_planted')
+                Input::make('farmer_profile.usual_crops_planted')
                     ->title('Usual Crops Planted:')
                     ->placeholder('Talong, Sitaw')
                     ->required(),
 
-                Input::make('affiliated_organization')
+                Input::make('farmer_profile.affiliated_organization')
                     ->title('Affiliated Organization:')
                     ->placeholder('TESDA')
                     ->required(),
             ]),
 
             Group::make([
-                Input::make('tesda_training_joined')
+                Input::make('farmer_profile.tesda_training_joined')
                     ->title('TESDA Training Joined:')
                     ->placeholder('Sustainable Agricultural Program')
                     ->required(),
 
-                Select::make('nc_passer_status')
+                Select::make('farmer_profile.nc_passer_status')
                 ->title('MC Passer?')
                 ->options(["Yes", "No"]),
             ]),
