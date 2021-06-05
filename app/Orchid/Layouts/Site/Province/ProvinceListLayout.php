@@ -50,8 +50,12 @@ class ProvinceListLayout extends Table
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Province $province) {
-                    return Link::make($province->region->name)
-                        ->route('platform.sites.regions.edit', $province->region->id);
+                    $region = $province->region;
+                    $has_region = !is_null($region);
+                    $element = $has_region ? Link::make($region->name)
+                        ->route('platform.sites.regions.edit', $region->id) : __('None');
+
+                    return $element;
                 }),
 
             TD::make(__('Actions'))

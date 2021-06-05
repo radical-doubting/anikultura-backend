@@ -50,16 +50,24 @@ class MunicityListLayout extends Table
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Municity $municity) {
-                    return Link::make($municity->province->name)
-                        ->route('platform.sites.provinces.edit', $municity->province->id);
+                    $province = $municity->province;
+                    $has_province = !is_null($province);
+                    $element = $has_province ? Link::make($province->name)
+                        ->route('platform.sites.provinces.edit', $province->id) : __('None');
+
+                    return $element;
                 }),
 
             TD::make('region', __('Region'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Municity $municity) {
-                    return Link::make($municity->region->name)
-                        ->route('platform.sites.regions.edit', $municity->region->id);
+                    $region = $municity->region;
+                    $has_region = !is_null($region);
+                    $element = $has_region ? Link::make($region->name)
+                        ->route('platform.sites.regions.edit', $region->id) : __('None');
+
+                    return $element;
                 }),
 
             TD::make(__('Actions'))
