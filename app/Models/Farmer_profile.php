@@ -27,7 +27,6 @@ class Farmer_profile extends Model
         'quantity_family_members', 
         'quantity_dependents', 
         'quantity_working_dependents', 
-        'trainings_joined', 
         'highest_educational_status', 
         'college_course', 
         'current_job', 
@@ -66,6 +65,21 @@ class Farmer_profile extends Model
 
     public function farmer_address()
     {
-        return $this->hasOne(Farmer_address::class);
+        return $this->hasOne(Farmer_address::class, 'foreign_key');
+    }
+
+    public function farmland()
+    {
+        return $this->hasOne(Farmland::class, 'foreign_key');
+    }
+
+    public function verification()
+    {
+        return $this->hasOne(Verification::class, 'foreign_key');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'foreign_key');
     }
 }
