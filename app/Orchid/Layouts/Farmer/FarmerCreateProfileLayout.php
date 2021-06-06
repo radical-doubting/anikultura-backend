@@ -54,8 +54,7 @@ class FarmerCreateProfileLayout extends Rows
                 Input::make('farmer_profile.age')
                 ->type('number')
                 ->title('Age')
-                ->value(42)
-                ->disabled(),
+                ->value(42),
             ]),
 
             Group::make([

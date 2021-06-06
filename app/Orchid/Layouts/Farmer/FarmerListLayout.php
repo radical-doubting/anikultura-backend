@@ -19,6 +19,7 @@ class FarmerListLayout extends Table
      *
      * @var string
      */
+    
     protected $target = 'farmer_profile';
 
     /**
@@ -26,6 +27,7 @@ class FarmerListLayout extends Table
      *
      * @return TD[]
      */
+
     protected function columns(): array
     {
         return [
@@ -37,14 +39,14 @@ class FarmerListLayout extends Table
                     return Link::make($farmer_profile->id)
                         ->route('platform.farmer.profile.edit', $farmer_profile->id);
                 }),
-            
+
             TD::make('lastname', __('Last Name'))
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
             ->render(function (Farmer_profile $farmer_profile) {
                 return Link::make($farmer_profile->lastname)
-                    ->route('platform.farmer.profile.edit', $farmer_profile->lastname);
+                    ->route('platform.farmer.profile.edit', $farmer_profile->id);
             }),
 
             TD::make('firstname', __('First Name'))
@@ -53,7 +55,7 @@ class FarmerListLayout extends Table
             ->filter(TD::FILTER_TEXT)
             ->render(function (Farmer_profile $farmer_profile) {
                 return Link::make($farmer_profile->firstname)
-                    ->route('platform.farmer.profile.edit', $farmer_profile->firstname);
+                    ->route('platform.farmer.profile.edit', $farmer_profile->id);
             }),
 
             TD::make('middlename', __('Middle Name'))
@@ -62,7 +64,29 @@ class FarmerListLayout extends Table
             ->filter(TD::FILTER_TEXT)
             ->render(function (Farmer_profile $farmer_profile) {
                 return Link::make($farmer_profile->middlename)
-                    ->route('platform.farmer.profile.edit', $farmer_profile->middlename);
+                    ->route('platform.farmer.profile.edit', $farmer_profile->id);
+            }),
+
+            TD::make(__('Actions'))
+                ->align(TD::ALIGN_CENTER)
+                ->cantHide()
+                ->width('100px')
+                ->render(function (Farmer_profile $farmer_profile) {
+                    return DropDown::make()
+                        ->icon('options-vertical')
+                        ->list([
+                            Link::make(__('Edit'))
+                                ->route('platform.farmer.profile.edit', $farmer_profile->id)
+                                ->icon('pencil'),
+
+                            Button::make(__('Delete'))
+                                ->icon('trash')
+                                ->method('remove')
+                                ->confirm(__('Once the farmer profile is deleted, all of its resources and data will be permanently deleted.'))
+                                ->parameters([
+                                    'id' => $farmer_profile->id,
+                                ]),
+                        ]);
             }),
         ];
     }

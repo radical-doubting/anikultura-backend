@@ -5,13 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
+use Orchid\Filters\Filterable;
 
 class Farmer_profile extends Model
 {
     public $table = 'farmer_profile';
-
-    use AsSource;
     
+    use Filterable, HasFactory, AsSource;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+
     protected $fillable = [
         'gender', 
         'civil_status', 
@@ -37,5 +44,23 @@ class Farmer_profile extends Model
         'created_at'
     ];
     
-    use HasFactory;
+    /**
+     * The attributes for which you can use filters in url.
+     *
+     * @var array
+     */
+    protected $allowedFilters = [
+        'id',
+    ];
+
+    /**
+     * The attributes for which can use sort in url.
+     *
+     * @var array
+     */
+    protected $allowedSorts = [
+        'id',
+        'updated_at',
+        'created_at',
+    ];
 }
