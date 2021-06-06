@@ -26,6 +26,7 @@ class FarmerEditScreen extends Screen
      *
      * @var string
      */
+
     public $name = 'Enroll Farmer';
 
     /**
@@ -33,6 +34,7 @@ class FarmerEditScreen extends Screen
      *
      * @var string|null
      */
+
     public $description = 'Fill out all required information.';
 
     /**
@@ -40,6 +42,7 @@ class FarmerEditScreen extends Screen
      *
      * @return array
      */
+
     public function query(Farmer_profile $farmer_profile): array
     {
         $this->farmer_profile = $farmer_profile;
@@ -59,6 +62,7 @@ class FarmerEditScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
+
     public function commandBar(): array
     {
         return [
@@ -79,6 +83,7 @@ class FarmerEditScreen extends Screen
      *
      * @return \Orchid\Screen\Layout[]|string[]
      */
+
     public function layout(): array
     {
         return [
@@ -116,6 +121,13 @@ class FarmerEditScreen extends Screen
                 ),
         ];
     }
+
+    /**
+     * @param Farmer_profile    $farmer_profile
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
 
     public function save(Farmer_profile $farmer_profile, Request $request)
     {
@@ -208,6 +220,14 @@ class FarmerEditScreen extends Screen
 
         return redirect()->route('platform.farmer.profile.view.all');
     }
+
+    /**
+     * @param Farmer_profile $farmer_profile
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
 
     public function remove(Farmer_profile $farmer_profile)
     {
