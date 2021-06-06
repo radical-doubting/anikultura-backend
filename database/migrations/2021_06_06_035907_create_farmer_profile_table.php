@@ -22,7 +22,6 @@ class CreateFarmerProfileTable extends Migration
             $table->tinyInteger('quantity_family_members');
             $table->tinyInteger('quantity_dependents');
             $table->tinyInteger('quantity_working_dependents');
-            $table->string('trainings_joined');
             $table->string('highest_educational_status');
             $table->string('college_course');
             $table->string('current_job');
