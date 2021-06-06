@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer_profile;
+use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -29,7 +29,7 @@ class FarmerCreateSalaryLayout extends Rows
      *
      * @return Field[]
      */
-    
+
     protected function fields(): array
     {
         return [

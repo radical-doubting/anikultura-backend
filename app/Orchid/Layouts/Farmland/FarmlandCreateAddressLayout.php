@@ -30,7 +30,7 @@ class FarmlandCreateAddressLayout extends Rows
                     ->title('House Number:')
                     ->placeholder('Enter house number')
                     ->required(),
-        
+
                 Input::make('street')
                     ->title('Street:')
                     ->placeholder('Enter street name')
@@ -47,7 +47,7 @@ class FarmlandCreateAddressLayout extends Rows
                     ->title('City:')
                     ->placeholder('Enter city name')
                     ->required(),
-        
+
                 Input::make('province')
                     ->title('Province:')
                     ->placeholder('Enter Province name')

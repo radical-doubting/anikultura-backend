@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Farmland;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Farmland_crop_buyer extends Model
+class FarmlandType extends Model
 {
     use HasFactory;
 }

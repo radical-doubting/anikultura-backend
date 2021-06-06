@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer_profile;
+use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -36,7 +36,7 @@ class FarmerCreateAddressLayout extends Rows
                     ->title('House Number:')
                     ->placeholder('Enter house number.')
                     ->required(),
-        
+
                 Input::make('street')
                     ->title('Street:')
                     ->placeholder('Enter street.')
@@ -53,7 +53,7 @@ class FarmerCreateAddressLayout extends Rows
                     ->title('City:')
                     ->placeholder('Enter city.')
                     ->required(),
-        
+
                 Input::make('province')
                     ->title('Province:')
                     ->placeholder('Enter Province')

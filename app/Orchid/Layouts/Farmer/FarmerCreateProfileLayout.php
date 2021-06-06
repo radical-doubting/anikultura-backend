@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer_profile;
+use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -28,7 +28,7 @@ class FarmerCreateProfileLayout extends Rows
      *
      * @return Field[]
      */
-    
+
     protected function fields(): array
     {
         return [
@@ -46,24 +46,24 @@ class FarmerCreateProfileLayout extends Rows
 
             Group::make([
                 Input::make('farmer_profile.birthday')
-                ->type('date')
-                ->title('Birthdate')
-                ->required()
-                ->value('2011-08-19'),
+                    ->type('date')
+                    ->title('Birthdate')
+                    ->required()
+                    ->value('2011-08-19'),
 
                 Input::make('farmer_profile.age')
-                ->type('number')
-                ->title('Age')
-                ->value(42),
+                    ->type('number')
+                    ->title('Age')
+                    ->value(42),
             ]),
 
             Group::make([
                 Input::make('farmer_profile.quantity_family_members')
-                ->type('number')
-                ->title('Number of Family Members')
-                ->required()
-                ->value(3),
-                
+                    ->type('number')
+                    ->title('Number of Family Members')
+                    ->required()
+                    ->value(3),
+
                 Input::make('farmer_profile.quantity_dependents')
                     ->type('number')
                     ->title('Number of Dependents')
@@ -72,10 +72,10 @@ class FarmerCreateProfileLayout extends Rows
             ]),
 
             Input::make('farmer_profile.quantity_working_dependents')
-            ->type('number')
-            ->title('Number of Working Dependents')
-            ->required()
-            ->value(2),
+                ->type('number')
+                ->title('Number of Working Dependents')
+                ->required()
+                ->value(2),
         ];
     }
 }

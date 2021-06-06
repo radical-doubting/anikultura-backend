@@ -34,13 +34,13 @@ class FarmlandCreateFarmLayout extends Rows
                 ->title('Farm Type:')
                 ->required()
                 ->options(["Personal Farmland", "Community Farmland"]),
-    
+
             Input::make('farm_size')
                 ->type('number')
                 ->required()
                 ->title('Farm Size:'),
 
-            
+
             Select::make('watering_system_used')
                 ->options([
                     'well'   => 'Well',
@@ -49,7 +49,8 @@ class FarmlandCreateFarmLayout extends Rows
                     'shallowtubewell' => 'Shallow Tube Well',
                     'creek' => 'Creek',
                     'faucet' => 'Faucet',
-                    'rainwater' => 'Rain Water',])
+                    'rainwater' => 'Rain Water',
+                ])
                 ->multiple()
                 ->title('Watering System Used:'),
 

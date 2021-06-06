@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\Farmland;
 
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
-use App\Models\Farmland;
+use App\Models\Farmland\Farmland;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 use Orchid\Support\Facades\Toast;
@@ -71,7 +71,7 @@ class FarmlandListScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    
+
     public function remove(Farmland $farmland)
     {
         $farmland->delete();
