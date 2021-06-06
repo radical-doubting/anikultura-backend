@@ -46,7 +46,7 @@ class FarmerEditScreen extends Screen
     public function query(Farmer_profile $farmer_profile): array
     {
         $this->farmer_profile = $farmer_profile;
-
+        
         if (!$farmer_profile->exists) {
             $this->name = 'Enroll Farmer';
             $this->description = 'Enroll New Farmer';
@@ -90,14 +90,18 @@ class FarmerEditScreen extends Screen
             Layout::block(FarmerCreateProfileLayout::class)
                 ->title('Personal Information')
                 ->description("This information collects farmer's personal information."),
+            
+            Layout::block(FarmerCreateAddressLayout::class)
+                ->title('Personal Address')
+                ->description("This information collects farmer's personal address."),
 
             Layout::block(FarmerCreateSkillLayout::class)
-            ->title('Job and Education Information')
-            ->description("This information collects farmer's job and education information."),
+                ->title('Job and Education Information')
+                ->description("This information collects farmer's job and education information."),
 
             Layout::block(FarmerCreateSalaryLayout::class)
-            ->title('Salary Information')
-            ->description("This information collects farmer's salary information."),
+                ->title('Salary Information')
+                ->description("This information collects farmer's salary information."),
         ];
     }
 

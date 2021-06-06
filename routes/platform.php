@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Farmer\FarmerListScreen;
 use App\Orchid\Screens\Farmer\FarmerEditScreen;
-use App\Orchid\Screens\Farmland\FarmlandCreateScreen;
+use App\Orchid\Screens\Farmland\FarmlandEditScreen;
+use App\Orchid\Screens\Farmland\FarmlandListScreen;
 /*
 |--------------------------------------------------------------------------
 | Dashboard Routes
@@ -121,8 +122,31 @@ Route::screen('farmer/edit/{farmer_profile}', FarmerEditScreen::class)
 });
 
 // Platform > System > Farmland > Create
-Route::screen('create/farmland', FarmlandCreateScreen::class)
-    ->name('platform.systems.farmland.create');
+Route::screen('enroll/farmer/farmland', FarmlandEditScreen::class)
+    ->name('platform.farmer.farmland.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.farmer.farmland.view.all')
+            ->push(__("Enroll Farmer's Farmland"), route('platform.farmer.farmland.create'));
+    });
+
+// Platform > System > Farmland > View
+Route::screen('view/all/farmland', FarmlandListScreen::class)
+    ->name('platform.farmer.farmland.view.all')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__("Farmer's Farmland"), route('platform.farmer.farmland.view.all'));
+    });
+
+// Platform > System > Farmland > Edit
+Route::screen('farmer/farmland/edit/{farmland}', FarmlandEditScreen::class)
+->name('platform.farmer.farmland.edit')
+->breadcrumbs(function (Trail $trail, $farmland) {
+    return $trail
+        ->parent('platform.farmer.farmland.view.all')
+        ->push(__("Edit Farmer's Farmland"), route('platform.farmer.farmland.edit', $farmland));
+});
 
 // Example...
 Route::screen('example', ExampleScreen::class)

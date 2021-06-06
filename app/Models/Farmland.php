@@ -20,6 +20,6 @@ class Farmland extends Model
 
     public function farmer_profile()
     {
-        return $this->belongsTo(Farmer_profile::class, 'foreign_key');
+        return $this->hasMany(farmer_profile::class, 'foreign_key');
     }
 }
