@@ -35,43 +35,38 @@ class FarmerCreateSkillLayout extends Rows
             Group::make([
                 Select::make('farmer_profile.highest_educational_status')
                     ->title('Highest Educational Status:')
+                    ->required()
                     ->options(["Elementary", "High School", "College"]),
                 
-                Input::make('farmer_profile.course')
+                Input::make('farmer_profile.college_course')
                     ->title('College Course:')
-                    ->placeholder('BS in Agriculture')
                     ->required(),
             ]),
 
             Group::make([
                 Input::make('farmer_profile.current_job')
                     ->title('Current Job:')
-                    ->placeholder('Farmer')
                     ->required(),
 
                 Input::make('farmer_profile.farming_years')
                     ->type('number')
                     ->required()
-                    ->placeholder('10')
                     ->title('Farming Years:'),
             ]),
 
             Group::make([
                 Input::make('farmer_profile.usual_crops_planted')
                     ->title('Usual Crops Planted:')
-                    ->placeholder('Talong, Sitaw')
                     ->required(),
 
                 Input::make('farmer_profile.affiliated_organization')
                     ->title('Affiliated Organization:')
-                    ->placeholder('TESDA')
                     ->required(),
             ]),
 
             Group::make([
                 Input::make('farmer_profile.tesda_training_joined')
                     ->title('TESDA Training Joined:')
-                    ->placeholder('Sustainable Agricultural Program')
                     ->required(),
 
                 Select::make('farmer_profile.nc_passer_status')
