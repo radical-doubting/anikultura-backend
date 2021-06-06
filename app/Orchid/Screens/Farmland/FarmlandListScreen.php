@@ -2,7 +2,11 @@
 
 namespace App\Orchid\Screens\Farmland;
 
+use App\Orchid\Layouts\Farmland\FarmlandListLayout;
+use App\Models\Farmland;
 use Orchid\Screen\Screen;
+use Orchid\Screen\Actions\Link;
+use Orchid\Support\Facades\Toast;
 
 class FarmlandListScreen extends Screen
 {
@@ -11,14 +15,14 @@ class FarmlandListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'FarmlandListScreen';
+    public $name = 'Farmland';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'FarmlandListScreen';
+    public $description = 'List of all farmers under SM KSK SAP';
 
     /**
      * Query data.
@@ -27,7 +31,11 @@ class FarmlandListScreen extends Screen
      */
     public function query(): array
     {
-        return [];
+        return [
+            'farmland' => Farmland::filters()
+                ->defaultSort('id')
+                ->paginate()
+        ];
     }
 
     /**
@@ -37,7 +45,11 @@ class FarmlandListScreen extends Screen
      */
     public function commandBar(): array
     {
-        return [];
+        return [
+            Link::make(__('Add'))
+                ->icon('plus')
+                ->route('platform.farmer.farmland.create'),
+        ];
     }
 
     /**
@@ -47,6 +59,25 @@ class FarmlandListScreen extends Screen
      */
     public function layout(): array
     {
-        return [];
+        return [
+            FarmlandListLayout::class
+        ];
+    }
+
+    /**
+     * @param Farmland $farmland
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    
+    public function remove(Farmland $farmland)
+    {
+        $farmland->delete();
+
+        Toast::info(__("Farmer's Farmland was removed successfully"));
+
+        return redirect()->route('platform.farmer.farmland.view.all');
     }
 }

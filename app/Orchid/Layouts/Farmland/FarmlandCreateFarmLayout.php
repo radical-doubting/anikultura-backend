@@ -35,7 +35,7 @@ class FarmlandCreateFarmLayout extends Rows
                 ->required()
                 ->options(["Personal Farmland", "Community Farmland"]),
     
-            Input::make('firstname')
+            Input::make('farm_size')
                 ->type('number')
                 ->required()
                 ->title('Farm Size:'),
@@ -49,22 +49,21 @@ class FarmlandCreateFarmLayout extends Rows
                     'shallowtubewell' => 'Shallow Tube Well',
                     'creek' => 'Creek',
                     'faucet' => 'Faucet',
-                    'rainwater' => 'Rain Water',
-                ])
+                    'rainwater' => 'Rain Water',])
                 ->multiple()
                 ->title('Watering System Used:'),
 
             Select::make('crop_buyer')
-            ->options([
-                'biyahedor'   => 'Biyahedor',
-                'dizon_farm' => 'Dizon Farm',
-                'wholesaler' => 'Wholesaler',
-                'market' => 'Market',
-                'fca' => 'FCA',
-                'others' => 'Others',
-            ])
-            ->multiple()
-            ->title('Crop Buyer:'),
+                ->options([
+                    'biyahedor'   => 'Biyahedor',
+                    'dizon_farm' => 'Dizon Farm',
+                    'wholesaler' => 'Wholesaler',
+                    'market' => 'Market',
+                    'fca' => 'FCA',
+                    'others' => 'Others',
+                ])
+                ->multiple()
+                ->title('Crop Buyer:'),
         ];
     }
 }

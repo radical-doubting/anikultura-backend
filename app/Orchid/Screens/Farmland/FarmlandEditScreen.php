@@ -2,14 +2,20 @@
 
 namespace App\Orchid\Screens\Farmland;
 
-use Orchid\Screen\Screen;
+use Illuminate\Http\Request;
+use App\Models\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandCreateFarmLayout;
 use App\Orchid\Layouts\Farmland\FarmlandCreateAddressLayout;
 use App\Orchid\Layouts\Farmland\FarmlandCreateAppStatusLayout;
-use App\Models\Farmer\Farmer_profile;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
+use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Field;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
+use Orchid\Screen\Action;
 
 class FarmlandEditScreen extends Screen
 {
@@ -93,7 +99,7 @@ class FarmlandEditScreen extends Screen
     }
 
     /**
-     * @param Farmer_profile    $farmer_profile
+     * @param Farmland    $farmland
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -123,14 +129,31 @@ class FarmlandEditScreen extends Screen
             ]
         ]);
 
-        $farmerprofileData = $request->get('farmer_profile');
+        $farmlandData = $request->get('farmland');
 
-        $farmer_profile
-            ->fill($farmerprofileData)
+        $farmland
+            ->fill($farmlandData)
             ->save();
 
-        Toast::info(__('Farmer Profile was saved'));
+        Toast::info(__('Farmland was saved'));
 
-        return redirect()->route('platform.farmer.profile.view.all');
+        return redirect()->route('platform.farmer.farmland.view.all');
+    }
+
+    /**
+     * @param Farmland $farmland
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+    public function remove(Farmland $farmland)
+    {
+        $farmland->delete();
+
+        Toast::info(__("Farmer's Farmland was removed successfully"));
+
+        return redirect()->route('platform.farmer.farmland.view.all');
     }
 }
