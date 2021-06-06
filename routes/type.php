@@ -111,11 +111,32 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 
-/* Route::screen('crops', CropListScreen::class)
-    ->name('platform.crops');
+//Crops
 
+Route::screen('crops', CropListScreen::class)
+    ->name('platform.crops')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Crops'), route('platform.crops'));
+    });
+
+//Crops > Edit
+ 
 Route::screen('crops/{crop}/edit', CropEditScreen::class)
-    ->name('platform.crops.edit');
-
-*/
-require('type.php');
+    ->name('platform.crops.edit')
+    ->breadcrumbs(function (Trail $trail, $crop) {
+        return $trail
+            ->parent('platform.crops')
+            ->push(__('Edit Crops'), route('platform.crops.edit', $crop));
+    });
+  
+//Crops > Create Crops
+ 
+Route::screen('crops/create', CropEditScreen::class)
+    ->name('platform.crops.create')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.crops')
+            ->push(__('Create Crops'), route('platform.crops.create'));
+    });

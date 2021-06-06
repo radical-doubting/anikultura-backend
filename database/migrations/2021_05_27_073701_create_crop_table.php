@@ -13,19 +13,16 @@ class CreateCropTable extends Migration
      */
     public function up()
     {
-        Schema::create('crop', function (Blueprint $table) {
+        Schema::create('crops', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('crop_name');
-            $table->string('growth_rate');
-            $table->integer('estimated_price');
-            $table->string('crop_group');            
-            $table->string('seed_development');
-            $table->string('seed_received');
-            $table->string('seed_planted');
-            $table->string('seed_established');
+            $table->string('group');
+            $table->string('name');
+            $table->string('variety');
+            $table->integer('establishment_days');            
             $table->integer('vegetative_days');
             $table->integer('yield_formation_days');
             $table->integer('ripening_days');
+
             $table->timestamps();
         });
     }
@@ -37,7 +34,7 @@ class CreateCropTable extends Migration
      */
     public function down()
     {
-        Schema::drop('crop');
+        Schema::drop('crops');
 
     }
 }
