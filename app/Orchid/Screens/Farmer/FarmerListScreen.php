@@ -21,7 +21,7 @@ class FarmerListScreen extends Screen
      *
      * @var string|null
      */
-    public $description = "View all farmers in SM KSK SAP";
+    public $description = "List of all farmers under SM KSK SAP";
 
     /**
      * Query data.
@@ -31,7 +31,9 @@ class FarmerListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmer_profile' => farmer_profile::all()
+            'farmer_profile' => Farmer_profile::filters()
+                ->defaultSort('id')
+                ->paginate()
         ];
     }
 

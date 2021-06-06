@@ -93,7 +93,7 @@ Route::screen('roles', RoleListScreen::class)
             ->push(__('Roles'), route('platform.systems.roles'));
     });
 
-// Platform > System > Farmer Profile > Create
+// Platform > System > Farmer Profile > Enroll Farmer
 Route::screen('enroll/farmer', FarmerEditScreen::class)
     ->name('platform.farmer.profile.create');
 
@@ -101,17 +101,9 @@ Route::screen('enroll/farmer', FarmerEditScreen::class)
 Route::screen('view/all/farmer', FarmerListScreen::class)
     ->name('platform.farmer.profile.view.all');
 
-// Platform > System > Farmer Profile > View One
-Route::screen('view/farmer/{id}', FarmerListScreen::class)
-->name('platform.farmer.profile.view.one');
-
 // Platform > System > Farmer Profile > Edit
-Route::screen('edit/farmer/{id}', FarmerEditScreen::class)
+Route::screen('farmer/{farmer_profile}/edit', FarmerEditScreen::class)
     ->name('platform.farmer.profile.edit');
-
-
-
-
 
 // Platform > System > Farmland > Create
 Route::screen('create/farmland', FarmlandCreateScreen::class)

@@ -35,7 +35,7 @@ class FarmerListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmer_profile $farmer_profile) {
                     return Link::make($farmer_profile->id)
-                        ->route('platform.farmer.profile.view.all', $farmer_profile->id);
+                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
                 }),
             
             TD::make('lastname', __('Last Name'))
@@ -44,7 +44,7 @@ class FarmerListLayout extends Table
             ->filter(TD::FILTER_TEXT)
             ->render(function (Farmer_profile $farmer_profile) {
                 return Link::make($farmer_profile->lastname)
-                    ->route('platform.farmer.profile.view.all', $farmer_profile->lastname);
+                    ->route('platform.farmer.profile.edit', $farmer_profile->lastname);
             }),
 
             TD::make('firstname', __('First Name'))
@@ -53,7 +53,7 @@ class FarmerListLayout extends Table
             ->filter(TD::FILTER_TEXT)
             ->render(function (Farmer_profile $farmer_profile) {
                 return Link::make($farmer_profile->firstname)
-                    ->route('platform.farmer.profile.view.all', $farmer_profile->firstname);
+                    ->route('platform.farmer.profile.edit', $farmer_profile->firstname);
             }),
 
             TD::make('middlename', __('Middle Name'))
@@ -62,7 +62,7 @@ class FarmerListLayout extends Table
             ->filter(TD::FILTER_TEXT)
             ->render(function (Farmer_profile $farmer_profile) {
                 return Link::make($farmer_profile->middlename)
-                    ->route('platform.farmer.profile.view.all', $farmer_profile->middlename);
+                    ->route('platform.farmer.profile.edit', $farmer_profile->middlename);
             }),
         ];
     }

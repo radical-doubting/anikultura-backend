@@ -2,21 +2,22 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use Orchid\Screen\Screen;
-use Orchid\Screen\Action;
+use Illuminate\Http\Request;
+use App\Models\Farmer_profile;
 use App\Orchid\Layouts\Farmer\FarmerCreateLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateSkillLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateSalaryLayout;
-use App\Models\Farmer_profile;
 use Orchid\Support\Facades\Layout;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
+use Orchid\Support\Facades\Toast;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Field;
 use Orchid\Screen\Actions\Button;
-use Orchid\Support\Color;
-use Orchid\Support\Facades\Alert;
-use Illuminate\Http\Request;
+use Orchid\Screen\Screen;
+use Orchid\Screen\Action;
 
 class FarmerEditScreen extends Screen
 {
@@ -204,6 +205,15 @@ class FarmerEditScreen extends Screen
             ->save();
 
         Toast::info(__('Farmer Profile was saved'));
+
+        return redirect()->route('platform.farmer.profile.view.all');
+    }
+
+    public function remove(Farmer_profile $farmer_profile)
+    {
+        $farmer_profile->delete();
+
+        Toast::info(__('Farmer Profile was removed successfully'));
 
         return redirect()->route('platform.farmer.profile.view.all');
     }
