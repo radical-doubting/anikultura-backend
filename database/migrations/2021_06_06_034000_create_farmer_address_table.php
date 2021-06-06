@@ -18,9 +18,6 @@ class CreateFarmerAddressTable extends Migration
             $table->string('house_number');
             $table->string('street');
             $table->string('barangay');
-            $table->string('city');
-            $table->string('province');
-            $table->string('region');
             $table->dateTime('created_at');
             $table->timestamp('updated_at');
         });

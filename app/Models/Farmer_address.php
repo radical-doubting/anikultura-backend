@@ -14,8 +14,6 @@ class Farmer_address extends Model
         'street',
         'barangay',
         'city',
-        'province',
-        'region',
         'created_at',
         'updated_at',
     ];

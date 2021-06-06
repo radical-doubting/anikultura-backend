@@ -63,4 +63,9 @@ class Farmer_profile extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function farmer_address()
+    {
+        return $this->hasOne(Farmer_address::class);
+    }
 }

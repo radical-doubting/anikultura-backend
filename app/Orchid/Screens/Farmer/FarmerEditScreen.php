@@ -89,36 +89,15 @@ class FarmerEditScreen extends Screen
         return [
             Layout::block(FarmerCreateProfileLayout::class)
                 ->title('Personal Information')
-                ->description("This information collects farmer's personal information.")
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::DEFAULT())
-                        ->icon('check')
-                        ->canSee($this->farmer_profile->exists)
-                        ->method('save'),
-                ),
+                ->description("This information collects farmer's personal information."),
 
             Layout::block(FarmerCreateSkillLayout::class)
             ->title('Job and Education Information')
-            ->description("This information collects farmer's job and education information.")
-            ->commands(
-                Button::make(__('Save'))
-                    ->type(Color::DEFAULT())
-                    ->icon('check')
-                    ->canSee($this->farmer_profile->exists)
-                    ->method('save'),
-                ),
+            ->description("This information collects farmer's job and education information."),
 
             Layout::block(FarmerCreateSalaryLayout::class)
             ->title('Salary Information')
-            ->description("This information collects farmer's salary information.")
-            ->commands(
-                Button::make(__('Save'))
-                    ->type(Color::DEFAULT())
-                    ->icon('check')
-                    ->canSee($this->farmer_profile->exists)
-                    ->method('save')
-                ),
+            ->description("This information collects farmer's salary information."),
         ];
     }
 
