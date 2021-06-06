@@ -63,4 +63,9 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function farmer_profile()
+    {
+        return $this->belongsTo(Farmer_profile::class, 'foreign_key');
+    }
 }

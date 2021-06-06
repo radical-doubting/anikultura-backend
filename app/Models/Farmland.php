@@ -7,15 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Farmland extends Model
 {
-    public $table = 'farmer_profile';
+    public $table = 'farmland';
 
     use HasFactory;
 
     protected $fillable = [
-        'farmland_type',
         'farm_size',
-        'watering_system',
         'crop_buyer',
+        'created_at',
         'updated_at',
     ];
+
+    public function farmer_profile()
+    {
+        return $this->belongsTo(Farmer_profile::class, 'foreign_key');
+    }
 }

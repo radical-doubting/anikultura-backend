@@ -18,4 +18,9 @@ class Verification extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function farmer_profile()
+    {
+        return $this->belongsTo(Farmer_profile::class, 'foreign_key');
+    }
 }

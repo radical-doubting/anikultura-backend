@@ -70,7 +70,7 @@ class Farmer_profile extends Model
 
     public function farmland()
     {
-        return $this->hasOne(Farmland::class, 'foreign_key');
+        return $this->hasMany(Farmland::class, 'foreign_key');
     }
 
     public function verification()
