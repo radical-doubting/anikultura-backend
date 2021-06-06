@@ -27,9 +27,9 @@ Route::screen('view/all/farmland', FarmlandListScreen::class)
 
 // Platform > System > Farmland > Edit
 Route::screen('farmer/farmland/edit/{farmland}', FarmlandEditScreen::class)
-->name('platform.farmer.farmland.edit')
-->breadcrumbs(function (Trail $trail, $farmland) {
-    return $trail
-        ->parent('platform.farmer.farmland.view.all')
-        ->push(__("Edit Farmer's Farmland"), route('platform.farmer.farmland.edit', $farmland));
-});
+    ->name('platform.farmer.farmland.edit')
+    ->breadcrumbs(function (Trail $trail, $farmland) {
+        return $trail
+            ->parent('platform.farmer.farmland.view.all')
+            ->push(__("Edit Farmer's Farmland"), route('platform.farmer.farmland.edit', $farmland));
+    });

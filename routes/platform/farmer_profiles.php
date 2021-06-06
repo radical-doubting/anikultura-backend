@@ -27,9 +27,9 @@ Route::screen('view/all/farmer', FarmerListScreen::class)
 
 // Platform > System > Farmer Profile > Edit
 Route::screen('farmer/edit/{farmer_profile}', FarmerEditScreen::class)
-->name('platform.farmer.profile.edit')
-->breadcrumbs(function (Trail $trail, $farmer_profile) {
-    return $trail
-        ->parent('platform.farmer.profile.view.all')
-        ->push(__('Edit Farmer Profile'), route('platform.farmer.profile.edit', $farmer_profile));
-});
+    ->name('platform.farmer.profile.edit')
+    ->breadcrumbs(function (Trail $trail, $farmer_profile) {
+        return $trail
+            ->parent('platform.farmer.profile.view.all')
+            ->push(__('Edit Farmer Profile'), route('platform.farmer.profile.edit', $farmer_profile));
+    });
