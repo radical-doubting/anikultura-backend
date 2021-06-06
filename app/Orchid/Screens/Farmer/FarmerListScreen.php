@@ -6,6 +6,7 @@ use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use App\Models\Farmer_profile;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
+use Orchid\Support\Facades\Toast;
 
 class FarmerListScreen extends Screen
 {
@@ -14,6 +15,7 @@ class FarmerListScreen extends Screen
      *
      * @var string
      */
+    
     public $name = 'Farmer Profile';
 
     /**
@@ -21,6 +23,7 @@ class FarmerListScreen extends Screen
      *
      * @var string|null
      */
+
     public $description = "List of all farmers under SM KSK SAP";
 
     /**
@@ -28,6 +31,7 @@ class FarmerListScreen extends Screen
      *
      * @return array
      */
+
     public function query(): array
     {
         return [
@@ -42,6 +46,7 @@ class FarmerListScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
+
     public function commandBar(): array
     {
         return [
@@ -56,10 +61,27 @@ class FarmerListScreen extends Screen
      *
      * @return \Orchid\Screen\Layout[]|string[]
      */
+
     public function layout(): array
     {
         return [
             FarmerListLayout::class
         ];
+    }
+
+    /**
+     * @param Farmer_profile $farmer_profile
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(Farmer_profile $farmer_profile)
+    {
+        $farmer_profile->delete();
+
+        Toast::info(__('Farmer Profile was removed successfully'));
+
+        return redirect()->route('platform.farmer.profile.view.all');
     }
 }
