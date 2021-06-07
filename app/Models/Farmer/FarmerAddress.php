@@ -13,13 +13,14 @@ class FarmerAddress extends Model
         'house_number',
         'street',
         'barangay',
-        'city',
-        'created_at',
-        'updated_at',
+        'municity',
+        'province',
+        'region_id',
+        'farmer_profile_id',
     ];
 
     public function farmer_profile()
     {
-        return $this->belongsTo(Farmer_profile::class, 'foreign_key');
+        return $this->belongsTo(FarmerProfile::class);
     }
 }

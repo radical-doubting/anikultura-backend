@@ -63,7 +63,7 @@ class FarmerProfile extends Model
 
     public function farmer_address()
     {
-        return $this->hasOne(Farmer_address::class, 'foreign_key');
+        return $this->hasOne(FarmerAddress::class);
     }
 
     public function verification()
@@ -73,11 +73,11 @@ class FarmerProfile extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class, 'foreign_key');
+        return $this->hasOne(User::class, 'user_id');
     }
 
-    public function farmland()
+    public function farmlands()
     {
-        return $this->belongsTo(Farmland::class, 'foreign_key');
+        return $this->belongsToMany(Farmland::class, 'foreign_key');
     }
 }

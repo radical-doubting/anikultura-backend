@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Farmer;
 
+use App\Models\Farmer\FarmerAddress;
 use Illuminate\Http\Request;
 use App\Models\Farmer\FarmerProfile;
 use App\Orchid\Layouts\Farmer\FarmerEditLoginLayout;
@@ -121,6 +122,7 @@ class FarmerEditScreen extends Screen
     public function save(FarmerProfile $farmer_profile, Request $request)
     {
         $request->validate([
+            // Farmer Profile
             'farmer_profile.gender' => [
                 'required'
             ],
@@ -195,11 +197,44 @@ class FarmerEditScreen extends Screen
 
             'farmer_profile.social_status_reason' => [
                 'required'
-            ]
+            ],
 
+            // Farmer Address
+            'farmer_address.house_number' => [
+                'required'
+            ],
+
+            'farmer_address.street' => [
+                'required'
+            ],
+
+            'farmer_address.barangay' => [
+                'required'
+            ],
+
+            'farmer_address.municity' => [
+                'required'
+            ],
+
+            'farmer_address.province' => [
+                'required'
+            ],
+
+            'farmer_address.region_id' => [
+                'required'
+            ],
         ]);
 
         $farmer_profile_data = $request->get('farmer_profile');
+
+        $farmer_address_data = $request->get('farmer_address');
+
+        if ($farmer_profile->farmer_address()->exists()) {
+            // $farmer_address = new FarmerAddress($farmer_address_data);
+            $farmer_profile->farmer_address()->create($farmer_address_data);
+        } else {
+            $farmer_profile->farmer_address()->update($farmer_address_data);
+        }
 
         $farmer_profile
             ->fill($farmer_profile_data)

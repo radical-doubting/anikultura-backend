@@ -51,9 +51,9 @@ class FarmerEditAddressLayout extends Rows
             ]),
 
             Group::make([
-                Input::make('farmer_address.city')
-                    ->title(__('City'))
-                    ->placeholder(__('City'))
+                Input::make('farmer_address.municity')
+                    ->title(__('Municipality / City'))
+                    ->placeholder(__('Municipality / City'))
                     ->required(),
 
                 Input::make('farmer_address.province')
