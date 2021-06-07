@@ -2,10 +2,14 @@
 
 namespace App\Orchid\Layouts\Farmland;
 
+use App\Models\Farmland\CropBuyer;
+use App\Models\Farmland\FarmlandStatus;
+use App\Models\Farmland\FarmlandType;
 use Orchid\Screen\Field;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Fields\Select;
 
 class FarmlandEditFarmLayout extends Rows
@@ -25,22 +29,24 @@ class FarmlandEditFarmLayout extends Rows
     protected function fields(): array
     {
         return [
-            /*Select::make('farmland_status')
-                ->title('Farm Status:')
+            Relation::make('farmland.type')
+                ->fromModel(FarmlandType::class, 'name')
                 ->required()
-                ->options(["Owned", "Rented", "Borrowed"]),
+                ->title(__('Type'))
+                ->placeholder(__('Type')),
 
-            Select::make('farm_type')
-                ->title('Farm Type:')
+            Relation::make('farmland.status')
+                ->fromModel(FarmlandStatus::class, 'name')
                 ->required()
-                ->options(["Personal Farmland", "Community Farmland"]), */
-    
+                ->title(__('Status'))
+                ->placeholder(__('Status')),
+
             Input::make('farmland.hectares_size')
                 ->type('number')
                 ->required()
-                ->title('Farm Size:'),
+                ->title(__('Size in Hectares')),
 
-            /*Select::make('watering_system_used')
+            Select::make('farmland.watering_systems')
                 ->options([
                     'well'   => 'Well',
                     'nia' => 'NIA Canal/Irrigation',
@@ -53,17 +59,12 @@ class FarmlandEditFarmLayout extends Rows
                 ->multiple()
                 ->title('Watering System Used:'),
 
-            Select::make('crop_buyer')
-                ->options([
-                    'biyahedor'   => 'Biyahedor',
-                    'dizon_farm' => 'Dizon Farm',
-                    'wholesaler' => 'Wholesaler',
-                    'market' => 'Market',
-                    'fca' => 'FCA',
-                    'others' => 'Others',
-                ])
-                ->multiple()
-                ->title('Crop Buyer:'), */
+            Relation::make('farmland.crop_buyers')
+                ->fromModel(CropBuyer::class, 'name')
+                ->required()
+                ->title(__('Crop Buyers'))
+                ->placeholder(__('Crop Buyers'))
+                ->multiple(),
         ];
     }
 }
