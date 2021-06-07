@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Farmer;
 
 use App\Models\Farmer\FarmerProfile;
+use App\Models\Site\Region;
 use Orchid\Screen\Field;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -13,6 +14,7 @@ use Orchid\Screen\Fields\Label;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Relation;
 
 class FarmerCreateAddressLayout extends Rows
 {
@@ -32,37 +34,38 @@ class FarmerCreateAddressLayout extends Rows
     {
         return [
             Group::make([
-                Input::make('house_number')
+                Input::make('farmer_address.house_number')
                     ->title('House Number:')
                     ->placeholder('Enter house number.')
                     ->required(),
 
-                Input::make('street')
+                Input::make('farmer_address.street')
                     ->title('Street:')
                     ->placeholder('Enter street.')
                     ->required(),
 
-                Input::make('barangay')
+                Input::make('farmer_address.barangay')
                     ->title('Barangay:')
                     ->placeholder('Enter Barangay.')
                     ->required(),
             ]),
 
             Group::make([
-                Input::make('city')
+                Input::make('farmer_address.city')
                     ->title('City:')
                     ->placeholder('Enter city.')
                     ->required(),
 
-                Input::make('province')
+                Input::make('farmer_address.province')
                     ->title('Province:')
                     ->placeholder('Enter Province')
                     ->required(),
 
-                Input::make('region')
-                    ->title('Region:')
-                    ->placeholder('Enter Region.')
-                    ->required(),
+                Relation::make('farmer_address.region_id')
+                    ->fromModel(Region::class, 'name')
+                    ->required()
+                    ->title('Region')
+                    ->placeholder(__('Region')),
             ]),
         ];
     }
