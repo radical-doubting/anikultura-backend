@@ -35,7 +35,7 @@ class BatchListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batches $batches) {
                     return Link::make($batches->id)
-                        ->route('platform.batch.edit', $batches->id);
+                        ->route('platform.batches.edit', $batches->id);
                 }),
 
                 TD::make('assigned_farmschhol_name', __('Assigned Farmschool Name'))
@@ -44,7 +44,7 @@ class BatchListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batches $batches) {
                     return Link::make($batches->assigned_farmschool_name)
-                        ->route('platform.batch.edit', $batches->id);
+                        ->route('platform.batches.edit', $batches->id);
                 }),
 
                 TD::make('assigned_site', __('Assigned Site'))
@@ -53,7 +53,7 @@ class BatchListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batches $batches) {
                     return Link::make($batches->assigned_site)
-                        ->route('platform.batch.edit', $batches->id);
+                        ->route('platform.batches.edit', $batches->id);
                 }),
 
                 TD::make('number_seeds_distributed', __('Number of Seeds Distributed'))
@@ -62,7 +62,7 @@ class BatchListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batches $batches) {
                     return Link::make($batches-> number_seeds_distributed)
-                        ->route('platform.batch.edit', $batches->id);
+                        ->route('platform.batches.edit', $batches->id);
                 }),
 
                 TD::make('farmers_names', __('Enrolled Farmers'))
@@ -71,7 +71,7 @@ class BatchListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batches $batches) {
                     return Link::make($batches-> farmer_names)
-                        ->route('platform.batch.edit', $batches->id);
+                        ->route('platform.batches.edit', $batches->id);
                 }),
                 
                 TD::make('updated_at', __('Last edit'))
@@ -89,7 +89,7 @@ class BatchListLayout extends Table
                         ->list([
 
                             Link::make(__('Edit'))
-                                ->route('platform.batch.edit', $batches->id)
+                                ->route('platform.batches.edit', $batches->id)
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))

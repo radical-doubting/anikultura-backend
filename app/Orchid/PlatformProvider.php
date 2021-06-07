@@ -39,6 +39,10 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('location-pin')
                         ->route('platform.sites.municities'),
                 ]),
+            Menu::make('Batches')
+                ->icon('module')
+                ->route('platform.batches'),
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')

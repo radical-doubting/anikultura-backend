@@ -49,7 +49,7 @@ class BatchListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.batch.create'),
+                ->route('platform.batches.create'),
         ];    
     }
 
@@ -78,6 +78,6 @@ class BatchListScreen extends Screen
 
         Toast::info(__('Batch was removed'));
 
-        return redirect()->route('platform.batch');
+        return redirect()->route('platform.batches');
     }
 }
