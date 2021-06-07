@@ -43,7 +43,7 @@ class FarmlandListLayout extends Table
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
             ->render(function (Farmland $farmland) {
-                return Link::make($farmland->lastname)
+                return Link::make($farmland->hectares_size)
                     ->route('platform.farmer.farmland.edit', $farmland->id);
             }),
 

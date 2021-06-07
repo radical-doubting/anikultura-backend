@@ -30,13 +30,13 @@ class FarmlandEditFarmLayout extends Rows
     protected function fields(): array
     {
         return [
-            Relation::make('farmland.type')
+            Relation::make('farmland.type_id')
                 ->fromModel(FarmlandType::class, 'name')
                 ->required()
                 ->title(__('Type'))
                 ->placeholder(__('Type')),
 
-            Relation::make('farmland.status')
+            Relation::make('farmland.status_id')
                 ->fromModel(FarmlandStatus::class, 'name')
                 ->required()
                 ->title(__('Status'))
@@ -48,14 +48,14 @@ class FarmlandEditFarmLayout extends Rows
                 ->title(__('Size'))
                 ->placeholder(__('Size in hectares')),
 
-            Relation::make('farmland.watering_systems')
+            Relation::make('farmland.watering_systems.')
                 ->fromModel(WateringSystem::class, 'name')
                 ->required()
                 ->title(__('Watering Systems Used'))
                 ->placeholder(__('Watering Systems Used'))
                 ->multiple(),
 
-            Relation::make('farmland.crop_buyers')
+            Relation::make('farmland.crop_buyers.')
                 ->fromModel(CropBuyer::class, 'name')
                 ->required()
                 ->title(__('Crop Buyers'))

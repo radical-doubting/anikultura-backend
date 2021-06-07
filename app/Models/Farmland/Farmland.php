@@ -2,6 +2,7 @@
 
 namespace App\Models\Farmland;
 
+use App\Models\Farmer\FarmerProfile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -11,9 +12,9 @@ class Farmland extends Model
     use HasFactory, Filterable;
 
     protected $fillable = [
+        'type_id',
+        'status_id',
         'hectares_size',
-        'created_at',
-        'updated_at',
     ];
 
     /**
@@ -36,9 +37,27 @@ class Farmland extends Model
         'created_at',
     ];
 
-    public function farmer_profile()
+    /**
+     * Get the watering systems of this farmland.
+     */
+    public function watering_systems()
     {
-        return $this->hasMany(farmer_profile::class, 'foreign_key');
+        return $this->belongsToMany(WateringSystem::class, 'farmland_watering_systems');
     }
 
+    /**
+     * Get the crop buyers of this farmland.
+     */
+    public function crop_buyers()
+    {
+        return $this->belongsToMany(CropBuyer::class, 'farmland_crop_buyers');
+    }
+
+    /**
+     * Get the farmer profiles of this farmland.
+     */
+    public function farmer_profiles()
+    {
+        return $this->belongsToMany(FarmerProfile::class, 'farmer_profile_farmlands');
+    }
 }

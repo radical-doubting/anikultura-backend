@@ -7,6 +7,7 @@ use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandEditFarmLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditAddressLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditAppStatusLayout;
+use Illuminate\Support\Facades\Log;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
@@ -107,18 +108,39 @@ class FarmlandEditScreen extends Screen
 
     public function save(Farmland $farmland, Request $request)
     {
-        /*$request->validate([
+        $request->validate([
+            'farmland.type_id' => [
+                'required'
+            ],
+            'farmland.status_id' => [
+                'required'
+            ],
             'farmland.hectares_size' => [
                 'required'
             ],
-
-        ]);*/
+            'farmland.watering_systems' => [
+                'required',
+                'array'
+            ],
+            'farmland.crop_buyers' => [
+                'required',
+                'array'
+            ],
+        ]);
 
         $farmland_data = $request->get('farmland');
 
         $farmland
             ->fill($farmland_data)
             ->save();
+
+        $farmland
+            ->watering_systems()
+            ->sync($farmland_data['watering_systems']);
+
+        $farmland
+            ->crop_buyers()
+            ->sync($farmland_data['crop_buyers']);
 
         Toast::info(__('Farmland was saved'));
 
