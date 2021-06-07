@@ -4,9 +4,9 @@ namespace App\Orchid\Screens\Farmland;
 
 use Illuminate\Http\Request;
 use App\Models\Farmland\Farmland;
-use App\Orchid\Layouts\Farmland\FarmlandCreateFarmLayout;
-use App\Orchid\Layouts\Farmland\FarmlandCreateAddressLayout;
-use App\Orchid\Layouts\Farmland\FarmlandCreateAppStatusLayout;
+use App\Orchid\Layouts\Farmland\FarmlandEditFarmLayout;
+use App\Orchid\Layouts\Farmland\FarmlandEditAddressLayout;
+use App\Orchid\Layouts\Farmland\FarmlandEditAppStatusLayout;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
