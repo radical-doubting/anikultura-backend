@@ -35,19 +35,19 @@ class FarmerEditSalaryLayout extends Rows
         return [
             Group::make([
                 Select::make('farmer_profile.salary_periodicity')
-                    ->title('Salary Periodicity:')
+                    ->title('Salary Periodicity')
                     ->options(["Everyday", "Monthly", "Annually", "Every 15 Days", "Every 3 Months", "Every 6 Months"])
                     ->required(),
 
                 Input::make('farmer_profile.estimated_salary')
-                    ->title('Estimated Salary:')
+                    ->title('Estimated Salary')
                     ->type('number')
-                    ->placeholder('15,000')
+                    ->placeholder(__('PHP'))
                     ->required(),
             ]),
 
             Select::make('farmer_profile.social_status')
-                ->title('Are your poor?')
+                ->title('Is the farmer poor?')
                 ->options(["Yes", "No"])
                 ->required(),
 

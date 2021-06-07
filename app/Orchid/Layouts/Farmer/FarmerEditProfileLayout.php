@@ -34,12 +34,12 @@ class FarmerEditProfileLayout extends Rows
         return [
             Group::make([
                 Select::make('farmer_profile.gender')
-                    ->title('Gender')
+                    ->title(__('Gender'))
                     ->required()
                     ->options(["Male", "Female", "I'd rather not say."]),
 
                 Select::make('farmer_profile.civil_status')
-                    ->title('Civil Status')
+                    ->title(__('Civil Status'))
                     ->required()
                     ->options(["Single", "Married", "Widow", "Annuled", "Separated"]),
             ]),
@@ -47,35 +47,36 @@ class FarmerEditProfileLayout extends Rows
             Group::make([
                 Input::make('farmer_profile.birthday')
                     ->type('date')
-                    ->title('Birthdate')
-                    ->required()
-                    ->value('2011-08-19'),
+                    ->title(__('Birthdate'))
+                    ->placeholder(__('Birthdate'))
+                    ->required(),
 
                 Input::make('farmer_profile.age')
                     ->type('number')
-                    ->title('Age')
-                    ->value(42),
+                    ->title(__('Age'))
+                    ->placeholder(__('Age'))
+                    ->required()
             ]),
 
             Group::make([
                 Input::make('farmer_profile.quantity_family_members')
                     ->type('number')
-                    ->title('Number of Family Members')
-                    ->required()
-                    ->value(3),
+                    ->title(__('Number of Family Members'))
+                    ->placeholder(__('Number of Family Members'))
+                    ->required(),
 
                 Input::make('farmer_profile.quantity_dependents')
                     ->type('number')
-                    ->title('Number of Dependents')
+                    ->title(__('Number of Dependents'))
+                    ->placeholder(__('Number of Dependents'))
                     ->required()
-                    ->value(2),
             ]),
 
             Input::make('farmer_profile.quantity_working_dependents')
                 ->type('number')
-                ->title('Number of Working Dependents')
+                ->title(__('Number of Working Dependents'))
+                ->placeholder(__('Number of Working Dependents'))
                 ->required()
-                ->value(2),
         ];
     }
 }

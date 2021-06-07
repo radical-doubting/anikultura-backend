@@ -35,36 +35,36 @@ class FarmerEditAddressLayout extends Rows
         return [
             Group::make([
                 Input::make('farmer_address.house_number')
-                    ->title('House Number:')
-                    ->placeholder('Enter house number.')
+                    ->title(__('House Number'))
+                    ->placeholder(__('House Number'))
                     ->required(),
 
                 Input::make('farmer_address.street')
-                    ->title('Street:')
-                    ->placeholder('Enter street.')
+                    ->title(__('Street'))
+                    ->placeholder(__('Street'))
                     ->required(),
 
                 Input::make('farmer_address.barangay')
-                    ->title('Barangay:')
-                    ->placeholder('Enter Barangay.')
+                    ->title(__('Barangay'))
+                    ->placeholder(__('Barangay'))
                     ->required(),
             ]),
 
             Group::make([
                 Input::make('farmer_address.city')
-                    ->title('City:')
-                    ->placeholder('Enter city.')
+                    ->title(__('City'))
+                    ->placeholder(__('City'))
                     ->required(),
 
                 Input::make('farmer_address.province')
-                    ->title('Province:')
-                    ->placeholder('Enter Province')
+                    ->title(__('Province'))
+                    ->placeholder(__('Province'))
                     ->required(),
 
                 Relation::make('farmer_address.region_id')
                     ->fromModel(Region::class, 'name')
                     ->required()
-                    ->title('Region')
+                    ->title(__('Region'))
                     ->placeholder(__('Region')),
             ]),
         ];
