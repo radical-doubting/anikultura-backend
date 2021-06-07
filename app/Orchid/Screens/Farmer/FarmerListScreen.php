@@ -16,7 +16,7 @@ class FarmerListScreen extends Screen
      * @var string
      */
 
-    public $name = 'Farmer Profile';
+    public $name = 'Farmer Profiles';
 
     /**
      * Display header description.

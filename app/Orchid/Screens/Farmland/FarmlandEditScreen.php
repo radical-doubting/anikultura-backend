@@ -84,15 +84,15 @@ class FarmlandEditScreen extends Screen
     public function layout(): array
     {
         return [
-            /*Layout::block(FarmlandCreateAddressLayout::class)
+            /*Layout::block(FarmlandEditAddressLayout::class)
                 ->title('Farmland Address')
                 ->description('Insert Description.'),*/
 
-            Layout::block(FarmlandCreateFarmLayout::class)
+            Layout::block(FarmlandEditFarmLayout::class)
                 ->title('Farmland Information')
                 ->description('Insert Description.'),
 
-            /*Layout::block(FarmlandCreateAppStatusLayout::class)
+            /*Layout::block(FarmlandEditAppStatusLayout::class)
                 ->title('Verification')
                 ->description('Insert Description.'),*/
         ];

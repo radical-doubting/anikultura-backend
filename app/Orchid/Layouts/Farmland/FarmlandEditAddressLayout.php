@@ -8,7 +8,7 @@ use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 
-class FarmlandCreateAddressLayout extends Rows
+class FarmlandEditAddressLayout extends Rows
 {
     /**
      * Used to create the title of a group of form elements.

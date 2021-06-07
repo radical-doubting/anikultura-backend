@@ -4,11 +4,11 @@ namespace App\Orchid\Screens\Farmer;
 
 use Illuminate\Http\Request;
 use App\Models\Farmer\FarmerProfile;
-use App\Orchid\Layouts\Farmer\FarmerCreateLoginLayout;
-use App\Orchid\Layouts\Farmer\FarmerCreateProfileLayout;
-use App\Orchid\Layouts\Farmer\FarmerCreateSkillLayout;
-use App\Orchid\Layouts\Farmer\FarmerCreateAddressLayout;
-use App\Orchid\Layouts\Farmer\FarmerCreateSalaryLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditLoginLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditProfileLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditSalaryLayout;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
@@ -27,7 +27,7 @@ class FarmerEditScreen extends Screen
      * @var string
      */
 
-    public $name = 'Enroll Farmer';
+    public $name = 'Edit Farmer Profile';
 
     /**
      * Display header description.
@@ -35,7 +35,7 @@ class FarmerEditScreen extends Screen
      * @var string|null
      */
 
-    public $description = 'Fill out all required information.';
+    public $description = 'Edit farmer profile details';
 
     /**
      * Query data.
@@ -48,8 +48,8 @@ class FarmerEditScreen extends Screen
         $this->farmer_profile = $farmer_profile;
 
         if (!$farmer_profile->exists) {
-            $this->name = 'Enroll Farmer';
-            $this->description = 'Enroll New Farmer';
+            $this->name = 'Create Farmer Profile';
+            $this->description = 'Create a new farmer profile';
         }
 
         return [
@@ -87,23 +87,23 @@ class FarmerEditScreen extends Screen
     public function layout(): array
     {
         return [
-            /* Layout::block(FarmerCreateLoginLayout::class)
+            /* Layout::block(FarmerEditLoginLayout::class)
                 ->title('Job and Education Information')
                 ->description("This information collects farmer's job and education information."), */
 
-            Layout::block(FarmerCreateProfileLayout::class)
+            Layout::block(FarmerEditProfileLayout::class)
                 ->title('Personal Information')
                 ->description("This information collects farmer's personal information."),
-            
-            /* Layout::block(FarmerCreateAddressLayout::class)
-                ->title('Job and Education Information')
-                ->description("This information collects farmer's job and education information."), */
 
-            Layout::block(FarmerCreateSkillLayout::class)
+            Layout::block(FarmerEditAddressLayout::class)
+                ->title('Address Information')
+                ->description("This information collects farmer's address information."),
+
+            Layout::block(FarmerEditSkillLayout::class)
                 ->title('Job and Education Information')
                 ->description("This information collects farmer's job and education information."),
 
-            Layout::block(FarmerCreateSalaryLayout::class)
+            Layout::block(FarmerEditSalaryLayout::class)
                 ->title('Salary Information')
                 ->description("This information collects farmer's salary information."),
 

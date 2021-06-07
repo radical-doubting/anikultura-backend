@@ -16,7 +16,7 @@ use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Relation;
 
-class FarmerCreateAddressLayout extends Rows
+class FarmerEditAddressLayout extends Rows
 {
     /**
      * Used to create the title of a group of form elements.
