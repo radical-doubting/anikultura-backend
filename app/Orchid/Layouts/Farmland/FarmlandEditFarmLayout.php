@@ -5,6 +5,7 @@ namespace App\Orchid\Layouts\Farmland;
 use App\Models\Farmland\CropBuyer;
 use App\Models\Farmland\FarmlandStatus;
 use App\Models\Farmland\FarmlandType;
+use App\Models\Farmland\WateringSystem;
 use Orchid\Screen\Field;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Group;
@@ -44,20 +45,15 @@ class FarmlandEditFarmLayout extends Rows
             Input::make('farmland.hectares_size')
                 ->type('number')
                 ->required()
-                ->title(__('Size in Hectares')),
+                ->title(__('Size'))
+                ->placeholder(__('Size in hectares')),
 
-            Select::make('farmland.watering_systems')
-                ->options([
-                    'well'   => 'Well',
-                    'nia' => 'NIA Canal/Irrigation',
-                    'spring' => 'Spring',
-                    'shallowtubewell' => 'Shallow Tube Well',
-                    'creek' => 'Creek',
-                    'faucet' => 'Faucet',
-                    'rainwater' => 'Rain Water',
-                ])
-                ->multiple()
-                ->title('Watering System Used:'),
+            Relation::make('farmland.watering_systems')
+                ->fromModel(WateringSystem::class, 'name')
+                ->required()
+                ->title(__('Watering Systems Used'))
+                ->placeholder(__('Watering Systems Used'))
+                ->multiple(),
 
             Relation::make('farmland.crop_buyers')
                 ->fromModel(CropBuyer::class, 'name')
