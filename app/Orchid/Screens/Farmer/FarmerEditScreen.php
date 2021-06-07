@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\Farmer;
 use App\Models\Farmer\FarmerAddress;
 use Illuminate\Http\Request;
 use App\Models\Farmer\FarmerProfile;
+use App\Models\User;
 use App\Orchid\Layouts\Farmer\FarmerEditLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
@@ -90,9 +91,9 @@ class FarmerEditScreen extends Screen
     public function layout(): array
     {
         return [
-            // Layout::block(FarmerEditLoginLayout::class)
-            //     ->title('Account Information')
-            //     ->description("This information collects farmer's account information."),
+            Layout::block(FarmerEditLoginLayout::class)
+                ->title('Account Information')
+                ->description("This information collects farmer's account information."),
 
             Layout::block(FarmerEditProfileLayout::class)
                 ->title('Personal Information')
@@ -224,12 +225,26 @@ class FarmerEditScreen extends Screen
             'farmer_address.region_id' => [
                 'required'
             ],
+
+            // User
+            'user.name' => [
+                'required'
+            ],
+
+            'user.password' => [
+                'required'
+            ],
         ]);
+
+        $farmer_user_id = $this->save_user($request);
 
         $farmer_profile_data = $request->get('farmer_profile');
 
         $farmer_profile
             ->fill($farmer_profile_data)
+            ->fill([
+                'user_id' => $farmer_user_id
+            ])
             ->save();
 
         $this->save_address($farmer_profile, $request);
@@ -240,9 +255,20 @@ class FarmerEditScreen extends Screen
     }
 
     /**
+     * @param Request $request
+     */
+    private function save_user(Request $request)
+    {
+        $farmer_user_data = $request->get('user');
+        $farmer_user = new User($farmer_user_data);
+        $farmer_user->save();
+
+        return $farmer_user->id;
+    }
+
+    /**
      * @param FarmerProfile   $farmer_profile
      * @param Request         $request
-     *
      */
     private function save_address(FarmerProfile $farmer_profile, Request $request)
     {

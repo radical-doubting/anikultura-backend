@@ -33,42 +33,42 @@ class FarmerEditLoginLayout extends Rows
     {
         return [
             Group::make([
-                Input::make('user.lastname')
-                    ->title('Last Name')
-                    ->placeholder('Enter Last name')
-                    ->required(),
-
-                Input::make('user.firstname')
+                Input::make('user.first_name')
                     ->title('First Name')
                     ->placeholder('Enter first name')
                     ->required(),
 
-                Input::make('user.middlename')
+                Input::make('user.middle_name')
                     ->title('Middle Name')
-                    ->placeholder('Enter middle name')
+                    ->placeholder('Enter middle name'),
+
+                Input::make('user.last_name')
+                    ->title('Last Name')
+                    ->placeholder('Enter Last name')
+                    ->required(),
             ]),
 
             Group::make([
-                Input::make('user.username')
+                Input::make('user.name')
                     ->title('Username')
                     ->placeholder('Username')
-                    ->disabled(),
-
-                Input::make('user.email')
-                    ->type('email')
-                    ->title('Email')
-                    ->placeholder('bootstrap@example.com'),
+                    ->required(),
 
                 Password::make('password')
                     ->title('Password')
                     ->required(),
             ]),
 
-            Input::make('contact_number')
-                ->type('number')
-                ->placeholder('09123456789')
-                ->required()
-                ->title('Mobile Number'),
+            Group::make([
+                Input::make('user.email')
+                    ->type('email')
+                    ->title('Email')
+                    ->placeholder('email@example.com'),
+
+                Input::make('user.contact_number')
+                    ->placeholder('09123456789')
+                    ->title('Mobile Number'),
+            ]),
         ];
     }
 }
