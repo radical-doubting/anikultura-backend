@@ -13,7 +13,7 @@ class CreateFarmlandTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('farmland_type', function (Blueprint $table) {
+        Schema::create('farmland_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFarmlandTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('farmland_type');
+        Schema::dropIfExists('farmland_types');
     }
 }

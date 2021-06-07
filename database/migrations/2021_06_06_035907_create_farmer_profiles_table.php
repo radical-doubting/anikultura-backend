@@ -13,7 +13,7 @@ class CreateFarmerProfileTable extends Migration
      */
     public function up()
     {
-        Schema::create('farmer_profile', function (Blueprint $table) {
+        Schema::create('farmer_profiles', function (Blueprint $table) {
             $table->id();
             $table->string('gender');
             $table->string('civil_status');
@@ -60,6 +60,6 @@ class CreateFarmerProfileTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('farmer_profile');
+        Schema::dropIfExists('farmer_profiles');
     }
 }

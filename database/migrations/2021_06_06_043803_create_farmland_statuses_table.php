@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFarmlandWateringSystemTable extends Migration
+class CreateFarmlandStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFarmlandWateringSystemTable extends Migration
      */
     public function up()
     {
-        Schema::create('farmland_watering_system', function (Blueprint $table) {
+        Schema::create('farmland_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFarmlandWateringSystemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('farmland_watering_system');
+        Schema::dropIfExists('farmland_statuses');
     }
 }
