@@ -114,10 +114,10 @@ class FarmlandEditScreen extends Screen
 
         ]);*/
 
-        $farmlandData = $request->get('farmland');
+        $farmland_data = $request->get('farmland');
 
         $farmland
-            ->fill($farmlandData)
+            ->fill($farmland_data)
             ->save();
 
         Toast::info(__('Farmland was saved'));

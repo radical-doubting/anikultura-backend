@@ -123,10 +123,10 @@ class MunicityEditScreen extends Screen
             ]
         ]);
 
-        $municityData = $request->get('municity');
+        $municity_data = $request->get('municity');
 
         $municity
-            ->fill($municityData)
+            ->fill($municity_data)
             ->save();
 
         Toast::info(__('Municity was saved successfully'));

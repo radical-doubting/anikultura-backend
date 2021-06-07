@@ -120,10 +120,10 @@ class ProvinceEditScreen extends Screen
             ]
         ]);
 
-        $provinceData = $request->get('province');
+        $province_data = $request->get('province');
 
         $province
-            ->fill($provinceData)
+            ->fill($province_data)
             ->save();
 
         Toast::info(__('Province was saved successfully'));

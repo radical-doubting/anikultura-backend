@@ -199,10 +199,10 @@ class FarmerEditScreen extends Screen
 
         ]);
 
-        $farmerprofileData = $request->get('farmer_profile');
+        $farmer_profile_data = $request->get('farmer_profile');
 
         $farmer_profile
-            ->fill($farmerprofileData)
+            ->fill($farmer_profile_data)
             ->save();
 
         Toast::info(__('Farmer Profile was saved'));
