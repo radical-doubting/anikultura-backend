@@ -2,11 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-<<<<<<< HEAD
-use App\Models\FarmerProfile;
-=======
 use App\Models\Farmer\FarmerProfile;
->>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;

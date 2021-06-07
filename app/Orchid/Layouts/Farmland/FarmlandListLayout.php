@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmland;
 
-use App\Models\Farmland;
+use App\Models\Farmland\Farmland;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
