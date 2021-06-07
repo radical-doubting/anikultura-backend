@@ -37,17 +37,3 @@ Route::screen('batch/create', BatchEditScreen::class)
     });
 
 
-
-
-
-
-// Platform > Batch > Create
-Route::screen('batch/create', BatchEditScreen::class)
-    ->name('platform.batch.create')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.batch')
-            ->push(__('Create'), route('platform.batch.create'));
-    });
-
-//Route::screen('idea', 'Idea::class','platform.screens.idea');

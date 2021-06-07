@@ -23,6 +23,7 @@ class AddSiteLayout extends Rows
     protected function fields(): array
     {
         return [
+            /*
             Input::make('batches.region')
             ->type('text')
             ->max(255)
@@ -42,7 +43,7 @@ class AddSiteLayout extends Rows
             ->max(255)
             ->required()
             ->title(__('Barangay'))
-            ->placeholder(__('Barangay')),
+            ->placeholder(__('Barangay')),*/
         ];
     }
 }

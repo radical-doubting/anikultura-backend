@@ -132,7 +132,7 @@ class BatchEditScreen extends Screen
 
         Toast::info(__('Batch was removed'));
 
-        return redirect()->route('platform.batches');
+        return redirect()->route('platform.batch');
     }
 
     /**
