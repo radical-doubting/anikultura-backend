@@ -41,7 +41,6 @@ class FarmerListLayout extends Table
                 }),
 
             TD::make('lastname', __('Last Name'))
-<<<<<<< HEAD
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
@@ -67,33 +66,6 @@ class FarmerListLayout extends Table
                 return Link::make($farmer_profile->middlename)
                     ->route('platform.farmer.profile.edit', $farmer_profile->id);
             }),
-=======
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerProfile $farmer_profile) {
-                    return Link::make($farmer_profile->lastname)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
-                }),
-
-            TD::make('firstname', __('First Name'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerProfile $farmer_profile) {
-                    return Link::make($farmer_profile->firstname)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
-                }),
-
-            TD::make('middlename', __('Middle Name'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerProfile $farmer_profile) {
-                    return Link::make($farmer_profile->middlename)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
-                }),
->>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
