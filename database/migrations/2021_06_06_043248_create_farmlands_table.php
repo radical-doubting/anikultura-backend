@@ -19,7 +19,7 @@ class CreateFarmlandsTable extends Migration
 
             $table->unsignedBigInteger('type_id')
                 ->nullable();
-            $table->foreign('farmland_types')
+            $table->foreign('type_id')
                 ->references('id')
                 ->on('farmland_types')
                 ->nullOnDelete()
@@ -27,7 +27,7 @@ class CreateFarmlandsTable extends Migration
 
             $table->unsignedBigInteger('status_id')
                 ->nullable();
-            $table->foreign('farmland_statuses')
+            $table->foreign('status_id')
                 ->references('id')
                 ->on('farmland_statuses')
                 ->nullOnDelete()
