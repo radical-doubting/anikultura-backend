@@ -17,8 +17,6 @@ use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-use App\Orchid\Screens\Batch\BatchListScreen;
-use App\Orchid\Screens\Batch\BatchEditScreen;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,3 +109,4 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 require('platform/batch.php');
+require('platform/sites.php');
