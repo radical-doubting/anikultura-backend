@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer_profile;
+use App\Models\FarmerProfile;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -35,7 +35,7 @@ class FarmerListLayout extends Table
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (Farmer_profile $farmer_profile) {
+                ->render(function (FarmerProfile $farmer_profile) {
                     return Link::make($farmer_profile->id)
                         ->route('platform.farmer.profile.edit', $farmer_profile->id);
                 }),
@@ -44,7 +44,7 @@ class FarmerListLayout extends Table
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Farmer_profile $farmer_profile) {
+            ->render(function (FarmerProfile $farmer_profile) {
                 return Link::make($farmer_profile->lastname)
                     ->route('platform.farmer.profile.edit', $farmer_profile->id);
             }),
@@ -53,7 +53,7 @@ class FarmerListLayout extends Table
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Farmer_profile $farmer_profile) {
+            ->render(function (FarmerProfile $farmer_profile) {
                 return Link::make($farmer_profile->firstname)
                     ->route('platform.farmer.profile.edit', $farmer_profile->id);
             }),
@@ -62,7 +62,7 @@ class FarmerListLayout extends Table
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Farmer_profile $farmer_profile) {
+            ->render(function (FarmerProfile $farmer_profile) {
                 return Link::make($farmer_profile->middlename)
                     ->route('platform.farmer.profile.edit', $farmer_profile->id);
             }),
@@ -71,7 +71,7 @@ class FarmerListLayout extends Table
                 ->align(TD::ALIGN_CENTER)
                 ->cantHide()
                 ->width('100px')
-                ->render(function (Farmer_profile $farmer_profile) {
+                ->render(function (FarmerProfile $farmer_profile) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
