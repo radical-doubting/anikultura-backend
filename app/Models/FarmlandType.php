@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Farmland_watering_system extends Model
+class FarmlandType extends Model
 {
     use HasFactory;
 }

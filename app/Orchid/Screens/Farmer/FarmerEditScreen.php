@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\Farmer;
 
 use Illuminate\Http\Request;
-use App\Models\Farmer_profile;
+use App\Models\FarmerProfile;
 use App\Orchid\Layouts\Farmer\FarmerCreateLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateSkillLayout;
@@ -43,7 +43,7 @@ class FarmerEditScreen extends Screen
      * @return array
      */
 
-    public function query(Farmer_profile $farmer_profile): array
+    public function query(FarmerProfile $farmer_profile): array
     {
         $this->farmer_profile = $farmer_profile;
         
@@ -91,10 +91,6 @@ class FarmerEditScreen extends Screen
                 ->title('Personal Information')
                 ->description("This information collects farmer's personal information."),
             
-            Layout::block(FarmerCreateAddressLayout::class)
-                ->title('Personal Address')
-                ->description("This information collects farmer's personal address."),
-
             Layout::block(FarmerCreateSkillLayout::class)
                 ->title('Job and Education Information')
                 ->description("This information collects farmer's job and education information."),
@@ -106,13 +102,13 @@ class FarmerEditScreen extends Screen
     }
 
     /**
-     * @param Farmer_profile    $farmer_profile
+     * @param FarmerProfile    $farmer_profile
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function save(Farmer_profile $farmer_profile, Request $request)
+    public function save(FarmerProfile $farmer_profile, Request $request)
     {
         $request->validate([
             'farmer_profile.gender' => [
@@ -205,14 +201,14 @@ class FarmerEditScreen extends Screen
     }
 
     /**
-     * @param Farmer_profile $farmer_profile
+     * @param FarmerProfile $farmer_profile
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function remove(Farmer_profile $farmer_profile)
+    public function remove(FarmerProfile $farmer_profile)
     {
         $farmer_profile->delete();
 

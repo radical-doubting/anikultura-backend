@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\Farmer;
 
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
-use App\Models\Farmer_profile;
+use App\Models\FarmerProfile;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 use Orchid\Support\Facades\Toast;
@@ -35,7 +35,7 @@ class FarmerListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmer_profile' => Farmer_profile::filters()
+            'farmer_profile' => FarmerProfile::filters()
                 ->defaultSort('id')
                 ->paginate()
         ];
@@ -70,14 +70,14 @@ class FarmerListScreen extends Screen
     }
 
     /**
-     * @param Farmer_profile $farmer_profile
+     * @param FarmerProfile $farmer_profile
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     
-    public function remove(Farmer_profile $farmer_profile)
+    public function remove(FarmerProfile $farmer_profile)
     {
         $farmer_profile->delete();
 

@@ -22,7 +22,7 @@ class FarmlandListScreen extends Screen
      *
      * @var string|null
      */
-    public $description = 'List of all farmers under SM KSK SAP';
+    public $description = 'List of all farmland under SM KSK SAP';
 
     /**
      * Query data.

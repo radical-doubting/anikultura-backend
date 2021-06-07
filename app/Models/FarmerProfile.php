@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Orchid\Screen\AsSource;
 use Orchid\Filters\Filterable;
 
-class Farmer_profile extends Model
+class FarmerProfile extends Model
 {
     public $table = 'farmer_profile';
     
