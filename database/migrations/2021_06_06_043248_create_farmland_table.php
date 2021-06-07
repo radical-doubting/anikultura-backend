@@ -16,8 +16,7 @@ class CreateFarmlandTable extends Migration
         Schema::create('farmland', function (Blueprint $table) {
             $table->id();
             $table->integer('hectares_size');
-            $table->dateTime('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
         });
     }
 

@@ -34,8 +34,22 @@ class CreateFarmerProfileTable extends Migration
             $table->integer('estimated_salary');
             $table->string('social_status');
             $table->string('social_status_reason');
-            $table->dateTime('created_at');
-            $table->timestamp('updated_at');
+
+            $table->unsignedBigInteger('farmer_address_id');
+            $table->foreign('farmer_address_id')
+                ->references('id')
+                ->on('farmer_address')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->timestamps();
         });
     }
 
