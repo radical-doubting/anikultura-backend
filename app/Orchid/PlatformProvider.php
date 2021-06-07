@@ -39,6 +39,11 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('location-pin')
                         ->route('platform.sites.municities'),
                 ]),
+
+            Menu::make('Farmer Profile')
+                ->icon('user')
+                ->route('platform.farmer.profile.view.all'),
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')

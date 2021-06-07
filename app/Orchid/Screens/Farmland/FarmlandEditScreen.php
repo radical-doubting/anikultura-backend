@@ -84,17 +84,17 @@ class FarmlandEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(FarmlandCreateAddressLayout::class)
+            /*Layout::block(FarmlandCreateAddressLayout::class)
                 ->title('Farmland Address')
-                ->description('Insert Description.'),
+                ->description('Insert Description.'),*/
 
             Layout::block(FarmlandCreateFarmLayout::class)
                 ->title('Farmland Information')
                 ->description('Insert Description.'),
 
-            Layout::block(FarmlandCreateAppStatusLayout::class)
-                ->title('Application Verification')
-                ->description('Insert Description.'),
+            /*Layout::block(FarmlandCreateAppStatusLayout::class)
+                ->title('Verification')
+                ->description('Insert Description.'),*/
         ];
     }
 
@@ -107,27 +107,12 @@ class FarmlandEditScreen extends Screen
 
     public function save(Farmland $farmland, Request $request)
     {
-        $request->validate([
-            'farmland.farmland_status' => [
+        /*$request->validate([
+            'farmland.hectares_size' => [
                 'required'
             ],
 
-            'farmland.farm_type' => [
-                'required'
-            ],
-
-            'farmland.farm_size' => [
-                'required'
-            ],
-
-            'farmland.watering_system_used' => [
-                'required'
-            ],
-
-            'farmland.crop_buyer' => [
-                'required'
-            ]
-        ]);
+        ]);*/
 
         $farmlandData = $request->get('farmland');
 

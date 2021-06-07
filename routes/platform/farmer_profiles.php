@@ -7,7 +7,7 @@ use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Farmer\FarmerListScreen;
 use App\Orchid\Screens\Farmer\FarmerEditScreen;
 
-// Platform > System > Farmer Profile > Enroll Farmer
+// Platform > System > Farmer Profile > Enroll
 Route::screen('enroll/farmer', FarmerEditScreen::class)
     ->name('platform.farmer.profile.create')
     ->breadcrumbs(function (Trail $trail) {
@@ -16,8 +16,8 @@ Route::screen('enroll/farmer', FarmerEditScreen::class)
             ->push(__('Enroll Farmer'), route('platform.farmer.profile.create'));
     });
 
-// Platform > System > Farmer Profile > View All
-Route::screen('view/all/farmer', FarmerListScreen::class)
+// Platform > System > Farmer Profile > View
+Route::screen('view/farmer', FarmerListScreen::class)
     ->name('platform.farmer.profile.view.all')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
@@ -26,7 +26,7 @@ Route::screen('view/all/farmer', FarmerListScreen::class)
     });
 
 // Platform > System > Farmer Profile > Edit
-Route::screen('farmer/edit/{farmer_profile}', FarmerEditScreen::class)
+Route::screen('edit/farmer/{farmer_profile}', FarmerEditScreen::class)
     ->name('platform.farmer.profile.edit')
     ->breadcrumbs(function (Trail $trail, $farmer_profile) {
         return $trail
