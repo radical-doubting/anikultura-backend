@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\Farmland;
 
 use Illuminate\Http\Request;
-use App\Models\Farmland;
+use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandCreateFarmLayout;
 use App\Orchid\Layouts\Farmland\FarmlandCreateAddressLayout;
 use App\Orchid\Layouts\Farmland\FarmlandCreateAppStatusLayout;
@@ -44,7 +44,7 @@ class FarmlandEditScreen extends Screen
     public function query(Farmland $farmland): array
     {
         $this->farmland = $farmland;
-        
+
         if (!$farmland->exists) {
             $this->name = "Enroll Farmer's Farmland";
             $this->description = "Enroll Farmer's Farmland";

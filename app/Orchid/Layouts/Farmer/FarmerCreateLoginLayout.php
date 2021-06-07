@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\Farmer_profile;
+use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -37,7 +37,7 @@ class FarmerCreateLoginLayout extends Rows
                     ->title('Last Name:')
                     ->placeholder('Enter Last name')
                     ->required(),
-        
+
                 Input::make('firstname')
                     ->title('First Name:')
                     ->placeholder('Enter first name')
@@ -51,26 +51,26 @@ class FarmerCreateLoginLayout extends Rows
 
             Group::make([
                 Input::make('username')
-                ->title('Username')
-                ->placeholder('Username')
-                ->disabled(),
+                    ->title('Username')
+                    ->placeholder('Username')
+                    ->disabled(),
 
                 Input::make('email')
-                ->type('email')
-                ->title('Email')
-                ->placeholder('bootstrap@example.com')
-                ->required(),
+                    ->type('email')
+                    ->title('Email')
+                    ->placeholder('bootstrap@example.com')
+                    ->required(),
 
                 Password::make('password')
-                ->title('Password')
-                ->required(),
+                    ->title('Password')
+                    ->required(),
             ]),
 
             Input::make('contact_number')
-            ->type('number')
-            ->placeholder('09123456789')
-            ->required()
-            ->title('Mobile Number'),
+                ->type('number')
+                ->placeholder('09123456789')
+                ->required()
+                ->title('Mobile Number'),
         ];
     }
 }

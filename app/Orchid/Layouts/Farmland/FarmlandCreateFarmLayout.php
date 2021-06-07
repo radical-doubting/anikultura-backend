@@ -33,14 +33,25 @@ class FarmlandCreateFarmLayout extends Rows
             Select::make('farm_type')
                 ->title('Farm Type:')
                 ->required()
+<<<<<<< HEAD
                 ->options(["Personal Farmland", "Community Farmland"]), */
     
             Input::make('farmland.hectares_size')
+=======
+                ->options(["Personal Farmland", "Community Farmland"]),
+
+            Input::make('farm_size')
+>>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
                 ->type('number')
                 ->required()
                 ->title('Farm Size:'),
 
+<<<<<<< HEAD
             /*Select::make('watering_system_used')
+=======
+
+            Select::make('watering_system_used')
+>>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
                 ->options([
                     'well'   => 'Well',
                     'nia' => 'NIA Canal/Irrigation',
@@ -48,7 +59,8 @@ class FarmlandCreateFarmLayout extends Rows
                     'shallowtubewell' => 'Shallow Tube Well',
                     'creek' => 'Creek',
                     'faucet' => 'Faucet',
-                    'rainwater' => 'Rain Water',])
+                    'rainwater' => 'Rain Water',
+                ])
                 ->multiple()
                 ->title('Watering System Used:'),
 

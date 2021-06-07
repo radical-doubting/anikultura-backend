@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Orchid\Screens\Farmland;
+namespace App\Orchid\Screens\Site\Province;
 
-use App\Orchid\Layouts\Farmland\FarmlandListLayout;
-use App\Models\Farmland\Farmland;
-use Orchid\Screen\Screen;
+use App\Models\Site\Province;
+use App\Orchid\Layouts\Site\Province\ProvinceListLayout;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
-class FarmlandListScreen extends Screen
+class ProvinceListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Farmland';
+    public $name = 'Provinces';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'List of all farmland under SM KSK SAP';
+    public $description = 'List of all provinces under SM KSK SAP';
 
     /**
      * Query data.
@@ -32,7 +32,8 @@ class FarmlandListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmland' => Farmland::filters()
+            'provinces' => Province::with('region')
+                ->filters()
                 ->defaultSort('id')
                 ->paginate()
         ];
@@ -48,7 +49,7 @@ class FarmlandListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmer.farmland.create'),
+                ->route('platform.sites.provinces.create'),
         ];
     }
 
@@ -60,24 +61,23 @@ class FarmlandListScreen extends Screen
     public function layout(): array
     {
         return [
-            FarmlandListLayout::class
+            ProvinceListLayout::class
         ];
     }
 
     /**
-     * @param Farmland $farmland
+     * @param Province $province
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
-    public function remove(Farmland $farmland)
+    public function remove(Province $province)
     {
-        $farmland->delete();
+        $province->delete();
 
-        Toast::info(__("Farmer's Farmland was removed successfully"));
+        Toast::info(__('Province was removed'));
 
-        return redirect()->route('platform.farmer.farmland.view.all');
+        return redirect()->route('platform.sites.provinces');
     }
 }

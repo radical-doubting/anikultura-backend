@@ -30,7 +30,7 @@ class FarmlandCreateAppStatusLayout extends Rows
                     ->title('Verified By:')
                     ->disabled()
                     ->required(),
-        
+
                 Input::make('position')
                     ->title('Position:')
                     ->disabled()
@@ -42,7 +42,7 @@ class FarmlandCreateAppStatusLayout extends Rows
                     ->title('Office:')
                     ->disabled()
                     ->required(),
-            
+
                 Input::make('contact_number')
                     ->title('Contact Number:')
                     ->disabled()

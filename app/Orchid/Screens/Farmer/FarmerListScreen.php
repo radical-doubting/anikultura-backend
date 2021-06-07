@@ -3,7 +3,11 @@
 namespace App\Orchid\Screens\Farmer;
 
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
+<<<<<<< HEAD
 use App\Models\FarmerProfile;
+=======
+use App\Models\Farmer\FarmerProfile;
+>>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 use Orchid\Support\Facades\Toast;
@@ -15,7 +19,7 @@ class FarmerListScreen extends Screen
      *
      * @var string
      */
-    
+
     public $name = 'Farmer Profile';
 
     /**
@@ -76,7 +80,11 @@ class FarmerListScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
     public function remove(FarmerProfile $farmer_profile)
     {
         $farmer_profile->delete();

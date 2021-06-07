@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\Farmer_profile;
+use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
 use Orchid\Support\Facades\Layout;
 use Orchid\Screen\Fields\Input;
@@ -28,7 +28,7 @@ class FarmerCreateSkillLayout extends Rows
      *
      * @return Field[]
      */
-    
+
     protected function fields(): array
     {
         return [
@@ -37,7 +37,7 @@ class FarmerCreateSkillLayout extends Rows
                     ->title('Highest Educational Status:')
                     ->required()
                     ->options(["Elementary", "High School", "College"]),
-                
+
                 Input::make('farmer_profile.college_course')
                     ->title('College Course:')
                     ->required(),
@@ -70,8 +70,8 @@ class FarmerCreateSkillLayout extends Rows
                     ->required(),
 
                 Select::make('farmer_profile.nc_passer_status')
-                ->title('MC Passer?')
-                ->options(["Yes", "No"]),
+                    ->title('MC Passer?')
+                    ->options(["Yes", "No"]),
             ]),
         ];
     }

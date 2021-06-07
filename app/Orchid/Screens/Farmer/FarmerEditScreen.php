@@ -3,7 +3,11 @@
 namespace App\Orchid\Screens\Farmer;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use App\Models\FarmerProfile;
+=======
+use App\Models\Farmer\FarmerProfile;
+>>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
 use App\Orchid\Layouts\Farmer\FarmerCreateLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerCreateSkillLayout;
@@ -46,7 +50,7 @@ class FarmerEditScreen extends Screen
     public function query(FarmerProfile $farmer_profile): array
     {
         $this->farmer_profile = $farmer_profile;
-        
+
         if (!$farmer_profile->exists) {
             $this->name = 'Enroll Farmer';
             $this->description = 'Enroll New Farmer';
@@ -94,10 +98,17 @@ class FarmerEditScreen extends Screen
             Layout::block(FarmerCreateProfileLayout::class)
                 ->title('Personal Information')
                 ->description("This information collects farmer's personal information."),
+<<<<<<< HEAD
             
             /* Layout::block(FarmerCreateAddressLayout::class)
                 ->title('Job and Education Information')
                 ->description("This information collects farmer's job and education information."), */
+=======
+
+            Layout::block(FarmerCreateAddressLayout::class)
+                ->title('Personal Address')
+                ->description("This information collects farmer's personal address."),
+>>>>>>> 77f5d923c32254527826ab3f58a756ddb672ea6e
 
             Layout::block(FarmerCreateSkillLayout::class)
                 ->title('Job and Education Information')

@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Orchid\Screens\Farmland;
+namespace App\Orchid\Screens\Site\Region;
 
-use App\Orchid\Layouts\Farmland\FarmlandListLayout;
-use App\Models\Farmland\Farmland;
-use Orchid\Screen\Screen;
+use App\Models\Site\Region;
+use App\Orchid\Layouts\Site\Region\RegionListLayout;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
-class FarmlandListScreen extends Screen
+class RegionListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Farmland';
+    public $name = 'Regions';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'List of all farmland under SM KSK SAP';
+    public $description = 'List of all regions under SM KSK SAP';
 
     /**
      * Query data.
@@ -32,7 +32,7 @@ class FarmlandListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmland' => Farmland::filters()
+            'regions' => Region::filters()
                 ->defaultSort('id')
                 ->paginate()
         ];
@@ -48,7 +48,7 @@ class FarmlandListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmer.farmland.create'),
+                ->route('platform.sites.regions.create'),
         ];
     }
 
@@ -60,24 +60,23 @@ class FarmlandListScreen extends Screen
     public function layout(): array
     {
         return [
-            FarmlandListLayout::class
+            RegionListLayout::class
         ];
     }
 
     /**
-     * @param Farmland $farmland
+     * @param Region $region
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
-    public function remove(Farmland $farmland)
+    public function remove(Region $region)
     {
-        $farmland->delete();
+        $region->delete();
 
-        Toast::info(__("Farmer's Farmland was removed successfully"));
+        Toast::info(__('Region was removed successfully'));
 
-        return redirect()->route('platform.farmer.farmland.view.all');
+        return redirect()->route('platform.sites.regions');
     }
 }
