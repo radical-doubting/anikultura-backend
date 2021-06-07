@@ -35,7 +35,7 @@ class FarmlandCreateFarmLayout extends Rows
                 ->required()
                 ->options(["Personal Farmland", "Community Farmland"]), */
     
-            Input::make('hectares_size')
+            Input::make('farmland.hectares_size')
                 ->type('number')
                 ->required()
                 ->title('Farm Size:'),

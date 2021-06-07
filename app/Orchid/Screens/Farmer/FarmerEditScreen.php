@@ -87,10 +87,18 @@ class FarmerEditScreen extends Screen
     public function layout(): array
     {
         return [
+            /* Layout::block(FarmerCreateLoginLayout::class)
+                ->title('Job and Education Information')
+                ->description("This information collects farmer's job and education information."), */
+
             Layout::block(FarmerCreateProfileLayout::class)
                 ->title('Personal Information')
                 ->description("This information collects farmer's personal information."),
             
+            /* Layout::block(FarmerCreateAddressLayout::class)
+                ->title('Job and Education Information')
+                ->description("This information collects farmer's job and education information."), */
+
             Layout::block(FarmerCreateSkillLayout::class)
                 ->title('Job and Education Information')
                 ->description("This information collects farmer's job and education information."),

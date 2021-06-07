@@ -99,6 +99,12 @@ class FarmlandEditScreen extends Screen
 
     public function save(Farmland $farmland, Request $request)
     {
+        /*$request->validate([
+            'farmland.hectares_size' => [
+                'required'
+            ],
+
+        ]);*/
 
         $farmlandData = $request->get('farmland');
 
