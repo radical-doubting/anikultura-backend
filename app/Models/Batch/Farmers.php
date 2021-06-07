@@ -6,22 +6,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 
-class Batches extends Model
+class Farmers extends Model
 {
     use Filterable, HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'assigned_farmschool_name',
-        'assigned_site',
-        'number_seeds_distributed',
         'farmer_names',
     ];
 
-    
     /**
      * The attributes for which you can use filters in url.
      *
@@ -29,7 +26,7 @@ class Batches extends Model
      */
     protected $allowedFilters = [
         'id',
-        'assigned_farmschool_name',
+        'name',
     ];
 
     /**
@@ -39,12 +36,18 @@ class Batches extends Model
      */
     protected $allowedSorts = [
         'id',
-        'assigned_farmschool_name',
-        'assigned_sites',
-        'number_seeds_distributed',
-        'farmer_names',
+        'name',
+        'updated_at',
+        'created_at',
     ];
 
+    /**
+     * Get the region that owns this province.
+     */
+    public function farmers()
+    {
+        return $this->belongsTo(Farmers::class);
+    }
 
     protected $casts = [
         'farmer_names' => 'array'

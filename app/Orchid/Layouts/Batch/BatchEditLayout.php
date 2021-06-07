@@ -30,12 +30,6 @@ class BatchEditLayout extends Rows
                 ->title(__('Assigned Farmschool Name'))
                 ->placeholder(__('Farmschool Name')),
 
-            Input::make('batches.assigned_site')
-                ->type('text')
-                ->required()
-                ->title(__('Assigned Site'))
-                ->placeholder(__('Site')),
-
             Input::make('batches.number_seeds_distributed')
                 ->type('text')
                 ->required()

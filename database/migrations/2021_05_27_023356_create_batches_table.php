@@ -16,9 +16,12 @@ class CreateBatchesTable extends Migration
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
             $table->string("assigned_farmschool_name")->nullable(false);
-            $table->string("assigned_site");
+            $table->string("region")->nullable(false);
+            $table->string("provinces")->nullable(false);
+            $table->string("municities")->nullable(false);
+            $table->string("barangays")->nullable(false);
             $table->integer("number_seeds_distributed");
-            $table->string("farmer_names");
+            $table->json("farmer_names");
             $table->timestamps();
         });
     }

@@ -91,8 +91,6 @@ class BatchEditScreen extends Screen
                     ->canSee($this->batches->exists)
                     ->method('save')
             ),
-
-            /*
             //AddSiteLayout::class
             Layout::block(AddSiteLayout::class)
             ->title(__('Batch Site'))
@@ -103,7 +101,7 @@ class BatchEditScreen extends Screen
                     ->icon('check')
                     ->canSee($this->batches->exists)
                     ->method('save')
-            ),*/
+            ),
 
             //AddFarmersLayout::class
             Layout::block(AddFarmersLayout::class)
@@ -146,7 +144,30 @@ class BatchEditScreen extends Screen
         $request->validate([
             'batches.assigned_farmschool_name' => [
                 'required'
-            ]
+            ],
+            'batches.number_seeds_distributed' => [
+                'required'
+            ],
+
+            'batches.farmer_names' => [
+                'required'
+            ],
+
+            'batches.regions' => [
+                'required'
+            ],
+
+            'batches.provinces' => [
+                'required'
+            ],
+
+            'batches.municities' => [
+                'required'
+            ],
+
+            'batches.barangays' => [
+                'required'
+            ],
         ]);
 
         $batchesData = $request->get('batches');

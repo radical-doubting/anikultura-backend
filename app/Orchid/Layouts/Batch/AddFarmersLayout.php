@@ -2,9 +2,10 @@
 
 namespace App\Orchid\Layouts\Batch;
 
+use App\Models\Batch\Farmers;
 use Orchid\Screen\Field;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Layouts\Rows;
+use Orchid\Screen\Fields\Relation;
 
 class AddFarmersLayout extends Rows
 {
@@ -22,12 +23,13 @@ class AddFarmersLayout extends Rows
      */
     protected function fields(): array
     {
-        return [ Input::make('batches.farmer_names')
-        ->type('text')
-        ->required()
-        ->title(__('Enrolled Farmer'))
-        ->placeholder(__('Farmer')),];
-        //Select::make('user')
-          //  ->fromModel(User::class, 'email');
+        return [ 
+        Relation::make('batches.farmer_names')
+            ->fromModel(Farmers::class, 'name')
+            ->required()
+            ->multiple()
+            ->title('Farmers')
+            ->placeholder(__('Farmers')),
+        ];
     }
 }

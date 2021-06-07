@@ -2,8 +2,12 @@
 
 namespace App\Orchid\Layouts\Batch;
 
+use App\Models\Site\Municity;
+use App\Models\Site\Province;
+use App\Models\Site\Region;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Layouts\Rows;
 
 class AddSiteLayout extends Rows
@@ -23,27 +27,30 @@ class AddSiteLayout extends Rows
     protected function fields(): array
     {
         return [
-            /*
-            Input::make('batches.region')
-            ->type('text')
-            ->max(255)
+            Relation::make('batches.regions')
+            ->fromModel(Region::class, 'name')
             ->required()
-            ->title(__('Region'))
+            ->title('Region')
             ->placeholder(__('Region')),
 
-            Input::make('batches.municity')
-            ->type('text')
-            ->max(255)
+            Relation::make('batches.provinces')
+            ->fromModel(Province::class, 'name')
             ->required()
-            ->title(__('Municipality/City'))
+            ->title('Province')
+            ->placeholder(__('Province')),
+
+            Relation::make('batches.municities')
+            ->fromModel(Municity::class, 'name')
+            ->required()
+            ->title('Municity')
             ->placeholder(__('Municity')),
 
-            Input::make('batches.barangay')
+            Input::make('batches.barangays')
             ->type('text')
             ->max(255)
             ->required()
             ->title(__('Barangay'))
-            ->placeholder(__('Barangay')),*/
+            ->placeholder(__('Barangay')),
         ];
     }
 }
