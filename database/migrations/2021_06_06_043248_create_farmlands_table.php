@@ -16,7 +16,40 @@ class CreateFarmlandTable extends Migration
         Schema::create('farmlands', function (Blueprint $table) {
             $table->id();
             $table->integer('hectares_size');
+
+            $table->unsignedBigInteger('type_id')
+                ->nullable();
+            $table->foreign('farmland_types')
+                ->references('id')
+                ->on('farmland_types')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('status_id')
+                ->nullable();
+            $table->foreign('farmland_statuses')
+                ->references('id')
+                ->on('farmland_statuses')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
             $table->timestamps();
+        });
+
+        Schema::create('farmland_crops', function (Blueprint $table) {
+            $table->unsignedBigInteger('farmland_id');
+            $table->foreign('farmland_id')
+                ->references('id')
+                ->on('farmlands')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('crop_id');
+            $table->foreign('crop_id')
+                ->references('id')
+                ->on('crops')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
         });
     }
 

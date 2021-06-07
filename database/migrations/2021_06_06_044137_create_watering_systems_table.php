@@ -18,6 +18,22 @@ class CreateFarmlandWateringSystemTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::create('farmland_watering_systems', function (Blueprint $table) {
+            $table->unsignedBigInteger('farmland_id');
+            $table->foreign('farmland_id')
+                ->references('id')
+                ->on('farmlands')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('watering_system_id');
+            $table->foreign('watering_system_id')
+                ->references('id')
+                ->on('watering_systems')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
     }
 
     /**
@@ -27,6 +43,7 @@ class CreateFarmlandWateringSystemTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('farmland_watering_systems');
         Schema::dropIfExists('watering_systems');
     }
 }

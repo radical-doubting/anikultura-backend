@@ -18,6 +18,22 @@ class CreateFarmlandCropBuyerTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::create('farmland_crop_buyers', function (Blueprint $table) {
+            $table->unsignedBigInteger('farmland_id');
+            $table->foreign('farmland_id')
+                ->references('id')
+                ->on('farmlands')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('crop_buyer_id');
+            $table->foreign('crop_buyer_id')
+                ->references('id')
+                ->on('crop_buyers')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
     }
 
     /**
@@ -27,6 +43,7 @@ class CreateFarmlandCropBuyerTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('farmland_crop_buyers');
         Schema::dropIfExists('crop_buyers');
     }
 }
