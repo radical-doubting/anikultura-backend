@@ -20,7 +20,7 @@ class FarmerListLayout extends Table
      * @var string
      */
 
-    protected $target = 'farmer_profile';
+    protected $target = 'farmer_profiles';
 
     /**
      * Get the table cells to be displayed.

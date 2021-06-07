@@ -32,7 +32,7 @@ class FarmlandListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmland' => Farmland::filters()
+            'farmlands' => Farmland::filters()
                 ->defaultSort('id')
                 ->paginate()
         ];

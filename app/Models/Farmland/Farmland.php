@@ -8,8 +8,6 @@ use Orchid\Filters\Filterable;
 
 class Farmland extends Model
 {
-    public $table = 'farmland';
-
     use HasFactory, Filterable;
 
     protected $fillable = [

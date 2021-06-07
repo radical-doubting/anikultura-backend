@@ -19,7 +19,7 @@ class FarmlandListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'farmland';
+    protected $target = 'farmlands';
 
     /**
      * Get the table cells to be displayed.
