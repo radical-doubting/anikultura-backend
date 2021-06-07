@@ -34,19 +34,18 @@ class FarmerEditLoginLayout extends Rows
         return [
             Group::make([
                 Input::make('user.lastname')
-                    ->title('Last Name:')
+                    ->title('Last Name')
                     ->placeholder('Enter Last name')
                     ->required(),
 
                 Input::make('user.firstname')
-                    ->title('First Name:')
+                    ->title('First Name')
                     ->placeholder('Enter first name')
                     ->required(),
 
                 Input::make('user.middlename')
-                    ->title('Middle Name:')
+                    ->title('Middle Name')
                     ->placeholder('Enter middle name')
-                    ->required(),
             ]),
 
             Group::make([

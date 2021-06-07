@@ -47,6 +47,7 @@ class FarmerEditScreen extends Screen
     public function query(FarmerProfile $farmer_profile): array
     {
         $this->farmer_profile = $farmer_profile;
+        $this->farmer_address = $farmer_profile->farmer_address;
 
         if (!$farmer_profile->exists) {
             $this->name = 'Create Farmer Profile';
@@ -54,7 +55,8 @@ class FarmerEditScreen extends Screen
         }
 
         return [
-            'farmer_profile' => $farmer_profile
+            'farmer_profile' => $farmer_profile,
+            'farmer_address' => $farmer_profile->farmer_address
         ];
     }
 
@@ -88,9 +90,9 @@ class FarmerEditScreen extends Screen
     public function layout(): array
     {
         return [
-            /* Layout::block(FarmerEditLoginLayout::class)
-                ->title('Job and Education Information')
-                ->description("This information collects farmer's job and education information."), */
+            // Layout::block(FarmerEditLoginLayout::class)
+            //     ->title('Account Information')
+            //     ->description("This information collects farmer's account information."),
 
             Layout::block(FarmerEditProfileLayout::class)
                 ->title('Personal Information')
@@ -118,7 +120,6 @@ class FarmerEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
     public function save(FarmerProfile $farmer_profile, Request $request)
     {
         $request->validate([
@@ -227,22 +228,38 @@ class FarmerEditScreen extends Screen
 
         $farmer_profile_data = $request->get('farmer_profile');
 
-        $farmer_address_data = $request->get('farmer_address');
-
-        if ($farmer_profile->farmer_address()->exists()) {
-            // $farmer_address = new FarmerAddress($farmer_address_data);
-            $farmer_profile->farmer_address()->create($farmer_address_data);
-        } else {
-            $farmer_profile->farmer_address()->update($farmer_address_data);
-        }
-
         $farmer_profile
             ->fill($farmer_profile_data)
             ->save();
 
+        $this->save_address($farmer_profile, $request);
+
         Toast::info(__('Farmer Profile was saved'));
 
         return redirect()->route('platform.farmer.profile.view.all');
+    }
+
+    /**
+     * @param FarmerProfile   $farmer_profile
+     * @param Request         $request
+     *
+     */
+    private function save_address(FarmerProfile $farmer_profile, Request $request)
+    {
+        $farmer_address_data = $request->get('farmer_address');
+
+        if (!$farmer_profile->farmer_address()->exists()) {
+            $farmer_address = new FarmerAddress($farmer_address_data);
+            $farmer_address->farmer_profile_id = $farmer_profile->id;
+
+            $farmer_profile
+                ->farmer_address()
+                ->save($farmer_address);
+        } else {
+            $farmer_profile
+                ->farmer_address()
+                ->update($farmer_address_data);
+        }
     }
 
     /**
@@ -252,7 +269,6 @@ class FarmerEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
     public function remove(FarmerProfile $farmer_profile)
     {
         $farmer_profile->delete();

@@ -37,14 +37,6 @@ class CreateFarmerAddressesTable extends Migration
             $table->dateTime('created_at');
             $table->timestamp('updated_at');
         });
-
-        Schema::table('farmer_profiles', function (Blueprint $table) {
-            $table->unsignedBigInteger('farmer_address_id');
-            $table->foreign('farmer_address_id')
-                ->references('id')
-                ->on('farmer_addresses')
-                ->cascadeOnUpdate();
-        });
     }
 
     /**
@@ -54,11 +46,6 @@ class CreateFarmerAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::table('farmer_profiles', function (Blueprint $table) {
-            $table->dropForeign('farmer_profiles_farmer_address_id_foreign');
-            $table->dropColumn(['farmer_address_id']);
-        });
-
         Schema::dropIfExists('farmer_addresses');
     }
 }
