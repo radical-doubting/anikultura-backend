@@ -106,6 +106,8 @@ class FarmerEditScreen extends Screen
             Layout::block(FarmerCreateSalaryLayout::class)
                 ->title('Salary Information')
                 ->description("This information collects farmer's salary information."),
+
+            /*Add Next Button*/
         ];
     }
 
@@ -223,5 +225,10 @@ class FarmerEditScreen extends Screen
         Toast::info(__('Farmer Profile was removed successfully'));
 
         return redirect()->route('platform.farmer.profile.view.all');
+    }
+
+    public function next(FarmerProfile $farmer_profile)
+    {
+        return redirect()->route('platform.farmer.farmland.create');
     }
 }
