@@ -47,8 +47,6 @@ class ProvinceListLayout extends Table
                 }),
 
             TD::make('region', __('Region'))
-                ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Province $province) {
                     $region = $province->region;
                     $has_region = !is_null($region);
