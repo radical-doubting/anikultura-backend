@@ -34,40 +34,41 @@ class FarmerEditLoginLayout extends Rows
         return [
             Group::make([
                 Input::make('user.first_name')
-                    ->title('First Name')
-                    ->placeholder('Enter first name')
+                    ->title(__('First Name'))
+                    ->placeholder(__('First Name'))
                     ->required(),
 
                 Input::make('user.middle_name')
-                    ->title('Middle Name')
-                    ->placeholder('Enter middle name'),
+                    ->title(__('Middle Name'))
+                    ->placeholder(__('Middle Name')),
 
                 Input::make('user.last_name')
-                    ->title('Last Name')
-                    ->placeholder('Enter Last name')
+                    ->title(__('Last Name'))
+                    ->placeholder(__('Last name'))
                     ->required(),
             ]),
 
             Group::make([
                 Input::make('user.name')
-                    ->title('Username')
-                    ->placeholder('Username')
+                    ->title(__('Username'))
+                    ->placeholder(__('Username'))
                     ->required(),
 
-                Password::make('password')
-                    ->title('Password')
+                Password::make('user.password')
+                    ->title(__('Password'))
                     ->required(),
             ]),
 
             Group::make([
                 Input::make('user.email')
                     ->type('email')
-                    ->title('Email')
+                    ->title(__('Email'))
                     ->placeholder('email@example.com'),
 
                 Input::make('user.contact_number')
-                    ->placeholder('09123456789')
-                    ->title('Mobile Number'),
+                    ->title(__('Mobile Number'))
+                    ->placeholder('09123456789'),
+
             ]),
         ];
     }
