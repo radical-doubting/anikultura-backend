@@ -12,10 +12,12 @@ class CreateAnikulturaUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('first_name');
+            $table->string('first_name')
+                ->nullable();
             $table->string('middle_name')
                 ->nullable();
-            $table->string('last_name');
+            $table->string('last_name')
+                ->nullable();
 
             $table->string('contact_number', 35)
                 ->nullable();
@@ -25,8 +27,7 @@ class CreateAnikulturaUsersTable extends Migration
             $table->unsignedInteger('profile_id')
                 ->nullable();
 
-            $table->renameColumn('name', 'username');
-            $table->unique(['username']);
+            $table->unique(['name']);
         });
     }
 
@@ -45,8 +46,7 @@ class CreateAnikulturaUsersTable extends Migration
                 'profile_id'
             ]);
 
-            $table->dropIndex('users_username_unique');
-            $table->renameColumn('username', 'name');
+            $table->dropIndex('users_name_unique');
         });
     }
 }

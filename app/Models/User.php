@@ -12,7 +12,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'contact_number',
+        'username',
         'email',
         'password',
         'permissions',
@@ -67,5 +71,10 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->morphTo();
+    }
+
+    public function has_farmer_profile()
+    {
+        return $this->profile_type === 'App\Farmer\FarmerProfile';
     }
 }
