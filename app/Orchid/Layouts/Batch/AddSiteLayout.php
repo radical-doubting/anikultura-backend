@@ -29,13 +29,13 @@ class AddSiteLayout extends Rows
     {
         return [
             Group::make([
-                Relation::make('batches.regions')
+                Relation::make('batches.region_id')
                 ->fromModel(Region::class, 'name')
                 ->required()
                 ->title('Region')
                 ->placeholder(__('Region')),
 
-                Relation::make('batches.provinces')
+                Relation::make('batches.province_id')
                 ->fromModel(Province::class, 'name')
                 ->required()
                 ->title('Province')
@@ -43,16 +43,15 @@ class AddSiteLayout extends Rows
             ]),
 
             Group::make([
-                Relation::make('batches.municities')
+                Relation::make('batches.municity_id')
                 ->fromModel(Municity::class, 'name')
                 ->required()
                 ->title('Municity')
                 ->placeholder(__('Municity')),
 
-                Input::make('batches.barangays')
+                Input::make('batches.barangay')
                 ->type('text')
                 ->max(255)
-                ->required()
                 ->title(__('Barangay'))
                 ->placeholder(__('Barangay')),
             ]),

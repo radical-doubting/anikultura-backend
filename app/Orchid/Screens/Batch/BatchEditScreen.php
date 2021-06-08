@@ -134,7 +134,7 @@ class BatchEditScreen extends Screen
     }
 
     /**
-     * @param Region    $region
+     * @param Batches    $batches
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -153,19 +153,15 @@ class BatchEditScreen extends Screen
                 'required'
             ],
 
-            'batches.regions' => [
+            'batches.region_id' => [
                 'required'
             ],
 
-            'batches.provinces' => [
+            'batches.province_id' => [
                 'required'
             ],
 
-            'batches.municities' => [
-                'required'
-            ],
-
-            'batches.barangays' => [
+            'batches.municity_id' => [
                 'required'
             ],
         ]);
@@ -176,7 +172,7 @@ class BatchEditScreen extends Screen
             ->fill($batchesData)
             ->save();
         
-        Toast::info(__('Batch was saved'));
+        Toast::info(__('Batch was saved successfully.'));
 
         return redirect()->route('platform.batches');
     }

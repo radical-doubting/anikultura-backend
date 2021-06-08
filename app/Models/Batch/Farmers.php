@@ -41,15 +41,13 @@ class Farmers extends Model
         'created_at',
     ];
 
-    /**
-     * Get the region that owns this province.
-     */
-    public function farmers()
+    public function batches()
     {
-        return $this->belongsTo(Farmers::class);
+        return $this->belongsTo(Batches::class);
     }
 
+    /*
     protected $casts = [
         'farmer_names' => 'array'
-    ];
+    ];*/
 }
