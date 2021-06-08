@@ -35,7 +35,8 @@ class FarmerListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmer_profiles' => FarmerProfile::filters()
+            'farmer_profiles' => FarmerProfile::with('user')
+                ->filters()
                 ->defaultSort('id')
                 ->paginate()
         ];

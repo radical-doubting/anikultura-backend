@@ -240,16 +240,11 @@ class FarmerEditScreen extends Screen
 
         $farmer_profile_data = $request->get('farmer_profile');
 
-        $farmer_user = $this->save_user($request);
+        $farmer_profile
+            ->fill($farmer_profile_data)
+            ->save();
 
-        $farmer_profile = FarmerProfile::create($farmer_profile_data);
-        // ->fill([
-        //     'user_id' => $farmer_user_id
-        // ])
-
-        $farmer_profile->user()->save($farmer_user);
-
-
+        $this->save_user($farmer_profile, $request);
         $this->save_address($farmer_profile, $request);
 
         Toast::info(__('Farmer Profile was saved'));
@@ -258,16 +253,26 @@ class FarmerEditScreen extends Screen
     }
 
     /**
+     * @param FarmerProfile   $farmer_profile
      * @param Request $request
      */
-    private function save_user(Request $request)
+    private function save_user(FarmerProfile $farmer_profile, Request $request)
     {
         $farmer_user_data = $request->get('user');
-        $farmer_user = new User($farmer_user_data);
-        $farmer_user->password = Hash::make($farmer_user_data['password']);
-        $farmer_user->save();
 
-        return $farmer_user;
+        // Creates a new user if it does not exist
+        if (!$farmer_profile->user()->exists()) {
+            $farmer_user = new User($farmer_user_data);
+            $farmer_user->password = Hash::make($farmer_user_data['password']);
+            $farmer_user->save();
+
+            $farmer_profile->user()->save($farmer_user);
+            return;
+        }
+
+        $farmer_profile
+            ->user()
+            ->update($farmer_user_data);
     }
 
     /**
@@ -285,11 +290,12 @@ class FarmerEditScreen extends Screen
             $farmer_profile
                 ->farmer_address()
                 ->save($farmer_address);
-        } else {
-            $farmer_profile
-                ->farmer_address()
-                ->update($farmer_address_data);
+            return;
         }
+
+        $farmer_profile
+            ->farmer_address()
+            ->update($farmer_address_data);
     }
 
     /**

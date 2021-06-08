@@ -27,6 +27,7 @@ class UserPasswordLayout extends Rows
         return [
             Password::make('user.password')
                 ->placeholder($placeholder)
+                ->required(!$user->exists)
                 ->title(__('Password')),
         ];
     }
