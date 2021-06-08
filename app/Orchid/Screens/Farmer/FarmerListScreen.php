@@ -76,7 +76,7 @@ class FarmerListScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    
+
     public function remove(FarmerProfile $farmer_profile)
     {
         $farmer_profile->delete();

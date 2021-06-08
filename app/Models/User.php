@@ -52,6 +52,9 @@ class User extends Authenticatable
     protected $allowedFilters = [
         'id',
         'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'permissions',
     ];
@@ -69,13 +72,17 @@ class User extends Authenticatable
         'created_at',
     ];
 
+    protected $with = [
+        'profile'
+    ];
+
     public function profile()
     {
-        return $this->morphTo();
+        return $this->morphTo('');
     }
 
     public function has_farmer_profile()
     {
-        return $this->profile_type === 'App\Farmer\FarmerProfile';
+        return $this->profile_type === 'App\Models\Farmer\FarmerProfile';
     }
 }

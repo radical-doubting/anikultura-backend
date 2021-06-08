@@ -35,13 +35,6 @@ class CreateFarmerProfilesTable extends Migration
             $table->string('social_status');
             $table->string('social_status_reason');
 
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-
             $table->timestamps();
         });
     }

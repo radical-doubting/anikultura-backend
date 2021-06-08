@@ -41,31 +41,23 @@ class FarmerListLayout extends Table
                 }),
 
             TD::make('lastname', __('Last Name'))
-            ->sort()
-            ->cantHide()
-            ->filter(TD::FILTER_TEXT)
-            ->render(function (FarmerProfile $farmer_profile) {
-                return Link::make($farmer_profile->lastname)
-                    ->route('platform.farmer.profile.edit', $farmer_profile->id);
-            }),
+                ->cantHide()
+                ->render(function (FarmerProfile $farmer_profile) {
+                    return Link::make($farmer_profile->user->last_name)
+                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
+                }),
 
             TD::make('firstname', __('First Name'))
-            ->sort()
-            ->cantHide()
-            ->filter(TD::FILTER_TEXT)
-            ->render(function (FarmerProfile $farmer_profile) {
-                return Link::make($farmer_profile->firstname)
-                    ->route('platform.farmer.profile.edit', $farmer_profile->id);
-            }),
+                ->render(function (FarmerProfile $farmer_profile) {
+                    return Link::make($farmer_profile->user->first_name)
+                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
+                }),
 
             TD::make('middlename', __('Middle Name'))
-            ->sort()
-            ->cantHide()
-            ->filter(TD::FILTER_TEXT)
-            ->render(function (FarmerProfile $farmer_profile) {
-                return Link::make($farmer_profile->middlename)
-                    ->route('platform.farmer.profile.edit', $farmer_profile->id);
-            }),
+                ->render(function (FarmerProfile $farmer_profile) {
+                    return Link::make($farmer_profile->user->middle_name)
+                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
+                }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)

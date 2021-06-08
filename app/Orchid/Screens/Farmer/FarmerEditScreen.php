@@ -11,6 +11,7 @@ use App\Orchid\Layouts\Farmer\FarmerEditProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSalaryLayout;
+use Illuminate\Support\Facades\Hash;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
@@ -57,7 +58,8 @@ class FarmerEditScreen extends Screen
 
         return [
             'farmer_profile' => $farmer_profile,
-            'farmer_address' => $farmer_profile->farmer_address
+            'farmer_address' => $farmer_profile->farmer_address,
+            'user' => $farmer_profile->user
         ];
     }
 
@@ -236,16 +238,17 @@ class FarmerEditScreen extends Screen
             ],
         ]);
 
-        $farmer_user_id = $this->save_user($request);
-
         $farmer_profile_data = $request->get('farmer_profile');
 
-        $farmer_profile
-            ->fill($farmer_profile_data)
-            ->fill([
-                'user_id' => $farmer_user_id
-            ])
-            ->save();
+        $farmer_user = $this->save_user($request);
+
+        $farmer_profile = FarmerProfile::create($farmer_profile_data);
+        // ->fill([
+        //     'user_id' => $farmer_user_id
+        // ])
+
+        $farmer_profile->user()->save($farmer_user);
+
 
         $this->save_address($farmer_profile, $request);
 
@@ -261,9 +264,10 @@ class FarmerEditScreen extends Screen
     {
         $farmer_user_data = $request->get('user');
         $farmer_user = new User($farmer_user_data);
+        $farmer_user->password = Hash::make($farmer_user_data['password']);
         $farmer_user->save();
 
-        return $farmer_user->id;
+        return $farmer_user;
     }
 
     /**
