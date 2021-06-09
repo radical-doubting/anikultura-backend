@@ -43,20 +43,32 @@ class FarmerListLayout extends Table
             TD::make('lastname', __('Last Name'))
                 ->cantHide()
                 ->render(function (FarmerProfile $farmer_profile) {
-                    return Link::make($farmer_profile->user->last_name)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
+                    $user = $farmer_profile->user;
+                    $has_user = !is_null($user);
+                    $element = $has_user ? Link::make($user->last_name)
+                        ->route('platform.farmer.profile.edit', $farmer_profile->id) : __('None');
+
+                    return $element;
                 }),
 
             TD::make('firstname', __('First Name'))
                 ->render(function (FarmerProfile $farmer_profile) {
-                    return Link::make($farmer_profile->user->first_name)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
+                    $user = $farmer_profile->user;
+                    $has_user = !is_null($user);
+                    $element = $has_user ? Link::make($user->first_name)
+                        ->route('platform.farmer.profile.edit', $farmer_profile->id) : __('None');
+
+                    return $element;
                 }),
 
             TD::make('middlename', __('Middle Name'))
                 ->render(function (FarmerProfile $farmer_profile) {
-                    return Link::make($farmer_profile->user->middle_name)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
+                    $user = $farmer_profile->user;
+                    $has_user = !is_null($user);
+                    $element = $has_user ? Link::make($user->middle_name)
+                        ->route('platform.farmer.profile.edit', $farmer_profile->id) : __('None');
+
+                    return $element;
                 }),
 
             TD::make(__('Actions'))

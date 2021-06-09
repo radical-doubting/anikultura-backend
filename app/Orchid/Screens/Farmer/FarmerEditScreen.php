@@ -12,6 +12,7 @@ use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSalaryLayout;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
@@ -230,7 +231,12 @@ class FarmerEditScreen extends Screen
 
             // User
             'user.name' => [
-                'required'
+                'required',
+                Rule::unique(User::class, 'name')->ignore($farmer_profile->user),
+            ],
+            'user.email' => [
+                'required',
+                Rule::unique(User::class, 'email')->ignore($farmer_profile->user),
             ]
         ]);
 
