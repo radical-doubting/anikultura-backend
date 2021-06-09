@@ -48,7 +48,7 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('user')
                         ->route('platform.farmer.profile.view.all'),
                     Menu::make('Farmlands')
-                        ->icon('user')
+                        ->icon('full-screen')
                         ->route('platform.farmer.farmland.view.all'),
                 ]),
 
