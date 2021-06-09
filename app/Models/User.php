@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
@@ -75,6 +76,23 @@ class User extends Authenticatable
     protected $with = [
         'profile'
     ];
+
+    /**
+     * Returns users with farmer profiles.
+     * 
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeFarmer(Builder $query)
+    {
+        return $query->where('profile_type', 'App\Models\Farmer\FarmerProfile');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name} ({$this->name})";
+    }
 
     public function profile()
     {

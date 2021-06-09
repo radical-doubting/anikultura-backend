@@ -7,6 +7,7 @@ use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandEditFarmLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditAddressLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditAppStatusLayout;
+use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
 use Illuminate\Support\Facades\Log;
 use Orchid\Support\Facades\Layout;
 use Orchid\Support\Color;
@@ -85,17 +86,13 @@ class FarmlandEditScreen extends Screen
     public function layout(): array
     {
         return [
-            /*Layout::block(FarmlandEditAddressLayout::class)
-                ->title('Farmland Address')
-                ->description('Insert Description.'),*/
-
             Layout::block(FarmlandEditFarmLayout::class)
-                ->title('Farmland Information')
-                ->description('Insert Description.'),
+                ->title('Basic Information')
+                ->description("This information collects farmlands basic information."),
 
-            /*Layout::block(FarmlandEditAppStatusLayout::class)
-                ->title('Verification')
-                ->description('Insert Description.'),*/
+            Layout::block(FarmlandEditMemberLayout::class)
+                ->title('Members')
+                ->description('This information assigns the members to this farmland.'),
         ];
     }
 
