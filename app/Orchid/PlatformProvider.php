@@ -27,7 +27,8 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             Menu::make('Site Management')
-                ->icon('location-pin')
+                ->icon('organization')
+                ->title('Navigation')
                 ->list([
                     Menu::make('Regions')
                         ->icon('location-pin')
@@ -39,6 +40,22 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('location-pin')
                         ->route('platform.sites.municities'),
                 ]),
+
+            Menu::make('Farmer Management')
+                ->icon('people')
+                ->list([
+                    Menu::make('Farmer Profiles')
+                        ->icon('user')
+                        ->route('platform.farmer.profile.view.all'),
+                    Menu::make('Farmlands')
+                        ->icon('full-screen')
+                        ->route('platform.farmer.farmland.view.all'),
+                ]),
+
+            Menu::make('Crop Type Management')
+                ->icon('quote')
+                ->route('platform.crops'),
+
             Menu::make(__('Users'))
                 ->icon('user')
                 ->route('platform.systems.users')
