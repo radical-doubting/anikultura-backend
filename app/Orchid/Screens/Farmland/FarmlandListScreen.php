@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Orchid\Screens\Crop;
+namespace App\Orchid\Screens\Farmland;
 
-use App\Models\Crop;
-use App\Orchid\Layouts\Crop\CropListLayout;
+use App\Orchid\Layouts\Farmland\FarmlandListLayout;
+use App\Models\Farmland\Farmland;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 use Orchid\Support\Facades\Toast;
 
-class CropListScreen extends Screen
+class FarmlandListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Crop Types';
+    public $name = 'Farmlands';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'List of all crop types under SM KSK SAP';
+    public $description = 'List of all farmland under SM KSK SAP';
 
     /**
      * Query data.
@@ -31,8 +31,8 @@ class CropListScreen extends Screen
      */
     public function query(): array
     {
-        return [   
-           'crops'=> Crop::filters()
+        return [
+            'farmlands' => Farmland::filters()
                 ->defaultSort('id')
                 ->paginate()
         ];
@@ -47,9 +47,8 @@ class CropListScreen extends Screen
     {
         return [
             Link::make(__('Add'))
-            ->icon('plus')
-            ->route('platform.crops.create')
-              
+                ->icon('plus')
+                ->route('platform.farmer.farmland.create'),
         ];
     }
 
@@ -61,17 +60,24 @@ class CropListScreen extends Screen
     public function layout(): array
     {
         return [
-           CropListLayout::class
+            FarmlandListLayout::class
         ];
     }
-    
-   public function remove(Crop $crop)
+
+    /**
+     * @param Farmland $farmland
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+    public function remove(Farmland $farmland)
     {
-        $crop->delete();
+        $farmland->delete();
 
-        Toast::info(__('Crop was removed'));
+        Toast::info(__("Farmer's Farmland was removed successfully"));
 
-        return redirect()->route('platform.crops');
+        return redirect()->route('platform.farmer.farmland.view.all');
     }
-    
 }

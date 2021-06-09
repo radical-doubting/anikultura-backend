@@ -47,8 +47,6 @@ class MunicityListLayout extends Table
                 }),
 
             TD::make('province', __('Province'))
-                ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Municity $municity) {
                     $province = $municity->province;
                     $has_province = !is_null($province);
@@ -59,8 +57,6 @@ class MunicityListLayout extends Table
                 }),
 
             TD::make('region', __('Region'))
-                ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Municity $municity) {
                     $region = $municity->region;
                     $has_region = !is_null($region);

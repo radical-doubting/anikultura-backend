@@ -14,5 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(RegionSeeder::class);
+        $this->call(FarmlandTypeSeeder::class);
+        $this->call(FarmlandStatusSeeder::class);
+        $this->call(CropBuyerSeeder::class);
+        $this->call(WateringSystemSeeder::class);
     }
 }

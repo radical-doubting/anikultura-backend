@@ -117,10 +117,10 @@ class RegionEditScreen extends Screen
             ]
         ]);
 
-        $regionData = $request->get('region');
+        $region_data = $request->get('region');
 
         $region
-            ->fill($regionData)
+            ->fill($region_data)
             ->save();
 
         Toast::info(__('Region was saved'));

@@ -127,10 +127,10 @@ public function save(Crop $crop, Request $request)
             ]        
         ]);
 
-        $cropData = $request->get('crop');
+        $crop_data = $request->get('crop');
 
         $crop
-            ->fill($cropData)
+            ->fill($crop_data)
             ->save();
 
         Toast::info(__('Crop was saved.'));

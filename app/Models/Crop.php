@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Crop extends Model
 {
     use Filterable, HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +25,7 @@ class Crop extends Model
         'yield_formation_days',
         'ripening_days'
     ];
-    
+
     /**
      * The attributes for which you can use filters in url.
      *
@@ -35,7 +36,7 @@ class Crop extends Model
         'name',
         'variety'
     ];
-        
+
     /**
      * The attributes for which can use sort in url.
      *
