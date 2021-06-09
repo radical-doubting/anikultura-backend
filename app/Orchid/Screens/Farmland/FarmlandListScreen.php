@@ -15,7 +15,7 @@ class FarmlandListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Farmland';
+    public $name = 'Farmlands';
 
     /**
      * Display header description.
