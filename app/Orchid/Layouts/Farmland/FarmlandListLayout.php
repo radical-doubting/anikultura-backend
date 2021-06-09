@@ -38,14 +38,29 @@ class FarmlandListLayout extends Table
                         ->route('platform.farmer.farmland.edit', $farmland->id);
                 }),
 
-            TD::make('hectares_size', __('Farm Size'))
-            ->sort()
-            ->cantHide()
-            ->filter(TD::FILTER_TEXT)
-            ->render(function (Farmland $farmland) {
-                return Link::make($farmland->hectares_size)
-                    ->route('platform.farmer.farmland.edit', $farmland->id);
-            }),
+            TD::make('type', __('Type'))
+                ->sort()
+                ->filter(TD::FILTER_TEXT)
+                ->render(function (Farmland $farmland) {
+                    return Link::make($farmland->type->name)
+                        ->route('platform.farmer.farmland.edit', $farmland->id);
+                }),
+
+            TD::make('status', __('Status'))
+                ->sort()
+                ->filter(TD::FILTER_TEXT)
+                ->render(function (Farmland $farmland) {
+                    return Link::make($farmland->status->name)
+                        ->route('platform.farmer.farmland.edit', $farmland->id);
+                }),
+
+            TD::make('hectares_size', __('Hectares Size'))
+                ->sort()
+                ->filter(TD::FILTER_TEXT)
+                ->render(function (Farmland $farmland) {
+                    return Link::make($farmland->hectares_size)
+                        ->route('platform.farmer.farmland.edit', $farmland->id);
+                }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
@@ -67,7 +82,7 @@ class FarmlandListLayout extends Table
                                     'id' => $farmland->id,
                                 ]),
                         ]);
-            }),
+                }),
         ];
     }
 }

@@ -38,6 +38,22 @@ class Farmland extends Model
     ];
 
     /**
+     * Get the type of this farmland.
+     */
+    public function type()
+    {
+        return $this->belongsTo(FarmlandType::class);
+    }
+
+    /**
+     * Get the status of this farmland.
+     */
+    public function status()
+    {
+        return $this->belongsTo(FarmlandStatus::class);
+    }
+
+    /**
      * Get the watering systems of this farmland.
      */
     public function watering_systems()
