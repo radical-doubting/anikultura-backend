@@ -231,11 +231,7 @@ class FarmerEditScreen extends Screen
             // User
             'user.name' => [
                 'required'
-            ],
-
-            'user.password' => [
-                'required'
-            ],
+            ]
         ]);
 
         $farmer_profile_data = $request->get('farmer_profile');
@@ -259,20 +255,25 @@ class FarmerEditScreen extends Screen
     private function save_user(FarmerProfile $farmer_profile, Request $request)
     {
         $farmer_user_data = $request->get('user');
+        $farmer_user = $farmer_profile->user();
 
         // Creates a new user if it does not exist
-        if (!$farmer_profile->user()->exists()) {
-            $farmer_user = new User($farmer_user_data);
-            $farmer_user->password = Hash::make($farmer_user_data['password']);
-            $farmer_user->save();
+        if (!$farmer_user->exists()) {
+            $new_user = new User($farmer_user_data);
+            $new_user->password = Hash::make($farmer_user_data['password']);
+            $new_user->save();
 
-            $farmer_profile->user()->save($farmer_user);
+            $farmer_profile->user()->save($new_user);
             return;
         }
 
-        $farmer_profile
-            ->user()
-            ->update($farmer_user_data);
+        if ($farmer_user_data['password'] === '') {
+            unset($farmer_user_data['password']);
+        } else {
+            $farmer_user_data['password'] =  Hash::make($farmer_user_data['password']);
+        }
+
+        $farmer_user->update($farmer_user_data);
     }
 
     /**

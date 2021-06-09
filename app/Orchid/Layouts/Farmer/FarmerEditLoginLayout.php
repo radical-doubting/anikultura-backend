@@ -31,6 +31,12 @@ class FarmerEditLoginLayout extends Rows
      */
     protected function fields(): array
     {
+        $user = $this->query->get('user');
+        $has_user = is_null($user) ? false : $user->exists;
+        $password_placeholder = $has_user
+            ? __('Leave empty to keep current password')
+            : __('Enter the password to be set');
+
         return [
             Group::make([
                 Input::make('user.first_name')
@@ -56,7 +62,8 @@ class FarmerEditLoginLayout extends Rows
 
                 Password::make('user.password')
                     ->title(__('Password'))
-                    ->required(),
+                    ->placeholder($password_placeholder)
+                    ->required(!$has_user)
             ]),
 
             Group::make([
