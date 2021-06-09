@@ -27,7 +27,7 @@ class FarmlandEditMemberLayout extends Rows
     protected function fields(): array
     {
         return [
-            Relation::make('farmland.members.')
+            Relation::make('farmland.farmers.')
                 ->fromModel(User::class, 'name')
                 ->applyScope('farmer')
                 ->searchColumns('first_name', 'last_name')
@@ -35,8 +35,8 @@ class FarmlandEditMemberLayout extends Rows
                 ->required()
                 ->multiple()
                 ->help(__('Search the name of this farmland\'s members'))
-                ->title(__('Members'))
-                ->placeholder(__('Members')),
+                ->title(__('Farmers'))
+                ->placeholder(__('Farmers')),
         ];
     }
 }

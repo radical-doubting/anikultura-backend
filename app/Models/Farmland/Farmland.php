@@ -3,6 +3,7 @@
 namespace App\Models\Farmland;
 
 use App\Models\Farmer\FarmerProfile;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -70,10 +71,10 @@ class Farmland extends Model
     }
 
     /**
-     * Get the farmer profiles of this farmland.
+     * Get the farmer users of this farmland.
      */
-    public function farmer_profiles()
+    public function farmers()
     {
-        return $this->belongsToMany(FarmerProfile::class, 'farmer_profile_farmlands');
+        return $this->belongsToMany(User::class, 'farmland_farmers', 'farmland_id', 'farmer_id');
     }
 }

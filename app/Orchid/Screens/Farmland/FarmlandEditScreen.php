@@ -27,7 +27,7 @@ class FarmlandEditScreen extends Screen
      * @var string
      */
 
-    public $name = "Enroll Farmer's Farmland";
+    public $name = 'Edit Farmland';
 
     /**
      * Display header description.
@@ -35,7 +35,7 @@ class FarmlandEditScreen extends Screen
      * @var string|null
      */
 
-    public $description = 'Fill out all required information.';
+    public $description = 'Edit farmland details';
 
     /**
      * Query data.
@@ -48,8 +48,8 @@ class FarmlandEditScreen extends Screen
         $this->farmland = $farmland;
 
         if (!$farmland->exists) {
-            $this->name = "Enroll Farmer's Farmland";
-            $this->description = "Enroll Farmer's Farmland";
+            $this->name = 'Create Farmland';
+            $this->description = 'Create a new farmland';
         }
 
         return [
@@ -91,8 +91,8 @@ class FarmlandEditScreen extends Screen
                 ->description("This information collects farmlands basic information."),
 
             Layout::block(FarmlandEditMemberLayout::class)
-                ->title('Members')
-                ->description('This information assigns the members to this farmland.'),
+                ->title('Farmers')
+                ->description('This information assigns the farmers to this farmland.'),
         ];
     }
 
@@ -123,6 +123,10 @@ class FarmlandEditScreen extends Screen
                 'required',
                 'array'
             ],
+            'farmland.farmers' => [
+                'required',
+                'array'
+            ],
         ]);
 
         $farmland_data = $request->get('farmland');
@@ -138,6 +142,10 @@ class FarmlandEditScreen extends Screen
         $farmland
             ->crop_buyers()
             ->sync($farmland_data['crop_buyers']);
+
+        $farmland
+            ->farmers()
+            ->sync($farmland_data['farmers']);
 
         Toast::info(__('Farmland was saved'));
 

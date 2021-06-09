@@ -52,6 +52,8 @@ class FarmerEditSkillLayout extends Rows
 
                 Input::make('farmer_profile.farming_years')
                     ->type('number')
+                    ->min(1)
+                    ->max(256)
                     ->title(__('Farming Years'))
                     ->placeholder(__('Farming Years'))
                     ->required(),

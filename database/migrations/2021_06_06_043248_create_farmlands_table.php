@@ -51,6 +51,22 @@ class CreateFarmlandsTable extends Migration
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
         });
+
+        Schema::create('farmland_farmers', function (Blueprint $table) {
+            $table->unsignedBigInteger('farmland_id');
+            $table->foreign('farmland_id')
+                ->references('id')
+                ->on('farmlands')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('farmer_id');
+            $table->foreign('farmer_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        });
     }
 
     /**
