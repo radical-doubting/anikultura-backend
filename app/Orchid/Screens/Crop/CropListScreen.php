@@ -15,14 +15,14 @@ class CropListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Crop Type Dashboard';
+    public $name = 'Crop Types';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'List of all Crop types under SM KSK SAP';
+    public $description = 'List of all crop types under SM KSK SAP';
 
     /**
      * Query data.
