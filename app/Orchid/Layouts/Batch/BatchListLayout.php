@@ -85,7 +85,7 @@ class BatchListLayout extends Table
             ->sort()
             ->filter(TD::FILTER_TEXT)
             ->render(function (Batches $batches) {
-                $municity = $batches->municities;
+                $municity = $batches->municity;
                 $has_municity = !is_null($municity);
                 $element = $has_municity ? Link::make($municity->name)
                     ->route('platform.batches.edit', $municity->id) : __('None');
