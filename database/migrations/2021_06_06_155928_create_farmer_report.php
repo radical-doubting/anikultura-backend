@@ -25,6 +25,8 @@ public function up()
                 ->references('id')
                 ->on('farmlands');
             $table->integer('crop_id');
+                ->references('id')
+                ->on('crops');
             $table->double('volume');
             $table->rememberToken();
         });
