@@ -101,7 +101,7 @@ class BatchListLayout extends Table
                 return Link::make($batches->barangay)
                     ->route('platform.batches.edit', $batches->id);
             }),
-
+            /* 
             TD::make('farmer_names', __('Enrolled Farmers'))
             ->sort()
             ->filter(TD::FILTER_TEXT)
@@ -112,7 +112,7 @@ class BatchListLayout extends Table
                     ->route('platform.batches.edit', $farmers->id) : __('None');
 
                 return $element;
-            }),
+            }),*/
             
             TD::make('updated_at', __('Last edit'))
             ->sort()

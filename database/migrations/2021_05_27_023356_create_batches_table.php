@@ -45,16 +45,25 @@ class CreateBatchesTable extends Migration
                 ->nullable();
             $table->integer("number_seeds_distributed")->nullable(false);
 
-            $table->unsignedBigInteger('farmer_names')
-                ->nullable();
-            $table->foreign('farmer_names')
-                ->references('id')
-                ->on('farmers')
-                ->nullOnDelete()
-                ->cascadeOnUpdate();
-            //$table->json("farmer_names")->nullable(false);
+        
             $table->timestamps();
         });
+        
+        Schema::create('batch_farmers', function (Blueprint $table) {
+            $table->unsignedBigInteger('batch_id')->nullable();
+            $table->foreign('batch_id')
+                ->references('id')
+                ->on('batches')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('farmer_id')->nullable();
+            $table->foreign('farmer_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+        }); 
     }
 
     /**

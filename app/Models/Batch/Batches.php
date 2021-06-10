@@ -5,6 +5,7 @@ namespace App\Models\Batch;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -75,6 +76,6 @@ class Batches extends Model
 
     public function farmers()
     {
-        return $this->belongsTo(Farmers::class);
+        return $this->belongsToMany(User::class, 'batch_farmers', 'batch_id', 'farmer_id');
     }
 }

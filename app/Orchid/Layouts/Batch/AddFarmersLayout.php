@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Batch;
 
 use App\Models\Batch\Farmers;
+use App\Models\User;
 use Orchid\Screen\Field;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Relation;
@@ -24,13 +25,17 @@ class AddFarmersLayout extends Rows
     protected function fields(): array
     {
         return [ 
-        Relation::make('batches.farmer_names')
-            ->fromModel(Farmers::class, 'name')
+
+        Relation::make('batches.farmers.')
+            ->fromModel(User::class, 'name')
+            ->applyScope('farmer')
+            ->searchColumns('first_name', 'last_name')
+            ->displayAppend('full_name')
             ->required()
             ->multiple()
-            ->title('Farmers')
+            ->help(__('Search the name of this farmland\'s members'))
+            ->title(__('Farmers'))
             ->placeholder(__('Farmers')),
-    
         ];
     }
 }

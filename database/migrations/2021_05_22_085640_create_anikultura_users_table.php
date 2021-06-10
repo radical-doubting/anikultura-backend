@@ -24,6 +24,10 @@ class CreateAnikulturaUsersTable extends Migration
 
             $table->string('profile_type')
                 ->nullable();
+
+            $table->string('email')
+                ->nullable(false)->change();
+                
             $table->unsignedInteger('profile_id')
                 ->nullable();
 

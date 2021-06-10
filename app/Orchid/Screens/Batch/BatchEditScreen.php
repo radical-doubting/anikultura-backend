@@ -83,37 +83,18 @@ class BatchEditScreen extends Screen
             //BatcheditLayout class
             Layout::block(BatchEditLayout::class)
             ->title(__('Batch Information'))
-            ->description(__('Update your batch\'s information.'))
-            ->commands(
-                Button::make(__('Save'))
-                    ->type(Color::DEFAULT())
-                    ->icon('check')
-                    ->canSee($this->batches->exists)
-                    ->method('save')
-            ),
+            ->description(__('Update your batch\'s information.')),
+            
             //AddSiteLayout::class
             Layout::block(AddSiteLayout::class)
             ->title(__('Batch Site'))
-            ->description(__('Enter where is the assigned site of the batch'))
-            ->commands(
-                Button::make(__('Save'))
-                    ->type(Color::DEFAULT())
-                    ->icon('check')
-                    ->canSee($this->batches->exists)
-                    ->method('save')
-            ),
+            ->description(__('Enter where is the assigned site of the batch')),
+            
 
             //AddFarmersLayout::class
             Layout::block(AddFarmersLayout::class)
             ->title(__('Enrolled Farmers'))
             ->description(__('Add Farmers included in the batch.'))
-            ->commands(
-                Button::make(__('Save'))
-                    ->type(Color::DEFAULT())
-                    ->icon('check')
-                    ->canSee($this->batches->exists)
-                    ->method('save')
-            ),
         ];
     }
 
@@ -149,10 +130,6 @@ class BatchEditScreen extends Screen
                 'required'
             ],
 
-            'batches.farmer_names' => [
-                'required'
-            ],
-
             'batches.region_id' => [
                 'required'
             ],
@@ -164,6 +141,11 @@ class BatchEditScreen extends Screen
             'batches.municity_id' => [
                 'required'
             ],
+
+            'batches.farmers' => [
+                'required',
+                'array'
+            ],
         ]);
 
         $batchesData = $request->get('batches');
@@ -172,6 +154,10 @@ class BatchEditScreen extends Screen
             ->fill($batchesData)
             ->save();
         
+        $batches
+            ->farmers()
+            ->sync($batchesData['farmers']);
+            
         Toast::info(__('Batch was saved successfully.'));
 
         return redirect()->route('platform.batches');
