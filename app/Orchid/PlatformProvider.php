@@ -40,7 +40,6 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('location-pin')
                         ->route('platform.sites.municities'),
                 ]),
-
             Menu::make('Farmer Management')
                 ->icon('people')
                 ->list([
@@ -51,6 +50,10 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('full-screen')
                         ->route('platform.farmer.farmland.view.all'),
                 ]),
+            
+            Menu::make('Batches')
+                ->icon('module')
+                ->route('platform.batches'),
 
             Menu::make('Crop Type Management')
                 ->icon('quote')

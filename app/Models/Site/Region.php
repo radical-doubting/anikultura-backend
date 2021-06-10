@@ -40,4 +40,5 @@ class Region extends Model
         'updated_at',
         'created_at',
     ];
+
 }

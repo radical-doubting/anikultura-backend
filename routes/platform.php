@@ -109,6 +109,8 @@ Route::screen('example-editors', ExampleTextEditorsScreen::class)->name('platfor
 Route::screen('example-cards', ExampleCardsScreen::class)->name('platform.example.cards');
 Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('platform.example.advanced');
 
+//Route::screen('idea', 'Idea::class','platform.screens.idea');
+require('platform/batch.php');
 require('platform/sites.php');
 require('platform/farmer_profiles.php');
 require('platform/farmlands.php');
