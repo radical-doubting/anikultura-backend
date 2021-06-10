@@ -7,9 +7,9 @@ use Orchid\Support\Facades\Layout;
 use Orchid\Support\Color;
 use Orchid\Screen\Actions\Button;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
-use App\Models\Batch\Batches;
-use App\Orchid\Layouts\Batch\AddFarmersLayout;
-use App\Orchid\Layouts\Batch\AddSiteLayout;
+use App\Models\Batch\Batch;
+use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
+use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
 use Orchid\Support\Facades\Toast;
 use Illuminate\Http\Request;
 
@@ -38,7 +38,7 @@ class BatchEditScreen extends Screen
      *
      * @return array
      */
-    public function query(Batches $batches): array
+    public function query(Batch $batches): array
     {
         $this->batches = $batches;
 
@@ -86,26 +86,26 @@ class BatchEditScreen extends Screen
             ->description(__('Update your batch\'s information.')),
             
             //AddSiteLayout::class
-            Layout::block(AddSiteLayout::class)
+            Layout::block(BatchEditSiteLayout::class)
             ->title(__('Batch Site'))
             ->description(__('Enter where is the assigned site of the batch')),
             
 
             //AddFarmersLayout::class
-            Layout::block(AddFarmersLayout::class)
+            Layout::block(BatchEditFarmersLayout::class)
             ->title(__('Enrolled Farmers'))
             ->description(__('Add Farmers included in the batch.'))
         ];
     }
 
     /**
-     * @param Batches $batches
+     * @param Batch $batches
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Batches $batches)
+    public function remove(Batch $batches)
     {
         $batches->delete();
 
@@ -115,12 +115,12 @@ class BatchEditScreen extends Screen
     }
 
     /**
-     * @param Batches    $batches
+     * @param Batch    $batches
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(Batches $batches, Request $request)
+    public function save(Batch $batches, Request $request)
     {
         $request->validate([
             'batches.assigned_farmschool_name' => [

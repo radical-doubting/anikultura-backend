@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 
-class Batches extends Model
+class Batch extends Model
 {
     use Filterable, HasFactory;
     /**

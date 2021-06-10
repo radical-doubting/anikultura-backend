@@ -2,13 +2,12 @@
 
 namespace App\Orchid\Layouts\Batch;
 
-use App\Models\Batch\Farmers;
 use App\Models\User;
 use Orchid\Screen\Field;
 use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Relation;
 
-class AddFarmersLayout extends Rows
+class BatchEditFarmersLayout extends Rows
 {
     /**
      * Used to create the title of a group of form elements.

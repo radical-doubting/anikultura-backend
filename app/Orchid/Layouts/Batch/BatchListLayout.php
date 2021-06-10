@@ -3,8 +3,7 @@
 namespace App\Orchid\Layouts\Batch;
 
 use Orchid\Screen\Layouts\Table;
-use App\Models\Batch\Batches;
-use Illuminate\Bus\Batch;
+use App\Models\Batch\Batch;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -34,7 +33,7 @@ class BatchListLayout extends Table
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (Batches $batches) {
+                ->render(function (Batch $batches) {
                     return Link::make($batches->id)
                         ->route('platform.batches.edit', $batches->id);
                 }),
@@ -43,7 +42,7 @@ class BatchListLayout extends Table
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 return Link::make($batches->assigned_farmschool_name)
                     ->route('platform.batches.edit', $batches->id);
             }),
@@ -52,7 +51,7 @@ class BatchListLayout extends Table
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 return Link::make($batches-> number_seeds_distributed)
                     ->route('platform.batches.edit', $batches->id);
             }),
@@ -60,7 +59,7 @@ class BatchListLayout extends Table
             TD::make('region', __('Region'))
             ->sort()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 $region = $batches->region;
                 $has_region = !is_null($region);
                 $element = $has_region ? Link::make($region->name)
@@ -72,7 +71,7 @@ class BatchListLayout extends Table
             TD::make('province', __('Province'))
             ->sort()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 $province = $batches->province;
                 $has_province = !is_null($province);
                 $element = $has_province ? Link::make($province->name)
@@ -84,7 +83,7 @@ class BatchListLayout extends Table
             TD::make('municity', __('Municity'))
             ->sort()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 $municity = $batches->municity;
                 $has_municity = !is_null($municity);
                 $element = $has_municity ? Link::make($municity->name)
@@ -97,33 +96,21 @@ class BatchListLayout extends Table
             ->sort()
             ->cantHide()
             ->filter(TD::FILTER_TEXT)
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 return Link::make($batches->barangay)
                     ->route('platform.batches.edit', $batches->id);
             }),
-            /* 
-            TD::make('farmer_names', __('Enrolled Farmers'))
-            ->sort()
-            ->filter(TD::FILTER_TEXT)
-            ->render(function (Batches $batches) {
-                $farmers = $batches->farmers;
-                $has_farmers = !is_null($farmers);
-                $element = $has_farmers ? Link::make($farmers->name)
-                    ->route('platform.batches.edit', $farmers->id) : __('None');
-
-                return $element;
-            }),*/
             
             TD::make('updated_at', __('Last edit'))
             ->sort()
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 return $batches->updated_at->toDateTimeString();
             }),
 
             TD::make(__('Actions'))
             ->align(TD::ALIGN_CENTER)
             ->width('100px')
-            ->render(function (Batches $batches) {
+            ->render(function (Batch $batches) {
                 return DropDown::make()
                     ->icon('options-vertical')
                     ->list([

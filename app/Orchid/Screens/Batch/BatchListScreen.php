@@ -5,7 +5,7 @@ namespace App\Orchid\Screens\Batch;
 use Orchid\Screen\Screen;
 use Orchid\Screen\Actions\Link;
 use App\Orchid\Layouts\Batch\BatchListLayout;
-use App\Models\Batch\Batches;
+use App\Models\Batch\Batch;
 use Orchid\Support\Facades\Toast;
 
 class BatchListScreen extends Screen
@@ -33,7 +33,7 @@ class BatchListScreen extends Screen
     {
         return [   
            //'batches'=>Batches::all()
-           'batches'=> Batches::filters()
+           'batches'=> Batch::filters()
                 ->defaultSort('id')
                 ->paginate()
         ];
@@ -66,13 +66,13 @@ class BatchListScreen extends Screen
     }
 
      /**
-     * @param Batches $batches
+     * @param Batch $batches
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Batches $batches)
+    public function remove(Batch $batches)
     {
         $batches->delete();
 

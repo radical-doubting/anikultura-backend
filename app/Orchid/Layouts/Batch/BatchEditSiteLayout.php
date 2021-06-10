@@ -11,7 +11,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Layouts\Rows;
 
-class AddSiteLayout extends Rows
+class BatchEditSiteLayout extends Rows
 {
     /**
      * Used to create the title of a group of form elements.
