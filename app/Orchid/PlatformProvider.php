@@ -26,60 +26,38 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
-            Menu::make('Example screen')
-                ->icon('monitor')
-                ->route('platform.example')
+            Menu::make('Site Management')
+                ->icon('organization')
                 ->title('Navigation')
-                ->badge(function () {
-                    return 6;
-                }),
-
-            Menu::make('Dropdown menu')
-                ->icon('code')
                 ->list([
-                    Menu::make('Sub element item 1')->icon('bag'),
-                    Menu::make('Sub element item 2')->icon('heart'),
+                    Menu::make('Regions')
+                        ->icon('location-pin')
+                        ->route('platform.sites.regions'),
+                    Menu::make('Provinces')
+                        ->icon('location-pin')
+                        ->route('platform.sites.provinces'),
+                    Menu::make('Municities')
+                        ->icon('location-pin')
+                        ->route('platform.sites.municities'),
                 ]),
+            Menu::make('Farmer Management')
+                ->icon('people')
+                ->list([
+                    Menu::make('Farmer Profiles')
+                        ->icon('user')
+                        ->route('platform.farmer.profile.view.all'),
+                    Menu::make('Farmlands')
+                        ->icon('full-screen')
+                        ->route('platform.farmer.farmland.view.all'),
+                ]),
+            
+            Menu::make('Batches')
+                ->icon('module')
+                ->route('platform.batches'),
 
-            Menu::make('Basic Elements')
-                ->title('Form controls')
-                ->icon('note')
-                ->route('platform.example.fields'),
-
-            Menu::make('Advanced Elements')
-                ->icon('briefcase')
-                ->route('platform.example.advanced'),
-
-            Menu::make('Text Editors')
-                ->icon('list')
-                ->route('platform.example.editors'),
-
-            Menu::make('Overview layouts')
-                ->title('Layouts')
-                ->icon('layers')
-                ->route('platform.example.layouts'),
-
-            Menu::make('Chart tools')
-                ->icon('bar-chart')
-                ->route('platform.example.charts'),
-
-            Menu::make('Cards')
-                ->icon('grid')
-                ->route('platform.example.cards')
-                ->divider(),
-
-            Menu::make('Documentation')
-                ->title('Docs')
-                ->icon('docs')
-                ->url('https://orchid.software/en/docs'),
-
-            Menu::make('Changelog')
-                ->icon('shuffle')
-                ->url('https://github.com/orchidsoftware/platform/blob/master/CHANGELOG.md')
-                ->target('_blank')
-                ->badge(function () {
-                    return Dashboard::version();
-                }, Color::DARK()),
+            Menu::make('Crop Type Management')
+                ->icon('quote')
+                ->route('platform.crops'),
 
             Menu::make(__('Users'))
                 ->icon('user')

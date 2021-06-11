@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFarmerReport extends Migration
+class CreateFarmerReports extends Migration
 {
     /**
      * Run the migrations.
@@ -15,20 +15,31 @@ public function up()
     {
         Schema::create('farmer_reports', function (Blueprint $table) {
             $table->id();
-            $table->integer('farmer_profiles_id')
+            $table->unsignedBigInteger('farmer_profiles_id')
+            ->nullable();
+            $table->foreign('farmer_profiles_id')
                 ->references('id')
                 ->on('farmer_profiles');
-            $table->integer('seed_stages_id')
+
+            $table->unsignedBigInteger('seed_stages_id')
+            ->nullable();
+            $table->foreign('seed_stages_id')
                 ->references('id')
                 ->on('seed_stages');
-            $table->integer('farmland_id')
+
+            $table->unsignedBigInteger('farmland_id')
+            ->nullable();
+            $table->foreign('farmland_id')
                 ->references('id')
                 ->on('farmlands');
-            $table->integer('crop_id')
+
+            $table->unsignedBigInteger('crop_id')
+                ->nullable();
+            $table->foreign('crop_id')
                 ->references('id')
                 ->on('crops');
+
             $table->double('volume');
-            $table->rememberToken();
             $table->timestamps();
         });
 

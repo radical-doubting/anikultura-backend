@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+use Laravel\Jetstream\HasProfilePhoto;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use HasProfilePhoto;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -13,6 +17,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'contact_number',
+        'username',
         'email',
         'password',
         'permissions',
@@ -47,6 +56,9 @@ class User extends Authenticatable
     protected $allowedFilters = [
         'id',
         'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'permissions',
     ];
@@ -63,4 +75,35 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    protected $with = [
+        'profile'
+    ];
+
+    /**
+     * Returns users with farmer profiles.
+     * 
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeFarmer(Builder $query)
+    {
+        return $query->where('profile_type', 'App\Models\Farmer\FarmerProfile');
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name} ({$this->name})";
+    }
+
+    public function profile()
+    {
+        return $this->morphTo('');
+    }
+
+    public function has_farmer_profile()
+    {
+        return $this->profile_type === 'App\Models\Farmer\FarmerProfile';
+    }
 }

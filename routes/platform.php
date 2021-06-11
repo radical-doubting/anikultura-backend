@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Crop\CropEditScreen;
+use App\Orchid\Screens\Crop\CropListScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -109,4 +111,9 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 
-require('farmer_reports.php');
+require('platform/farmer_reports.php');
+require('platform/batch.php');
+require('platform/sites.php');
+require('platform/farmer_profiles.php');
+require('platform/farmlands.php');
+require('platform/crops.php');
