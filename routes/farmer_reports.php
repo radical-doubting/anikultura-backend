@@ -9,6 +9,7 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\Farmers\FarmerReportsListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -109,4 +110,4 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 
-require('farmer_reports.php');
+Route::screen('farmer/reports', FarmerReportsListScreen::class)->name('platform.farmer.reports');
