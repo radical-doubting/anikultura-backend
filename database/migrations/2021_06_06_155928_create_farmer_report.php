@@ -24,11 +24,12 @@ public function up()
             $table->integer('farmland_id')
                 ->references('id')
                 ->on('farmlands');
-            $table->integer('crop_id');
+            $table->integer('crop_id')
                 ->references('id')
                 ->on('crops');
             $table->double('volume');
             $table->rememberToken();
+            $table->timestamps();
         });
 
     }
