@@ -2,8 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\Crop\CropEditScreen;
-use App\Orchid\Screens\Crop\CropListScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
 use App\Orchid\Screens\Examples\ExampleFieldsAdvancedScreen;
@@ -11,6 +9,7 @@ use App\Orchid\Screens\Examples\ExampleFieldsScreen;
 use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
+use App\Orchid\Screens\Farmers\FarmerReportsListScreen;
 use App\Orchid\Screens\PlatformScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -111,9 +110,4 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 
-require('platform/farmer_reports.php');
-require('platform/batch.php');
-require('platform/sites.php');
-require('platform/farmer_profiles.php');
-require('platform/farmlands.php');
-require('platform/crops.php');
+Route::screen('farmer/reports', FarmerReportsListScreen::class)->name('platform.farmer.reports');
