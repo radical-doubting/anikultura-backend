@@ -4,27 +4,22 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use App\Models\farmer_reports;
+use App\Models\FarmerReport;
 use App\User;
 use Illuminate\Support\Facades\DB;
 
 
 class FarmerDashboard extends Component
 {
-    public $user_id, $reports, $stage, $seed_temp;
-    public $test = 69;
+    public $user_id, $report, $seed_stage, $seed_temp;
 
     public function mount(){
         $this->user_id = Auth::id();
-        $this->reports = farmer_reports::where('farmer_profiles_id', $this->user_id)
-            ->orderBy('created_at', 'asc')
-            ->take(1)
-            ->get();
-        //  
-        // $this->seed_temp = farmer_reports::where('farmer_profiles_id', $this->user_id)
-        //     ->orderBy('created_at', 'asc')
-        //     ->take(1)
-        //     ->value('seed_stages_id');
+        $this->report = FarmerReport::where('farmer_profiles_id', $this->user_id)
+            ->orderBy('created_at', 'desc')
+            ->first();
+
+        $this->seed_stage = $this->report->seed_stage()->name;
     }
 
     public function render()
@@ -37,11 +32,12 @@ class FarmerDashboard extends Component
         $this->user_id = $uid;
         $this->stage = $stage_num;
         $this->stage++;
-        farmer_reports::create([
+
+        FarmerReport::create([
                 'farmer_profiles_id' => $this->user_id,
                 'seed_stages_id' => $this->stage,
                 'farmland_id' => 1,
-                'crop_id' => 3,
+                'crop_id' => 1,
                 'volume' => 50,
             ]);
         return view('livewire.farmer-dashboard');
