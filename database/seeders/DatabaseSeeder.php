@@ -18,5 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(FarmlandStatusSeeder::class);
         $this->call(CropBuyerSeeder::class);
         $this->call(WateringSystemSeeder::class);
+        $this->call(CropSeeder::class);
+        $this->call(FarmerProfileSeeder::class);
+        $this->call(FarmlandSeeder::class);
     }
 }
