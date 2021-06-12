@@ -34,7 +34,7 @@ public function up()
                 ->on('farmlands');
 
             $table->unsignedBigInteger('crop_id')
-                ->nullable();
+            ->nullable();
             $table->foreign('crop_id')
                 ->references('id')
                 ->on('crops');
