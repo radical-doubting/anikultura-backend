@@ -16,11 +16,11 @@ class CreateFarmerReports extends Migration
         Schema::create('farmer_reports', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('farmer_profile_id')
+            $table->unsignedBigInteger('farmer_id')
                 ->nullable();
-            $table->foreign('farmer_profile_id')
+            $table->foreign('farmer_id')
                 ->references('id')
-                ->on('farmer_profiles');
+                ->on('users');
 
             $table->unsignedBigInteger('seed_stage_id')
                 ->nullable();

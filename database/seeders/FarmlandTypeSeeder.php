@@ -17,8 +17,8 @@ class FarmlandTypeSeeder extends Seeder
     {
         $date_now = Carbon::now();
         $farmland = [
-            ['id' => 1, 'name' => 'Community Farmland', 'created_at' => $date_now],
-            ['id' => 2, 'name' => 'Personal Farmland', 'created_at' => $date_now],
+            ['id' => 1, 'name' => 'Community Farmland', 'created_at' => $date_now, 'updated_at' => $date_now],
+            ['id' => 2, 'name' => 'Personal Farmland', 'created_at' => $date_now, 'updated_at' => $date_now],
         ];
 
         FarmlandType::insert($farmland);
