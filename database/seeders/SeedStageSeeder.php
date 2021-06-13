@@ -6,7 +6,7 @@ use App\Models\SeedStage;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
-class SeedStagesSeeder extends Seeder
+class SeedStageSeeder extends Seeder
 {
     /**
      * Run the database seeds.

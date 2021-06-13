@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(FarmlandStatusSeeder::class);
         $this->call(CropBuyerSeeder::class);
         $this->call(WateringSystemSeeder::class);
+        $this->call(SeedStageSeeder::class);
 
         // Data (in order)
         $this->call(CropSeeder::class);
