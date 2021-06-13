@@ -2,19 +2,21 @@
 
     <h1 class="font-bold">Hi, {{ $user->first_name }}</h1>
 
-    <img src="https://cdn.discordapp.com/attachments/719478925700497842/850287856294297610/farr.png" style="height: 250px; margin: auto auto" />
-
-
     @if($this->has_report())
-        <p>Stage image: {{ $report->seed_stage->image }}</p>
         <p>Crop: {{ $report->crop->name }}</p>
-        <p>Seed stage: {{ $report->seed_stage->name }}</p>
-        <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-8 md:my-8" wire:click="advance_stage">
-            text here
-        </button>
-        <button class="bg-red-500 hover:bg-blue-700 text-white font-bold rounded-full py-2 self-center px-4 items-center">
-            icon here
-        </button>
+        <img class="m-auto" src="/img/{{ $report->seed_stage->image }}" style="height: 250px;" />
+        <div>
+            <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-8 md:my-8" style="margin-bottom: 10px;" 
+            wire:click="advance_stage">
+                {{ $report->seed_stage->name }}
+            </button>
+            <button class="bg-red-500 hover:bg-blue-700 m-auto text-white font-bold py-2 px-4 flex rounded-full" wire:click="advance_stage">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                &nbsp;Ibahin ang araw ng naitala 
+            </button>
+        <div>
     @else
         Wala ka pang natatanggap na starter kit.
     @endif
