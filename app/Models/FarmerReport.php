@@ -12,7 +12,7 @@ class FarmerReport extends Model
     use Filterable, HasFactory;
 
     protected $fillable = [
-        'farmer_profile_id',
+        'farmer_id',
         'seed_stage_id',
         'farmland_id',
         'crop_id',

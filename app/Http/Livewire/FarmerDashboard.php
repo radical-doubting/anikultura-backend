@@ -5,65 +5,65 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\FarmerReport;
-use App\Models\SeedStage;
-use App\User;
-use Illuminate\Support\Facades\DB;
-
 
 class FarmerDashboard extends Component
 {
-    public $user_id, $report, $seed_stage, $seed_temp;
+    public $user;
+    public $farmer_profile;
+    public $report;
+    public $seed_stage;
 
     public function mount()
     {
         $user = Auth::user();
 
         $this->user = $user;
-        $this->profile = $user->profile;
+        $this->farmer_profile = $user->profile;
 
+        $this->initialize_report();
+    }
+
+    public function initialize_report()
+    {
         $this->report = $this->get_latest_report();
-        $this->seed_stage = $this->get_seed_stage();
     }
 
     public function get_latest_report()
     {
-        $latest_report = FarmerReport::where('farmer_profile_id', $this->user->id)
+        $latest_report = FarmerReport::where('farmer_id', $this->user->id)
             ->orderBy('created_at', 'desc')
             ->first();
 
         return $latest_report;
     }
 
-    public function get_seed_stage()
+    public function has_report()
     {
-        $report = $this->report;
-        $has_report = !is_null($report);
-        $seed_stage = null;
-
-        if ($has_report) {
-            $seed_stage = $report->seed_stage->name;
-            return $seed_stage;
-        }
-
-        // Get first seed stage
-        return SeedStage::find(1);
+        return !is_null($this->report);
     }
 
     public function advance_stage()
     {
         $user_id = $this->user->id;
-        $this->stage = $stage_num;
-        $this->stage++;
+        $crop_id = $this->report->crop->id;
+        $farmland_id = $this->report->farmland->id;
+        $next_seed_stage_id = $this->report->seed_stage->id + 1;
+
+        // If no more next stage, cancel advancing
+        if ($next_seed_stage_id > 6)
+            return;
 
         FarmerReport::create([
-            'farmer_profiles_id' => $this->user_id,
-            'seed_stages_id' => $this->stage,
-            'farmland_id' => 1,
-            'crop_id' => 1,
-            'volume' => 50,
+            'farmer_id' => $user_id,
+            'seed_stage_id' => $next_seed_stage_id,
+            'farmland_id' => $farmland_id,
+            'crop_id' => $crop_id,
+            'volume' => 50, // Will be inputted by farmer, yes?
         ]);
-    }
 
+        // Reinitialize report to update UI
+        $this->initialize_report();
+    }
 
     public function render()
     {
