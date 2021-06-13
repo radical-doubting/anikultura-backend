@@ -31,7 +31,7 @@ class FarmerDashboard extends Component
     public function get_latest_report()
     {
         $latest_report = FarmerReport::where('farmer_id', $this->user->id)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('id', 'desc')
             ->first();
 
         return $latest_report;
