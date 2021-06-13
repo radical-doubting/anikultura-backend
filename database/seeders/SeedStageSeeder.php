@@ -23,7 +23,7 @@ class SeedStageSeeder extends Seeder
             ['id' => 4, 'name' => 'Malalago at malapit na magbunga ang tanim', 'image' => 'stage4.png'],
             ['id' => 5, 'name' => 'Namumulaklak at unti-unting nagbubunga ang tanim', 'image' => 'stage5.png'],
             ['id' => 6, 'name' => 'Nagbunga na ang mga tanim at malapit na anihin', 'image' => 'stage6.png'],
-            ['id' => 7, 'name' => 'Naani ko na aking mga tanim', 'image' => 'stage7.png'],
+            ['id' => 7, 'name' => 'Naani ko na ang aking mga tanim', 'image' => 'stage7.png'],
         ];
 
         SeedStage::insert($seedstages);
