@@ -18,11 +18,21 @@ class UserSeeder extends Seeder
     {
         $date_now = Carbon::now();
         $user = [
-            ['name' => 'sadaanton', 'email' => 'sadaanton@student.apc.edu.ph', 'email_verified_at' => $date_now,
-            'created_at' => $date_now, 'password' => Hash::make('thisisatest'), 'first_name' => 'Steven',
-            'middle_name' => 'Aguinaldo', 'last_name' => 'Da-Anton'],
+            [
+                'id' => 1,
+                'name' => 'juandel',
+                'email' => 'juandelacruz@gmail.com',
+                'email_verified_at' => $date_now,
+                'created_at' => $date_now,
+                'password' => Hash::make('password'),
+                'first_name' => 'Juan',
+                'middle_name' => 'Santos',
+                'last_name' => 'Dela Cruz',
+                'profile_type' => 'App\Models\Farmer\FarmerProfile',
+                'profile_id' => 1
+            ],
         ];
 
-        FarmlandType::insert($user);
+        User::insert($user);
     }
 }
