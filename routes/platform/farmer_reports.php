@@ -18,4 +18,9 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 Route::screen('farmer/reports', FarmerReportListScreen::class)
-    ->name('platform.farmer.reports');
+    ->name('platform.farmer.reports')
+    ->breadcrumbs(function (Trail $trail) {
+        return $trail
+            ->parent('platform.index')
+            ->push(__('Farmer Reports'), route('platform.farmer.reports'));
+    });

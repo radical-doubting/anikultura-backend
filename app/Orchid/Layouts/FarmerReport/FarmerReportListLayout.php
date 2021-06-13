@@ -41,7 +41,7 @@ class FarmerReportListLayout extends Table
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->id)
+                    return Link::make($farmer_report->farmer->getFullNameAttribute())
                         ->route('platform.farmer.reports', $farmer_report->id);
                 }),
 
@@ -54,27 +54,16 @@ class FarmerReportListLayout extends Table
                         ->route('platform.farmer.reports', $farmer_report->id);
                 }),
 
-            TD::make('farmland', __('Farmland'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->farmland->id)
-                        ->route('platform.farmer.reports', $farmer_report->id);
-                }),
-
             TD::make('crop', __('Crop'))
                 ->sort()
-                ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->crop->name)
                         ->route('platform.farmer.reports', $farmer_report->id);
                 }),
 
-            TD::make('volume', __('Volume'))
+            TD::make('volume', __('Volume (kg)'))
                 ->sort()
-                ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->volume)

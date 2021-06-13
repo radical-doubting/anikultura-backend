@@ -30,9 +30,9 @@ class FarmerReport extends Model
         'created_at',
     ];
 
-    public function farmer_profile()
+    public function farmer()
     {
-        return $this->belongsTo(FarmerProfile::class);
+        return $this->belongsTo(User::class);
     }
 
     public function seed_stage()
