@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Farmland\Farmland;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -29,11 +30,23 @@ class FarmerReport extends Model
         'created_at',
     ];
 
-    public function farmer_profile() {
+    public function farmer_profile()
+    {
         return $this->belongsTo(FarmerProfile::class);
     }
 
-    public function seed_stage() {
+    public function seed_stage()
+    {
         return $this->belongsTo(SeedStage::class);
+    }
+
+    public function farmland()
+    {
+        return $this->belongsTo(Farmland::class);
+    }
+
+    public function crop()
+    {
+        return $this->belongsTo(Crop::class);
     }
 }

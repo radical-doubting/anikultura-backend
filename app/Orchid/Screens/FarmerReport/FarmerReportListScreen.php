@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Orchid\Screens\Farmers;
+namespace App\Orchid\Screens\FarmerReport;
 
-use App\Models\farmer_reports;
-use App\Orchid\Layouts\Farmers\FarmerReportsListLayout;
+use App\Models\FarmerReport;
+use App\Orchid\Layouts\FarmerReport\FarmerReportListLayout;
 use Orchid\Screen\Screen;
 
-class FarmerReportsListScreen extends Screen
+class FarmerReportListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Farmer Reports Dashboard';
+    public $name = 'Farmer Report';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Farmer Reports under the SM KSK SAP Program';
+    public $description = 'Farmer reports under the SM KSK SAP Program';
 
     /**
      * Query data.
@@ -30,7 +30,9 @@ class FarmerReportsListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmer_reports' => farmer_reports::all()
+            'farmer_reports' => FarmerReport::filters()
+                ->defaultSort('id')
+                ->paginate()
         ];
     }
 
@@ -52,7 +54,7 @@ class FarmerReportsListScreen extends Screen
     public function layout(): array
     {
         return [
-            FarmerReportsListLayout::class
+            FarmerReportListLayout::class
         ];
     }
 }
