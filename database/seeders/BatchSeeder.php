@@ -24,7 +24,7 @@ class BatchSeeder extends Seeder
                 'province_id' => 1,
                 'municity_id' => 1,
                 'barangay' => 'Nagbalon',
-                'number_seeds_distributed' => 200,
+                'number_seeds_distributed' => 1540,
                 'created_at' => $date_now,
                 'updated_at' => $date_now
             ],
@@ -35,7 +35,7 @@ class BatchSeeder extends Seeder
                 'province_id' => 1,
                 'municity_id' => 1,
                 'barangay' => 'Liputan',
-                'number_seeds_distributed' => 154,
+                'number_seeds_distributed' => 2250,
                 'created_at' => $date_now,
                 'updated_at' => $date_now
             ]
