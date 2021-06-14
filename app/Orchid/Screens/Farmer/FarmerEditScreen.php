@@ -235,7 +235,6 @@ class FarmerEditScreen extends Screen
                 Rule::unique(User::class, 'name')->ignore($farmer_profile->user),
             ],
             'user.email' => [
-                'required',
                 Rule::unique(User::class, 'email')->ignore($farmer_profile->user),
             ]
         ]);

@@ -32,7 +32,7 @@ class BatchEditFarmersLayout extends Rows
             ->displayAppend('full_name')
             ->required()
             ->multiple()
-            ->help(__('Search the name of this farmland\'s members'))
+            ->help(__('Search the name of this batch\'s members'))
             ->title(__('Farmers'))
             ->placeholder(__('Farmers')),
         ];

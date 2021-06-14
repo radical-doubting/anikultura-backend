@@ -26,7 +26,7 @@ class CreateAnikulturaUsersTable extends Migration
                 ->nullable();
 
             $table->string('email')
-                ->nullable(false)->change();
+                ->nullable()->change();
                 
             $table->unsignedInteger('profile_id')
                 ->nullable();
@@ -51,6 +51,8 @@ class CreateAnikulturaUsersTable extends Migration
             ]);
 
             $table->dropIndex('users_name_unique');
+            $table->string('email')
+                ->nullable(false)->change();
         });
     }
 }
