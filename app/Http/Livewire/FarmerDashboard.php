@@ -50,7 +50,7 @@ class FarmerDashboard extends Component
         $next_seed_stage_id = $this->report->seed_stage->id + 1;
 
         // If no more next stage, cancel advancing
-        if ($next_seed_stage_id > 6)
+        if ($next_seed_stage_id > 8)
             return;
 
         FarmerReport::create([

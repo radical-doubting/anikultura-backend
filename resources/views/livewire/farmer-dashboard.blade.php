@@ -1,10 +1,12 @@
 <div class="text-center mb-8">
 
-    <h1 class="font-bold">Mabuhay, {{ $user->first_name }}!</h1>
+    <h1 class="font-bold mb-3">Mabuhay, {{ $user->first_name }}!</h1>
 
-    @if($this->has_report())
-        <p>Uri ng tanim: {{ $report->crop->name }}</p>
-        <img class="m-auto" src="/img/{{ $report->seed_stage->image }}" style="height: 250px;" />
+    @if($this->has_report() && $report->seed_stage->id < 8)
+        <span class="text-sm font-medium bg-yellow-100 py-1 px-2 rounded text-yellow-500 align-middle">
+            <b>Tanim:</b> {{ $report->crop->name }}
+        </span>
+        <img class="m-auto mt-3" src="/img/{{ $report->seed_stage->image }}" style="height: 250px;" />
         <div>
             <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-8 md:my-8" style="margin-bottom: 10px;" 
             wire:click="advance_stage">
@@ -18,7 +20,8 @@
             </button>
         <div>
     @else
-        Wala ka pang natatanggap na starter kit. Ipalam ito sa kinauukulan.
+        <img class="m-auto" src="/img/{{ $report->seed_stage->image }}" style="height: 250px;" />
+        <p>{{ $report->seed_stage->name }}</p>
     @endif
 
 </div>
