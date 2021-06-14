@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Features;
 
 return [
@@ -61,7 +62,14 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    'home' => function () {
+        // Check roles instead soon
+        if (Auth::user()->name === 'admin') {
+            return route('platform.index');
+        }
+
+        return route('dashboard');
+    },
 
     /*
     |--------------------------------------------------------------------------

@@ -16,7 +16,7 @@ class CropBuyerSeeder extends Seeder
     public function run()
     {
         $date_now = Carbon::now();
-        $regions = [
+        $crops = [
             ['id' => 1, 'name' => 'Biyahedor', 'created_at' => $date_now],
             ['id' => 2, 'name' => 'Dizon Farm', 'created_at' => $date_now],
             ['id' => 3, 'name' => 'Wholesaler', 'created_at' => $date_now],
@@ -24,6 +24,6 @@ class CropBuyerSeeder extends Seeder
             ['id' => 5, 'name' => 'FCA', 'created_at' => $date_now],
         ];
 
-        CropBuyer::insert($regions);
+        CropBuyer::insert($crops);
     }
 }

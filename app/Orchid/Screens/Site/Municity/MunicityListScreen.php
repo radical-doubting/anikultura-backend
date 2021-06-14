@@ -15,14 +15,14 @@ class MunicityListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Municities';
+    public $name = 'Municipalities and Cities';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'List of all municities under SM KSK SAP';
+    public $description = 'List of all municipalities and cities under SM KSK SAP';
 
     /**
      * Query data.

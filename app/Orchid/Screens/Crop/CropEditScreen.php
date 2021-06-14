@@ -25,26 +25,26 @@ class CropEditScreen extends Screen
      *
      * @var string|null
      */
-    public $description = 'Edit a crop description type under SM KSK SAP';
+    public $description = 'Edit a crop type under SM KSK SAP';
 
     /**
      * Query data.
      *
-        * @return array
-        */
-        public function query(Crop $crop): array
-        {
-            $this->crop = $crop;
-    
-            if(!$crop->exists){
-                $this->name = 'Create Crop';
-                $this->description = 'Create a new Crop Type';
-            }
-    
-            return [   
-               'crop' => $crop
-            ];
+     * @return array
+     */
+    public function query(Crop $crop): array
+    {
+        $this->crop = $crop;
+
+        if (!$crop->exists) {
+            $this->name = 'Create Crop';
+            $this->description = 'Create a new Crop Type';
         }
+
+        return [
+            'crop' => $crop
+        ];
+    }
 
     /**
      * Button commands.
@@ -54,16 +54,16 @@ class CropEditScreen extends Screen
     public function commandBar(): array
     {
         return [
-        Button::make(__('Remove'))
-            ->icon('trash')
-            ->confirm(__('Once the account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
-            ->method('remove')
-            ->canSee($this->crop->exists),
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the crop type is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->crop->exists),
 
-        Button::make(__('Save'))
-            ->icon('check')
-            ->method('save'),
-  
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
+
         ];
     }
 
@@ -73,8 +73,6 @@ class CropEditScreen extends Screen
      * @return \Orchid\Screen\Layout[]|string[]
      */
     public function layout(): array
-
-//Layout for Edit Crop
     {
         return [
             Layout::block(CropEditLayout::class)
@@ -89,8 +87,8 @@ class CropEditScreen extends Screen
                 ),
         ];
     }
-    
-//Delete function
+
+    //Delete function
     public function remove(Crop $crop)
     {
         $crop->delete();
@@ -98,10 +96,10 @@ class CropEditScreen extends Screen
         Toast::info(__('Crop was removed'));
 
         return redirect()->route('platform.crops');
-}
+    }
 
-//Save function
-public function save(Crop $crop, Request $request)
+    //Save function
+    public function save(Crop $crop, Request $request)
     {
         $request->validate([
             'crop.group' => [
@@ -124,7 +122,7 @@ public function save(Crop $crop, Request $request)
             ],
             'crop.ripening_days' => [
                 'required',
-            ]        
+            ]
         ]);
 
         $crop_data = $request->get('crop');

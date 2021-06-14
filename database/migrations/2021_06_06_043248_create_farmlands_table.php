@@ -76,6 +76,7 @@ class CreateFarmlandsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('farmland_farmers');
         Schema::dropIfExists('farmland_crops');
         Schema::dropIfExists('farmlands');
     }
