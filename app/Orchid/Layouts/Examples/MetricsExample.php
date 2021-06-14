@@ -17,9 +17,9 @@ class MetricsExample extends Metric
      * @var array
      */
     protected $labels = [
-        'Sales Today',
-        'Visitors Today',
-        'Pending Orders',
-        'Total Earnings',
+        'Farmers',
+        'Reports',
+        'Current Yield',
+        'Projected Yield',
     ];
 }
