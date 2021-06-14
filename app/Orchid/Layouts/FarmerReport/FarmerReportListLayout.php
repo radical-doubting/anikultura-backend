@@ -68,7 +68,13 @@ class FarmerReportListLayout extends Table
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->volume)
                         ->route('platform.farmer.reports', $farmer_report->id);
-                })
+                }),
+
+            TD::make('created_at', __('Reported at'))
+                ->sort()
+                ->render(function (FarmerReport $farmer_report) {
+                    return $farmer_report->created_at->toDateTimeString();
+                }),
         ];
     }
 }

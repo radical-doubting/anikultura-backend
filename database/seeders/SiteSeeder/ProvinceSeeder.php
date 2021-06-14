@@ -17,7 +17,13 @@ class ProvinceSeeder extends Seeder
     {
         $date_now = Carbon::now();
         $provinces = [
-            ['id' => 1, 'name' => 'Bulacan', 'created_at' => $date_now, 'updated_at' => $date_now],
+            [
+                'id' => 1,
+                'name' => 'Bulacan',
+                'region_id' => 1,
+                'created_at' => $date_now,
+                'updated_at' => $date_now
+            ],
         ];
 
         Province::insert($provinces);

@@ -1,9 +1,9 @@
 <div class="text-center mb-8">
 
-    <h1 class="font-bold">Hi, {{ $user->first_name }}</h1>
+    <h1 class="font-bold">Mabuhay, {{ $user->first_name }}!</h1>
 
     @if($this->has_report())
-        <p>Crop: {{ $report->crop->name }}</p>
+        <p>Uri ng tanim: {{ $report->crop->name }}</p>
         <img class="m-auto" src="/img/{{ $report->seed_stage->image }}" style="height: 250px;" />
         <div>
             <button class="bg-green-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-8 md:my-8" style="margin-bottom: 10px;" 
@@ -18,7 +18,7 @@
             </button>
         <div>
     @else
-        Wala ka pang natatanggap na starter kit.
+        Wala ka pang natatanggap na starter kit. Ipalam ito sa kinauukulan.
     @endif
 
 </div>

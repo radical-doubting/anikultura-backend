@@ -16,10 +16,17 @@ class MunicitySeeder extends Seeder
     public function run()
     {
         $date_now = Carbon::now();
-        $provinces = [
-            ['id' => 1, 'name' => 'Marilao', 'created_at' => $date_now, 'updated_at' => $date_now],
+        $municities = [
+            [
+                'id' => 1,
+                'name' => 'Marilao',
+                'province_id' => 1,
+                'region_id' => 1,
+                'created_at' => $date_now,
+                'updated_at' => $date_now
+            ],
         ];
 
-        Municity::insert($provinces);
+        Municity::insert($municities);
     }
 }

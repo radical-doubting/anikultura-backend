@@ -18,14 +18,14 @@ class MunicityEditScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Edit Municity';
+    public $name = 'Edit Municipality or City';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'Edit municity details';
+    public $description = 'Edit municipality or city details';
 
     /**
      * Query data.
@@ -37,8 +37,8 @@ class MunicityEditScreen extends Screen
         $this->municity = $municity;
 
         if (!$municity->exists) {
-            $this->name = 'Create Municity';
-            $this->description = 'Create a new municity';
+            $this->name = 'Create Municipality or City ';
+            $this->description = 'Create a new municipality or city';
         }
 
         return [
@@ -56,7 +56,7 @@ class MunicityEditScreen extends Screen
         return [
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm(__('Once the municity is deleted, all of its resources and data will be permanently deleted.'))
+                ->confirm(__('Once the municipality or city is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('remove')
                 ->canSee($this->municity->exists),
 
@@ -75,8 +75,8 @@ class MunicityEditScreen extends Screen
     {
         return [
             Layout::block(MunicityEditLayout::class)
-                ->title(__('Municity Information'))
-                ->description(__('Update the municity\'s details.'))
+                ->title(__('Municipality or City Information'))
+                ->description(__('Update the municipality or city\'s details.'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
