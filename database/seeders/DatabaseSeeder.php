@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CropSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(FarmerProfileSeeder::class);
+        $this->call(BatchSeeder::class);
         $this->call(FarmlandSeeder::class);
+        $this->call(FarmerReportSeeder::class);
     }
 }

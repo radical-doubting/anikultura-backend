@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Batch\Batch;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class BatchSeeder extends Seeder
 {
@@ -42,5 +43,15 @@ class BatchSeeder extends Seeder
         ];
 
         Batch::insert($batches);
+
+        DB::table('batch_farmers')->insert([
+            'batch_id' => 1,
+            'farmer_id' => 1
+        ]);
+
+        DB::table('batch_farmers')->insert([
+            'batch_id' => 1,
+            'farmer_id' => 2
+        ]);
     }
 }

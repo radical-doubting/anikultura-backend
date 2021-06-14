@@ -11,10 +11,11 @@ class FarmerReportSeeder extends Seeder
     public function run()
     {
         $date_now = Carbon::now();
-        $report = [
+        $reports = [
             [
                 'id' => 1,
                 'farmer_id' => 1,
+                'farmland_id' => 1,
                 'seed_stage_id' => 1,
                 'crop_id' => 1,
                 'volume' => 53,
@@ -24,6 +25,7 @@ class FarmerReportSeeder extends Seeder
             [
                 'id' => 2,
                 'farmer_id' => 2,
+                'farmland_id' => 1,
                 'seed_stage_id' => 1,
                 'crop_id' => 1,
                 'volume' => 72,
@@ -32,6 +34,6 @@ class FarmerReportSeeder extends Seeder
             ]
         ];
 
-        Crop::insert($report);
+        FarmerReport::insert($reports);
     }
 }
