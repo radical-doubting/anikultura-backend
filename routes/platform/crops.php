@@ -17,22 +17,22 @@ Route::screen('crops', CropListScreen::class)
             ->push(__('Crops'), route('platform.crops'));
     });
 
-//Crops > Edit
- 
+//Crops > Edit Crop
+
 Route::screen('crops/{crop}/edit', CropEditScreen::class)
     ->name('platform.crops.edit')
     ->breadcrumbs(function (Trail $trail, $crop) {
         return $trail
             ->parent('platform.crops')
-            ->push(__('Edit Crops'), route('platform.crops.edit', $crop));
+            ->push(__('Edit Crop'), route('platform.crops.edit', $crop));
     });
-  
-//Crops > Create Crops
- 
+
+//Crops > Create Crop
+
 Route::screen('crops/create', CropEditScreen::class)
     ->name('platform.crops.create')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.crops')
-            ->push(__('Create Crops'), route('platform.crops.create'));
+            ->push(__('Create Crop'), route('platform.crops.create'));
     });

@@ -33,7 +33,7 @@ class FarmerReportListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->id)
-                        ->route('platform.farmer.reports', $farmer_report->id);
+                        ->route('platform.farmer.reports.edit', $farmer_report->id);
                 }),
 
             TD::make('farmer', __('Farmer'))
@@ -42,7 +42,7 @@ class FarmerReportListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->farmer->getFullNameAttribute())
-                        ->route('platform.farmer.reports', $farmer_report->id);
+                        ->route('platform.farmer.reports.edit', $farmer_report->id);
                 }),
 
             TD::make('seed_stage', __('Seed Stage'))
@@ -51,7 +51,7 @@ class FarmerReportListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->seed_stage->name)
-                        ->route('platform.farmer.reports', $farmer_report->id);
+                        ->route('platform.farmer.reports.edit', $farmer_report->id);
                 }),
 
             TD::make('crop', __('Crop'))
@@ -59,7 +59,7 @@ class FarmerReportListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->crop->name)
-                        ->route('platform.farmer.reports', $farmer_report->id);
+                        ->route('platform.farmer.reports.edit', $farmer_report->id);
                 }),
 
             TD::make('volume', __('Volume (kg)'))
@@ -67,7 +67,7 @@ class FarmerReportListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
                     return Link::make($farmer_report->volume)
-                        ->route('platform.farmer.reports', $farmer_report->id);
+                        ->route('platform.farmer.reports.edit', $farmer_report->id);
                 }),
 
             TD::make('created_at', __('Reported at'))

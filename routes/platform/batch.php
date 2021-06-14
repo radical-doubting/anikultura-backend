@@ -19,7 +19,7 @@ Route::screen('batches', BatchListScreen::class)
 
 
 // Batch > Edit Batch
-Route::screen('batch-{batch}/edit', BatchEditScreen::class)
+Route::screen('batch/{batch}/edit', BatchEditScreen::class)
     ->name('platform.batches.edit')
     ->breadcrumbs(function (Trail $trail, $batches) {
         return $trail
@@ -35,5 +35,3 @@ Route::screen('batches/create', BatchEditScreen::class)
             ->parent('platform.batches')
             ->push(__('Create Batch'), route('platform.batches.create'));
     });
-
-
