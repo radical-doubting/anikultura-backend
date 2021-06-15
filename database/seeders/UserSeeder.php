@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -50,5 +51,6 @@ class UserSeeder extends Seeder
         ];
 
         User::insert($user);
+        PostgresHelper::update_increments('users');
     }
 }
