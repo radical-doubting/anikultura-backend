@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Farmland\Farmland;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class FarmlandSeeder extends Seeder
         ];
 
         Farmland::insert($farmlands);
+        PostgresHelper::update_increments('farmlands');
 
         DB::table('farmland_farmers')->insert([
             'farmland_id' => 1,

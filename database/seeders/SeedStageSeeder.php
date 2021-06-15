@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\SeedStage;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,7 @@ class SeedStageSeeder extends Seeder
     public function run()
     {
         $date_now = Carbon::now();
-        $seedstages = [
+        $seed_stages = [
             ['id' => 1, 'name' => 'Nakuha ko na ang Starter Kit', 'image' => 'stage1.png'],
             ['id' => 2, 'name' => 'Natanim ko na ang mga buto', 'image' => 'stage2.png'],
             ['id' => 3, 'name' => 'Nailipat na ang buto sa lupang tataniman', 'image' => 'stage3.png'],
@@ -27,6 +28,7 @@ class SeedStageSeeder extends Seeder
             ['id' => 8, 'name' => 'Maari mo na ibenta ang iyong pananim!', 'image' => 'stage8.png'],
         ];
 
-        SeedStage::insert($seedstages);
+        SeedStage::insert($seed_stages);
+        PostgresHelper::update_increments('seed_stages');
     }
 }

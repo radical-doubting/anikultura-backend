@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\SiteSeeder;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Site\Municity;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -28,5 +29,6 @@ class MunicitySeeder extends Seeder
         ];
 
         Municity::insert($municities);
+        PostgresHelper::update_increments('municities');
     }
 }

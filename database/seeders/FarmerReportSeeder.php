@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\FarmerReport;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -11,7 +12,7 @@ class FarmerReportSeeder extends Seeder
     public function run()
     {
         $date_now = Carbon::now();
-        $reports = [
+        $farmer_reports = [
             [
                 'id' => 1,
                 'farmer_id' => 1,
@@ -34,6 +35,7 @@ class FarmerReportSeeder extends Seeder
             ]
         ];
 
-        FarmerReport::insert($reports);
+        FarmerReport::insert($farmer_reports);
+        PostgresHelper::update_increments('farmer_reports');
     }
 }

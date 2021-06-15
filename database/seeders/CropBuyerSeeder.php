@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Farmland\CropBuyer;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -16,7 +17,7 @@ class CropBuyerSeeder extends Seeder
     public function run()
     {
         $date_now = Carbon::now();
-        $crops = [
+        $crop_buyers = [
             ['id' => 1, 'name' => 'Biyahedor', 'created_at' => $date_now],
             ['id' => 2, 'name' => 'Dizon Farm', 'created_at' => $date_now],
             ['id' => 3, 'name' => 'Wholesaler', 'created_at' => $date_now],
@@ -24,6 +25,7 @@ class CropBuyerSeeder extends Seeder
             ['id' => 5, 'name' => 'FCA', 'created_at' => $date_now],
         ];
 
-        CropBuyer::insert($crops);
+        CropBuyer::insert($crop_buyers);
+        PostgresHelper::update_increments('crop_buyers');
     }
 }

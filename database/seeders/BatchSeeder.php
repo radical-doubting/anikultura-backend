@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Batch\Batch;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -43,6 +44,7 @@ class BatchSeeder extends Seeder
         ];
 
         Batch::insert($batches);
+        PostgresHelper::update_increments('batches');
 
         DB::table('batch_farmers')->insert([
             'batch_id' => 1,

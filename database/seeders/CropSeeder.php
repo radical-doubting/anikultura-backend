@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Crop;
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
@@ -32,5 +33,6 @@ class CropSeeder extends Seeder
         ];
 
         Crop::insert($crops);
+        PostgresHelper::update_increments('crops');
     }
 }

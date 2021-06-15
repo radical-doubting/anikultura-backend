@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Farmland\WateringSystem;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -27,5 +28,6 @@ class WateringSystemSeeder extends Seeder
         ];
 
         WateringSystem::insert($regions);
+        PostgresHelper::update_increments('watering_systems');
     }
 }

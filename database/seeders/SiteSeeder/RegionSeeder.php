@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\SiteSeeder;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Site\Region;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -37,5 +38,6 @@ class RegionSeeder extends Seeder
         ];
 
         Region::insert($regions);
+        PostgresHelper::update_increments('regions');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\SiteSeeder;
 
+use App\Helpers\PostgresHelper;
 use App\Models\Site\Province;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
@@ -27,5 +28,6 @@ class ProvinceSeeder extends Seeder
         ];
 
         Province::insert($provinces);
+        PostgresHelper::update_increments('provinces');
     }
 }
