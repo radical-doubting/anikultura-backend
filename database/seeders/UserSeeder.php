@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
             ],
         ];
 
-        User::insert($user);
+        //User::insert($user);
         PostgresHelper::update_increments('users');
     }
 }
