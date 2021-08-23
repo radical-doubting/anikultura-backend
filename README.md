@@ -1,4 +1,4 @@
-# SM KSK SAP Anikultura
+# Anikultura
 
 A web application built in the Tailwind, Alpine.js, Laravel, Livewire (TALL) stack.
 
@@ -39,5 +39,5 @@ Reference: https://laravel.com/docs/8.x/sail
 * Execute `docker run --rm \ -u "$(id -u):$(id -g)" \ -v $(pwd):/opt \ -w /opt \ laravelsail/php80-composer:latest \ composer install --ignore-platform-reqs`
 * Navigate to the `smfi-crpm-app` folder then run `./vendor/laravel/sail/bin/sail build`
 * After the image is built, run `./vendor/laravel/sail/bin/sail up`
-* Open `smfi-crpm-app` (which is in Ubuntu) using VS Code.
+* Open `anikultura` (which is in Ubuntu) using VS Code.
 * Done
