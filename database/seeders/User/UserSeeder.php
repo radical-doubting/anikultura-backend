@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\User;
 
 use App\Models\User;
 use Carbon\Carbon;
@@ -16,39 +16,35 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $date_now = Carbon::now();
-        $user = [
+        $dateNow = Carbon::now();
+
+        $users = [
             [
-                'id' => 1,
                 'name' => 'juandel',
                 'email' => 'juandelacruz@gmail.com',
-                'email_verified_at' => $date_now,
+                'email_verified_at' => $dateNow,
                 'password' => Hash::make('password'),
                 'first_name' => 'Juan',
                 'middle_name' => 'Santos',
                 'last_name' => 'Dela Cruz',
                 'profile_type' => 'App\Models\Farmer\FarmerProfile',
-                'profile_id' => 1,
-                'created_at' => $date_now,
-                'updated_at' => $date_now
+                'profile_id' => 1
             ],
             [
-                'id' => 2,
                 'name' => 'pedrogil',
                 'email' => 'pedrogil@gmail.com',
-                'email_verified_at' => $date_now,
-                'created_at' => $date_now,
+                'email_verified_at' => $dateNow,
                 'password' => Hash::make('password'),
                 'first_name' => 'Pedro',
                 'middle_name' => 'Ejercito',
                 'last_name' => 'Gil',
                 'profile_type' => 'App\Models\Farmer\FarmerProfile',
-                'profile_id' => 2,
-                'created_at' => $date_now,
-                'updated_at' => $date_now
-            ],
+                'profile_id' => 2
+            ]
         ];
 
-        User::insert($user);
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }

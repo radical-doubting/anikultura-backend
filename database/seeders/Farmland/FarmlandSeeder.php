@@ -1,11 +1,10 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Farmland;
 
 use App\Models\Farmland\Farmland;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
 class FarmlandSeeder extends Seeder
 {
@@ -16,19 +15,17 @@ class FarmlandSeeder extends Seeder
      */
     public function run()
     {
-        $date_now = Carbon::now();
         $farmlands = [
             [
-                'id' => 1,
                 'type_id' => 1,
                 'status_id' => 1,
                 'hectares_size' => 10,
-                'created_at' => $date_now,
-                'updated_at' => $date_now
             ]
         ];
 
-        Farmland::insert($farmlands);
+        foreach ($farmlands as $farmland) {
+            Farmland::create($farmland);
+        }
 
         DB::table('farmland_farmers')->insert([
             'farmland_id' => 1,

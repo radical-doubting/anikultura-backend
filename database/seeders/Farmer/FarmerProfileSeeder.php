@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Farmer;
 
 use App\Models\FarmerProfile;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class FarmerProfileSeeder extends Seeder
@@ -15,10 +14,8 @@ class FarmerProfileSeeder extends Seeder
      */
     public function run()
     {
-        $date_now = Carbon::now();
-        $farmer = [
+        $farmerProfiles = [
             [
-                'id' => 1,
                 'gender' => 0,
                 'civil_status' => 0,
                 'birthday' => '1998-11-11',
@@ -37,12 +34,9 @@ class FarmerProfileSeeder extends Seeder
                 'salary_periodicity' => 0,
                 'estimated_salary' => 6900,
                 'social_status' => 0,
-                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.',
-                'created_at' => $date_now,
-                'updated_at' => $date_now
+                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.'
             ],
             [
-                'id' => 2,
                 'gender' => 1,
                 'civil_status' => 1,
                 'birthday' => '1979-01-15',
@@ -61,12 +55,12 @@ class FarmerProfileSeeder extends Seeder
                 'salary_periodicity' => 0,
                 'estimated_salary' => 8000,
                 'social_status' => 0,
-                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.',
-                'created_at' => $date_now,
-                'updated_at' => $date_now
+                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.'
             ],
         ];
 
-        FarmerProfile::insert($farmer);
+        foreach ($farmerProfiles as $farmerProfile) {
+            FarmerProfile::create($farmerProfile);
+        }
     }
 }

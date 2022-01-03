@@ -1,39 +1,33 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Farmer;
 
 use App\Models\FarmerReport;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class FarmerReportSeeder extends Seeder
 {
     public function run()
     {
-        $date_now = Carbon::now();
-        $reports = [
+        $farmerReports = [
             [
-                'id' => 1,
                 'farmer_id' => 1,
                 'farmland_id' => 1,
                 'seed_stage_id' => 1,
                 'crop_id' => 1,
-                'volume' => 53,
-                'created_at' => $date_now,
-                'updated_at' => $date_now
+                'volume' => 53
             ],
             [
-                'id' => 2,
                 'farmer_id' => 2,
                 'farmland_id' => 1,
                 'seed_stage_id' => 1,
                 'crop_id' => 1,
-                'volume' => 72,
-                'created_at' => $date_now,
-                'updated_at' => $date_now
+                'volume' => 72
             ]
         ];
 
-        FarmerReport::insert($reports);
+        foreach ($farmerReports as $farmerReport) {
+            FarmerReport::create($farmerReport);
+        }
     }
 }

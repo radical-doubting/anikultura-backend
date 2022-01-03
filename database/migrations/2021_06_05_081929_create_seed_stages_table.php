@@ -17,6 +17,7 @@ class CreateSeedStagesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
+            $table->timestamps();
         });
     }
 

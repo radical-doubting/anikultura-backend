@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders\SiteSeeder;
+namespace Database\Seeders\Site;
 
 use App\Models\Site\Municity;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class MunicitySeeder extends Seeder
@@ -15,18 +14,16 @@ class MunicitySeeder extends Seeder
      */
     public function run()
     {
-        $date_now = Carbon::now();
         $municities = [
             [
-                'id' => 1,
                 'name' => 'Marilao',
                 'province_id' => 1,
-                'region_id' => 1,
-                'created_at' => $date_now,
-                'updated_at' => $date_now
+                'region_id' => 1
             ],
         ];
 
-        Municity::insert($municities);
+        foreach ($municities as $municity) {
+            Municity::create($municity);
+        }
     }
 }
