@@ -34,8 +34,7 @@ class CreateFarmerAddressesTable extends Migration
                 ->on('regions')
                 ->cascadeOnUpdate();
 
-            $table->dateTime('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
         });
     }
 

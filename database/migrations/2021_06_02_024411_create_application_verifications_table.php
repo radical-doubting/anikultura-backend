@@ -20,8 +20,7 @@ class CreateApplicationVerificationsTable extends Migration
             $table->string('office');
             $table->integer('contact_number');
             $table->string('mode_of_application');
-            $table->dateTime('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
         });
     }
 

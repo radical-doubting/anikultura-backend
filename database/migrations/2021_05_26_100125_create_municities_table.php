@@ -15,7 +15,7 @@ class CreateMunicitiesTable extends Migration
     {
         Schema::create('municities', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable(false)->unique();
 
             $table->unsignedBigInteger('region_id')
                 ->nullable();

@@ -15,7 +15,7 @@ class CreateFarmlandTypesTable extends Migration
     {
         Schema::create('farmland_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable(false)->unique();
             $table->timestamps();
         });
     }

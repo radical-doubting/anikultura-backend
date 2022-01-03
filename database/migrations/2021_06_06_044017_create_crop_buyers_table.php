@@ -15,7 +15,7 @@ class CreateCropBuyersTable extends Migration
     {
         Schema::create('crop_buyers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable(false)->unique();
             $table->timestamps();
         });
 
