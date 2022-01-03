@@ -2,10 +2,10 @@
 
 namespace App\Orchid\Screens\Batch;
 
-use Orchid\Screen\Screen;
-use Orchid\Screen\Actions\Link;
-use App\Orchid\Layouts\Batch\BatchListLayout;
 use App\Models\Batch\Batch;
+use App\Orchid\Layouts\Batch\BatchListLayout;
+use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
 class BatchListScreen extends Screen
@@ -35,7 +35,7 @@ class BatchListScreen extends Screen
            //'batches'=>Batches::all()
            'batches'=> Batch::filters()
                 ->defaultSort('id')
-                ->paginate()
+                ->paginate(),
         ];
     }
 
@@ -61,11 +61,11 @@ class BatchListScreen extends Screen
     public function layout(): array
     {
         return [
-            BatchListLayout::class
+            BatchListLayout::class,
         ];
     }
 
-     /**
+    /**
      * @param Batch $batches
      *
      * @throws \Exception

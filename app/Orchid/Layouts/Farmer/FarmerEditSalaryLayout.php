@@ -2,18 +2,11 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
-use Orchid\Support\Facades\Layout;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Layouts\Rows;
-use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\Label;
-use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
-use Orchid\Screen\Fields\Radio;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Layouts\Rows;
 
 class FarmerEditSalaryLayout extends Rows
 {
@@ -29,14 +22,13 @@ class FarmerEditSalaryLayout extends Rows
      *
      * @return Field[]
      */
-
     protected function fields(): array
     {
         return [
             Group::make([
                 Select::make('farmer_profile.salary_periodicity')
                     ->title('Salary Periodicity')
-                    ->options(["Everyday", "Monthly", "Annually", "Every 15 Days", "Every 3 Months", "Every 6 Months"])
+                    ->options(['Everyday', 'Monthly', 'Annually', 'Every 15 Days', 'Every 3 Months', 'Every 6 Months'])
                     ->required(),
 
                 Input::make('farmer_profile.estimated_salary')
@@ -48,7 +40,7 @@ class FarmerEditSalaryLayout extends Rows
 
             Select::make('farmer_profile.social_status')
                 ->title('Is the farmer poor?')
-                ->options(["Yes", "No"])
+                ->options(['Yes', 'No'])
                 ->required(),
 
             Input::make('farmer_profile.social_status_reason')

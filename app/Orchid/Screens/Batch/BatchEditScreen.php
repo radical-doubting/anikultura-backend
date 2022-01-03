@@ -2,16 +2,15 @@
 
 namespace App\Orchid\Screens\Batch;
 
-use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Layout;
-use Orchid\Support\Color;
-use Orchid\Screen\Actions\Button;
-use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
+use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
-use Orchid\Support\Facades\Toast;
 use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class BatchEditScreen extends Screen
 {
@@ -28,12 +27,8 @@ class BatchEditScreen extends Screen
      * @var string|null
      */
     public $description = 'Edit a batch under KSK SAP';
-    
-   
+
     /**
-     *
-     *
-     *
      * Query data.
      *
      * @return array
@@ -49,9 +44,10 @@ class BatchEditScreen extends Screen
 
         return [
            //'batches'=>Batches::all()
-           'batches' => $batches
+           'batches' => $batches,
         ];
     }
+
     /**
      * Button commands.
      *
@@ -84,17 +80,16 @@ class BatchEditScreen extends Screen
             Layout::block(BatchEditLayout::class)
             ->title(__('Batch Information'))
             ->description(__('Update your batch\'s information.')),
-            
+
             //AddSiteLayout::class
             Layout::block(BatchEditSiteLayout::class)
             ->title(__('Batch Site'))
             ->description(__('Enter where is the assigned site of the batch')),
-            
 
             //AddFarmersLayout::class
             Layout::block(BatchEditFarmersLayout::class)
             ->title(__('Enrolled Farmers'))
-            ->description(__('Add Farmers included in the batch.'))
+            ->description(__('Add Farmers included in the batch.')),
         ];
     }
 
@@ -124,27 +119,27 @@ class BatchEditScreen extends Screen
     {
         $request->validate([
             'batches.assigned_farmschool_name' => [
-                'required'
+                'required',
             ],
             'batches.number_seeds_distributed' => [
-                'required'
+                'required',
             ],
 
             'batches.region_id' => [
-                'required'
+                'required',
             ],
 
             'batches.province_id' => [
-                'required'
+                'required',
             ],
 
             'batches.municity_id' => [
-                'required'
+                'required',
             ],
 
             'batches.farmers' => [
                 'required',
-                'array'
+                'array',
             ],
         ]);
 
@@ -153,11 +148,11 @@ class BatchEditScreen extends Screen
         $batches
             ->fill($batchesData)
             ->save();
-        
+
         $batches
             ->farmers()
             ->sync($batchesData['farmers']);
-            
+
         Toast::info(__('Batch was saved successfully.'));
 
         return redirect()->route('platform.batches');

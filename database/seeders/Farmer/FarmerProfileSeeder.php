@@ -34,7 +34,7 @@ class FarmerProfileSeeder extends Seeder
                 'salary_periodicity' => 0,
                 'estimated_salary' => 6900,
                 'social_status' => 0,
-                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.'
+                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.',
             ],
             [
                 'gender' => 1,
@@ -55,7 +55,7 @@ class FarmerProfileSeeder extends Seeder
                 'salary_periodicity' => 0,
                 'estimated_salary' => 8000,
                 'social_status' => 0,
-                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.'
+                'social_status_reason' => 'Inaccessibility to opportunities, Rural Area.',
             ],
         ];
 

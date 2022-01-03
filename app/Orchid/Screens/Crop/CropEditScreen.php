@@ -42,7 +42,7 @@ class CropEditScreen extends Screen
         }
 
         return [
-            'crop' => $crop
+            'crop' => $crop,
         ];
     }
 
@@ -122,7 +122,7 @@ class CropEditScreen extends Screen
             ],
             'crop.ripening_days' => [
                 'required',
-            ]
+            ],
         ]);
 
         $crop_data = $request->get('crop');

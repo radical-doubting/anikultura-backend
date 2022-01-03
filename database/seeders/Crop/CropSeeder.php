@@ -22,8 +22,8 @@ class CropSeeder extends Seeder
                 'establishment_days' => 10,
                 'vegetative_days' => 15,
                 'yield_formation_days' => 30,
-                'ripening_days' => 10
-            ]
+                'ripening_days' => 10,
+            ],
         ];
 
         foreach ($crops as $crop) {

@@ -190,7 +190,7 @@ return [
     */
 
     'turbo' => [
-        'cache' => false
+        'cache' => false,
     ],
 
 ];

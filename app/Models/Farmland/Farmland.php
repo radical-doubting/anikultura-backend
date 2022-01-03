@@ -2,7 +2,6 @@
 
 namespace App\Models\Farmland;
 
-use App\Models\Farmer\FarmerProfile;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

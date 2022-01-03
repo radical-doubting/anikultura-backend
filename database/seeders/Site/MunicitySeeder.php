@@ -18,7 +18,7 @@ class MunicitySeeder extends Seeder
             [
                 'name' => 'Marilao',
                 'province_id' => 1,
-                'region_id' => 1
+                'region_id' => 1,
             ],
         ];
 

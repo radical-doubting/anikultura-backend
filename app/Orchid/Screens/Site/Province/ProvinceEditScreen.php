@@ -42,7 +42,7 @@ class ProvinceEditScreen extends Screen
         }
 
         return [
-            'province' => $province
+            'province' => $province,
         ];
     }
 
@@ -113,11 +113,11 @@ class ProvinceEditScreen extends Screen
     {
         $request->validate([
             'province.name' => [
-                'required'
+                'required',
             ],
             'province.region_id' => [
-                'required'
-            ]
+                'required',
+            ],
         ]);
 
         $province_data = $request->get('province');

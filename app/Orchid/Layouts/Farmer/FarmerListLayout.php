@@ -19,7 +19,6 @@ class FarmerListLayout extends Table
      *
      * @var string
      */
-
     protected $target = 'farmer_profiles';
 
     /**
@@ -27,7 +26,6 @@ class FarmerListLayout extends Table
      *
      * @return TD[]
      */
-
     protected function columns(): array
     {
         return [

@@ -7,7 +7,6 @@ use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
-
     /**
      * The attributes that are mass assignable.
      *
@@ -75,7 +74,7 @@ class User extends Authenticatable
     ];
 
     protected $with = [
-        'profile'
+        'profile',
     ];
 
     /**

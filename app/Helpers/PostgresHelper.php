@@ -10,7 +10,7 @@ class PostgresHelper
     {
         if (env('DB_CONNECTION', 'pgsql')) {
             $id_seq = $table_name . '_id_seq';
-            $stmt = DB::raw("SELECT setval('" . $id_seq . "', (SELECT MAX(id) from " . $table_name . "));");
+            $stmt = DB::raw("SELECT setval('" . $id_seq . "', (SELECT MAX(id) from " . $table_name . '));');
             DB::select($stmt);
         }
     }

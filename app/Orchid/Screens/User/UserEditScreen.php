@@ -57,7 +57,7 @@ class UserEditScreen extends Screen
     {
         $this->user = $user;
 
-        if (! $user->exists) {
+        if (!$user->exists) {
             $this->name = 'Create User';
         }
 
@@ -172,7 +172,7 @@ class UserEditScreen extends Screen
             ->toArray();
 
         $userData = $request->get('user');
-        if ($user->exists && (string)$userData['password'] === '') {
+        if ($user->exists && (string) $userData['password'] === '') {
             // When updating existing user null password means "do not change current password"
             unset($userData['password']);
         } else {

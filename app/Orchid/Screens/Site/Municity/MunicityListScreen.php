@@ -36,7 +36,7 @@ class MunicityListScreen extends Screen
                 ->with('province')
                 ->filters()
                 ->defaultSort('id')
-                ->paginate()
+                ->paginate(),
         ];
     }
 
@@ -62,7 +62,7 @@ class MunicityListScreen extends Screen
     public function layout(): array
     {
         return [
-            MunicityListLayout::class
+            MunicityListLayout::class,
         ];
     }
 

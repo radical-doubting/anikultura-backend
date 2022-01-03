@@ -42,7 +42,7 @@ class MunicityEditScreen extends Screen
         }
 
         return [
-            'municity' => $municity
+            'municity' => $municity,
         ];
     }
 
@@ -113,14 +113,14 @@ class MunicityEditScreen extends Screen
     {
         $request->validate([
             'municity.name' => [
-                'required'
+                'required',
             ],
             'municity.province_id' => [
-                'required'
+                'required',
             ],
             'municity.region_id' => [
-                'required'
-            ]
+                'required',
+            ],
         ]);
 
         $municity_data = $request->get('municity');
