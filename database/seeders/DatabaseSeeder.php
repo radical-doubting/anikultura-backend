@@ -29,21 +29,21 @@ class DatabaseSeeder extends Seeder
     {
         // Metadata
         $this->call(RegionSeeder::class);
-        // $this->call(ProvinceSeeder::class);
-        // $this->call(MunicitySeeder::class);
+        $this->call(ProvinceSeeder::class);
+        $this->call(MunicitySeeder::class);
 
-        // $this->call(FarmlandTypeSeeder::class);
-        // $this->call(FarmlandStatusSeeder::class);
-        // $this->call(CropBuyerSeeder::class);
-        // $this->call(WateringSystemSeeder::class);
-        // $this->call(SeedStageSeeder::class);
+        $this->call(FarmlandTypeSeeder::class);
+        $this->call(FarmlandStatusSeeder::class);
+        $this->call(CropBuyerSeeder::class);
+        $this->call(WateringSystemSeeder::class);
+        $this->call(SeedStageSeeder::class);
 
-        // // Data (in order)
-        // $this->call(CropSeeder::class);
-        // $this->call(UserSeeder::class);
-        // $this->call(FarmerProfileSeeder::class);
-        // $this->call(BatchSeeder::class);
-        // $this->call(FarmlandSeeder::class);
-        // $this->call(FarmerReportSeeder::class);
+        // Data (in order)
+        $this->call(CropSeeder::class);
+        $this->call(UserSeeder::class);
+        $this->call(FarmerProfileSeeder::class);
+        $this->call(BatchSeeder::class);
+        $this->call(FarmlandSeeder::class);
+        $this->call(FarmerReportSeeder::class);
     }
 }

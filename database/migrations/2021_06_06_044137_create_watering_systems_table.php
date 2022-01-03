@@ -15,7 +15,7 @@ class CreateWateringSystemsTable extends Migration
     {
         Schema::create('watering_systems', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable(false)->unique();
             $table->timestamps();
         });
 

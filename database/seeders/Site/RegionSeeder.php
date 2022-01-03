@@ -2,9 +2,7 @@
 
 namespace Database\Seeders\Site;
 
-use App\Helpers\PostgresHelper;
 use App\Models\Site\Region;
-use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class RegionSeeder extends Seeder

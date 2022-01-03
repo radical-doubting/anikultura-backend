@@ -2,10 +2,8 @@
 
 namespace Database\Seeders\Crop;
 
-use App\Helpers\PostgresHelper;
 use App\Models\Crop;
 use Illuminate\Database\Seeder;
-use Carbon\Carbon;
 
 class CropSeeder extends Seeder
 {
@@ -16,19 +14,20 @@ class CropSeeder extends Seeder
      */
     public function run()
     {
-        $date_now = Carbon::now();
+        $crops = [
+            [
+                'group' => 'Banana Group',
+                'name' => 'Banana',
+                'variety' => 'Banana Variety',
+                'establishment_days' => 10,
+                'vegetative_days' => 15,
+                'yield_formation_days' => 30,
+                'ripening_days' => 10
+            ]
+        ];
 
-        Crop::create([
-            'id' => 1,
-            'group' => 'Banana Group',
-            'name' => 'Banana',
-            'variety' => 'Banana Variety',
-            'establishment_days' => 10,
-            'vegetative_days' => 15,
-            'yield_formation_days' => 30,
-            'ripening_days' => 10,
-            'created_at' => $date_now,
-            'updated_at' => $date_now
-        ]);
+        foreach ($crops as $crop) {
+            Crop::create($crop);
+        }
     }
 }
