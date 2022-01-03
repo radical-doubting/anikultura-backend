@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Farmland;
 
 use App\Helpers\PostgresHelper;
 use App\Models\Farmland\FarmlandType;
@@ -22,7 +22,10 @@ class FarmlandTypeSeeder extends Seeder
             ['id' => 2, 'name' => 'Personal Farmland', 'created_at' => $date_now, 'updated_at' => $date_now],
         ];
 
-        FarmlandType::insert($farmland_types);
-        PostgresHelper::update_increments('farmland_types');
+        foreach ($farmland_types as $farmland_type) {
+            FarmlandType::create($farmland_type);
+        }
+
+        // PostgresHelper::update_increments('farmland_types');
     }
 }

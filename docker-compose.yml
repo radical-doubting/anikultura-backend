@@ -18,35 +18,20 @@ services:
         networks:
             - sail
         depends_on:
-            - mysql
-    mysql:
-        image: 'mariadb:10.4'
+            - postgres
+    postgres:
+        image: 'postgres:14-alpine'
         ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: 'ani'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        env_file:
+          - database.env
         volumes:
-            - ~/sailmysql:/var/lib/mysql
+            - sailpgsql:/var/lib/postgresql/data/
         networks:
             - sail
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        networks:
-            - sail
-        ports:
-            - 8000:80
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            PMA_HOST: mysql
 networks:
     sail:
         driver: bridge
 volumes:
-    sailmysql:
-        driver: local
+    sailpgsql:
+

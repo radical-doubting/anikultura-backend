@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\User;
 
 use App\Helpers\PostgresHelper;
 use App\Models\User;
@@ -18,9 +18,9 @@ class UserSeeder extends Seeder
     public function run()
     {
         $date_now = Carbon::now();
-        $user = [
+
+        $users = [
             [
-                'id' => 1,
                 'name' => 'juandel',
                 'email' => 'juandelacruz@gmail.com',
                 'email_verified_at' => $date_now,
@@ -34,7 +34,6 @@ class UserSeeder extends Seeder
                 'updated_at' => $date_now
             ],
             [
-                'id' => 2,
                 'name' => 'pedrogil',
                 'email' => 'pedrogil@gmail.com',
                 'email_verified_at' => $date_now,
@@ -47,10 +46,11 @@ class UserSeeder extends Seeder
                 'profile_id' => 2,
                 'created_at' => $date_now,
                 'updated_at' => $date_now
-            ],
+            ]
         ];
 
-        User::insert($user);
-        PostgresHelper::update_increments('users');
+        foreach ($users as $user) {
+            User::create($user);
+        }
     }
 }

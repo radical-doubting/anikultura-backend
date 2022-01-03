@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Batch;
 
 use App\Helpers\PostgresHelper;
 use App\Models\Batch\Batch;

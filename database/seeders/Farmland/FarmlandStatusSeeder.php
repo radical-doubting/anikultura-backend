@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Farmland;
 
 use App\Helpers\PostgresHelper;
 use App\Models\Farmland\FarmlandStatus;
