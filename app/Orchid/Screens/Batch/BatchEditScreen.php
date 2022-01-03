@@ -31,8 +31,8 @@ class BatchEditScreen extends Screen
     
    
     /**
-     * 
-     * 
+     *
+     *
      *
      * Query data.
      *
@@ -42,12 +42,12 @@ class BatchEditScreen extends Screen
     {
         $this->batches = $batches;
 
-        if(!$batches->exists){
+        if (!$batches->exists) {
             $this->name = 'Create Batch';
             $this->description = 'Create a new batch';
         }
 
-        return [   
+        return [
            //'batches'=>Batches::all()
            'batches' => $batches
         ];

@@ -38,7 +38,8 @@ class SeedStage extends Model
         'id',
         'name',
     ];
-    public function farmer_report() {
+    public function farmerReport()
+    {
         return $this->hasMany(FarmerReport::class);
     }
 }

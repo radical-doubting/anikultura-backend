@@ -67,6 +67,5 @@ class CropEditLayout extends Rows
             ->title(__('Crop Ripening Days'))
             ->placeholder(__('Days')),
         ];
-        
     }
 }

@@ -245,8 +245,8 @@ class FarmerEditScreen extends Screen
             ->fill($farmer_profile_data)
             ->save();
 
-        $this->save_user($farmer_profile, $request);
-        $this->save_address($farmer_profile, $request);
+        $this->saveUser($farmer_profile, $request);
+        $this->saveAddress($farmer_profile, $request);
 
         Toast::info(__('Farmer Profile was saved'));
 
@@ -257,7 +257,7 @@ class FarmerEditScreen extends Screen
      * @param FarmerProfile   $farmer_profile
      * @param Request $request
      */
-    private function save_user(FarmerProfile $farmer_profile, Request $request)
+    private function saveUser(FarmerProfile $farmer_profile, Request $request)
     {
         $farmer_user_data = $request->get('user');
         $farmer_user = $farmer_profile->user();
@@ -285,7 +285,7 @@ class FarmerEditScreen extends Screen
      * @param FarmerProfile   $farmer_profile
      * @param Request         $request
      */
-    private function save_address(FarmerProfile $farmer_profile, Request $request)
+    private function saveAddress(FarmerProfile $farmer_profile, Request $request)
     {
         $farmer_address_data = $request->get('farmer_address');
 

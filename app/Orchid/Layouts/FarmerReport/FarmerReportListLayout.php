@@ -50,7 +50,7 @@ class FarmerReportListLayout extends Table
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->seed_stage->name)
+                    return Link::make($farmer_report->seedStage->name)
                         ->route('platform.farmer.reports.edit', $farmer_report->id);
                 }),
 

@@ -63,7 +63,7 @@ class CreateBatchesTable extends Migration
                 ->on('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-        }); 
+        });
     }
 
     /**

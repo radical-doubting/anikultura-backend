@@ -12,7 +12,7 @@ use Orchid\Support\Presenter;
 class UserPresenter extends Presenter implements Searchable, Personable
 {
 
-    public function full_name()
+    public function fullName()
     {
         return $this->first_name . ' ' . $this->last_name;
     }

@@ -31,7 +31,7 @@ class BatchListScreen extends Screen
      */
     public function query(): array
     {
-        return [   
+        return [
            //'batches'=>Batches::all()
            'batches'=> Batch::filters()
                 ->defaultSort('id')
@@ -50,7 +50,7 @@ class BatchListScreen extends Screen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.batches.create'),
-        ];    
+        ];
     }
 
     /**

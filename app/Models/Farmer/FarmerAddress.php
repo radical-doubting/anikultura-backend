@@ -19,7 +19,7 @@ class FarmerAddress extends Model
         'farmer_profile_id',
     ];
 
-    public function farmer_profile()
+    public function farmerProfile()
     {
         return $this->belongsTo(FarmerProfile::class);
     }

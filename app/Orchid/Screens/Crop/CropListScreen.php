@@ -31,7 +31,7 @@ class CropListScreen extends Screen
      */
     public function query(): array
     {
-        return [   
+        return [
            'crops'=> Crop::filters()
                 ->defaultSort('id')
                 ->paginate()
@@ -65,7 +65,7 @@ class CropListScreen extends Screen
         ];
     }
     
-   public function remove(Crop $crop)
+    public function remove(Crop $crop)
     {
         $crop->delete();
 
@@ -73,5 +73,4 @@ class CropListScreen extends Screen
 
         return redirect()->route('platform.crops');
     }
-    
 }

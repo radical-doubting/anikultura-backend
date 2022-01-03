@@ -35,7 +35,7 @@ class FarmerReport extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function seed_stage()
+    public function seedStage()
     {
         return $this->belongsTo(SeedStage::class);
     }

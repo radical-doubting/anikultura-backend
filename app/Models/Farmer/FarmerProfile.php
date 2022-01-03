@@ -62,7 +62,7 @@ class FarmerProfile extends Model
         'created_at',
     ];
 
-    public function farmer_address()
+    public function farmerAddress()
     {
         return $this->hasOne(FarmerAddress::class);
     }

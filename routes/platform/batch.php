@@ -7,7 +7,6 @@ use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Batch\BatchListScreen;
 use App\Orchid\Screens\Batch\BatchEditScreen;
 
-
 // Batch
 Route::screen('batches', BatchListScreen::class)
     ->name('platform.batches')

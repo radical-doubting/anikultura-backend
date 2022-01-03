@@ -23,7 +23,7 @@ class BatchEditFarmersLayout extends Rows
      */
     protected function fields(): array
     {
-        return [ 
+        return [
 
         Relation::make('batches.farmers.')
             ->fromModel(User::class, 'name')
