@@ -3,13 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Laravel\Jetstream\HasProfilePhoto;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasProfilePhoto;
-    
+
     /**
      * The attributes that are mass assignable.
      *
