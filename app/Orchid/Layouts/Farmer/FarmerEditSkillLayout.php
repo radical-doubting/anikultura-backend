@@ -2,17 +2,11 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
-use Orchid\Support\Facades\Layout;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Layouts\Rows;
-use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\Label;
-use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Layouts\Rows;
 
 class FarmerEditSkillLayout extends Rows
 {
@@ -28,14 +22,13 @@ class FarmerEditSkillLayout extends Rows
      *
      * @return Field[]
      */
-
     protected function fields(): array
     {
         return [
             Group::make([
                 Select::make('farmer_profile.highest_educational_status')
                     ->title(__('Highest Educational Status'))
-                    ->options(["Elementary", "High School", "College"])
+                    ->options(['Elementary', 'High School', 'College'])
                     ->required(),
 
                 Input::make('farmer_profile.college_course')
@@ -80,7 +73,7 @@ class FarmerEditSkillLayout extends Rows
                 Select::make('farmer_profile.nc_passer_status')
                     ->title(__('Is an MC Passer?'))
                     ->placeholder(__('Is an MC Passer?'))
-                    ->options(["Yes", "No"]),
+                    ->options(['Yes', 'No']),
             ]),
         ];
     }

@@ -2,17 +2,11 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
-use Orchid\Support\Facades\Layout;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Layouts\Rows;
-use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\Label;
-use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Layouts\Rows;
 
 class FarmerEditProfileLayout extends Rows
 {
@@ -28,7 +22,6 @@ class FarmerEditProfileLayout extends Rows
      *
      * @return Field[]
      */
-
     protected function fields(): array
     {
         return [
@@ -36,12 +29,12 @@ class FarmerEditProfileLayout extends Rows
                 Select::make('farmer_profile.gender')
                     ->title(__('Gender'))
                     ->required()
-                    ->options(["Male", "Female", "I'd rather not say."]),
+                    ->options(['Male', 'Female', "I'd rather not say."]),
 
                 Select::make('farmer_profile.civil_status')
                     ->title(__('Civil Status'))
                     ->required()
-                    ->options(["Single", "Married", "Widow", "Annuled", "Separated"]),
+                    ->options(['Single', 'Married', 'Widow', 'Annuled', 'Separated']),
             ]),
 
             Group::make([
@@ -55,7 +48,7 @@ class FarmerEditProfileLayout extends Rows
                     ->type('number')
                     ->title(__('Age'))
                     ->placeholder(__('Age'))
-                    ->required()
+                    ->required(),
             ]),
 
             Group::make([
@@ -69,14 +62,14 @@ class FarmerEditProfileLayout extends Rows
                     ->type('number')
                     ->title(__('Number of Dependents'))
                     ->placeholder(__('Number of Dependents'))
-                    ->required()
+                    ->required(),
             ]),
 
             Input::make('farmer_profile.quantity_working_dependents')
                 ->type('number')
                 ->title(__('Number of Working Dependents'))
                 ->placeholder(__('Number of Working Dependents'))
-                ->required()
+                ->required(),
         ];
     }
 }

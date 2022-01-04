@@ -19,7 +19,7 @@ class Verification extends Model
         'updated_at',
     ];
 
-    public function farmer_profile()
+    public function farmerProfile()
     {
         return $this->belongsTo(Farmer_profile::class, 'foreign_key');
     }

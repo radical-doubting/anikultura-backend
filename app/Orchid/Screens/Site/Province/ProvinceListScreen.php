@@ -35,7 +35,7 @@ class ProvinceListScreen extends Screen
             'provinces' => Province::with('region')
                 ->filters()
                 ->defaultSort('id')
-                ->paginate()
+                ->paginate(),
         ];
     }
 
@@ -61,7 +61,7 @@ class ProvinceListScreen extends Screen
     public function layout(): array
     {
         return [
-            ProvinceListLayout::class
+            ProvinceListLayout::class,
         ];
     }
 

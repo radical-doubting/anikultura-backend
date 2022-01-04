@@ -31,7 +31,6 @@ class UserEditLayout extends Rows
                 ->title(__('Email'))
                 ->placeholder(__('Email')),
 
-            
         ];
     }
 }

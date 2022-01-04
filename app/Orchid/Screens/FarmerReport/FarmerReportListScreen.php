@@ -33,7 +33,7 @@ class FarmerReportListScreen extends Screen
         return [
             'farmer_reports' => FarmerReport::filters()
                 ->defaultSort('id')
-                ->paginate()
+                ->paginate(),
         ];
     }
 
@@ -59,7 +59,7 @@ class FarmerReportListScreen extends Screen
     public function layout(): array
     {
         return [
-            FarmerReportListLayout::class
+            FarmerReportListLayout::class,
         ];
     }
 }

@@ -3,10 +3,10 @@
 namespace App\Orchid\Layouts\Farmland;
 
 use Orchid\Screen\Field;
-use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Layouts\Rows;
 
 class FarmlandEditAppStatusLayout extends Rows
 {
@@ -52,7 +52,7 @@ class FarmlandEditAppStatusLayout extends Rows
             Select::make('mode_of_application')
                 ->title('Mode of Application:')
                 ->required()
-                ->options(["DSWD", "DA", "LGU", "TESDA", "Walk-In", "Others"]),
+                ->options(['DSWD', 'DA', 'LGU', 'TESDA', 'Walk-In', 'Others']),
         ];
     }
 }

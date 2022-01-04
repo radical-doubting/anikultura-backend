@@ -34,7 +34,7 @@ class RegionListScreen extends Screen
         return [
             'regions' => Region::filters()
                 ->defaultSort('id')
-                ->paginate()
+                ->paginate(),
         ];
     }
 
@@ -60,7 +60,7 @@ class RegionListScreen extends Screen
     public function layout(): array
     {
         return [
-            RegionListLayout::class
+            RegionListLayout::class,
         ];
     }
 

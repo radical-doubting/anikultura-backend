@@ -3,25 +3,20 @@
 namespace App\Orchid\Screens\Farmer;
 
 use App\Models\Farmer\FarmerAddress;
-use Illuminate\Http\Request;
 use App\Models\Farmer\FarmerProfile;
 use App\Models\User;
+use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditProfileLayout;
-use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
-use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSalaryLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
-use Orchid\Support\Facades\Layout;
-use Orchid\Support\Color;
-use Orchid\Support\Facades\Alert;
-use Orchid\Support\Facades\Toast;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Field;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
-use Orchid\Screen\Action;
+use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class FarmerEditScreen extends Screen
 {
@@ -30,7 +25,6 @@ class FarmerEditScreen extends Screen
      *
      * @var string
      */
-
     public $name = 'Edit Farmer Profile';
 
     /**
@@ -38,7 +32,6 @@ class FarmerEditScreen extends Screen
      *
      * @var string|null
      */
-
     public $description = 'Edit farmer profile details';
 
     /**
@@ -46,7 +39,6 @@ class FarmerEditScreen extends Screen
      *
      * @return array
      */
-
     public function query(FarmerProfile $farmer_profile): array
     {
         $this->farmer_profile = $farmer_profile;
@@ -60,7 +52,7 @@ class FarmerEditScreen extends Screen
         return [
             'farmer_profile' => $farmer_profile,
             'farmer_address' => $farmer_profile->farmer_address,
-            'user' => $farmer_profile->user
+            'user' => $farmer_profile->user,
         ];
     }
 
@@ -69,7 +61,6 @@ class FarmerEditScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-
     public function commandBar(): array
     {
         return [
@@ -90,7 +81,6 @@ class FarmerEditScreen extends Screen
      *
      * @return \Orchid\Screen\Layout[]|string[]
      */
-
     public function layout(): array
     {
         return [
@@ -129,104 +119,104 @@ class FarmerEditScreen extends Screen
         $request->validate([
             // Farmer Profile
             'farmer_profile.gender' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.civil_status' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.birthday' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.age' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.quantity_family_members' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.quantity_dependents' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.quantity_working_dependents' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.highest_educational_status' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.college_course' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.current_job' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.farming_years' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.usual_crops_planted' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.affiliated_organization' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.tesda_training_joined' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.nc_passer_status' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.salary_periodicity' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.estimated_salary' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.social_status' => [
-                'required'
+                'required',
             ],
 
             'farmer_profile.social_status_reason' => [
-                'required'
+                'required',
             ],
 
             // Farmer Address
             'farmer_address.house_number' => [
-                'required'
+                'required',
             ],
 
             'farmer_address.street' => [
-                'required'
+                'required',
             ],
 
             'farmer_address.barangay' => [
-                'required'
+                'required',
             ],
 
             'farmer_address.municity' => [
-                'required'
+                'required',
             ],
 
             'farmer_address.province' => [
-                'required'
+                'required',
             ],
 
             'farmer_address.region_id' => [
-                'required'
+                'required',
             ],
 
             // User
@@ -236,7 +226,7 @@ class FarmerEditScreen extends Screen
             ],
             'user.email' => [
                 Rule::unique(User::class, 'email')->ignore($farmer_profile->user),
-            ]
+            ],
         ]);
 
         $farmer_profile_data = $request->get('farmer_profile');
@@ -245,8 +235,8 @@ class FarmerEditScreen extends Screen
             ->fill($farmer_profile_data)
             ->save();
 
-        $this->save_user($farmer_profile, $request);
-        $this->save_address($farmer_profile, $request);
+        $this->saveUser($farmer_profile, $request);
+        $this->saveAddress($farmer_profile, $request);
 
         Toast::info(__('Farmer Profile was saved'));
 
@@ -257,7 +247,7 @@ class FarmerEditScreen extends Screen
      * @param FarmerProfile   $farmer_profile
      * @param Request $request
      */
-    private function save_user(FarmerProfile $farmer_profile, Request $request)
+    private function saveUser(FarmerProfile $farmer_profile, Request $request)
     {
         $farmer_user_data = $request->get('user');
         $farmer_user = $farmer_profile->user();
@@ -269,13 +259,14 @@ class FarmerEditScreen extends Screen
             $new_user->save();
 
             $farmer_profile->user()->save($new_user);
+
             return;
         }
 
         if ($farmer_user_data['password'] === '') {
             unset($farmer_user_data['password']);
         } else {
-            $farmer_user_data['password'] =  Hash::make($farmer_user_data['password']);
+            $farmer_user_data['password'] = Hash::make($farmer_user_data['password']);
         }
 
         $farmer_user->update($farmer_user_data);
@@ -285,7 +276,7 @@ class FarmerEditScreen extends Screen
      * @param FarmerProfile   $farmer_profile
      * @param Request         $request
      */
-    private function save_address(FarmerProfile $farmer_profile, Request $request)
+    private function saveAddress(FarmerProfile $farmer_profile, Request $request)
     {
         $farmer_address_data = $request->get('farmer_address');
 
@@ -296,6 +287,7 @@ class FarmerEditScreen extends Screen
             $farmer_profile
                 ->farmer_address()
                 ->save($farmer_address);
+
             return;
         }
 

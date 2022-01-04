@@ -2,7 +2,6 @@
 
 namespace App\Models\Farmland;
 
-use App\Models\Farmer\FarmerProfile;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,7 +56,7 @@ class Farmland extends Model
     /**
      * Get the watering systems of this farmland.
      */
-    public function watering_systems()
+    public function wateringSystems()
     {
         return $this->belongsToMany(WateringSystem::class, 'farmland_watering_systems');
     }
@@ -65,7 +64,7 @@ class Farmland extends Model
     /**
      * Get the crop buyers of this farmland.
      */
-    public function crop_buyers()
+    public function cropBuyers()
     {
         return $this->belongsToMany(CropBuyer::class, 'farmland_crop_buyers');
     }

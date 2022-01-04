@@ -13,15 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
 Route::get('/', function () {
-    return redirect('/login');
-});
-
-
-Route::get('/profile', function () {
-    return view('profile');
+    return redirect('/admin/login');
 });

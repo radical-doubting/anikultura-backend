@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Route;
-use Tabuna\Breadcrumbs\Trail;
 use App\Orchid\Screens\Farmland\FarmlandEditScreen;
 use App\Orchid\Screens\Farmland\FarmlandListScreen;
+use Illuminate\Support\Facades\Route;
+use Tabuna\Breadcrumbs\Trail;
 
 // Platform > System > Farmland > Create
 Route::screen('enroll/farmer/farmland', FarmlandEditScreen::class)

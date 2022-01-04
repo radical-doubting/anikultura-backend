@@ -2,22 +2,14 @@
 
 namespace App\Orchid\Screens\Farmland;
 
-use Illuminate\Http\Request;
 use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandEditFarmLayout;
-use App\Orchid\Layouts\Farmland\FarmlandEditAddressLayout;
-use App\Orchid\Layouts\Farmland\FarmlandEditAppStatusLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
-use Illuminate\Support\Facades\Log;
-use Orchid\Support\Facades\Layout;
-use Orchid\Support\Color;
-use Orchid\Support\Facades\Alert;
-use Orchid\Support\Facades\Toast;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Field;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
-use Orchid\Screen\Action;
+use Orchid\Support\Facades\Layout;
+use Orchid\Support\Facades\Toast;
 
 class FarmlandEditScreen extends Screen
 {
@@ -26,7 +18,6 @@ class FarmlandEditScreen extends Screen
      *
      * @var string
      */
-
     public $name = 'Edit Farmland';
 
     /**
@@ -34,7 +25,6 @@ class FarmlandEditScreen extends Screen
      *
      * @var string|null
      */
-
     public $description = 'Edit farmland details';
 
     /**
@@ -42,7 +32,6 @@ class FarmlandEditScreen extends Screen
      *
      * @return array
      */
-
     public function query(Farmland $farmland): array
     {
         $this->farmland = $farmland;
@@ -53,7 +42,7 @@ class FarmlandEditScreen extends Screen
         }
 
         return [
-            'farmland' => $farmland
+            'farmland' => $farmland,
         ];
     }
 
@@ -62,7 +51,6 @@ class FarmlandEditScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-
     public function commandBar(): array
     {
         return [
@@ -88,7 +76,7 @@ class FarmlandEditScreen extends Screen
         return [
             Layout::block(FarmlandEditFarmLayout::class)
                 ->title('Basic Information')
-                ->description("This information collects farmlands basic information."),
+                ->description('This information collects farmlands basic information.'),
 
             Layout::block(FarmlandEditMemberLayout::class)
                 ->title('Farmers')
@@ -102,30 +90,29 @@ class FarmlandEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
     public function save(Farmland $farmland, Request $request)
     {
         $request->validate([
             'farmland.type_id' => [
-                'required'
+                'required',
             ],
             'farmland.status_id' => [
-                'required'
+                'required',
             ],
             'farmland.hectares_size' => [
-                'required'
+                'required',
             ],
             'farmland.watering_systems' => [
                 'required',
-                'array'
+                'array',
             ],
             'farmland.crop_buyers' => [
                 'required',
-                'array'
+                'array',
             ],
             'farmland.farmers' => [
                 'required',
-                'array'
+                'array',
             ],
         ]);
 
@@ -159,7 +146,6 @@ class FarmlandEditScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
     public function remove(Farmland $farmland)
     {
         $farmland->delete();

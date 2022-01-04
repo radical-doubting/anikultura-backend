@@ -94,7 +94,7 @@ class ExampleCardsScreen extends Screen
                 public function description(): string
                 {
                     return
-                        '<p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'.
+                        '<p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>' .
                         new Facepile(User::limit(4)->get()->map->presenter());
                 }
 
@@ -115,7 +115,7 @@ class ExampleCardsScreen extends Screen
                 }
 
                 /**
-                 * {@inheritdoc}
+                 * @inheritdoc
                  */
                 public function status(): ?Color
                 {

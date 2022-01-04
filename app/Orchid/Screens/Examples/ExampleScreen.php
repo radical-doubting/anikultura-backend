@@ -167,7 +167,7 @@ class ExampleScreen extends Screen
 
                 TD::make('price', 'Price')
                     ->render(function (Repository $model) {
-                        return '$ '.number_format($model->get('price'), 2);
+                        return '$ ' . number_format($model->get('price'), 2);
                     }),
 
                 TD::make('created_at', 'Created'),

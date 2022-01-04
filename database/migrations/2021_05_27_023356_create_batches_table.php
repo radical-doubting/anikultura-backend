@@ -15,7 +15,7 @@ class CreateBatchesTable extends Migration
     {
         Schema::create('batches', function (Blueprint $table) {
             $table->id();
-            $table->string("assigned_farmschool_name");
+            $table->string('assigned_farmschool_name');
 
             $table->unsignedBigInteger('region_id')
                 ->nullable();
@@ -24,7 +24,7 @@ class CreateBatchesTable extends Migration
                 ->on('regions')
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
-            
+
             $table->unsignedBigInteger('province_id')
                 ->nullable();
             $table->foreign('province_id')
@@ -41,14 +41,13 @@ class CreateBatchesTable extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->string("barangay")
+            $table->string('barangay')
                 ->nullable();
-            $table->integer("number_seeds_distributed")->nullable(false);
+            $table->integer('number_seeds_distributed')->nullable(false);
 
-        
             $table->timestamps();
         });
-        
+
         Schema::create('batch_farmers', function (Blueprint $table) {
             $table->unsignedBigInteger('batch_id')->nullable();
             $table->foreign('batch_id')
@@ -63,7 +62,7 @@ class CreateBatchesTable extends Migration
                 ->on('users')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-        }); 
+        });
     }
 
     /**

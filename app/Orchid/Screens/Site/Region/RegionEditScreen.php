@@ -42,7 +42,7 @@ class RegionEditScreen extends Screen
         }
 
         return [
-            'region' => $region
+            'region' => $region,
         ];
     }
 
@@ -113,8 +113,8 @@ class RegionEditScreen extends Screen
     {
         $request->validate([
             'region.name' => [
-                'required'
-            ]
+                'required',
+            ],
         ]);
 
         $region_data = $request->get('region');

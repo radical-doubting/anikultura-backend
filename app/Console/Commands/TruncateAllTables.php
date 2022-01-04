@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
@@ -45,7 +44,6 @@ class TruncateAllTables extends Command
             $this->error('Cannot truncate production server');
             exit();
         }
-
 
         Schema::disableForeignKeyConstraints();
 

@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Laravel\Jetstream\HasProfilePhoto;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasProfilePhoto;
-    
     /**
      * The attributes that are mass assignable.
      *
@@ -77,12 +74,12 @@ class User extends Authenticatable
     ];
 
     protected $with = [
-        'profile'
+        'profile',
     ];
 
     /**
      * Returns users with farmer profiles.
-     * 
+     *
      * @param Builder $query
      *
      * @return Builder
@@ -102,7 +99,7 @@ class User extends Authenticatable
         return $this->morphTo('');
     }
 
-    public function has_farmer_profile()
+    public function hasFarmerProfile()
     {
         return $this->profile_type === 'App\Models\Farmer\FarmerProfile';
     }

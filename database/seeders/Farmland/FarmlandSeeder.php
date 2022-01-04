@@ -20,7 +20,7 @@ class FarmlandSeeder extends Seeder
                 'type_id' => 1,
                 'status_id' => 1,
                 'hectares_size' => 10,
-            ]
+            ],
         ];
 
         foreach ($farmlands as $farmland) {
@@ -29,12 +29,12 @@ class FarmlandSeeder extends Seeder
 
         DB::table('farmland_farmers')->insert([
             'farmland_id' => 1,
-            'farmer_id' => 1
+            'farmer_id' => 1,
         ]);
 
         DB::table('farmland_crops')->insert([
             'farmland_id' => 1,
-            'crop_id' => 1
+            'crop_id' => 1,
         ]);
     }
 }

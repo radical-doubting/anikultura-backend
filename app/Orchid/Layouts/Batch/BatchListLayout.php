@@ -2,11 +2,11 @@
 
 namespace App\Orchid\Layouts\Batch;
 
-use Orchid\Screen\Layouts\Table;
 use App\Models\Batch\Batch;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
 class BatchListLayout extends Table
@@ -37,7 +37,6 @@ class BatchListLayout extends Table
                     return Link::make($batches->id)
                         ->route('platform.batches.edit', $batches->id);
                 }),
-
             TD::make('assigned_farmschool_name', __('Assigned Farmschool Name'))
                 ->sort()
                 ->cantHide()
@@ -46,7 +45,6 @@ class BatchListLayout extends Table
                     return Link::make($batches->assigned_farmschool_name)
                         ->route('platform.batches.edit', $batches->id);
                 }),
-
             TD::make('number_seeds_distributed', __('Number of Seeds Distributed'))
                 ->sort()
                 ->cantHide()
@@ -55,7 +53,6 @@ class BatchListLayout extends Table
                     return Link::make($batches->number_seeds_distributed)
                         ->route('platform.batches.edit', $batches->id);
                 }),
-
             TD::make('region', __('Region'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
@@ -67,7 +64,6 @@ class BatchListLayout extends Table
 
                     return $element;
                 }),
-
             TD::make('province', __('Province'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
@@ -79,7 +75,6 @@ class BatchListLayout extends Table
 
                     return $element;
                 }),
-
             TD::make('municity', __('Municity'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
@@ -91,7 +86,6 @@ class BatchListLayout extends Table
 
                     return $element;
                 }),
-
             TD::make('barangay', __('Barangay'))
                 ->sort()
                 ->cantHide()
@@ -100,13 +94,11 @@ class BatchListLayout extends Table
                     return Link::make($batches->barangay)
                         ->route('platform.batches.edit', $batches->id);
                 }),
-
             TD::make('updated_at', __('Last edit'))
                 ->sort()
                 ->render(function (Batch $batches) {
                     return $batches->updated_at->toDateTimeString();
                 }),
-
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
@@ -114,7 +106,6 @@ class BatchListLayout extends Table
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
-
                             Link::make(__('Edit'))
                                 ->route('platform.batches.edit', $batches->id)
                                 ->icon('pencil'),
@@ -128,7 +119,6 @@ class BatchListLayout extends Table
                                 ]),
                         ]);
                 }),
-
         ];
     }
 }
