@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Orchid\Filters\Filterable;
 use Illuminate\Database\Eloquent\Model;
+use Orchid\Filters\Filterable;
 
 class Crop extends Model
 {
@@ -23,7 +23,7 @@ class Crop extends Model
         'establishment_days',
         'vegetative_days',
         'yield_formation_days',
-        'ripening_days'
+        'ripening_days',
     ];
 
     /**
@@ -34,7 +34,7 @@ class Crop extends Model
     protected $allowedFilters = [
         'group',
         'name',
-        'variety'
+        'variety',
     ];
 
     /**
@@ -42,7 +42,6 @@ class Crop extends Model
      *
      * @var array
      */
-
     protected $allowedSorts = [
         'id',
         'group',

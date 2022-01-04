@@ -1,0 +1,21 @@
+name: Create Staging to Master PR
+on:
+  push:
+    branches:
+      - staging
+
+jobs:
+  create-pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "master"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_label: "chore, automated"
+          pr_title: "[Chore] Merge staging into master"
+          pr_body: ":crown: Automated PR that merges staging changes into master"

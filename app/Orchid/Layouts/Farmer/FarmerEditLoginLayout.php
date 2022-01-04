@@ -2,18 +2,11 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\FarmerProfile;
 use Orchid\Screen\Field;
-use Orchid\Support\Facades\Layout;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Layouts\Rows;
-use Orchid\Screen\Fields\DateTimer;
-use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Fields\Password;
-use Orchid\Screen\Fields\Label;
-use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Fields\Password;
+use Orchid\Screen\Layouts\Rows;
 
 class FarmerEditLoginLayout extends Rows
 {
@@ -63,7 +56,7 @@ class FarmerEditLoginLayout extends Rows
                 Password::make('user.password')
                     ->title(__('Password'))
                     ->placeholder($password_placeholder)
-                    ->required(!$has_user)
+                    ->required(!$has_user),
             ]),
 
             Group::make([

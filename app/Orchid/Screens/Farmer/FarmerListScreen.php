@@ -2,10 +2,10 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use App\Models\Farmer\FarmerProfile;
-use Orchid\Screen\Screen;
+use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
 class FarmerListScreen extends Screen
@@ -15,7 +15,6 @@ class FarmerListScreen extends Screen
      *
      * @var string
      */
-
     public $name = 'Farmer Profiles';
 
     /**
@@ -23,22 +22,20 @@ class FarmerListScreen extends Screen
      *
      * @var string|null
      */
-
-    public $description = "List of all farmers under SM KSK SAP";
+    public $description = 'List of all farmers under SM KSK SAP';
 
     /**
      * Query data.
      *
      * @return array
      */
-
     public function query(): array
     {
         return [
             'farmer_profiles' => FarmerProfile::with('user')
                 ->filters()
                 ->defaultSort('id')
-                ->paginate()
+                ->paginate(),
         ];
     }
 
@@ -47,7 +44,6 @@ class FarmerListScreen extends Screen
      *
      * @return \Orchid\Screen\Action[]
      */
-
     public function commandBar(): array
     {
         return [
@@ -62,11 +58,10 @@ class FarmerListScreen extends Screen
      *
      * @return \Orchid\Screen\Layout[]|string[]
      */
-
     public function layout(): array
     {
         return [
-            FarmerListLayout::class
+            FarmerListLayout::class,
         ];
     }
 
@@ -77,7 +72,6 @@ class FarmerListScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
     public function remove(FarmerProfile $farmer_profile)
     {
         $farmer_profile->delete();

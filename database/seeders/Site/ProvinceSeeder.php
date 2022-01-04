@@ -17,7 +17,7 @@ class ProvinceSeeder extends Seeder
         $provinces = [
             [
                 'name' => 'Bulacan',
-                'region_id' => 1
+                'region_id' => 1,
             ],
         ];
 

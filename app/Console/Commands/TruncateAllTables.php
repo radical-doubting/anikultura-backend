@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class TruncateAllTables extends Command
 {
@@ -45,18 +45,23 @@ class TruncateAllTables extends Command
             exit();
         }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Schema::disableForeignKeyConstraints();
 
         $this->info('Truncating tables');
 
         // Truncate all tables, except migrations
-        $tables = DB::select('SHOW TABLES');
+        $tables = DB::select('SELECT * FROM pg_catalog.pg_tables WHERE schemaname = \'public\'');
         foreach ($tables as $table) {
-            if ($table->Tables_in_anikultura !== 'migrations')
-                DB::table($table->Tables_in_anikultura)->truncate();
+            $tableName = $table->tablename;
+
+            $this->info('Truncating: ' . $tableName);
+
+            if ($tableName !== 'migrations') {
+                DB::table($tableName)->truncate();
+            }
         }
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        Schema::enableForeignKeyConstraints();
 
         $this->info('Truncating tables successfully');
     }

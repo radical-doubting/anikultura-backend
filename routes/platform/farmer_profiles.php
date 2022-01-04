@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
+use App\Orchid\Screens\Farmer\FarmerEditScreen;
+use App\Orchid\Screens\Farmer\FarmerListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
-use App\Orchid\Screens\Farmer\FarmerListScreen;
-use App\Orchid\Screens\Farmer\FarmerEditScreen;
 
 // Platform > System > Farmer Profile > Enroll
 Route::screen('enroll/farmer', FarmerEditScreen::class)

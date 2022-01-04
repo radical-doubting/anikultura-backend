@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Screens\FarmerReport;
 
-use App\Models\Crop;
 use App\Models\FarmerReport;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditLayout;
 use Illuminate\Http\Request;
@@ -43,7 +42,7 @@ class FarmerReportEditScreen extends Screen
         }
 
         return [
-            'farmer_report' => $farmer_report
+            'farmer_report' => $farmer_report,
         ];
     }
 
@@ -116,7 +115,7 @@ class FarmerReportEditScreen extends Screen
             ],
             'farmer_report.volume' => [
                 'required',
-            ]
+            ],
         ]);
 
         $report_data = $request->get('farmer_report');

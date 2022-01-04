@@ -9,7 +9,7 @@ class PrintHomeMessage
     use AsAction;
 
     public function handle(string $message)
-    {   
+    {
         error_log($message, 0);
     }
 }

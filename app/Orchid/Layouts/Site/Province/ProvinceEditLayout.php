@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Layouts\Site\Province;
 
-use App\Models\Site\Province;
 use App\Models\Site\Region;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;

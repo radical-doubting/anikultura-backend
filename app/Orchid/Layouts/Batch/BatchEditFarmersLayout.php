@@ -4,8 +4,8 @@ namespace App\Orchid\Layouts\Batch;
 
 use App\Models\User;
 use Orchid\Screen\Field;
-use Orchid\Screen\Layouts\Rows;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Layouts\Rows;
 
 class BatchEditFarmersLayout extends Rows
 {
@@ -23,18 +23,17 @@ class BatchEditFarmersLayout extends Rows
      */
     protected function fields(): array
     {
-        return [ 
-
-        Relation::make('batches.farmers.')
-            ->fromModel(User::class, 'name')
-            ->applyScope('farmer')
-            ->searchColumns('first_name', 'last_name')
-            ->displayAppend('full_name')
-            ->required()
-            ->multiple()
-            ->help(__('Search the name of this batch\'s members'))
-            ->title(__('Farmers'))
-            ->placeholder(__('Farmers')),
+        return [
+            Relation::make('batches.farmers.')
+                ->fromModel(User::class, 'name')
+                ->applyScope('farmer')
+                ->searchColumns('first_name', 'last_name')
+                ->displayAppend('full_name')
+                ->required()
+                ->multiple()
+                ->help(__('Search the name of this batch\'s members'))
+                ->title(__('Farmers'))
+                ->placeholder(__('Farmers')),
         ];
     }
 }

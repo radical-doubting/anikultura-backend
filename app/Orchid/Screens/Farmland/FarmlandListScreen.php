@@ -2,10 +2,10 @@
 
 namespace App\Orchid\Screens\Farmland;
 
-use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use App\Models\Farmland\Farmland;
-use Orchid\Screen\Screen;
+use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Toast;
 
 class FarmlandListScreen extends Screen
@@ -34,7 +34,7 @@ class FarmlandListScreen extends Screen
         return [
             'farmlands' => Farmland::filters()
                 ->defaultSort('id')
-                ->paginate()
+                ->paginate(),
         ];
     }
 
@@ -60,7 +60,7 @@ class FarmlandListScreen extends Screen
     public function layout(): array
     {
         return [
-            FarmlandListLayout::class
+            FarmlandListLayout::class,
         ];
     }
 
@@ -71,7 +71,6 @@ class FarmlandListScreen extends Screen
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-
     public function remove(Farmland $farmland)
     {
         $farmland->delete();

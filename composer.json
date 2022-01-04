@@ -13,10 +13,7 @@
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/fortify": "^1.7",
         "laravel/framework": "^8.12",
-        "laravel/jetstream": "^2.3",
-        "laravel/sanctum": "^2.6",
         "laravel/tinker": "^2.5",
         "livewire/livewire": "^2.4",
         "lorisleiva/laravel-actions": "^2.1",
@@ -25,11 +22,11 @@
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.4",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
-        "phpunit/phpunit": "^9.3.3",
-        "squizlabs/php_codesniffer": "^3.6"
+        "phpunit/phpunit": "^9.3.3"
     },
     "autoload": {
         "psr-4": {
@@ -54,9 +51,15 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "lint": "./vendor/bin/phpcs",
-        "fix-lint": "./vendor/bin/phpcbf",
-        "test": "./vendor/bin/phpunit"
+        "sniff": [
+            "./vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots"
+        ],
+        "lint": [
+            "./vendor/bin/php-cs-fixer fix -vvv --show-progress=dots"
+        ],
+        "test": [
+            "./vendor/bin/phpunit"
+        ]
     },
     "extra": {
         "laravel": {

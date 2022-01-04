@@ -26,11 +26,10 @@ class Batch extends Model
         'province_id',
         'municity_id',
         'barangay',
-        'farmer_names,'
-        
+        'farmer_names,',
+
     ];
 
-    
     /**
      * The attributes for which you can use filters in url.
      *
@@ -51,7 +50,6 @@ class Batch extends Model
     protected $allowedSorts = [
         'id',
         'assigned_farmschool_name',
-        
     ];
 
     /*

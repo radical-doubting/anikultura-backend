@@ -22,7 +22,7 @@ class BatchSeeder extends Seeder
                 'province_id' => 1,
                 'municity_id' => 1,
                 'barangay' => 'Nagbalon',
-                'number_seeds_distributed' => 1540
+                'number_seeds_distributed' => 1540,
             ],
             [
                 'assigned_farmschool_name' => 'Masagana Community School',
@@ -30,8 +30,8 @@ class BatchSeeder extends Seeder
                 'province_id' => 1,
                 'municity_id' => 1,
                 'barangay' => 'Liputan',
-                'number_seeds_distributed' => 2250
-            ]
+                'number_seeds_distributed' => 2250,
+            ],
         ];
 
         foreach ($batches as $batch) {
@@ -40,12 +40,12 @@ class BatchSeeder extends Seeder
 
         DB::table('batch_farmers')->insert([
             'batch_id' => 1,
-            'farmer_id' => 1
+            'farmer_id' => 1,
         ]);
 
         DB::table('batch_farmers')->insert([
             'batch_id' => 1,
-            'farmer_id' => 2
+            'farmer_id' => 2,
         ]);
     }
 }

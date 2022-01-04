@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
                 'middle_name' => 'Santos',
                 'last_name' => 'Dela Cruz',
                 'profile_type' => 'App\Models\Farmer\FarmerProfile',
-                'profile_id' => 1
+                'profile_id' => 1,
             ],
             [
                 'name' => 'pedrogil',
@@ -39,8 +39,8 @@ class UserSeeder extends Seeder
                 'middle_name' => 'Ejercito',
                 'last_name' => 'Gil',
                 'profile_type' => 'App\Models\Farmer\FarmerProfile',
-                'profile_id' => 2
-            ]
+                'profile_id' => 2,
+            ],
         ];
 
         foreach ($users as $user) {

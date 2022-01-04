@@ -30,30 +30,29 @@ class BatchEditSiteLayout extends Rows
         return [
             Group::make([
                 Relation::make('batches.region_id')
-                ->fromModel(Region::class, 'name')
-                ->required()
-                ->title('Region')
-                ->placeholder(__('Region')),
+                    ->fromModel(Region::class, 'name')
+                    ->required()
+                    ->title('Region')
+                    ->placeholder(__('Region')),
 
                 Relation::make('batches.province_id')
-                ->fromModel(Province::class, 'name')
-                ->required()
-                ->title('Province')
-                ->placeholder(__('Province')),
+                    ->fromModel(Province::class, 'name')
+                    ->required()
+                    ->title('Province')
+                    ->placeholder(__('Province')),
             ]),
-
             Group::make([
                 Relation::make('batches.municity_id')
-                ->fromModel(Municity::class, 'name')
-                ->required()
-                ->title('Municity')
-                ->placeholder(__('Municity')),
+                    ->fromModel(Municity::class, 'name')
+                    ->required()
+                    ->title('Municity')
+                    ->placeholder(__('Municity')),
 
                 Input::make('batches.barangay')
-                ->type('text')
-                ->max(255)
-                ->title(__('Barangay'))
-                ->placeholder(__('Barangay')),
+                    ->type('text')
+                    ->max(255)
+                    ->title(__('Barangay'))
+                    ->placeholder(__('Barangay')),
             ]),
         ];
     }

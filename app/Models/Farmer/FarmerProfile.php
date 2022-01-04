@@ -5,8 +5,8 @@ namespace App\Models\Farmer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Screen\AsSource;
 use Orchid\Filters\Filterable;
+use Orchid\Screen\AsSource;
 
 class FarmerProfile extends Model
 {
@@ -17,7 +17,6 @@ class FarmerProfile extends Model
      *
      * @var array
      */
-
     protected $fillable = [
         'gender',
         'civil_status',
@@ -39,7 +38,7 @@ class FarmerProfile extends Model
         'social_status',
         'social_status_reason',
         'updated_at',
-        'created_at'
+        'created_at',
     ];
 
     /**
@@ -62,7 +61,7 @@ class FarmerProfile extends Model
         'created_at',
     ];
 
-    public function farmer_address()
+    public function farmerAddress()
     {
         return $this->hasOne(FarmerAddress::class);
     }
