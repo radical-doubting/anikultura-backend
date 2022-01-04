@@ -16,6 +16,6 @@ jobs:
         with:
           destination_branch: "master"
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_label: "chore, automated"
+          pr_label: "chore,automated"
           pr_title: "[Chore] Merge staging into master"
-          pr_body: ":crown: Automated PR that merges staging changes into master"
+          pr_body: ":crown: Automated pull request that merges all staging changes into master!"
