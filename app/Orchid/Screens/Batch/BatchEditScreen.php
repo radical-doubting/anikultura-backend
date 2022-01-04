@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Batch;
 
+use App\Actions\Batch\CreateBatch;
+use App\Actions\Batch\DeleteBatch;
 use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
@@ -10,7 +12,6 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class BatchEditScreen extends Screen
 {
@@ -43,8 +44,7 @@ class BatchEditScreen extends Screen
         }
 
         return [
-           //'batches'=>Batches::all()
-           'batches' => $batches,
+            'batches' => $batches,
         ];
     }
 
@@ -76,85 +76,38 @@ class BatchEditScreen extends Screen
     public function layout(): array
     {
         return [
-            //BatcheditLayout class
             Layout::block(BatchEditLayout::class)
-            ->title(__('Batch Information'))
-            ->description(__('Update your batch\'s information.')),
-
-            //AddSiteLayout::class
+                ->title(__('Batch Information'))
+                ->description(__('Update your batch\'s information.')),
             Layout::block(BatchEditSiteLayout::class)
-            ->title(__('Batch Site'))
-            ->description(__('Enter where is the assigned site of the batch')),
-
-            //AddFarmersLayout::class
+                ->title(__('Batch Site'))
+                ->description(__('Enter where is the assigned site of the batch')),
             Layout::block(BatchEditFarmersLayout::class)
-            ->title(__('Enrolled Farmers'))
-            ->description(__('Add Farmers included in the batch.')),
+                ->title(__('Enrolled Farmers'))
+                ->description(__('Add Farmers included in the batch.')),
         ];
     }
 
     /**
-     * @param Batch $batches
+     * @param Batch $batch
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Batch $batches)
+    public function remove(Batch $batch)
     {
-        $batches->delete();
-
-        Toast::info(__('Batch was removed'));
-
-        return redirect()->route('platform.batches');
+        return DeleteBatch::runOrchidAction($batch);
     }
 
     /**
-     * @param Batch    $batches
+     * @param Batch    $batch
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(Batch $batches, Request $request)
+    public function save(Batch $batch, Request $request)
     {
-        $request->validate([
-            'batches.assigned_farmschool_name' => [
-                'required',
-            ],
-            'batches.number_seeds_distributed' => [
-                'required',
-            ],
-
-            'batches.region_id' => [
-                'required',
-            ],
-
-            'batches.province_id' => [
-                'required',
-            ],
-
-            'batches.municity_id' => [
-                'required',
-            ],
-
-            'batches.farmers' => [
-                'required',
-                'array',
-            ],
-        ]);
-
-        $batchesData = $request->get('batches');
-
-        $batches
-            ->fill($batchesData)
-            ->save();
-
-        $batches
-            ->farmers()
-            ->sync($batchesData['farmers']);
-
-        Toast::info(__('Batch was saved successfully.'));
-
-        return redirect()->route('platform.batches');
+        return CreateBatch::runOrchidAction($batch, $request);
     }
 }
