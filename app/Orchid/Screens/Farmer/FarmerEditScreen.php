@@ -65,7 +65,7 @@ class FarmerEditScreen extends Screen
                 ->icon('trash')
                 ->confirm(__('Once the farmer profile is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('remove')
-                ->canSee($this->farmer_profile->exists),
+                ->canSee($this->farmerProfile->exists),
 
             Button::make(__('Save'))
                 ->icon('check')

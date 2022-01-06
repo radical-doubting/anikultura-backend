@@ -27,7 +27,7 @@ Route::screen('farmlands/{farmland}/edit', FarmlandEditScreen::class)
 
 // Farmland > Create Farmland
 Route::screen('enroll/farmer/farmland', FarmlandEditScreen::class)
-    ->name('platform.farmer.farmland.create')
+    ->name('platform.farmlands.create')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.farmlands')

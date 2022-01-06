@@ -35,7 +35,7 @@ class FarmlandListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->id)
-                        ->route('platform.farmer.farmland.edit', $farmland->id);
+                        ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
             TD::make('type', __('Type'))
@@ -43,7 +43,7 @@ class FarmlandListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->type->name)
-                        ->route('platform.farmer.farmland.edit', $farmland->id);
+                        ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
             TD::make('status', __('Status'))
@@ -51,7 +51,7 @@ class FarmlandListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->status->name)
-                        ->route('platform.farmer.farmland.edit', $farmland->id);
+                        ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
             TD::make('hectares_size', __('Hectares Size'))
@@ -59,7 +59,7 @@ class FarmlandListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->hectares_size)
-                        ->route('platform.farmer.farmland.edit', $farmland->id);
+                        ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
             TD::make(__('Actions'))
@@ -71,7 +71,7 @@ class FarmlandListLayout extends Table
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.farmer.farmland.edit', $farmland->id)
+                                ->route('platform.farmlands.edit', $farmland->id)
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
