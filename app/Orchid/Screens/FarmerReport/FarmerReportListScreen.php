@@ -47,7 +47,7 @@ class FarmerReportListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmer.reports.create'),
+                ->route('platform.farmer-reports.create'),
         ];
     }
 

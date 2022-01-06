@@ -37,7 +37,7 @@ class CreateFarmerProfile
 
         Toast::info(__('Farmer profile was saved successfully!'));
 
-        return redirect()->route('platform.farmer.profile.view.all');
+        return redirect()->route('platform.farmers');
     }
 
     private function validateIfFarmerAccountExistsAlready($farmerProfile, Request $request)

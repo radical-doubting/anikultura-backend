@@ -42,25 +42,25 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Farmer Management')
                 ->icon('people')
                 ->list([
-                    Menu::make('Farmer Profiles')
+                    Menu::make('Farmers')
                         ->icon('user')
-                        ->route('platform.farmer.profile.view.all'),
+                        ->route('platform.farmers'),
                     Menu::make('Farmlands')
                         ->icon('full-screen')
-                        ->route('platform.farmer.farmland.view.all'),
+                        ->route('platform.farmlands'),
                     Menu::make('Batches')
                         ->icon('module')
                         ->route('platform.batches'),
                 ]),
 
-            Menu::make('Crop Type Management')
+            Menu::make('Crop Types Management')
                 ->icon('quote')
                 ->route('platform.crops'),
 
-            Menu::make('Farmer Report Management')
+            Menu::make('Farmer Reports Management')
                 ->icon('docs')
                 ->title(__('Admin Insights'))
-                ->route('platform.farmer.reports'),
+                ->route('platform.farmer-reports'),
 
             Menu::make(__('Users'))
                 ->icon('user')

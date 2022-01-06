@@ -23,7 +23,7 @@ class DeleteCrop
     {
         $this->handle($model);
 
-        Toast::info(__('Crop was removed successfully.'));
+        Toast::info(__('Crop was removed successfully!'));
 
         return redirect()->route('platform.crops');
     }

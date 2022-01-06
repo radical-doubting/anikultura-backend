@@ -49,7 +49,7 @@ class FarmerListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmer.profile.create'),
+                ->route('platform.farmers.create'),
         ];
     }
 

@@ -23,7 +23,7 @@ class DeleteBatch
     {
         $this->handle($model);
 
-        Toast::info(__('Batch was removed successfully.'));
+        Toast::info(__('Batch was removed successfully!'));
 
         return redirect()->route('platform.batches');
     }

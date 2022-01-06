@@ -25,6 +25,6 @@ class DeleteFarmerReport
 
         Toast::info(__('Farmer report was removed successfully!'));
 
-        return redirect()->route('platform.farmer.reports');
+        return redirect()->route('platform.farmer-reports');
     }
 }

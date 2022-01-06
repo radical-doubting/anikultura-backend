@@ -23,8 +23,8 @@ class DeleteFarmerProfile
     {
         $this->handle($model);
 
-        Toast::info(__('Farmer profile was removed successfully'));
+        Toast::info(__('Farmer profile was removed successfully!'));
 
-        return redirect()->route('platform.farmer.profile.view.all');
+        return redirect()->route('platform.farmers');
     }
 }

@@ -39,9 +39,9 @@ class CreateFarmland
 
         $this->handle($model, $farmlandData);
 
-        Toast::info(__('Farmland was successfully saved!'));
+        Toast::info(__('Farmland was saved successfully!'));
 
-        return redirect()->route('platform.farmer.farmland.view.all');
+        return redirect()->route('platform.farmlands');
     }
 
     public function rules(): array

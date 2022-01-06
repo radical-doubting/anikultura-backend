@@ -48,7 +48,7 @@ class FarmlandListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmer.farmland.create'),
+                ->route('platform.farmlands.create'),
         ];
     }
 

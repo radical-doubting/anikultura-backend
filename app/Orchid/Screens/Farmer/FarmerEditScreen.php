@@ -29,7 +29,7 @@ class FarmerEditScreen extends Screen
      *
      * @var string|null
      */
-    public $description = __('Edit farmer profile details');
+    public $description = 'Edit farmer profile details';
 
     /**
      * Query data.

@@ -27,9 +27,9 @@ class CreateFarmerReport
 
         $this->handle($model, $farmerReportData);
 
-        Toast::info(__('Farmer report was saved.'));
+        Toast::info(__('Farmer report was saved successfully!'));
 
-        return redirect()->route('platform.farmer.reports');
+        return redirect()->route('platform.farmer-reports');
     }
 
     public function rules(): array

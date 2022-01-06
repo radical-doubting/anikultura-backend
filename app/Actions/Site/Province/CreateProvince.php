@@ -27,7 +27,7 @@ class CreateProvince
 
         $this->handle($model, $provinceData);
 
-        Toast::info(__('Province was successfully saved!'));
+        Toast::info(__('Province was saved successfully!'));
 
         return redirect()->route('platform.sites.provinces');
     }

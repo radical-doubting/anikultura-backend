@@ -25,6 +25,6 @@ class DeleteFarmland
 
         Toast::info(__('Farmland was removed successfully!'));
 
-        return redirect()->route('platform.farmer.farmland.view.all');
+        return redirect()->route('platform.farmlands');
     }
 }

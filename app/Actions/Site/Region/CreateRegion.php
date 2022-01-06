@@ -27,7 +27,7 @@ class CreateRegion
 
         $this->handle($model, $regionData);
 
-        Toast::info(__('Region was successfully saved!'));
+        Toast::info(__('Region was saved successfully!'));
 
         return redirect()->route('platform.sites.regions');
     }

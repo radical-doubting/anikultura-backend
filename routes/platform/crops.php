@@ -7,8 +7,7 @@ use App\Orchid\Screens\Crop\CropListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
-//Crops
-
+// Crops
 Route::screen('crops', CropListScreen::class)
     ->name('platform.crops')
     ->breadcrumbs(function (Trail $trail) {
@@ -17,8 +16,7 @@ Route::screen('crops', CropListScreen::class)
             ->push(__('Crops'), route('platform.crops'));
     });
 
-//Crops > Edit Crop
-
+// Crops > Edit Crop
 Route::screen('crops/{crop}/edit', CropEditScreen::class)
     ->name('platform.crops.edit')
     ->breadcrumbs(function (Trail $trail, $crop) {
@@ -27,8 +25,7 @@ Route::screen('crops/{crop}/edit', CropEditScreen::class)
             ->push(__('Edit Crop'), route('platform.crops.edit', $crop));
     });
 
-//Crops > Create Crop
-
+// Crops > Create Crop
 Route::screen('crops/create', CropEditScreen::class)
     ->name('platform.crops.create')
     ->breadcrumbs(function (Trail $trail) {

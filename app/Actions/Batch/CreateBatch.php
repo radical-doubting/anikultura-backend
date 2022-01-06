@@ -33,7 +33,7 @@ class CreateBatch
 
         $this->handle($model, $batchData);
 
-        Toast::info(__('Batch was saved successfully.'));
+        Toast::info(__('Batch was saved successfully!'));
 
         return redirect()->route('platform.batches');
     }
