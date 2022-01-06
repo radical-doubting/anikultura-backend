@@ -2,11 +2,11 @@
 
 namespace App\Orchid\Screens\Batch;
 
+use App\Actions\Batch\DeleteBatch;
 use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Toast;
 
 class BatchListScreen extends Screen
 {
@@ -65,18 +65,14 @@ class BatchListScreen extends Screen
     }
 
     /**
-     * @param Batch $batches
+     * @param Batch $batch
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Batch $batches)
+    public function remove(Batch $batch)
     {
-        $batches->delete();
-
-        Toast::info(__('Batch was removed'));
-
-        return redirect()->route('platform.batches');
+        return DeleteBatch::runOrchidAction($batch);
     }
 }

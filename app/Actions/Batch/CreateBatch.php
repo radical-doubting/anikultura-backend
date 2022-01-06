@@ -20,16 +20,18 @@ class CreateBatch
             ->fill($batchData)
             ->save();
 
+        $farmers = $batchData['farmers'];
+
         $batch
             ->farmers()
-            ->sync($batchData['farmers']);
+            ->sync($farmers);
     }
 
-    public function asOrchidAction(Batch $batch, Request $request)
+    public function asOrchidAction($model, ?Request $request)
     {
         $batchData = $request->get('batches');
 
-        $this->handle($batch, $batchData);
+        $this->handle($model, $batchData);
 
         Toast::info(__('Batch was saved successfully.'));
 
@@ -44,6 +46,7 @@ class CreateBatch
             ],
             'batches.number_seeds_distributed' => [
                 'required',
+                'integer',
             ],
             'batches.region_id' => [
                 'required',

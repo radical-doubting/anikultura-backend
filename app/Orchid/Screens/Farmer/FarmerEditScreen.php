@@ -2,21 +2,18 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Models\Farmer\FarmerAddress;
+use App\Actions\Batch\CreateFarmerProfile;
+use App\Actions\Batch\DeleteFarmerProfile;
 use App\Models\Farmer\FarmerProfile;
-use App\Models\User;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditLoginLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditProfileLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSalaryLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class FarmerEditScreen extends Screen
 {
@@ -32,27 +29,27 @@ class FarmerEditScreen extends Screen
      *
      * @var string|null
      */
-    public $description = 'Edit farmer profile details';
+    public $description = __('Edit farmer profile details');
 
     /**
      * Query data.
      *
      * @return array
      */
-    public function query(FarmerProfile $farmer_profile): array
+    public function query(FarmerProfile $farmerProfile): array
     {
-        $this->farmer_profile = $farmer_profile;
-        $this->farmer_address = $farmer_profile->farmer_address;
+        $this->farmerProfile = $farmerProfile;
+        $this->farmerAddress = $farmerProfile->farmerAddress;
 
-        if (!$farmer_profile->exists) {
-            $this->name = 'Create Farmer Profile';
-            $this->description = 'Create a new farmer profile';
+        if (!$farmerProfile->exists) {
+            $this->name = __('Create Farmer Profile');
+            $this->description = __('Create a new farmer profile');
         }
 
         return [
-            'farmer_profile' => $farmer_profile,
-            'farmer_address' => $farmer_profile->farmer_address,
-            'user' => $farmer_profile->user,
+            'farmer_profile' => $farmerProfile,
+            'farmer_address' => $farmerProfile->farmer_address,
+            'user' => $farmerProfile->user,
         ];
     }
 
@@ -103,217 +100,33 @@ class FarmerEditScreen extends Screen
             Layout::block(FarmerEditSalaryLayout::class)
                 ->title('Salary Information')
                 ->description("This information collects farmer's salary information."),
-
-            /*Add Next Button*/
         ];
     }
 
     /**
-     * @param FarmerProfile    $farmer_profile
+     * Save a farmer profile.
+     *
+     * @param FarmerProfile    $farmerProfile
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(FarmerProfile $farmer_profile, Request $request)
+    public function save(FarmerProfile $farmerProfile, Request $request)
     {
-        $request->validate([
-            // Farmer Profile
-            'farmer_profile.gender' => [
-                'required',
-            ],
-
-            'farmer_profile.civil_status' => [
-                'required',
-            ],
-
-            'farmer_profile.birthday' => [
-                'required',
-            ],
-
-            'farmer_profile.age' => [
-                'required',
-            ],
-
-            'farmer_profile.quantity_family_members' => [
-                'required',
-            ],
-
-            'farmer_profile.quantity_dependents' => [
-                'required',
-            ],
-
-            'farmer_profile.quantity_working_dependents' => [
-                'required',
-            ],
-
-            'farmer_profile.highest_educational_status' => [
-                'required',
-            ],
-
-            'farmer_profile.college_course' => [
-                'required',
-            ],
-
-            'farmer_profile.current_job' => [
-                'required',
-            ],
-
-            'farmer_profile.farming_years' => [
-                'required',
-            ],
-
-            'farmer_profile.usual_crops_planted' => [
-                'required',
-            ],
-
-            'farmer_profile.affiliated_organization' => [
-                'required',
-            ],
-
-            'farmer_profile.tesda_training_joined' => [
-                'required',
-            ],
-
-            'farmer_profile.nc_passer_status' => [
-                'required',
-            ],
-
-            'farmer_profile.salary_periodicity' => [
-                'required',
-            ],
-
-            'farmer_profile.estimated_salary' => [
-                'required',
-            ],
-
-            'farmer_profile.social_status' => [
-                'required',
-            ],
-
-            'farmer_profile.social_status_reason' => [
-                'required',
-            ],
-
-            // Farmer Address
-            'farmer_address.house_number' => [
-                'required',
-            ],
-
-            'farmer_address.street' => [
-                'required',
-            ],
-
-            'farmer_address.barangay' => [
-                'required',
-            ],
-
-            'farmer_address.municity' => [
-                'required',
-            ],
-
-            'farmer_address.province' => [
-                'required',
-            ],
-
-            'farmer_address.region_id' => [
-                'required',
-            ],
-
-            // User
-            'user.name' => [
-                'required',
-                Rule::unique(User::class, 'name')->ignore($farmer_profile->user),
-            ],
-            'user.email' => [
-                Rule::unique(User::class, 'email')->ignore($farmer_profile->user),
-            ],
-        ]);
-
-        $farmer_profile_data = $request->get('farmer_profile');
-
-        $farmer_profile
-            ->fill($farmer_profile_data)
-            ->save();
-
-        $this->saveUser($farmer_profile, $request);
-        $this->saveAddress($farmer_profile, $request);
-
-        Toast::info(__('Farmer Profile was saved'));
-
-        return redirect()->route('platform.farmer.profile.view.all');
+        return CreateFarmerProfile::runOrchidAction($farmerProfile, $request);
     }
 
     /**
-     * @param FarmerProfile   $farmer_profile
-     * @param Request $request
-     */
-    private function saveUser(FarmerProfile $farmer_profile, Request $request)
-    {
-        $farmer_user_data = $request->get('user');
-        $farmer_user = $farmer_profile->user();
-
-        // Creates a new user if it does not exist
-        if (!$farmer_user->exists()) {
-            $new_user = new User($farmer_user_data);
-            $new_user->password = Hash::make($farmer_user_data['password']);
-            $new_user->save();
-
-            $farmer_profile->user()->save($new_user);
-
-            return;
-        }
-
-        if ($farmer_user_data['password'] === '') {
-            unset($farmer_user_data['password']);
-        } else {
-            $farmer_user_data['password'] = Hash::make($farmer_user_data['password']);
-        }
-
-        $farmer_user->update($farmer_user_data);
-    }
-
-    /**
-     * @param FarmerProfile   $farmer_profile
-     * @param Request         $request
-     */
-    private function saveAddress(FarmerProfile $farmer_profile, Request $request)
-    {
-        $farmer_address_data = $request->get('farmer_address');
-
-        if (!$farmer_profile->farmer_address()->exists()) {
-            $farmer_address = new FarmerAddress($farmer_address_data);
-            $farmer_address->farmer_profile_id = $farmer_profile->id;
-
-            $farmer_profile
-                ->farmer_address()
-                ->save($farmer_address);
-
-            return;
-        }
-
-        $farmer_profile
-            ->farmer_address()
-            ->update($farmer_address_data);
-    }
-
-    /**
-     * @param FarmerProfile $farmer_profile
+     * Removes a farmer profile.
+     *
+     * @param FarmerProfile $farmerProfile
      *
      * @throws \Exception
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(FarmerProfile $farmer_profile)
+    public function remove(FarmerProfile $farmerProfile)
     {
-        $farmer_profile->delete();
-
-        Toast::info(__('Farmer Profile was removed successfully'));
-
-        return redirect()->route('platform.farmer.profile.view.all');
-    }
-
-    public function next(FarmerProfile $farmer_profile)
-    {
-        return redirect()->route('platform.farmer.farmland.create');
+        return DeleteFarmerProfile::runOrchidAction($farmerProfile, null);
     }
 }

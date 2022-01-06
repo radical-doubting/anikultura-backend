@@ -89,6 +89,7 @@ class BatchEditScreen extends Screen
     }
 
     /**
+     * Remove a batch.
      * @param Batch $batch
      *
      * @throws \Exception
@@ -97,10 +98,12 @@ class BatchEditScreen extends Screen
      */
     public function remove(Batch $batch)
     {
-        return DeleteBatch::runOrchidAction($batch);
+        return DeleteBatch::runOrchidAction($batch, null);
     }
 
     /**
+     * Save a batch.
+     *
      * @param Batch    $batch
      * @param Request $request
      *

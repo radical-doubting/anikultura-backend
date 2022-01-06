@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Crop;
 
+use App\Actions\Batch\CreateCrop;
+use App\Actions\Batch\DeleteCrop;
 use App\Models\Crop;
 use App\Orchid\Layouts\Crop\CropEditLayout;
 use Illuminate\Http\Request;
@@ -9,7 +11,6 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class CropEditScreen extends Screen
 {
@@ -88,51 +89,31 @@ class CropEditScreen extends Screen
         ];
     }
 
-    //Delete function
+    /**
+     * Remove a crop.
+     *
+     * @param Crop $crop
+     *
+     * @throws \Exception
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function remove(Crop $crop)
     {
-        $crop->delete();
-
-        Toast::info(__('Crop was removed'));
-
-        return redirect()->route('platform.crops');
+        return DeleteCrop::runOrchidAction($crop, null);
     }
 
-    //Save function
+    /**
+     * Save a crop.
+     *
+     * @param Crop    $crop
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function save(Crop $crop, Request $request)
     {
-        $request->validate([
-            'crop.group' => [
-                'required',
-            ],
-            'crop.name' => [
-                'required',
-            ],
-            'crop.variety' => [
-                'required',
-            ],
-            'crop.establishment_days' => [
-                'required',
-            ],
-            'crop.vegetative_days' => [
-                'required',
-            ],
-            'crop.yield_formation_days' => [
-                'required',
-            ],
-            'crop.ripening_days' => [
-                'required',
-            ],
-        ]);
-
-        $crop_data = $request->get('crop');
-
-        $crop
-            ->fill($crop_data)
-            ->save();
-
-        Toast::info(__('Crop was saved.'));
-
-        return redirect()->route('platform.crops');
+        return CreateCrop::runOrchidAction($crop, $request);
     }
 }
