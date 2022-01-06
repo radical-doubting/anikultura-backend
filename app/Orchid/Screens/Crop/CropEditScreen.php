@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Screens\Crop;
 
-use App\Actions\Batch\CreateCrop;
-use App\Actions\Batch\DeleteCrop;
+use App\Actions\Crop\CreateCrop;
+use App\Actions\Crop\DeleteCrop;
 use App\Models\Crop;
 use App\Orchid\Layouts\Crop\CropEditLayout;
 use Illuminate\Http\Request;
@@ -93,9 +93,7 @@ class CropEditScreen extends Screen
      * Remove a crop.
      *
      * @param Crop $crop
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Crop $crop)
@@ -107,9 +105,7 @@ class CropEditScreen extends Screen
      * Save a crop.
      *
      * @param Crop    $crop
-     *
      * @param Request $request
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Crop $crop, Request $request)

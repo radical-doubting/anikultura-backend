@@ -90,10 +90,9 @@ class BatchEditScreen extends Screen
 
     /**
      * Remove a batch.
+     *
      * @param Batch $batch
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Batch $batch)
@@ -106,7 +105,6 @@ class BatchEditScreen extends Screen
      *
      * @param Batch    $batch
      * @param Request $request
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Batch $batch, Request $request)

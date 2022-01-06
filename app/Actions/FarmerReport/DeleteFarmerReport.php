@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Actions\Crop;
+namespace App\Actions\FarmerReport;
 
-use App\Models\Crop;
+use App\Models\FarmerReport;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
-class DeleteCrop
+class DeleteFarmerReport
 {
     use AsAction;
 
     use AsOrchidAction;
 
-    public function handle(Crop $crop)
+    public function handle(FarmerReport $farmerReport)
     {
-        $crop->delete();
+        $farmerReport->delete();
     }
 
     public function asOrchidAction($model, ?Request $request)
     {
         $this->handle($model);
 
-        Toast::info(__('Crop was removed successfully.'));
+        Toast::info(__('Farmer report was removed successfully!'));
 
-        return redirect()->route('platform.crops');
+        return redirect()->route('platform.farmer.reports');
     }
 }

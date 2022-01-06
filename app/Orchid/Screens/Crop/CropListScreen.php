@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens\Crop;
 
-use App\Actions\Batch\DeleteCrop;
+use App\Actions\Crop\DeleteCrop;
 use App\Models\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
 use Orchid\Screen\Actions\Link;
@@ -69,9 +69,7 @@ class CropListScreen extends Screen
      * Remove a crop.
      *
      * @param Crop $crop
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Crop $crop)

@@ -2,12 +2,11 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Actions\Batch\DeleteFarmerProfile;
+use App\Actions\Farmer\DeleteFarmerProfile;
 use App\Models\Farmer\FarmerProfile;
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Toast;
 
 class FarmerListScreen extends Screen
 {
@@ -68,11 +67,9 @@ class FarmerListScreen extends Screen
 
     /**
      * Remove a farmer profile.
-     * 
+     *
      * @param FarmerProfile $farmerProfile
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(FarmerProfile $farmerProfile)

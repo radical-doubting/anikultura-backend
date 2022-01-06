@@ -65,14 +65,14 @@ class BatchListScreen extends Screen
     }
 
     /**
+     * Remove a batch.
+     *
      * @param Batch $batch
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Batch $batch)
     {
-        return DeleteBatch::runOrchidAction($batch);
+        return DeleteBatch::runOrchidAction($batch, null);
     }
 }

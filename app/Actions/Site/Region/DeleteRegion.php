@@ -1,30 +1,30 @@
 <?php
 
-namespace App\Actions\Crop;
+namespace App\Actions\Site\Region;
 
-use App\Models\Crop;
+use App\Models\Site\Region;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
-class DeleteCrop
+class DeleteRegion
 {
     use AsAction;
 
     use AsOrchidAction;
 
-    public function handle(Crop $crop)
+    public function handle(Region $region)
     {
-        $crop->delete();
+        $region->delete();
     }
 
     public function asOrchidAction($model, ?Request $request)
     {
         $this->handle($model);
 
-        Toast::info(__('Crop was removed successfully.'));
+        Toast::info(__('Region was removed successfully!'));
 
-        return redirect()->route('platform.crops');
+        return redirect()->route('platform.sites.regions');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Batch;
+namespace App\Actions\Crop;
 
 use App\Models\Crop;
 use App\Traits\AsOrchidAction;

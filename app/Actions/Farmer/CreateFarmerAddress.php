@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Batch;
+namespace App\Actions\Farmer;
 
 use App\Models\Farmer\FarmerAddress;
 use App\Models\Farmer\FarmerProfile;

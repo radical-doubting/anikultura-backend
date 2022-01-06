@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Actions\Batch\CreateFarmerProfile;
-use App\Actions\Batch\DeleteFarmerProfile;
+use App\Actions\Farmer\CreateFarmerProfile;
+use App\Actions\Farmer\DeleteFarmerProfile;
 use App\Models\Farmer\FarmerProfile;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditLoginLayout;
@@ -106,9 +106,8 @@ class FarmerEditScreen extends Screen
     /**
      * Save a farmer profile.
      *
-     * @param FarmerProfile    $farmerProfile
-     * @param Request $request
-     *
+     * @param FarmerProfile $farmerProfile
+     * @param Request       $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(FarmerProfile $farmerProfile, Request $request)
@@ -120,9 +119,7 @@ class FarmerEditScreen extends Screen
      * Removes a farmer profile.
      *
      * @param FarmerProfile $farmerProfile
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(FarmerProfile $farmerProfile)
