@@ -48,7 +48,7 @@ class FarmerEditScreen extends Screen
 
         return [
             'farmer_profile' => $farmerProfile,
-            'farmer_address' => $farmerProfile->farmer_address,
+            'farmer_address' => $farmerProfile->farmerAddress,
             'user' => $farmerProfile->user,
         ];
     }

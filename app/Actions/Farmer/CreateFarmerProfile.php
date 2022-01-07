@@ -3,6 +3,7 @@
 namespace App\Actions\Farmer;
 
 use App\Models\Farmer\FarmerProfile;
+use App\Models\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
