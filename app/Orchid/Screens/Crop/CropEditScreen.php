@@ -4,7 +4,7 @@ namespace App\Orchid\Screens\Crop;
 
 use App\Actions\Crop\CreateCrop;
 use App\Actions\Crop\DeleteCrop;
-use App\Models\Crop;
+use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropEditLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;

@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens\FarmerReport;
 
-use App\Models\FarmerReport;
+use App\Models\FarmerReport\FarmerReport;
 use App\Orchid\Layouts\FarmerReport\FarmerReportListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;

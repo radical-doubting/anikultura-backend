@@ -4,7 +4,7 @@ namespace App\Orchid\Screens\FarmerReport;
 
 use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\DeleteFarmerReport;
-use App\Models\FarmerReport;
+use App\Models\FarmerReport\FarmerReport;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;

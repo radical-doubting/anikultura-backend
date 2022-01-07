@@ -2,7 +2,7 @@
 
 namespace App\Actions\Crop;
 
-use App\Models\Crop;
+use App\Models\Crop\Crop;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;

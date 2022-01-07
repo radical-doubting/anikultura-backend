@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\FarmerReport;
 
-use App\Models\FarmerReport;
+use App\Models\FarmerReport\FarmerReport;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;

@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\Crop;
 
 use App\Actions\Crop\DeleteCrop;
-use App\Models\Crop;
+use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;

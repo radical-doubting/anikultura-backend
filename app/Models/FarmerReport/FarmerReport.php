@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\FarmerReport;
 
+use App\Models\Crop\Crop;
+use App\Models\Crop\SeedStage;
 use App\Models\Farmland\Farmland;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;

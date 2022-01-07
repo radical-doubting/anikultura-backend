@@ -17,7 +17,6 @@ class CreateFarmerAccount
 
         if (!$existingFarmerAccount->exists()) {
             $this->createNewFarmerAccount($existingFarmerAccount, $farmerAccountData);
-
             return;
         }
 
@@ -36,8 +35,8 @@ class CreateFarmerAccount
 
     private function updateExistingFarmerAccount($farmerAccount, $farmerAccountData)
     {
-        $this->updatePassword($farmerAccountData);
-        $farmerAccount->update($farmerAccountData);
+        $updatedAccountData = $this->updatePassword($farmerAccountData);
+        $farmerAccount->update($updatedAccountData);
     }
 
     private function updatePassword($farmerAccountData)
@@ -46,9 +45,12 @@ class CreateFarmerAccount
 
         if (empty($password)) {
             unset($farmerAccountData['password']);
+            return $farmerAccountData;
         }
 
         $farmerAccountData['password'] = $this->hashPassword($password);
+
+        return $farmerAccountData;
     }
 
     private function hashPassword(string $plainTextPassword)

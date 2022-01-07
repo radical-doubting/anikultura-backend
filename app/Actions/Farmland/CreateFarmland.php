@@ -21,11 +21,11 @@ class CreateFarmland
             ->save();
 
         $farmland
-            ->watering_systems()
+            ->wateringSystems()
             ->sync($farmlandData['watering_systems']);
 
         $farmland
-            ->crop_buyers()
+            ->cropBuyers()
             ->sync($farmlandData['crop_buyers']);
 
         $farmland
