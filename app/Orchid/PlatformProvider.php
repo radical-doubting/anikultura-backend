@@ -35,7 +35,7 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('Provinces')
                         ->icon('location-pin')
                         ->route('platform.sites.provinces'),
-                    Menu::make('Municities')
+                    Menu::make('Municipalities and Cities')
                         ->icon('location-pin')
                         ->route('platform.sites.municities'),
                 ]),

@@ -65,13 +65,13 @@ Route::screen('sites/provinces/create', ProvinceEditScreen::class)
             ->push(__('Create Province'), route('platform.sites.provinces.create'));
     });
 
-// Sites > Municities
+// Sites > Municipalities or cities
 Route::screen('sites/municities', MunicityListScreen::class)
     ->name('platform.sites.municities')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
-            ->push(__('Municities'), route('platform.sites.municities'));
+            ->push(__('Municipalities and Cities'), route('platform.sites.municities'));
     });
 
 // Sites > Municities > Edit Municity
@@ -80,7 +80,7 @@ Route::screen('sites/municities/{municity}/edit', MunicityEditScreen::class)
     ->breadcrumbs(function (Trail $trail, $municity) {
         return $trail
             ->parent('platform.sites.municities')
-            ->push(__('Edit Municity'), route('platform.sites.municities.edit', $municity));
+            ->push(__('Edit Municipality or City'), route('platform.sites.municities.edit', $municity));
     });
 
 // Sites > Municities > Create Municity
@@ -89,5 +89,5 @@ Route::screen('sites/municities/create', MunicityEditScreen::class)
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.sites.municities')
-            ->push(__('Create Municity'), route('platform.sites.municities.create'));
+            ->push(__('Create Municipality or City'), route('platform.sites.municities.create'));
     });
