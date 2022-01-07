@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Site\Region;
 
+use App\Actions\Site\Region\CreateRegion;
+use App\Actions\Site\Region\DeleteRegion;
 use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionEditLayout;
 use Illuminate\Http\Request;
@@ -9,7 +11,6 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class RegionEditScreen extends Screen
 {
@@ -88,43 +89,26 @@ class RegionEditScreen extends Screen
     }
 
     /**
+     * Remove a region.
+     *
      * @param Region $region
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Region $region)
     {
-        $region->delete();
-
-        Toast::info(__('Region was removed successfully'));
-
-        return redirect()->route('platform.sites.regions');
+        return DeleteRegion::runOrchidAction($region, null);
     }
 
     /**
-     * @param Region    $region
-     * @param Request $request
+     * Save a region.
      *
+     * @param Region  $region
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Region $region, Request $request)
     {
-        $request->validate([
-            'region.name' => [
-                'required',
-            ],
-        ]);
-
-        $region_data = $request->get('region');
-
-        $region
-            ->fill($region_data)
-            ->save();
-
-        Toast::info(__('Region was saved'));
-
-        return redirect()->route('platform.sites.regions');
+        return CreateRegion::runOrchidAction($region, $request);
     }
 }

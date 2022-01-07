@@ -1,4 +1,4 @@
-name: Pull Request Title Check
+name: Check Pull Request Title
 
 on:
   pull_request:

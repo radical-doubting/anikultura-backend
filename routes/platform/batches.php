@@ -7,22 +7,22 @@ use App\Orchid\Screens\Batch\BatchListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
-// Batch
+// Batches
 Route::screen('batches', BatchListScreen::class)
     ->name('platform.batches')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
-            ->push(__('Batch'), route('platform.batches'));
+            ->push(__('Batches'), route('platform.batches'));
     });
 
-// Batch > Edit Batch
-Route::screen('batch/{batch}/edit', BatchEditScreen::class)
+// Batches > Edit Batch
+Route::screen('batches/{batch}/edit', BatchEditScreen::class)
     ->name('platform.batches.edit')
-    ->breadcrumbs(function (Trail $trail, $batches) {
+    ->breadcrumbs(function (Trail $trail, $batch) {
         return $trail
             ->parent('platform.batches')
-            ->push(__('Edit Batch'), route('platform.batches.edit', $batches));
+            ->push(__('Edit Batch'), route('platform.batches.edit', $batch));
     });
 
 // Batch > Create Batch

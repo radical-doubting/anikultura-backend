@@ -1,6 +1,7 @@
 # Anikultura
 
 A web application built in the Tailwind, Alpine.js, Laravel, Livewire (TALL) stack.
+https://github.com/Radical-Doubting/anikultura-backend/actions/workflows/pr-title-check.yml/badge.svg
 
 ## Setup using XAMPP
 

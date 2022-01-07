@@ -35,7 +35,7 @@ class FarmerListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerProfile $farmer_profile) {
                     return Link::make($farmer_profile->id)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id);
+                        ->route('platform.farmers.edit', $farmer_profile->id);
                 }),
 
             TD::make('lastname', __('Last Name'))
@@ -44,7 +44,7 @@ class FarmerListLayout extends Table
                     $user = $farmer_profile->user;
                     $has_user = !is_null($user);
                     $element = $has_user ? Link::make($user->last_name)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id) : __('None');
+                        ->route('platform.farmers.edit', $farmer_profile->id) : __('None');
 
                     return $element;
                 }),
@@ -54,7 +54,7 @@ class FarmerListLayout extends Table
                     $user = $farmer_profile->user;
                     $has_user = !is_null($user);
                     $element = $has_user ? Link::make($user->first_name)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id) : __('None');
+                        ->route('platform.farmers.edit', $farmer_profile->id) : __('None');
 
                     return $element;
                 }),
@@ -64,7 +64,7 @@ class FarmerListLayout extends Table
                     $user = $farmer_profile->user;
                     $has_user = !is_null($user);
                     $element = $has_user ? Link::make($user->middle_name)
-                        ->route('platform.farmer.profile.edit', $farmer_profile->id) : __('None');
+                        ->route('platform.farmers.edit', $farmer_profile->id) : __('None');
 
                     return $element;
                 }),
@@ -78,7 +78,7 @@ class FarmerListLayout extends Table
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.farmer.profile.edit', $farmer_profile->id)
+                                ->route('platform.farmers.edit', $farmer_profile->id)
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))

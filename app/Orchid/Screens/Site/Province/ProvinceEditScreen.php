@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Site\Province;
 
+use App\Actions\Site\Province\CreateProvince;
+use App\Actions\Site\Province\DeleteProvince;
 use App\Models\Site\Province;
 use App\Orchid\Layouts\Site\Province\ProvinceEditLayout;
 use Illuminate\Http\Request;
@@ -9,7 +11,6 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class ProvinceEditScreen extends Screen
 {
@@ -88,46 +89,26 @@ class ProvinceEditScreen extends Screen
     }
 
     /**
+     * Remove a province.
+     *
      * @param Province $province
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Province $province)
     {
-        $province->delete();
-
-        Toast::info(__('Province was removed'));
-
-        return redirect()->route('platform.sites.provinces');
+        return DeleteProvince::runOrchidAction($province, null);
     }
 
     /**
-     * @param Province   $province
-     * @param Request   $request
+     * Save a province.
      *
+     * @param Province $province
+     * @param Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Province $province, Request $request)
     {
-        $request->validate([
-            'province.name' => [
-                'required',
-            ],
-            'province.region_id' => [
-                'required',
-            ],
-        ]);
-
-        $province_data = $request->get('province');
-
-        $province
-            ->fill($province_data)
-            ->save();
-
-        Toast::info(__('Province was saved successfully'));
-
-        return redirect()->route('platform.sites.provinces');
+        return CreateProvince::runOrchidAction($province, $request);
     }
 }

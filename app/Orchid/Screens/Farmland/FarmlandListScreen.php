@@ -2,11 +2,11 @@
 
 namespace App\Orchid\Screens\Farmland;
 
+use App\Actions\Farmland\DeleteFarmland;
 use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Toast;
 
 class FarmlandListScreen extends Screen
 {
@@ -48,7 +48,7 @@ class FarmlandListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmer.farmland.create'),
+                ->route('platform.farmlands.create'),
         ];
     }
 
@@ -65,18 +65,14 @@ class FarmlandListScreen extends Screen
     }
 
     /**
+     * Remove a farmland.
+     *
      * @param Farmland $farmland
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Farmland $farmland)
     {
-        $farmland->delete();
-
-        Toast::info(__("Farmer's Farmland was removed successfully"));
-
-        return redirect()->route('platform.farmer.farmland.view.all');
+        return DeleteFarmland::runOrchidAction($farmland, null);
     }
 }

@@ -2,14 +2,15 @@
 
 namespace App\Orchid\Screens\FarmerReport;
 
-use App\Models\FarmerReport;
+use App\Actions\FarmerReport\CreateFarmerReport;
+use App\Actions\FarmerReport\DeleteFarmerReport;
+use App\Models\FarmerReport\FarmerReport;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class FarmerReportEditScreen extends Screen
 {
@@ -87,45 +88,27 @@ class FarmerReportEditScreen extends Screen
         ];
     }
 
-    //Delete function
-    public function remove(FarmerReport $farmer_report)
+    /**
+     * Save a farmer report.
+     *
+     * @param FarmerReport $farmerReport
+     * @param Request      $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(FarmerReport $farmerReport, Request $request)
     {
-        $farmer_report->delete();
-
-        Toast::info(__('Farmer report was removed'));
-
-        return redirect()->route('platform.farmer.reports');
+        return CreateFarmerReport::runOrchidAction($farmerReport, $request);
     }
 
-    //Save function
-    public function save(FarmerReport $farmer_report, Request $request)
+    /**
+     * Remove a farmer report.
+     *
+     * @param FarmerReport $farmerReport
+     * @param Request      $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(FarmerReport $farmerReport)
     {
-        $request->validate([
-            'farmer_report.farmer_id' => [
-                'required',
-            ],
-            'farmer_report.farmland_id' => [
-                'required',
-            ],
-            'farmer_report.seed_stage_id' => [
-                'required',
-            ],
-            'farmer_report.crop_id' => [
-                'required',
-            ],
-            'farmer_report.volume' => [
-                'required',
-            ],
-        ]);
-
-        $report_data = $request->get('farmer_report');
-
-        $farmer_report
-            ->fill($report_data)
-            ->save();
-
-        Toast::info(__('Farmer report was saved.'));
-
-        return redirect()->route('platform.farmer.reports');
+        return DeleteFarmerReport::runOrchidAction($farmerReport, null);
     }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Orchid\Screens\Site\Municity;
 
+use App\Actions\Site\Municity\DeleteMunicity;
 use App\Models\Site\Municity;
 use App\Orchid\Layouts\Site\Municity\MunicityListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Toast;
 
 class MunicityListScreen extends Screen
 {
@@ -75,10 +75,6 @@ class MunicityListScreen extends Screen
      */
     public function remove(Municity $municity)
     {
-        $municity->delete();
-
-        Toast::info(__('Municity was removed successfully'));
-
-        return redirect()->route('platform.sites.municities');
+        return DeleteMunicity::runOrchidAction($municity, null);
     }
 }
