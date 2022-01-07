@@ -2,11 +2,11 @@
 
 namespace App\Orchid\Screens\Crop;
 
-use App\Models\Crop;
+use App\Actions\Crop\DeleteCrop;
+use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Toast;
 
 class CropListScreen extends Screen
 {
@@ -32,7 +32,7 @@ class CropListScreen extends Screen
     public function query(): array
     {
         return [
-           'crops'=> Crop::filters()
+            'crops' => Crop::filters()
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -47,8 +47,8 @@ class CropListScreen extends Screen
     {
         return [
             Link::make(__('Add'))
-            ->icon('plus')
-            ->route('platform.crops.create'),
+                ->icon('plus')
+                ->route('platform.crops.create'),
 
         ];
     }
@@ -61,16 +61,19 @@ class CropListScreen extends Screen
     public function layout(): array
     {
         return [
-           CropListLayout::class,
+            CropListLayout::class,
         ];
     }
 
+    /**
+     * Remove a crop.
+     *
+     * @param Crop $crop
+     * @throws \Exception
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function remove(Crop $crop)
     {
-        $crop->delete();
-
-        Toast::info(__('Crop was removed'));
-
-        return redirect()->route('platform.crops');
+        return DeleteCrop::runOrchidAction($crop, null);
     }
 }

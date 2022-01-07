@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Crop;
 
-use App\Models\Crop;
+use App\Models\Crop\Crop;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;

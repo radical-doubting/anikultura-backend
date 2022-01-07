@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Farmer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Verification extends Model
+class FarmerApplicationVerification extends Model
 {
     use HasFactory;
 
@@ -21,6 +21,6 @@ class Verification extends Model
 
     public function farmerProfile()
     {
-        return $this->belongsTo(Farmer_profile::class, 'foreign_key');
+        return $this->belongsTo(FarmerProfile::class, 'foreign_key');
     }
 }

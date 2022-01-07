@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Farmland;
 
+use App\Actions\Farmland\CreateFarmland;
+use App\Actions\Farmland\DeleteFarmland;
 use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandEditFarmLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
@@ -9,7 +11,6 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class FarmlandEditScreen extends Screen
 {
@@ -85,61 +86,22 @@ class FarmlandEditScreen extends Screen
     }
 
     /**
+     * Save a farmland.
+     *
      * @param Farmland    $farmland
+     *
      * @param Request $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Farmland $farmland, Request $request)
     {
-        $request->validate([
-            'farmland.type_id' => [
-                'required',
-            ],
-            'farmland.status_id' => [
-                'required',
-            ],
-            'farmland.hectares_size' => [
-                'required',
-            ],
-            'farmland.watering_systems' => [
-                'required',
-                'array',
-            ],
-            'farmland.crop_buyers' => [
-                'required',
-                'array',
-            ],
-            'farmland.farmers' => [
-                'required',
-                'array',
-            ],
-        ]);
-
-        $farmland_data = $request->get('farmland');
-
-        $farmland
-            ->fill($farmland_data)
-            ->save();
-
-        $farmland
-            ->watering_systems()
-            ->sync($farmland_data['watering_systems']);
-
-        $farmland
-            ->crop_buyers()
-            ->sync($farmland_data['crop_buyers']);
-
-        $farmland
-            ->farmers()
-            ->sync($farmland_data['farmers']);
-
-        Toast::info(__('Farmland was saved'));
-
-        return redirect()->route('platform.farmer.farmland.view.all');
+        return CreateFarmland::runOrchidAction($farmland, $request);
     }
 
     /**
+     * Remove a farmland.
+     *
      * @param Farmland $farmland
      *
      * @throws \Exception
@@ -148,10 +110,6 @@ class FarmlandEditScreen extends Screen
      */
     public function remove(Farmland $farmland)
     {
-        $farmland->delete();
-
-        Toast::info(__("Farmer's Farmland was removed successfully"));
-
-        return redirect()->route('platform.farmer.farmland.view.all');
+        return DeleteFarmland::runOrchidAction($farmland, null);
     }
 }

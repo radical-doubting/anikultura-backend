@@ -111,7 +111,7 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 //Route::screen('idea', 'Idea::class','platform.screens.idea');
 
 require 'platform/farmer_reports.php';
-require 'platform/batch.php';
+require 'platform/batches.php';
 require 'platform/sites.php';
 require 'platform/farmer_profiles.php';
 require 'platform/farmlands.php';

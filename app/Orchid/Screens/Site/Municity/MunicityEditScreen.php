@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Screens\Site\Municity;
 
+use App\Actions\Site\Municity\CreateMunicity;
+use App\Actions\Site\Municity\DeleteMunicity;
 use App\Models\Site\Municity;
 use App\Orchid\Layouts\Site\Municity\MunicityEditLayout;
 use Illuminate\Http\Request;
@@ -9,7 +11,6 @@ use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class MunicityEditScreen extends Screen
 {
@@ -88,49 +89,26 @@ class MunicityEditScreen extends Screen
     }
 
     /**
+     * Remove a municity.
+     *
      * @param Municity $municity
-     *
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Municity $municity)
     {
-        $municity->delete();
-
-        Toast::info(__('Municity was removed successfully'));
-
-        return redirect()->route('platform.sites.municities');
+        return DeleteMunicity::runOrchidAction($municity, null);
     }
 
     /**
+     * Save a municity.
+     *
      * @param Municity   $municity
      * @param Request   $request
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Municity $municity, Request $request)
     {
-        $request->validate([
-            'municity.name' => [
-                'required',
-            ],
-            'municity.province_id' => [
-                'required',
-            ],
-            'municity.region_id' => [
-                'required',
-            ],
-        ]);
-
-        $municity_data = $request->get('municity');
-
-        $municity
-            ->fill($municity_data)
-            ->save();
-
-        Toast::info(__('Municity was saved successfully'));
-
-        return redirect()->route('platform.sites.municities');
+        return CreateMunicity::runOrchidAction($municity, $request);
     }
 }

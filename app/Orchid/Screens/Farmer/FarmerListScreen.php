@@ -2,11 +2,11 @@
 
 namespace App\Orchid\Screens\Farmer;
 
+use App\Actions\Farmer\DeleteFarmerProfile;
 use App\Models\Farmer\FarmerProfile;
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
-use Orchid\Support\Facades\Toast;
 
 class FarmerListScreen extends Screen
 {
@@ -49,7 +49,7 @@ class FarmerListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmer.profile.create'),
+                ->route('platform.farmers.create'),
         ];
     }
 
@@ -66,18 +66,14 @@ class FarmerListScreen extends Screen
     }
 
     /**
-     * @param FarmerProfile $farmer_profile
+     * Remove a farmer profile.
      *
+     * @param FarmerProfile $farmerProfile
      * @throws \Exception
-     *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(FarmerProfile $farmer_profile)
+    public function remove(FarmerProfile $farmerProfile)
     {
-        $farmer_profile->delete();
-
-        Toast::info(__('Farmer Profile was removed successfully'));
-
-        return redirect()->route('platform.farmer.profile.view.all');
+        return DeleteFarmerProfile::runOrchidAction($farmerProfile, null);
     }
 }

@@ -25,8 +25,8 @@ class FarmerEditLoginLayout extends Rows
     protected function fields(): array
     {
         $user = $this->query->get('user');
-        $has_user = is_null($user) ? false : $user->exists;
-        $password_placeholder = $has_user
+        $hasUser = is_null($user) ? false : $user->exists;
+        $passwordPlaceholder = $hasUser
             ? __('Leave empty to keep current password')
             : __('Enter the password to be set');
 
@@ -55,8 +55,8 @@ class FarmerEditLoginLayout extends Rows
 
                 Password::make('user.password')
                     ->title(__('Password'))
-                    ->placeholder($password_placeholder)
-                    ->required(!$has_user),
+                    ->placeholder($passwordPlaceholder)
+                    ->required(!$hasUser),
             ]),
 
             Group::make([
