@@ -17,6 +17,7 @@ class CreateFarmerAccount
 
         if (!$existingFarmerAccount->exists()) {
             $this->createNewFarmerAccount($existingFarmerAccount, $farmerAccountData);
+
             return;
         }
 
@@ -45,6 +46,7 @@ class CreateFarmerAccount
 
         if (empty($password)) {
             unset($farmerAccountData['password']);
+
             return $farmerAccountData;
         }
 
