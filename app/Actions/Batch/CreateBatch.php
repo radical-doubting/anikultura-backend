@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
-class CreateBatches
+class CreateBatch
 {
     use AsAction;
 
