@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Crop;
 
-use App\Models\SeedStage;
+use App\Models\Crop\SeedStage;
 use Illuminate\Database\Seeder;
 
 class SeedStageSeeder extends Seeder
