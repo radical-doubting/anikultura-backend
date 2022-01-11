@@ -1,5 +1,6 @@
 <?php
 
+use App\Actions\Authentication\LoginFarmer;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -10,3 +11,7 @@
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+use Illuminate\Support\Facades\Route;
+
+Route::post('/login', LoginFarmer::class);
