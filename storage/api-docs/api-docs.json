@@ -1,0 +1,60 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Anikultura API Docs",
+        "description": "Documentation for the Anikultura REST API",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://project.test/api/v1",
+            "description": "Anikultura server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Login",
+                "operationId": "d766ec51192c666f47fa3a07807a4aed",
+                "responses": {
+                    "200": {
+                        "description": "Authentication token"
+                    },
+                    "422": {
+                        "description": "Validation errors occured"
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "description": "Logout from current authenticated session",
+                "operationId": "56c4f655c6cfcfd17f8973cc4cdada01",
+                "responses": {
+                    "200": {
+                        "description": "Successful logout"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "auth",
+            "description": "Authentication endpoints"
+        }
+    ],
+    "security": [
+        []
+    ]
+}
