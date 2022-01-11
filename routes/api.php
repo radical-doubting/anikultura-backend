@@ -2,7 +2,6 @@
 
 use App\Actions\Authentication\LoginFarmer;
 use App\Actions\Authentication\LogoutFarmer;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes

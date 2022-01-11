@@ -3,9 +3,9 @@
 namespace App\Actions\Authentication;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cookie;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class LogoutFarmer
 {
@@ -13,7 +13,7 @@ class LogoutFarmer
 
     public function handle()
     {
-        JWTAuth::logout();
+        auth('api')->logout();
     }
 
     /**
@@ -32,6 +32,8 @@ class LogoutFarmer
     {
         $this->handle();
 
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()
+            ->json(['message' => 'Successfully logged out'])
+            ->withCookie(Cookie::forget('token'));
     }
 }

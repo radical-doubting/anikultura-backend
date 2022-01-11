@@ -5,7 +5,6 @@ namespace App\Actions\Authentication;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class LoginFarmer
 {
@@ -14,7 +13,7 @@ class LoginFarmer
     public function handle($username, $password)
     {
         // Match request body with User model attributes
-        $token = JWTAuth::attempt([
+        $token = auth('api')->attempt([
             'name' => $username,
             'password' => $password,
         ]);
@@ -47,6 +46,10 @@ class LoginFarmer
      */
     public function asController(ActionRequest $request): JsonResponse
     {
+        if (auth('api')->user()) {
+            return response()->json(['error' => 'Already logged in'], 400);
+        }
+
         $username = $request->get('username');
         $password = $request->get('password');
 
@@ -56,7 +59,9 @@ class LoginFarmer
             return response()->json(['error' => 'Invalid login credentials'], 401);
         }
 
-        return response()->json($authPayload);
+        $authCookie = cookie('token', $authPayload['access_token'], $authPayload['expires_in']);
+
+        return response()->json($authPayload)->withCookie($authCookie);
     }
 
     public function rules(): array
@@ -64,7 +69,7 @@ class LoginFarmer
         return [
             'username' => [
                 'required',
-                'string'
+                'string',
             ],
             'password' => [
                 'required',
