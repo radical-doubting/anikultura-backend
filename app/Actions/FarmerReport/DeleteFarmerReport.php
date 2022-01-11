@@ -2,7 +2,7 @@
 
 namespace App\Actions\FarmerReport;
 
-use App\Models\FarmerReport;
+use App\Models\FarmerReport\FarmerReport;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;

@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
 
       - name: Install dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
@@ -35,10 +35,16 @@ jobs:
           mkdir -p database
           touch database/database.sqlite
 
+      - name: Attempt to execute database migrations
+        run: php artisan migrate:fresh
+
+      - name: Attempt to execute database seeders
+        run: php artisan db:seed
+
+      - name: Attempt to generate Swagger documentation
+        run: php artisan l5-swagger:generate
+
       - name: Execute tests
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: database/database.sqlite
         run: composer test
 
       - name: Verify linting
