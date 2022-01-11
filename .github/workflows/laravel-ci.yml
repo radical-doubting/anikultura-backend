@@ -41,6 +41,9 @@ jobs:
       - name: Attempt to execute database seeders
         run: php artisan db:seed
 
+      - name: Attempt to generate Swagger documentation
+        run: php artisan l5-swagger:generate
+
       - name: Execute tests
         run: composer test
 
