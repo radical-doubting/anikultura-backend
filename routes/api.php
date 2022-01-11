@@ -1,6 +1,7 @@
 <?php
 
 use App\Actions\Authentication\LoginFarmer;
+use App\Actions\Authentication\LogoutFarmer;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,4 +15,7 @@ use App\Actions\Authentication\LoginFarmer;
 
 use Illuminate\Support\Facades\Route;
 
-Route::post('/login', LoginFarmer::class);
+Route::group(['prefix' => 'farmer', 'as' => 'api.'], function () {
+    Route::post('/login', LoginFarmer::class)->name('login');
+    Route::post('/logout', LogoutFarmer::class)->name('logout');
+});

@@ -15,7 +15,6 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "livewire/livewire": "^2.4",
         "lorisleiva/laravel-actions": "^2.1",
         "orchid/platform": "^10.4",
         "php-open-source-saver/jwt-auth": "^1.2"
