@@ -11,38 +11,88 @@
     },
     "servers": [
         {
-            "url": "http://project.test/api/v1",
+            "url": "http://localhost/api/",
             "description": "Anikultura server"
         }
     ],
     "paths": {
-        "/login": {
+        "/auth/login": {
             "post": {
                 "tags": [
                     "auth"
                 ],
-                "description": "Login",
-                "operationId": "d766ec51192c666f47fa3a07807a4aed",
+                "description": "Login to acquire an authentication token",
+                "operationId": "091c07df1b57039447ff9c1de1c2c25b",
+                "requestBody": {
+                    "description": "Pass user credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "format": "string",
+                                        "example": "user1"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "PassWord12345"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Authentication token"
+                        "description": "Successful login with returned authentication token",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "422": {
-                        "description": "Validation errors occured"
+                        "description": "Validation errors occured",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid login credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
         },
-        "/logout": {
+        "/auth/logout": {
             "post": {
                 "tags": [
                     "auth"
                 ],
                 "description": "Logout from current authenticated session",
-                "operationId": "56c4f655c6cfcfd17f8973cc4cdada01",
+                "operationId": "4ea2b6cfb3b88d1a8748c15668ccfa83",
                 "responses": {
                     "200": {
-                        "description": "Successful logout"
+                        "description": "Successful logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }

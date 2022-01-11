@@ -3,6 +3,7 @@
 namespace App\Actions\Authentication;
 
 use Lorisleiva\Actions\Concerns\AsAction;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class CreateAuthPayload
 {
@@ -13,7 +14,7 @@ class CreateAuthPayload
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'expires_in' => JWTAuth::factory()->getTTL() * 60,
             'user' => auth()->user(),
         ];
     }

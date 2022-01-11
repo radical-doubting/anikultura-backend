@@ -22,7 +22,7 @@ use Illuminate\Routing\Controller as BaseController;
  *      url=L5_SWAGGER_CONST_HOST,
  *      description="Anikultura server"
  * )
- * 
+ *
  *  @OA\Tag(
  *       name="auth",
  *       description="Authentication endpoints"

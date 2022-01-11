@@ -2,8 +2,10 @@
 
 namespace App\Actions\Authentication;
 
+use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
+use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
 class LoginFarmer
 {
@@ -11,8 +13,9 @@ class LoginFarmer
 
     public function handle($username, $password)
     {
-        $token = auth()->attempt([
-            'username' => $username,
+        // Match request body with User model attributes
+        $token = JWTAuth::attempt([
+            'name' => $username,
             'password' => $password,
         ]);
 
@@ -23,7 +26,26 @@ class LoginFarmer
         return CreateAuthPayload::run($token);
     }
 
-    public function asController(ActionRequest $request)
+    /**
+     * @OA\Post(
+     *     path="/auth/login",
+     *     description="Login to acquire an authentication token",
+     *     tags={"auth"},
+     *     @OA\RequestBody(
+     *       required=true,
+     *       description="Pass user credentials",
+     *       @OA\JsonContent(
+     *          required={"email","password"},
+     *          @OA\Property(property="username", type="string", format="string", example="user1"),
+     *          @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *       ),
+     *     ),
+     *     @OA\Response(response="200", description="Successful login with returned authentication token", @OA\JsonContent()),
+     *     @OA\Response(response="422", description="Validation errors occured", @OA\JsonContent()),
+     *     @OA\Response(response="401", description="Invalid login credentials", @OA\JsonContent())
+     * )
+     */
+    public function asController(ActionRequest $request): JsonResponse
     {
         $username = $request->get('username');
         $password = $request->get('password');
@@ -31,7 +53,7 @@ class LoginFarmer
         $authPayload = $this->handle($username, $password);
 
         if (!$authPayload) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return response()->json(['error' => 'Invalid login credentials'], 401);
         }
 
         return response()->json($authPayload);
@@ -40,9 +62,9 @@ class LoginFarmer
     public function rules(): array
     {
         return [
-            'email' => [
+            'username' => [
                 'required',
-                'email',
+                'string'
             ],
             'password' => [
                 'required',
