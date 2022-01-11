@@ -41,7 +41,8 @@ class LoginFarmer
      *     ),
      *     @OA\Response(response="200", description="Successful login with returned authentication token", @OA\JsonContent()),
      *     @OA\Response(response="422", description="Validation errors occured", @OA\JsonContent()),
-     *     @OA\Response(response="401", description="Invalid login credentials", @OA\JsonContent())
+     *     @OA\Response(response="401", description="Invalid login credentials", @OA\JsonContent()),
+     *     @OA\Response(response="400", description="Already logged in", @OA\JsonContent()),
      * )
      */
     public function asController(ActionRequest $request): JsonResponse

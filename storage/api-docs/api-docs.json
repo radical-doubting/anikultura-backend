@@ -74,6 +74,14 @@
                                 "schema": {}
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Already logged in",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -88,6 +96,14 @@
                 "responses": {
                     "200": {
                         "description": "Successful logout",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
                         "content": {
                             "application/json": {
                                 "schema": {}

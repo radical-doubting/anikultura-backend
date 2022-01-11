@@ -25,7 +25,8 @@ class LogoutFarmer
      *       name="auth",
      *       description="Authentication endpoints"
      *     ),
-     *     @OA\Response(response="200", description="Successful logout", @OA\JsonContent())
+     *     @OA\Response(response="200", description="Successful logout", @OA\JsonContent()),
+     *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
     public function asController(ActionRequest $request): JsonResponse
