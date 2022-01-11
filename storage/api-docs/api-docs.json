@@ -12,7 +12,11 @@
     "servers": [
         {
             "url": "http://localhost/api/",
-            "description": "Anikultura server"
+            "description": "This anikultura server"
+        },
+        {
+            "url": "https://ani-be-stg.herokuapp.com/api/",
+            "description": "Anikultura staging server"
         }
     ],
     "paths": {

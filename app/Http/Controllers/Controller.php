@@ -19,8 +19,13 @@ use Illuminate\Routing\Controller as BaseController;
  * )
  *
  * @OA\Server(
- *      url=L5_SWAGGER_CONST_HOST,
- *      description="Anikultura server"
+ *      url="http://localhost/api/",
+ *      description="This anikultura server"
+ * )
+ * 
+ * @OA\Server(
+ *      url="https://ani-be-stg.herokuapp.com/api/",
+ *      description="Anikultura staging server"
  * )
  *
  *  @OA\Tag(
