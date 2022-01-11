@@ -22,7 +22,7 @@ use Illuminate\Routing\Controller as BaseController;
  *      url="http://localhost/api/",
  *      description="This anikultura server"
  * )
- * 
+ *
  * @OA\Server(
  *      url="https://ani-be-stg.herokuapp.com/api/",
  *      description="Anikultura staging server"
