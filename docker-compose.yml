@@ -1,37 +1,59 @@
 # For more information: https://laravel.com/docs/sail
-version: '3'
+version: "3"
 services:
-    laravel.test:
-        build:
-            context: ./docker/8.0
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.0/app
-        ports:
-            - '${APP_PORT:-80}:80'
-        environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-        volumes:
-            - '.:/var/www/html'
-        networks:
-            - sail
-        depends_on:
-            - postgres
-    postgres:
-        image: 'postgres:14-alpine'
-        ports:
-            - '${FORWARD_DB_PORT:-5432}:5432'
-        env_file:
-          - database.env
-        volumes:
-            - sailpgsql:/var/lib/postgresql/data/
-        networks:
-            - sail
+  laravel:
+    build:
+      context: ./docker/sail/8.0
+      dockerfile: Dockerfile
+      args:
+        WWWGROUP: "${WWWGROUP}"
+    image: sail-8.0/app
+    ports:
+      - "${APP_PORT:-80}:80"
+    environment:
+      WWWUSER: "${WWWUSER}"
+      LARAVEL_SAIL: 1
+    volumes:
+      - ".:/var/www/html"
+    networks:
+      - sail
+    depends_on:
+      - postgres
+  postgres:
+    image: "postgres:14-alpine"
+    ports:
+      - "${FORWARD_DB_PORT:-5432}:5432"
+    env_file:
+      - database.env
+    volumes:
+      - sailpgsql:/var/lib/postgresql/data/
+    networks:
+      - sail
+  influxdb:
+    image: "influxdb:1.8-alpine"
+    ports:
+      - "8086:8086"
+    env_file:
+      - influxdb.env
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+      - ./docker/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
+    networks:
+      - sail
+  grafana:
+    image: "grafana/grafana"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana-data:/var/lib/grafana
+    networks:
+      - sail
 networks:
-    sail:
-        driver: bridge
+  sail:
+    driver: bridge
 volumes:
-    sailpgsql:
-
+  sailpgsql:
+  influxdb-data:
+  grafana-data:

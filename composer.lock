@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "49a19dfe935383d92319ac0b78fe4be2",
+    "content-hash": "9b21b5f63462a82c7fb434340b64d177",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1591,6 +1591,72 @@
                 }
             ],
             "time": "2021-10-06T17:43:30+00:00"
+        },
+        {
+            "name": "influxdb/influxdb-php",
+            "version": "1.15.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/influxdata/influxdb-php.git",
+                "reference": "d6e59f4f04ab9107574fda69c2cbe36671253d03"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/influxdata/influxdb-php/zipball/d6e59f4f04ab9107574fda69c2cbe36671253d03",
+                "reference": "d6e59f4f04ab9107574fda69c2cbe36671253d03",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.0|^7.0",
+                "php": "^5.5 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "dms/phpunit-arraysubset-asserts": "^0.2.1",
+                "phpunit/phpunit": "^9.5"
+            },
+            "suggest": {
+                "ext-curl": "Curl extension, needed for Curl driver",
+                "stefanotorresi/influxdb-php-async": "An asyncronous client for InfluxDB, implemented via ReactPHP."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "InfluxDB\\": "src/InfluxDB"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Hoogendijk",
+                    "email": "stephen@tca0.nl"
+                },
+                {
+                    "name": "Daniel Martinez",
+                    "email": "danimartcas@hotmail.com"
+                },
+                {
+                    "name": "Gianluca Arbezzano",
+                    "email": "gianarb92@gmail.com"
+                }
+            ],
+            "description": "InfluxDB client library for PHP",
+            "keywords": [
+                "client",
+                "influxdata",
+                "influxdb",
+                "influxdb class",
+                "influxdb client",
+                "influxdb library",
+                "time series"
+            ],
+            "support": {
+                "issues": "https://github.com/influxdata/influxdb-php/issues",
+                "source": "https://github.com/influxdata/influxdb-php/tree/1.15.2"
+            },
+            "time": "2020-12-26T17:45:17+00:00"
         },
         {
             "name": "laravel/framework",
@@ -6859,6 +6925,57 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/2.2.4"
             },
             "time": "2021-12-08T09:12:39+00:00"
+        },
+        {
+            "name": "tray-labs/laravel-influxdb",
+            "version": "1.0.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tray-labs/laravel-influxdb.git",
+                "reference": "6832474bd5c73fd9ddb0229d165b397ceee87c8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tray-labs/laravel-influxdb/zipball/6832474bd5c73fd9ddb0229d165b397ceee87c8f",
+                "reference": "6832474bd5c73fd9ddb0229d165b397ceee87c8f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0",
+                "influxdb/influxdb-php": "^1.15"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "TrayLabs\\InfluxDB\\Providers\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "InfluxDB": "TrayLabs\\InfluxDB\\Facades\\InfluxDB"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "TrayLabs\\InfluxDB\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tray Labs",
+                    "email": "dev@traylabs.com.br"
+                }
+            ],
+            "description": "A service made to provide, set up and use the library from influxdata influxphp in Laravel.",
+            "support": {
+                "issues": "https://github.com/tray-labs/laravel-influxdb/issues",
+                "source": "https://github.com/tray-labs/laravel-influxdb/tree/1.0.7"
+            },
+            "time": "2021-06-07T13:30:27+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

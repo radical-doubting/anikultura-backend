@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.5",
         "lorisleiva/laravel-actions": "^2.1",
         "orchid/platform": "^10.4",
-        "php-open-source-saver/jwt-auth": "^1.2"
+        "php-open-source-saver/jwt-auth": "^1.2",
+        "tray-labs/laravel-influxdb": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
