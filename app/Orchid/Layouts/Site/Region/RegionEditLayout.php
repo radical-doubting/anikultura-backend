@@ -29,6 +29,12 @@ class RegionEditLayout extends Rows
                 ->required()
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
+            Input::make('region.slug')
+                ->type('text')
+                ->max(255)
+                ->title(__('Slug'))
+                ->placeholder(__('Slug'))
+                ->readonly(),
         ];
     }
 }
