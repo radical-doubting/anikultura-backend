@@ -14,15 +14,6 @@ class ProvinceSeeder extends Seeder
      */
     public function run()
     {
-        $provinces = [
-            [
-                'name' => 'Bulacan',
-                'region_id' => 1,
-            ],
-        ];
-
-        foreach ($provinces as $province) {
-            Province::create($province);
-        }
+        Province::factory()->count(10)->create();
     }
 }
