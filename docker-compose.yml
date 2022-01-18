@@ -30,14 +30,13 @@ services:
     networks:
       - sail
   influxdb:
-    image: "influxdb:1.8-alpine"
+    image: "influxdb:2.0-alpine"
     ports:
       - "8086:8086"
     env_file:
       - influxdb.env
     volumes:
       - influxdb-data:/var/lib/influxdb
-      - ./docker/influxdb/influxdb.conf:/etc/influxdb/influxdb.conf:ro
     networks:
       - sail
   grafana:

@@ -2,12 +2,12 @@
 
 namespace App\Actions\Insights;
 
-use InfluxDB\Database;
-use InfluxDB\Point;
+use GeTracker\InfluxDBLaravel\Facades\InfluxDB;
+use InfluxDB2\Point;
+use InfluxDB2\WriteApi;
 use Lorisleiva\Actions\Concerns\AsAction;
-use TrayLabs\InfluxDB\Facades\InfluxDB;
 
-class CreateInsight
+class CreateInsightMetric
 {
     use AsAction;
 
@@ -20,8 +20,13 @@ class CreateInsight
         $points = [
             new Point($measurementName, $measurementValue, $tags, $fields, time()),
         ];
-        $precision = Database::PRECISION_SECONDS;
 
-        return InfluxDB::writePoints($points, $precision);
+        $writer = $this->getWriteApi();
+        $writer->write($points);
+    }
+
+    private function getWriteApi(): WriteApi
+    {
+        return InfluxDB::createWriteApi();
     }
 }
