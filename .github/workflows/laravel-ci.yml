@@ -43,11 +43,6 @@ jobs:
       - name: Set directory permissions
         run: chmod -R 777 storage bootstrap/cache
 
-      - name: Create database
-        run: |
-          mkdir -p database
-          touch database/database.sqlite
-
       - name: Attempt to execute database migrations
         run: php artisan migrate:fresh
 
