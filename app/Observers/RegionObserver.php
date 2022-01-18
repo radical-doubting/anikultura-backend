@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
-use App\Actions\Insights\CreateInsight;
 use App\Actions\Insights\CreateInsightMetric;
 use App\Models\Site\Region;
+use InfluxDB2\Point;
 
 class RegionObserver
 {
@@ -16,7 +16,12 @@ class RegionObserver
      */
     public function created(Region $region)
     {
-        CreateInsightMetric::run('region');
+        CreateInsightMetric::run([
+            Point::measurement('h2o_levels')
+                ->addTag('location', $region->slug)
+                ->addField('level', 2)
+                ->time(time()),
+        ]);
     }
 
     /**

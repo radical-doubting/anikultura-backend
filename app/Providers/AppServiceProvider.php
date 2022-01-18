@@ -4,9 +4,7 @@ namespace App\Providers;
 
 use App\Models\Site\Region;
 use App\Observers\RegionObserver;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register application observers by Filename and Model
+     * Register application observers by Filename and Model.
      */
     private function registerObservers()
     {

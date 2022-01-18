@@ -18,6 +18,7 @@ class Region extends Model
      */
     protected $fillable = [
         'name',
+        'short_name',
     ];
 
     /**
@@ -28,6 +29,7 @@ class Region extends Model
     protected $allowedFilters = [
         'id',
         'name',
+        'short_name',
     ];
 
     /**
@@ -38,6 +40,7 @@ class Region extends Model
     protected $allowedSorts = [
         'id',
         'name',
+        'short_name',
         'updated_at',
         'created_at',
     ];
