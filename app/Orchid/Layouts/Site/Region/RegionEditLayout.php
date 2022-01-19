@@ -32,6 +32,7 @@ class RegionEditLayout extends Rows
             Input::make('region.short_name')
                 ->type('text')
                 ->max(255)
+                ->required()
                 ->title(__('Short Name'))
                 ->placeholder(__('Short Name')),
         ];

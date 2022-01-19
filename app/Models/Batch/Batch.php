@@ -19,7 +19,7 @@ class Batch extends Model
      * @var array
      */
     protected $fillable = [
-        'assigned_farmschool_name',
+        'farmschool_name',
         'assigned_site',
         'number_seeds_distributed',
         'region_id',
@@ -37,7 +37,7 @@ class Batch extends Model
      */
     protected $allowedFilters = [
         'id',
-        'assigned_farmschool_name',
+        'farmschool_name',
         'updated_at',
         'created_at',
     ];
@@ -49,7 +49,7 @@ class Batch extends Model
      */
     protected $allowedSorts = [
         'id',
-        'assigned_farmschool_name',
+        'farmschool_name',
     ];
 
     /*

@@ -37,20 +37,12 @@ class BatchListLayout extends Table
                     return Link::make($batches->id)
                         ->route('platform.batches.edit', $batches->id);
                 }),
-            TD::make('assigned_farmschool_name', __('Assigned Farmschool Name'))
+            TD::make('farmschool_name', __('Farmschool Name'))
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
-                    return Link::make($batches->assigned_farmschool_name)
-                        ->route('platform.batches.edit', $batches->id);
-                }),
-            TD::make('number_seeds_distributed', __('Number of Seeds Distributed'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Batch $batches) {
-                    return Link::make($batches->number_seeds_distributed)
+                    return Link::make($batches->farmschool_name)
                         ->route('platform.batches.edit', $batches->id);
                 }),
             TD::make('region', __('Region'))
@@ -60,7 +52,7 @@ class BatchListLayout extends Table
                     $region = $batches->region;
                     $has_region = !is_null($region);
                     $element = $has_region ? Link::make($region->name)
-                        ->route('platform.batches.edit', $region->id) : __('None');
+                        ->route('platform.sites.regions.edit', $region->id) : __('None');
 
                     return $element;
                 }),

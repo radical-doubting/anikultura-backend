@@ -45,6 +45,11 @@ class Region extends Model
         'created_at',
     ];
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->short_name} - {$this->name}";
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *
