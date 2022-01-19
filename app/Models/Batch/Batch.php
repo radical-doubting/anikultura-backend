@@ -13,6 +13,7 @@ use Orchid\Filters\Filterable;
 class Batch extends Model
 {
     use Filterable, HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -52,11 +53,6 @@ class Batch extends Model
         'farmschool_name',
     ];
 
-    /*
-    protected $casts = [
-        'farmer_names' => 'array'
-    ];*/
-
     public function region()
     {
         return $this->belongsTo(Region::class);
@@ -75,5 +71,10 @@ class Batch extends Model
     public function farmers()
     {
         return $this->belongsToMany(User::class, 'batch_farmers', 'batch_id', 'farmer_id');
+    }
+
+    public function seedAllocations()
+    {
+        return $this->hasMany(BatchSeedAllocation::class);
     }
 }

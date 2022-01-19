@@ -63,7 +63,7 @@ class BatchListLayout extends Table
                     $province = $batches->province;
                     $has_province = !is_null($province);
                     $element = $has_province ? Link::make($province->name)
-                        ->route('platform.batches.edit', $province->id) : __('None');
+                        ->route('platform.sites.provinces.edit', $province->id) : __('None');
 
                     return $element;
                 }),
@@ -74,7 +74,7 @@ class BatchListLayout extends Table
                     $municity = $batches->municity;
                     $has_municity = !is_null($municity);
                     $element = $has_municity ? Link::make($municity->name)
-                        ->route('platform.batches.edit', $municity->id) : __('None');
+                        ->route('platform.sites.municities.edit', $municity->id) : __('None');
 
                     return $element;
                 }),

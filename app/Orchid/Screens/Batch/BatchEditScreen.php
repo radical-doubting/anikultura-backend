@@ -8,6 +8,7 @@ use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
+use App\Orchid\Layouts\Batch\BatchSeedAllocationListLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -46,6 +47,7 @@ class BatchEditScreen extends Screen
 
         return [
             'batches' => $batches,
+            'batchSeedAllocations' => $batches->seedAllocations,
         ];
     }
 
@@ -77,21 +79,29 @@ class BatchEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(BatchEditLayout::class)
-                ->title(__('Batch Information'))
-                ->description(__('Update your batch\'s information.')),
-            Layout::block(BatchEditSiteLayout::class)
-                ->title(__('Batch Site'))
-                ->description(__('Enter where is the assigned site of the batch')),
-            Layout::block(BatchEditFarmersLayout::class)
-                ->title(__('Enrolled Farmers'))
-                ->description(__('Add Farmers included in the batch.'))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::DEFAULT())
-                        ->icon('check')
-                        ->method('save')
-                ),
+            Layout::tabs([
+                'Batch Information' => [
+                    Layout::block(BatchEditLayout::class)
+                        ->title(__('Batch Information'))
+                        ->description(__('Update your batch\'s information.')),
+                    Layout::block(BatchEditSiteLayout::class)
+                        ->title(__('Batch Site'))
+                        ->description(__('Enter where is the assigned site of the batch')),
+                    Layout::block(BatchEditFarmersLayout::class)
+                        ->title(__('Enrolled Farmers'))
+                        ->description(__('Add Farmers included in the batch.'))
+                        ->commands(
+                            Button::make(__('Save'))
+                                ->type(Color::DEFAULT())
+                                ->icon('check')
+                                ->method('save')
+                        ),
+                ],
+
+                'Seeds Allocation' => [
+                    BatchSeedAllocationListLayout::class,
+                ],
+            ]),
         ];
     }
 
