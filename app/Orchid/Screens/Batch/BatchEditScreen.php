@@ -11,6 +11,7 @@ use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
 class BatchEditScreen extends Screen
@@ -84,7 +85,13 @@ class BatchEditScreen extends Screen
                 ->description(__('Enter where is the assigned site of the batch')),
             Layout::block(BatchEditFarmersLayout::class)
                 ->title(__('Enrolled Farmers'))
-                ->description(__('Add Farmers included in the batch.')),
+                ->description(__('Add Farmers included in the batch.'))
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::DEFAULT())
+                        ->icon('check')
+                        ->method('save')
+                ),
         ];
     }
 

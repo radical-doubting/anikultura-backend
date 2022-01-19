@@ -8,7 +8,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Layouts\Rows;
 
-class FarmerEditProfileLayout extends Rows
+class FarmerEditPersonalLayout extends Rows
 {
     /**
      * Used to create the title of a group of form elements.
@@ -63,13 +63,14 @@ class FarmerEditProfileLayout extends Rows
                     ->title(__('Number of Dependents'))
                     ->placeholder(__('Number of Dependents'))
                     ->required(),
+
+                Input::make('farmer_profile.quantity_working_dependents')
+                    ->type('number')
+                    ->title(__('Number of Working Dependents'))
+                    ->placeholder(__('Number of Working Dependents'))
+                    ->required(),
             ]),
 
-            Input::make('farmer_profile.quantity_working_dependents')
-                ->type('number')
-                ->title(__('Number of Working Dependents'))
-                ->placeholder(__('Number of Working Dependents'))
-                ->required(),
         ];
     }
 }

@@ -42,7 +42,7 @@ class RegionListLayout extends Table
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Region $region) {
-                    return Link::make($region->getFullNameAttribute())
+                    return Link::make($region->fullName)
                         ->route('platform.sites.regions.edit', $region->id);
                 }),
 

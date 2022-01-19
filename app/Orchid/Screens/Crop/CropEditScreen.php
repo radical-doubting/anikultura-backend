@@ -5,7 +5,8 @@ namespace App\Orchid\Screens\Crop;
 use App\Actions\Crop\CreateCrop;
 use App\Actions\Crop\DeleteCrop;
 use App\Models\Crop\Crop;
-use App\Orchid\Layouts\Crop\CropEditLayout;
+use App\Orchid\Layouts\Crop\CropEditBasicLayout;
+use App\Orchid\Layouts\Crop\CropEditGrowthLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -59,12 +60,12 @@ class CropEditScreen extends Screen
                 ->icon('trash')
                 ->confirm(__('Once the crop type is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('remove')
-                ->canSee($this->crop->exists),
+                ->canSee($this->crop->exists)
+                ->type(Color::DANGER()),
 
             Button::make(__('Save'))
                 ->icon('check')
                 ->method('save'),
-
         ];
     }
 
@@ -76,14 +77,17 @@ class CropEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(CropEditLayout::class)
-                ->title(__('Crop Information'))
-                ->description(__('Update your crop\'s  information'))
+            Layout::block(CropEditBasicLayout::class)
+                ->title(__('Basic Information'))
+                ->description(__('Update your crop\'s  information')),
+
+            Layout::block(CropEditGrowthLayout::class)
+                ->title(__('Growth Information'))
+                ->description(__('Update your crop growth rate information'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
                         ->icon('check')
-                        ->canSee($this->crop->exists)
                         ->method('save')
                 ),
         ];

@@ -10,6 +10,7 @@ use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
 class FarmlandEditScreen extends Screen
@@ -81,7 +82,13 @@ class FarmlandEditScreen extends Screen
 
             Layout::block(FarmlandEditMemberLayout::class)
                 ->title('Farmers')
-                ->description('This information assigns the farmers to this farmland.'),
+                ->description('This information assigns the farmers to this farmland.')
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::DEFAULT())
+                        ->icon('check')
+                        ->method('save')
+                ),
         ];
     }
 

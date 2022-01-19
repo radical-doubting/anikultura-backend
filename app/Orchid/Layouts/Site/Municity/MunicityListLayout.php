@@ -60,7 +60,7 @@ class MunicityListLayout extends Table
                 ->render(function (Municity $municity) {
                     $region = $municity->region;
                     $has_region = !is_null($region);
-                    $element = $has_region ? Link::make($region->name)
+                    $element = $has_region ? Link::make($region->fullName)
                         ->route('platform.sites.regions.edit', $region->id) : __('None');
 
                     return $element;

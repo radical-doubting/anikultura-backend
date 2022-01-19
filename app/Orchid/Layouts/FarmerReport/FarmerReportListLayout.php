@@ -41,7 +41,7 @@ class FarmerReportListLayout extends Table
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->farmer->getFullNameAttribute())
+                    return Link::make($farmer_report->farmer->fullName)
                         ->route('platform.farmer-reports.edit', $farmer_report->id);
                 }),
 
