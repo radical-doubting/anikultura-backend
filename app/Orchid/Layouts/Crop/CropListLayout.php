@@ -22,6 +22,14 @@ class CropListLayout extends Table
     protected $target = 'crops';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]
@@ -29,14 +37,6 @@ class CropListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('id', __('ID'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Crop $crop) {
-                    return Link::make($crop->id)
-                        ->route('platform.crops.edit', $crop->id);
-                }),
             TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()

@@ -22,6 +22,14 @@ class RegionListLayout extends Table
     protected $target = 'regions';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]
@@ -29,15 +37,6 @@ class RegionListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('id', __('ID'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Region $region) {
-                    return Link::make($region->id)
-                        ->route('platform.sites.regions.edit', $region->id);
-                }),
-
             TD::make('name', __('Name'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)

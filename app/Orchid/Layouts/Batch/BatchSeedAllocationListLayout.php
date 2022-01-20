@@ -24,6 +24,14 @@ class BatchSeedAllocationListLayout extends Table
     protected $target = 'batchSeedAllocations';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]

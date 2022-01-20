@@ -22,6 +22,14 @@ class MunicityListLayout extends Table
     protected $target = 'municities';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]
@@ -29,15 +37,6 @@ class MunicityListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('id', __('ID'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Municity $municity) {
-                    return Link::make($municity->id)
-                        ->route('platform.sites.municities.edit', $municity->id);
-                }),
-
             TD::make('name', __('Name'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
@@ -48,22 +47,14 @@ class MunicityListLayout extends Table
 
             TD::make('province', __('Province'))
                 ->render(function (Municity $municity) {
-                    $province = $municity->province;
-                    $has_province = !is_null($province);
-                    $element = $has_province ? Link::make($province->name)
-                        ->route('platform.sites.provinces.edit', $province->id) : __('None');
-
-                    return $element;
+                    return Link::make($municity->name)
+                        ->route('platform.sites.municities.edit', $municity->id);
                 }),
 
             TD::make('region', __('Region'))
                 ->render(function (Municity $municity) {
-                    $region = $municity->region;
-                    $has_region = !is_null($region);
-                    $element = $has_region ? Link::make($region->fullName)
-                        ->route('platform.sites.regions.edit', $region->id) : __('None');
-
-                    return $element;
+                    return Link::make($municity->name)
+                        ->route('platform.sites.municities.edit', $municity->id);
                 }),
 
             TD::make(__('Actions'))

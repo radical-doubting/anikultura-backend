@@ -22,6 +22,14 @@ class ProvinceListLayout extends Table
     protected $target = 'provinces';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]
@@ -29,15 +37,6 @@ class ProvinceListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('id', __('ID'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Province $province) {
-                    return Link::make($province->id)
-                        ->route('platform.sites.provinces.edit', $province->id);
-                }),
-
             TD::make('name', __('Name'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
@@ -48,12 +47,8 @@ class ProvinceListLayout extends Table
 
             TD::make('region', __('Region'))
                 ->render(function (Province $province) {
-                    $region = $province->region;
-                    $has_region = !is_null($region);
-                    $element = $has_region ? Link::make($region->fullName)
-                        ->route('platform.sites.regions.edit', $region->id) : __('None');
-
-                    return $element;
+                    return Link::make($province->name)
+                        ->route('platform.sites.provinces.edit', $province->id);
                 }),
 
             TD::make(__('Actions'))

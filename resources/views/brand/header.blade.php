@@ -3,10 +3,10 @@
 @endpush
 
 <p class="h2 n-m font-thin v-center">
-    <x-orchid-icon path="orchid-old" />
+    <img src="/img/ani-logo-white.png" style="margin-right: 0.5em" width=64>
 
-    <span class="m-l d-none d-sm-block">
-        Anikultura
-        <small class="v-top opacity">Admin</small>
+    <span class="m-l d-none d-sm-block" style="font-size: 0.8em; line-height: 0.9em;">
+        Anikultura<br>
+        <small class="opacity">Management Dashboard</small>
     </span>
 </p>

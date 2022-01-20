@@ -8,6 +8,7 @@ use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
+use App\Orchid\Layouts\Batch\BatchSeedAllocationCommandLayout;
 use App\Orchid\Layouts\Batch\BatchSeedAllocationListLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
@@ -99,9 +100,10 @@ class BatchEditScreen extends Screen
                 ],
 
                 'Seeds Allocation' => [
+                    BatchSeedAllocationCommandLayout::class,
                     BatchSeedAllocationListLayout::class,
                 ],
-            ]),
+            ])->activeTab('Batch Information'),
         ];
     }
 

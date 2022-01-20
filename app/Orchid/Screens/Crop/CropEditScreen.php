@@ -60,8 +60,7 @@ class CropEditScreen extends Screen
                 ->icon('trash')
                 ->confirm(__('Once the crop type is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('remove')
-                ->canSee($this->crop->exists)
-                ->type(Color::DANGER()),
+                ->canSee($this->crop->exists),
 
             Button::make(__('Save'))
                 ->icon('check')
