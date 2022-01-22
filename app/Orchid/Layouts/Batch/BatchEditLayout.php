@@ -23,7 +23,7 @@ class BatchEditLayout extends Rows
     protected function fields(): array
     {
         return [
-            Input::make('batches.farmschool_name')
+            Input::make('batch.farmschool_name')
                 ->type('text')
                 ->max(255)
                 ->required()

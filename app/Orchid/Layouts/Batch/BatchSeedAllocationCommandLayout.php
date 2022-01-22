@@ -24,13 +24,15 @@ class BatchSeedAllocationCommandLayout extends Rows
      */
     protected function fields(): array
     {
+        $currentBatch = $this->query['batch'];
+
         return [
             Group::make([
                 Link::make(__('Allocate seeds'))
                     ->type(Color::DEFAULT())
                     ->right()
                     ->icon('orchid-old')
-                    ->route('platform.crops'),
+                    ->route('platform.batch-seed-allocations.create', $currentBatch),
             ])->autoWidth(),
         ];
     }

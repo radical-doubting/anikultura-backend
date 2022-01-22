@@ -4,7 +4,9 @@ namespace App\Orchid\Screens\Batch;
 
 use App\Actions\Batch\CreateBatch;
 use App\Actions\Batch\DeleteBatch;
+use App\Actions\Batch\DeleteBatchSeedAllocation;
 use App\Models\Batch\Batch;
+use App\Models\Batch\BatchSeedAllocation;
 use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
@@ -18,37 +20,32 @@ use Orchid\Support\Facades\Layout;
 
 class BatchEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Batch';
+    protected $exists;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit a batch under KSK SAP';
+    public function __construct()
+    {
+        $this->name = __('Create Batch');
+        $this->description = __('Create a new batch');
+    }
 
     /**
      * Query data.
      *
      * @return array
      */
-    public function query(Batch $batches): array
+    public function query(Batch $batch): array
     {
-        $this->batches = $batches;
+        $this->batch = $batch;
+        $this->exists = $batch->exists;
 
-        if (!$batches->exists) {
-            $this->name = 'Create Batch';
-            $this->description = 'Create a new batch';
+        if ($this->exists) {
+            $this->name = __('Edit Batch');
+            $this->description = __('Edit a batch under KSK SAP');
         }
 
         return [
-            'batches' => $batches,
-            'batchSeedAllocations' => $batches->seedAllocations,
+            'batch' => $batch,
+            'batchSeedAllocations' => $batch->seedAllocations,
         ];
     }
 
@@ -63,8 +60,8 @@ class BatchEditScreen extends Screen
             Button::make(__('Remove'))
                 ->icon('trash')
                 ->confirm(__('Once the batch is deleted, all of its resouces and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
-                ->method('remove')
-                ->canSee($this->batches->exists),
+                ->method('removeBatch')
+                ->canSee($this->exists),
 
             Button::make(__('Save'))
                 ->icon('check')
@@ -114,9 +111,21 @@ class BatchEditScreen extends Screen
      * @throws \Exception
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Batch $batch)
+    public function removeBatch(Batch $batch)
     {
         return DeleteBatch::runOrchidAction($batch, null);
+    }
+
+    /**
+     * Remove a batch seed allocation.
+     *
+     * @param BatchSeedAllocation $batchSeedAllocation
+     * @throws \Exception
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function removeBatchSeedAllocation(BatchSeedAllocation $batchSeedAllocation)
+    {
+        return DeleteBatchSeedAllocation::runOrchidAction($batchSeedAllocation, null);
     }
 
     /**

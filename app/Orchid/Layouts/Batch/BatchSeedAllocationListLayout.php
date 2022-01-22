@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Layouts\Batch;
 
-use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -38,6 +37,8 @@ class BatchSeedAllocationListLayout extends Table
      */
     protected function columns(): array
     {
+        $currentBatch = $this->query['batch'];
+
         return [
             TD::make('farmer', __('Farmer'))
                 ->sort()
@@ -50,19 +51,13 @@ class BatchSeedAllocationListLayout extends Table
             TD::make('crop', __('Crop'))
                 ->sort()
                 ->render(function (BatchSeedAllocation $batchSeedAllocation) {
-                    $crop = $batchSeedAllocation->crop;
-                    $element = !is_null($crop) ? Link::make($crop->name)
-                        ->route('platform.crops.edit', $crop->id) : __('None');
-
-                    return $element;
+                    return Link::make($batchSeedAllocation->crop->name);
                 }),
 
             TD::make('seed_amount', __('Seed Amount'))
                 ->sort()
                 ->render(function (BatchSeedAllocation $batchSeedAllocation) {
-                    $seedAmount = $batchSeedAllocation->seed_amount;
-
-                    return $seedAmount;
+                    return Link::make($batchSeedAllocation->seed_amount);
                 }),
 
             TD::make('updated_at', __('Last edit'))
@@ -73,18 +68,18 @@ class BatchSeedAllocationListLayout extends Table
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
-                ->render(function (BatchSeedAllocation $batchSeedAllocation) {
+                ->render(function (BatchSeedAllocation $batchSeedAllocation) use ($currentBatch) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                // ->route('platform.batch-seed-allocations.edit', $batchSeedAllocation->id)
+                                ->route('platform.batch-seed-allocations.edit', ['batch' => $currentBatch, 'batchSeedAllocation' => $batchSeedAllocation])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
                                 ->icon('trash')
-                                ->method('remove')
-                                ->confirm(__('Once the batch seed allocation is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
+                                ->method('removeBatchSeedAllocation')
+                                ->confirm(__('Once the batch seed allocation is deleted, all of its resources and data will be permanently deleted.'))
                                 ->parameters([
                                     'id' => $batchSeedAllocation->id,
                                 ]),
