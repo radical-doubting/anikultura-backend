@@ -3,7 +3,6 @@
 namespace App\Actions\FarmerReport;
 
 use App\Models\FarmerReport\FarmerReport;
-use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -12,7 +11,6 @@ class CreateFarmerReport
 {
     use AsAction;
 
-    use AsOrchidAction;
 
     public function handle(FarmerReport $farmerReport, $farmerReportData)
     {
@@ -21,7 +19,7 @@ class CreateFarmerReport
             ->save();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asController($model, ?Request $request)
     {
         $farmerReportData = $request->get('farmer_report');
 
