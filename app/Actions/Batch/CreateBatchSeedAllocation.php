@@ -21,15 +21,17 @@ class CreateBatchSeedAllocation
             ->save();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction($models, ?Request $request)
     {
-        $batchSeedAllocation = $request->get('batchSeedAllocation');
+        $batchSeedAllocationData = $request->get('batchSeedAllocation');
+        $batch = $models['batch'];
+        $batchSeedAllocationData['batch_id'] = $batch->id;
 
-        $this->handle($model, $batchSeedAllocation);
+        $this->handle($models['batchSeedAllocation'], $batchSeedAllocationData);
 
         Toast::info(__('Batch seed allocation was saved successfully!'));
 
-        return redirect()->route('platform.batches');
+        return redirect()->route('platform.batches.edit', $batch);
     }
 
     public function rules(): array

@@ -47,7 +47,6 @@ class BatchSeedAllocationEditLayout extends Rows
 
                 Input::make('batchSeedAllocation.seed_amount')
                     ->type('number')
-                    ->max(255)
                     ->required()
                     ->title(__('Seed Amount'))
                     ->placeholder(__('Seed Amount')),

@@ -50,14 +50,22 @@ class BatchSeedAllocationListLayout extends Table
 
             TD::make('crop', __('Crop'))
                 ->sort()
-                ->render(function (BatchSeedAllocation $batchSeedAllocation) {
-                    return Link::make($batchSeedAllocation->crop->name);
+                ->render(function (BatchSeedAllocation $batchSeedAllocation) use ($currentBatch) {
+                    return Link::make($batchSeedAllocation->crop->name)
+                        ->route('platform.batch-seed-allocations.edit', [
+                            'batch' => $currentBatch,
+                            'batchSeedAllocation' => $batchSeedAllocation,
+                        ]);
                 }),
 
             TD::make('seed_amount', __('Seed Amount'))
                 ->sort()
-                ->render(function (BatchSeedAllocation $batchSeedAllocation) {
-                    return Link::make($batchSeedAllocation->seed_amount);
+                ->render(function (BatchSeedAllocation $batchSeedAllocation) use ($currentBatch) {
+                    return Link::make($batchSeedAllocation->seed_amount)
+                        ->route('platform.batch-seed-allocations.edit', [
+                            'batch' => $currentBatch,
+                            'batchSeedAllocation' => $batchSeedAllocation,
+                        ]);
                 }),
 
             TD::make('updated_at', __('Last edit'))
@@ -73,7 +81,10 @@ class BatchSeedAllocationListLayout extends Table
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.batch-seed-allocations.edit', ['batch' => $currentBatch, 'batchSeedAllocation' => $batchSeedAllocation])
+                                ->route('platform.batch-seed-allocations.edit', [
+                                    'batch' => $currentBatch,
+                                    'batchSeedAllocation' => $batchSeedAllocation,
+                                ])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))

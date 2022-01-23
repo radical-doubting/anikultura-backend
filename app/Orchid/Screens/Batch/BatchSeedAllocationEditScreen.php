@@ -55,12 +55,12 @@ class BatchSeedAllocationEditScreen extends Screen
             Button::make(__('Remove'))
                 ->icon('trash')
                 ->confirm(__('Once the batchSeedAllocation is deleted, all of its resouces and data will be permanently deleted.'))
-                ->method('remove', [$this->batchSeedAllocation])
+                ->method('remove')
                 ->canSee($this->exists),
 
             Button::make(__('Save'))
                 ->icon('check')
-                ->method('save', ['batchSeedAllocation' => $this->batchSeedAllocation->id]),
+                ->method('save'),
         ];
     }
 
@@ -99,6 +99,9 @@ class BatchSeedAllocationEditScreen extends Screen
      */
     public function save(Batch $batch, BatchSeedAllocation $batchSeedAllocation, Request $request)
     {
-        return CreateBatchSeedAllocation::runOrchidAction($batchSeedAllocation, $request);
+        return CreateBatchSeedAllocation::runOrchidAction([
+            'batch' => $batch,
+            'batchSeedAllocation' => $batchSeedAllocation,
+        ], $request);
     }
 }
