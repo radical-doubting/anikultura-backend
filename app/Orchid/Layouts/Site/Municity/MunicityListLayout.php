@@ -47,13 +47,13 @@ class MunicityListLayout extends Table
 
             TD::make('province', __('Province'))
                 ->render(function (Municity $municity) {
-                    return Link::make($municity->name)
+                    return Link::make($municity->province->name)
                         ->route('platform.sites.municities.edit', $municity->id);
                 }),
 
             TD::make('region', __('Region'))
                 ->render(function (Municity $municity) {
-                    return Link::make($municity->name)
+                    return Link::make($municity->region->fullName)
                         ->route('platform.sites.municities.edit', $municity->id);
                 }),
 

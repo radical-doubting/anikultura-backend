@@ -47,7 +47,7 @@ class ProvinceListLayout extends Table
 
             TD::make('region', __('Region'))
                 ->render(function (Province $province) {
-                    return Link::make($province->name)
+                    return Link::make($province->region->fullName)
                         ->route('platform.sites.provinces.edit', $province->id);
                 }),
 
