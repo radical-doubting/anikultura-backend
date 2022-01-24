@@ -81,13 +81,13 @@ class BatchEditScreen extends Screen
                 'Batch Information' => [
                     Layout::block(BatchEditLayout::class)
                         ->title(__('Batch Information'))
-                        ->description(__('Update your batch\'s information.')),
+                        ->description(__('Basic information of this batch')),
                     Layout::block(BatchEditSiteLayout::class)
                         ->title(__('Batch Site'))
-                        ->description(__('Enter where is the assigned site of the batch')),
+                        ->description(__('The assigned site location of this batch')),
                     Layout::block(BatchEditFarmersLayout::class)
-                        ->title(__('Enrolled Farmers'))
-                        ->description(__('Add Farmers included in the batch.'))
+                        ->title(__('Batch Farmers'))
+                        ->description(__('The farmers who belong to this batch'))
                         ->commands(
                             Button::make(__('Save'))
                                 ->type(Color::DEFAULT())
@@ -97,7 +97,9 @@ class BatchEditScreen extends Screen
                 ],
 
                 'Seeds Allocation' => [
-                    BatchSeedAllocationCommandLayout::class,
+                    Layout::block(BatchSeedAllocationCommandLayout::class)
+                        ->title(__('Seeds Allocation'))
+                        ->description(__('Seeds distributed to each farmer in this batch')),
                     BatchSeedAllocationListLayout::class,
                 ],
             ])->activeTab('Batch Information'),
