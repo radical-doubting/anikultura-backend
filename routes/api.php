@@ -22,5 +22,5 @@ Route::group(['prefix' => 'auth', 'as' => 'api.'], function () {
     Route::post('/logout', LogoutFarmer::class)->name('logout')->middleware('auth:api');
 });
 
-Route::put('/create.farmer.report', CreateFarmerReport::class)->middleware('auth');
-Route::put('/delete.farmer.report', DeleteFarmerReport::class)->middleware('auth');
+Route::post('/create.farmer.report', CreateFarmerReport::class);
+Route::post('/delete.farmer.report', DeleteFarmerReport::class);
