@@ -20,6 +20,14 @@ class FarmerReportListLayout extends Table
     protected $target = 'farmer_reports';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]
@@ -27,21 +35,12 @@ class FarmerReportListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('id', __('ID'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->id)
-                        ->route('platform.farmer-reports.edit', $farmer_report->id);
-                }),
-
             TD::make('farmer', __('Farmer'))
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->farmer->getFullNameAttribute())
+                    return Link::make($farmer_report->farmer->fullName)
                         ->route('platform.farmer-reports.edit', $farmer_report->id);
                 }),
 

@@ -8,7 +8,7 @@ use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Password;
 use Orchid\Screen\Layouts\Rows;
 
-class FarmerEditLoginLayout extends Rows
+class FarmerEditAccountLayout extends Rows
 {
     /**
      * Used to create the title of a group of form elements.

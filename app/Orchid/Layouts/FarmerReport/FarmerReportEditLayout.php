@@ -39,7 +39,7 @@ class FarmerReportEditLayout extends Rows
                 ->placeholder(__('Farmer')),
 
             Relation::make('farmer_report.farmland_id')
-                ->fromModel(Farmland::class, 'id')
+                ->fromModel(Farmland::class, 'name')
                 ->required()
                 ->title(__('Farmland'))
                 ->placeholder(__('Farmland')),

@@ -24,11 +24,11 @@ class BatchEditFarmersLayout extends Rows
     protected function fields(): array
     {
         return [
-            Relation::make('batches.farmers.')
+            Relation::make('batch.farmers.')
                 ->fromModel(User::class, 'name')
                 ->applyScope('farmer')
                 ->searchColumns('first_name', 'last_name')
-                ->displayAppend('full_name')
+                ->displayAppend('fullName')
                 ->required()
                 ->multiple()
                 ->help(__('Search the name of this batch\'s members'))

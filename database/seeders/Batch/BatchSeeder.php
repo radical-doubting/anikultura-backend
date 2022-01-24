@@ -17,20 +17,18 @@ class BatchSeeder extends Seeder
     {
         $batches = [
             [
-                'assigned_farmschool_name' => 'Mabuhay High School',
+                'farmschool_name' => 'Mabuhay High School',
                 'region_id' => 5,
                 'province_id' => 1,
                 'municity_id' => 1,
                 'barangay' => 'Nagbalon',
-                'number_seeds_distributed' => 1540,
             ],
             [
-                'assigned_farmschool_name' => 'Masagana Community School',
+                'farmschool_name' => 'Masagana Community School',
                 'region_id' => 5,
                 'province_id' => 1,
                 'municity_id' => 1,
                 'barangay' => 'Liputan',
-                'number_seeds_distributed' => 2250,
             ],
         ];
 

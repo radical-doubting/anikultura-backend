@@ -22,6 +22,14 @@ class BatchListLayout extends Table
     protected $target = 'batches';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]
@@ -29,71 +37,37 @@ class BatchListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('id', __('ID'))
+
+            TD::make('farmschool_name', __('Farmschool Name'))
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
-                    return Link::make($batches->id)
-                        ->route('platform.batches.edit', $batches->id);
-                }),
-            TD::make('assigned_farmschool_name', __('Assigned Farmschool Name'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Batch $batches) {
-                    return Link::make($batches->assigned_farmschool_name)
-                        ->route('platform.batches.edit', $batches->id);
-                }),
-            TD::make('number_seeds_distributed', __('Number of Seeds Distributed'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Batch $batches) {
-                    return Link::make($batches->number_seeds_distributed)
+                    return Link::make($batches->farmschool_name)
                         ->route('platform.batches.edit', $batches->id);
                 }),
             TD::make('region', __('Region'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
-                    $region = $batches->region;
-                    $has_region = !is_null($region);
-                    $element = $has_region ? Link::make($region->name)
-                        ->route('platform.batches.edit', $region->id) : __('None');
-
-                    return $element;
+                    return Link::make($batches->region->name)
+                        ->route('platform.batches.edit', $batches->id);
                 }),
             TD::make('province', __('Province'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
-                    $province = $batches->province;
-                    $has_province = !is_null($province);
-                    $element = $has_province ? Link::make($province->name)
-                        ->route('platform.batches.edit', $province->id) : __('None');
-
-                    return $element;
+                    return Link::make($batches->province->name)
+                        ->route('platform.batches.edit', $batches->id);
                 }),
             TD::make('municity', __('Municity'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
-                    $municity = $batches->municity;
-                    $has_municity = !is_null($municity);
-                    $element = $has_municity ? Link::make($municity->name)
-                        ->route('platform.batches.edit', $municity->id) : __('None');
-
-                    return $element;
-                }),
-            TD::make('barangay', __('Barangay'))
-                ->sort()
-                ->cantHide()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Batch $batches) {
-                    return Link::make($batches->barangay)
+                    return Link::make($batches->municity->name)
                         ->route('platform.batches.edit', $batches->id);
                 }),
+
             TD::make('updated_at', __('Last edit'))
                 ->sort()
                 ->render(function (Batch $batches) {

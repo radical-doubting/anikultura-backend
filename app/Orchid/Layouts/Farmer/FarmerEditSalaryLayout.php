@@ -6,6 +6,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Layouts\Rows;
 
 class FarmerEditSalaryLayout extends Rows
@@ -43,7 +44,7 @@ class FarmerEditSalaryLayout extends Rows
                 ->options(['Yes', 'No'])
                 ->required(),
 
-            Input::make('farmer_profile.social_status_reason')
+            TextArea::make('farmer_profile.social_status_reason')
                 ->title('Why do you think so?')
                 ->required(),
         ];

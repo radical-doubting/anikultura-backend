@@ -14,16 +14,6 @@ class MunicitySeeder extends Seeder
      */
     public function run()
     {
-        $municities = [
-            [
-                'name' => 'Marilao',
-                'province_id' => 1,
-                'region_id' => 1,
-            ],
-        ];
-
-        foreach ($municities as $municity) {
-            Municity::create($municity);
-        }
+        Municity::factory()->count(10)->create();
     }
 }

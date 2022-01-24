@@ -38,6 +38,9 @@ class CreateRegion
             'region.name' => [
                 'required',
             ],
+            'region.short_name' => [
+                'required',
+            ],
         ];
     }
 }

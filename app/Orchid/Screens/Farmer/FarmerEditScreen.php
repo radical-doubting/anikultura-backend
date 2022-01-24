@@ -5,14 +5,15 @@ namespace App\Orchid\Screens\Farmer;
 use App\Actions\Farmer\CreateFarmerProfile;
 use App\Actions\Farmer\DeleteFarmerProfile;
 use App\Models\Farmer\FarmerProfile;
+use App\Orchid\Layouts\Farmer\FarmerEditAccountLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
-use App\Orchid\Layouts\Farmer\FarmerEditLoginLayout;
-use App\Orchid\Layouts\Farmer\FarmerEditProfileLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditJobEducationLayout;
+use App\Orchid\Layouts\Farmer\FarmerEditPersonalLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSalaryLayout;
-use App\Orchid\Layouts\Farmer\FarmerEditSkillLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
 class FarmerEditScreen extends Screen
@@ -81,11 +82,11 @@ class FarmerEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(FarmerEditLoginLayout::class)
+            Layout::block(FarmerEditAccountLayout::class)
                 ->title('Account Information')
                 ->description("This information collects farmer's account information."),
 
-            Layout::block(FarmerEditProfileLayout::class)
+            Layout::block(FarmerEditPersonalLayout::class)
                 ->title('Personal Information')
                 ->description("This information collects farmer's personal information."),
 
@@ -93,13 +94,19 @@ class FarmerEditScreen extends Screen
                 ->title('Address Information')
                 ->description("This information collects farmer's address information."),
 
-            Layout::block(FarmerEditSkillLayout::class)
+            Layout::block(FarmerEditJobEducationLayout::class)
                 ->title('Job and Education Information')
                 ->description("This information collects farmer's job and education information."),
 
             Layout::block(FarmerEditSalaryLayout::class)
                 ->title('Salary Information')
-                ->description("This information collects farmer's salary information."),
+                ->description("This information collects farmer's salary information.")
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::DEFAULT())
+                        ->icon('check')
+                        ->method('save')
+                ),
         ];
     }
 

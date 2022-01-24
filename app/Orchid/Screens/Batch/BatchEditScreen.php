@@ -4,47 +4,48 @@ namespace App\Orchid\Screens\Batch;
 
 use App\Actions\Batch\CreateBatch;
 use App\Actions\Batch\DeleteBatch;
+use App\Actions\Batch\DeleteBatchSeedAllocation;
 use App\Models\Batch\Batch;
+use App\Models\Batch\BatchSeedAllocation;
 use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
+use App\Orchid\Layouts\Batch\BatchSeedAllocationCommandLayout;
+use App\Orchid\Layouts\Batch\BatchSeedAllocationListLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
 class BatchEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Batch';
+    protected $exists;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit a batch under KSK SAP';
+    public function __construct()
+    {
+        $this->name = __('Create Batch');
+        $this->description = __('Create a new batch');
+    }
 
     /**
      * Query data.
      *
      * @return array
      */
-    public function query(Batch $batches): array
+    public function query(Batch $batch): array
     {
-        $this->batches = $batches;
+        $this->batch = $batch;
+        $this->exists = $batch->exists;
 
-        if (!$batches->exists) {
-            $this->name = 'Create Batch';
-            $this->description = 'Create a new batch';
+        if ($this->exists) {
+            $this->name = __('Edit Batch');
+            $this->description = __('Edit a batch under KSK SAP');
         }
 
         return [
-            'batches' => $batches,
+            'batch' => $batch,
+            'batchSeedAllocations' => $batch->seedAllocations,
         ];
     }
 
@@ -59,8 +60,8 @@ class BatchEditScreen extends Screen
             Button::make(__('Remove'))
                 ->icon('trash')
                 ->confirm(__('Once the batch is deleted, all of its resouces and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
-                ->method('remove')
-                ->canSee($this->batches->exists),
+                ->method('removeBatch')
+                ->canSee($this->exists),
 
             Button::make(__('Save'))
                 ->icon('check')
@@ -76,15 +77,32 @@ class BatchEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(BatchEditLayout::class)
-                ->title(__('Batch Information'))
-                ->description(__('Update your batch\'s information.')),
-            Layout::block(BatchEditSiteLayout::class)
-                ->title(__('Batch Site'))
-                ->description(__('Enter where is the assigned site of the batch')),
-            Layout::block(BatchEditFarmersLayout::class)
-                ->title(__('Enrolled Farmers'))
-                ->description(__('Add Farmers included in the batch.')),
+            Layout::tabs([
+                'Batch Information' => [
+                    Layout::block(BatchEditLayout::class)
+                        ->title(__('Batch Information'))
+                        ->description(__('Basic information of this batch')),
+                    Layout::block(BatchEditSiteLayout::class)
+                        ->title(__('Batch Site'))
+                        ->description(__('The assigned site location of this batch')),
+                    Layout::block(BatchEditFarmersLayout::class)
+                        ->title(__('Batch Farmers'))
+                        ->description(__('The farmers who belong to this batch'))
+                        ->commands(
+                            Button::make(__('Save'))
+                                ->type(Color::DEFAULT())
+                                ->icon('check')
+                                ->method('save')
+                        ),
+                ],
+
+                'Seeds Allocation' => [
+                    Layout::block(BatchSeedAllocationCommandLayout::class)
+                        ->title(__('Seeds Allocation'))
+                        ->description(__('Seeds distributed to each farmer in this batch')),
+                    BatchSeedAllocationListLayout::class,
+                ],
+            ])->activeTab('Batch Information'),
         ];
     }
 
@@ -95,9 +113,21 @@ class BatchEditScreen extends Screen
      * @throws \Exception
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(Batch $batch)
+    public function removeBatch(Batch $batch)
     {
         return DeleteBatch::runOrchidAction($batch, null);
+    }
+
+    /**
+     * Remove a batch seed allocation.
+     *
+     * @param BatchSeedAllocation $batchSeedAllocation
+     * @throws \Exception
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function removeBatchSeedAllocation(BatchSeedAllocation $batchSeedAllocation)
+    {
+        return DeleteBatchSeedAllocation::runOrchidAction($batchSeedAllocation, null);
     }
 
     /**

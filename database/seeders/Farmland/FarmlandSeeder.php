@@ -17,6 +17,7 @@ class FarmlandSeeder extends Seeder
     {
         $farmlands = [
             [
+                'name' => 'Mabuhay Farmland',
                 'type_id' => 1,
                 'status_id' => 1,
                 'hectares_size' => 10,
