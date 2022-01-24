@@ -13,7 +13,7 @@ Route::screen('farmlands', FarmlandListScreen::class)
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
-            ->push(__('Farmer\'s Farmland'), route('platform.farmlands'));
+            ->push(__('Farmland'), route('platform.farmlands'));
     });
 
 // Farmland > Edit Farmland
@@ -22,7 +22,7 @@ Route::screen('farmlands/{farmland}/edit', FarmlandEditScreen::class)
     ->breadcrumbs(function (Trail $trail, $farmland) {
         return $trail
             ->parent('platform.farmlands')
-            ->push(__('Edit Farmer\'s Farmland'), route('platform.farmlands.edit', $farmland));
+            ->push(__('Edit Farmland'), route('platform.farmlands.edit', $farmland));
     });
 
 // Farmland > Create Farmland
@@ -31,5 +31,5 @@ Route::screen('enroll/farmer/farmland', FarmlandEditScreen::class)
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.farmlands')
-            ->push(__('Enroll Farmer\'s Farmland'), route('platform.farmlands.create'));
+            ->push(__('Create Farmland'), route('platform.farmlands.create'));
     });

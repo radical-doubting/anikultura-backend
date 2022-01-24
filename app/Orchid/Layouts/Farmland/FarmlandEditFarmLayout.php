@@ -44,22 +44,8 @@ class FarmlandEditFarmLayout extends Rows
             Input::make('farmland.hectares_size')
                 ->type('number')
                 ->required()
-                ->title(__('Size'))
+                ->title(__('Size in Hectares'))
                 ->placeholder(__('Size in hectares')),
-
-            Relation::make('farmland.watering_systems.')
-                ->fromModel(WateringSystem::class, 'name')
-                ->required()
-                ->title(__('Watering Systems Used'))
-                ->placeholder(__('Watering Systems Used'))
-                ->multiple(),
-
-            Relation::make('farmland.crop_buyers.')
-                ->fromModel(CropBuyer::class, 'name')
-                ->required()
-                ->title(__('Crop Buyers'))
-                ->placeholder(__('Crop Buyers'))
-                ->multiple(),
         ];
     }
 }

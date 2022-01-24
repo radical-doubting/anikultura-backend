@@ -7,6 +7,7 @@ use App\Actions\Farmland\DeleteFarmland;
 use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandEditFarmLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
+use App\Orchid\Layouts\Farmland\FarmlandEditOtherLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -78,11 +79,15 @@ class FarmlandEditScreen extends Screen
         return [
             Layout::block(FarmlandEditFarmLayout::class)
                 ->title('Basic Information')
-                ->description('This information collects farmlands basic information.'),
+                ->description('This information collects farmlands basic information'),
 
             Layout::block(FarmlandEditMemberLayout::class)
                 ->title('Farmers')
-                ->description('This information assigns the farmers to this farmland.')
+                ->description('This information assigns the farmers to this farmland'),
+
+            Layout::block(FarmlandEditOtherLayout::class)
+                ->title('Other Information')
+                ->description('This information collects other farmland information')
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
