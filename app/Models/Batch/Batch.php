@@ -13,13 +13,14 @@ use Orchid\Filters\Filterable;
 class Batch extends Model
 {
     use Filterable, HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'assigned_farmschool_name',
+        'farmschool_name',
         'assigned_site',
         'number_seeds_distributed',
         'region_id',
@@ -37,7 +38,7 @@ class Batch extends Model
      */
     protected $allowedFilters = [
         'id',
-        'assigned_farmschool_name',
+        'farmschool_name',
         'updated_at',
         'created_at',
     ];
@@ -49,13 +50,8 @@ class Batch extends Model
      */
     protected $allowedSorts = [
         'id',
-        'assigned_farmschool_name',
+        'farmschool_name',
     ];
-
-    /*
-    protected $casts = [
-        'farmer_names' => 'array'
-    ];*/
 
     public function region()
     {
@@ -75,5 +71,10 @@ class Batch extends Model
     public function farmers()
     {
         return $this->belongsToMany(User::class, 'batch_farmers', 'batch_id', 'farmer_id');
+    }
+
+    public function seedAllocations()
+    {
+        return $this->hasMany(BatchSeedAllocation::class);
     }
 }

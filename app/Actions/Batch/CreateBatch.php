@@ -29,7 +29,7 @@ class CreateBatch
 
     public function asOrchidAction($model, ?Request $request)
     {
-        $batchData = $request->get('batches');
+        $batchData = $request->get('batch');
 
         $this->handle($model, $batchData);
 
@@ -41,23 +41,19 @@ class CreateBatch
     public function rules(): array
     {
         return [
-            'batches.assigned_farmschool_name' => [
+            'batch.farmschool_name' => [
                 'required',
             ],
-            'batches.number_seeds_distributed' => [
-                'required',
-                'integer',
-            ],
-            'batches.region_id' => [
+            'batch.region_id' => [
                 'required',
             ],
-            'batches.province_id' => [
+            'batch.province_id' => [
                 'required',
             ],
-            'batches.municity_id' => [
+            'batch.municity_id' => [
                 'required',
             ],
-            'batches.farmers' => [
+            'batch.farmers' => [
                 'required',
                 'array',
             ],

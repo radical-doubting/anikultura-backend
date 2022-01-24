@@ -14,7 +14,7 @@ class CreateCropsTable extends Migration
     public function up()
     {
         Schema::create('crops', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name')->nullable(false)->unique();
             $table->string('group');
             $table->string('variety');

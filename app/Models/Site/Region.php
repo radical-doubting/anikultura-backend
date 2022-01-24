@@ -2,13 +2,14 @@
 
 namespace App\Models\Site;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 
 class Region extends Model
 {
-    use Filterable, HasFactory;
+    use Filterable, HasFactory, Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +18,7 @@ class Region extends Model
      */
     protected $fillable = [
         'name',
+        'short_name',
     ];
 
     /**
@@ -27,6 +29,7 @@ class Region extends Model
     protected $allowedFilters = [
         'id',
         'name',
+        'short_name',
     ];
 
     /**
@@ -37,7 +40,27 @@ class Region extends Model
     protected $allowedSorts = [
         'id',
         'name',
+        'short_name',
         'updated_at',
         'created_at',
     ];
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->short_name} - {$this->name}";
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'short_name',
+            ],
+        ];
+    }
 }

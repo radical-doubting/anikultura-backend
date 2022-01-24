@@ -22,6 +22,14 @@ class FarmlandListLayout extends Table
     protected $target = 'farmlands';
 
     /**
+     * @return bool
+     */
+    protected function striped(): bool
+    {
+        return true;
+    }
+
+    /**
      * Get the table cells to be displayed.
      *
      * @return TD[]
@@ -29,12 +37,11 @@ class FarmlandListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('id', __('ID'))
+            TD::make('name', __('Name'))
                 ->sort()
-                ->cantHide()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
-                    return Link::make($farmland->id)
+                    return Link::make($farmland->name)
                         ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
@@ -51,14 +58,6 @@ class FarmlandListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->status->name)
-                        ->route('platform.farmlands.edit', $farmland->id);
-                }),
-
-            TD::make('hectares_size', __('Hectares Size'))
-                ->sort()
-                ->filter(TD::FILTER_TEXT)
-                ->render(function (Farmland $farmland) {
-                    return Link::make($farmland->hectares_size)
                         ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
