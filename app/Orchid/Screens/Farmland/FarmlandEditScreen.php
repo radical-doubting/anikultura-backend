@@ -5,7 +5,7 @@ namespace App\Orchid\Screens\Farmland;
 use App\Actions\Farmland\CreateFarmland;
 use App\Actions\Farmland\DeleteFarmland;
 use App\Models\Farmland\Farmland;
-use App\Orchid\Layouts\Farmland\FarmlandEditFarmLayout;
+use App\Orchid\Layouts\Farmland\FarmlandEditBasicLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditOtherLayout;
 use Illuminate\Http\Request;
@@ -77,7 +77,7 @@ class FarmlandEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(FarmlandEditFarmLayout::class)
+            Layout::block(FarmlandEditBasicLayout::class)
                 ->title('Basic Information')
                 ->description('This information collects farmlands basic information'),
 

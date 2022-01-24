@@ -26,14 +26,14 @@ class FarmlandEditOtherLayout extends Rows
     protected function fields(): array
     {
         return [
-            Relation::make('farmland.watering_systems.')
+            Relation::make('farmland.wateringSystems.')
                 ->fromModel(WateringSystem::class, 'name')
                 ->required()
                 ->title(__('Watering Systems'))
                 ->placeholder(__('Watering Systems'))
                 ->multiple(),
 
-            Relation::make('farmland.crop_buyers.')
+            Relation::make('farmland.cropBuyers.')
                 ->fromModel(CropBuyer::class, 'name')
                 ->required()
                 ->title(__('Crop Buyers'))

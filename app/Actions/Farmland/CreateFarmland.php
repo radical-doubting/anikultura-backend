@@ -22,11 +22,11 @@ class CreateFarmland
 
         $farmland
             ->wateringSystems()
-            ->sync($farmlandData['watering_systems']);
+            ->sync($farmlandData['wateringSystems']);
 
         $farmland
             ->cropBuyers()
-            ->sync($farmlandData['crop_buyers']);
+            ->sync($farmlandData['cropBuyers']);
 
         $farmland
             ->farmers()
@@ -56,11 +56,11 @@ class CreateFarmland
             'farmland.hectares_size' => [
                 'required',
             ],
-            'farmland.watering_systems' => [
+            'farmland.wateringSystems' => [
                 'required',
                 'array',
             ],
-            'farmland.crop_buyers' => [
+            'farmland.cropBuyers' => [
                 'required',
                 'array',
             ],
