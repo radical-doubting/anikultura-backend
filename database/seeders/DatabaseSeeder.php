@@ -15,6 +15,7 @@ use Database\Seeders\Farmland\WateringSystemSeeder;
 use Database\Seeders\Site\MunicitySeeder;
 use Database\Seeders\Site\ProvinceSeeder;
 use Database\Seeders\Site\RegionSeeder;
+use Database\Seeders\User\RoleSeeder;
 use Database\Seeders\User\UserSeeder;
 use Illuminate\Database\Seeder;
 
@@ -28,6 +29,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Metadata
+        $this->call(RoleSeeder::class);
         $this->call(RegionSeeder::class);
         $this->call(ProvinceSeeder::class);
         $this->call(MunicitySeeder::class);
