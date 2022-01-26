@@ -96,6 +96,26 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('System'))
                 ->addPermission('platform.systems.roles', __('Roles'))
                 ->addPermission('platform.systems.users', __('Users')),
+            ItemPermission::group(__('Site'))
+                ->addPermission('platform.sites.read', __('Read Sites'))
+                ->addPermission('platform.sites.edit', __('Edit Sites')),
+            ItemPermission::group(__('Farmers'))
+                ->addPermission('platform.farmers.read', __('Read Farmers'))
+                ->addPermission('platform.farmers.edit', __('Edit Farmers')),
+            ItemPermission::group(__('Farmlands'))
+                ->addPermission('platform.farmlands.read', __('Read Farmlands'))
+                ->addPermission('platform.farmlands.edit', __('Edit Farmlands')),
+            ItemPermission::group(__('Batches'))
+                ->addPermission('platform.batches.read', __('Read Batches'))
+                ->addPermission('platform.batches.edit', __('Edit Batches'))
+                ->addPermission('platform.batch-seed-allocations.read', __('Read Batch Seed Allocations'))
+                ->addPermission('platform.batch-seed-allocations.edit', __('Edit Batch Seed Allocations')),
+            ItemPermission::group(__('Crop Types'))
+                ->addPermission('platform.crops.read', __('Read Crop Types'))
+                ->addPermission('platform.crops.edit', __('Edit Crop Types')),
+            ItemPermission::group(__('Farmer Reports'))
+                ->addPermission('platform.farmer-reports.read', __('Read Farmer Reports'))
+                ->addPermission('platform.farmer-reports.edit', __('Edit Farmer Reports')),
         ];
     }
 

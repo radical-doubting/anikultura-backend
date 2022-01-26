@@ -10,6 +10,7 @@ use Tabuna\Breadcrumbs\Trail;
 // Crops
 Route::screen('crops', CropListScreen::class)
     ->name('platform.crops')
+    ->middleware(['access:platform.crops.read'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
@@ -19,6 +20,7 @@ Route::screen('crops', CropListScreen::class)
 // Crops > Edit Crop
 Route::screen('crops/{crop}/edit', CropEditScreen::class)
     ->name('platform.crops.edit')
+    ->middleware(['access:platform.crops.edit'])
     ->breadcrumbs(function (Trail $trail, $crop) {
         return $trail
             ->parent('platform.crops')
@@ -28,6 +30,7 @@ Route::screen('crops/{crop}/edit', CropEditScreen::class)
 // Crops > Create Crop
 Route::screen('crops/create', CropEditScreen::class)
     ->name('platform.crops.create')
+    ->middleware(['access:platform.crops.edit'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.crops')

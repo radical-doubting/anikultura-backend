@@ -11,6 +11,7 @@ use Tabuna\Breadcrumbs\Trail;
 // Batches
 Route::screen('batches', BatchListScreen::class)
     ->name('platform.batches')
+    ->middleware(['access:platform.batches.read'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
@@ -20,6 +21,7 @@ Route::screen('batches', BatchListScreen::class)
 // Batch > Create Batch
 Route::screen('batches/create', BatchEditScreen::class)
     ->name('platform.batches.create')
+    ->middleware(['access:platform.batches.edit'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.batches')
@@ -29,15 +31,17 @@ Route::screen('batches/create', BatchEditScreen::class)
 // Batches > Edit Batch
 Route::screen('batches/{batch}/edit', BatchEditScreen::class)
     ->name('platform.batches.edit')
+    ->middleware(['access:platform.batches.edit'])
     ->breadcrumbs(function (Trail $trail, $batch) {
         return $trail
             ->parent('platform.batches')
             ->push(__('Edit Batch'), route('platform.batches.edit', $batch));
     });
 
-// Batches > Edit Batch
+// Batch Seed Allocations > Edit Batch Seed Allocation
 Route::screen('batches/{batch}/seed-allocations/{batchSeedAllocation}/edit', BatchSeedAllocationEditScreen::class)
     ->name('platform.batch-seed-allocations.edit')
+    ->middleware(['access:platform.batch-seed-allocations.edit'])
     ->breadcrumbs(function (Trail $trail, $batch, $batchSeedAllocation) {
         return $trail
             ->parent('platform.batches.edit', $batch)
@@ -47,9 +51,10 @@ Route::screen('batches/{batch}/seed-allocations/{batchSeedAllocation}/edit', Bat
             ]));
     });
 
-// Batch Seed Allocations > Create Batch
+// Batch Seed Allocations > Create Batch Seed Allocation
 Route::screen('batches/{batch}/seed-allocations/create', BatchSeedAllocationEditScreen::class)
     ->name('platform.batch-seed-allocations.create')
+    ->middleware(['access:platform.batch-seed-allocations.edit'])
     ->breadcrumbs(function (Trail $trail, $batch) {
         return $trail
             ->parent('platform.batches.edit', $batch)
