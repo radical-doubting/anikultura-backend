@@ -2,10 +2,10 @@
 
 namespace App\Models\Batch;
 
+use App\Models\Farmer\Farmer;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -70,7 +70,7 @@ class Batch extends Model
 
     public function farmers()
     {
-        return $this->belongsToMany(User::class, 'batch_farmers', 'batch_id', 'farmer_id');
+        return $this->belongsToMany(Farmer::class, 'batch_farmers', 'batch_id', 'farmer_id');
     }
 
     public function seedAllocations()

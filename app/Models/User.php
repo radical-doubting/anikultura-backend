@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Batch\Batch;
-use Illuminate\Database\Eloquent\Builder;
 use Orchid\Platform\Models\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
@@ -79,25 +77,6 @@ class User extends Authenticatable implements JWTSubject
         'profile',
     ];
 
-    /**
-     * Returns users with farmer profiles.
-     *
-     * @param Builder $query
-     *
-     * @return Builder
-     */
-    public function scopeFarmer(Builder $query)
-    {
-        return $query->where('profile_type', 'App\Models\Farmer\FarmerProfile');
-    }
-
-    public function scopeFarmerBelongToBatch(Builder $query, $batchId)
-    {
-        return $query->whereHas('batches', function ($q) use ($batchId) {
-            $q->where('id', '=', $batchId);
-        });
-    }
-
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name} ({$this->name})";
@@ -106,16 +85,6 @@ class User extends Authenticatable implements JWTSubject
     public function profile()
     {
         return $this->morphTo('');
-    }
-
-    public function hasFarmerProfile()
-    {
-        return $this->profile_type === 'App\Models\Farmer\FarmerProfile';
-    }
-
-    public function batches()
-    {
-        return $this->belongsToMany(Batch::class, 'batch_farmers', 'farmer_id', 'batch_id');
     }
 
     /**

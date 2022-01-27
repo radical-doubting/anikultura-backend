@@ -3,7 +3,7 @@
 namespace App\Orchid\Layouts\Batch;
 
 use App\Models\Crop\Crop;
-use App\Models\User;
+use App\Models\Farmer\Farmer;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
@@ -30,7 +30,7 @@ class BatchSeedAllocationEditLayout extends Rows
 
         return [
             Relation::make('batchSeedAllocation.farmer_id')
-                ->fromModel(User::class, 'name')
+                ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('full_name')
                 ->applyScope('farmerBelongToBatch', $currentBatchId)

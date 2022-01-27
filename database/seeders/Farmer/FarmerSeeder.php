@@ -2,10 +2,10 @@
 
 namespace Database\Seeders\Farmer;
 
-use App\Models\Farmer\FarmerProfile;
+use App\Models\Farmer\Farmer;
 use Illuminate\Database\Seeder;
 
-class FarmerProfileSeeder extends Seeder
+class FarmerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class FarmerProfileSeeder extends Seeder
      */
     public function run()
     {
-        FarmerProfile::factory()->count(10)->create();
+        Farmer::factory()->count(10)->create();
     }
 }

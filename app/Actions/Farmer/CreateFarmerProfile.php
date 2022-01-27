@@ -2,8 +2,8 @@
 
 namespace App\Actions\Farmer;
 
+use App\Models\Farmer\Farmer;
 use App\Models\Farmer\FarmerProfile;
-use App\Models\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -44,8 +44,8 @@ class CreateFarmerProfile
     private function validateIfFarmerAccountExistsAlready($farmerProfile, Request $request)
     {
         $farmerAccount = $farmerProfile->user;
-        $userNameShouldBeUnique = Rule::unique(User::class, 'name')->ignore($farmerAccount);
-        $emailShouldBeUnique = Rule::unique(User::class, 'email')->ignore($farmerAccount);
+        $userNameShouldBeUnique = Rule::unique(Farmer::class, 'name')->ignore($farmerAccount);
+        $emailShouldBeUnique = Rule::unique(Farmer::class, 'email')->ignore($farmerAccount);
 
         $request->validate([
             'user.name' => [
