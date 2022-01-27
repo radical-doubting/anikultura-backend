@@ -8,6 +8,7 @@ use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\Crop\SeedStageSeeder;
 use Database\Seeders\Farmer\FarmerProfileSeeder;
 use Database\Seeders\Farmer\FarmerReportSeeder;
+use Database\Seeders\Farmer\FarmerSeeder;
 use Database\Seeders\Farmland\FarmlandSeeder;
 use Database\Seeders\Farmland\FarmlandStatusSeeder;
 use Database\Seeders\Farmland\FarmlandTypeSeeder;
@@ -16,7 +17,6 @@ use Database\Seeders\Site\MunicitySeeder;
 use Database\Seeders\Site\ProvinceSeeder;
 use Database\Seeders\Site\RegionSeeder;
 use Database\Seeders\User\RoleSeeder;
-use Database\Seeders\User\UserSeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
 
         // Data (in order)
         $this->call(CropSeeder::class);
-        $this->call(UserSeeder::class);
+        $this->call(FarmerSeeder::class);
         $this->call(FarmerProfileSeeder::class);
         $this->call(BatchSeeder::class);
         $this->call(FarmlandSeeder::class);
