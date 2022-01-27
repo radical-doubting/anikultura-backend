@@ -10,6 +10,8 @@ use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
+
+
 class CreateFarmerReport
 {
     use AsAction;
@@ -33,6 +35,28 @@ class CreateFarmerReport
 
         return redirect()->route('platform.farmer-reports');
     }
+    
+    //PROXYYYY PALANG TOH HAHAHAH di ko pa alam ano ilalagay hehehe
+    /**
+     * @OA\Post(
+     *     path="/create.farmer.report",
+     *     description="Gets farmer report data",
+     *     tags={"farmer_reports"},
+     *     @OA\RequestBody(
+     *       required=true,
+     *       description="Pass user credentials",
+     *       @OA\JsonContent(
+     *          required={"email","password"},
+     *          @OA\Property(property="username", type="string", format="string", example="user1"),
+     *          @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *       ),
+     *     ),
+     *     @OA\Response(response="200", description="Successful login with returned authentication token", @OA\JsonContent()),
+     *     @OA\Response(response="422", description="Validation errors occured", @OA\JsonContent()),
+     *     @OA\Response(response="401", description="Invalid login credentials", @OA\JsonContent()),
+     *     @OA\Response(response="400", description="Already logged in", @OA\JsonContent()),
+     * )
+     */
 
     public function asController(ActionRequest $request)
     {
