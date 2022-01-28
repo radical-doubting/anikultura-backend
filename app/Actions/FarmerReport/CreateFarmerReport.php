@@ -4,13 +4,10 @@ namespace App\Actions\FarmerReport;
 
 use App\Models\FarmerReport\FarmerReport;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
-
-
 
 class CreateFarmerReport
 {
@@ -35,7 +32,7 @@ class CreateFarmerReport
 
         return redirect()->route('platform.farmer-reports');
     }
-    
+
     //PROXYYYY PALANG TOH HAHAHAH di ko pa alam ano ilalagay hehehe
     /**
      * @OA\Post(
@@ -57,13 +54,12 @@ class CreateFarmerReport
      *     @OA\Response(response="400", description="Already logged in", @OA\JsonContent()),
      * )
      */
-
     public function asController(ActionRequest $request)
     {
         $farmerReportData = $request->only('farmer_id', 'farmland_id', 'seed_stage_id', 'crop_id', 'volume');
-        
+
         $this->handle($request->model(), $farmerReportData);
-        
+
         return redirect()->route('platform.farmer-reports');
     }
 
