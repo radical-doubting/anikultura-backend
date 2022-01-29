@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Database\Seeders\Batch\BatchSeeder;
+use Database\Seeders\BigBrother\BigBrotherProfileSeeder;
+use Database\Seeders\BigBrother\BigBrotherSeeder;
 use Database\Seeders\Crop\CropBuyerSeeder;
 use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\Crop\SeedStageSeeder;
@@ -44,6 +46,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CropSeeder::class);
         $this->call(FarmerSeeder::class);
         $this->call(FarmerProfileSeeder::class);
+        $this->call(BigBrotherSeeder::class);
+        $this->call(BigBrotherProfileSeeder::class);
         $this->call(BatchSeeder::class);
         $this->call(FarmlandSeeder::class);
         $this->call(FarmerReportSeeder::class);
