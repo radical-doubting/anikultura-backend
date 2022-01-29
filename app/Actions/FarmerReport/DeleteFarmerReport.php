@@ -28,7 +28,4 @@ class DeleteFarmerReport
         return redirect()->route('platform.farmer-reports');
     }
 
-    public function asController()
-    {
-    }
 }
