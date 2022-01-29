@@ -28,7 +28,8 @@ class BigBrotherFactory extends Factory
         $firstName = $this->faker->unique()->firstName();
         $middleName = $this->faker->lastName();
         $lastName = $this->faker->lastName();
-        $username = strtolower($firstName);
+        $randomNumber = $this->faker->numberBetween(1, 99);
+        $username = strtolower("$firstName$randomNumber");
 
         $data = [
             'name' => $username,
