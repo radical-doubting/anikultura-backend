@@ -27,5 +27,4 @@ class DeleteFarmerReport
 
         return redirect()->route('platform.farmer-reports');
     }
-
 }

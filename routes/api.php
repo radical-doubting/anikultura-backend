@@ -3,7 +3,6 @@
 use App\Actions\Authentication\LoginFarmer;
 use App\Actions\Authentication\LogoutFarmer;
 use App\Actions\FarmerReport\CreateFarmerReport;
-use App\Actions\FarmerReport\DeleteFarmerReport;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,4 +22,3 @@ Route::group(['prefix' => 'auth', 'as' => 'api.'], function () {
 });
 
 Route::post('/farmer-reports', CreateFarmerReport::class)->middleware('auth:api');
-
