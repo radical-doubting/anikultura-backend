@@ -2,9 +2,9 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Actions\Farmer\CreateFarmerProfile;
-use App\Actions\Farmer\DeleteFarmerProfile;
-use App\Models\Farmer\FarmerProfile;
+use App\Actions\Farmer\CreateFarmer;
+use App\Actions\Farmer\DeleteFarmer;
+use App\Models\Farmer\Farmer;
 use App\Orchid\Layouts\Farmer\FarmerEditAccountLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditJobEducationLayout;
@@ -18,39 +18,32 @@ use Orchid\Support\Facades\Layout;
 
 class FarmerEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Farmer Profile';
+    protected $exists = false;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit farmer profile details';
+    public function __construct()
+    {
+        $this->name = __('Create Farmer');
+        $this->description = __('Create a new farmer');
+    }
 
     /**
      * Query data.
      *
      * @return array
      */
-    public function query(FarmerProfile $farmerProfile): array
+    public function query(Farmer $farmer): array
     {
-        $this->farmerProfile = $farmerProfile;
-        $this->farmerAddress = $farmerProfile->farmerAddress;
+        $this->exists = $farmer->exists;
 
-        if (!$farmerProfile->exists) {
-            $this->name = __('Create Farmer Profile');
-            $this->description = __('Create a new farmer profile');
+        if ($this->exists) {
+            $this->name = __('Edit Farmer');
+            $this->description = __('Edit farmer details');
         }
 
         return [
-            'farmer_profile' => $farmerProfile,
-            'farmer_address' => $farmerProfile->farmerAddress,
-            'user' => $farmerProfile->user,
+            'user' => $farmer,
+            'farmer_profile' => $farmer->profile,
+            'farmer_address' => $farmer->profile->farmerAddress,
         ];
     }
 
@@ -66,7 +59,7 @@ class FarmerEditScreen extends Screen
                 ->icon('trash')
                 ->confirm(__('Once the farmer profile is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('remove')
-                ->canSee($this->farmerProfile->exists),
+                ->canSee($this->exists),
 
             Button::make(__('Save'))
                 ->icon('check')
@@ -111,26 +104,26 @@ class FarmerEditScreen extends Screen
     }
 
     /**
-     * Save a farmer profile.
+     * Save a farmer.
      *
-     * @param FarmerProfile $farmerProfile
-     * @param Request       $request
+     * @param Farmer $farmer
+     * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(FarmerProfile $farmerProfile, Request $request)
+    public function save(Farmer $farmer, Request $request)
     {
-        return CreateFarmerProfile::runOrchidAction($farmerProfile, $request);
+        return CreateFarmer::runOrchidAction($farmer, $request);
     }
 
     /**
-     * Removes a farmer profile.
+     * Removes a farmer.
      *
-     * @param FarmerProfile $farmerProfile
+     * @param Farmer $farmer
      * @throws \Exception
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(FarmerProfile $farmerProfile)
+    public function remove(Farmer $farmer)
     {
-        return DeleteFarmerProfile::runOrchidAction($farmerProfile, null);
+        return DeleteFarmer::runOrchidAction($farmer, null);
     }
 }

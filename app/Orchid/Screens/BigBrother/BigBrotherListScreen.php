@@ -1,29 +1,28 @@
 <?php
 
-namespace App\Orchid\Screens\Farmer;
+namespace App\Orchid\Screens\BigBrother;
 
-use App\Actions\Farmer\DeleteFarmerProfile;
-use App\Models\Farmer\Farmer;
-use App\Models\Farmer\FarmerProfile;
-use App\Orchid\Layouts\Farmer\FarmerListLayout;
+use App\Actions\BigBrother\DeleteBigBrother;
+use App\Models\BigBrother\BigBrother;
+use App\Orchid\Layouts\BigBrother\BigBrotherListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
 
-class FarmerListScreen extends Screen
+class BigBrotherListScreen extends Screen
 {
     /**
      * Display header name.
      *
      * @var string
      */
-    public $name = 'Farmer Profiles';
+    public $name = 'Big brothers';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'List of all farmers under SM KSK SAP';
+    public $description = 'List of all big brother under SM KSK SAP';
 
     /**
      * Query data.
@@ -33,8 +32,7 @@ class FarmerListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmers' => Farmer::with('profile')
-                ->filters()
+            'big_brothers' => BigBrother::filters()
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -50,7 +48,8 @@ class FarmerListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.farmers.create'),
+                ->route('platform.big brothers.create'),
+
         ];
     }
 
@@ -62,19 +61,19 @@ class FarmerListScreen extends Screen
     public function layout(): array
     {
         return [
-            FarmerListLayout::class,
+            BigBrotherListLayout::class,
         ];
     }
 
     /**
-     * Remove a farmer profile.
+     * Remove a big brother.
      *
-     * @param FarmerProfile $farmerProfile
+     * @param BigBrother $bigBrother
      * @throws \Exception
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(FarmerProfile $farmerProfile)
+    public function remove(BigBrother $bigBrother)
     {
-        return DeleteFarmerProfile::runOrchidAction($farmerProfile, null);
+        return DeleteBigBrother::runOrchidAction($bigBrother, null);
     }
 }
