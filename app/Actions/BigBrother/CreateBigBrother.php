@@ -18,10 +18,8 @@ class CreateBigBrother
 
     public function handle(BigBrother $bigBrother, array $bigBrotherData)
     {
-        $bigBrotherProfile = $bigBrother->profile();
-
         CreateUser::run($bigBrother, $bigBrotherData['account']);
-        CreateBigBrotherProfile::run($bigBrotherProfile, $bigBrotherData['profile']);
+        CreateBigBrotherProfile::run($bigBrother->profile, $bigBrotherData['profile']);
     }
 
     public function asOrchidAction($model, ?Request $request)

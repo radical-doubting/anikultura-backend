@@ -18,11 +18,9 @@ class CreateFarmer
 
     public function handle(Farmer $farmer, array $farmerData)
     {
-        $farmerProfile = $farmer->profile();
-
         CreateUser::run($farmer, $farmerData['account']);
-        CreateFarmerProfile::run($farmerProfile, $farmerData['profile']);
-        CreateFarmerAddress::run($farmerProfile, $farmerData['address']);
+        CreateFarmerProfile::run($farmer->profile, $farmerData['profile']);
+        CreateFarmerAddress::run($farmer->profile, $farmerData['address']);
     }
 
     public function asOrchidAction($model, ?Request $request)
