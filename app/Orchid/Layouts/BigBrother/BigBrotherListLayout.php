@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\BigBrother;
 
-use App\Models\BigBrother\BigBrotherProfile;
+use App\Models\BigBrother\BigBrother;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -38,54 +38,42 @@ class BigBrotherListLayout extends Table
     {
         return [
             TD::make('firstname', __('First Name'))
-                ->render(function (BigBrotherProfile $bigBrotherProfile) {
-                    $user = $bigBrotherProfile->user;
-                    $has_user = !is_null($user);
-                    $element = $has_user ? Link::make($user->first_name)
-                        ->route('platform.farmers.edit', $bigBrotherProfile->id) : __('None');
-
-                    return $element;
+                ->render(function (BigBrother $bigBrother) {
+                    return Link::make($bigBrother->first_name)
+                        ->route('platform.big-brothers.edit', $bigBrother->id);;
                 }),
 
             TD::make('middlename', __('Middle Name'))
-                ->render(function (BigBrotherProfile $bigBrotherProfile) {
-                    $user = $bigBrotherProfile->user;
-                    $has_user = !is_null($user);
-                    $element = $has_user ? Link::make($user->middle_name)
-                        ->route('platform.farmers.edit', $bigBrotherProfile->id) : __('None');
-
-                    return $element;
+                ->render(function (BigBrother $bigBrother) {
+                    return Link::make($bigBrother->middle_name)
+                        ->route('platform.big-brothers.edit', $bigBrother->id);;
                 }),
 
             TD::make('lastname', __('Last Name'))
                 ->cantHide()
-                ->render(function (BigBrotherProfile $bigBrotherProfile) {
-                    $user = $bigBrotherProfile->user;
-                    $has_user = !is_null($user);
-                    $element = $has_user ? Link::make($user->last_name)
-                        ->route('platform.farmers.edit', $bigBrotherProfile->id) : __('None');
-
-                    return $element;
+                ->render(function (BigBrother $bigBrother) {
+                    return Link::make($bigBrother->last_name)
+                        ->route('platform.big-brothers.edit', $bigBrother->id);;
                 }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->cantHide()
                 ->width('100px')
-                ->render(function (BigBrotherProfile $bigBrotherProfile) {
+                ->render(function (BigBrother $bigBrother) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.farmers.edit', $bigBrotherProfile->id)
+                                ->route('platform.farmers.edit', $bigBrother->id)
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
                                 ->icon('trash')
                                 ->method('remove')
-                                ->confirm(__('Once the farmer profile is deleted, all of its resources and data will be permanently deleted.'))
+                                ->confirm(__('Once the big brother is deleted, all of its resources and data will be permanently deleted.'))
                                 ->parameters([
-                                    'id' => $bigBrotherProfile->id,
+                                    'id' => $bigBrother->id,
                                 ]),
                         ]);
                 }),

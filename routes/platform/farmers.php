@@ -18,13 +18,13 @@ Route::screen('farmers', FarmerListScreen::class)
     });
 
 // Farmers > Edit Farmer
-Route::screen('farmers/{farmerProfile}/edit', FarmerEditScreen::class)
+Route::screen('farmers/{farmer}/edit', FarmerEditScreen::class)
     ->name('platform.farmers.edit')
     ->middleware(['access:platform.farmers.edit'])
-    ->breadcrumbs(function (Trail $trail, $farmerProfile) {
+    ->breadcrumbs(function (Trail $trail, $farmer) {
         return $trail
             ->parent('platform.farmers')
-            ->push(__('Edit Farmer Profile'), route('platform.farmers.edit', $farmerProfile));
+            ->push(__('Edit Farmer'), route('platform.farmers.edit', $farmer));
     });
 
 // Farmers > Enroll Farmer

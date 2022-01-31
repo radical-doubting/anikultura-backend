@@ -15,14 +15,14 @@ class BigBrotherListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Big brothers';
+    public $name = 'Big Brothers';
 
     /**
      * Display header description.
      *
      * @var string|null
      */
-    public $description = 'List of all big brother under SM KSK SAP';
+    public $description = 'List of all big brothers under SM KSK SAP';
 
     /**
      * Query data.
@@ -48,7 +48,7 @@ class BigBrotherListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.big brothers.create'),
+                ->route('platform.big-brothers.create'),
 
         ];
     }

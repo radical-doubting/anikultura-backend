@@ -42,6 +42,9 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Farmer Management')
                 ->icon('people')
                 ->list([
+                    Menu::make('Big Brothers')
+                        ->icon('graduation')
+                        ->route('platform.big-brothers'),
                     Menu::make('Farmers')
                         ->icon('user')
                         ->route('platform.farmers'),
@@ -99,6 +102,9 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('Sites'))
                 ->addPermission('platform.sites.read', __('Read Sites'))
                 ->addPermission('platform.sites.edit', __('Edit Sites')),
+            ItemPermission::group(__('Big Brothers'))
+                ->addPermission('platform.big-brothers.read', __('Read Big Brothers'))
+                ->addPermission('platform.big-brothers.edit', __('Edit Big Brothers')),
             ItemPermission::group(__('Farmers'))
                 ->addPermission('platform.farmers.read', __('Read Farmers'))
                 ->addPermission('platform.farmers.edit', __('Edit Farmers')),

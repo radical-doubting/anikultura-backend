@@ -24,7 +24,7 @@ class BigBrotherEditLayout extends Rows
     protected function fields(): array
     {
         return [
-            Input::make('bigBrotherProfile.organization_name')
+            Input::make('big_brother_profile.organization_name')
                 ->title(__('Affiliated Organization'))
                 ->placeholder(__('Affiliated Organization'))
                 ->required(),

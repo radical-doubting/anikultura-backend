@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\Farmer;
 
+use App\Actions\Farmer\DeleteFarmer;
 use App\Actions\Farmer\DeleteFarmerProfile;
 use App\Models\Farmer\Farmer;
 use App\Models\Farmer\FarmerProfile;
@@ -16,7 +17,7 @@ class FarmerListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Farmer Profiles';
+    public $name = 'Farmers';
 
     /**
      * Display header description.
@@ -67,14 +68,14 @@ class FarmerListScreen extends Screen
     }
 
     /**
-     * Remove a farmer profile.
+     * Remove a farmer.
      *
-     * @param FarmerProfile $farmerProfile
+     * @param Farmer $farmer
      * @throws \Exception
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(FarmerProfile $farmerProfile)
+    public function remove(Farmer $farmer)
     {
-        return DeleteFarmerProfile::runOrchidAction($farmerProfile, null);
+        return DeleteFarmer::runOrchidAction($farmer, null);
     }
 }
