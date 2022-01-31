@@ -8,6 +8,7 @@ use Database\Seeders\BigBrother\BigBrotherSeeder;
 use Database\Seeders\Crop\CropBuyerSeeder;
 use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\Crop\SeedStageSeeder;
+use Database\Seeders\Farmer\FarmerAddressSeeder;
 use Database\Seeders\Farmer\FarmerProfileSeeder;
 use Database\Seeders\Farmer\FarmerReportSeeder;
 use Database\Seeders\Farmer\FarmerSeeder;
@@ -46,6 +47,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CropSeeder::class);
         $this->call(FarmerSeeder::class);
         $this->call(FarmerProfileSeeder::class);
+        $this->call(FarmerAddressSeeder::class);
         $this->call(BigBrotherSeeder::class);
         $this->call(BigBrotherProfileSeeder::class);
         $this->call(BatchSeeder::class);

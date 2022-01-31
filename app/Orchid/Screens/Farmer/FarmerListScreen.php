@@ -3,9 +3,7 @@
 namespace App\Orchid\Screens\Farmer;
 
 use App\Actions\Farmer\DeleteFarmer;
-use App\Actions\Farmer\DeleteFarmerProfile;
 use App\Models\Farmer\Farmer;
-use App\Models\Farmer\FarmerProfile;
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;

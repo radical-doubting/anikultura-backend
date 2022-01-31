@@ -40,20 +40,20 @@ class BigBrotherListLayout extends Table
             TD::make('firstname', __('First Name'))
                 ->render(function (BigBrother $bigBrother) {
                     return Link::make($bigBrother->first_name)
-                        ->route('platform.big-brothers.edit', $bigBrother->id);;
+                        ->route('platform.big-brothers.edit', $bigBrother->id);
                 }),
 
             TD::make('middlename', __('Middle Name'))
                 ->render(function (BigBrother $bigBrother) {
                     return Link::make($bigBrother->middle_name)
-                        ->route('platform.big-brothers.edit', $bigBrother->id);;
+                        ->route('platform.big-brothers.edit', $bigBrother->id);
                 }),
 
             TD::make('lastname', __('Last Name'))
                 ->cantHide()
                 ->render(function (BigBrother $bigBrother) {
                     return Link::make($bigBrother->last_name)
-                        ->route('platform.big-brothers.edit', $bigBrother->id);;
+                        ->route('platform.big-brothers.edit', $bigBrother->id);
                 }),
 
             TD::make(__('Actions'))

@@ -21,6 +21,8 @@ class RoleSeeder extends Seeder
                 'permissions' => [
                     'platform.sites.read' => true,
                     'platform.sites.edit' => true,
+                    'platform.big-brothers.read' => true,
+                    'platform.big-brothers.edit' => true,
                     'platform.farmers.read' => true,
                     'platform.farmers.edit' => true,
                     'platform.farmlands.read' => true,
