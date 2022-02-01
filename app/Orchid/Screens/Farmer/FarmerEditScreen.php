@@ -5,11 +5,11 @@ namespace App\Orchid\Screens\Farmer;
 use App\Actions\Farmer\CreateFarmer;
 use App\Actions\Farmer\DeleteFarmer;
 use App\Models\Farmer\Farmer;
-use App\Orchid\Layouts\Farmer\FarmerEditAccountLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditJobEducationLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditPersonalLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditSalaryLayout;
+use App\Orchid\Layouts\User\UserEditLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -75,7 +75,7 @@ class FarmerEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(FarmerEditAccountLayout::class)
+            Layout::block(UserEditLayout::class)
                 ->title('Account Information')
                 ->description("This information collects farmer's account information."),
 

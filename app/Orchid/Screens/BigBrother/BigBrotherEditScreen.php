@@ -5,12 +5,11 @@ namespace App\Orchid\Screens\BigBrother;
 use App\Actions\BigBrother\CreateBigBrother;
 use App\Actions\BigBrother\DeleteBigBrother;
 use App\Models\BigBrother\BigBrother;
-use App\Orchid\Layouts\BigBrother\BigBrotherEditBasicLayout;
-use App\Orchid\Layouts\BigBrother\BigBrotherEditGrowthLayout;
+use App\Orchid\Layouts\BigBrother\BigBrotherEditLayout;
+use App\Orchid\Layouts\User\UserEditLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
-use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
 class BigBrotherEditScreen extends Screen
@@ -38,7 +37,8 @@ class BigBrotherEditScreen extends Screen
         }
 
         return [
-            'big_brother' => $bigBrother,
+            'user' => $bigBrother,
+            'big_brother_profile' => $bigBrother->profile,
         ];
     }
 
@@ -70,19 +70,13 @@ class BigBrotherEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(BigBrotherEditBasicLayout::class)
-                ->title(__('Basic Information'))
-                ->description(__('Update your bigBrother\'s  information')),
+            Layout::block(UserEditLayout::class)
+                ->title('Account Information')
+                ->description("This information collects big brother's account information."),
 
-            Layout::block(BigBrotherEditGrowthLayout::class)
-                ->title(__('Growth Information'))
-                ->description(__('Update your bigBrother growth rate information'))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::DEFAULT())
-                        ->icon('check')
-                        ->method('save')
-                ),
+            Layout::block(BigBrotherEditLayout::class)
+                ->title(__('Basic Information'))
+                ->description(__('Update big brother\'s  information')),
         ];
     }
 

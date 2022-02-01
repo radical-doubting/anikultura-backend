@@ -30,7 +30,7 @@ class BigBrotherEditLayout extends Rows
                 ->required(),
 
             Input::make('big_brother_profile.age')
-                ->title('Estimated Salary')
+                ->title(__('Age'))
                 ->type('number')
                 ->placeholder(__('Age'))
                 ->required(),
