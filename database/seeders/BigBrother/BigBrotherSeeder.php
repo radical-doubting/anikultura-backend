@@ -4,6 +4,7 @@ namespace Database\Seeders\BigBrother;
 
 use App\Models\BigBrother\BigBrother;
 use Illuminate\Database\Seeder;
+use Orchid\Platform\Models\Role;
 
 class BigBrotherSeeder extends Seeder
 {
@@ -14,6 +15,15 @@ class BigBrotherSeeder extends Seeder
      */
     public function run()
     {
-        BigBrother::factory()->count(10)->create();
+        $bigBrotherRoleId = Role::where('slug', 'big-brother')
+            ->first()
+            ->id;
+
+        BigBrother::factory()
+            ->count(10)
+            ->create()
+            ->each(function (BigBrother $bigBrother) use ($bigBrotherRoleId) {
+                $bigBrother->roles()->attach($bigBrotherRoleId);
+            });
     }
 }

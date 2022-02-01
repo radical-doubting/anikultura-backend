@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Farmer extends User
 {
+    public static $profilePath = 'App\Models\Farmer\FarmerProfile';
+
     /**
      * The database table used by the model.
      *
@@ -20,7 +22,7 @@ class Farmer extends User
         parent::boot();
 
         static::addGlobalScope(function ($query) {
-            $query->where('profile_type', 'App\Models\Farmer\FarmerProfile');
+            $query->where('profile_type', self::$profilePath);
         });
     }
 

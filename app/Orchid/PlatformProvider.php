@@ -38,32 +38,38 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('Municipalities and Cities')
                         ->icon('location-pin')
                         ->route('platform.sites.municities'),
-                ]),
+                ])
+                ->permission('platform.sites.read'),
             Menu::make('Farmer Management')
                 ->icon('people')
                 ->list([
                     Menu::make('Big Brothers')
                         ->icon('graduation')
-                        ->route('platform.big-brothers'),
+                        ->route('platform.big-brothers')
+                        ->permission('platform.big-brothers.read'),
                     Menu::make('Farmers')
                         ->icon('user')
-                        ->route('platform.farmers'),
+                        ->route('platform.farmers')
+                        ->permission('platform.farmers.read'),
                     Menu::make('Farmlands')
                         ->icon('full-screen')
-                        ->route('platform.farmlands'),
+                        ->route('platform.farmlands')
+                        ->permission('platform.farmlands.read'),
                     Menu::make('Batches')
                         ->icon('module')
-                        ->route('platform.batches'),
+                        ->route('platform.batches')
+                        ->permission('platform.batches.read'),
                 ]),
 
             Menu::make('Crop Types Management')
                 ->icon('quote')
-                ->route('platform.crops'),
+                ->route('platform.crops')
+                ->permission('platform.crops.read'),
 
             Menu::make('Farmer Reports Management')
                 ->icon('docs')
-                ->title(__('Admin Insights'))
-                ->route('platform.farmer-reports'),
+                ->route('platform.farmer-reports')
+                ->permission('platform.farmer-reports.read'),
 
             Menu::make(__('Users'))
                 ->icon('user')

@@ -19,6 +19,9 @@ class RoleSeeder extends Seeder
                 'slug' => 'admin',
                 'name' => 'Administrator',
                 'permissions' => [
+                    'platform.index' => true,
+                    'platform.systems.roles' => true,
+                    'platform.systems.users' => true,
                     'platform.sites.read' => true,
                     'platform.sites.edit' => true,
                     'platform.big-brothers.read' => true,
@@ -41,6 +44,7 @@ class RoleSeeder extends Seeder
                 'slug' => 'big-brother',
                 'name' => 'Big Brother',
                 'permissions' => [
+                    'platform.index' => true,
                     'platform.farmlands.read' => true,
                     'platform.farmlands.edit' => true,
                     'platform.batches.read' => true,
