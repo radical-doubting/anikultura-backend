@@ -2,6 +2,7 @@
 
 use App\Actions\Authentication\LoginFarmer;
 use App\Actions\Authentication\LogoutFarmer;
+use App\Actions\FarmerReport\CreateFarmerReport;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,3 +20,5 @@ Route::group(['prefix' => 'auth', 'as' => 'api.'], function () {
     Route::post('/login', LoginFarmer::class)->name('login');
     Route::post('/logout', LogoutFarmer::class)->name('logout')->middleware('auth:api');
 });
+
+Route::post('/farmer-reports', CreateFarmerReport::class)->middleware('auth:api');

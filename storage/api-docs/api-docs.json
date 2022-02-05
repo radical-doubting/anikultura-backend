@@ -116,6 +116,94 @@
                     }
                 }
             }
+        },
+        "/farmer-reports": {
+            "post": {
+                "tags": [
+                    "farmer_reports"
+                ],
+                "description": "Create farmer reports",
+                "operationId": "52e31995f8366c15208e900e175f884d",
+                "requestBody": {
+                    "description": "Pass farmer reports",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "farmer_id",
+                                    "farmland_id",
+                                    "seed_stage_id",
+                                    "crop_id",
+                                    "volume"
+                                ],
+                                "properties": {
+                                    "farmer_id": {
+                                        "type": "bigint",
+                                        "format": "bigint",
+                                        "example": "5000"
+                                    },
+                                    "farmland_id": {
+                                        "type": "bigint",
+                                        "format": "bigint",
+                                        "example": "4000"
+                                    },
+                                    "seed_stage_id": {
+                                        "type": "bigint",
+                                        "format": "bigint",
+                                        "example": "3000"
+                                    },
+                                    "crop_id": {
+                                        "type": "bigint",
+                                        "format": "bigint",
+                                        "example": "2000"
+                                    },
+                                    "volume": {
+                                        "type": "double",
+                                        "format": "double",
+                                        "example": "1000"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfuly crated a farmer report",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation errors occured",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid request",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request. Id must be bigint.",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "tags": [
