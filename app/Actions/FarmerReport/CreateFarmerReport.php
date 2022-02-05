@@ -33,7 +33,6 @@ class CreateFarmerReport
         return redirect()->route('platform.farmer-reports');
     }
 
-    //PROXYYYY PALANG TOH HAHAHAH di ko pa alam ano ilalagay hehehe
     /**
      * @OA\Post(
      *     path="/farmer-reports",
@@ -48,7 +47,7 @@ class CreateFarmerReport
      *          @OA\Property(property="farmland_id", type="bigint", format="bigint", example="4000"),
      *          @OA\Property(property="seed_stage_id", type="bigint", format="bigint", example="3000"),
      *          @OA\Property(property="crop_id", type="bigint", format="bigint", example="2000"),
-     *          @OA\Property(property="seed_stage_id", type="double", format="double", example="1000"),
+     *          @OA\Property(property="volume", type="double", format="double", example="1000"),
      *       ),
      *     ),
      *     @OA\Response(response="200", description="Successfuly crated a farmer report", @OA\JsonContent()),
