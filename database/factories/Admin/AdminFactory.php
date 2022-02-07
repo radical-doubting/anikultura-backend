@@ -39,8 +39,8 @@ class AdminFactory extends Factory
             'first_name' => $firstName,
             'middle_name' => $middleName,
             'last_name' => $lastName,
-            // 'profile_type' => 'App\Models\BigBrother\BigBrotherProfile',
-            // 'profile_id' => self::$nextProfileId++,
+            'profile_type' => 'App\Models\Admin\AdminProfile',
+            'profile_id' => self::$nextProfileId++,
         ];
 
         return $data;

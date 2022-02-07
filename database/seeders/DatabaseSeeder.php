@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Seeders\Admin\AdminProfileSeeder;
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\Batch\BatchSeeder;
 use Database\Seeders\BigBrother\BigBrotherProfileSeeder;
@@ -52,6 +53,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BigBrotherSeeder::class);
         $this->call(BigBrotherProfileSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(AdminProfileSeeder::class);
         $this->call(BatchSeeder::class);
         $this->call(FarmlandSeeder::class);
         $this->call(FarmerReportSeeder::class);
