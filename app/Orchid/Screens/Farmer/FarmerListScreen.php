@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Actions\Farmer\DeleteFarmerProfile;
-use App\Models\Farmer\FarmerProfile;
+use App\Actions\Farmer\DeleteFarmer;
+use App\Models\Farmer\Farmer;
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -15,7 +15,7 @@ class FarmerListScreen extends Screen
      *
      * @var string
      */
-    public $name = 'Farmer Profiles';
+    public $name = 'Farmers';
 
     /**
      * Display header description.
@@ -32,7 +32,7 @@ class FarmerListScreen extends Screen
     public function query(): array
     {
         return [
-            'farmer_profiles' => FarmerProfile::with('user')
+            'farmers' => Farmer::with('profile')
                 ->filters()
                 ->defaultSort('id')
                 ->paginate(),
@@ -66,14 +66,14 @@ class FarmerListScreen extends Screen
     }
 
     /**
-     * Remove a farmer profile.
+     * Remove a farmer.
      *
-     * @param FarmerProfile $farmerProfile
+     * @param Farmer $farmer
      * @throws \Exception
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function remove(FarmerProfile $farmerProfile)
+    public function remove(Farmer $farmer)
     {
-        return DeleteFarmerProfile::runOrchidAction($farmerProfile, null);
+        return DeleteFarmer::runOrchidAction($farmer, null);
     }
 }

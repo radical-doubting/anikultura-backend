@@ -14,6 +14,7 @@ use Tabuna\Breadcrumbs\Trail;
 // Sites > Regions
 Route::screen('sites/regions', RegionListScreen::class)
     ->name('platform.sites.regions')
+    ->middleware(['access:platform.sites.read'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
@@ -23,6 +24,7 @@ Route::screen('sites/regions', RegionListScreen::class)
 // Sites > Regions > Edit Region
 Route::screen('sites/regions/{region}/edit', RegionEditScreen::class)
     ->name('platform.sites.regions.edit')
+    ->middleware(['access:platform.sites.edit'])
     ->breadcrumbs(function (Trail $trail, $region) {
         return $trail
             ->parent('platform.sites.regions')
@@ -32,6 +34,7 @@ Route::screen('sites/regions/{region}/edit', RegionEditScreen::class)
 // Sites > Regions > Create Region
 Route::screen('sites/regions/create', RegionEditScreen::class)
     ->name('platform.sites.regions.create')
+    ->middleware(['access:platform.sites.edit'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.sites.regions')
@@ -41,6 +44,7 @@ Route::screen('sites/regions/create', RegionEditScreen::class)
 // Sites > Provinces
 Route::screen('sites/provinces', ProvinceListScreen::class)
     ->name('platform.sites.provinces')
+    ->middleware(['access:platform.sites.read'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
@@ -50,6 +54,7 @@ Route::screen('sites/provinces', ProvinceListScreen::class)
 // Sites > Provinces > Edit Province
 Route::screen('sites/provinces/{province}/edit', ProvinceEditScreen::class)
     ->name('platform.sites.provinces.edit')
+    ->middleware(['access:platform.sites.edit'])
     ->breadcrumbs(function (Trail $trail, $province) {
         return $trail
             ->parent('platform.sites.provinces')
@@ -59,6 +64,7 @@ Route::screen('sites/provinces/{province}/edit', ProvinceEditScreen::class)
 // Sites > Provinces > Create Province
 Route::screen('sites/provinces/create', ProvinceEditScreen::class)
     ->name('platform.sites.provinces.create')
+    ->middleware(['access:platform.sites.edit'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.sites.provinces')
@@ -68,6 +74,7 @@ Route::screen('sites/provinces/create', ProvinceEditScreen::class)
 // Sites > Municipalities or cities
 Route::screen('sites/municities', MunicityListScreen::class)
     ->name('platform.sites.municities')
+    ->middleware(['access:platform.sites.read'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
@@ -77,6 +84,7 @@ Route::screen('sites/municities', MunicityListScreen::class)
 // Sites > Municities > Edit Municity
 Route::screen('sites/municities/{municity}/edit', MunicityEditScreen::class)
     ->name('platform.sites.municities.edit')
+    ->middleware(['access:platform.sites.edit'])
     ->breadcrumbs(function (Trail $trail, $municity) {
         return $trail
             ->parent('platform.sites.municities')
@@ -86,6 +94,7 @@ Route::screen('sites/municities/{municity}/edit', MunicityEditScreen::class)
 // Sites > Municities > Create Municity
 Route::screen('sites/municities/create', MunicityEditScreen::class)
     ->name('platform.sites.municities.create')
+    ->middleware(['access:platform.sites.edit'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.sites.municities')

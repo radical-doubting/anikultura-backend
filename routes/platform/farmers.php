@@ -10,6 +10,7 @@ use Tabuna\Breadcrumbs\Trail;
 // Farmers
 Route::screen('farmers', FarmerListScreen::class)
     ->name('platform.farmers')
+    ->middleware(['access:platform.farmers.read'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
@@ -17,17 +18,19 @@ Route::screen('farmers', FarmerListScreen::class)
     });
 
 // Farmers > Edit Farmer
-Route::screen('farmers/{farmerProfile}/edit', FarmerEditScreen::class)
+Route::screen('farmers/{farmer}/edit', FarmerEditScreen::class)
     ->name('platform.farmers.edit')
-    ->breadcrumbs(function (Trail $trail, $farmerProfile) {
+    ->middleware(['access:platform.farmers.edit'])
+    ->breadcrumbs(function (Trail $trail, $farmer) {
         return $trail
             ->parent('platform.farmers')
-            ->push(__('Edit Farmer Profile'), route('platform.farmers.edit', $farmerProfile));
+            ->push(__('Edit Farmer'), route('platform.farmers.edit', $farmer));
     });
 
 // Farmers > Enroll Farmer
 Route::screen('farmers/create', FarmerEditScreen::class)
     ->name('platform.farmers.create')
+    ->middleware(['access:platform.farmers.edit'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.farmers')

@@ -33,17 +33,19 @@ class FarmlandEditBasicLayout extends Rows
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
 
-            Relation::make('farmland.type_id')
-                ->fromModel(FarmlandType::class, 'name')
-                ->required()
-                ->title(__('Type'))
-                ->placeholder(__('Type')),
+            Group::make([
+                Relation::make('farmland.type_id')
+                    ->fromModel(FarmlandType::class, 'name')
+                    ->required()
+                    ->title(__('Type'))
+                    ->placeholder(__('Type')),
 
-            Relation::make('farmland.status_id')
-                ->fromModel(FarmlandStatus::class, 'name')
-                ->required()
-                ->title(__('Status'))
-                ->placeholder(__('Status')),
+                Relation::make('farmland.status_id')
+                    ->fromModel(FarmlandStatus::class, 'name')
+                    ->required()
+                    ->title(__('Status'))
+                    ->placeholder(__('Status')),
+            ]),
 
             Input::make('farmland.hectares_size')
                 ->type('number')

@@ -2,9 +2,11 @@
 
 namespace Database\Seeders\Farmland;
 
+use App\Models\Farmer\Farmer;
+use App\Models\Farmland\CropBuyer;
 use App\Models\Farmland\Farmland;
+use App\Models\Farmland\WateringSystem;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class FarmlandSeeder extends Seeder
 {
@@ -15,27 +17,24 @@ class FarmlandSeeder extends Seeder
      */
     public function run()
     {
-        $farmlands = [
-            [
-                'name' => 'Mabuhay Farmland',
-                'type_id' => 1,
-                'status_id' => 1,
-                'hectares_size' => 10,
-            ],
-        ];
+        Farmland::factory()->count(10)->create();
 
-        foreach ($farmlands as $farmland) {
-            Farmland::create($farmland);
-        }
+        $wateringSystems = WateringSystem::all();
+        $cropBuyers = CropBuyer::all();
+        $farmers = Farmer::all();
 
-        DB::table('farmland_farmers')->insert([
-            'farmland_id' => 1,
-            'farmer_id' => 1,
-        ]);
+        Farmland::all()->each(function ($farmland) use ($wateringSystems, $cropBuyers, $farmers) {
+            $farmland->cropBuyers()->attach(
+                $cropBuyers->random(rand(1, $cropBuyers->count()))->pluck('id')->toArray()
+            );
 
-        DB::table('farmland_crops')->insert([
-            'farmland_id' => 1,
-            'crop_id' => 1,
-        ]);
+            $farmland->wateringSystems()->attach(
+                $wateringSystems->random(rand(1, $wateringSystems->count()))->pluck('id')->toArray()
+            );
+
+            $farmland->farmers()->attach(
+                $farmers->random(rand(1, $farmers->count()))->pluck('id')->toArray()
+            );
+        });
     }
 }

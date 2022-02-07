@@ -2,7 +2,6 @@
 
 namespace App\Models\Farmer;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -73,7 +72,7 @@ class FarmerProfile extends Model
 
     public function user()
     {
-        return $this->morphOne(User::class, 'profile');
+        return $this->morphOne(Farmer::class, 'profile');
     }
 
     public function farmlands()

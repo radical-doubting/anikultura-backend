@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\FarmerProfile;
+use App\Models\Farmer\Farmer;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -19,7 +19,7 @@ class FarmerListLayout extends Table
      *
      * @var string
      */
-    protected $target = 'farmer_profiles';
+    protected $target = 'farmers';
 
     /**
      * @return bool
@@ -38,54 +38,42 @@ class FarmerListLayout extends Table
     {
         return [
             TD::make('firstname', __('First Name'))
-                ->render(function (FarmerProfile $farmer_profile) {
-                    $user = $farmer_profile->user;
-                    $has_user = !is_null($user);
-                    $element = $has_user ? Link::make($user->first_name)
-                        ->route('platform.farmers.edit', $farmer_profile->id) : __('None');
-
-                    return $element;
+                ->render(function (Farmer $farmer) {
+                    return Link::make($farmer->first_name)
+                        ->route('platform.farmers.edit', $farmer->id);
                 }),
 
             TD::make('middlename', __('Middle Name'))
-                ->render(function (FarmerProfile $farmer_profile) {
-                    $user = $farmer_profile->user;
-                    $has_user = !is_null($user);
-                    $element = $has_user ? Link::make($user->middle_name)
-                        ->route('platform.farmers.edit', $farmer_profile->id) : __('None');
-
-                    return $element;
+                ->render(function (Farmer $farmer) {
+                    return Link::make($farmer->middle_name)
+                        ->route('platform.farmers.edit', $farmer->id);
                 }),
 
             TD::make('lastname', __('Last Name'))
                 ->cantHide()
-                ->render(function (FarmerProfile $farmer_profile) {
-                    $user = $farmer_profile->user;
-                    $has_user = !is_null($user);
-                    $element = $has_user ? Link::make($user->last_name)
-                        ->route('platform.farmers.edit', $farmer_profile->id) : __('None');
-
-                    return $element;
+                ->render(function (Farmer $farmer) {
+                    return Link::make($farmer->last_name)
+                        ->route('platform.farmers.edit', $farmer->id);
                 }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->cantHide()
                 ->width('100px')
-                ->render(function (FarmerProfile $farmer_profile) {
+                ->render(function (Farmer $farmer) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.farmers.edit', $farmer_profile->id)
+                                ->route('platform.farmers.edit', $farmer->id)
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
                                 ->icon('trash')
                                 ->method('remove')
-                                ->confirm(__('Once the farmer profile is deleted, all of its resources and data will be permanently deleted.'))
+                                ->confirm(__('Once the farmer is deleted, all of its resources and data will be permanently deleted.'))
                                 ->parameters([
-                                    'id' => $farmer_profile->id,
+                                    'id' => $farmer->id,
                                 ]),
                         ]);
                 }),
