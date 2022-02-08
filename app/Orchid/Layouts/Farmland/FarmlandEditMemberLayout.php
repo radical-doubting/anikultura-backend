@@ -27,7 +27,6 @@ class FarmlandEditMemberLayout extends Rows
         return [
             Relation::make('farmland.farmers.')
                 ->fromModel(Farmer::class, 'name')
-                ->applyScope('farmer')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('full_name')
                 ->required()

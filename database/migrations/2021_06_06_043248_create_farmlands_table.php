@@ -15,7 +15,7 @@ class CreateFarmlandsTable extends Migration
     {
         Schema::create('farmlands', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable(false);
             $table->integer('hectares_size');
 
             $table->unsignedBigInteger('type_id')

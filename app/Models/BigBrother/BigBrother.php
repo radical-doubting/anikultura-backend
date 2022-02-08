@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class BigBrother extends User
 {
+    public static $profilePath = 'App\Models\BigBrother\BigBrotherProfile';
+
     /**
      * The database table used by the model.
      *
@@ -20,7 +22,7 @@ class BigBrother extends User
         parent::boot();
 
         static::addGlobalScope(function ($query) {
-            $query->where('profile_type', 'App\Models\BigBrother\BigBrotherProfile');
+            $query->where('profile_type', self::$profilePath);
         });
     }
 

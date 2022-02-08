@@ -12,6 +12,7 @@ class Farmland extends Model
     use HasFactory, Filterable;
 
     protected $fillable = [
+        'name',
         'type_id',
         'status_id',
         'hectares_size',
@@ -24,6 +25,8 @@ class Farmland extends Model
      */
     protected $allowedFilters = [
         'id',
+        'name',
+        'hectares_size',
     ];
 
     /**
@@ -33,6 +36,8 @@ class Farmland extends Model
      */
     protected $allowedSorts = [
         'id',
+        'name',
+        'hectares_size',
         'updated_at',
         'created_at',
     ];

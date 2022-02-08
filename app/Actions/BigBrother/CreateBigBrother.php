@@ -4,6 +4,7 @@ namespace App\Actions\BigBrother;
 
 use App\Actions\User\CreateUser;
 use App\Models\BigBrother\BigBrother;
+use App\Models\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -18,8 +19,22 @@ class CreateBigBrother
 
     public function handle(BigBrother $bigBrother, array $bigBrotherData)
     {
-        CreateUser::run($bigBrother, $bigBrotherData['account']);
-        CreateBigBrotherProfile::run($bigBrother->profile, $bigBrotherData['profile']);
+        $createdAccountId = CreateUser::run($bigBrother, $bigBrotherData['account']);
+        $createdAccount = User::find($createdAccountId);
+
+        $this->createProfile($createdAccount, $bigBrotherData['profile']);
+    }
+
+    private function createProfile(User $createdAccount, $profileData)
+    {
+        $bigBrotherProfileId = CreateBigBrotherProfile::run($createdAccount->profile, $profileData);
+
+        $createdAccount->update([
+            'profile_id' => $bigBrotherProfileId,
+            'profile_type' => BigBrother::$profilePath,
+        ]);
+
+        $createdAccount->refresh();
     }
 
     public function asOrchidAction($model, ?Request $request)

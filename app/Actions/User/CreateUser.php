@@ -12,29 +12,28 @@ class CreateUser
 
     public function handle(User $user, $userData)
     {
-        if (is_null($user)) {
-            $this->createNewUser($user, $userData);
-
-            return;
+        if (!$user->exists) {
+            return $this->createNewUser($userData);
+        } else {
+            return $this->updateExistingUser($user, $userData);
         }
-
-        $this->updateExistingUser($user, $userData);
     }
 
-    private function createNewUser($existingUser, $userData)
+    private function createNewUser($userData)
     {
         $newUser = new User($userData);
-        $plainTextPassword = $userData['password'];
-        $newUser->password = $this->hashPassword($plainTextPassword);
+        $newUser->password = $this->hashPassword($userData['password']);
         $newUser->save();
 
-        $existingUser->save($newUser);
+        return $newUser->id;
     }
 
     private function updateExistingUser($user, $userData)
     {
         $updatedUserDataData = $this->updatePassword($userData);
         $user->update($updatedUserDataData);
+
+        return $user->id;
     }
 
     private function updatePassword($userData)

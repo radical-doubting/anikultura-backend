@@ -47,6 +47,9 @@ class CreateFarmland
     public function rules(): array
     {
         return [
+            'farmland.name' => [
+                'required',
+            ],
             'farmland.type_id' => [
                 'required',
             ],

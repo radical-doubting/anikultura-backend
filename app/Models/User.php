@@ -22,6 +22,8 @@ class User extends Authenticatable implements JWTSubject
         'email',
         'password',
         'permissions',
+        'profile_id',
+        'profile_type',
     ];
 
     /**
@@ -84,7 +86,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function profile()
     {
-        return $this->morphTo('');
+        return $this->morphTo();
     }
 
     /**

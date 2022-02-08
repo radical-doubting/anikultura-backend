@@ -4,6 +4,7 @@ namespace App\Actions\Farmer;
 
 use App\Actions\User\CreateUser;
 use App\Models\Farmer\Farmer;
+use App\Models\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -18,9 +19,24 @@ class CreateFarmer
 
     public function handle(Farmer $farmer, array $farmerData)
     {
-        CreateUser::run($farmer, $farmerData['account']);
-        CreateFarmerProfile::run($farmer->profile, $farmerData['profile']);
-        CreateFarmerAddress::run($farmer->profile, $farmerData['address']);
+        $createdAccountId = CreateUser::run($farmer, $farmerData['account']);
+        $createdAccount = User::find($createdAccountId);
+
+        $this->createProfile($createdAccount, $farmerData['profile']);
+
+        CreateFarmerAddress::run($createdAccount->profile, $farmerData['address']);
+    }
+
+    private function createProfile(User $createdAccount, $profileData)
+    {
+        $farmerProfileId = CreateFarmerProfile::run($createdAccount->profile, $profileData);
+
+        $createdAccount->update([
+            'profile_id' => $farmerProfileId,
+            'profile_type' => Farmer::$profilePath,
+        ]);
+
+        $createdAccount->refresh();
     }
 
     public function asOrchidAction($model, ?Request $request)
