@@ -10,6 +10,8 @@ class AddSlugColumnsForInsights extends Migration
         'regions',
         'provinces',
         'municities',
+        'farmland_types',
+        'farmland_statuses',
     ];
 
     /**

@@ -3,22 +3,22 @@
 namespace App\Observers;
 
 use App\Actions\Insights\CreateInsightMetric;
-use App\Models\Site\Region;
+use App\Models\Farmer\Farmer;
 use InfluxDB2\Point;
 
-class RegionObserver
+class FarmerObserver
 {
     /**
-     * Handle the Region "saved" event.
+     * Handle the Farmer "saved" event.
      *
-     * @param  \App\Models\Site\Region  $region
+     * @param  \App\Models\Farmer\Farmer  $farmer
      * @return void
      */
-    public function saved(Region $region)
+    public function saved(Farmer $farmer)
     {
         CreateInsightMetric::dispatch([
-            Point::measurement('regions')
-                ->addTag('location', $region->slug)
+            Point::measurement('census-')
+                ->addTag('batch', $farmer->slug)
                 ->addField('level', 2)
                 ->time(time()),
         ]);

@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\Site\Region;
-use App\Observers\RegionObserver;
+use App\Models\Batch\Batch;
+use App\Models\Farmland\Farmland;
+use App\Observers\BatchObserver;
+use App\Observers\FarmlandObserver;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,6 +40,7 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerObservers()
     {
-        Region::observe(RegionObserver::class);
+        Batch::observe(BatchObserver::class);
+        Farmland::observe(FarmlandObserver::class);
     }
 }
