@@ -18,6 +18,14 @@ class CreateFarmlandsTable extends Migration
             $table->string('name')->nullable(false);
             $table->integer('hectares_size');
 
+            $table->unsignedBigInteger('batch_id')
+                ->nullable();
+            $table->foreign('batch_id')
+                ->references('id')
+                ->on('batches')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
+
             $table->unsignedBigInteger('type_id')
                 ->nullable();
             $table->foreign('type_id')

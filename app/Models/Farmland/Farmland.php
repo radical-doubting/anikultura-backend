@@ -2,6 +2,7 @@
 
 namespace App\Models\Farmland;
 
+use App\Models\Batch\Batch;
 use App\Models\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,6 +14,7 @@ class Farmland extends Model
 
     protected $fillable = [
         'name',
+        'batch_id',
         'type_id',
         'status_id',
         'hectares_size',
@@ -56,6 +58,14 @@ class Farmland extends Model
     public function status()
     {
         return $this->belongsTo(FarmlandStatus::class);
+    }
+
+    /**
+     * Get the batch of this farmland.
+     */
+    public function batch()
+    {
+        return $this->belongsTo(Batch::class);
     }
 
     /**

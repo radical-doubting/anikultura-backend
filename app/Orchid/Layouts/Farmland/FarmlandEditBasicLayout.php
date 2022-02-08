@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmland;
 
+use App\Models\Batch\Batch;
 use App\Models\Farmland\FarmlandStatus;
 use App\Models\Farmland\FarmlandType;
 use Orchid\Screen\Field;
@@ -32,6 +33,12 @@ class FarmlandEditBasicLayout extends Rows
                 ->required()
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
+
+            Relation::make('farmland.batch_id')
+                ->fromModel(Batch::class, 'farmschool_name')
+                ->required()
+                ->title('Batch')
+                ->placeholder(__('Batch')),
 
             Group::make([
                 Relation::make('farmland.type_id')
