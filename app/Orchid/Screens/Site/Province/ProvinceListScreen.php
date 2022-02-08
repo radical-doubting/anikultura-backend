@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Site\Province;
 
 use App\Actions\Site\Province\DeleteProvince;
 use App\Models\Site\Province;
+use App\Orchid\Layouts\Site\Province\ProvinceFiltersLayout;
 use App\Orchid\Layouts\Site\Province\ProvinceListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -34,6 +35,7 @@ class ProvinceListScreen extends Screen
         return [
             'provinces' => Province::with('region')
                 ->filters()
+                ->filtersApplySelection(ProvinceFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -61,6 +63,7 @@ class ProvinceListScreen extends Screen
     public function layout(): array
     {
         return [
+            ProvinceFiltersLayout::class,
             ProvinceListLayout::class,
         ];
     }

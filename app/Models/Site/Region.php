@@ -29,6 +29,7 @@ class Region extends Model
     protected $allowedFilters = [
         'id',
         'name',
+        'slug',
         'short_name',
     ];
 
@@ -40,6 +41,7 @@ class Region extends Model
     protected $allowedSorts = [
         'id',
         'name',
+        'slug',
         'short_name',
         'updated_at',
         'created_at',
