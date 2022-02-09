@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Actions\Insights\CreateInsightMetric;
+use App\Actions\Insights\RetrieveModelCount;
 use App\Models\Site\Region;
 use InfluxDB2\Point;
 
@@ -16,10 +17,13 @@ class RegionObserver
      */
     public function saved(Region $region)
     {
+        $newCount = RetrieveModelCount::run(
+            $region
+        );
+
         CreateInsightMetric::dispatch([
-            Point::measurement('regions')
-                ->addTag('location', $region->slug)
-                ->addField('level', 2)
+            Point::measurement('census-region')
+                ->addField('count', $newCount)
                 ->time(time()),
         ]);
     }

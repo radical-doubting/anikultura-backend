@@ -16,11 +16,17 @@ class FarmerObserver
      */
     public function saved(Farmer $farmer)
     {
-        CreateInsightMetric::dispatch([
-            Point::measurement('census-')
-                ->addTag('batch', $farmer->slug)
+        $points = [];
+
+        foreach ($farmer->batches as $farmerBatch) {
+            $points[] = Point::measurement('census-farmer')
                 ->addField('level', 2)
-                ->time(time()),
-        ]);
+                ->addTag('region', $farmerBatch->region->slug)
+                ->addTag('province', $farmerBatch->province->slug)
+                ->addTag('municity', $farmerBatch->municity->slug)
+                ->time(time());
+        }
+
+        CreateInsightMetric::dispatch($points);
     }
 }
