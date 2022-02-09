@@ -26,7 +26,6 @@ class BatchEditFarmersLayout extends Rows
         return [
             Relation::make('batch.farmers.')
                 ->fromModel(Farmer::class, 'name')
-                ->applyScope('farmer')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullName')
                 ->required()
