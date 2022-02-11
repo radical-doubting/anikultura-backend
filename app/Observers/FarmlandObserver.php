@@ -20,5 +20,22 @@ class FarmlandObserver
                 'batch.municity' => 'id',
             ]
         );
+
+        CreateCensusMetric::dispatch(
+            $farmland,
+            'census-farmland',
+            [
+                'type' => 'id',
+                'status' => 'id',
+                'batch.region' => 'id',
+                'batch.province' => 'id',
+                'batch.municity' => 'id',
+            ],
+            'hectares-size',
+            [
+                'type' => 'sum',
+                'column' => 'hectares_size',
+            ]
+        );
     }
 }

@@ -14,13 +14,13 @@ class CreateCensusMetric
         string $measurementName,
         array $tags = [],
         string $fieldName = 'count',
-        int $increment = 1
+        array $aggregation = ['type' => 'count', 'column' => '*']
     ) {
-        $newCount = RetrieveModelCount::run(
+        $newCount = RetrieveModelAggregate::run(
             $model,
             $tags,
             $fieldName,
-            $increment
+            $aggregation
         );
 
         $point = Point::measurement($measurementName)
