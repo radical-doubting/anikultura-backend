@@ -9,18 +9,25 @@ class CreateCensusMetric
 {
     use AsAction;
 
-    public function handle($model, string $measurementName, array $tags = [])
-    {
+    public function handle(
+        $model,
+        string $measurementName,
+        array $tags = [],
+        string $fieldName = 'count',
+        int $increment = 1
+    ) {
         $newCount = RetrieveModelCount::run(
             $model,
-            $tags
+            $tags,
+            $fieldName,
+            $increment
         );
 
         $point = Point::measurement($measurementName)
-            ->addField('count', $newCount)
+            ->addField($fieldName, $newCount)
             ->time(time());
 
-        foreach ($tags as $tag => $_) {
+        foreach ($tags as $tag => $property) {
             $sluggableProperty = $model;
             $tagParts = explode('.', $tag);
 

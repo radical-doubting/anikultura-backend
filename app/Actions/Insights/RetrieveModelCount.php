@@ -10,10 +10,14 @@ class RetrieveModelCount
 {
     use AsAction;
 
-    public function handle($model, array $tags = [], int $increment = 1)
-    {
+    public function handle(
+        $model,
+        array $tags = [],
+        string $fieldName = 'count',
+        int $increment = 1
+    ) {
         $dotModel = $this->createDotModel($model, $tags);
-        $key = $this->retrieveKey($model, $tags, $dotModel);
+        $key = $this->retrieveKey($model, $tags, $fieldName, $dotModel);
 
         $lastCount = $this->retrieveLastCount($model, $tags, $key, $dotModel);
         $newCount = $lastCount + $increment;
@@ -36,7 +40,7 @@ class RetrieveModelCount
         return Arr::dot($clonedModel->toArray());
     }
 
-    private function retrieveKey($model, array $tags, array $dotModel)
+    private function retrieveKey($model, array $tags, string $fieldName, array $dotModel)
     {
         $key = $model->getTable();
 
@@ -50,7 +54,7 @@ class RetrieveModelCount
             $ids[] = $dotModel["$tag.$property"];
         }
 
-        return $key . ':' . implode(':', $ids);
+        return "$key:$fieldName:" . implode(':', $ids);
     }
 
     private function retrieveLastCount($model, array $tags, string $key, array $dotModel)
