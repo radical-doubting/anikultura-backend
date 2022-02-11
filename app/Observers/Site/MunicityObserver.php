@@ -1,21 +1,20 @@
 <?php
 
-namespace App\Observers;
+namespace App\Observers\Site;
 
 use App\Actions\Insights\CreateCensusMetric;
-use App\Models\Batch\Batch;
+use App\Models\Site\Municity;
 
-class BatchObserver
+class MunicityObserver
 {
-    public function saved(Batch $batch)
+    public function saved(Municity $municity)
     {
         CreateCensusMetric::dispatch(
-            $batch,
-            'census-batch',
+            $municity,
+            'census-municipality-city',
             [
                 'region' => 'id',
                 'province' => 'id',
-                'municity' => 'id',
             ]
         );
     }
