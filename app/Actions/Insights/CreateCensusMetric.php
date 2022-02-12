@@ -13,12 +13,14 @@ class CreateCensusMetric
         $model,
         string $measurementName,
         array $tags = [],
+        bool $shouldIncrement = true,
         string $fieldName = 'count',
-        array $aggregation = ['type' => 'count', 'column' => '*']
+        array $aggregation = ['type' => 'count', 'column' => '*'],
     ) {
         $newCount = RetrieveModelAggregate::run(
             $model,
             $tags,
+            $shouldIncrement,
             $fieldName,
             $aggregation
         );

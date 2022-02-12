@@ -16,16 +16,13 @@ class RetrieveModelAggregate
     public function handle(
         $model,
         array $tags = [],
+        bool $shouldIncrement = true,
         string $fieldName = 'count',
         array $aggregation = ['type' => 'count', 'column' => '*'],
     ) {
         $hydratedModel = $this->createHydratedModel($model, $tags);
         $key = $this->retrieveKey($model, $tags, $fieldName, $hydratedModel);
-
-        $lastCount = $this->retrieveLastCount($model, $tags, $key, $aggregation, $hydratedModel);
-        $increment = $this->retrieveIncrement($aggregation, $hydratedModel);
-
-        $newCount = $lastCount + $increment;
+        $newCount = $this->retrieveNewCount($model, $tags, $key, $aggregation, $hydratedModel, $shouldIncrement);
 
         Cache::put($key, $newCount);
 
@@ -66,7 +63,23 @@ class RetrieveModelAggregate
         return "$key:$fieldName:" . implode(':', $ids);
     }
 
-    private function retrieveIncrement(array $aggregation, $hydratedModel)
+    private function retrieveNewCount(
+        $model,
+        array $tags,
+        string $key,
+        array $aggregation,
+        array $hydratedModel,
+        bool $shouldIncrement
+    ) {
+        $lastCount = $this->retrieveLastCount($model, $tags, $key, $aggregation, $hydratedModel);
+        $offset = $this->retrieveOffset($aggregation, $hydratedModel);
+        $offsetSign = $shouldIncrement ? 1 : -1;
+        $newCount = $lastCount + ($offset * $offsetSign);
+
+        return $newCount < 0 ? 0 : $newCount;
+    }
+
+    private function retrieveOffset(array $aggregation, $hydratedModel)
     {
         $type = $aggregation['type'];
         $column = $aggregation['column'];

@@ -9,6 +9,16 @@ class FarmlandObserver
 {
     public function saved(Farmland $farmland)
     {
+        $this->sendInsights($farmland, true);
+    }
+
+    public function deleted(Farmland $farmland)
+    {
+        $this->sendInsights($farmland, false);
+    }
+
+    private function sendInsights(Farmland $farmland, bool $shouldIncrement)
+    {
         CreateCensusMetric::dispatch(
             $farmland,
             'census-farmland',
@@ -18,7 +28,8 @@ class FarmlandObserver
                 'batch.region' => 'id',
                 'batch.province' => 'id',
                 'batch.municity' => 'id',
-            ]
+            ],
+            $shouldIncrement
         );
 
         CreateCensusMetric::dispatch(
@@ -31,6 +42,7 @@ class FarmlandObserver
                 'batch.province' => 'id',
                 'batch.municity' => 'id',
             ],
+            $shouldIncrement,
             'hectares-size',
             [
                 'type' => 'sum',
