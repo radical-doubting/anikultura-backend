@@ -12,7 +12,7 @@ class FarmlandObserver
         $this->sendInsights($farmland, true);
     }
 
-    public function deleted(Farmland $farmland)
+    public function deleting(Farmland $farmland)
     {
         $this->sendInsights($farmland, false);
     }
@@ -20,33 +20,47 @@ class FarmlandObserver
     private function sendInsights(Farmland $farmland, bool $shouldIncrement)
     {
         CreateCensusMetric::dispatch(
-            $farmland,
-            'census-farmland',
             [
-                'type' => 'id',
-                'status' => 'id',
-                'batch.region' => 'id',
-                'batch.province' => 'id',
-                'batch.municity' => 'id',
-            ],
-            $shouldIncrement
+                'model' => [
+                    'id' => $farmland->id,
+                    'class' => Farmland::class,
+                ],
+                'point' => [
+                    'increment' => $shouldIncrement,
+                    'measurement' => 'census-farmland',
+                    'tags' => [
+                        'type' => 'id',
+                        'status' => 'id',
+                        'batch.region' => 'id',
+                        'batch.province' => 'id',
+                        'batch.municity' => 'id',
+                    ],
+                ],
+            ]
         );
 
         CreateCensusMetric::dispatch(
-            $farmland,
-            'census-farmland',
             [
-                'type' => 'id',
-                'status' => 'id',
-                'batch.region' => 'id',
-                'batch.province' => 'id',
-                'batch.municity' => 'id',
-            ],
-            $shouldIncrement,
-            'hectares-size',
-            [
-                'type' => 'sum',
-                'column' => 'hectares_size',
+                'model' => [
+                    'id' => $farmland->id,
+                    'class' => Farmland::class,
+                    'aggregation' => [
+                        'type' => 'sum',
+                        'column' => 'hectares_size',
+                    ],
+                ],
+                'point' => [
+                    'increment' => $shouldIncrement,
+                    'field' => 'hectares-size',
+                    'measurement' => 'census-farmland',
+                    'tags' => [
+                        'type' => 'id',
+                        'status' => 'id',
+                        'batch.region' => 'id',
+                        'batch.province' => 'id',
+                        'batch.municity' => 'id',
+                    ],
+                ],
             ]
         );
     }

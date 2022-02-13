@@ -2,6 +2,7 @@
 
 namespace App\Actions\Insights;
 
+use App\Helpers\MetricPropertyHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -13,42 +14,55 @@ class RetrieveModelAggregate
 {
     use AsAction;
 
-    public function handle(
-        $model,
-        array $tags = [],
-        bool $shouldIncrement = true,
-        string $fieldName = 'count',
-        array $aggregation = ['type' => 'count', 'column' => '*'],
-    ) {
-        $hydratedModel = $this->createHydratedModel($model, $tags);
-        $key = $this->retrieveKey($model, $tags, $fieldName, $hydratedModel);
-        $newCount = $this->retrieveNewCount($model, $tags, $key, $aggregation, $hydratedModel, $shouldIncrement);
+    public function handle(array $properties)
+    {
+        $tags = MetricPropertyHelper::getPointProperty($properties, 'tags', []);
+        $fieldName = MetricPropertyHelper::getPointProperty($properties, 'field', 'count');
+        $shouldIncrement = MetricPropertyHelper::getPointProperty($properties, 'increment', true);
+
+        $modelId = MetricPropertyHelper::getModelProperty($properties, 'id');
+        $modelClass = MetricPropertyHelper::getModelProperty($properties, 'class');
+        $aggregation = MetricPropertyHelper::getModelProperty($properties, 'aggregation', [
+            'type' => 'count',
+            'column' => '*',
+        ]);
+
+        $hydratedModel = $this->retrieveHydratedModel($modelId, $modelClass, $tags);
+        $flatModel = $this->retrieveFlatModel($hydratedModel);
+
+        $tableName = $hydratedModel->getTable();
+        $key = $this->retrieveKey($tableName, $tags, $fieldName, $flatModel);
+
+        $newCount = $this->retrieveNewCount($modelClass, $flatModel, $tags, $key, $aggregation, $shouldIncrement);
 
         Cache::put($key, $newCount);
 
-        return $newCount;
+        return ['count' => $newCount, 'model' => $hydratedModel];
     }
 
-    private function createHydratedModel($model, array $tags)
+    private function retrieveHydratedModel(int $modelId, $modelClass, array $tags)
     {
-        $clonedModel = $model->replicate();
+        $model = $modelClass::query();
 
         foreach ($tags as $tag => $property) {
-            $clonedModel = $clonedModel->with($tag);
+            $model = $model->with($tag);
         }
 
-        $clonedModel = $clonedModel->first();
+        return $model->find($modelId);
+    }
 
-        return Arr::dot($clonedModel->toArray());
+    private function retrieveFlatModel($model)
+    {
+        return Arr::dot($model->toArray());
     }
 
     private function retrieveKey(
-        $model,
+        string $tableName,
         array $tags,
         string $fieldName,
-        array $hydratedModel
+        array $flatModel
     ) {
-        $key = $model->getTable();
+        $key = $tableName;
 
         if (empty($tags)) {
             return $key;
@@ -57,30 +71,38 @@ class RetrieveModelAggregate
         $ids = [];
 
         foreach ($tags as $tag => $property) {
-            $ids[] = $hydratedModel["$tag.$property"];
+            $ids[] = $flatModel["$tag.$property"];
         }
 
         return "$key:$fieldName:" . implode(':', $ids);
     }
 
     private function retrieveNewCount(
-        $model,
+        $modelClass,
+        array $flatModel,
         array $tags,
         string $key,
         array $aggregation,
-        array $hydratedModel,
         bool $shouldIncrement
     ) {
-        $lastCount = $this->retrieveLastCount($model, $tags, $key, $aggregation, $hydratedModel);
-        $offset = $this->retrieveOffset($aggregation, $hydratedModel);
+        $lastCount = $this->retrieveLastCount($modelClass, $flatModel, $tags, $key, $aggregation);
+        $offset = $this->retrieveOffset($flatModel, $key, $aggregation);
+
         $offsetSign = $shouldIncrement ? 1 : -1;
         $newCount = $lastCount + ($offset * $offsetSign);
 
         return $newCount < 0 ? 0 : $newCount;
     }
 
-    private function retrieveOffset(array $aggregation, $hydratedModel)
+    private function retrieveOffset(array $flatModel, string $key, array $aggregation)
     {
+        /*
+         * Do not offset when retrieving from database since it already has offsetted values.
+         */
+        if (!Cache::has($key)) {
+            return 0;
+        }
+
         $type = $aggregation['type'];
         $column = $aggregation['column'];
 
@@ -88,37 +110,37 @@ class RetrieveModelAggregate
             case 'count':
                 return 1;
             case 'sum':
-                return $hydratedModel[$column];
+                return $flatModel[$column];
         }
     }
 
     private function retrieveLastCount(
-        $model,
+        $modelClass,
+        array $flatModel,
         array $tags,
         string $key,
-        array $aggregation,
-        array $hydratedModel
+        array $aggregation
     ) {
         if (Cache::has($key)) {
             return Cache::get($key);
         }
 
-        return $this->retrieveLastCountFromDatabase($model, $tags, $aggregation, $hydratedModel);
+        return $this->retrieveLastCountFromDatabase($modelClass, $flatModel, $tags, $aggregation);
     }
 
     private function retrieveLastCountFromDatabase(
-        $model,
+        $modelClass,
+        array $flatModel,
         array $tags,
-        array $aggregation,
-        $hydratedModel
+        array $aggregation
     ) {
-        $masterQuery = null;
+        $masterQuery = $modelClass::query();
 
         foreach ($tags as $tag => $property) {
-            $masterQuery = $model->whereHas(
+            $masterQuery = $masterQuery->whereHas(
                 $tag,
-                function ($query) use ($tag, $property, $hydratedModel) {
-                    $query->where($property, $hydratedModel["$tag.$property"]);
+                function ($query) use ($tag, $property, $flatModel) {
+                    $query->where($property, $flatModel["$tag.$property"]);
                 }
             );
         }

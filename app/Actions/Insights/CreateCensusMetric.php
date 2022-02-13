@@ -2,6 +2,7 @@
 
 namespace App\Actions\Insights;
 
+use App\Helpers\MetricPropertyHelper;
 use InfluxDB2\Point;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -9,21 +10,15 @@ class CreateCensusMetric
 {
     use AsAction;
 
-    public function handle(
-        $model,
-        string $measurementName,
-        array $tags = [],
-        bool $shouldIncrement = true,
-        string $fieldName = 'count',
-        array $aggregation = ['type' => 'count', 'column' => '*'],
-    ) {
-        $newCount = RetrieveModelAggregate::run(
-            $model,
-            $tags,
-            $shouldIncrement,
-            $fieldName,
-            $aggregation
-        );
+    public function handle(array $properties)
+    {
+        $results = RetrieveModelAggregate::run($properties);
+        $newCount = $results['count'];
+        $model = $results['model'];
+
+        $measurementName = MetricPropertyHelper::getPointProperty($properties, 'measurement');
+        $fieldName = MetricPropertyHelper::getPointProperty($properties, 'field', 'count');
+        $tags = MetricPropertyHelper::getPointProperty($properties, 'tags', []);
 
         $point = Point::measurement($measurementName)
             ->addField($fieldName, $newCount)
