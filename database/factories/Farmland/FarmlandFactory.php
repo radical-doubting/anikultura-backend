@@ -4,6 +4,8 @@ namespace Database\Factories\Farmland;
 
 use App\Models\Batch\Batch;
 use App\Models\Farmland\Farmland;
+use App\Models\Farmland\FarmlandStatus;
+use App\Models\Farmland\FarmlandType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FarmlandFactory extends Factory
@@ -26,8 +28,8 @@ class FarmlandFactory extends Factory
             'name' => $this->faker->state . ' Farmland',
             'batch_id' => Batch::all()->random()->id,
             'hectares_size' => $this->faker->numberBetween(40, 1000),
-            'type_id' => $this->faker->numberBetween(1, 2),
-            'status_id' => $this->faker->numberBetween(1, 3),
+            'type_id' => FarmlandType::all()->random()->id,
+            'status_id' => FarmlandStatus::all()->random()->id,
         ];
     }
 }
