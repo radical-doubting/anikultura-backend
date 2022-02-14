@@ -3,20 +3,42 @@
 namespace App\Observers;
 
 use App\Actions\Insights\CreateCensusMetric;
+use App\Actions\Insights\CreateFarmerEnrollmentMetric;
 use App\Models\Batch\Batch;
+use App\Models\Farmer\Farmer;
 
 class BatchObserver
 {
     public function saved(Batch $batch)
     {
         CreateCensusMetric::dispatch(
-            $batch,
-            'census-batch',
             [
-                'region' => 'id',
-                'province' => 'id',
-                'municity' => 'id',
+                'model' => [
+                    'id' => $batch->id,
+                    'class' => Batch::class,
+                ],
+                'point' => [
+                    'increment' => true,
+                    'measurement' => 'census-batch',
+                    'tags' => [
+                        'region' => 'id',
+                        'province' => 'id',
+                        'municity' => 'id',
+                    ],
+                ],
             ]
         );
+    }
+
+    /**
+     * Farmer assigned to batch event.
+     */
+    public function belongsToManyAttached(string $relation, Batch $batch, array $farmerIds)
+    {
+        if ($relation != 'farmers') {
+            return;
+        }
+
+        CreateFarmerEnrollmentMetric::dispatch($batch, $farmerIds);
     }
 }

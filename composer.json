@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "chelout/laravel-relationship-events": "^1.5",
         "cviebrock/eloquent-sluggable": "^8.0",
         "darkaonline/l5-swagger": "^8.1",
         "doctrine/dbal": "^3.1",

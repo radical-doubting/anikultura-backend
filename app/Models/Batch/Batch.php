@@ -6,13 +6,15 @@ use App\Models\Farmer\Farmer;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
+use Chelout\RelationshipEvents\Concerns\HasBelongsToManyEvents;
+use Chelout\RelationshipEvents\Traits\HasRelationshipObservables;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 
 class Batch extends Model
 {
-    use Filterable, HasFactory;
+    use Filterable, HasFactory, HasBelongsToManyEvents, HasRelationshipObservables;
 
     /**
      * The attributes that are mass assignable.
@@ -52,6 +54,11 @@ class Batch extends Model
         'id',
         'farmschool_name',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+    }
 
     public function region()
     {

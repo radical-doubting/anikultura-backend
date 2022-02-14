@@ -8,12 +8,6 @@ use InfluxDB2\Point;
 
 class FarmerObserver
 {
-    /**
-     * Handle the Farmer "saved" event.
-     *
-     * @param  \App\Models\Farmer\Farmer  $farmer
-     * @return void
-     */
     public function saved(Farmer $farmer)
     {
         $points = [];
