@@ -15,12 +15,12 @@ class BatchSeeder extends Seeder
      */
     public function run()
     {
-        $farmers = Farmer::all();
+        $farmerIds = Farmer::all()->pluck('id')->toArray();
 
-        Batch::factory()->count(10)->create()->each(function ($batch) use ($farmers) {
-            $batch->farmers()->attach(
-                $farmers->random(rand(1, $farmers->count()))->pluck('id')->toArray()
-            );
-        });
+        Batch::factory()->count(10)->create();
+
+        foreach (Batch::all() as $batch) {
+            $batch->farmers()->attach(array_pop($farmerIds));
+        }
     }
 }

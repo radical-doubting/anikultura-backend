@@ -32,7 +32,9 @@ class CreateFarmerReportsTable extends Migration
                 ->nullable();
             $table->foreign('farmland_id')
                 ->references('id')
-                ->on('farmlands');
+                ->on('farmlands')
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
 
             $table->unsignedBigInteger('crop_id')
                 ->nullable();
