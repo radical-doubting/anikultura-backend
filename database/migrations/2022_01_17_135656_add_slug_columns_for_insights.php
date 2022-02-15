@@ -12,6 +12,9 @@ class AddSlugColumnsForInsights extends Migration
         'municities',
         'farmland_types',
         'farmland_statuses',
+        'crops',
+        'batches',
+        'seed_stages',
     ];
 
     /**

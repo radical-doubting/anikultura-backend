@@ -48,33 +48,26 @@ class BatchListLayout extends Table
                 }),
             TD::make('region', __('Region'))
                 ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
-                    return Link::make($batches->region->name)
+                    return Link::make($batches->region->fullName)
                         ->route('platform.batches.edit', $batches->id);
                 }),
             TD::make('province', __('Province'))
                 ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
                     return Link::make($batches->province->name)
                         ->route('platform.batches.edit', $batches->id);
                 }),
             TD::make('municity', __('Municity'))
                 ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Batch $batches) {
                     return Link::make($batches->municity->name)
                         ->route('platform.batches.edit', $batches->id);
                 }),
 
-            TD::make('updated_at', __('Last edit'))
-                ->sort()
-                ->render(function (Batch $batches) {
-                    return $batches->updated_at->toDateTimeString();
-                }),
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
+                ->cantHide()
                 ->width('100px')
                 ->render(function (Batch $batches) {
                     return DropDown::make()

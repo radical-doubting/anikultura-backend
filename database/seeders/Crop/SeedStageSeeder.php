@@ -22,7 +22,7 @@ class SeedStageSeeder extends Seeder
             ['name' => 'Yield Formation Stage'],
             ['name' => 'Ripening Stage'],
             ['name' => 'Crops Harvested'],
-            ['name' => 'Ready to Sell'],
+            ['name' => 'Marketable'],
         ];
 
         foreach ($seedStages as $seedStage) {
