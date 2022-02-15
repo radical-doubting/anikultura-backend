@@ -19,10 +19,8 @@ class CropSeeder extends Seeder
                 'group' => 'Banana Group',
                 'name' => 'Banana',
                 'variety' => 'Banana Variety',
-                'establishment_days' => 10,
-                'vegetative_days' => 15,
-                'yield_formation_days' => 30,
-                'ripening_days' => 10,
+                'maturity_lower_bound' => 15,
+                'maturity_upper_bound' => 30,
             ],
         ];
 

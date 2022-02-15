@@ -10,10 +10,18 @@ class ProvinceObserver
     public function saved(Province $province)
     {
         CreateCensusMetric::dispatch(
-            $province,
-            'census-province',
             [
-                'region' => 'id',
+                'model' => [
+                    'id' => $province->id,
+                    'class' => Province::class,
+                ],
+                'point' => [
+                    'increment' => true,
+                    'measurement' => 'census-province',
+                    'tags' => [
+                        'region' => 'id',
+                    ],
+                ],
             ]
         );
     }

@@ -18,10 +18,9 @@ class CreateCropsTable extends Migration
             $table->string('name')->nullable(false)->unique();
             $table->string('group');
             $table->string('variety');
-            $table->integer('establishment_days');
-            $table->integer('vegetative_days');
-            $table->integer('yield_formation_days');
-            $table->integer('ripening_days');
+
+            $table->integer('maturity_lower_bound');
+            $table->integer('maturity_upper_bound');
 
             $table->timestamps();
         });

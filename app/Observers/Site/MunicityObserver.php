@@ -10,11 +10,19 @@ class MunicityObserver
     public function saved(Municity $municity)
     {
         CreateCensusMetric::dispatch(
-            $municity,
-            'census-municipality-city',
             [
-                'region' => 'id',
-                'province' => 'id',
+                'model' => [
+                    'id' => $municity->id,
+                    'class' => Municity::class,
+                ],
+                'point' => [
+                    'increment' => true,
+                    'measurement' => 'census-municipality-city',
+                    'tags' => [
+                        'region' => 'id',
+                        'province' => 'id',
+                    ],
+                ],
             ]
         );
     }

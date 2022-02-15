@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Observers\Batch;
 
 use App\Actions\Insights\CreateCensusMetric;
 use App\Actions\Insights\CreateFarmerEnrollmentMetric;

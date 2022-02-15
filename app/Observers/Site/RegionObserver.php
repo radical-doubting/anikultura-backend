@@ -10,8 +10,16 @@ class RegionObserver
     public function saved(Region $region)
     {
         CreateCensusMetric::dispatch(
-            $region,
-            'census-region'
+            [
+                'model' => [
+                    'id' => $region->id,
+                    'class' => Region::class,
+                ],
+                'point' => [
+                    'increment' => true,
+                    'measurement' => 'census-region',
+                ],
+            ]
         );
     }
 }

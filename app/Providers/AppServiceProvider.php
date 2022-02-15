@@ -2,12 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Batch\Batch;
-use App\Models\Farmer\Farmer;
-use App\Models\Farmland\Farmland;
-use App\Observers\BatchObserver;
-use App\Observers\FarmerObserver;
-use App\Observers\FarmlandObserver;
+use App\Models\Batch\BatchSeedAllocation;
+use App\Observers\Batch\BatchSeedAllocationObserver;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -42,8 +38,6 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerObservers()
     {
-        Farmer::observe(FarmerObserver::class);
-        Batch::observe(BatchObserver::class);
-        Farmland::observe(FarmlandObserver::class);
+        BatchSeedAllocation::observe(BatchSeedAllocationObserver::class);
     }
 }

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Observers;
+namespace App\Observers\Batch;
 
 use App\Actions\Insights\CreateCensusMetric;
 use App\Models\Batch\BatchSeedAllocation;
 
-class BatchSeedAllocation
+class BatchSeedAllocationObserver
 {
     public function saved(BatchSeedAllocation $batchSeedAllocation)
     {
@@ -21,6 +21,7 @@ class BatchSeedAllocation
                 ],
                 'point' => [
                     'increment' => true,
+                    'field' => 'seed-amount',
                     'measurement' => 'census-seed-allocation',
                     'tags' => [
                         'crop' => 'id',

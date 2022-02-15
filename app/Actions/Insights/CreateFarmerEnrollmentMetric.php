@@ -20,7 +20,6 @@ class CreateFarmerEnrollmentMetric
 
         $point = Point::measurement('census-farmer')
             ->addField('count', $newCount)
-            ->addTag('batch', $batch->slug)
             ->addTag('region', $batch->region->slug)
             ->addTag('province', $batch->province->slug)
             ->addTag('municity', $batch->municity->slug)
