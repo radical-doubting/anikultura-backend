@@ -36,7 +36,7 @@ services:
     env_file:
       - influxdb.env
     volumes:
-      - influxdb-data:/var/lib/influxdb
+      - influxdb-data:/var/lib/influxdb2
     networks:
       - sail
   grafana:
@@ -49,6 +49,15 @@ services:
       - grafana-data:/var/lib/grafana
     networks:
       - sail
+  redis:
+    image: redis:6.2-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - redis-data:/data
+    networks:
+      - sail
 networks:
   sail:
     driver: bridge
@@ -56,3 +65,4 @@ volumes:
   sailpgsql:
   influxdb-data:
   grafana-data:
+  redis-data:

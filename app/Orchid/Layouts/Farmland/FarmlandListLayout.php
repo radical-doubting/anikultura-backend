@@ -45,19 +45,28 @@ class FarmlandListLayout extends Table
                         ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
+            TD::make('batch_id', __('Batch'))
+                ->render(function (Farmland $farmland) {
+                    return Link::make($farmland->batch->farmschool_name)
+                        ->route('platform.farmlands.edit', $farmland->id);
+                }),
+
             TD::make('type', __('Type'))
-                ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->type->name)
                         ->route('platform.farmlands.edit', $farmland->id);
                 }),
 
             TD::make('status', __('Status'))
-                ->sort()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->status->name)
+                        ->route('platform.farmlands.edit', $farmland->id);
+                }),
+
+            TD::make('hectares_size', __('Size (ha)'))
+                ->sort()
+                ->render(function (Farmland $farmland) {
+                    return Link::make($farmland->hectares_size)
                         ->route('platform.farmlands.edit', $farmland->id);
                 }),
 

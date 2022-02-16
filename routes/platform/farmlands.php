@@ -10,6 +10,7 @@ use Tabuna\Breadcrumbs\Trail;
 // Farmlands
 Route::screen('farmlands', FarmlandListScreen::class)
     ->name('platform.farmlands')
+    ->middleware(['access:platform.farmlands.read'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
@@ -19,6 +20,7 @@ Route::screen('farmlands', FarmlandListScreen::class)
 // Farmland > Edit Farmland
 Route::screen('farmlands/{farmland}/edit', FarmlandEditScreen::class)
     ->name('platform.farmlands.edit')
+    ->middleware(['access:platform.farmlands.edit'])
     ->breadcrumbs(function (Trail $trail, $farmland) {
         return $trail
             ->parent('platform.farmlands')
@@ -28,6 +30,7 @@ Route::screen('farmlands/{farmland}/edit', FarmlandEditScreen::class)
 // Farmland > Create Farmland
 Route::screen('enroll/farmer/farmland', FarmlandEditScreen::class)
     ->name('platform.farmlands.create')
+    ->middleware(['access:platform.farmlands.edit'])
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.farmlands')

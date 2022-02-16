@@ -113,6 +113,7 @@ Route::screen('example-advanced', ExampleFieldsAdvancedScreen::class)->name('pla
 require 'platform/farmer_reports.php';
 require 'platform/batches.php';
 require 'platform/sites.php';
-require 'platform/farmer_profiles.php';
+require 'platform/farmers.php';
+require 'platform/big_brothers.php';
 require 'platform/farmlands.php';
 require 'platform/crops.php';

@@ -3,7 +3,7 @@
 namespace App\Models\Batch;
 
 use App\Models\Crop\Crop;
-use App\Models\User;
+use App\Models\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -52,7 +52,7 @@ class BatchSeedAllocation extends Model
 
     public function farmer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Farmer::class);
     }
 
     public function crop()

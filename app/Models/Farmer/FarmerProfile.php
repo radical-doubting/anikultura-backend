@@ -2,7 +2,6 @@
 
 namespace App\Models\Farmer;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -66,18 +65,8 @@ class FarmerProfile extends Model
         return $this->hasOne(FarmerAddress::class);
     }
 
-    public function verification()
-    {
-        return $this->hasOne(Verification::class, 'foreign_key');
-    }
-
     public function user()
     {
-        return $this->morphOne(User::class, 'profile');
-    }
-
-    public function farmlands()
-    {
-        return $this->belongsToMany(Farmland::class, 'foreign_key');
+        return $this->morphOne(Farmer::class, 'profile');
     }
 }

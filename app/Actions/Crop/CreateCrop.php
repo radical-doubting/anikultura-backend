@@ -44,17 +44,35 @@ class CreateCrop
             'crop.variety' => [
                 'required',
             ],
-            'crop.establishment_days' => [
+            'crop.gross_returns_per_ha' => [
                 'required',
+                'numeric',
             ],
-            'crop.vegetative_days' => [
+            'crop.total_costs_per_ha' => [
                 'required',
+                'numeric',
             ],
-            'crop.yield_formation_days' => [
+            'crop.production_cost_per_kg' => [
                 'required',
+                'numeric',
             ],
-            'crop.ripening_days' => [
+            'crop.farmgate_price_per_kg' => [
                 'required',
+                'numeric',
+            ],
+            'crop.yield_per_ha' => [
+                'required',
+                'numeric',
+            ],
+            'crop.maturity_lower_bound' => [
+                'required',
+                'numeric',
+                'lt:crop.maturity_upper_bound',
+            ],
+            'crop.maturity_upper_bound' => [
+                'required',
+                'numeric',
+                'gt:crop.maturity_lower_bound',
             ],
         ];
     }

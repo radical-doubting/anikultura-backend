@@ -15,8 +15,7 @@ class CreateSeedStagesTable extends Migration
     {
         Schema::create('seed_stages', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
+            $table->string('name')->nullable(false)->unique();
             $table->timestamps();
         });
     }

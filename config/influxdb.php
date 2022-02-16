@@ -17,14 +17,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | InfluxDB Enable Flag
+    | InfluxDB Enable Flags
     |--------------------------------------------------------------------------
     |
-    | Here InfluxDB metrics can be enabled or not.
+    | Here InfluxDB metrics can be enabled or not. The observer mode could also
+    | be defined to `save` or `create`.
     |
     */
 
     'enabled' => env('INFLUXDB_ENABLED', true),
+    'observerMode' => env('INFLUXDB_OBSERVER_MODE', 'save'),
 
     /*
     |--------------------------------------------------------------------------

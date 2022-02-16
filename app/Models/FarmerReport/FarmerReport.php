@@ -4,8 +4,8 @@ namespace App\Models\FarmerReport;
 
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
+use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -35,7 +35,7 @@ class FarmerReport extends Model
 
     public function farmer()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Farmer::class);
     }
 
     public function seedStage()

@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Batch;
 
 use App\Actions\Batch\DeleteBatch;
 use App\Models\Batch\Batch;
+use App\Orchid\Layouts\Batch\BatchFiltersLayout;
 use App\Orchid\Layouts\Batch\BatchListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -33,6 +34,8 @@ class BatchListScreen extends Screen
     {
         return [
             'batches' => Batch::filters()
+                ->filters()
+                ->filtersApplySelection(BatchFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -60,6 +63,7 @@ class BatchListScreen extends Screen
     public function layout(): array
     {
         return [
+            BatchFiltersLayout::class,
             BatchListLayout::class,
         ];
     }

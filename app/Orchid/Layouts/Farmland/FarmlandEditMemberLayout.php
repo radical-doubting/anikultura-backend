@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmland;
 
-use App\Models\User;
+use App\Models\Farmer\Farmer;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Relation;
@@ -26,8 +26,7 @@ class FarmlandEditMemberLayout extends Rows
     {
         return [
             Relation::make('farmland.farmers.')
-                ->fromModel(User::class, 'name')
-                ->applyScope('farmer')
+                ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('full_name')
                 ->required()

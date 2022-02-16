@@ -2,13 +2,14 @@
 
 namespace App\Models\Crop;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 
 class Crop extends Model
 {
-    use Filterable, HasFactory;
+    use Filterable, HasFactory, Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -48,4 +49,18 @@ class Crop extends Model
         'name',
         'variety',
     ];
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+            ],
+        ];
+    }
 }

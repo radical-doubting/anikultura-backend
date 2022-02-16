@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Farmland;
 
 use App\Actions\Farmland\DeleteFarmland;
 use App\Models\Farmland\Farmland;
+use App\Orchid\Layouts\Farmland\FarmlandFiltersLayout;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -33,6 +34,7 @@ class FarmlandListScreen extends Screen
     {
         return [
             'farmlands' => Farmland::filters()
+                ->filtersApplySelection(FarmlandFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -60,6 +62,7 @@ class FarmlandListScreen extends Screen
     public function layout(): array
     {
         return [
+            FarmlandFiltersLayout::class,
             FarmlandListLayout::class,
         ];
     }

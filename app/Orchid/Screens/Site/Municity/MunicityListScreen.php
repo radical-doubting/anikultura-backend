@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\Site\Municity;
 
 use App\Actions\Site\Municity\DeleteMunicity;
 use App\Models\Site\Municity;
+use App\Orchid\Layouts\Site\Municity\MunicityFiltersLayout;
 use App\Orchid\Layouts\Site\Municity\MunicityListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -35,6 +36,7 @@ class MunicityListScreen extends Screen
             'municities' => Municity::with('region')
                 ->with('province')
                 ->filters()
+                ->filtersApplySelection(MunicityFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -62,6 +64,7 @@ class MunicityListScreen extends Screen
     public function layout(): array
     {
         return [
+            MunicityFiltersLayout::class,
             MunicityListLayout::class,
         ];
     }

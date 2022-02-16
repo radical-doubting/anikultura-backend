@@ -18,10 +18,15 @@ class CreateCropsTable extends Migration
             $table->string('name')->nullable(false)->unique();
             $table->string('group');
             $table->string('variety');
-            $table->integer('establishment_days');
-            $table->integer('vegetative_days');
-            $table->integer('yield_formation_days');
-            $table->integer('ripening_days');
+
+            $table->double('gross_returns_per_ha');
+            $table->double('total_costs_per_ha');
+            $table->double('production_cost_per_kg');
+            $table->double('farmgate_price_per_kg');
+            $table->double('yield_per_ha');
+
+            $table->integer('maturity_lower_bound');
+            $table->integer('maturity_upper_bound');
 
             $table->timestamps();
         });

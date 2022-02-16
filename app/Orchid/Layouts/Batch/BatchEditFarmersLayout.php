@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Batch;
 
-use App\Models\User;
+use App\Models\Farmer\Farmer;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Relation;
 use Orchid\Screen\Layouts\Rows;
@@ -25,8 +25,7 @@ class BatchEditFarmersLayout extends Rows
     {
         return [
             Relation::make('batch.farmers.')
-                ->fromModel(User::class, 'name')
-                ->applyScope('farmer')
+                ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullName')
                 ->required()

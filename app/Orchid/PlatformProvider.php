@@ -38,29 +38,38 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('Municipalities and Cities')
                         ->icon('location-pin')
                         ->route('platform.sites.municities'),
-                ]),
+                ])
+                ->permission('platform.sites.read'),
             Menu::make('Farmer Management')
                 ->icon('people')
                 ->list([
+                    Menu::make('Big Brothers')
+                        ->icon('graduation')
+                        ->route('platform.big-brothers')
+                        ->permission('platform.big-brothers.read'),
                     Menu::make('Farmers')
                         ->icon('user')
-                        ->route('platform.farmers'),
+                        ->route('platform.farmers')
+                        ->permission('platform.farmers.read'),
                     Menu::make('Farmlands')
                         ->icon('full-screen')
-                        ->route('platform.farmlands'),
+                        ->route('platform.farmlands')
+                        ->permission('platform.farmlands.read'),
                     Menu::make('Batches')
                         ->icon('module')
-                        ->route('platform.batches'),
+                        ->route('platform.batches')
+                        ->permission('platform.batches.read'),
                 ]),
 
             Menu::make('Crop Types Management')
                 ->icon('quote')
-                ->route('platform.crops'),
+                ->route('platform.crops')
+                ->permission('platform.crops.read'),
 
             Menu::make('Farmer Reports Management')
                 ->icon('docs')
-                ->title(__('Admin Insights'))
-                ->route('platform.farmer-reports'),
+                ->route('platform.farmer-reports')
+                ->permission('platform.farmer-reports.read'),
 
             Menu::make(__('Users'))
                 ->icon('user')
@@ -96,6 +105,29 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('System'))
                 ->addPermission('platform.systems.roles', __('Roles'))
                 ->addPermission('platform.systems.users', __('Users')),
+            ItemPermission::group(__('Sites'))
+                ->addPermission('platform.sites.read', __('Read Sites'))
+                ->addPermission('platform.sites.edit', __('Edit Sites')),
+            ItemPermission::group(__('Big Brothers'))
+                ->addPermission('platform.big-brothers.read', __('Read Big Brothers'))
+                ->addPermission('platform.big-brothers.edit', __('Edit Big Brothers')),
+            ItemPermission::group(__('Farmers'))
+                ->addPermission('platform.farmers.read', __('Read Farmers'))
+                ->addPermission('platform.farmers.edit', __('Edit Farmers')),
+            ItemPermission::group(__('Farmlands'))
+                ->addPermission('platform.farmlands.read', __('Read Farmlands'))
+                ->addPermission('platform.farmlands.edit', __('Edit Farmlands')),
+            ItemPermission::group(__('Batches'))
+                ->addPermission('platform.batches.read', __('Read Batches'))
+                ->addPermission('platform.batches.edit', __('Edit Batches'))
+                ->addPermission('platform.batch-seed-allocations.read', __('Read Batch Seed Allocations'))
+                ->addPermission('platform.batch-seed-allocations.edit', __('Edit Batch Seed Allocations')),
+            ItemPermission::group(__('Crop Types'))
+                ->addPermission('platform.crops.read', __('Read Crop Types'))
+                ->addPermission('platform.crops.edit', __('Edit Crop Types')),
+            ItemPermission::group(__('Farmer Reports'))
+                ->addPermission('platform.farmer-reports.read', __('Read Farmer Reports'))
+                ->addPermission('platform.farmer-reports.edit', __('Edit Farmer Reports')),
         ];
     }
 

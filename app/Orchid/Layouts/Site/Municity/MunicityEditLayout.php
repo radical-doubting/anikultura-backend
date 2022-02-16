@@ -40,7 +40,8 @@ class MunicityEditLayout extends Rows
                 ->placeholder(__('Province')),
 
             Relation::make('municity.region_id')
-                ->fromModel(Region::class, 'fullName')
+                ->fromModel(Region::class, 'name')
+                ->displayAppend('fullName')
                 ->required()
                 ->title('Region')
                 ->placeholder(__('Region')),

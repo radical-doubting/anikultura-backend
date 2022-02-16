@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\FarmerReport;
 
 use App\Models\FarmerReport\FarmerReport;
+use App\Orchid\Layouts\FarmerReport\FarmerReportFiltersLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportListLayout;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -32,6 +33,7 @@ class FarmerReportListScreen extends Screen
     {
         return [
             'farmer_reports' => FarmerReport::filters()
+                ->filtersApplySelection(FarmerReportFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -59,6 +61,7 @@ class FarmerReportListScreen extends Screen
     public function layout(): array
     {
         return [
+            FarmerReportFiltersLayout::class,
             FarmerReportListLayout::class,
         ];
     }
