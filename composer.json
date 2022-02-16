@@ -13,6 +13,7 @@
         "cviebrock/eloquent-sluggable": "^8.0",
         "darkaonline/l5-swagger": "^8.1",
         "doctrine/dbal": "^3.1",
+        "ext-redis": "*",
         "fico7489/laravel-pivot": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
