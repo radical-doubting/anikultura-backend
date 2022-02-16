@@ -19,6 +19,12 @@ class CreateCropsTable extends Migration
             $table->string('group');
             $table->string('variety');
 
+            $table->double('gross_returns_per_ha');
+            $table->double('total_costs_per_ha');
+            $table->double('production_cost_per_kg');
+            $table->double('farmgate_price_per_kg');
+            $table->double('yield_per_ha');
+
             $table->integer('maturity_lower_bound');
             $table->integer('maturity_upper_bound');
 

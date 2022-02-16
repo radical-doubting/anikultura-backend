@@ -24,6 +24,12 @@ class CropEditGrowthLayout extends Rows
     protected function fields(): array
     {
         return [
+            Input::make('crop.yield_per_ha')
+                ->type('text')
+                ->max(255)
+                ->required()
+                ->title(__('Yield per Hectare (kg/ha)'))
+                ->placeholder(__('Yield per Hectare (kg/ha)')),
             Group::make([
                 Input::make('crop.maturity_lower_bound')
                     ->type('number')
