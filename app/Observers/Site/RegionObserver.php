@@ -4,19 +4,22 @@ namespace App\Observers\Site;
 
 use App\Actions\Insights\CreateCensusMetric;
 use App\Models\Site\Region;
+use App\Traits\AsInsightSender;
 
 class RegionObserver
 {
-    public function saved(Region $region)
+    use AsInsightSender;
+
+    private function sendInsights($model, bool $shouldIncrement)
     {
         CreateCensusMetric::dispatch(
             [
                 'model' => [
-                    'id' => $region->id,
+                    'id' => $model->id,
                     'class' => Region::class,
                 ],
                 'point' => [
-                    'increment' => true,
+                    'increment' => $shouldIncrement,
                     'measurement' => 'census-region',
                 ],
             ]

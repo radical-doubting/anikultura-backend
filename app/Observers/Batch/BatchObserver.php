@@ -6,19 +6,22 @@ use App\Actions\Insights\CreateCensusMetric;
 use App\Actions\Insights\CreateFarmerEnrollmentMetric;
 use App\Models\Batch\Batch;
 use App\Models\Farmer\Farmer;
+use App\Traits\AsInsightSender;
 
 class BatchObserver
 {
-    public function saved(Batch $batch)
+    use AsInsightSender;
+
+    private function sendInsights($model, bool $shouldIncrement)
     {
         CreateCensusMetric::dispatch(
             [
                 'model' => [
-                    'id' => $batch->id,
+                    'id' => $model->id,
                     'class' => Batch::class,
                 ],
                 'point' => [
-                    'increment' => true,
+                    'increment' => $shouldIncrement,
                     'measurement' => 'census-batch',
                     'tags' => [
                         'region' => 'id',

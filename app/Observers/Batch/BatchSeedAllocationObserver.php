@@ -4,15 +4,18 @@ namespace App\Observers\Batch;
 
 use App\Actions\Insights\CreateCensusMetric;
 use App\Models\Batch\BatchSeedAllocation;
+use App\Traits\AsInsightSender;
 
 class BatchSeedAllocationObserver
 {
-    public function saved(BatchSeedAllocation $batchSeedAllocation)
+    use AsInsightSender;
+
+    private function sendInsights($model, bool $shouldIncrement)
     {
         CreateCensusMetric::dispatch(
             [
                 'model' => [
-                    'id' => $batchSeedAllocation->id,
+                    'id' => $model->id,
                     'class' => BatchSeedAllocation::class,
                     'aggregation' => [
                         'type' => 'sum',
@@ -20,7 +23,7 @@ class BatchSeedAllocationObserver
                     ],
                 ],
                 'point' => [
-                    'increment' => true,
+                    'increment' => $shouldIncrement,
                     'field' => 'seed-amount',
                     'measurement' => 'census-seed-allocation',
                     'tags' => [

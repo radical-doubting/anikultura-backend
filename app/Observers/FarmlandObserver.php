@@ -4,25 +4,18 @@ namespace App\Observers;
 
 use App\Actions\Insights\CreateCensusMetric;
 use App\Models\Farmland\Farmland;
+use App\Traits\AsInsightSender;
 
 class FarmlandObserver
 {
-    public function saved(Farmland $farmland)
-    {
-        $this->sendInsights($farmland, true);
-    }
+    use AsInsightSender;
 
-    public function deleting(Farmland $farmland)
-    {
-        $this->sendInsights($farmland, false);
-    }
-
-    private function sendInsights(Farmland $farmland, bool $shouldIncrement)
+    private function sendInsights($model, bool $shouldIncrement)
     {
         CreateCensusMetric::dispatch(
             [
                 'model' => [
-                    'id' => $farmland->id,
+                    'id' => $model->id,
                     'class' => Farmland::class,
                 ],
                 'point' => [
@@ -42,7 +35,7 @@ class FarmlandObserver
         CreateCensusMetric::dispatch(
             [
                 'model' => [
-                    'id' => $farmland->id,
+                    'id' => $model->id,
                     'class' => Farmland::class,
                     'aggregation' => [
                         'type' => 'sum',

@@ -2,8 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
+use App\Models\Farmland\Farmland;
+use App\Models\Site\Municity;
+use App\Models\Site\Province;
+use App\Models\Site\Region;
+use App\Observers\Batch\BatchObserver;
 use App\Observers\Batch\BatchSeedAllocationObserver;
+use App\Observers\FarmlandObserver;
+use App\Observers\Site\MunicityObserver;
+use App\Observers\Site\ProvinceObserver;
+use App\Observers\Site\RegionObserver;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,6 +48,16 @@ class AppServiceProvider extends ServiceProvider
      */
     private function registerObservers()
     {
+        // Site observers
+        Region::observe(RegionObserver::class);
+        Province::observe(ProvinceObserver::class);
+        Municity::observe(MunicityObserver::class);
+
+        // Batch and farmer enrollment observers
+        Batch::observe(BatchObserver::class);
         BatchSeedAllocation::observe(BatchSeedAllocationObserver::class);
+
+        // Farmland observer
+        Farmland::observe(FarmlandObserver::class);
     }
 }
