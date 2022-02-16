@@ -24,30 +24,23 @@ class CropEditGrowthLayout extends Rows
     protected function fields(): array
     {
         return [
+            Input::make('crop.yield_per_ha')
+                ->type('text')
+                ->max(255)
+                ->required()
+                ->title(__('Yield per Hectare (kg/ha)'))
+                ->placeholder(__('Yield per Hectare (kg/ha)')),
             Group::make([
-                Input::make('crop.establishment_days')
+                Input::make('crop.maturity_lower_bound')
                     ->type('number')
                     ->required()
-                    ->title(__('Crop Establishment Days'))
-                    ->placeholder(__('Days')),
-                Input::make('crop.vegetative_days')
+                    ->title(__('Maturity Lower Bound (DAP, DAT, DAS)'))
+                    ->placeholder(__('Maturity Lower Bound (DAP, DAT, DAS)')),
+                Input::make('crop.maturity_upper_bound')
                     ->type('number')
                     ->required()
-                    ->title(__('Crop Vegetative Days'))
-                    ->placeholder(__('Days')),
-            ]),
-
-            Group::make([
-                Input::make('crop.yield_formation_days')
-                    ->type('number')
-                    ->required()
-                    ->title(__('Crop Yield Formation Days'))
-                    ->placeholder(__('Days')),
-                Input::make('crop.ripening_days')
-                    ->type('number')
-                    ->required()
-                    ->title(__('Crop Ripening Days'))
-                    ->placeholder(__('Days')),
+                    ->title(__('Maturity Upper Bound (DAP, DAT, DAS)'))
+                    ->placeholder(__('Maturity Upper Bound (DAP, DAT, DAS)')),
             ]),
         ];
     }

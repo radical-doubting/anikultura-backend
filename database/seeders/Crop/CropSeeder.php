@@ -16,13 +16,16 @@ class CropSeeder extends Seeder
     {
         $crops = [
             [
-                'group' => 'Banana Group',
-                'name' => 'Banana',
-                'variety' => 'Banana Variety',
-                'establishment_days' => 10,
-                'vegetative_days' => 15,
-                'yield_formation_days' => 30,
-                'ripening_days' => 10,
+                'name' => 'Calamansi',
+                'group' => 'Calamansi Group',
+                'variety' => 'Calamansi Variety',
+                'gross_returns_per_ha' => 151312,
+                'total_costs_per_ha' => 81094,
+                'production_cost_per_kg' => 14.69,
+                'farmgate_price_per_kg' => 27.41,
+                'yield_per_ha' => 5520,
+                'maturity_lower_bound' => 90,
+                'maturity_upper_bound' => 120,
             ],
         ];
 

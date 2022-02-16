@@ -40,10 +40,13 @@ class FarmerEditScreen extends Screen
             $this->description = __('Edit farmer details');
         }
 
+        $farmerProfile = $farmer->profile;
+        $farmerAddress = $this->exists ? $farmerProfile->farmerAddress : null;
+
         return [
             'user' => $farmer,
-            'farmer_profile' => $farmer->profile,
-            'farmer_address' => $farmer->profile->farmerAddress,
+            'farmer_profile' => $farmerProfile,
+            'farmer_address' => $farmerAddress,
         ];
     }
 
