@@ -2,6 +2,9 @@
 
 namespace App\Models\Crop;
 
+use App\Actions\Crop\CalculateNetProfitCostRatio;
+use App\Actions\Crop\CalculateNetReturns;
+use App\Actions\Crop\CalculateProfitPerKilogram;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,10 +24,11 @@ class Crop extends Model
         'group',
         'name',
         'variety',
-        'establishment_days',
-        'vegetative_days',
-        'yield_formation_days',
-        'ripening_days',
+        'gross_returns_per_ha',
+        'total_costs_per_ha',
+        'production_cost_per_kg',
+        'farmgate_price_per_kg',
+        'yield_per_ha',
     ];
 
     /**
@@ -49,6 +53,17 @@ class Crop extends Model
         'name',
         'variety',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (self $crop) {
+            $crop->profit_per_kg = CalculateProfitPerKilogram::run($crop);
+            $crop->net_returns_per_ha = CalculateNetReturns::run($crop);
+            $crop->net_profit_cost_ratio = CalculateNetProfitCostRatio::run($crop);
+        });
+    }
 
     /**
      * Return the sluggable configuration array for this model.
