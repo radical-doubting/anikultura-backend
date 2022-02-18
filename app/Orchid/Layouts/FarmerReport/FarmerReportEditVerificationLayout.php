@@ -27,6 +27,7 @@ class FarmerReportEditVerificationLayout extends Rows
         return [
             CheckBox::make('farmer_report.verified')
                 ->required()
+                ->sendTrueOrFalse()
                 ->title(__('Verification Status'))
                 ->placeholder(__('This farmer report is considered as valid')),
 
