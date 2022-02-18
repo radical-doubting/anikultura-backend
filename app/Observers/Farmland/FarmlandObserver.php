@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Observers;
+namespace App\Observers\Farmland;
 
 use App\Actions\Insights\CreateCensusMetric;
 use App\Models\Farmland\Farmland;

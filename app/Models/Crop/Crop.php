@@ -29,6 +29,8 @@ class Crop extends Model
         'production_cost_per_kg',
         'farmgate_price_per_kg',
         'yield_per_ha',
+        'maturity_lower_bound',
+        'maturity_upper_bound',
     ];
 
     /**

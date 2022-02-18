@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Crop\Crop;
+use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
@@ -12,7 +13,8 @@ use App\Models\Site\Region;
 use App\Observers\Batch\BatchObserver;
 use App\Observers\Batch\BatchSeedAllocationObserver;
 use App\Observers\Crop\CropObserver;
-use App\Observers\FarmlandObserver;
+use App\Observers\FarmerReport\FarmerReportObserver;
+use App\Observers\Farmland\FarmlandObserver;
 use App\Observers\Site\MunicityObserver;
 use App\Observers\Site\ProvinceObserver;
 use App\Observers\Site\RegionObserver;
@@ -62,5 +64,6 @@ class AppServiceProvider extends ServiceProvider
         // Farmland observer
         Farmland::observe(FarmlandObserver::class);
         Crop::observe(CropObserver::class);
+        FarmerReport::observe(FarmerReportObserver::class);
     }
 }
