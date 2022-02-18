@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
-use App\Models\User;
+use App\Models\Admin\Admin;
+use App\Models\BigBrother\BigBrother;
 
-class Admin extends User
+class ManagementUser extends User
 {
-    public static $profilePath = 'App\Models\Admin\AdminProfile';
-
     /**
      * The database table used by the model.
      *
@@ -20,7 +19,8 @@ class Admin extends User
         parent::boot();
 
         static::addGlobalScope(function ($query) {
-            $query->where('profile_type', self::$profilePath);
+            $query->where('profile_type', BigBrother::$profilePath);
+            $query->orWhere('profile_type', Admin::$profilePath);
         });
     }
 }

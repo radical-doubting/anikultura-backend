@@ -68,7 +68,7 @@ class CreateFarmerReport
     public function rules(): array
     {
         return [
-            'farmer_report.farmer_id' => [
+            'farmer_report.reported_by' => [
                 'required',
             ],
             'farmer_report.farmland_id' => [
@@ -80,7 +80,7 @@ class CreateFarmerReport
             'farmer_report.crop_id' => [
                 'required',
             ],
-            'farmer_report.volume' => [
+            'farmer_report.volume_kg' => [
                 'required',
             ],
         ];

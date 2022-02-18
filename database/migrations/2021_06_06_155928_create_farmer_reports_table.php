@@ -16,9 +16,9 @@ class CreateFarmerReportsTable extends Migration
         Schema::create('farmer_reports', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('farmer_id')
+            $table->unsignedBigInteger('reported_by')
                 ->nullable();
-            $table->foreign('farmer_id')
+            $table->foreign('reported_by')
                 ->references('id')
                 ->on('users');
 
@@ -26,23 +26,41 @@ class CreateFarmerReportsTable extends Migration
                 ->nullable();
             $table->foreign('seed_stage_id')
                 ->references('id')
-                ->on('seed_stages');
+                ->on('seed_stages')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
 
             $table->unsignedBigInteger('farmland_id')
                 ->nullable();
             $table->foreign('farmland_id')
                 ->references('id')
                 ->on('farmlands')
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
 
             $table->unsignedBigInteger('crop_id')
                 ->nullable();
             $table->foreign('crop_id')
                 ->references('id')
-                ->on('crops');
+                ->on('crops')
+                ->nullOnDelete()
+                ->cascadeOnUpdate();
 
-            $table->double('volume');
+            $table->boolean('verified')
+                ->default(false);
+
+            $table->string('image')
+                ->nullable();
+
+            $table->unsignedBigInteger('verified_by')
+                ->nullable();
+            $table->foreign('verified_by')
+                ->references('id')
+                ->on('users');
+
+            $table->double('volume_kg')
+                ->nullable();
+
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models\Farmland;
 
 use App\Models\Batch\Batch;
 use App\Models\Farmer\Farmer;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -43,6 +44,18 @@ class Farmland extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} - {$this->batch->farmschool_name}";
+    }
+
+    public function scopeFarmerBelongToFarmland(Builder $query, $farmerId)
+    {
+        return $query->whereHas('farmers', function ($q) use ($farmerId) {
+            $q->whereIn('id', [$farmerId]);
+        });
+    }
 
     /**
      * Get the type of this farmland.
