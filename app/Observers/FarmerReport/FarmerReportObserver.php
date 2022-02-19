@@ -3,6 +3,7 @@
 namespace App\Observers\FarmerReport;
 
 use App\Actions\Insights\CreateCensusMetric;
+use App\Actions\Insights\Crop\CreateCropEstimationMetric;
 use App\Models\FarmerReport\FarmerReport;
 use App\Traits\AsInsightSender;
 
@@ -10,7 +11,16 @@ class FarmerReportObserver
 {
     use AsInsightSender;
 
-    private function sendInsights($model, bool $shouldIncrement)
+    private function sendInsights($farmerReport, bool $shouldIncrement)
+    {
+        $this->dispatchCensusMetric($farmerReport, $shouldIncrement);
+
+        if ($farmerReport->isPlanted()) {
+            CreateCropEstimationMetric::dispatch($farmerReport);
+        }
+    }
+
+    private function dispatchCensusMetric($model, bool $shouldIncrement)
     {
         CreateCensusMetric::dispatch(
             [

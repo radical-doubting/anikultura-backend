@@ -10,7 +10,7 @@ class CalculateExpectedYieldAmount
 {
     use AsAction;
 
-    public function handle(Farmland $farmland, Crop $crop)
+    public function handle(Crop $crop, Farmland $farmland)
     {
         $hectares = $farmland->hectares_size;
         $yieldPerHectares = $crop->yield_per_ha;

@@ -23,6 +23,8 @@ class CalculateExpectedYieldDate
 
     private function estimateDate(DateTime $datePlanted, int $maturity)
     {
-        return date('Y-m-d', strtotime($datePlanted . " + $maturity days"));
+        $date = date('Y-m-d', strtotime($datePlanted . " + $maturity days"));
+
+        return strtolower($date);
     }
 }

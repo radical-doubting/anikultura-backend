@@ -5,8 +5,9 @@ namespace App\Orchid\Screens\FarmerReport;
 use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\DeleteFarmerReport;
 use App\Models\FarmerReport\FarmerReport;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditAttachmentLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditEstimationLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditInfoLayout;
-use App\Orchid\Layouts\FarmerReport\FarmerReportEditPhotoImage;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditVerificationLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
@@ -82,9 +83,12 @@ class FarmerReportEditScreen extends Screen
             Layout::block(FarmerReportEditInfoLayout::class)
                 ->title(__('Report Information'))
                 ->description(__('Update the report information')),
-            Layout::block(FarmerReportEditPhotoImage::class)
+            Layout::block(FarmerReportEditAttachmentLayout::class)
                 ->title(__('Attachment Information'))
                 ->description(__('Update the report attachments')),
+            Layout::block(FarmerReportEditEstimationLayout::class)
+                ->title(__('Estimation Information'))
+                ->description(__('Read the report estimations')),
             Layout::block(FarmerReportEditVerificationLayout::class)
                 ->title(__('Verification'))
                 ->description(__('Update the report verification status'))

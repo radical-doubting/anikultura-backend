@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Actions\Insights;
+namespace App\Actions\Insights\Crop;
 
+use App\Actions\Insights\CreateInsightMetric;
 use App\Models\Crop\Crop;
 use InfluxDB2\Point;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class CreateCropMetric
+class CreateCropProfitMetric
 {
     use AsAction;
 

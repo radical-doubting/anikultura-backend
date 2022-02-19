@@ -6,7 +6,7 @@ use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Upload;
 use Orchid\Screen\Layouts\Rows;
 
-class FarmerReportEditPhotoImage extends Rows
+class FarmerReportEditAttachmentLayout extends Rows
 {
     /**
      * Used to create the title of a group of form elements.

@@ -2,7 +2,7 @@
 
 namespace App\Observers\Crop;
 
-use App\Actions\Insights\CreateCropMetric;
+use App\Actions\Insights\Crop\CreateCropProfitMetric;
 use App\Traits\AsInsightSender;
 
 class CropObserver
@@ -11,6 +11,6 @@ class CropObserver
 
     private function sendInsights($model, bool $shouldIncrement)
     {
-        CreateCropMetric::dispatch($model);
+        CreateCropProfitMetric::dispatch($model);
     }
 }

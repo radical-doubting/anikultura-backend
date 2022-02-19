@@ -61,6 +61,15 @@ class CreateFarmerReportsTable extends Migration
             $table->double('volume_kg')
                 ->nullable();
 
+            $table->double('estimated_yield_amount')
+                ->nullable();
+
+            $table->date('estimated_yield_date_upper_bound')
+                ->nullable();
+
+            $table->date('estimated_yield_date_lower_bound')
+                ->nullable();
+
             $table->timestamps();
         });
     }

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Actions\Insights;
+namespace App\Actions\Insights\Farmer;
 
+use App\Actions\Insights\CreateInsightMetric;
 use App\Models\Batch\Batch;
 use Illuminate\Support\Facades\Cache;
 use InfluxDB2\Point;
