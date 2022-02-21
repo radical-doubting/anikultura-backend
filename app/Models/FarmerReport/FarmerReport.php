@@ -52,15 +52,15 @@ class FarmerReport extends Model
         parent::boot();
 
         static::saving(function (self $farmerReport) {
-            Log::info('hey', [$farmerReport->isPlanted()]);
-
             if (!$farmerReport->isPlanted()) {
                 return;
             }
 
             $crop = $farmerReport->crop;
             $farmland = $farmerReport->farmland;
-            $datePlanted = $farmerReport->created_at;
+
+            $createdAt = $farmerReport->created_at;
+            $datePlanted = is_null($createdAt) ? now() : $createdAt;
 
             $estimatedYield = CalculateExpectedYieldAmount::run($crop, $farmland);
             $farmerReport->estimated_yield_amount = $estimatedYield;

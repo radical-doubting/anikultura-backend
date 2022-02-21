@@ -7,6 +7,7 @@ use App\Actions\Crop\RetrieveFarmerCrops;
 use App\Actions\Crop\RetrieveFarmerSeedStage;
 use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
+use App\Actions\FarmerReport\SubmitFarmerReport;
 use App\Actions\Farmland\RetrieveFarmerFarmlands;
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::group(['as' => 'api.'], function () {
     });
 
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {
-        Route::post('/', CreateFarmerReport::class);
+        Route::post('/', SubmitFarmerReport::class);
         Route::get('/', RetrieveFarmerSubmittedReports::class);
     });
 

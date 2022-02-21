@@ -228,35 +228,33 @@
                 "tags": [
                     "farmer-reports"
                 ],
-                "description": "Submit a farming report with current authenticated user",
-                "operationId": "52e31995f8366c15208e900e175f884d",
+                "description": "Submit a farming report with logged in farmer",
+                "operationId": "b0b0cbb75920a20eb8c8ddb2d78cc62d",
                 "requestBody": {
-                    "description": "Pass farmer reports",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "required": [
-                                    "farmland_id",
-                                    "seed_stage_id",
-                                    "crop_id",
-                                    "volume"
-                                ],
                                 "properties": {
-                                    "farmland_id": {
-                                        "type": "bigint",
-                                        "format": "bigint",
-                                        "example": "4000"
-                                    },
-                                    "crop_id": {
-                                        "type": "bigint",
-                                        "format": "bigint",
-                                        "example": "2000"
-                                    },
-                                    "volume": {
-                                        "type": "number",
-                                        "format": "double",
-                                        "example": "1000"
+                                    "farmer_report": {
+                                        "properties": {
+                                            "farmland_id": {
+                                                "type": "integer",
+                                                "format": "int",
+                                                "example": "1"
+                                            },
+                                            "crop_id": {
+                                                "type": "integer",
+                                                "format": "int",
+                                                "example": "1"
+                                            },
+                                            "volume_kg": {
+                                                "type": "number",
+                                                "format": "double",
+                                                "example": "10.23"
+                                            }
+                                        },
+                                        "type": "object"
                                     }
                                 },
                                 "type": "object"
@@ -266,7 +264,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Successfuly crated a farmer report",
+                        "description": "The created farmer report",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -275,22 +273,6 @@
                     },
                     "422": {
                         "description": "Validation errors occured",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Invalid request",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request. Id must be bigint.",
                         "content": {
                             "application/json": {
                                 "schema": {}
