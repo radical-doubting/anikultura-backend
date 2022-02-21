@@ -36,16 +36,14 @@ class CreateFarmerReport
     /**
      * @OA\Post(
      *     path="/farmer-reports",
-     *     description="Create farmer reports",
-     *     tags={"farmer_reports"},
+     *     description="Submit a farming report with current authenticated user",
+     *     tags={"farmer-reports"},
      *     @OA\RequestBody(
      *       required=true,
      *       description="Pass farmer reports",
      *       @OA\JsonContent(
-     *          required={"farmer_id","farmland_id", "seed_stage_id", "crop_id", "volume"},
-     *          @OA\Property(property="farmer_id", type="bigint", format="bigint", example="5000"),
+     *          required={"farmland_id", "seed_stage_id", "crop_id", "volume"},
      *          @OA\Property(property="farmland_id", type="bigint", format="bigint", example="4000"),
-     *          @OA\Property(property="seed_stage_id", type="bigint", format="bigint", example="3000"),
      *          @OA\Property(property="crop_id", type="bigint", format="bigint", example="2000"),
      *          @OA\Property(property="volume", type="double", format="double", example="1000"),
      *       ),
@@ -58,11 +56,17 @@ class CreateFarmerReport
      */
     public function asController(ActionRequest $request)
     {
-        $farmerReportData = $request->only('farmer_id', 'farmland_id', 'seed_stage_id', 'crop_id', 'volume');
+        $farmerReportData = $request->only([
+            'farmland_id',
+            'crop_id',
+            'volume',
+        ]);
 
-        $this->handle($request->model(), $farmerReportData);
+        $farmerReport = FarmerReport::create($farmerReportData);
 
-        return redirect()->route('platform.farmer-reports');
+        // $this->handle($request->model(), $farmerReportData);
+
+        return response()->json();
     }
 
     public function rules(): array

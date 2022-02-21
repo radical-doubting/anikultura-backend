@@ -8,6 +8,7 @@ use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
+use App\Models\ManagementUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -41,6 +42,11 @@ class FarmerReport extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'volume_kg' => 'float',
+        'estimated_yield_amount' => 'float',
+    ];
+
     protected static function boot()
     {
         parent::boot();
@@ -68,6 +74,11 @@ class FarmerReport extends Model
     public function farmer()
     {
         return $this->belongsTo(Farmer::class, 'reported_by');
+    }
+
+    public function verifier()
+    {
+        return $this->belongsTo(ManagementUser::class, 'verified_by');
     }
 
     public function image()

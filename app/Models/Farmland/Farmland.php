@@ -45,6 +45,10 @@ class Farmland extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'hectares_size' => 'float',
+    ];
+
     public function getFullNameAttribute()
     {
         return "{$this->name} - {$this->batch->farmschool_name}";
