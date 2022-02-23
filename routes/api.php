@@ -5,7 +5,6 @@ use App\Actions\Authentication\LogoutFarmer;
 use App\Actions\Batch\RetrieveFarmerSeedAllocation;
 use App\Actions\Crop\RetrieveFarmerCrops;
 use App\Actions\Crop\RetrieveFarmerSeedStage;
-use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
 use App\Actions\FarmerReport\SubmitFarmerReport;
 use App\Actions\Farmland\RetrieveFarmerFarmlands;

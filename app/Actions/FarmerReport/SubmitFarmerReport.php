@@ -4,7 +4,6 @@ namespace App\Actions\FarmerReport;
 
 use App\Actions\Crop\RetrieveFarmerSeedStage;
 use App\Models\FarmerReport\FarmerReport;
-use Illuminate\Http\Request;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
