@@ -27,7 +27,7 @@ class FarmlandFactory extends Factory
         return [
             'name' => $this->faker->state . ' Farmland',
             'batch_id' => Batch::all()->random()->id,
-            'hectares_size' => $this->faker->numberBetween(40, 1000),
+            'hectares_size' => $this->faker->randomFloat(2, 1, 10),
             'type_id' => FarmlandType::all()->random()->id,
             'status_id' => FarmlandStatus::all()->random()->id,
         ];
