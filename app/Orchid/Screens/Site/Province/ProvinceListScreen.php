@@ -6,10 +6,10 @@ use App\Actions\Site\Province\DeleteProvince;
 use App\Models\Site\Province;
 use App\Orchid\Layouts\Site\Province\ProvinceFiltersLayout;
 use App\Orchid\Layouts\Site\Province\ProvinceListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class ProvinceListScreen extends Screen
+class ProvinceListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -17,13 +17,6 @@ class ProvinceListScreen extends Screen
      * @var string
      */
     public $name = 'Provinces';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all provinces under SM KSK SAP';
 
     /**
      * Query data.

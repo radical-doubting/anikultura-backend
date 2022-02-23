@@ -5,10 +5,10 @@ namespace App\Orchid\Screens\FarmerReport;
 use App\Models\FarmerReport\FarmerReport;
 use App\Orchid\Layouts\FarmerReport\FarmerReportFiltersLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class FarmerReportListScreen extends Screen
+class FarmerReportListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -16,13 +16,6 @@ class FarmerReportListScreen extends Screen
      * @var string
      */
     public $name = 'Farmer Report';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Farmer reports under the SM KSK SAP Program';
 
     /**
      * Query data.

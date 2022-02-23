@@ -6,10 +6,10 @@ use App\Actions\Batch\DeleteBatch;
 use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchFiltersLayout;
 use App\Orchid\Layouts\Batch\BatchListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class BatchListScreen extends Screen
+class BatchListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -17,13 +17,6 @@ class BatchListScreen extends Screen
      * @var string
      */
     public $name = 'Batches';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all batches under SM KSK SAP.';
 
     /**
      * Query data.

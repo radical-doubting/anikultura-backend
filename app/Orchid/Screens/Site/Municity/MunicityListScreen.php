@@ -6,10 +6,10 @@ use App\Actions\Site\Municity\DeleteMunicity;
 use App\Models\Site\Municity;
 use App\Orchid\Layouts\Site\Municity\MunicityFiltersLayout;
 use App\Orchid\Layouts\Site\Municity\MunicityListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class MunicityListScreen extends Screen
+class MunicityListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -17,13 +17,6 @@ class MunicityListScreen extends Screen
      * @var string
      */
     public $name = 'Municipalities and Cities';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all municipalities and cities under SM KSK SAP';
 
     /**
      * Query data.

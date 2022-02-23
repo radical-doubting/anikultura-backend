@@ -5,10 +5,10 @@ namespace App\Orchid\Screens\Site\Region;
 use App\Actions\Site\Region\DeleteRegion;
 use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class RegionListScreen extends Screen
+class RegionListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -16,13 +16,6 @@ class RegionListScreen extends Screen
      * @var string
      */
     public $name = 'Regions';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all regions under SM KSK SAP';
 
     /**
      * Query data.
