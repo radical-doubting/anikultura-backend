@@ -5,7 +5,10 @@ namespace App\Orchid\Screens\FarmerReport;
 use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\DeleteFarmerReport;
 use App\Models\FarmerReport\FarmerReport;
-use App\Orchid\Layouts\FarmerReport\FarmerReportEditLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditAttachmentLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditEstimationLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditInfoLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditVerificationLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -35,6 +38,8 @@ class FarmerReportEditScreen extends Screen
      */
     public function query(FarmerReport $farmer_report): array
     {
+        $farmer_report->load('attachment');
+
         $this->farmer_report = $farmer_report;
 
         if (!$farmer_report->exists) {
@@ -75,9 +80,18 @@ class FarmerReportEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(FarmerReportEditLayout::class)
+            Layout::block(FarmerReportEditInfoLayout::class)
                 ->title(__('Report Information'))
-                ->description(__('Update the report\'s  information'))
+                ->description(__('Update the report information')),
+            Layout::block(FarmerReportEditAttachmentLayout::class)
+                ->title(__('Attachment Information'))
+                ->description(__('Update the report attachments')),
+            Layout::block(FarmerReportEditEstimationLayout::class)
+                ->title(__('Estimation Information'))
+                ->description(__('Read the report estimations')),
+            Layout::block(FarmerReportEditVerificationLayout::class)
+                ->title(__('Verification'))
+                ->description(__('Update the report verification status'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())

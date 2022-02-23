@@ -5,10 +5,10 @@ namespace App\Orchid\Screens\Crop;
 use App\Actions\Crop\DeleteCrop;
 use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class CropListScreen extends Screen
+class CropListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -16,13 +16,6 @@ class CropListScreen extends Screen
      * @var string
      */
     public $name = 'Crop Types';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all crop types under SM KSK SAP';
 
     /**
      * Query data.

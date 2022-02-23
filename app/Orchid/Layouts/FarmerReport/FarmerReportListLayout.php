@@ -65,7 +65,7 @@ class FarmerReportListLayout extends Table
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->volume)
+                    return Link::make($farmer_report->volume_kg)
                         ->route('platform.farmer-reports.edit', $farmer_report->id);
                 }),
 

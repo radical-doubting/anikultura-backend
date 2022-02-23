@@ -33,6 +33,7 @@ class CropEditPriceLayout extends Rows
                         'prefix' => 'PHP ',
                         'groupSeparator' => ',',
                         'digitsOptional' => false,
+                        'removeMaskOnSubmit' => true,
                     ]),
                 Input::make('crop.total_costs_per_ha')
                     ->required()
@@ -42,6 +43,7 @@ class CropEditPriceLayout extends Rows
                         'prefix' => 'PHP ',
                         'groupSeparator' => ',',
                         'digitsOptional' => false,
+                        'removeMaskOnSubmit' => true,
                     ]),
             ]),
             Group::make([
@@ -53,6 +55,7 @@ class CropEditPriceLayout extends Rows
                         'prefix' => 'PHP ',
                         'groupSeparator' => ',',
                         'digitsOptional' => false,
+                        'removeMaskOnSubmit' => true,
                     ]),
                 Input::make('crop.farmgate_price_per_kg')
                     ->required()
@@ -62,6 +65,7 @@ class CropEditPriceLayout extends Rows
                         'prefix' => 'PHP ',
                         'groupSeparator' => ',',
                         'digitsOptional' => false,
+                        'removeMaskOnSubmit' => true,
                     ]),
             ]),
         ];

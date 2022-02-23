@@ -30,8 +30,20 @@ use Illuminate\Routing\Controller as BaseController;
  *
  *  @OA\Tag(
  *       name="auth",
- *       description="Authentication endpoints"
+ *       description="Endpoints related with authentication such as login and logout."
  *  )
+ *  @OA\Tag(
+ *       name="crops",
+ *       description="Endpoints related with crops such as retrieving current seed stage and allocated seeds."
+ *  )
+ *  @OA\Tag(
+ *       name="farmlands",
+ *       description="Endpoints related with farmlands such as what farmland a farmer belongs in."
+ *  )
+ *  @OA\Tag(
+ *       name="farmer-reports",
+ *       description="Endpoints related with farmer reports such as submitting and retrieving their history."
+ * )
  */
 class Controller extends BaseController
 {

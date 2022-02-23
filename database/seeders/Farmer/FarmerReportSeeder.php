@@ -11,18 +11,18 @@ class FarmerReportSeeder extends Seeder
     {
         $farmerReports = [
             [
-                'farmer_id' => 1,
+                'reported_by' => 1,
                 'farmland_id' => 1,
                 'seed_stage_id' => 1,
                 'crop_id' => 1,
-                'volume' => 53,
+                'volume_kg' => 53,
             ],
             [
-                'farmer_id' => 2,
+                'reported_by' => 2,
                 'farmland_id' => 1,
                 'seed_stage_id' => 1,
                 'crop_id' => 1,
-                'volume' => 72,
+                'volume_kg' => 72,
             ],
         ];
 

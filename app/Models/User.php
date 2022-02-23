@@ -84,6 +84,13 @@ class User extends Authenticatable implements JWTSubject
         return "{$this->first_name} {$this->last_name} ({$this->name})";
     }
 
+    public function getFullNameWithRoleAttribute()
+    {
+        $roles = $this->roles->pluck('name')->implode(' / ');
+
+        return "{$this->first_name} {$this->last_name} ({$this->name}) - $roles";
+    }
+
     public function profile()
     {
         return $this->morphTo();

@@ -6,10 +6,10 @@ use App\Actions\Farmland\DeleteFarmland;
 use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandFiltersLayout;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class FarmlandListScreen extends Screen
+class FarmlandListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -17,13 +17,6 @@ class FarmlandListScreen extends Screen
      * @var string
      */
     public $name = 'Farmlands';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all farmland under SM KSK SAP';
 
     /**
      * Query data.

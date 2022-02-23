@@ -5,6 +5,7 @@ namespace App\Actions\Insights;
 use App\Helpers\MetricPropertyHelper;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 /**
@@ -45,7 +46,7 @@ class RetrieveModelAggregate
         $model = $modelClass::query();
 
         foreach ($tags as $tag => $property) {
-            $model = $model->with($tag);
+            $model = $model->with(Str::camel($tag));
         }
 
         return $model->find($modelId);
@@ -138,7 +139,7 @@ class RetrieveModelAggregate
 
         foreach ($tags as $tag => $property) {
             $masterQuery = $masterQuery->whereHas(
-                $tag,
+                Str::camel($tag),
                 function ($query) use ($tag, $property, $flatModel) {
                     $query->where($property, $flatModel["$tag.$property"]);
                 }

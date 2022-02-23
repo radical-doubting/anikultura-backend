@@ -31,7 +31,7 @@ use Tabuna\Breadcrumbs\Trail;
 
 // Main
 // PlatformScreen::class
-Route::screen('/main', ExampleScreen::class)
+Route::screen('/main', PlatformScreen::class)
     ->name('platform.main');
 
 // Platform > Profile
