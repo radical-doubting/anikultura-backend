@@ -27,7 +27,7 @@
                 <span class="ms-3 text-dark">Analytics Dashboard</span>
             </h3>
             <p class="ms-md-5 ps-md-1">
-                See more insights in the platform. The Grafana analytics dashboard accessible is <a
+                See more insights in the platform. The Grafana analytics dashboard is accessible <a
                     href="{{ Config::get('anikultura.grafanaUrl') }}" target="_blank" class="text-u-l">here</a>.
             </p>
         </div>
