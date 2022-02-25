@@ -23,7 +23,7 @@ class FarmerReportEditEstimationLayout extends Rows
      */
     protected function fields(): array
     {
-        $currentReport = $this->query['farmerReport'];
+        $currentReport = $this->query['farmer_report'];
         $isPlanted = false;
 
         if ($currentReport->exists) {

@@ -43,7 +43,7 @@ class FarmerReportEditScreen extends Screen
         }
 
         return [
-            'farmerReport' => $farmerReport,
+            'farmer_report' => $farmerReport,
         ];
     }
 

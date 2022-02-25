@@ -28,7 +28,7 @@ class FarmerReportEditInfoLayout extends Rows
      */
     protected function fields(): array
     {
-        $currentReport = $this->query['farmerReport'];
+        $currentReport = $this->query['farmer_report'];
         $isHarvested = false;
 
         $farmlandRelationField = Relation::make('farmer_report.farmland_id')
