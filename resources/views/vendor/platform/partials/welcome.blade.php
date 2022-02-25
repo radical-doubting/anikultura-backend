@@ -28,7 +28,7 @@
             </h3>
             <p class="ms-md-5 ps-md-1">
                 See more insights in the platform. The Grafana analytics dashboard accessible is <a
-                    href="https://laravel.com/docs" target="_blank" class="text-u-l">here</a>.
+                    href="{{ Config::get('anikultura.grafanaUrl') }}" target="_blank" class="text-u-l">here</a>.
             </p>
         </div>
     </div>
