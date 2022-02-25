@@ -28,10 +28,20 @@ class FarmerReportEditInfoLayout extends Rows
      */
     protected function fields(): array
     {
-        $currentReport = $this->query['farmer_report'];
-        $currentFarmer = $currentReport->farmer;
+        $currentReport = $this->query['farmerReport'];
+        $isHarvested = false;
 
-        $isHarvested = $currentReport->isHarvested();
+        $farmlandRelationField = Relation::make('farmer_report.farmland_id')
+            ->fromModel(Farmland::class, 'name')
+            ->displayAppend('fullName')
+            ->required()
+            ->title(__('Farmland'))
+            ->placeholder(__('Farmland'));
+
+        if ($currentReport->exists) {
+            $isHarvested = $currentReport->isHarvested();
+            $farmlandRelationField->applyScope('farmerBelongToFarmland', $currentReport->farmer->id);
+        }
 
         return [
             Relation::make('farmer_report.reported_by')
@@ -50,13 +60,7 @@ class FarmerReportEditInfoLayout extends Rows
                 ->placeholder(__('Seed Stage')),
 
             Group::make([
-                Relation::make('farmer_report.farmland_id')
-                    ->fromModel(Farmland::class, 'name')
-                    ->applyScope('farmerBelongToFarmland', $currentFarmer->id)
-                    ->displayAppend('fullName')
-                    ->required()
-                    ->title(__('Farmland'))
-                    ->placeholder(__('Farmland')),
+                $farmlandRelationField,
 
                 Relation::make('farmer_report.crop_id')
                     ->fromModel(Crop::class, 'name')

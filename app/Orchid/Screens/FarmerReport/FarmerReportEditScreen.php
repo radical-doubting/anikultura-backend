@@ -17,38 +17,33 @@ use Orchid\Support\Facades\Layout;
 
 class FarmerReportEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Farmer Report';
+    protected $exists;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit a submitted farmer report';
+    public function __construct()
+    {
+        $this->name = __('Create Farmer Report');
+        $this->description = __('Create a new farmer report');
+    }
 
     /**
      * Query data.
      *
      * @return array
      */
-    public function query(FarmerReport $farmer_report): array
+    public function query(FarmerReport $farmerReport): array
     {
-        $farmer_report->load('attachment');
+        $farmerReport->load('attachment');
 
-        $this->farmer_report = $farmer_report;
+        $this->farmerReport = $farmerReport;
+        $this->exists = $farmerReport->exists;
 
-        if (!$farmer_report->exists) {
-            $this->name = 'Create Farmer Report';
-            $this->description = 'Create a new farmer report';
+        if ($this->exists) {
+            $this->name = __('Edit Farmer Report');
+            $this->description = __('Edit a submitted farmer report');
         }
 
         return [
-            'farmer_report' => $farmer_report,
+            'farmerReport' => $farmerReport,
         ];
     }
 
@@ -64,7 +59,7 @@ class FarmerReportEditScreen extends Screen
                 ->icon('trash')
                 ->confirm(__('Once the farmer report is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                 ->method('remove')
-                ->canSee($this->farmer_report->exists),
+                ->canSee($this->exists),
 
             Button::make(__('Save'))
                 ->icon('check')
@@ -96,7 +91,7 @@ class FarmerReportEditScreen extends Screen
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
                         ->icon('check')
-                        ->canSee($this->farmer_report->exists)
+                        ->canSee($this->exists)
                         ->method('save')
                 ),
         ];

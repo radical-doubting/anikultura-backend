@@ -40,7 +40,7 @@ class BatchSeedAllocationEditScreen extends Screen
 
         return [
             'batch' => $batch,
-            'batchSeedAllocation' =>  $batchSeedAllocation,
+            'batchSeedAllocation' => $batchSeedAllocation,
         ];
     }
 

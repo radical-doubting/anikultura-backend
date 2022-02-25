@@ -23,15 +23,19 @@ class FarmerReportEditEstimationLayout extends Rows
      */
     protected function fields(): array
     {
-        $currentReport = $this->query['farmer_report'];
-        $farmland = $currentReport->farmland;
-        $farmlandName = $farmland->name;
-        $farmlandHectares = $farmland->hectares;
+        $currentReport = $this->query['farmerReport'];
+        $isPlanted = false;
 
-        $cropName = $currentReport->crop->name;
-        $isPlanted = $currentReport->isPlanted();
+        if ($currentReport->exists) {
+            $farmland = $currentReport->farmland;
+            $farmlandName = $farmland->name;
+            $farmlandHectares = $farmland->hectares;
 
-        $disclaimer = __("The estimated yield assuming that the entire $farmlandHectares hectare(s) of $farmlandName has only $cropName planted.");
+            $cropName = $currentReport->crop->name;
+            $isPlanted = $currentReport->isPlanted();
+
+            $disclaimer = __("The estimated yield assuming that the entire $farmlandHectares hectare(s) of $farmlandName has only $cropName planted.");
+        }
 
         return [
             Input::make('farmer_report.estimated_yield_amount')

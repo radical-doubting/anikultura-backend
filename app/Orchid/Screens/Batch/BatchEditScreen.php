@@ -76,33 +76,37 @@ class BatchEditScreen extends Screen
      */
     public function layout(): array
     {
-        return [
-            Layout::tabs([
-                'Batch Information' => [
-                    Layout::block(BatchEditLayout::class)
-                        ->title(__('Batch Information'))
-                        ->description(__('Basic information of this batch')),
-                    Layout::block(BatchEditSiteLayout::class)
-                        ->title(__('Batch Site'))
-                        ->description(__('The assigned site location of this batch')),
-                    Layout::block(BatchEditFarmersLayout::class)
-                        ->title(__('Batch Farmers'))
-                        ->description(__('The farmers who belong to this batch'))
-                        ->commands(
-                            Button::make(__('Save'))
-                                ->type(Color::DEFAULT())
-                                ->icon('check')
-                                ->method('save')
-                        ),
-                ],
+        $tabs = [
+            'Batch Information' => [
+                Layout::block(BatchEditLayout::class)
+                    ->title(__('Batch Information'))
+                    ->description(__('Basic information of this batch')),
+                Layout::block(BatchEditSiteLayout::class)
+                    ->title(__('Batch Site'))
+                    ->description(__('The assigned site location of this batch')),
+                Layout::block(BatchEditFarmersLayout::class)
+                    ->title(__('Batch Farmers'))
+                    ->description(__('The farmers who belong to this batch'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ],
+        ];
 
-                'Seeds Allocation' => [
-                    Layout::block(BatchSeedAllocationCommandLayout::class)
-                        ->title(__('Seeds Allocation'))
-                        ->description(__('Seeds distributed to each farmer in this batch')),
-                    BatchSeedAllocationListLayout::class,
-                ],
-            ])->activeTab('Batch Information'),
+        if ($this->exists) {
+            $tabs['Seeds Allocation'] = [
+                Layout::block(BatchSeedAllocationCommandLayout::class)
+                    ->title(__('Seeds Allocation'))
+                    ->description(__('Seeds distributed to each farmer in this batch')),
+                BatchSeedAllocationListLayout::class,
+            ];
+        }
+
+        return [
+            Layout::tabs($tabs)->activeTab('Batch Information'),
         ];
     }
 
