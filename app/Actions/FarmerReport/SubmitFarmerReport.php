@@ -3,6 +3,7 @@
 namespace App\Actions\FarmerReport;
 
 use App\Actions\Crop\RetrieveFarmerSeedStage;
+use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\FarmerReport\FarmerReport;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -16,9 +17,9 @@ class SubmitFarmerReport
         $farmerReport = FarmerReport::create([
             'reported_by' => $farmer->id,
             'seed_stage_id' =>  $this->getNextSeedStage($farmer),
-            'farmland_id' => $farmerReportData['farmland_id'],
-            'crop_id' => $farmerReportData['crop_id'],
-            'volume_kg' => $farmerReportData['volume_kg'],
+            'farmland_id' => $farmerReportData['farmlandId'],
+            'crop_id' => $farmerReportData['cropId'],
+            'volume_kg' => $farmerReportData['volumeKg'],
         ]);
 
         return $farmerReport;
@@ -33,10 +34,10 @@ class SubmitFarmerReport
      *       required=true,
      *       @OA\JsonContent(
      *          @OA\Property(
-     *             property="farmer_report",
-     *             @OA\Property(property="farmland_id", type="int", format="int", example="1"),
-     *             @OA\Property(property="crop_id", type="int", format="int", example="1"),
-     *             @OA\Property(property="volume_kg", type="double", format="double", example="10.23"),
+     *             property="farmerReport",
+     *             @OA\Property(property="farmlandId", type="int", format="int", example="1"),
+     *             @OA\Property(property="cropId", type="int", format="int", example="1"),
+     *             @OA\Property(property="volumeKg", type="double", format="double", example="10.23"),
      *          )
      *       ),
      *     ),
@@ -48,12 +49,14 @@ class SubmitFarmerReport
     {
         $farmer = auth('api')->user();
 
-        $farmerReportData = $request->get('farmer_report');
+        $farmerReportData = $request->get('farmerReport');
 
         $createdFarmerReport = $this->handle($farmer, $farmerReportData);
 
         return response()->json(
-            $createdFarmerReport->fresh()
+            new FarmerReportResource(
+                $createdFarmerReport->fresh()
+            )
         );
     }
 
@@ -71,14 +74,17 @@ class SubmitFarmerReport
     public function rules(): array
     {
         return [
-            'farmer_report.farmland_id' => [
+            'farmerReport.farmlandId' => [
                 'required',
+                'integer',
             ],
-            'farmer_report.crop_id' => [
+            'farmerReport.cropId' => [
                 'required',
+                'integer',
             ],
-            'farmer_report.volume_kg' => [
+            'farmerReport.volumeKg' => [
                 'required',
+                'numeric',
             ],
         ];
     }

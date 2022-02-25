@@ -2,6 +2,7 @@
 
 namespace App\Actions\FarmerReport;
 
+use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use Lorisleiva\Actions\ActionRequest;
@@ -13,25 +14,16 @@ class RetrieveFarmerSubmittedReports
 
     public function handle($farmer)
     {
-        $farmlands = FarmerReport::with([
-            'crop:id,name,slug',
-            'verifier:id,first_name,middle_name,last_name',
-            'seedStage:id,name,slug',
-        ])
-            ->where('reported_by', $farmer->id)
-            ->orderBy('created_at', 'DESC')
+        $farmerReports = FarmerReport::with([
+            'crop',
+            'verifier',
+            'seedStage',
+        ])->where('reported_by', $farmer->id)
+            ->orderBy('created_at', 'ASC')
             ->orderBy('seed_stage_id', 'DESC')
             ->get();
 
-        return $farmlands->makeHidden([
-            'updated_at',
-            'farmland_id',
-            'seed_stage_id',
-            'reported_by',
-            'crop_id',
-            'verified_by',
-            'image',
-        ]);
+        return $farmerReports;
     }
 
     /**
@@ -47,8 +39,8 @@ class RetrieveFarmerSubmittedReports
     {
         $user = auth('api')->user();
 
-        $currentSeedStage = $this->handle($user);
+        $farmerReports = $this->handle($user);
 
-        return response()->json($currentSeedStage);
+        return response()->json(FarmerReportResource::collection($farmerReports));
     }
 }

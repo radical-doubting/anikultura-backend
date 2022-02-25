@@ -236,19 +236,19 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "farmer_report": {
+                                    "farmerReport": {
                                         "properties": {
-                                            "farmland_id": {
+                                            "farmlandId": {
                                                 "type": "integer",
                                                 "format": "int",
                                                 "example": "1"
                                             },
-                                            "crop_id": {
+                                            "cropId": {
                                                 "type": "integer",
                                                 "format": "int",
                                                 "example": "1"
                                             },
-                                            "volume_kg": {
+                                            "volumeKg": {
                                                 "type": "number",
                                                 "format": "double",
                                                 "example": "10.23"

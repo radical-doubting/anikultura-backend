@@ -2,6 +2,7 @@
 
 namespace App\Actions\Farmland;
 
+use App\Http\Resources\Farmland\FarmlandResource;
 use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use Lorisleiva\Actions\ActionRequest;
@@ -35,6 +36,6 @@ class RetrieveFarmerFarmlands
 
         $farmlands = $this->handle($user);
 
-        return response()->json($farmlands);
+        return response()->json(FarmlandResource::collection($farmlands));
     }
 }

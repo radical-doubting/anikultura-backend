@@ -2,6 +2,7 @@
 
 namespace App\Actions\Crop;
 
+use App\Http\Resources\Crop\SeedStageResource;
 use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
@@ -21,7 +22,7 @@ class RetrieveFarmerSeedStage
         $currentSeedStage = is_null($farmerReport) ?
             $this->getFirstSeedStage() : $farmerReport->seedStage;
 
-        return $currentSeedStage->makeHidden('created_at', 'updated_at');
+        return $currentSeedStage;
     }
 
     private function getFirstSeedStage()
@@ -45,6 +46,6 @@ class RetrieveFarmerSeedStage
 
         $currentSeedStage = $this->handle($user);
 
-        return response()->json($currentSeedStage);
+        return response()->json(new SeedStageResource($currentSeedStage));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Actions\Batch;
 
+use App\Http\Resources\Batch\BatchSeedAllocationResource;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
 use Lorisleiva\Actions\ActionRequest;
@@ -14,17 +15,11 @@ class RetrieveFarmerSeedAllocation
     public function handle($farmer)
     {
         $seedAllocations = BatchSeedAllocation::with([
-            'batch:id,farmschool_name',
-            'crop:id,name,slug',
+            'batch',
+            'crop',
         ])->where('farmer_id', $farmer->id)->get();
 
-        return $seedAllocations->makeHidden([
-            'created_at',
-            'updated_at',
-            'farmer_id',
-            'batch_id',
-            'crop_id',
-        ]);
+        return $seedAllocations;
     }
 
     /**
@@ -42,6 +37,6 @@ class RetrieveFarmerSeedAllocation
 
         $seedAllocations = $this->handle($user);
 
-        return response()->json($seedAllocations);
+        return response()->json(BatchSeedAllocationResource::collection($seedAllocations));
     }
 }
