@@ -22,7 +22,7 @@ class LoginFarmer
             return null;
         }
 
-        return CreateAuthPayload::run($token);
+        return CreateFarmerAuthPayload::run($token);
     }
 
     /**

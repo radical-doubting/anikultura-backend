@@ -2,10 +2,11 @@
 
 namespace App\Actions\Authentication;
 
+use App\Http\Resources\Farmer\FarmerResource;
 use Lorisleiva\Actions\Concerns\AsAction;
 use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
 
-class CreateAuthPayload
+class CreateFarmerAuthPayload
 {
     use AsAction;
 
@@ -15,7 +16,7 @@ class CreateAuthPayload
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => JWTAuth::factory()->getTTL() * 60,
-            'user' => auth('api')->user(),
+            'user' => new FarmerResource(auth('api')->user()),
         ];
     }
 }
