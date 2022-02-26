@@ -172,12 +172,29 @@
             }
         },
         "/crops/seed-stage": {
-            "get": {
+            "post": {
                 "tags": [
                     "crops"
                 ],
                 "description": "Get the current seed stage of the logged in farmer",
-                "operationId": "5d9d034aaae36115f095c9ef66f2635a",
+                "operationId": "3a3c0b4f527e75926bcefaea219ff937",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "farmlandId": {
+                                        "type": "integer",
+                                        "format": "int",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "The current seed stage",

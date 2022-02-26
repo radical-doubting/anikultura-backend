@@ -34,7 +34,7 @@ Route::group(['as' => 'api.'], function () {
 
     Route::group(['prefix' => 'crops', 'middleware' => 'auth:api'], function () {
         Route::get('/', RetrieveFarmerCrops::class);
-        Route::get('/seed-stage', RetrieveFarmerSeedStage::class);
+        Route::post('/seed-stage', RetrieveFarmerSeedStage::class);
         Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class);
     });
 
