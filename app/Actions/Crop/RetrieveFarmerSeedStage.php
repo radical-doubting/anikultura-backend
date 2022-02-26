@@ -39,7 +39,7 @@ class RetrieveFarmerSeedStage
 
     /**
      * @OA\Post(
-     *     path="/crops/seed-stage",
+     *     path="/crops/current-seed-stage",
      *     description="Get the current seed stage of the logged in farmer",
      *     tags={"crops"},
      *     @OA\RequestBody(

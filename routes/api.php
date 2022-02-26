@@ -5,6 +5,7 @@ use App\Actions\Authentication\LogoutFarmer;
 use App\Actions\Batch\RetrieveFarmerSeedAllocation;
 use App\Actions\Crop\RetrieveFarmerCrops;
 use App\Actions\Crop\RetrieveFarmerSeedStage;
+use App\Actions\Crop\RetrieveNextSeedStage;
 use App\Actions\Farmer\UpdateFarmerTutorialState;
 use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
 use App\Actions\FarmerReport\SubmitFarmerReport;
@@ -39,8 +40,9 @@ Route::group(['as' => 'api.'], function () {
 
     Route::group(['prefix' => 'crops', 'middleware' => 'auth:api'], function () {
         Route::get('/', RetrieveFarmerCrops::class);
-        Route::post('/seed-stage', RetrieveFarmerSeedStage::class);
         Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class);
+        Route::post('/next-seed-stage', RetrieveNextSeedStage::class);
+        Route::post('/current-seed-stage', RetrieveFarmerSeedStage::class);
     });
 
     Route::group(['prefix' => 'farmlands', 'middleware' => 'auth:api'], function () {

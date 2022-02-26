@@ -171,13 +171,13 @@
                 }
             }
         },
-        "/crops/seed-stage": {
+        "/crops/current-seed-stage": {
             "post": {
                 "tags": [
                     "crops"
                 ],
                 "description": "Get the current seed stage of the logged in farmer",
-                "operationId": "3a3c0b4f527e75926bcefaea219ff937",
+                "operationId": "54bd361f055c2c0eeebf48943605c0d5",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -198,6 +198,50 @@
                 "responses": {
                     "200": {
                         "description": "The current seed stage",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crops/next-seed-stage": {
+            "post": {
+                "tags": [
+                    "crops"
+                ],
+                "description": "Get the next seed stage of of a given seed stage",
+                "operationId": "1a45147e3841fa735e4441eadb610c6b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "currentSeedStageId": {
+                                        "type": "integer",
+                                        "format": "int",
+                                        "example": "1"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Next seed stage",
                         "content": {
                             "application/json": {
                                 "schema": {}

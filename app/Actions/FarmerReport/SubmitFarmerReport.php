@@ -3,8 +3,10 @@
 namespace App\Actions\FarmerReport;
 
 use App\Actions\Crop\RetrieveFarmerSeedStage;
+use App\Actions\Crop\RetrieveNextSeedStage;
 use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\FarmerReport\FarmerReport;
+use App\Models\Farmland\Farmland;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -14,10 +16,16 @@ class SubmitFarmerReport
 
     public function handle($farmer, $farmerReportData)
     {
+        $farmland = Farmland::findOrFail($farmerReportData['farmlandId']);
+        $currentSeedStage = RetrieveFarmerSeedStage::run($farmer, $farmland);
+        $nextSeedStage = RetrieveNextSeedStage::run($currentSeedStage);
+
+        abort_if(is_null($nextSeedStage), 400, 'No next seed stage');
+
         $farmerReport = FarmerReport::create([
             'reported_by' => $farmer->id,
-            'seed_stage_id' =>  $this->getNextSeedStage($farmer),
-            'farmland_id' => $farmerReportData['farmlandId'],
+            'seed_stage_id' =>  $nextSeedStage->id,
+            'farmland_id' => $farmland->id,
             'crop_id' => $farmerReportData['cropId'],
             'volume_kg' => $farmerReportData['volumeKg'],
         ]);
@@ -58,17 +66,6 @@ class SubmitFarmerReport
                 $createdFarmerReport->fresh()
             )
         );
-    }
-
-    private function getNextSeedStage($farmer)
-    {
-        $currentSeedStage = RetrieveFarmerSeedStage::run($farmer);
-
-        if ($currentSeedStage->slug === 'marketable') {
-            return $currentSeedStage->id;
-        }
-
-        return $currentSeedStage->id + 1;
     }
 
     public function rules(): array
