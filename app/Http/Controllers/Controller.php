@@ -41,9 +41,13 @@ use Illuminate\Routing\Controller as BaseController;
  *       description="Endpoints related with farmlands such as what farmland a farmer belongs in."
  *  )
  *  @OA\Tag(
+ *       name="farmers",
+ *       description="Endpoints related with farmers such as updating tutorial state."
+ *  )
+ *  @OA\Tag(
  *       name="farmer-reports",
  *       description="Endpoints related with farmer reports such as submitting and retrieving their history."
- * )
+ *  )
  */
 class Controller extends BaseController
 {

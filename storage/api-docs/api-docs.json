@@ -215,6 +215,49 @@
                 }
             }
         },
+        "/farmers/tutorial": {
+            "patch": {
+                "tags": [
+                    "farmers"
+                ],
+                "description": "Get the current seed stage of the logged in farmer",
+                "operationId": "2bf3a108f55ee082f8b60cc7b284a4bc",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "tutorialDone": {
+                                        "type": "boolean",
+                                        "example": "false"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful update",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/farmer-reports": {
             "get": {
                 "tags": [
@@ -339,6 +382,10 @@
         {
             "name": "farmlands",
             "description": "Endpoints related with farmlands such as what farmland a farmer belongs in."
+        },
+        {
+            "name": "farmers",
+            "description": "Endpoints related with farmers such as updating tutorial state."
         },
         {
             "name": "farmer-reports",

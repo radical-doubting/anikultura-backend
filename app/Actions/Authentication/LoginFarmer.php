@@ -60,7 +60,7 @@ class LoginFarmer
             return response()->json(['error' => 'Invalid login credentials'], 401);
         }
 
-        $authCookie = cookie('token', $authPayload['access_token'], $authPayload['expires_in']);
+        $authCookie = cookie('token', $authPayload['accessToken'], $authPayload['expiresIn']);
 
         return response()->json($authPayload)->withCookie($authCookie);
     }
