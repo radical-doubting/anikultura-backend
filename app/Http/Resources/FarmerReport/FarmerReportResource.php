@@ -21,6 +21,7 @@ class FarmerReportResource extends JsonResource
                 'actualVolumeKgProduced' => $this->volume_kg,
             ]),
             $this->mergeWhen($this->isPlanted(), [
+                'estimatedProfit' => $this->estimated_profit,
                 'estimatedYieldAmount' => $this->estimated_yield_amount,
                 'estimatedYieldDateEarliest' => $this->estimated_yield_date_lower_bound,
                 'estimatedYieldDateLatest' => $this->estimated_yield_date_upper_bound,

@@ -2,6 +2,7 @@
 
 namespace App\Models\FarmerReport;
 
+use App\Actions\Crop\CalculateExpectedProfitByVolume;
 use App\Actions\Crop\CalculateExpectedYieldAmount;
 use App\Actions\Crop\CalculateExpectedYieldDate;
 use App\Models\Crop\Crop;
@@ -43,6 +44,7 @@ class FarmerReport extends Model
 
     protected $casts = [
         'volume_kg' => 'float',
+        'estimated_profit' => 'float',
         'estimated_yield_amount' => 'float',
     ];
 
@@ -67,6 +69,9 @@ class FarmerReport extends Model
             $estimatedDates = CalculateExpectedYieldDate::run($crop, $datePlanted);
             $farmerReport->estimated_yield_date_upper_bound = $estimatedDates['upper'];
             $farmerReport->estimated_yield_date_lower_bound = $estimatedDates['lower'];
+
+            $estimatedProfit = CalculateExpectedProfitByVolume::run($crop, $estimatedYield);
+            $farmerReport->estimated_profit = $estimatedProfit;
         });
     }
 
