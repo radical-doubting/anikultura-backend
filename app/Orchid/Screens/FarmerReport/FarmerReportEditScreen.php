@@ -32,8 +32,6 @@ class FarmerReportEditScreen extends Screen
      */
     public function query(FarmerReport $farmerReport): array
     {
-        $farmerReport->load('attachment');
-
         $this->farmerReport = $farmerReport;
         $this->exists = $farmerReport->exists;
 
@@ -80,7 +78,7 @@ class FarmerReportEditScreen extends Screen
                 ->description(__('Update the report information')),
             Layout::block(FarmerReportEditAttachmentLayout::class)
                 ->title(__('Attachment Information'))
-                ->description(__('Update the report attachments')),
+                ->description(__('View the report attachments')),
             Layout::block(FarmerReportEditEstimationLayout::class)
                 ->title(__('Estimation Information'))
                 ->description(__('Read the report estimations')),

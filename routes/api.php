@@ -10,6 +10,7 @@ use App\Actions\Farmer\RetrieveFarmerTutorialState;
 use App\Actions\Farmer\UpdateFarmerTutorialState;
 use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
 use App\Actions\FarmerReport\SubmitFarmerReport;
+use App\Actions\FarmerReport\UploadImageToFarmerReport;
 use App\Actions\Farmland\RetrieveFarmerFarmlands;
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::group(['as' => 'api.'], function () {
 
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {
         Route::post('/', SubmitFarmerReport::class);
+        Route::post('/{id}/upload', UploadImageToFarmerReport::class);
         Route::get('/', RetrieveFarmerSubmittedReports::class);
     });
 

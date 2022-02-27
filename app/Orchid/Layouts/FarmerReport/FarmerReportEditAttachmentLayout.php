@@ -3,7 +3,7 @@
 namespace App\Orchid\Layouts\FarmerReport;
 
 use Orchid\Screen\Field;
-use Orchid\Screen\Fields\Upload;
+use Orchid\Screen\Fields\Picture;
 use Orchid\Screen\Layouts\Rows;
 
 class FarmerReportEditAttachmentLayout extends Rows
@@ -22,12 +22,19 @@ class FarmerReportEditAttachmentLayout extends Rows
      */
     protected function fields(): array
     {
+        $currentReport = $this->query['farmer_report'];
+        $media = $currentReport->fetchAllMedia();
+        $fileUrl = 'http://placehold.jp/ababab/ffffff/150x150.png?text=No%20image%20attached';
+
+        if (count($media) > 0) {
+            $fileUrl = $media[0]->file_url;
+        }
+
         return [
-            Upload::make('farmer_report.attachment')
-                ->title(__('All attachments'))
-                ->acceptedFiles('image/*')
-                ->storage('local')
-                ->groups('photos'),
+            Picture::make('image')
+                ->value($fileUrl)
+                ->title('Image Proof')
+                ->acceptedFiles('image/*'),
         ];
     }
 }

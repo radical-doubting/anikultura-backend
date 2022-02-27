@@ -9,11 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-redis": "*",
         "chelout/laravel-relationship-events": "^1.5",
+        "cloudinary-labs/cloudinary-laravel": "^1.0",
         "cviebrock/eloquent-sluggable": "^8.0",
         "darkaonline/l5-swagger": "^8.1",
         "doctrine/dbal": "^3.1",
-        "ext-redis": "*",
         "fakerphp/faker": "^1.9.1",
         "fico7489/laravel-pivot": "^3.0",
         "fideloper/proxy": "^4.4",

@@ -10,15 +10,15 @@ use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use App\Models\ManagementUser;
+use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
-use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 
 class FarmerReport extends Model
 {
-    use Filterable, HasFactory, Attachable;
+    use Filterable, HasFactory, MediaAlly;
 
     protected $fillable = [
         'reported_by',
@@ -28,7 +28,6 @@ class FarmerReport extends Model
         'verified',
         'verified_by',
         'volume_kg',
-        'image',
     ];
 
     protected $allowedFilters = [
