@@ -220,7 +220,7 @@
                 "tags": [
                     "crops"
                 ],
-                "description": "Get the next seed stage of of a given seed stage",
+                "description": "Get the next seed stage of the logged in farmer",
                 "operationId": "1a45147e3841fa735e4441eadb610c6b",
                 "requestBody": {
                     "required": true,
@@ -228,7 +228,7 @@
                         "application/json": {
                             "schema": {
                                 "properties": {
-                                    "currentSeedStageId": {
+                                    "farmlandId": {
                                         "type": "integer",
                                         "format": "int",
                                         "example": "1"
@@ -241,7 +241,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Next seed stage",
+                        "description": "The next seed stage",
                         "content": {
                             "application/json": {
                                 "schema": {}

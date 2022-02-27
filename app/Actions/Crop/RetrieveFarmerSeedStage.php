@@ -3,7 +3,6 @@
 namespace App\Actions\Crop;
 
 use App\Http\Resources\Crop\SeedStageResource;
-use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
@@ -26,15 +25,9 @@ class RetrieveFarmerSeedStage
             ->first();
 
         $currentSeedStage = is_null($farmerReport) ?
-            $this->getFirstSeedStage() : $farmerReport->seedStage;
+            null : $farmerReport->seedStage;
 
         return $currentSeedStage;
-    }
-
-    private function getFirstSeedStage()
-    {
-        return SeedStage::where('slug', 'starter-kit-received')
-            ->first();
     }
 
     /**
@@ -61,7 +54,11 @@ class RetrieveFarmerSeedStage
 
         $currentSeedStage = $this->handle($user, $farmland);
 
-        return response()->json(new SeedStageResource($currentSeedStage));
+        if (is_null($currentSeedStage)) {
+            return response()->json(null);
+        } else {
+            return response()->json(new SeedStageResource($currentSeedStage));
+        }
     }
 
     public function rules(): array

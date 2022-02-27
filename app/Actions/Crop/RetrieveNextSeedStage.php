@@ -4,6 +4,7 @@ namespace App\Actions\Crop;
 
 use App\Http\Resources\Crop\SeedStageResource;
 use App\Models\Crop\SeedStage;
+use App\Models\Farmland\Farmland;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -11,8 +12,13 @@ class RetrieveNextSeedStage
 {
     use AsAction;
 
-    public function handle(SeedStage $currentSeedStage)
+    public function handle($currentSeedStage)
     {
+        if (is_null($currentSeedStage)) {
+            return SeedStage::where('slug', 'starter-kit-received')
+                ->first();
+        }
+
         if ($currentSeedStage->slug === 'marketable') {
             return null;
         }
@@ -23,22 +29,26 @@ class RetrieveNextSeedStage
     /**
      * @OA\Post(
      *     path="/crops/next-seed-stage",
-     *     description="Get the next seed stage of of a given seed stage",
+     *     description="Get the next seed stage of the logged in farmer",
      *     tags={"crops"},
      *     @OA\RequestBody(
      *       required=true,
      *       @OA\JsonContent(
-     *         @OA\Property(property="currentSeedStageId", type="int", format="int", example="1"),
+     *         @OA\Property(property="farmlandId", type="int", format="int", example="1"),
      *       )
      *     ),
-     *     @OA\Response(response="200", description="Next seed stage", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="The next seed stage", @OA\JsonContent()),
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
     public function asController(ActionRequest $request)
     {
-        $currentSeedStageId = $request->get('currentSeedStageId');
-        $currentSeedStage = SeedStage::findOrFail($currentSeedStageId);
+        $user = auth('api')->user();
+
+        $farmlandId = $request->get('farmlandId');
+        $farmland = Farmland::findOrFail($farmlandId);
+
+        $currentSeedStage = RetrieveFarmerSeedStage::run($user, $farmland);
         $nextSeedStage = $this->handle($currentSeedStage);
 
         if (is_null($nextSeedStage)) {
@@ -51,7 +61,7 @@ class RetrieveNextSeedStage
     public function rules(): array
     {
         return [
-            'currentSeedStageId' => [
+            'farmlandId' => [
                 'required',
                 'integer',
             ],
