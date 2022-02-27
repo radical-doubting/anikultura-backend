@@ -75,7 +75,7 @@ class UploadImageToFarmerReport
         return [
             'image' => [
                 'mimes:jpeg,jpg,bmp,png',
-                'max:2048',
+                'max:10240',
             ],
         ];
     }
