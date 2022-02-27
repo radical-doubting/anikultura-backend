@@ -38,8 +38,8 @@ Route::group(['as' => 'api.'], function () {
 
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {
         Route::post('/', SubmitFarmerReport::class);
-        Route::post('/{id}/upload', UploadImageToFarmerReport::class);
-        Route::get('/', RetrieveFarmerSubmittedReports::class);
+        Route::post('/{farmerReportId}/upload', UploadImageToFarmerReport::class);
+        Route::get('/{farmlandId}', RetrieveFarmerSubmittedReports::class);
     });
 
     Route::group(['prefix' => 'crops', 'middleware' => 'auth:api'], function () {

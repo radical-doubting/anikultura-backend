@@ -80,8 +80,8 @@ class SubmitFarmerReport
                 'integer',
             ],
             'farmerReport.volumeKg' => [
-                'required',
                 'numeric',
+                'nullable',
             ],
         ];
     }

@@ -327,13 +327,20 @@
                 }
             }
         },
-        "/farmer-reports": {
+        "/farmer-reports/{farmlandId}": {
             "get": {
                 "tags": [
                     "farmer-reports"
                 ],
                 "description": "Get the submitted farmer reports of the logged in farmer",
-                "operationId": "09bc52a7232e2b94c0cccdca674db51c",
+                "operationId": "db70405a84f1463e2e188cf6b8982482",
+                "parameters": [
+                    {
+                        "name": "farmlandId",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "The submitted farmer reports",
@@ -352,7 +359,9 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/farmer-reports": {
             "post": {
                 "tags": [
                     "farmer-reports"
@@ -411,16 +420,16 @@
                 }
             }
         },
-        "/farmer-reports/{id}/upload": {
+        "/farmer-reports/{farmerReportId}/upload": {
             "post": {
                 "tags": [
                     "farmer-reports"
                 ],
                 "description": "Upload an image to farmer report",
-                "operationId": "e86fc3621b3564b995f8e31fff60d473",
+                "operationId": "8a145d034af9c15526987390bc2a6ef3",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "farmerReportId",
                         "in": "path",
                         "required": true
                     }

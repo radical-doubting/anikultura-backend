@@ -27,11 +27,11 @@ class UploadImageToFarmerReport
 
     /**
      * @OA\Post(
-     *     path="/farmer-reports/{id}/upload",
+     *     path="/farmer-reports/{farmerReportId}/upload",
      *     description="Upload an image to farmer report",
      *     tags={"farmer-reports"},
      *     @OA\Parameter(
-     *        name="id",
+     *        name="farmerReportId",
      *        in="path",
      *        required=true,
      *     ),
@@ -57,7 +57,7 @@ class UploadImageToFarmerReport
     {
         $farmer = auth('api')->user();
 
-        $farmerReportId = $request->route('id');
+        $farmerReportId = $request->route('farmerReportId');
 
         $farmerReport = FarmerReport::findOrFail($farmerReportId);
 
