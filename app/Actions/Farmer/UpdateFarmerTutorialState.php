@@ -18,7 +18,7 @@ class UpdateFarmerTutorialState
     /**
      * @OA\Patch(
      *     path="/farmers/tutorial",
-     *     description="Get the current seed stage of the logged in farmer",
+     *     description="Update the tutorial state of the logged in farmer",
      *     tags={"farmers"},
      *     @OA\RequestBody(
      *       required=true,

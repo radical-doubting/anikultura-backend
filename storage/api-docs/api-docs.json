@@ -260,11 +260,36 @@
             }
         },
         "/farmers/tutorial": {
+            "get": {
+                "tags": [
+                    "farmers"
+                ],
+                "description": "Get the current tutorial state of the logged in farmer",
+                "operationId": "b819e5b6365464fe5938444654041d2a",
+                "responses": {
+                    "200": {
+                        "description": "The tutorial state",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
             "patch": {
                 "tags": [
                     "farmers"
                 ],
-                "description": "Get the current seed stage of the logged in farmer",
+                "description": "Update the tutorial state of the logged in farmer",
                 "operationId": "2bf3a108f55ee082f8b60cc7b284a4bc",
                 "requestBody": {
                     "required": true,

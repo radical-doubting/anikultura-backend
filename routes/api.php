@@ -6,6 +6,7 @@ use App\Actions\Batch\RetrieveFarmerSeedAllocation;
 use App\Actions\Crop\RetrieveFarmerCrops;
 use App\Actions\Crop\RetrieveFarmerSeedStage;
 use App\Actions\Crop\RetrieveNextSeedStage;
+use App\Actions\Farmer\RetrieveFarmerTutorialState;
 use App\Actions\Farmer\UpdateFarmerTutorialState;
 use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
 use App\Actions\FarmerReport\SubmitFarmerReport;
@@ -30,6 +31,7 @@ Route::group(['as' => 'api.'], function () {
     });
 
     Route::group(['prefix' => 'farmers', 'middleware' => 'auth:api'], function () {
+        Route::get('/tutorial', RetrieveFarmerTutorialState::class);
         Route::patch('/tutorial', UpdateFarmerTutorialState::class);
     });
 
