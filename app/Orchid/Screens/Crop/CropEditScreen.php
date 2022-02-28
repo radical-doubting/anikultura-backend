@@ -16,19 +16,13 @@ use Orchid\Support\Facades\Layout;
 
 class CropEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Crop';
+    protected $exists = false;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit a crop type under SM KSK SAP';
+    public function __construct()
+    {
+        $this->name = __('Create Crop');
+        $this->description = __('Create a new crop type');
+    }
 
     /**
      * Query data.
@@ -38,10 +32,11 @@ class CropEditScreen extends Screen
     public function query(Crop $crop): array
     {
         $this->crop = $crop;
+        $this->exists = $crop->exists;
 
         if (!$crop->exists) {
-            $this->name = 'Create Crop';
-            $this->description = 'Create a new Crop Type';
+            $this->name = __('Edit Crop');
+            $this->description = __('Edit crop type details');
         }
 
         return [
@@ -61,7 +56,7 @@ class CropEditScreen extends Screen
                 ->icon('trash')
                 ->confirm(__('Once the crop type is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('remove')
-                ->canSee($this->crop->exists),
+                ->canSee($this->exists),
 
             Button::make(__('Save'))
                 ->icon('check')

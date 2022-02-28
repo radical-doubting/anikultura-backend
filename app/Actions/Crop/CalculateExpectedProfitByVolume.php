@@ -9,10 +9,10 @@ class CalculateExpectedProfitByVolume
 {
     use AsAction;
 
-    public function handle(float $volume, Crop $crop)
+    public function handle(Crop $crop, float $volume)
     {
         $profitPerKg = $crop->profit_per_kg;
 
-        return $volume * $profitPerKg;
+        return round($volume * $profitPerKg, 2);
     }
 }

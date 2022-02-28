@@ -48,7 +48,8 @@ class CreateFarmerReport
                 'required',
             ],
             'farmer_report.volume_kg' => [
-                'required',
+                'numeric',
+                'nullable',
             ],
         ];
     }

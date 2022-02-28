@@ -2,6 +2,7 @@
 
 namespace App\Actions\FarmerReport;
 
+use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use Lorisleiva\Actions\ActionRequest;
@@ -11,34 +12,31 @@ class RetrieveFarmerSubmittedReports
 {
     use AsAction;
 
-    public function handle($farmer)
+    public function handle($farmer, $farmlandId)
     {
-        $farmlands = FarmerReport::with([
-            'crop:id,name,slug',
-            'verifier:id,first_name,middle_name,last_name',
-            'seedStage:id,name,slug',
-        ])
+        $farmerReports = FarmerReport::with([
+            'crop',
+            'verifier',
+            'seedStage',
+        ])->where('farmland_id', $farmlandId)
             ->where('reported_by', $farmer->id)
-            ->orderBy('created_at', 'DESC')
+            ->orderBy('created_at', 'ASC')
             ->orderBy('seed_stage_id', 'DESC')
             ->get();
 
-        return $farmlands->makeHidden([
-            'updated_at',
-            'farmland_id',
-            'seed_stage_id',
-            'reported_by',
-            'crop_id',
-            'verified_by',
-            'image',
-        ]);
+        return $farmerReports;
     }
 
     /**
      * @OA\Get(
-     *     path="/farmer-reports",
+     *     path="/farmer-reports/{farmlandId}",
      *     description="Get the submitted farmer reports of the logged in farmer",
      *     tags={"farmer-reports"},
+     *     @OA\Parameter(
+     *        name="farmlandId",
+     *        in="path",
+     *        required=true,
+     *     ),
      *     @OA\Response(response="200", description="The submitted farmer reports", @OA\JsonContent()),
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
@@ -47,8 +45,10 @@ class RetrieveFarmerSubmittedReports
     {
         $user = auth('api')->user();
 
-        $currentSeedStage = $this->handle($user);
+        $farmlandId = $request->route('farmlandId');
 
-        return response()->json($currentSeedStage);
+        $farmerReports = $this->handle($user, $farmlandId);
+
+        return response()->json(FarmerReportResource::collection($farmerReports));
     }
 }

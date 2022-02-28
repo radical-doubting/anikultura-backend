@@ -2,6 +2,7 @@
 
 namespace App\Actions\Crop;
 
+use App\Http\Resources\Crop\CropResource;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
 use Lorisleiva\Actions\ActionRequest;
@@ -14,7 +15,7 @@ class RetrieveFarmerCrops
     public function handle($farmer)
     {
         $crops = BatchSeedAllocation::with([
-            'crop:id,name,slug',
+            'crop:id,name',
         ])->where('farmer_id', $farmer->id)
             ->get()
             ->pluck('crop')
@@ -36,8 +37,8 @@ class RetrieveFarmerCrops
     {
         $user = auth('api')->user();
 
-        $seedAllocations = $this->handle($user);
+        $crops = $this->handle($user);
 
-        return response()->json($seedAllocations);
+        return response()->json(CropResource::collection($crops));
     }
 }

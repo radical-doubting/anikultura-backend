@@ -5,8 +5,12 @@ use App\Actions\Authentication\LogoutFarmer;
 use App\Actions\Batch\RetrieveFarmerSeedAllocation;
 use App\Actions\Crop\RetrieveFarmerCrops;
 use App\Actions\Crop\RetrieveFarmerSeedStage;
+use App\Actions\Crop\RetrieveNextSeedStage;
+use App\Actions\Farmer\RetrieveFarmerTutorialState;
+use App\Actions\Farmer\UpdateFarmerTutorialState;
 use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
 use App\Actions\FarmerReport\SubmitFarmerReport;
+use App\Actions\FarmerReport\UploadImageToFarmerReport;
 use App\Actions\Farmland\RetrieveFarmerFarmlands;
 /*
 |--------------------------------------------------------------------------
@@ -27,15 +31,22 @@ Route::group(['as' => 'api.'], function () {
         Route::post('/logout', LogoutFarmer::class)->name('logout')->middleware('auth:api');
     });
 
+    Route::group(['prefix' => 'farmers', 'middleware' => 'auth:api'], function () {
+        Route::get('/tutorial', RetrieveFarmerTutorialState::class);
+        Route::patch('/tutorial', UpdateFarmerTutorialState::class);
+    });
+
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {
         Route::post('/', SubmitFarmerReport::class);
-        Route::get('/', RetrieveFarmerSubmittedReports::class);
+        Route::post('/{farmerReportId}/upload', UploadImageToFarmerReport::class);
+        Route::get('/{farmlandId}', RetrieveFarmerSubmittedReports::class);
     });
 
     Route::group(['prefix' => 'crops', 'middleware' => 'auth:api'], function () {
         Route::get('/', RetrieveFarmerCrops::class);
-        Route::get('/seed-stage', RetrieveFarmerSeedStage::class);
         Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class);
+        Route::post('/next-seed-stage', RetrieveNextSeedStage::class);
+        Route::post('/current-seed-stage', RetrieveFarmerSeedStage::class);
     });
 
     Route::group(['prefix' => 'farmlands', 'middleware' => 'auth:api'], function () {

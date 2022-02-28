@@ -22,7 +22,7 @@ class LoginFarmer
             return null;
         }
 
-        return CreateAuthPayload::run($token);
+        return CreateFarmerAuthPayload::run($token);
     }
 
     /**
@@ -48,7 +48,7 @@ class LoginFarmer
     public function asController(ActionRequest $request): JsonResponse
     {
         if (auth('api')->user()) {
-            return response()->json(['error' => 'Already logged in'], 400);
+            return response()->json(['message' => 'Already logged in'], 400);
         }
 
         $username = $request->get('username');
@@ -57,10 +57,10 @@ class LoginFarmer
         $authPayload = $this->handle($username, $password);
 
         if (!$authPayload) {
-            return response()->json(['error' => 'Invalid login credentials'], 401);
+            return response()->json(['message' => 'Invalid login credentials'], 401);
         }
 
-        $authCookie = cookie('token', $authPayload['access_token'], $authPayload['expires_in']);
+        $authCookie = cookie('token', $authPayload['accessToken'], $authPayload['expiresIn']);
 
         return response()->json($authPayload)->withCookie($authCookie);
     }

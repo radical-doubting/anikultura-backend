@@ -40,7 +40,7 @@ class BatchEditScreen extends Screen
 
         if ($this->exists) {
             $this->name = __('Edit Batch');
-            $this->description = __('Edit a batch under KSK SAP');
+            $this->description = __('Edit batch details');
         }
 
         return [

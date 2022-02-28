@@ -2,6 +2,7 @@
 
 namespace App\Models\FarmerReport;
 
+use App\Actions\Crop\CalculateExpectedProfitByVolume;
 use App\Actions\Crop\CalculateExpectedYieldAmount;
 use App\Actions\Crop\CalculateExpectedYieldDate;
 use App\Models\Crop\Crop;
@@ -9,15 +10,15 @@ use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use App\Models\ManagementUser;
+use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
-use Orchid\Attachment\Attachable;
 use Orchid\Filters\Filterable;
 
 class FarmerReport extends Model
 {
-    use Filterable, HasFactory, Attachable;
+    use Filterable, HasFactory, MediaAlly;
 
     protected $fillable = [
         'reported_by',
@@ -27,7 +28,6 @@ class FarmerReport extends Model
         'verified',
         'verified_by',
         'volume_kg',
-        'image',
     ];
 
     protected $allowedFilters = [
@@ -43,6 +43,7 @@ class FarmerReport extends Model
 
     protected $casts = [
         'volume_kg' => 'float',
+        'estimated_profit' => 'float',
         'estimated_yield_amount' => 'float',
     ];
 
@@ -67,6 +68,9 @@ class FarmerReport extends Model
             $estimatedDates = CalculateExpectedYieldDate::run($crop, $datePlanted);
             $farmerReport->estimated_yield_date_upper_bound = $estimatedDates['upper'];
             $farmerReport->estimated_yield_date_lower_bound = $estimatedDates['lower'];
+
+            $estimatedProfit = CalculateExpectedProfitByVolume::run($crop, $estimatedYield);
+            $farmerReport->estimated_profit = $estimatedProfit;
         });
     }
 

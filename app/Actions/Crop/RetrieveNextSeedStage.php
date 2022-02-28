@@ -3,37 +3,33 @@
 namespace App\Actions\Crop;
 
 use App\Http\Resources\Crop\SeedStageResource;
-use App\Models\Farmer\Farmer;
-use App\Models\FarmerReport\FarmerReport;
+use App\Models\Crop\SeedStage;
 use App\Models\Farmland\Farmland;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class RetrieveFarmerSeedStage
+class RetrieveNextSeedStage
 {
     use AsAction;
 
-    public function handle($farmer, $farmland)
+    public function handle($currentSeedStage)
     {
-        Farmer::query()->whereHas('farmlands', function ($q) use ($farmland) {
-            $q->where('id', $farmland->id);
-        })->findOrFail($farmer->id);
+        if (is_null($currentSeedStage)) {
+            return SeedStage::where('slug', 'starter-kit-received')
+                ->first();
+        }
 
-        $farmerReport = FarmerReport::orderBy('seed_stage_id', 'DESC')
-            ->where('reported_by', $farmer->id)
-            ->where('farmland_id', $farmland->id)
-            ->first();
+        if ($currentSeedStage->slug === 'marketable') {
+            return null;
+        }
 
-        $currentSeedStage = is_null($farmerReport) ?
-            null : $farmerReport->seedStage;
-
-        return $currentSeedStage;
+        return SeedStage::findOrFail($currentSeedStage->id + 1);
     }
 
     /**
      * @OA\Post(
-     *     path="/crops/current-seed-stage",
-     *     description="Get the current seed stage of the logged in farmer",
+     *     path="/crops/next-seed-stage",
+     *     description="Get the next seed stage of the logged in farmer",
      *     tags={"crops"},
      *     @OA\RequestBody(
      *       required=true,
@@ -41,7 +37,7 @@ class RetrieveFarmerSeedStage
      *         @OA\Property(property="farmlandId", type="int", format="int", example="1"),
      *       )
      *     ),
-     *     @OA\Response(response="200", description="The current seed stage", @OA\JsonContent()),
+     *     @OA\Response(response="200", description="The next seed stage", @OA\JsonContent()),
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
@@ -52,12 +48,13 @@ class RetrieveFarmerSeedStage
         $farmlandId = $request->get('farmlandId');
         $farmland = Farmland::findOrFail($farmlandId);
 
-        $currentSeedStage = $this->handle($user, $farmland);
+        $currentSeedStage = RetrieveFarmerSeedStage::run($user, $farmland);
+        $nextSeedStage = $this->handle($currentSeedStage);
 
-        if (is_null($currentSeedStage)) {
+        if (is_null($nextSeedStage)) {
             return response()->json(null);
         } else {
-            return response()->json(new SeedStageResource($currentSeedStage));
+            return response()->json(new SeedStageResource($nextSeedStage));
         }
     }
 
