@@ -10,19 +10,9 @@ use Orchid\Support\Facades\Layout;
 
 class PlatformScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Get Started';
-
-    /**
-     * Display header description.
-     *
-     * @var string
-     */
-    public $description = 'Welcome to your Orchid application.';
+    public function __construct()
+    {
+    }
 
     /**
      * Query data.
@@ -31,6 +21,13 @@ class PlatformScreen extends Screen
      */
     public function query(): array
     {
+        $user = auth('web')->user();
+        $firstName = $user->first_name;
+        $roles = $user->roles->pluck('name')->implode(' / ');
+
+        $this->name = "Greetings, $firstName!";
+        $this->description = "Welcome to the Anikultura Management Dashboard - $roles";
+
         return [];
     }
 
@@ -42,16 +39,12 @@ class PlatformScreen extends Screen
     public function commandBar(): array
     {
         return [
-            Link::make('Website')
-                ->href('http://orchid.software')
-                ->icon('globe-alt'),
-
             Link::make('Documentation')
                 ->href('https://orchid.software/en/docs')
                 ->icon('docs'),
 
             Link::make('GitHub')
-                ->href('https://github.com/orchidsoftware/platform')
+                ->href('https://github.com/Radical-Doubting')
                 ->icon('social-github'),
         ];
     }

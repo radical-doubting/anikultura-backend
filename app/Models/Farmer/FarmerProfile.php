@@ -17,6 +17,7 @@ class FarmerProfile extends Model
      * @var array
      */
     protected $fillable = [
+        'tutorial_done',
         'gender',
         'civil_status',
         'birthday',

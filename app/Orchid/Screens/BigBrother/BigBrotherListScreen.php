@@ -5,10 +5,10 @@ namespace App\Orchid\Screens\BigBrother;
 use App\Actions\BigBrother\DeleteBigBrother;
 use App\Models\BigBrother\BigBrother;
 use App\Orchid\Layouts\BigBrother\BigBrotherListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class BigBrotherListScreen extends Screen
+class BigBrotherListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -16,13 +16,6 @@ class BigBrotherListScreen extends Screen
      * @var string
      */
     public $name = 'Big Brothers';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all big brothers under SM KSK SAP';
 
     /**
      * Query data.

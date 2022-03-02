@@ -3,3 +3,6 @@ oadmin:
 
 resetdb:
 	php artisan migrate:fresh --seed
+
+apidocs:
+	php artisan l5-swagger:generate

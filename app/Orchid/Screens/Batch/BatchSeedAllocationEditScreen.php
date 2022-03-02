@@ -35,12 +35,12 @@ class BatchSeedAllocationEditScreen extends Screen
 
         if ($this->exists) {
             $this->name = __('Edit Batch Seed Allocation');
-            $this->description = __('Edit a batch seed allocation under KSK SAP');
+            $this->description = __('Edit a batch seed allocation details');
         }
 
         return [
             'batch' => $batch,
-            'batchSeedAllocation' =>  $batchSeedAllocation,
+            'batchSeedAllocation' => $batchSeedAllocation,
         ];
     }
 

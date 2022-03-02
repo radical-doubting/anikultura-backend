@@ -5,10 +5,10 @@ namespace App\Orchid\Screens\Farmer;
 use App\Actions\Farmer\DeleteFarmer;
 use App\Models\Farmer\Farmer;
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
+use App\Orchid\Screens\AnikulturaListScreen;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Screen;
 
-class FarmerListScreen extends Screen
+class FarmerListScreen extends AnikulturaListScreen
 {
     /**
      * Display header name.
@@ -16,13 +16,6 @@ class FarmerListScreen extends Screen
      * @var string
      */
     public $name = 'Farmers';
-
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'List of all farmers under SM KSK SAP';
 
     /**
      * Query data.

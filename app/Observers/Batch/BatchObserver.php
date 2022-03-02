@@ -3,7 +3,7 @@
 namespace App\Observers\Batch;
 
 use App\Actions\Insights\CreateCensusMetric;
-use App\Actions\Insights\CreateFarmerEnrollmentMetric;
+use App\Actions\Insights\Farmer\CreateFarmerEnrollmentMetric;
 use App\Models\Batch\Batch;
 use App\Models\Farmer\Farmer;
 use App\Traits\AsInsightSender;

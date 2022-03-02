@@ -5,7 +5,10 @@ namespace App\Orchid\Screens\FarmerReport;
 use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\DeleteFarmerReport;
 use App\Models\FarmerReport\FarmerReport;
-use App\Orchid\Layouts\FarmerReport\FarmerReportEditLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditAttachmentLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditEstimationLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditInfoLayout;
+use App\Orchid\Layouts\FarmerReport\FarmerReportEditVerificationLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
@@ -14,36 +17,31 @@ use Orchid\Support\Facades\Layout;
 
 class FarmerReportEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Farmer Report';
+    protected $exists;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit a submitted farmer report';
+    public function __construct()
+    {
+        $this->name = __('Create Farmer Report');
+        $this->description = __('Create a new farmer report');
+    }
 
     /**
      * Query data.
      *
      * @return array
      */
-    public function query(FarmerReport $farmer_report): array
+    public function query(FarmerReport $farmerReport): array
     {
-        $this->farmer_report = $farmer_report;
+        $this->farmerReport = $farmerReport;
+        $this->exists = $farmerReport->exists;
 
-        if (!$farmer_report->exists) {
-            $this->name = 'Create Farmer Report';
-            $this->description = 'Create a new farmer report';
+        if ($this->exists) {
+            $this->name = __('Edit Farmer Report');
+            $this->description = __('Edit a submitted farmer report');
         }
 
         return [
-            'farmer_report' => $farmer_report,
+            'farmer_report' => $farmerReport,
         ];
     }
 
@@ -59,7 +57,7 @@ class FarmerReportEditScreen extends Screen
                 ->icon('trash')
                 ->confirm(__('Once the farmer report is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
                 ->method('remove')
-                ->canSee($this->farmer_report->exists),
+                ->canSee($this->exists),
 
             Button::make(__('Save'))
                 ->icon('check')
@@ -75,14 +73,23 @@ class FarmerReportEditScreen extends Screen
     public function layout(): array
     {
         return [
-            Layout::block(FarmerReportEditLayout::class)
+            Layout::block(FarmerReportEditInfoLayout::class)
                 ->title(__('Report Information'))
-                ->description(__('Update the report\'s  information'))
+                ->description(__('Update the report information')),
+            Layout::block(FarmerReportEditAttachmentLayout::class)
+                ->title(__('Attachment Information'))
+                ->description(__('View the report attachments')),
+            Layout::block(FarmerReportEditEstimationLayout::class)
+                ->title(__('Estimation Information'))
+                ->description(__('Read the report estimations')),
+            Layout::block(FarmerReportEditVerificationLayout::class)
+                ->title(__('Verification'))
+                ->description(__('Update the report verification status'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
                         ->icon('check')
-                        ->canSee($this->farmer_report->exists)
+                        ->canSee($this->exists)
                         ->method('save')
                 ),
         ];

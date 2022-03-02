@@ -3,6 +3,7 @@
 namespace App\Actions\Insights;
 
 use App\Helpers\MetricPropertyHelper;
+use Illuminate\Support\Str;
 use InfluxDB2\Point;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -26,13 +27,14 @@ class CreateCensusMetric
 
         foreach ($tags as $tag => $property) {
             $sluggableProperty = $model;
-            $tagParts = explode('.', $tag);
+            $tagParts = explode('.', Str::camel($tag));
 
             foreach ($tagParts as $tagPart) {
                 $sluggableProperty = $sluggableProperty->$tagPart;
             }
 
-            $point = $point->addTag(end($tagParts), $sluggableProperty->slug);
+            $lastTagPart = end($tagParts);
+            $point = $point->addTag(Str::kebab($lastTagPart), $sluggableProperty->slug);
         }
 
         CreateInsightMetric::run([$point]);
