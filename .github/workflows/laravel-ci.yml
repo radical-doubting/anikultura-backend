@@ -31,6 +31,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
 
+      - name: Install Postgres client
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends postgresql-client
+
       - name: Copy .env
         run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
 
