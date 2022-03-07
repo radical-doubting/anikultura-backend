@@ -52,6 +52,9 @@ jobs:
       - name: Attempt to generate Swagger documentation
         run: php artisan l5-swagger:generate
 
+      - name: Create testing database
+        run: psql -f database/init.sql postgresql://ani:password@postgres:5432/postgres
+
       - name: Execute tests
         run: composer test
 
