@@ -24,7 +24,7 @@ services:
     ports:
       - "${FORWARD_DB_PORT:-5432}:5432"
     env_file:
-      - database.env
+      - ./docker/database.env
     volumes:
       - sailpgsql:/var/lib/postgresql/data/
     networks:
@@ -34,7 +34,7 @@ services:
     ports:
       - "8086:8086"
     env_file:
-      - influxdb.env
+      - ./docker/influxdb.env
     volumes:
       - influxdb-data:/var/lib/influxdb2
     networks:
