@@ -58,6 +58,9 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
+        "post-update-cmd": [
+            "@php artisan orchid:publish --ansi"
+        ],
         "sniff": [
             "./vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots"
         ],
