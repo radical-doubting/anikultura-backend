@@ -25,7 +25,7 @@ class PlatformScreenTest extends TestCase
             AdminProfileSeeder::class,
         ]);
 
-        $screen = $this->screen('platform.main')->actingAs(Admin::find(1));
+        $screen = $this->screen('platform.main')->actingAs(Admin::first());
 
         $screen->display()
             ->assertSee('Empowering')
