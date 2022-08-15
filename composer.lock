@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "63ab6ba0cc6cdbe1aebcb3dc0d5c8037",
+    "content-hash": "2822cebb316002f776a1a62c3edf2b37",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3908,16 +3908,16 @@
         },
         {
             "name": "orchid/platform",
-            "version": "10.31.0",
+            "version": "11.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "616deea2623eb9be714626b1828ba71c6644ef62"
+                "reference": "2bd5e92b0b67d1440dbe3b360b88555f0bfdbe86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/616deea2623eb9be714626b1828ba71c6644ef62",
-                "reference": "616deea2623eb9be714626b1828ba71c6644ef62",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/2bd5e92b0b67d1440dbe3b360b88555f0bfdbe86",
+                "reference": "2bd5e92b0b67d1440dbe3b360b88555f0bfdbe86",
                 "shasum": ""
             },
             "require": {
@@ -4013,7 +4013,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-01-22T16:26:20+00:00"
+            "time": "2022-02-06T18:05:39+00:00"
         },
         {
             "name": "php-open-source-saver/jwt-auth",
