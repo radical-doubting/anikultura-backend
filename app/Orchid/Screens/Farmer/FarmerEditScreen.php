@@ -109,8 +109,8 @@ class FarmerEditScreen extends Screen
     /**
      * Save a farmer.
      *
-     * @param Farmer $farmer
-     * @param Request $request
+     * @param  Farmer  $farmer
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Farmer $farmer, Request $request)
@@ -121,9 +121,10 @@ class FarmerEditScreen extends Screen
     /**
      * Removes a farmer.
      *
-     * @param Farmer $farmer
-     * @throws \Exception
+     * @param  Farmer  $farmer
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Farmer $farmer)
     {

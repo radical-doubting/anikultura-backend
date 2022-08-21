@@ -15,7 +15,7 @@ class CreateFarmerAddress
         $farmerProfileId = $farmerProfile->id;
         $existingFarmerAddress = $farmerProfile->farmerAddress();
 
-        if (!$existingFarmerAddress->exists()) {
+        if (! $existingFarmerAddress->exists()) {
             $this->createNewFarmerAddress($existingFarmerAddress, $farmerAddressData, $farmerProfileId);
 
             return;

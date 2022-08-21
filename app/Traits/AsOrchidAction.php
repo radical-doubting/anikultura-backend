@@ -11,10 +11,8 @@ trait AsOrchidAction
     /**
      * A static helper that runs the action as an Orchid business logic.
      *
-     * @param Model $model
-     *
-     * @param Request $request
-     *
+     * @param  Model  $model
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public static function runOrchidAction($model, ?Request $request)
@@ -25,10 +23,8 @@ trait AsOrchidAction
     /**
      * Runs the action as an Orchid business logic.
      *
-     * @param Model   $model
-     *
-     * @param Request $request
-     *
+     * @param  Model  $model
+     * @param  Request  $request
      * @return RedirectResponse
      */
     public function handleAsOrchidAction($model, ?Request $request)
@@ -47,7 +43,7 @@ trait AsOrchidAction
     {
         $rules = $this->rules();
 
-        if (!isset($rules)) {
+        if (! isset($rules)) {
             return;
         }
 
@@ -57,10 +53,8 @@ trait AsOrchidAction
     /**
      * Runs the action as an Orchid business logic.
      *
-     * @param Model   $model
-     *
-     * @param Request $request
-     *
+     * @param  Model  $model
+     * @param  Request  $request
      * @return RedirectResponse
      */
     abstract public function asOrchidAction($model, ?Request $request);

@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteBatchSeedAllocation
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(BatchSeedAllocation $batchSeedAllocation)

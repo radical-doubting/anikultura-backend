@@ -48,7 +48,7 @@ return [
     */
 
     'middleware' => [
-        'public'  => ['web'],
+        'public' => ['web'],
         'private' => ['web', 'platform'],
     ],
 
@@ -83,7 +83,7 @@ return [
     |
     */
 
-    'auth'  => true,
+    'auth' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
 
     'resource' => [
         'stylesheets' => [],
-        'scripts'     => [],
+        'scripts' => [],
     ],
 
     /*
@@ -142,7 +142,7 @@ return [
     */
 
     'attachment' => [
-        'disk'      => 'public',
+        'disk' => 'public',
         'generator' => \Orchid\Attachment\Engines\Generator::class,
     ],
 
@@ -175,7 +175,7 @@ return [
     */
 
     'notifications' => [
-        'enabled'  => true,
+        'enabled' => true,
         'interval' => 60,
     ],
 

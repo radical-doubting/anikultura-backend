@@ -26,8 +26,7 @@ class RegionFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -57,6 +56,6 @@ class RegionFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . Region::where('slug', $this->request->get('region'))->first()->fullName;
+        return $this->name().': '.Region::where('slug', $this->request->get('region'))->first()->fullName;
     }
 }

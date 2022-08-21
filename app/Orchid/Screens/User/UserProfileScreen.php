@@ -36,8 +36,7 @@ class UserProfileScreen extends Screen
     /**
      * Query data.
      *
-     * @param Request $request
-     *
+     * @param  Request  $request
      * @return array
      */
     public function query(Request $request): array
@@ -86,12 +85,12 @@ class UserProfileScreen extends Screen
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      */
     public function save(Request $request): void
     {
         $request->validate([
-            'user.name'  => 'required|string',
+            'user.name' => 'required|string',
             'user.email' => [
                 'required',
                 Rule::unique(User::class, 'email')->ignore($request->user()),
@@ -106,13 +105,13 @@ class UserProfileScreen extends Screen
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      */
     public function changePassword(Request $request): void
     {
         $request->validate([
             'old_password' => 'required|password:web',
-            'password'     => 'required|confirmed',
+            'password' => 'required|confirmed',
         ]);
 
         tap($request->user(), function ($user) use ($request) {

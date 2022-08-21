@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class CreateBatchSeedAllocation
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(BatchSeedAllocation $batchSeedAllocation, $batchSeedAllocationData)

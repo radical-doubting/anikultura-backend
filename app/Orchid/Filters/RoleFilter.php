@@ -28,8 +28,7 @@ class RoleFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -58,6 +57,6 @@ class RoleFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . Role::where('slug', $this->request->get('role'))->first()->name;
+        return $this->name().': '.Role::where('slug', $this->request->get('role'))->first()->name;
     }
 }

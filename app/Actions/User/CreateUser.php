@@ -12,7 +12,7 @@ class CreateUser
 
     public function handle(User $user, $userData)
     {
-        if (!$user->exists) {
+        if (! $user->exists) {
             return $this->createNewUser($userData);
         } else {
             return $this->updateExistingUser($user, $userData);

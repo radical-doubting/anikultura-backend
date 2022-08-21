@@ -13,7 +13,7 @@ class CreateInsightMetric
 
     public function handle(array $points)
     {
-        if (!InsightsHelper::isInsightsEnabled()) {
+        if (! InsightsHelper::isInsightsEnabled()) {
             return;
         }
 

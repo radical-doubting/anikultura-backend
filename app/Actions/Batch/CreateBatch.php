@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class CreateBatch
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Batch $batch, $batchData)

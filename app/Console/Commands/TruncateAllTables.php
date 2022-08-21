@@ -54,7 +54,7 @@ class TruncateAllTables extends Command
         foreach ($tables as $table) {
             $tableName = $table->tablename;
 
-            $this->info('Truncating: ' . $tableName);
+            $this->info('Truncating: '.$tableName);
 
             if ($tableName !== 'migrations') {
                 DB::table($tableName)->truncate();

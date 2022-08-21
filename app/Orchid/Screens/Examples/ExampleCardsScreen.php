@@ -33,7 +33,8 @@ class ExampleCardsScreen extends Screen
     {
         return [
             'user' => User::firstOrFail(),
-            'card' => new class implements Cardable {
+            'card' => new class implements Cardable
+            {
                 /**
                  * @return string
                  */
@@ -79,7 +80,8 @@ class ExampleCardsScreen extends Screen
                     return Color::INFO();
                 }
             },
-            'cardPersona'    => new class implements Cardable {
+            'cardPersona' => new class implements Cardable
+            {
                 /**
                  * @return string
                  */
@@ -94,7 +96,7 @@ class ExampleCardsScreen extends Screen
                 public function description(): string
                 {
                     return
-                        '<p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>' .
+                        '<p>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'.
                         new Facepile(User::limit(4)->get()->map->presenter());
                 }
 
@@ -115,7 +117,7 @@ class ExampleCardsScreen extends Screen
                 }
 
                 /**
-                 * @inheritdoc
+                 * {@inheritdoc}
                  */
                 public function status(): ?Color
                 {
@@ -138,9 +140,9 @@ class ExampleCardsScreen extends Screen
     /**
      * Views.
      *
-     * @throws \Throwable
-     *
      * @return array
+     *
+     * @throws \Throwable
      */
     public function layout(): array
     {
@@ -192,7 +194,7 @@ class ExampleCardsScreen extends Screen
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      */
     public function showToast(Request $request): void
     {

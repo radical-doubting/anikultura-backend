@@ -61,9 +61,10 @@ class BigBrotherListScreen extends AnikulturaListScreen
     /**
      * Remove a big brother.
      *
-     * @param BigBrother $bigBrother
-     * @throws \Exception
+     * @param  BigBrother  $bigBrother
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(BigBrother $bigBrother)
     {

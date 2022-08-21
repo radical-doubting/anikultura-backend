@@ -25,7 +25,7 @@ class FarmlandFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->state . ' Farmland',
+            'name' => $this->faker->state.' Farmland',
             'batch_id' => Batch::all()->random()->id,
             'hectares_size' => $this->faker->randomFloat(2, 1, 10),
             'type_id' => FarmlandType::all()->random()->id,

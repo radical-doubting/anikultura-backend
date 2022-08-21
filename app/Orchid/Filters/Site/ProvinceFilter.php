@@ -26,8 +26,7 @@ class ProvinceFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -56,6 +55,6 @@ class ProvinceFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . Province::where('slug', $this->request->get('province'))->first()->name;
+        return $this->name().': '.Province::where('slug', $this->request->get('province'))->first()->name;
     }
 }

@@ -25,7 +25,7 @@ class BatchFactory extends Factory
     public function definition()
     {
         return [
-            'farmschool_name' => $this->faker->unique()->state . ' School',
+            'farmschool_name' => $this->faker->unique()->state.' School',
             'municity_id' => Municity::all()->random()->id,
             'province_id' => Province::all()->random()->id,
             'region_id' => Region::all()->random()->id,

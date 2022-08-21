@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteRegion
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Region $region)

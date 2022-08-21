@@ -98,8 +98,8 @@ class FarmerReportEditScreen extends Screen
     /**
      * Save a farmer report.
      *
-     * @param FarmerReport $farmerReport
-     * @param Request      $request
+     * @param  FarmerReport  $farmerReport
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(FarmerReport $farmerReport, Request $request)
@@ -110,8 +110,8 @@ class FarmerReportEditScreen extends Screen
     /**
      * Remove a farmer report.
      *
-     * @param FarmerReport $farmerReport
-     * @param Request      $request
+     * @param  FarmerReport  $farmerReport
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(FarmerReport $farmerReport)

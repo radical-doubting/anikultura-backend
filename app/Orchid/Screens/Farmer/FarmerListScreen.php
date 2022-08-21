@@ -61,9 +61,10 @@ class FarmerListScreen extends AnikulturaListScreen
     /**
      * Remove a farmer.
      *
-     * @param Farmer $farmer
-     * @throws \Exception
+     * @param  Farmer  $farmer
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Farmer $farmer)
     {

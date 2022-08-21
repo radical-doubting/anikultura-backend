@@ -37,7 +37,7 @@ class ProvinceEditScreen extends Screen
     {
         $this->province = $province;
 
-        if (!$province->exists) {
+        if (! $province->exists) {
             $this->name = 'Create Province';
             $this->description = 'Create a new province';
         }
@@ -91,9 +91,10 @@ class ProvinceEditScreen extends Screen
     /**
      * Remove a province.
      *
-     * @param Province $province
-     * @throws \Exception
+     * @param  Province  $province
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Province $province)
     {
@@ -103,8 +104,8 @@ class ProvinceEditScreen extends Screen
     /**
      * Save a province.
      *
-     * @param Province $province
-     * @param Request  $request
+     * @param  Province  $province
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Province $province, Request $request)

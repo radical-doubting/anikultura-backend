@@ -17,7 +17,7 @@ trait AsInsightSender
 
     public function saved($model)
     {
-        if (!InsightsHelper::isObserverSaveMode()) {
+        if (! InsightsHelper::isObserverSaveMode()) {
             return;
         }
 

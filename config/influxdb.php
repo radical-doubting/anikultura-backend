@@ -40,10 +40,10 @@ return [
     'connections' => [
 
         'main' => [
-            'url'       => env('INFLUXDB_URL'),
-            'token'     => env('INFLUXDB_TOKEN'),
-            'bucket'    => env('INFLUXDB_BUCKET'),
-            'org'       => env('INFLUXDB_ORG'),
+            'url' => env('INFLUXDB_URL'),
+            'token' => env('INFLUXDB_TOKEN'),
+            'bucket' => env('INFLUXDB_BUCKET'),
+            'org' => env('INFLUXDB_ORG'),
             'verifySSL' => env('INFLUXDB_VERIFY_SSL', false),
             'precision' => env('INFLUXDB_PRECISION', 'ns'),
         ],

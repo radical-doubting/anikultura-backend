@@ -60,9 +60,10 @@ class RegionListScreen extends AnikulturaListScreen
     /**
      * Remove a region.
      *
-     * @param Region $region
-     * @throws \Exception
+     * @param  Region  $region
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Region $region)
     {

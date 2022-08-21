@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteCrop
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Crop $crop)

@@ -75,7 +75,7 @@ class RetrieveModelAggregate
             $ids[] = $flatModel["$tag.$property"];
         }
 
-        return "$key:$fieldName:" . implode(':', $ids);
+        return "$key:$fieldName:".implode(':', $ids);
     }
 
     private function retrieveNewCount(
@@ -100,7 +100,7 @@ class RetrieveModelAggregate
         /*
          * Do not offset when retrieving from database since it already has offsetted values.
          */
-        if (!Cache::has($key)) {
+        if (! Cache::has($key)) {
             return 0;
         }
 

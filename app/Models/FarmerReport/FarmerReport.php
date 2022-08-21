@@ -52,7 +52,7 @@ class FarmerReport extends Model
         parent::boot();
 
         static::saving(function (self $farmerReport) {
-            if (!$farmerReport->isPlanted()) {
+            if (! $farmerReport->isPlanted()) {
                 return;
             }
 
