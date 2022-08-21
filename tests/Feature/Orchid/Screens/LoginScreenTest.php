@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Orchid\Screens;
 
 use Orchid\Support\Testing\ScreenTesting;
 use Tests\TestCase;
