@@ -61,10 +61,10 @@
         "post-update-cmd": [
             "@php artisan orchid:publish --ansi"
         ],
-        "sniff": [
+        "lint": [
             "./vendor/bin/pint --test"
         ],
-        "lint": [
+        "lint-fix": [
             "./vendor/bin/pint"
         ],
         "test": [
