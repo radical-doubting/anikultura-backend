@@ -45,7 +45,7 @@ services:
     networks:
       - sail
   grafana:
-    image: "grafana/grafana"
+    image: "grafana/grafana:9.1.0"
     ports:
       - "3000:3000"
     depends_on:
