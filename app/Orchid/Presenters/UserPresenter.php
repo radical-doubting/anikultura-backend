@@ -13,7 +13,7 @@ class UserPresenter extends Presenter implements Searchable, Personable
 {
     public function fullName()
     {
-        return $this->first_name . ' ' . $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     /**
@@ -73,8 +73,7 @@ class UserPresenter extends Presenter implements Searchable, Personable
     }
 
     /**
-     * @param string|null $query
-     *
+     * @param  string|null  $query
      * @return Builder
      */
     public function searchQuery(string $query = null): Builder

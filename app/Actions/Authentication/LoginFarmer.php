@@ -18,7 +18,7 @@ class LoginFarmer
             'password' => $password,
         ]);
 
-        if (!$token) {
+        if (! $token) {
             return null;
         }
 
@@ -56,7 +56,7 @@ class LoginFarmer
 
         $authPayload = $this->handle($username, $password);
 
-        if (!$authPayload) {
+        if (! $authPayload) {
             return response()->json(['message' => 'Invalid login credentials'], 401);
         }
 

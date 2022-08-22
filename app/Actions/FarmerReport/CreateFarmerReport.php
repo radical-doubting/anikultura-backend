@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class CreateFarmerReport
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(FarmerReport $farmerReport, $farmerReportData)

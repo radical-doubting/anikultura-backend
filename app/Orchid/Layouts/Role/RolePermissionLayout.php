@@ -22,9 +22,9 @@ class RolePermissionLayout extends Rows
     /**
      * Views.
      *
-     * @throws Throwable
-     *
      * @return Field[]
+     *
+     * @throws Throwable
      */
     public function fields(): array
     {
@@ -36,8 +36,7 @@ class RolePermissionLayout extends Rows
     }
 
     /**
-     * @param Collection $permissionsRaw
-     *
+     * @param  Collection  $permissionsRaw
      * @return array
      */
     private function generatedPermissionFields(Collection $permissionsRaw): array
@@ -51,9 +50,8 @@ class RolePermissionLayout extends Rows
     }
 
     /**
-     * @param Collection $permissions
-     * @param string     $title
-     *
+     * @param  Collection  $permissions
+     * @param  string  $title
      * @return Collection
      */
     private function makeCheckBoxGroup(Collection $permissions, string $title): Collection
@@ -77,13 +75,12 @@ class RolePermissionLayout extends Rows
     }
 
     /**
-     * @param Collection $chunks
-     *
+     * @param  Collection  $chunks
      * @return CheckBox
      */
     private function makeCheckBox(Collection $chunks): CheckBox
     {
-        return CheckBox::make('permissions.' . base64_encode($chunks->get('slug')))
+        return CheckBox::make('permissions.'.base64_encode($chunks->get('slug')))
             ->placeholder($chunks->get('description'))
             ->value($chunks->get('active'))
             ->sendTrueOrFalse()
@@ -96,7 +93,6 @@ class RolePermissionLayout extends Rows
     /**
      * @param $slug
      * @param $value
-     *
      * @return bool
      */
     private function getIndeterminateStatus($slug, $value): bool

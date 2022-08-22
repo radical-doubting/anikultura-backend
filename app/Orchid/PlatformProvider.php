@@ -10,7 +10,7 @@ use Orchid\Screen\Actions\Menu;
 class PlatformProvider extends OrchidServiceProvider
 {
     /**
-     * @param Dashboard $dashboard
+     * @param  Dashboard  $dashboard
      */
     public function boot(Dashboard $dashboard): void
     {

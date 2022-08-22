@@ -81,9 +81,10 @@ class BatchSeedAllocationEditScreen extends Screen
     /**
      * Remove a batch seed allocation.
      *
-     * @param BatchSeedAllocation $batchSeedAllocation
-     * @throws \Exception
+     * @param  BatchSeedAllocation  $batchSeedAllocation
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Batch $batch, BatchSeedAllocation $batchSeedAllocation)
     {
@@ -93,8 +94,8 @@ class BatchSeedAllocationEditScreen extends Screen
     /**
      * Save a batch seed allocation.
      *
-     * @param BatchSeedAllocation    $batchSeedAllocation
-     * @param Request $request
+     * @param  BatchSeedAllocation  $batchSeedAllocation
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Batch $batch, BatchSeedAllocation $batchSeedAllocation, Request $request)

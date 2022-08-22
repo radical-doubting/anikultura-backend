@@ -64,9 +64,10 @@ class ProvinceListScreen extends AnikulturaListScreen
     /**
      * Remove a province.
      *
-     * @param Province $province
-     * @throws \Exception
+     * @param  Province  $province
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Province $province)
     {

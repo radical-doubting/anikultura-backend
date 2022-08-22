@@ -14,7 +14,6 @@ use Orchid\Support\Facades\Toast;
 class CreateFarmer
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Farmer $farmer, array $farmerData)
@@ -46,7 +45,7 @@ class CreateFarmer
         $this->handle($model, [
             'account' => $request->get('user'),
             'profile' => $request->get('farmer_profile'),
-            'address' =>  $request->get('farmer_address'),
+            'address' => $request->get('farmer_address'),
         ]);
 
         Toast::info(__('Farmer profile was saved successfully!'));

@@ -34,7 +34,7 @@ class CropEditScreen extends Screen
         $this->crop = $crop;
         $this->exists = $crop->exists;
 
-        if (!$crop->exists) {
+        if (! $crop->exists) {
             $this->name = __('Edit Crop');
             $this->description = __('Edit crop type details');
         }
@@ -95,9 +95,10 @@ class CropEditScreen extends Screen
     /**
      * Remove a crop.
      *
-     * @param Crop $crop
-     * @throws \Exception
+     * @param  Crop  $crop
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Crop $crop)
     {
@@ -107,8 +108,8 @@ class CropEditScreen extends Screen
     /**
      * Save a crop.
      *
-     * @param Crop    $crop
-     * @param Request $request
+     * @param  Crop  $crop
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Crop $crop, Request $request)

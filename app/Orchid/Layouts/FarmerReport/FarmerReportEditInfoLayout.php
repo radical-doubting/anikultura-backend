@@ -74,7 +74,7 @@ class FarmerReportEditInfoLayout extends Rows
                 ->max(255)
                 ->title($isHarvested ? __('Yield Volume (kg)') : '')
                 ->placeholder(__('Yield Volume (kg)'))
-                ->hidden(!$isHarvested),
+                ->hidden(! $isHarvested),
         ];
     }
 }

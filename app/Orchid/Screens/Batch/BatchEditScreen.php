@@ -113,9 +113,10 @@ class BatchEditScreen extends Screen
     /**
      * Remove a batch.
      *
-     * @param Batch $batch
-     * @throws \Exception
+     * @param  Batch  $batch
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function removeBatch(Batch $batch)
     {
@@ -125,9 +126,10 @@ class BatchEditScreen extends Screen
     /**
      * Remove a batch seed allocation.
      *
-     * @param BatchSeedAllocation $batchSeedAllocation
-     * @throws \Exception
+     * @param  BatchSeedAllocation  $batchSeedAllocation
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function removeBatchSeedAllocation(BatchSeedAllocation $batchSeedAllocation)
     {
@@ -137,8 +139,8 @@ class BatchEditScreen extends Screen
     /**
      * Save a batch.
      *
-     * @param Batch    $batch
-     * @param Request $request
+     * @param  Batch  $batch
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Batch $batch, Request $request)

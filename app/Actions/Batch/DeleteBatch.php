@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteBatch
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Batch $batch)

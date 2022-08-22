@@ -26,8 +26,7 @@ class BatchFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -56,6 +55,6 @@ class BatchFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . Batch::where('slug', $this->request->get('batch'))->first()->farmschool_name;
+        return $this->name().': '.Batch::where('slug', $this->request->get('batch'))->first()->farmschool_name;
     }
 }

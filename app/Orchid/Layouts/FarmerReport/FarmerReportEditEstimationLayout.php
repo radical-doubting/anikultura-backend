@@ -44,7 +44,7 @@ class FarmerReportEditEstimationLayout extends Rows
                 ->title($isPlanted ? __('Estimated Yield Amount (kg)') : '')
                 ->placeholder(__('Estimated Yield Amount (kg)'))
                 ->help($isPlanted ? $disclaimer : 'Estimation data is available when this report reaches the Seeds Planted stage.')
-                ->hidden(!$isPlanted)
+                ->hidden(! $isPlanted)
                 ->mask([
                     'alias' => 'currency',
                     'suffix' => ' kg',
@@ -61,7 +61,7 @@ class FarmerReportEditEstimationLayout extends Rows
                     ->title($isPlanted ? __('Estimated Yield Date (Earliest)') : '')
                     ->placeholder(__('Estimated Yield Amount (Earliest)'))
                     ->help($isPlanted ? __('The earliest date that this crop could reach maturity.') : '')
-                    ->hidden(!$isPlanted),
+                    ->hidden(! $isPlanted),
 
                 Input::make('farmer_report.estimated_yield_date_upper_bound')
                     ->type('date')
@@ -70,7 +70,7 @@ class FarmerReportEditEstimationLayout extends Rows
                     ->title($isPlanted ? __('Estimated Yield Date (Latest)') : '')
                     ->placeholder(__('Estimated Yield Amount (Latest)'))
                     ->help($isPlanted ? __('The latest date that this crop could reach maturity.') : '')
-                    ->hidden(!$isPlanted),
+                    ->hidden(! $isPlanted),
             ]),
         ];
     }

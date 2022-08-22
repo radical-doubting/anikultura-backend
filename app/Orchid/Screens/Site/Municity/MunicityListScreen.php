@@ -63,11 +63,10 @@ class MunicityListScreen extends AnikulturaListScreen
     }
 
     /**
-     * @param Municity $municity
+     * @param  Municity  $municity
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Exception
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Municity $municity)
     {
