@@ -83,9 +83,10 @@ class BigBrotherEditScreen extends Screen
     /**
      * Remove a bigBrother.
      *
-     * @param BigBrother $bigBrother
-     * @throws \Exception
+     * @param  BigBrother  $bigBrother
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(BigBrother $bigBrother)
     {
@@ -95,8 +96,8 @@ class BigBrotherEditScreen extends Screen
     /**
      * Save a bigBrother.
      *
-     * @param BigBrother    $bigBrother
-     * @param Request $request
+     * @param  BigBrother  $bigBrother
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(BigBrother $bigBrother, Request $request)

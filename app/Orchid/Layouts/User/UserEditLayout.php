@@ -56,7 +56,7 @@ class UserEditLayout extends Rows
                 Password::make('user.password')
                     ->title(__('Password'))
                     ->placeholder($passwordPlaceholder)
-                    ->required(!$hasUser),
+                    ->required(! $hasUser),
             ]),
 
             Group::make([

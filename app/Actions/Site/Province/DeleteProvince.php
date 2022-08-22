@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteProvince
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Province $province)

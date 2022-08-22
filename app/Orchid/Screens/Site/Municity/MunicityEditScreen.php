@@ -37,7 +37,7 @@ class MunicityEditScreen extends Screen
     {
         $this->municity = $municity;
 
-        if (!$municity->exists) {
+        if (! $municity->exists) {
             $this->name = 'Create Municipality or City ';
             $this->description = 'Create a new municipality or city';
         }
@@ -91,9 +91,10 @@ class MunicityEditScreen extends Screen
     /**
      * Remove a municity.
      *
-     * @param Municity $municity
-     * @throws \Exception
+     * @param  Municity  $municity
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Municity $municity)
     {
@@ -103,8 +104,8 @@ class MunicityEditScreen extends Screen
     /**
      * Save a municity.
      *
-     * @param Municity   $municity
-     * @param Request   $request
+     * @param  Municity  $municity
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Municity $municity, Request $request)

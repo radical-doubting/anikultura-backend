@@ -26,8 +26,7 @@ class MunicityFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -56,6 +55,6 @@ class MunicityFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . Municity::where('slug', $this->request->get('municity'))->first()->name;
+        return $this->name().': '.Municity::where('slug', $this->request->get('municity'))->first()->name;
     }
 }

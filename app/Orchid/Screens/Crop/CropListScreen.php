@@ -61,9 +61,10 @@ class CropListScreen extends AnikulturaListScreen
     /**
      * Remove a crop.
      *
-     * @param Crop $crop
-     * @throws \Exception
+     * @param  Crop  $crop
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Crop $crop)
     {

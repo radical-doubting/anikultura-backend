@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Orchid\Screens;
 
 use App\Models\Admin\Admin;
 use Database\Seeders\Admin\AdminProfileSeeder;

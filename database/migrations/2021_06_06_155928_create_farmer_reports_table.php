@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFarmerReportsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -83,4 +83,4 @@ class CreateFarmerReportsTable extends Migration
     {
         Schema::dropIfExists('farmer_reports');
     }
-}
+};

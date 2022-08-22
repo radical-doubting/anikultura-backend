@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteMunicity
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Municity $municity)

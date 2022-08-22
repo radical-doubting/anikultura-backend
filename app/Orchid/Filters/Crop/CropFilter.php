@@ -26,8 +26,7 @@ class CropFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -56,6 +55,6 @@ class CropFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . Crop::where('slug', $this->request->get('crop'))->first()->name;
+        return $this->name().': '.Crop::where('slug', $this->request->get('crop'))->first()->name;
     }
 }

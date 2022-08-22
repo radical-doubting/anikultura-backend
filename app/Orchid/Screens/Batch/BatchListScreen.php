@@ -64,9 +64,10 @@ class BatchListScreen extends AnikulturaListScreen
     /**
      * Remove a batch.
      *
-     * @param Batch $batch
-     * @throws \Exception
+     * @param  Batch  $batch
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Batch $batch)
     {

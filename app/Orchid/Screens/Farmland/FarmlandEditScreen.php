@@ -39,7 +39,7 @@ class FarmlandEditScreen extends Screen
     {
         $this->farmland = $farmland;
 
-        if (!$farmland->exists) {
+        if (! $farmland->exists) {
             $this->name = 'Create Farmland';
             $this->description = 'Create a new farmland';
         }
@@ -100,10 +100,8 @@ class FarmlandEditScreen extends Screen
     /**
      * Save a farmland.
      *
-     * @param Farmland    $farmland
-     *
-     * @param Request $request
-     *
+     * @param  Farmland  $farmland
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Farmland $farmland, Request $request)
@@ -114,11 +112,10 @@ class FarmlandEditScreen extends Screen
     /**
      * Remove a farmland.
      *
-     * @param Farmland $farmland
+     * @param  Farmland  $farmland
+     * @return \Illuminate\Http\RedirectResponse
      *
      * @throws \Exception
-     *
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function remove(Farmland $farmland)
     {

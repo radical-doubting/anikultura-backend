@@ -26,8 +26,7 @@ class FarmlandStatusFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -56,6 +55,6 @@ class FarmlandStatusFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . FarmlandStatus::where('slug', $this->request->get('status'))->first()->name;
+        return $this->name().': '.FarmlandStatus::where('slug', $this->request->get('status'))->first()->name;
     }
 }

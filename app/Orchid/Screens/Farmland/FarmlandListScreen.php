@@ -63,9 +63,10 @@ class FarmlandListScreen extends AnikulturaListScreen
     /**
      * Remove a farmland.
      *
-     * @param Farmland $farmland
-     * @throws \Exception
+     * @param  Farmland  $farmland
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Farmland $farmland)
     {

@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteFarmland
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Farmland $farmland)

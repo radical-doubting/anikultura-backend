@@ -23,7 +23,7 @@ class ProvinceFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->state . ' ' . $this->faker->streetSuffix,
+            'name' => $this->faker->state.' '.$this->faker->streetSuffix,
             'region_id' => Region::all()->random()->id,
         ];
     }

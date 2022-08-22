@@ -14,7 +14,7 @@ class MetricPropertyHelper
             throw new Exception('Model property is null');
         }
 
-        if (!array_key_exists($propertyName, $modelProperties)) {
+        if (! array_key_exists($propertyName, $modelProperties)) {
             if (is_null($defaultValue)) {
                 throw new Exception("Model value property '$propertyName' is null");
             }
@@ -36,7 +36,7 @@ class MetricPropertyHelper
             throw new Exception('Point value is null');
         }
 
-        if (!array_key_exists($propertyName, $pointProperties)) {
+        if (! array_key_exists($propertyName, $pointProperties)) {
             if (is_null($defaultValue)) {
                 throw new Exception("Point value property '$propertyName' is null");
             }

@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class CreateMunicity
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Municity $municity, $municityData)

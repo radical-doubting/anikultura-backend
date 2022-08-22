@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class DeleteBigBrother
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(BigBrother $bigBrother)

@@ -11,7 +11,6 @@ use Orchid\Support\Facades\Toast;
 class CreateRegion
 {
     use AsAction;
-
     use AsOrchidAction;
 
     public function handle(Region $region, $regionData)

@@ -24,7 +24,7 @@ class SubmitFarmerReport
 
         $farmerReport = FarmerReport::create([
             'reported_by' => $farmer->id,
-            'seed_stage_id' =>  $nextSeedStage->id,
+            'seed_stage_id' => $nextSeedStage->id,
             'farmland_id' => $farmland->id,
             'crop_id' => $farmerReportData['cropId'],
             'volume_kg' => $farmerReportData['volumeKg'],

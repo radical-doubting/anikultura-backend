@@ -84,8 +84,7 @@ class UserListScreen extends Screen
     }
 
     /**
-     * @param User $user
-     *
+     * @param  User  $user
      * @return array
      */
     public function asyncGetUser(User $user): array
@@ -96,13 +95,13 @@ class UserListScreen extends Screen
     }
 
     /**
-     * @param User    $user
-     * @param Request $request
+     * @param  User  $user
+     * @param  Request  $request
      */
     public function saveUser(User $user, Request $request): void
     {
         $request->validate([
-            'user.email' => 'required|unique:users,email,' . $user->id,
+            'user.email' => 'required|unique:users,email,'.$user->id,
         ]);
 
         $user->fill($request->input('user'))
@@ -112,7 +111,7 @@ class UserListScreen extends Screen
     }
 
     /**
-     * @param Request $request
+     * @param  Request  $request
      */
     public function remove(Request $request): void
     {

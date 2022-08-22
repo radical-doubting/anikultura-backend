@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSlugColumnsForInsights extends Migration
+return new class extends Migration
 {
     protected $sluggedTableNames = [
         'regions',
@@ -54,4 +54,4 @@ class AddSlugColumnsForInsights extends Migration
             $table->dropColumn('slug');
         });
     }
-}
+};

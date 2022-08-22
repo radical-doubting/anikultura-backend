@@ -26,8 +26,7 @@ class FarmlandTypeFilter extends Filter
     }
 
     /**
-     * @param Builder $builder
-     *
+     * @param  Builder  $builder
      * @return Builder
      */
     public function run(Builder $builder): Builder
@@ -56,6 +55,6 @@ class FarmlandTypeFilter extends Filter
      */
     public function value(): string
     {
-        return $this->name() . ': ' . FarmlandType::where('slug', $this->request->get('type'))->first()->name;
+        return $this->name().': '.FarmlandType::where('slug', $this->request->get('type'))->first()->name;
     }
 }

@@ -37,7 +37,7 @@ class RegionEditScreen extends Screen
     {
         $this->region = $region;
 
-        if (!$region->exists) {
+        if (! $region->exists) {
             $this->name = 'Create Region';
             $this->description = 'Create a new region';
         }
@@ -91,9 +91,10 @@ class RegionEditScreen extends Screen
     /**
      * Remove a region.
      *
-     * @param Region $region
-     * @throws \Exception
+     * @param  Region  $region
      * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function remove(Region $region)
     {
@@ -103,8 +104,8 @@ class RegionEditScreen extends Screen
     /**
      * Save a region.
      *
-     * @param Region  $region
-     * @param Request $request
+     * @param  Region  $region
+     * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Region $region, Request $request)
