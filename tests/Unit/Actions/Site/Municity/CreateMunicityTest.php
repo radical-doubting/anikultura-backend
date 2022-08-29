@@ -4,16 +4,15 @@ namespace Tests\Unit\Actions\Site\Municity;
 
 use App\Actions\Site\Municity\CreateMunicity;
 use App\Models\Site\Municity;
-use Mockery\MockInterface;
-use Tests\TestCase;
+use Mockery;
+use PHPUnit\Framework\TestCase;
 
 class CreateMunicityTest extends TestCase
 {
     public function testShouldCreateMunicity()
     {
-        $mockMunicity = $this->partialMock(Municity::class, function (MockInterface $mock) {
-            $mock->shouldReceive('save')->once()->andReturn(true);
-        });
+        $mockMunicity = Mockery::mock(Municity::class)->makePartial();
+        $mockMunicity->shouldReceive('save')->once()->andReturn(true);
 
         $createdMunicity = CreateMunicity::run($mockMunicity, [
             'name' => 'Santa Rosa',

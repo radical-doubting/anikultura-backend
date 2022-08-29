@@ -4,16 +4,15 @@ namespace Tests\Unit\Actions\Site\Municity;
 
 use App\Actions\Site\Municity\DeleteMunicity;
 use App\Models\Site\Municity;
-use Mockery\MockInterface;
-use Tests\TestCase;
+use Mockery;
+use PHPUnit\Framework\TestCase;
 
 class DeleteMunicityTest extends TestCase
 {
     public function testShouldDeleteMunicity()
     {
-        $mockMunicity = $this->partialMock(Municity::class, function (MockInterface $mock) {
-            $mock->shouldReceive('delete')->once()->andReturn(true);
-        });
+        $mockMunicity = Mockery::mock(Municity::class)->makePartial();
+        $mockMunicity->shouldReceive('delete')->once()->andReturn(true);
 
         $deleteMunicityResult = DeleteMunicity::run($mockMunicity);
 
