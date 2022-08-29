@@ -13,11 +13,11 @@ class CreateProvince
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Province $province, $provinceData)
+    public function handle(Province $province, array $provinceData): Province
     {
-        $province
-            ->fill($provinceData)
-            ->save();
+        $province->fill($provinceData)->save();
+
+        return $province->refresh();
     }
 
     public function asOrchidAction($model, ?Request $request)
