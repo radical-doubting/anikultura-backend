@@ -24,7 +24,7 @@ class MunicityFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->municipality,
+            'name' => $this->faker->unique()->municipality,
             'province_id' => Province::all()->random()->id,
             'region_id' => Region::all()->random()->id,
         ];
