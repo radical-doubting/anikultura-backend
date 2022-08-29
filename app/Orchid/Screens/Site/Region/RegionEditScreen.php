@@ -14,44 +14,25 @@ use Orchid\Support\Facades\Layout;
 
 class RegionEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Region';
+    public Region $region;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit region details';
+    public function name(): string
+    {
+        return $this->region->exists ? __('Edit region') : __('Create a new region');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
+    public function description(): string
+    {
+        return __('Edit region details');
+    }
+
     public function query(Region $region): array
     {
-        $this->region = $region;
-
-        if (! $region->exists) {
-            $this->name = 'Create Region';
-            $this->description = 'Create a new region';
-        }
-
         return [
             'region' => $region,
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -67,11 +48,6 @@ class RegionEditScreen extends Screen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
