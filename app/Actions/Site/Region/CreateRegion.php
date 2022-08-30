@@ -13,11 +13,11 @@ class CreateRegion
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Region $region, $regionData)
+    public function handle(Region $region, array $regionData): Region
     {
-        $region
-            ->fill($regionData)
-            ->save();
+        $region->fill($regionData)->save();
+
+        return $region->refresh();
     }
 
     public function asOrchidAction($model, ?Request $request)

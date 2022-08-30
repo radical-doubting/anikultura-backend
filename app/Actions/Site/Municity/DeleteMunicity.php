@@ -13,9 +13,9 @@ class DeleteMunicity
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Municity $municity)
+    public function handle(Municity $municity): bool
     {
-        $municity->delete();
+        return  $municity->delete();
     }
 
     public function asOrchidAction($model, ?Request $request)

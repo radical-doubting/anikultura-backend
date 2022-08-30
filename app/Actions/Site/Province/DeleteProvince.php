@@ -13,9 +13,9 @@ class DeleteProvince
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Province $province)
+    public function handle(Province $province): bool
     {
-        $province->delete();
+        return $province->delete();
     }
 
     public function asOrchidAction($model, ?Request $request)
