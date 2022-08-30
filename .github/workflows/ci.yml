@@ -37,5 +37,35 @@ jobs:
       - name: Create testing database
         run: psql -f ./database/init.sql postgresql://ani:password@postgres:5432/postgres
 
-      - name: Run build action
+      - name: Build, lint, and test application
+        uses: ./.github/actions/build
+
+  mysql:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
+
+    services:
+      postgres:
+        image: mysql/mysql-server:8.0
+        env:
+          MYSQL_USER: ani
+          MYSQL_PASSWORD: password
+          MYSQL_DATABASE: anikultura
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Create testing database
+        run: mysql -h mysql -u ani -p password < ./database/init.sql
+
+      - name: Build, lint, and test application
         uses: ./.github/actions/build
