@@ -53,6 +53,8 @@ jobs:
       mysql:
         image: mysql/mysql-server:8.0
         env:
+          MYSQL_ROOT_HOST: "%"
+          MYSQL_ROOT_PASSWORD: password
           MYSQL_USER: ani
           MYSQL_PASSWORD: password
           MYSQL_DATABASE: anikultura
@@ -69,7 +71,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create testing database
-        run: mysql -h mysql -u ani -p password < ./database/init.sql
+        run: mysql -h mysql -u root -p password < ./database/init.sql
 
       - name: Build, lint, and test application
         uses: ./.github/actions/build
