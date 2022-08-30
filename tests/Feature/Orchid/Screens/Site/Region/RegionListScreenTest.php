@@ -30,6 +30,6 @@ class RegionListScreenTest extends TestCase
         $screen = $this->screen('platform.sites.regions')->actingAs(Admin::first());
 
         $screen->display()
-            ->assertSee('Region');
+            ->assertSee(__('Region'));
     }
 }
