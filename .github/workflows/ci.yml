@@ -37,4 +37,4 @@ jobs:
       - name: Create testing database
         run: psql -f ./database/init.sql postgresql://ani:password@postgres:5432/postgres
 
-      - uses: ./.github/workflows/build.yml@master
+      - uses: ./.github/workflows/build.yml
