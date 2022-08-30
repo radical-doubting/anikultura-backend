@@ -25,7 +25,7 @@ class RegionListScreenTest extends TestCase
         ]);
     }
 
-    public function testShouldShowScreen(): void
+    public function testShouldShowListScreen(): void
     {
         $screen = $this->screen('platform.sites.regions')->actingAs(Admin::first());
 

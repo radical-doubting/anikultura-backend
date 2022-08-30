@@ -25,7 +25,7 @@ class ProvinceListScreenTest extends TestCase
         ]);
     }
 
-    public function testShouldShowScreen(): void
+    public function testShouldShowListScreen(): void
     {
         $screen = $this->screen('platform.sites.provinces')->actingAs(Admin::first());
 
