@@ -47,7 +47,7 @@ class MunicityListScreen extends AnikulturaListScreen
 
     /**
      * Remove a municity.
-     * 
+     *
      * @param  Municity  $municity
      * @return \Illuminate\Http\RedirectResponse
      *
