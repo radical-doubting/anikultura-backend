@@ -1,0 +1,37 @@
+name: Build, lint and test Laravel
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    steps:
+      - name: Copy .env from .env.ci
+        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+
+      - name: Install dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Lint application
+        run: composer lint
+
+      - name: Run unit tests
+        run: php artisan test --testsuite=Unit
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Set directory permissions
+        run: chmod -R 777 storage bootstrap/cache
+
+      - name: Run database migrations
+        run: php artisan migrate:fresh
+
+      - name: Run database seeders
+        run: php artisan db:seed
+
+      - name: Generate Swagger documentation
+        run: php artisan l5-swagger:generate
+
+      - name: Run feature tests
+        run: php artisan test --testsuite=Feature

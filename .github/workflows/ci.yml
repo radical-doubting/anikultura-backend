@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master, staging]
+
+jobs:
+  postgresql:
+    runs-on: ubuntu-latest
+    container:
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
+
+    services:
+      postgres:
+        image: postgres:14-alpine
+        env:
+          POSTGRES_USER: ani
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: anikultura
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Install Postgres client
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends postgresql-client
+
+      - name: Create testing database
+        run: psql -f ./database/init.sql postgresql://ani:password@postgres:5432/postgres
+
+      - uses: ./.github/workflows/build.yml@master
