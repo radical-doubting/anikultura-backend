@@ -24,7 +24,7 @@ class FarmerProfileFactory extends Factory
         $data = [
             'gender' => $this->faker->numberBetween(0, 2),
             'civil_status' => $this->faker->numberBetween(0, 4),
-            'birthday' => $this->getRandomDate(),
+            'birthday' => $this->faker->date(),
             'age' => $this->faker->numberBetween(30, 70),
             'quantity_family_members' => $this->faker->numberBetween(1, 10),
             'quantity_dependents' => $this->faker->numberBetween(1, 10),
@@ -43,18 +43,11 @@ class FarmerProfileFactory extends Factory
         ];
 
         if ($data['highest_educational_status'] == 2) {
-            $data['college_course'] = $this->faker->stateAbbr().' '.$this->faker->jobTitle();
+            $data['college_course'] = $this->faker->stateAbbr() . ' ' . $this->faker->jobTitle();
         } else {
             $data['college_course'] = 'N/A';
         }
 
         return $data;
-    }
-
-    private function getRandomDate()
-    {
-        $timestamp = mt_rand(1, time());
-
-        return date('Y-M-d', $timestamp);
     }
 }
