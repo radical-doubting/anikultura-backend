@@ -43,7 +43,7 @@ class FarmerProfileFactory extends Factory
         ];
 
         if ($data['highest_educational_status'] == 2) {
-            $data['college_course'] = $this->faker->stateAbbr() . ' ' . $this->faker->jobTitle();
+            $data['college_course'] = $this->faker->stateAbbr().' '.$this->faker->jobTitle();
         } else {
             $data['college_course'] = 'N/A';
         }
