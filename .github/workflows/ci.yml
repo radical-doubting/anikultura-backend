@@ -39,6 +39,10 @@ jobs:
 
       - name: Build, lint, and test application
         uses: ./.github/actions/build
+        env:
+          DB_CONNECTION: pgsql
+          DB_HOST: postgres
+          DB_PORT: 5432
 
   mysql:
     runs-on: ubuntu-latest
@@ -69,3 +73,7 @@ jobs:
 
       - name: Build, lint, and test application
         uses: ./.github/actions/build
+        env:
+          DB_CONNECTION: mysql
+          DB_HOST: mysql
+          DB_PORT: 3306
