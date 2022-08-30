@@ -14,44 +14,29 @@ use Orchid\Support\Facades\Layout;
 
 class ProvinceEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Province';
+    public Province $province;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit province details';
+    public function name(): string
+    {
+        return $this->province->exists
+            ? __('Edit province')
+            : __('Create province');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
+    public function description(): string
+    {
+        return $this->province->exists
+            ? __('Edit province details')
+            : __('Create a new province');
+    }
+
     public function query(Province $province): array
     {
-        $this->province = $province;
-
-        if (! $province->exists) {
-            $this->name = 'Create Province';
-            $this->description = 'Create a new province';
-        }
-
         return [
             'province' => $province,
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -67,11 +52,6 @@ class ProvinceEditScreen extends Screen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [

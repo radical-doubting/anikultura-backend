@@ -18,12 +18,16 @@ class RegionEditScreen extends Screen
 
     public function name(): string
     {
-        return $this->region->exists ? __('Edit region') : __('Create a new region');
+        return $this->region->exists
+            ? __('Edit region')
+            : __('Create region');
     }
 
     public function description(): string
     {
-        return __('Edit region details');
+        return $this->region->exists
+            ? __('Edit region details')
+            : __('Create a new region');
     }
 
     public function query(Region $region): array

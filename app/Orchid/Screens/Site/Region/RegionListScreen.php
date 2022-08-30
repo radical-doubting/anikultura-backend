@@ -10,7 +10,7 @@ use Orchid\Screen\Actions\Link;
 
 class RegionListScreen extends AnikulturaListScreen
 {
-    public function name(): ?string
+    public function name(): string
     {
         return __('Regions');
     }

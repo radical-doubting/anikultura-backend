@@ -11,18 +11,11 @@ use Orchid\Screen\Actions\Link;
 
 class MunicityListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Municipalities and Cities';
+    public function name(): string
+    {
+        return __('Municipalities and Cities');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
     public function query(): array
     {
         return [
@@ -35,11 +28,6 @@ class MunicityListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -49,11 +37,6 @@ class MunicityListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
@@ -63,6 +46,8 @@ class MunicityListScreen extends AnikulturaListScreen
     }
 
     /**
+     * Remove a municity.
+     * 
      * @param  Municity  $municity
      * @return \Illuminate\Http\RedirectResponse
      *
