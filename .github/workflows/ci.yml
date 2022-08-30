@@ -46,7 +46,7 @@ jobs:
       image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     services:
-      postgres:
+      mysql:
         image: mysql/mysql-server:8.0
         env:
           MYSQL_USER: ani
