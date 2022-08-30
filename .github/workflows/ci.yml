@@ -35,7 +35,7 @@ jobs:
           apt-get install --yes --no-install-recommends postgresql-client
 
       - name: Create testing database
-        run: psql -f ./database/init.sql postgresql://ani:password@postgres:5432/postgres
+        run: psql -f ./database/init-postgresql.sql postgresql://ani:password@postgres:5432/postgres
 
       - name: Build, lint, and test application
         uses: ./.github/actions/build
@@ -71,7 +71,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create testing database
-        run: mysql -h mysql --port 3306 -uroot -ppassword < ./database/init.sql
+        run: mysql -h mysql --port 3306 -uroot -ppassword < ./database/init-mysql.sql
 
       - name: Build, lint, and test application
         uses: ./.github/actions/build
