@@ -3,5 +3,12 @@
     "Regions" : "Rehiyon",
     "Municipalities and Cities" : "Munisipalidad at Lungsod",
     "Provinces" : "Probinsya",
-    "Language" : "Lenggwahe"
+    "Language" : "Lenggwahe",
+    "Greetings, " : "Magandang araw, ",
+    "Welcome to the Anikultura Management Dashboard - " : "Maligayang Pagdating sa Anikultura Management Dashboard - ",
+    "Documentation" : "Dokumentasyon",
+    "Anikultura is a centralized farm management and monitoring application. Use the navigation on the right to manage platform resources. See the available links below for more actions." : "Ang Anikultura ay isang sentralisadong aplikasyon na ginagamit sa pamamahala at pagsubaybay ng mga sakahan. Gamitin ang nabigasyon sa kanan upang pamahalaan ang mga platform resources. Tingnan ang mga available na link sa ibaba para sa higit pang mga aksyon.",
+    "Empowering the " : "Binibigyang tibay ang ",
+    "See more insights in the platform. The Grafana analytics dashboard is accessible" : "Tumingin ng higit pang mga insight sa platform. Maaaring makita ang Grafana analytics dashboard",
+    "here" : "dito"
 }
