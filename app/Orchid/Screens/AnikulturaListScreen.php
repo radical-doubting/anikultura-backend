@@ -9,10 +9,15 @@ abstract class AnikulturaListScreen extends Screen
 {
     public function __construct()
     {
-        $screenName = strtolower($this->name);
-        $programName = Config::get('anikultura.programFullName');
+        $this->middleware(function ($request, $next) {
+            $screenName = strtolower($this->name);
+            $programName = Config::get('anikultura.programFullName');
+            
+            $this->description = (__('A list of all ')) . $screenName . (__(' under the ')) . $programName;
+            
+            return $next($request);
+        });
 
-        $this->description = "A list of all $screenName under the $programName";
     }
 
     abstract public function layout(): array;
