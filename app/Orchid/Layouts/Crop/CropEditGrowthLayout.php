@@ -35,12 +35,12 @@ class CropEditGrowthLayout extends Rows
                     ->type('number')
                     ->required()
                     ->title(__('Maturity Lower Bound (DAP, DAT, DAS)'))
-                    ->placeholder(__('Maturity Lower Bound (DAP, DAT, DAS)')),
+                    ->placeholder(__('(DAP, DAT, DAS)')),
                 Input::make('crop.maturity_upper_bound')
                     ->type('number')
                     ->required()
                     ->title(__('Maturity Upper Bound (DAP, DAT, DAS)'))
-                    ->placeholder(__('Maturity Upper Bound (DAP, DAT, DAS)')),
+                    ->placeholder(__('(DAP, DAT, DAS)')),
             ]),
         ];
     }
