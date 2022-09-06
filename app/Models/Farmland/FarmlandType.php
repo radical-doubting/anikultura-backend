@@ -6,6 +6,9 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $slug
+ */
 class FarmlandType extends Model
 {
     use HasFactory, Sluggable;

@@ -16,6 +16,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Batch extends Model
 {
     use Filterable, HasFactory, HasBelongsToManyEvents, HasRelationshipObservables, Sluggable;

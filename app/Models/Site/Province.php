@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Province extends Model
 {
     use Filterable, HasFactory, Sluggable;

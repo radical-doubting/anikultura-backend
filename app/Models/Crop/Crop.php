@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Crop extends Model
 {
     use Filterable, HasFactory, Sluggable;

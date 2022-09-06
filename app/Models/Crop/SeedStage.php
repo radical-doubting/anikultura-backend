@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class SeedStage extends Model
 {
     use Filterable, HasFactory, Sluggable;
