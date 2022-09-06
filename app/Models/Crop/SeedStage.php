@@ -5,6 +5,7 @@ namespace App\Models\Crop;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 
 class SeedStage extends Model
@@ -40,7 +41,7 @@ class SeedStage extends Model
         'name',
     ];
 
-    public function farmerReport()
+    public function farmerReport(): HasMany
     {
         return $this->hasMany(FarmerReport::class);
     }

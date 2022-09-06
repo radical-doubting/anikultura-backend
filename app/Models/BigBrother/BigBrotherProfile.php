@@ -4,6 +4,7 @@ namespace App\Models\BigBrother;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -41,7 +42,7 @@ class BigBrotherProfile extends Model
         'created_at',
     ];
 
-    public function user()
+    public function user(): MorphOne
     {
         return $this->morphOne(BigBrother::class, 'profile');
     }

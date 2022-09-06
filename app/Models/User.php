@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Orchid\Platform\Models\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
@@ -91,7 +92,7 @@ class User extends Authenticatable implements JWTSubject
         return "{$this->first_name} {$this->last_name} ({$this->name}) - $roles";
     }
 
-    public function profile()
+    public function profile(): MorphTo
     {
         return $this->morphTo();
     }

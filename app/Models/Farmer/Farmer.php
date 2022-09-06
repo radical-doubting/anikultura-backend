@@ -6,6 +6,7 @@ use App\Models\Batch\Batch;
 use App\Models\Farmland\Farmland;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Farmer extends User
 {
@@ -34,12 +35,12 @@ class Farmer extends User
         });
     }
 
-    public function batches()
+    public function batches(): BelongsToMany
     {
         return $this->belongsToMany(Batch::class, 'batch_farmers', 'farmer_id', 'batch_id');
     }
 
-    public function farmlands()
+    public function farmlands(): BelongsToMany
     {
         return $this->belongsToMany(Farmland::class, 'farmland_farmers', 'farmer_id', 'farmland_id');
     }

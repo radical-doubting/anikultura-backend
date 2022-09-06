@@ -5,6 +5,7 @@ namespace App\Models\Site;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
 
 class Municity extends Model
@@ -48,7 +49,7 @@ class Municity extends Model
     /**
      * Get the province that owns this municity.
      */
-    public function province()
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
     }
@@ -56,7 +57,7 @@ class Municity extends Model
     /**
      * Get the region that owns this municity.
      */
-    public function region()
+    public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
     }

@@ -5,6 +5,7 @@ namespace App\Models\BigBrother;
 use App\Models\Batch\Batch;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BigBrother extends User
 {
@@ -33,7 +34,7 @@ class BigBrother extends User
         });
     }
 
-    public function batches()
+    public function batches(): BelongsToMany
     {
         return $this->belongsToMany(Batch::class, 'batch_farmers', 'farmer_id', 'batch_id');
     }
