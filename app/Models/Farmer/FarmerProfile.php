@@ -13,11 +13,6 @@ class FarmerProfile extends Model
 {
     use Filterable, HasFactory, AsSource;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'tutorial_done',
         'gender',

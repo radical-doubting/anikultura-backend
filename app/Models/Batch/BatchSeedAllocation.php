@@ -13,11 +13,6 @@ class BatchSeedAllocation extends Model
 {
     use Filterable, HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'batch_id',
         'farmer_id',

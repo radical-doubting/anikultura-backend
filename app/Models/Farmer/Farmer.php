@@ -12,11 +12,6 @@ class Farmer extends User
 {
     public static $profilePath = 'App\Models\Farmer\FarmerProfile';
 
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'users';
 
     public static function boot()

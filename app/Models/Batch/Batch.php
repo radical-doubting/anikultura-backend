@@ -23,11 +23,6 @@ class Batch extends Model
 {
     use Filterable, HasFactory, HasBelongsToManyEvents, HasRelationshipObservables, Sluggable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'farmschool_name',
         'assigned_site',

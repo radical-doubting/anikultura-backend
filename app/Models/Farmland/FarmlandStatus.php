@@ -13,11 +13,6 @@ class FarmlandStatus extends Model
 {
     use HasFactory, Sluggable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
     ];
