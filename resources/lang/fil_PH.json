@@ -46,6 +46,8 @@
     "Maturity Lower Bound (DAP, DAT, DAS)" : "Lower Bound ng Pagkahinog",
     "Maturity Upper Bound (DAP, DAT, DAS)" : "Upper Bound ng Pagkahinog",
 
+    "Edit" : "I-edit",
+    "Delete" : "Tanggalin",
     "Are you sure?" : "Sigurado ka ba?",
     "Cancel" : "Kanselahin",
     "Region" : "Rehiyon",
@@ -58,8 +60,9 @@
     "Name" : "Pangalan",
     "Short Name" : "Pina-ikling pangalan",
     "Remove" : "Tanggalin",
-    "Region was saved successfully!" : "Nai-save na ang impormasyon ng Rehiyon",
-    "Once the region is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang rehiyon, lahat ng impormasyon nito ay permanentend mabubura",
+    "Region was saved successfully!" : "Nai-save na ang impormasyon ng Rehiyon!",
+    "Once the region is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang rehiyon na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Region was removed successfully!" : "Naitanggal na ang impormasyon ng Rehiyon!",
 
     "Create Province" : "Magdagdag ng Probinsya",
     "Province" : "Probinsya",
@@ -68,8 +71,9 @@
     "Edit province details" : "I-edit ang detalye ng probinsya",
     "Province Information" : "Impormasyon tungkol sa Probinsya",
     "Update the province's details." : "Baguhin ang mga detalye.",
-    "Province was saved successfully!" : "Nai-save na ang impormasyon ng Probinsya",
-    "Once the province is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang probinsya, lahat ng impormasyon nito ay permanentend mabubura",
+    "Province was saved successfully!" : "Nai-save na ang impormasyon ng Probinsya!",
+    "Once the province is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang probinsyang ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Province was removed successfully!" : "Naitanggal na ang impormasyon ng Probinsya!",
 
     "Create Municipality or City" : "Magdagdag ng Munisipyo o Lungsod",
     "Municipality or City" : "Munisipyo o Lungsod",
@@ -78,10 +82,11 @@
     "Edit municipality or city details" : "I-edit ang detalye ng munisipyo o lungsod",
     "Municipality or City Information" : "Impormasyon tungkol sa munisipyo o lungsod",
     "Update the municipality or city's details." : "Baguhin ang mga detalye.",
-    "Municity was saved successfully!" : "Nai-save na ang impormasyon ng Munisipyo o Lungsod",
-    "Once the municipality or city is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang munisipyo o lungsod, lahat ng impormasyon nito ay permanentend mabubura",
+    "Municity was saved successfully!" : "Nai-save na ang impormasyon ng Munisipyo o Lungsod!",
+    "Once the municipality or city is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang munisipyo o lungsod na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Municity was removed successfully!" : "Naitanggal na ang impormasyon ng Munisipyo o Lungsod!",
 
-
+    "Actions" : "Aksyon",
     "Roles" : "Mga Tungkulin",
     "Manage roles" : "Pamahalaan ang mga Tungkulin",
     "Access rights" : "Mga pribilehiyo",
@@ -119,7 +124,25 @@
     "Edit Farmer Reports" : "I-edit ang detalye ng mga Ulat ng Magsasaka",
     "Read Farmer Reports" : "Basahin ang mga detalye ng mga Ulat ng Magsasaka",
     "Main" : "Pangunahin",
-    "Role was saved" : "Nai-save na ang Tungkulin",
-    "Role was removed" : "Naitanggal na ang Tungkulin"
+    "Role was saved" : "Nai-save na ang impormasyon ng Tungkulin!",
+    "Role was removed" : "Naitanggal na ang impormasyon ng Tungkulin",
+
+    "Farmland" : "Taniman",
+    "Batch" : "Pangkat",
+    "Type" : "Uri",
+    "Status" : "Estado",
+    "Size (ha)" : "Sukat (hektarya)", 
+    "Create Farmland" : "Magdagdag ng Taniman",
+    "Create a new farmland" : "Magdagdag ng bagong Taniman",
+    "This information collects farmlands basic information" : "Ang mga impormasyong ito ay patungkol sa pangunahing detalye ng taniman",
+    "This information assigns the farmers to this farmland" : "Ang mga impormasyong ito ay nagtatalaga ng magsasaka sa taniman na ito",
+    "Search the name of this farmland's members" : "Hanapin ang (mga) pangalan ng mga magsasakang parte ng taniman na ito",
+    "Other Information" : "Iba Pang Impormasyon",
+    "This information collects other farmland information" : "Ang mga impormasyong ito au patungkol sa iba pang detalye ng taniman",
+    "Watering Systems" : "Mga Sistemang Patubig", 
+    "Crop Buyers" : "Mga bibili ng Tanim",
+    "Farmland was saved successfully!" : "Nai-save na ang impormasyon ng Taniman!",
+    "Once the farmer farmland is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang taniman na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Farmland was removed successfully!" : "Naitanggal na ang impormasyon ng Taniman!"
 }
 
