@@ -46,21 +46,28 @@
 
     "Create Region" : "Magdagdag ng Rehiyon",
     "Create a new region" : "Magdagdag ng bagong Rehiyon",
+    "Edit Region" : "I-edit ang Rehiyon",
+    "Edit region details" : "I-edit ang detalye ng rehiyon",
     "Region Information" : "Impormasyon tungkol sa Rehiyon",
-    "Update the region's details." : "Baguhin ang impormasyon.",
+    "Update the region's details." : "Baguhin ang mga detalye.",
     "Name" : "Pangalan",
     "Short Name" : "Pina-ikling pangalan",
+    "Remove" : "Tanggalin",
 
     "Create Province" : "Magdagdag ng Probinsya",
     "Create a new province" : "Magdagdag ng bagong probinsya",
+    "Edit Province" : "I-edit ang Probinsya",
+    "Edit province details" : "I-edit ang detalye ng probinsya",
     "Province Information" : "Impormasyon tungkol sa Probinsya",
-    "Update the province's details." : "Baguhin ang impormasyon.",
+    "Update the province's details." : "Baguhin ang mga detalye.",
 
     "Create Municipality or City" : "Magdagdag ng Munisipyo o Lungsod",
     "Create a new municipality or city" : "Magdagdag ng bagong munisipyo o lungsod",
+    "Edit Municipality or City" : "I-edit ang Munisipyo o Lungsod",
+    "Edit municipality or city details" : "I-edit ang detalye ng munisipyo o lungsod",
     "Municipality or City Information" : "Impormasyon tungkol sa munisipyo o lungsod",
-    "Update the municipality or city's details." : "Baguhin ang impormasyon."
+    "Update the municipality or city's details." : "Baguhin ang mga detalye."
 
-
+    
 }
 
