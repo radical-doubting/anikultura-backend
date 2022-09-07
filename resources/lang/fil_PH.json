@@ -132,6 +132,7 @@
     "Type" : "Uri",
     "Status" : "Estado",
     "Size (ha)" : "Sukat (hektarya)", 
+    "Size in hectares" : "Sukat sa hektarya",
     "Create Farmland" : "Magdagdag ng Taniman",
     "Create a new farmland" : "Magdagdag ng impormasyon tungkol sa bagong Taniman",
     "This information collects farmlands basic information" : "Ang mga impormasyong ito ay patungkol sa pangunahing detalye ng taniman",
@@ -142,7 +143,7 @@
     "Watering Systems" : "Mga Sistemang Patubig", 
     "Crop Buyers" : "Mga bibili ng Tanim",
     "Farmland was saved successfully!" : "Nai-save na ang impormasyon ng Taniman!",
-    "Once the farmer farmland is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang taniman na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Once the farmland is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang taniman na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "Farmland was removed successfully!" : "Naitanggal na ang impormasyon ng Taniman!",
 
     "Farmschool Name" : "Pangalan ng Farmschool",

@@ -59,8 +59,7 @@ class FarmlandEditScreen extends Screen
         return [
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm(__('Once the farmer farmland is deleted, all of its resources and data will be permanently deleted.'))
-                ->method('remove')
+                ->confirm(__('Once the farmland is deleted, all of its resources and data will be permanently deleted.'))                ->method('remove')
                 ->canSee($this->farmland->exists),
 
             Button::make(__('Save'))
