@@ -19,6 +19,8 @@
     "Seed Stage" : "Yugto ng Binhi",
     "Reported at" : "Iniulat noong",
     "Configure Columns" : "I-configure ang hanay",
+    "Configure columns" : "I-configure ang hanay",
+    "Displayed records:" : "Mga naitala:",
     "Farmer Report" : "Report ng Magsasaka",
 
     "Crop" : "Tanim",
@@ -66,8 +68,20 @@
     "Edit Municipality or City" : "I-edit ang Munisipyo o Lungsod",
     "Edit municipality or city details" : "I-edit ang detalye ng munisipyo o lungsod",
     "Municipality or City Information" : "Impormasyon tungkol sa munisipyo o lungsod",
-    "Update the municipality or city's details." : "Baguhin ang mga detalye."
+    "Update the municipality or city's details." : "Baguhin ang mga detalye.",
 
-    
+    "Roles" : "Mga Tungkulin",
+    "Manage roles" : "Pamahalaan ang mga Tungkulin",
+    "Access rights" : "Mga pribilehiyo",
+    "Slug" : "Pinaikli",
+    "Created" : "Petsa at Oras ng Paggawa",
+    "Role" : "Tungkulin",
+    "Create Role" : "Magdagdag ng Tungkulin",
+    "Edit Role" : "I-edit ang Tungkulin",
+    "Role display name" : "Naka-display na pangalan",
+    "Actual name in the system" : "Aktwal na pangalan sa sistema",
+    "A role is a collection of privileges (of possibly different services like the Users service, Moderator, and so on) that grants users with that role the ability to perform certain tasks or operations." : "Ang isang tungkulin ay koleksyon ng mga pribilehiyo (nga mga iba-t ibang serbisyo tulad ng Users service, Moderator, at iba pa) na maaaring magbigay sa isang user ng tungkulin at abilidad na gawin ang isang gawain o operasyon.",
+    "Permission/Privilege" : "Pahintulot o Pribilehiyo",
+    "A privilege is necessary to perform certain tasks and operations in an area." : "Ang pribilehiyo ay kailangan para maisagawa ang mga gawain o operasyon na nais gawin"
 }
 
