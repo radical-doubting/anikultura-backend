@@ -1,0 +1,426 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Binary operation \"\\.\" between DateTime and non\\-falsy\\-string results in an error\\.$#"
+			count: 1
+			path: app/Actions/Crop/CalculateExpectedYieldDate.php
+
+		-
+			message: "#^Call to an undefined static method GeTracker\\\\InfluxDBLaravel\\\\Facades\\\\InfluxDB\\:\\:createWriteApi\\(\\)\\.$#"
+			count: 1
+			path: app/Actions/Insights/CreateInsightMetric.php
+
+		-
+			message: "#^Parameter \\#2 \\$estimatedYieldAmount of method App\\\\Actions\\\\Insights\\\\Crop\\\\CreateCropEstimationMetric\\:\\:retrieveNewAmount\\(\\) expects int, float\\|null given\\.$#"
+			count: 1
+			path: app/Actions/Insights/Crop/CreateCropEstimationMetric.php
+
+		-
+			message: "#^Method App\\\\Console\\\\Commands\\\\TruncateAllTables\\:\\:handle\\(\\) should return int but return statement is missing\\.$#"
+			count: 1
+			path: app/Console/Commands/TruncateAllTables.php
+
+		-
+			message: "#^Class App\\\\Models\\\\Crop\\\\FarmerReport not found\\.$#"
+			count: 1
+			path: app/Models/Crop/SeedStage.php
+
+		-
+			message: "#^Class App\\\\Models\\\\FarmerReport\\\\Attachment not found\\.$#"
+			count: 1
+			path: app/Models/FarmerReport/FarmerReport.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Batch/BatchFilter.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Crop/CropFilter.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Crop/SeedStageFilter.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Farmland/FarmlandStatusFilter.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Farmland/FarmlandTypeFilter.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Site/MunicityFilter.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Site/ProvinceFilter.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Filters/Site/RegionFilter.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Batch\\\\BatchEditSiteLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Batch/BatchEditSiteLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Batch\\\\BatchListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Batch/BatchListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 5
+			path: app/Orchid/Layouts/Batch/BatchListLayout.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:right\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Batch/BatchSeedAllocationCommandLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Batch\\\\BatchSeedAllocationCommandLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Batch/BatchSeedAllocationCommandLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Batch\\\\BatchSeedAllocationEditLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\|Orchid\\\\Screen\\\\Fields\\\\Relation\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Batch/BatchSeedAllocationEditLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Batch\\\\BatchSeedAllocationListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Batch/BatchSeedAllocationListLayout.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of static method Orchid\\\\Screen\\\\Field\\:\\:make\\(\\) expects string\\|null, int\\|null given\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Batch/BatchSeedAllocationListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\BigBrother\\\\BigBrotherListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/BigBrother/BigBrotherListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 4
+			path: app/Orchid/Layouts/BigBrother/BigBrotherListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Crop\\\\CropEditGrowthLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\|Orchid\\\\Screen\\\\Fields\\\\Input\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Crop/CropEditGrowthLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Crop\\\\CropEditPriceLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Crop/CropEditPriceLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Crop\\\\CropListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Crop/CropListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 4
+			path: app/Orchid/Layouts/Crop/CropListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmer\\\\FarmerEditAddressLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmer/FarmerEditAddressLayout.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Select\\:\\:placeholder\\(\\)\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmer/FarmerEditJobEducationLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmer\\\\FarmerEditJobEducationLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmer/FarmerEditJobEducationLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmer\\\\FarmerEditPersonalLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmer/FarmerEditPersonalLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmer\\\\FarmerEditSalaryLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\|Orchid\\\\Screen\\\\Fields\\\\Select\\|Orchid\\\\Screen\\\\Fields\\\\TextArea\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmer/FarmerEditSalaryLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmer\\\\FarmerListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmer/FarmerListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 4
+			path: app/Orchid/Layouts/Farmer/FarmerListLayout.php
+
+		-
+			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Field\\:\\:title\\(\\)\\.$#"
+			count: 3
+			path: app/Orchid/Layouts/FarmerReport/FarmerReportEditEstimationLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\FarmerReport\\\\FarmerReportEditEstimationLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, mixed\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/FarmerReport/FarmerReportEditEstimationLayout.php
+
+		-
+			message: "#^Variable \\$disclaimer might not be defined\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/FarmerReport/FarmerReportEditEstimationLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\FarmerReport\\\\FarmerReportEditInfoLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Field\\|Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/FarmerReport/FarmerReportEditInfoLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\FarmerReport\\\\FarmerReportListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/FarmerReport/FarmerReportListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 3
+			path: app/Orchid/Layouts/FarmerReport/FarmerReportListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmland\\\\FarmlandEditAddressLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmland/FarmlandEditAddressLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmland\\\\FarmlandEditAppStatusLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\|Orchid\\\\Screen\\\\Fields\\\\Select\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmland/FarmlandEditAppStatusLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmland\\\\FarmlandEditBasicLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\|Orchid\\\\Screen\\\\Fields\\\\Input\\|Orchid\\\\Screen\\\\Fields\\\\Relation\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmland/FarmlandEditBasicLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Farmland\\\\FarmlandListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmland/FarmlandListLayout.php
+
+		-
+			message: "#^Parameter \\#1 \\$name of static method Orchid\\\\Screen\\\\Field\\:\\:make\\(\\) expects string\\|null, float given\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Farmland/FarmlandListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 6
+			path: app/Orchid/Layouts/Farmland/FarmlandListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Role\\\\RoleListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Role/RoleListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Role/RoleListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Site\\\\Municity\\\\MunicityListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Site/Municity/MunicityListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 4
+			path: app/Orchid/Layouts/Site/Municity/MunicityListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Site\\\\Province\\\\ProvinceListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Site/Province/ProvinceListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 3
+			path: app/Orchid/Layouts/Site/Province/ProvinceListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\Site\\\\Region\\\\RegionListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/Site/Region/RegionListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 2
+			path: app/Orchid/Layouts/Site/Region/RegionListLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\User\\\\UserEditLayout\\:\\:fields\\(\\) should return array\\<Orchid\\\\Screen\\\\Field\\> but returns array\\<int, Orchid\\\\Screen\\\\Fields\\\\Group\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/User/UserEditLayout.php
+
+		-
+			message: "#^Method App\\\\Orchid\\\\Layouts\\\\User\\\\UserListLayout\\:\\:columns\\(\\) should return array\\<Orchid\\\\Screen\\\\TD\\> but returns array\\<int, Orchid\\\\Screen\\\\Cell\\>\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/User/UserListLayout.php
+
+		-
+			message: "#^Parameter \\#2 \\$parameters of method Orchid\\\\Screen\\\\Actions\\\\Link\\:\\:route\\(\\) expects array, int given\\.$#"
+			count: 1
+			path: app/Orchid/Layouts/User/UserListLayout.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Presenters\\\\UserPresenter\\:\\:\\$first_name\\.$#"
+			count: 1
+			path: app/Orchid/Presenters/UserPresenter.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Presenters\\\\UserPresenter\\:\\:\\$last_name\\.$#"
+			count: 1
+			path: app/Orchid/Presenters/UserPresenter.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\AnikulturaListScreen\\:\\:\\$description\\.$#"
+			count: 1
+			path: app/Orchid/Screens/AnikulturaListScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Batch\\\\BatchEditScreen\\:\\:\\$batch\\.$#"
+			count: 1
+			path: app/Orchid/Screens/Batch/BatchEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Batch\\\\BatchEditScreen\\:\\:\\$description\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Batch/BatchEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Batch\\\\BatchEditScreen\\:\\:\\$name\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Batch/BatchEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Batch\\\\BatchSeedAllocationEditScreen\\:\\:\\$batch\\.$#"
+			count: 1
+			path: app/Orchid/Screens/Batch/BatchSeedAllocationEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Batch\\\\BatchSeedAllocationEditScreen\\:\\:\\$batchSeedAllocation\\.$#"
+			count: 1
+			path: app/Orchid/Screens/Batch/BatchSeedAllocationEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Batch\\\\BatchSeedAllocationEditScreen\\:\\:\\$description\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Batch/BatchSeedAllocationEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Batch\\\\BatchSeedAllocationEditScreen\\:\\:\\$name\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Batch/BatchSeedAllocationEditScreen.php
+
+		-
+			message: "#^Parameter \\#1 \\$model of static method App\\\\Actions\\\\Batch\\\\CreateBatchSeedAllocation\\:\\:runOrchidAction\\(\\) expects Illuminate\\\\Database\\\\Eloquent\\\\Model, array\\<string, App\\\\Models\\\\Batch\\\\Batch\\|App\\\\Models\\\\Batch\\\\BatchSeedAllocation\\> given\\.$#"
+			count: 1
+			path: app/Orchid/Screens/Batch/BatchSeedAllocationEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\BigBrother\\\\BigBrotherEditScreen\\:\\:\\$description\\.$#"
+			count: 2
+			path: app/Orchid/Screens/BigBrother/BigBrotherEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\BigBrother\\\\BigBrotherEditScreen\\:\\:\\$name\\.$#"
+			count: 2
+			path: app/Orchid/Screens/BigBrother/BigBrotherEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Crop\\\\CropEditScreen\\:\\:\\$crop\\.$#"
+			count: 1
+			path: app/Orchid/Screens/Crop/CropEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Crop\\\\CropEditScreen\\:\\:\\$description\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Crop/CropEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Crop\\\\CropEditScreen\\:\\:\\$name\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Crop/CropEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Farmer\\\\FarmerEditScreen\\:\\:\\$description\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Farmer/FarmerEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Farmer\\\\FarmerEditScreen\\:\\:\\$name\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Farmer/FarmerEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\FarmerReport\\\\FarmerReportEditScreen\\:\\:\\$description\\.$#"
+			count: 2
+			path: app/Orchid/Screens/FarmerReport/FarmerReportEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\FarmerReport\\\\FarmerReportEditScreen\\:\\:\\$farmerReport\\.$#"
+			count: 1
+			path: app/Orchid/Screens/FarmerReport/FarmerReportEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\FarmerReport\\\\FarmerReportEditScreen\\:\\:\\$name\\.$#"
+			count: 2
+			path: app/Orchid/Screens/FarmerReport/FarmerReportEditScreen.php
+
+		-
+			message: "#^PHPDoc tag @param references unknown parameter\\: \\$request$#"
+			count: 1
+			path: app/Orchid/Screens/FarmerReport/FarmerReportEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\Farmland\\\\FarmlandEditScreen\\:\\:\\$farmland\\.$#"
+			count: 2
+			path: app/Orchid/Screens/Farmland/FarmlandEditScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\PlatformScreen\\:\\:\\$description\\.$#"
+			count: 1
+			path: app/Orchid/Screens/PlatformScreen.php
+
+		-
+			message: "#^Access to an undefined property App\\\\Orchid\\\\Screens\\\\PlatformScreen\\:\\:\\$name\\.$#"
+			count: 1
+			path: app/Orchid/Screens/PlatformScreen.php
+
+		-
+			message: "#^PHPDoc tag @var above a method has no effect\\.$#"
+			count: 1
+			path: app/Providers/RouteServiceProvider.php
+
+		-
+			message: "#^PHPDoc tag @var does not specify variable name\\.$#"
+			count: 1
+			path: app/Providers/RouteServiceProvider.php
