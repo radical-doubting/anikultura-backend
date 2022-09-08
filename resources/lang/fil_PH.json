@@ -72,6 +72,11 @@
     "A project for " : "Isang proyekto para sa ",
     "Roles": "Mga Role",
     "Important events you follow" : "Important events you follow",
-    "Analytics Dashboard" : "Dashboard ng Analytics"
+    "Analytics Dashboard" : "Dashboard ng Analytics",
+    "Crop Types" : "Uri ng Pananim",
+    "Crop was saved successfully!" : "Matagumpay na na-save ang tanim!",
+    "Crop was removed successfully!" : "Matagumpay na na-delete ang tanim!",
+    "Farmer report was saved successfully!" : "Matagumpay na na-save ang report ng magsasaka!",
+    "Farmer report was removed successfully!" : "Matagumpay na na-delete ang report ng magsasaka!"
 
 }
