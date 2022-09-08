@@ -3,6 +3,7 @@
 namespace Tests\Feature\Orchid\Screens\Site\Region;
 
 use App\Models\Admin\Admin;
+use App\Models\Site\Region;
 use Database\Seeders\Admin\AdminProfileSeeder;
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\User\RoleSeeder;
@@ -31,5 +32,19 @@ class RegionListScreenTest extends TestCase
 
         $screen->display()
             ->assertSee(__('Region'));
+    }
+
+    public function testShouldShowRegionInScreen(): void
+    {
+        Region::create([
+            'name' => 'Some Example Region',
+            'short_name' => 'SER',
+        ]);
+
+        $screen = $this->screen('platform.sites.regions')->actingAs(Admin::first());
+
+        $screen->display()
+            ->assertSee(__('Some Example Region'))
+            ->assertSee(__('SER'));
     }
 }
