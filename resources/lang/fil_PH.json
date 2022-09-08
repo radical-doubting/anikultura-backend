@@ -190,7 +190,7 @@
     "Edit Batch" : "I-edit ang Pangkat",
     "Edit batch details" : "I-edit ang mga detalye ng Pangkat",
     "Batch was saved successfully!" : "Nai-save na ang impormasyon ng Pangkat!",
-    "Once the batch is deleted, all of its resouces and data will be permanently deleted." : "Kapag natanggal na ang pangkat na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Once the batch is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang pangkat na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "Batch was removed successfully!" : "Naitanggal na ang impormasyon ng Pangkat!",
     "Seeds Allocation" : "Alokasyon ng Buto",
     "Seeds distributed to each farmer in this batch" : "Mga butong pinamahagi sa bawat magsasaka sa pangkat na ito",
@@ -201,6 +201,6 @@
     "Create Batch Seed Allocation" : "Magdagdag ng Ipapamahaging Buto sa Pangkat",
     "Create a new batch seed allocation" : "Magdagdag ng impormasyon tungkol sa ipapamahaging buto sa pangkat",
     "Update your batch's information." : "Baguhin ang mga detalye ng pangkat.",
-    "Once the Batch Seed Allocation is deleted, all of its resouces and data will be permanently deleted." : "Kapag natanggal na ang pinamahaging butong ito sa pangkat, lahat ng impormasyon nito ay permanenteng mabubura."
+    "Once the Batch Seed Allocation is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang pinamahaging butong ito sa pangkat, lahat ng impormasyon nito ay permanenteng mabubura."
 
 }
