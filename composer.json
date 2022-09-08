@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "ext-redis": "*",
+        "arquivei/laravel-prometheus-exporter": "^3.0",
         "chelout/laravel-relationship-events": "^1.5",
         "cloudinary-labs/cloudinary-laravel": "^1.0",
         "cviebrock/eloquent-sluggable": "^9.0",
