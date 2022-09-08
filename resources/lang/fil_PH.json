@@ -1,8 +1,11 @@
 {
     "Select Language" : "Pumili ng Lenggwahe",
     "Regions" : "Rehiyon",
-    "Municipalities and Cities" : "Munisipalidad at Lungsod",
+    "regions" : "rehiyon",
+    "Municipalities and Cities" : "Munisipyo at Lungsod",
+    "municipalities and cities" : "munisipyo o lungsod",
     "Provinces" : "Probinsya",
+    "provinces" : "probinsya",
     "Language" : "Lenggwahe",
     "Greetings, " : "Magandang araw, ",
     "A list of all " : "Listahan ng mga ",
@@ -78,10 +81,6 @@
     "Gross Returns per Hectare (PHP/ha)" : "Gross Return kada Ektarya (PHP/ha)",
     "Total Costs per Hectare (PHP/ha)" : "Kabuuang Gastos kada Ektarya (PHP/ha)",
     
-
-
-
-
     "Are you sure?" : "Sigurado ka ba?",
     "Cancel" : "Kanselahin",
     "Region" : "Rehiyon",
@@ -95,7 +94,7 @@
     "Short Name" : "Pina-ikling pangalan",
     "Remove" : "Tanggalin",
     "Region was saved successfully!" : "Nai-save na ang impormasyon ng Rehiyon!",
-    "Once the region is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang rehiyon na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Once the region is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang Rehiyon na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "Region was removed successfully!" : "Naitanggal na ang impormasyon ng Rehiyon!",
 
     "Create Province" : "Magdagdag ng Probinsya",
@@ -106,7 +105,7 @@
     "Province Information" : "Impormasyon tungkol sa Probinsya",
     "Update the province's details." : "Baguhin ang mga detalye ng probinsya.",
     "Province was saved successfully!" : "Nai-save na ang impormasyon ng Probinsya!",
-    "Once the province is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang probinsyang ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Once the province is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang Probinsyang ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "Province was removed successfully!" : "Naitanggal na ang impormasyon ng Probinsya!",
 
     "Create Municipality or City" : "Magdagdag ng Munisipyo o Lungsod",
@@ -117,7 +116,7 @@
     "Municipality or City Information" : "Impormasyon tungkol sa munisipyo o lungsod",
     "Update the municipality or city's details." : "Baguhin ang mga detalye ng munisipyo o lungsod.",
     "Municity was saved successfully!" : "Nai-save na ang impormasyon ng Munisipyo o Lungsod!",
-    "Once the municipality or city is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang munisipyo o lungsod na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Once the municipality or city is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang Munisipyo o Lungsod na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "Municity was removed successfully!" : "Naitanggal na ang impormasyon ng Munisipyo o Lungsod!",
 
     "Manage roles" : "Pamahalaan ang mga Role",
@@ -155,7 +154,7 @@
     "Read Farmer Reports" : "Basahin ang mga detalye ng mga Report mula sa mga Magsasaka",
     "Main" : "Pangunahin",
     "Role was saved" : "Nai-save na ang impormasyon ng Role!",
-    "Role was removed" : "Naitanggal na ang impormasyon ng Role",
+    "Role was removed" : "Naitanggal na ang impormasyon ng Role!",
 
     "Farmland" : "Taniman",
     "Batch" : "Pangkat",
@@ -173,8 +172,10 @@
     "Watering Systems" : "Mga Sistemang Patubig", 
     "Crop Buyers" : "Mga bibili ng Tanim",
     "Farmland was saved successfully!" : "Nai-save na ang impormasyon ng Taniman!",
-    "Once the farmland is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang taniman na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Once the farmland is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang Taniman na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "Farmland was removed successfully!" : "Naitanggal na ang impormasyon ng Taniman!",
+    "Edit Farmland" : "I-edit ang Taniman",
+    "Edit farmland details" : "I-edit and detalye ng Taniman",
 
     "Farmschool Name" : "Pangalan ng Farmschool",
     "Municity" : "Munisipyo o Lungsod",
@@ -190,7 +191,7 @@
     "Edit Batch" : "I-edit ang Pangkat",
     "Edit batch details" : "I-edit ang mga detalye ng Pangkat",
     "Batch was saved successfully!" : "Nai-save na ang impormasyon ng Pangkat!",
-    "Once the batch is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang pangkat na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Once the batch is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang Pangkat na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "Batch was removed successfully!" : "Naitanggal na ang impormasyon ng Pangkat!",
     "Seeds Allocation" : "Alokasyon ng Buto",
     "Seeds distributed to each farmer in this batch" : "Mga butong pinamahagi sa bawat magsasaka sa pangkat na ito",
@@ -201,6 +202,8 @@
     "Create Batch Seed Allocation" : "Magdagdag ng Ipapamahaging Buto sa Pangkat",
     "Create a new batch seed allocation" : "Magdagdag ng impormasyon tungkol sa ipapamahaging buto sa pangkat",
     "Update your batch's information." : "Baguhin ang mga detalye ng pangkat.",
-    "Once the Batch Seed Allocation is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang pinamahaging butong ito sa pangkat, lahat ng impormasyon nito ay permanenteng mabubura."
-
+    "Batch seed allocation was saved successfully!" : "Nai-save na ang Pinamahaging Buto!",
+    "Once the Batch Seed Allocation is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang Pinamahaging Butong ito sa pangkat, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "Batch seed allocation was removed successfully!" : "Naitanggal na ang Pinamahaging Buto!"
+    
 }

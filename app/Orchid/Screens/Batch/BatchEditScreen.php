@@ -59,7 +59,7 @@ class BatchEditScreen extends Screen
         return [
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm(__('Once the batch is deleted, all of its resouces and data will be permanently deleted.'))
+                ->confirm(__('Once the batch is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('removeBatch')
                 ->canSee($this->exists),
 
