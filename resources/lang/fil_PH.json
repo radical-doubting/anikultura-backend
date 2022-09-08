@@ -51,7 +51,7 @@
     "Create Crop" : "Magdagdag ng Tanim",
     "Edit Crop" : "Magdagdag o Mag-edit ng Tanim",
     "Edit crop type details" : "Magdagdag o Mag-edit ng detalye tungkol sa uri ng tanim",
-    "Create a new crop type" : "Gumawa ng bagong uri ng pananim",
+    "Create a new crop type" : "Magdagdag ng bagong uri ng pananim",
     "Crop Name" : "Pangalan ng Tanim",
     "Crop Group" : "Grupong Kinabibilangan ng Tanim",
     "Crop Variety" : "Uri ng Tanim",
@@ -236,8 +236,8 @@
 
     "All registered users" : "Lahat ng mga rehistradong user",
 
-    "Create Big Brother" : "Gumawa ng Big Brother",
-    "Create a new big brother" : "Gumawa ng bagong Big Brother",
+    "Create Big Brother" : "Magdagdag ng Big Brother",
+    "Create a new big brother" : "Magdagdag ng bagong Big Brother",
     "Account Information" : "Impormasyon ng Account",
     "This information collects big brother's account information." : "Kinokolekta ng impormasyong ito ang impormasyon ng account ni Big Brother.",
     "Update big brother's information" : "I-update ang imporamasyon ni kuya",
@@ -281,7 +281,14 @@
     "Specify which groups this account should belong to" : "Tukuyin kung saang mga grupo dapat kabilang ang account na ito",
     "Permissions" : "Mga Pahintulot",
     "Allow the user to perform some actions that are not provided for by his roles" : "Pahintulutan ang user na magsagawa ng ilang pagkilos na hindi akma sa kanyang Role",
-    "Attachment" : "Kalakip"
+    "Attachment" : "Kalakip",
+    "Profile updated." : "Na-update ang profile",
+    "Password changed." : "Nabago ang password",
+    "Enroll Big Brother" : "I-enroll si Big Brother",
+    "Big brother was saved successfully!" : "Matagumpay na na-save ang impormasyon ng Big Brother!",
+    "Big brother was removed successfully!" : "Matagumpay na naitanggal ang impormasyon ni Big Brother",
+    "Farmer was removed successfully!" : "Matagumpay na naitanggal ang impormasyon ng Magsasaka!"
+
 
 
 
