@@ -37,7 +37,7 @@ class CropListLayout extends Table
     protected function columns(): array
     {
         return [
-            TD::make('name', __('Name of Crop'))
+            TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)

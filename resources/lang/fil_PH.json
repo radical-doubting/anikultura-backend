@@ -1,4 +1,8 @@
 {
+    "Select Language" : "Pumili ng Lenggwahe",
+    "Regions" : "Rehiyon",
+    "Municipalities and Cities" : "Munisipalidad at Lungsod",
+    "Provinces" : "Probinsya",
     "Language" : "Lenggwahe",
     "Greetings, " : "Magandang araw, ",
     "A list of all " : "Listahan ng mga ",
@@ -9,16 +13,15 @@
     "Empowering the " : "Binibigyang tibay ang ",
     "See more insights in the platform. The Grafana analytics dashboard is accessible" : "Tumingin ng higit pang mga insight sa platform. Maaaring makita ang Grafana analytics dashboard",
     "here" : "dito",
-
     "Add" : "Mag-add",
     "Save" : "I-save",
     "Edit" : "I-edit",
     "Delete" : "Alisin",
     "Farmer" : "Pangalan ng Magsasaka",
+    "Seed Stage" : "Yugto ng Binhi",
     "Reported at" : "Iniulat noong",
     "Configure Columns" : "I-configure ang hanay",
-
-    "Farmer Report" : "Report mula sa Magsasaka",
+    "Farmer Report" : "Report ng Magsasaka",
     "Farmer Reports" : "Mga Report mula sa Magsasaka",
     "Create Farmer Report" : "Magdagdag o Mag-edit ng Report mula sa Magsasaka",
     "Create a new farmer report" : "Magdagdag o Mag-edit ng report mula sa magsasaka",
@@ -38,12 +41,11 @@
     "View the report attachments" : "Mag-upload o tingnan ang mga pagpapatunay sa report",
     "Read the report estimations" : "Basahin ang mga estimasyon sa report",
     "Update the report verification status" : "Mag-update o maglagay ng pagpapatunay",
-
     "Crop" : "Tanim",
     "Crops" : "Pananim",
     "Create Crop" : "Magdagdag ng Tanim",
     "Edit Crop" : "Magdagdag o Mag-edit ng Tanim",
-    "Edit crop type details" : "Magdagdag o Mag-edit ng tanim",
+    "Edit crop type details" : "Magdagdag o Mag-edit ng detalye tungkol sa uri ng tanim",
     "Create a new crop type" : "Gumawa ng bagong uri ng pananim",
     "Crop Name" : "Pangalan ng Tanim",
     "Crop Group" : "Grupong Kinabibilangan ng Tanim",
@@ -55,22 +57,21 @@
     "Basic Information" : "Pangunahing Impormasyon",
     "Price Information" : "Impormasyon ng Presyo",
     "Growth Information" : "Impormasyon ng Pagtubo",
-    "Gross Returns per Hectare (PHP/ha)" : "Gross Return kada Ektarya (PHP/ha)",
-    "Total Costs per Hectare (PHP/ha)" : "Kabuuang Gastos kada Ektarya (PHP/ha)",
     "Production Price per Kilogram (PHP/kg)" : "Presyo ng Produksyon kada Kilo (PHP/kg)",
     "Yield per Hectare (kg/ha)" : "Ani kada Ektarya (kg/ha)",
     "Farmgate Price per Kilogram (PHP/kg)" : "Farmgate na Presyo kada Kilo (PHP/kg)",
-    "Update your crop's basic information" : "Mag-update o maglagay ng pangunahing impormasyon ng iyong tanim",
-    "Update your crop's price information" : "Mag-update o maglagay ng impormasyon ng presyo",
-    "Update your crop growth rate information" : "Mag-update o maglagay ng impormasyon ng pagtubo ng tanim",
+    "Update your crop's basic information" : "I-update and pangunahing impormasyon ng iyong tanim",
+    "Update your crop's price information" : "I-update and impormasyon ng presyo",
+    "Update your crop growth rate information" : "I-update and impormasyon ng pagtubo ng tanim",
     "Maturity Lower Bound (DAP, DAT, DAS)" : "Lower Bound ng Pagkahinog",
     "Maturity Upper Bound (DAP, DAT, DAS)" : "Upper Bound ng Pagkahinog",
-    "Seed Stage" : "Yugto ng Binhi",
-
-    "Regions" : "Rehiyon",
-
-    "Municipalities and Cities" : "Munisipalidad at Lungsod",
-
-    "Provinces" : "Probinsya"
+    "Navigation" : "Nabigasyon",
+    "Access rights" : "Karapatan sa pag-access",
+    "Users" : "Mga User",
+    "Management Dashboard" : "Dashboard sa Pamamahala",
+    "A project for " : "Isang proyekto para sa ",
+    "Roles": "Mga Role",
+    "Important events you follow" : "Important events you follow",
+    "Analytics Dashboard" : "Dashboard ng Analytics"
 
 }
