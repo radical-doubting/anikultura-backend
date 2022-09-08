@@ -41,9 +41,13 @@ trait AsOrchidAction
      */
     private function validateRequest(Request $request): void
     {
+        if (! method_exists($this, 'rules')) {
+            return;    
+        }
+
         $rules = $this->rules();
 
-        if (! isset($rules)) {
+        if (! is_array($rules)) {
             return;
         }
 
