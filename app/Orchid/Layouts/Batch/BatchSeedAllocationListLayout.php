@@ -68,7 +68,7 @@ class BatchSeedAllocationListLayout extends Table
                         ]);
                 }),
 
-            TD::make('updated_at', __('Last edit'))
+            TD::make('updated_at', __('Last Edit'))
                 ->sort()
                 ->render(function (BatchSeedAllocation $batchSeedAllocation) {
                     return $batchSeedAllocation->updated_at->toDateTimeString();
