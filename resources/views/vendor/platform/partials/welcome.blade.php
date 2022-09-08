@@ -22,7 +22,7 @@
             <h3 class="text-muted fw-light">
                 <x-orchid-icon path="bar-chart" />
 
-                <span class="ms-3 text-dark">Analytics Dashboard</span>
+                <span class="ms-3 text-dark">{{__('Analytics Dashboard')}}</span>
             </h3>
             <p class="ms-md-5 ps-md-1">
                 {{__("See more insights in the platform. The Grafana analytics dashboard is accessible")  }} <a
