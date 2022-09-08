@@ -14,44 +14,29 @@ use Orchid\Support\Facades\Layout;
 
 class MunicityEditScreen extends Screen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Edit Municipality or City';
+    public Municity $municity;
 
-    /**
-     * Display header description.
-     *
-     * @var string|null
-     */
-    public $description = 'Edit municipality or city details';
+    public function name(): string
+    {
+        return $this->municity->exists
+            ? __('Edit municipality or city')
+            : __('Create municipality or city');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
+    public function description(): string
+    {
+        return $this->municity->exists
+            ? __('Edit municipality or city details')
+            : __('Create a new municipality or city');
+    }
+
     public function query(Municity $municity): array
     {
-        $this->municity = $municity;
-
-        if (! $municity->exists) {
-            $this->name = 'Create Municipality or City ';
-            $this->description = 'Create a new municipality or city';
-        }
-
         return [
             'municity' => $municity,
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -67,11 +52,6 @@ class MunicityEditScreen extends Screen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [

@@ -1,0 +1,44 @@
+name: Build, lint, and test application
+
+runs:
+  using: composite
+  steps:
+    - name: Copy .env from .env.ci
+      run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+      shell: bash
+
+    - name: Install dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      shell: bash
+
+    - name: Lint application
+      run: composer lint
+      shell: bash
+
+    - name: Run unit tests
+      run: php artisan test --testsuite=Unit
+      shell: bash
+
+    - name: Generate application key
+      run: php artisan key:generate
+      shell: bash
+
+    - name: Set directory permissions
+      run: chmod -R 777 storage bootstrap/cache
+      shell: bash
+
+    - name: Run database migrations
+      run: php artisan migrate:fresh
+      shell: bash
+
+    - name: Run database seeders
+      run: php artisan db:seed
+      shell: bash
+
+    - name: Generate Swagger documentation
+      run: php artisan l5-swagger:generate
+      shell: bash
+
+    - name: Run feature tests
+      run: php artisan test --testsuite=Feature
+      shell: bash

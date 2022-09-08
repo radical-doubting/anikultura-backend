@@ -10,18 +10,11 @@ use Orchid\Screen\Actions\Link;
 
 class RegionListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Regions';
+    public function name(): string
+    {
+        return __('Regions');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
     public function query(): array
     {
         return [
@@ -31,11 +24,6 @@ class RegionListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -45,11 +33,6 @@ class RegionListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [

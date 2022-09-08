@@ -13,9 +13,9 @@ class DeleteRegion
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Region $region)
+    public function handle(Region $region): bool
     {
-        $region->delete();
+        return $region->delete();
     }
 
     public function asOrchidAction($model, ?Request $request)
