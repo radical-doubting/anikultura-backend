@@ -38,7 +38,7 @@ class MunicityEditScreen extends Screen
         $this->municity = $municity;
 
         if (! $municity->exists) {
-            $this->name = 'Create Municipality or City ';
+            $this->name = 'Create Municipality or City';
             $this->description = 'Create a new municipality or city';
         }
 

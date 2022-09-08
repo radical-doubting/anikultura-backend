@@ -9,7 +9,6 @@
     "Empowering the " : "Binibigyang tibay ang ",
     "See more insights in the platform. The Grafana analytics dashboard is accessible" : "Tumingin ng higit pang mga insight sa platform. Maaaring makita ang Grafana analytics dashboard",
     "here" : "dito",
-
     "Add" : "Mag-add",
     "Save" : "I-save",
     "Edit" : "I-edit",
@@ -17,7 +16,6 @@
     "Farmer" : "Pangalan ng Magsasaka",
     "Reported at" : "Iniulat noong",
     "Configure Columns" : "I-configure ang hanay",
-
     "Farmer Report" : "Report mula sa Magsasaka",
     "Farmer Reports" : "Mga Report mula sa Magsasaka",
     "Create Farmer Report" : "Magdagdag o Mag-edit ng Report mula sa Magsasaka",
@@ -38,7 +36,6 @@
     "View the report attachments" : "Mag-upload o tingnan ang mga pagpapatunay sa report",
     "Read the report estimations" : "Basahin ang mga estimasyon sa report",
     "Update the report verification status" : "Mag-update o maglagay ng pagpapatunay",
-
     "Crop" : "Tanim",
     "Crops" : "Pananim",
     "Create Crop" : "Magdagdag ng Tanim",
@@ -66,11 +63,8 @@
     "Maturity Lower Bound (DAP, DAT, DAS)" : "Lower Bound ng Pagkahinog",
     "Maturity Upper Bound (DAP, DAT, DAS)" : "Upper Bound ng Pagkahinog",
     "Seed Stage" : "Yugto ng Binhi",
-
     "Regions" : "Rehiyon",
-
     "Municipalities and Cities" : "Munisipalidad at Lungsod",
-
     "Provinces" : "Probinsya"
 
 }

@@ -36,14 +36,14 @@ class MunicityEditLayout extends Rows
             Relation::make('municity.province_id')
                 ->fromModel(Province::class, 'name')
                 ->required()
-                ->title('Province')
+                ->title(__('Province'))
                 ->placeholder(__('Province')),
 
             Relation::make('municity.region_id')
                 ->fromModel(Region::class, 'name')
                 ->displayAppend('fullName')
                 ->required()
-                ->title('Region')
+                ->title(__('Region'))
                 ->placeholder(__('Region')),
         ];
     }
