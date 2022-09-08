@@ -24,7 +24,7 @@ class FarmerProfileFactory extends Factory
         $data = [
             'gender' => $this->faker->numberBetween(0, 2),
             'civil_status' => $this->faker->numberBetween(0, 4),
-            'birthday' => $this->faker->date(),
+            'birthday' => $this->getRandomDate(),
             'age' => $this->faker->numberBetween(30, 70),
             'quantity_family_members' => $this->faker->numberBetween(1, 10),
             'quantity_dependents' => $this->faker->numberBetween(1, 10),

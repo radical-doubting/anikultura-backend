@@ -35,7 +35,7 @@ class ProvinceEditLayout extends Rows
                 ->fromModel(Region::class, 'name')
                 ->displayAppend('fullName')
                 ->required()
-                ->title(__('Region'))
+                ->title('Region')
                 ->placeholder(__('Region')),
         ];
     }

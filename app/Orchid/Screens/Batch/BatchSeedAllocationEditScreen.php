@@ -54,7 +54,7 @@ class BatchSeedAllocationEditScreen extends Screen
         return [
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm(__('Once the Batch Seed Allocation is deleted, all of its resouces and data will be permanently deleted.'))
+                ->confirm(__('Once the batchSeedAllocation is deleted, all of its resouces and data will be permanently deleted.'))
                 ->method('remove')
                 ->canSee($this->exists),
 
