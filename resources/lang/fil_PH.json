@@ -84,7 +84,7 @@
     "Farmer report was saved successfully!" : "Matagumpay na na-save ang report ng magsasaka!",
     "Farmer report was removed successfully!" : "Matagumpay na na-delete ang report ng magsasaka!",
     "Once the crop is deleted, all of its resources and data will be permanently deleted." : "Kapag na-delete na ang crop, permanenteng made-delete ang lahat ng data nito.",
-    "Cancel" : "I-cancel",
+    "Cancel" : "Kanselahin",
     "Confirm new password" : "Kumpirmahin ang bagong password",
     "Once the crop type is deleted, all of its resources and data will be permanently deleted." : "Kapag na-delete na ang uri ng tanim, permanenteng made-delete ang lahat ng data nito.",
     "Once the farmer report is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain." : "Kapag na-delete na ang uri ng report ng magsasaka, permanenteng made-delete ang lahat ng data nito. Bago tanggalin ang iyong account, mangyaring mag-download ng anumang data o impormasyon na nais mong panatilihin.",
@@ -94,6 +94,7 @@
     "Sign out" : "Mag-sign out",
     "Notifications" : "Mga notification",
     "Messages" : "Mga mensahe",
+    
     "Are you sure?" : "Sigurado ka ba?",
     "Region" : "Rehiyon",
     "Create Region" : "Magdagdag ng Rehiyon",
