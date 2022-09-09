@@ -70,6 +70,9 @@
         ],
         "test": [
             "./vendor/bin/phpunit"
+        ],
+        "install-agent": [
+            "./setup-agent.sh"
         ]
     },
     "extra": {
