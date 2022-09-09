@@ -63,6 +63,19 @@ services:
       - redis-data:/data
     networks:
       - sail
+  prometheus:
+    image: prom/prometheus:v2.38.0
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--web.enable-remote-write-receiver"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
 networks:
   sail:
     driver: bridge
@@ -71,3 +84,4 @@ volumes:
   influxdb-data:
   grafana-data:
   redis-data:
+  prometheus-data:
