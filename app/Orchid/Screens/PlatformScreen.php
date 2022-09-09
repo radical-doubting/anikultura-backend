@@ -25,8 +25,8 @@ class PlatformScreen extends Screen
         $firstName = $user->first_name;
         $roles = $user->roles->pluck('name')->implode(' / ');
 
-        $this->name = (__('Greetings, ')) . $firstName . "!";
-        $this->description = (__('Welcome to the Anikultura Management Dashboard - ')) . $roles;
+        $this->name = (__('Greetings, ')).$firstName.'!';
+        $this->description = (__('Welcome to the Anikultura Management Dashboard - ')).$roles;
 
         return [];
     }

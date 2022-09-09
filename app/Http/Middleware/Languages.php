@@ -17,11 +17,12 @@ class Languages
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Session()->has('applocale') AND array_key_exists(Session()->get('applocale'), config('languages'))) {
+        if (Session()->has('applocale') and array_key_exists(Session()->get('applocale'), config('languages'))) {
             App::setLocale(Session()->get('applocale'));
         } else {
             App::setlocale(config('app.fallback_locale'));
         }
+
         return $next($request);
     }
 }

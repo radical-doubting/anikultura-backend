@@ -12,9 +12,9 @@ abstract class AnikulturaListScreen extends Screen
         $this->middleware(function ($request, $next) {
             $screenName = strtolower($this->name);
             $programName = Config::get('anikultura.programFullName');
-            
-            $this->description = (__('A list of all ')) . $screenName . (__(' under the ')) . $programName;
-            
+
+            $this->description = (__('A list of all ')).$screenName.(__(' under the ')).$programName;
+
             return $next($request);
         });
     }

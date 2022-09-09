@@ -91,8 +91,8 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make('Tagalog')
                         ->icon('location-pin')
                         ->route('lang.switch', 'fil_PH'),
-                ])
-            ];
+                ]),
+        ];
     }
 
     /**
