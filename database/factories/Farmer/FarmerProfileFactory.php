@@ -50,11 +50,4 @@ class FarmerProfileFactory extends Factory
 
         return $data;
     }
-
-    private function getRandomDate()
-    {
-        $timestamp = mt_rand(1, time());
-
-        return date('Y-M-d', $timestamp);
-    }
 }

@@ -13,11 +13,11 @@ class CreateMunicity
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Municity $municity, $municityData)
+    public function handle(Municity $municity, array $municityData): Municity
     {
-        $municity
-            ->fill($municityData)
-            ->save();
+        $municity->fill($municityData)->save();
+
+        return $municity;
     }
 
     public function asOrchidAction($model, ?Request $request)

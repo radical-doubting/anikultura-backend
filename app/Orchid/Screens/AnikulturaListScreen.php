@@ -17,7 +17,6 @@ abstract class AnikulturaListScreen extends Screen
             
             return $next($request);
         });
-
     }
 
     abstract public function layout(): array;
