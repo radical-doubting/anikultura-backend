@@ -25,12 +25,6 @@ class CropCollector implements CollectorInterface
             'The total net profit cost ratio of crops.',
             ['crop']
         );
-
-        $exporter->registerGauge(
-            'seed_allocation_total',
-            'The total number of seed allocations.',
-            ['crop', 'region', 'province', 'municity']
-        );
     }
 
     public function collect(): void
