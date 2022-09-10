@@ -2,39 +2,32 @@
 
 namespace App\Observers\Batch;
 
-use App\Actions\Insights\CreateCensusMetric;
-use App\Actions\Insights\Farmer\CreateFarmerEnrollmentMetric;
+use App\Helpers\InsightsHelper;
 use App\Models\Batch\Batch;
-use App\Models\Farmer\Farmer;
 use App\Traits\AsInsightSender;
+use Illuminate\Database\Eloquent\Model;
 
 class BatchObserver
 {
     use AsInsightSender;
 
-    private function sendInsights($model, bool $shouldIncrement)
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
-        CreateCensusMetric::dispatch(
-            [
-                'model' => [
-                    'id' => $model->id,
-                    'class' => Batch::class,
-                ],
-                'point' => [
-                    'increment' => $shouldIncrement,
-                    'measurement' => 'census-batch',
-                    'tags' => [
-                        'region' => 'id',
-                        'province' => 'id',
-                        'municity' => 'id',
-                    ],
-                ],
-            ]
-        );
+        $labels = [
+            'region' => $model->region->slug,
+            'province' => $model->province->slug,
+            'municity' => $model->municity->slug,
+        ];
+
+        if ($shouldIncrement) {
+            InsightsHelper::incrementGauge('batch_total', $labels);
+        } else {
+            InsightsHelper::decrementGauge('batch_total', $labels);
+        }
     }
 
     /**
-     * Farmer assigned to batch event.
+     * Handles the farmer assigned to batch event.
      */
     public function belongsToManyAttached(string $relation, Batch $batch, array $farmerIds)
     {
@@ -42,6 +35,30 @@ class BatchObserver
             return;
         }
 
-        CreateFarmerEnrollmentMetric::dispatch($batch, $farmerIds);
+        $farmerAssignedCount = count($farmerIds);
+
+        InsightsHelper::incrementGauge('farmer_total', [
+            'region' => $batch->region->slug,
+            'province' => $batch->province->slug,
+            'municity' => $batch->municity->slug,
+        ], $farmerAssignedCount);
+    }
+
+    /**
+     * Handles the farmer unassigned to batch event.
+     */
+    public function belongsToManyDetached(string $relation, Batch $batch, array $farmerIds)
+    {
+        if ($relation != 'farmers') {
+            return;
+        }
+
+        $farmerAssignedCount = count($farmerIds);
+
+        InsightsHelper::decrementGauge('farmer_total', [
+            'region' => $batch->region->slug,
+            'province' => $batch->province->slug,
+            'municity' => $batch->municity->slug,
+        ], $farmerAssignedCount);
     }
 }
