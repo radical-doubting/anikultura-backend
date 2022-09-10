@@ -101,7 +101,7 @@ return [
         App\Collectors\CropCollector::class,
         App\Collectors\FarmerCollector::class,
         App\Collectors\FarmlandCollector::class,
-        App\Collectors\SiteCollector::class
+        App\Collectors\SiteCollector::class,
     ],
 
     /*

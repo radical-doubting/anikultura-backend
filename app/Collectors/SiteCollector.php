@@ -7,7 +7,6 @@ use Arquivei\LaravelPrometheusExporter\PrometheusExporter;
 
 class SiteCollector implements CollectorInterface
 {
-
     public function getName(): string
     {
         return 'sites';
