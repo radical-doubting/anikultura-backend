@@ -76,6 +76,8 @@ services:
     volumes:
       - ./prometheus-config.yml:/etc/prometheus/prometheus.yml
       - prometheus-data:/prometheus
+    networks:
+      - sail
 networks:
   sail:
     driver: bridge
