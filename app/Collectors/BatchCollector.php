@@ -19,6 +19,12 @@ class BatchCollector implements CollectorInterface
             'The total number of batches.',
             ['region', 'province', 'municity']
         );
+
+        $exporter->registerGauge(
+            'batch_seed_allocation_total',
+            'The total number of batch seed allocations.',
+            ['crop', 'region', 'province', 'municity']
+        );
     }
 
     public function collect(): void
