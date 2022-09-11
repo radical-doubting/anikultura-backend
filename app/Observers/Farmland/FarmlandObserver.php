@@ -3,58 +3,33 @@
 namespace App\Observers\Farmland;
 
 use App\Actions\Insights\CreateCensusMetric;
+use App\Helpers\InsightsHelper;
 use App\Models\Farmland\Farmland;
 use App\Traits\AsInsightSender;
+use Illuminate\Database\Eloquent\Model;
 
 class FarmlandObserver
 {
     use AsInsightSender;
 
-    private function sendInsights($model, bool $shouldIncrement)
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
-        CreateCensusMetric::dispatch(
-            [
-                'model' => [
-                    'id' => $model->id,
-                    'class' => Farmland::class,
-                ],
-                'point' => [
-                    'increment' => $shouldIncrement,
-                    'measurement' => 'census-farmland',
-                    'tags' => [
-                        'type' => 'id',
-                        'status' => 'id',
-                        'batch.region' => 'id',
-                        'batch.province' => 'id',
-                        'batch.municity' => 'id',
-                    ],
-                ],
-            ]
-        );
+        $labels = [
+            'type' => $model->type->slug,
+            'status' => $model->status->slug,
+            'region' => $model->batch->region->slug,
+            'province' => $model->batch->province->slug,
+            'municity' => $model->batch->municity->slug,
+        ];
 
-        CreateCensusMetric::dispatch(
-            [
-                'model' => [
-                    'id' => $model->id,
-                    'class' => Farmland::class,
-                    'aggregation' => [
-                        'type' => 'sum',
-                        'column' => 'hectares_size',
-                    ],
-                ],
-                'point' => [
-                    'increment' => $shouldIncrement,
-                    'field' => 'hectares-size',
-                    'measurement' => 'census-farmland',
-                    'tags' => [
-                        'type' => 'id',
-                        'status' => 'id',
-                        'batch.region' => 'id',
-                        'batch.province' => 'id',
-                        'batch.municity' => 'id',
-                    ],
-                ],
-            ]
-        );
+        $hectares = $model->hectares_size;
+
+        if ($shouldIncrement) {
+            InsightsHelper::incrementGauge('farmland_total', $labels);
+            InsightsHelper::incrementGauge('farmland_hectares', $labels, $hectares);
+        } else {
+            InsightsHelper::decrementGauge('farmland_total', $labels);
+            InsightsHelper::decrementGauge('farmland_hectares', $labels, $hectares);
+        }
     }
 }
