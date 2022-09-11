@@ -2,9 +2,7 @@
 
 namespace App\Observers\Farmland;
 
-use App\Actions\Insights\CreateCensusMetric;
 use App\Helpers\InsightsHelper;
-use App\Models\Farmland\Farmland;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
