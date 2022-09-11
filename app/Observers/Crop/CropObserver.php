@@ -12,8 +12,8 @@ class CropObserver
 
     private function sendInsights(Model $model, bool $shouldIncrement)
     {
-        $profitPerKg = (float) $model->profit_per_kg;
-        $netProfitCostRatio = (float) $model->net_profit_cost_ratio;
+        $profitPerKg = $model->profit_per_kg;
+        $netProfitCostRatio = $model->net_profit_cost_ratio;
 
         if ($shouldIncrement) {
             InsightsHelper::incrementGauge('crop_profit_per_kg_pesos', [
