@@ -25,6 +25,12 @@ class FarmerCollector implements CollectorInterface
             'The total number of farmer reports.',
             ['crop', 'seed_stage', 'region', 'province', 'municity']
         );
+
+        $exporter->registerGauge(
+            'farmer_report_estimated_yield_grams',
+            'The estimated yield in grams from farmer reports.',
+            ['crop', 'region', 'province', 'municity', 'yield_date_earliest', 'yield_date_latest']
+        );
     }
 
     public function collect(): void
