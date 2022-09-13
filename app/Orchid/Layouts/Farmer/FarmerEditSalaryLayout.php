@@ -2,28 +2,15 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use Orchid\Screen\Field;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Layouts\Rows;
 
-class FarmerEditSalaryLayout extends Rows
+class FarmerEditSalaryLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
         return [
             Group::make([
