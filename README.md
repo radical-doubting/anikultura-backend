@@ -50,3 +50,13 @@ The exact PHP and MariaDB versions can be found in [XAMPP 8.1.6](https://www.apa
 -   Open `anikultura-backend`, which is in Ubuntu again, using VS Code.
 -   A more detailed article is available [here](https://laravel.com/docs/9.x/sail).
 -   Done!
+
+## Metrics
+
+### Grafana Cloud Agent
+
+Send metrics via the agent.
+
+```bash
+PROMETHEUS_PUSH_URL=http://localhost:9090/api/v1/write PROMETHEUS_TARGET_URL=localhost ./agent-linux-amd64 -config.file=agent-config.yml -config.expand-env
+```

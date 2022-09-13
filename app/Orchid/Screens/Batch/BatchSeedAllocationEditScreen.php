@@ -8,8 +8,11 @@ use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Orchid\Layouts\Batch\BatchSeedAllocationEditLayout;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Facades\Dashboard;
 use Orchid\Support\Facades\Layout;
 
 class BatchSeedAllocationEditScreen extends Screen
@@ -20,6 +23,34 @@ class BatchSeedAllocationEditScreen extends Screen
     {
         $this->name = __('Create Batch Seed Allocation');
         $this->description = __('Create a new batch seed allocation');
+    }
+
+    public function handle(Request $request, ...$parameters)
+    {
+        Dashboard::setCurrentScreen($this);
+
+        abort_unless($this->checkAccess($request), 403);
+
+        if ($request->isMethod('GET')) {
+            return $this->redirectOnGetMethodCallOrShowView($parameters);
+        }
+
+        $method = Route::current()->parameter('method', Arr::last($parameters));
+
+        $prepare = collect($parameters)
+            ->merge($request->query())
+            ->diff($method)
+            ->all();
+
+        return $this->callMethod($method, $prepare) ?? back();
+    }
+
+    private function callMethod(string $method, array $parameters = [])
+    {
+        return call_user_func_array(
+            [$this, $method],
+            $this->resolveDependencies($method, $parameters)
+        );
     }
 
     /**

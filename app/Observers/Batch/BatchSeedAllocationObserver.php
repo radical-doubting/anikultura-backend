@@ -2,38 +2,35 @@
 
 namespace App\Observers\Batch;
 
-use App\Actions\Insights\CreateCensusMetric;
-use App\Models\Batch\BatchSeedAllocation;
+use App\Helpers\InsightsHelper;
 use App\Traits\AsInsightSender;
+use Illuminate\Database\Eloquent\Model;
 
 class BatchSeedAllocationObserver
 {
     use AsInsightSender;
 
-    private function sendInsights($model, bool $shouldIncrement)
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
-        CreateCensusMetric::dispatch(
-            [
-                'model' => [
-                    'id' => $model->id,
-                    'class' => BatchSeedAllocation::class,
-                    'aggregation' => [
-                        'type' => 'sum',
-                        'column' => 'seed_amount',
-                    ],
-                ],
-                'point' => [
-                    'increment' => $shouldIncrement,
-                    'field' => 'seed-amount',
-                    'measurement' => 'census-seed-allocation',
-                    'tags' => [
-                        'crop' => 'id',
-                        'batch.region' => 'id',
-                        'batch.province' => 'id',
-                        'batch.municity' => 'id',
-                    ],
-                ],
-            ]
-        );
+        $labels = [
+            'crop' => $model->crop->slug,
+            'region' => $model->batch->region->slug,
+            'province' => $model->batch->province->slug,
+            'municity' => $model->batch->municity->slug,
+        ];
+
+        if ($shouldIncrement) {
+            InsightsHelper::incrementGauge(
+                'batch_seed_allocation_total',
+                $labels,
+                $model->seed_amount
+            );
+        } else {
+            InsightsHelper::decrementGauge(
+                'batch_seed_allocation_total',
+                $labels,
+                $model->seed_amount
+            );
+        }
     }
 }
