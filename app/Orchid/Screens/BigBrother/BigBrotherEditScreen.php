@@ -18,8 +18,8 @@ class BigBrotherEditScreen extends Screen
 
     public function __construct()
     {
-        $this->name = __('Create Big Brother');
-        $this->description = __('Create a new big brother');
+        $this->name = __('Enroll Big Brother');
+        $this->description = __('Enroll a new big brother');
     }
 
     /**
@@ -52,7 +52,7 @@ class BigBrotherEditScreen extends Screen
         return [
             Button::make(__('Remove'))
                 ->icon('trash')
-                ->confirm(__('Once the bigBrother type is deleted, all of its resources and data will be permanently deleted.'))
+                ->confirm(__('Once the Big Brother is deleted, all of its resources and data will be permanently deleted.'))
                 ->method('remove')
                 ->canSee($this->exists),
 

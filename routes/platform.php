@@ -64,7 +64,7 @@ Route::screen('roles/{roles}/edit', RoleEditScreen::class)
     ->breadcrumbs(function (Trail $trail, $role) {
         return $trail
             ->parent('platform.systems.roles')
-            ->push(__('Role'), route('platform.systems.roles.edit', $role));
+            ->push(__('Edit Role'), route('platform.systems.roles.edit', $role));
     });
 
 // Platform > System > Roles > Create
@@ -73,7 +73,7 @@ Route::screen('roles/create', RoleEditScreen::class)
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.systems.roles')
-            ->push(__('Create'), route('platform.systems.roles.create'));
+            ->push(__('Create Role'), route('platform.systems.roles.create'));
     });
 
 // Platform > System > Roles

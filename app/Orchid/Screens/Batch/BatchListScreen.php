@@ -11,18 +11,11 @@ use Orchid\Screen\Actions\Link;
 
 class BatchListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Batches';
+    public function name(): string
+    {
+        return __('Batches');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
     public function query(): array
     {
         return [
