@@ -10,24 +10,16 @@ trait AsOrchidAction
 {
     /**
      * A static helper that runs the action as an Orchid business logic.
-     *
-     * @param  Model  $model
-     * @param  Request  $request
-     * @return RedirectResponse
      */
-    public static function runOrchidAction($model, ?Request $request)
+    public static function runOrchidAction(Model $model, ?Request $request): RedirectResponse
     {
         return static::make()->handleAsOrchidAction($model, $request);
     }
 
     /**
      * Runs the action as an Orchid business logic.
-     *
-     * @param  Model  $model
-     * @param  Request  $request
-     * @return RedirectResponse
      */
-    public function handleAsOrchidAction($model, ?Request $request)
+    public function handleAsOrchidAction(Model $model, ?Request $request): RedirectResponse
     {
         if (isset($request)) {
             $this->validateRequest($request);
@@ -56,10 +48,6 @@ trait AsOrchidAction
 
     /**
      * Runs the action as an Orchid business logic.
-     *
-     * @param  Model  $model
-     * @param  Request  $request
-     * @return RedirectResponse
      */
-    abstract public function asOrchidAction($model, ?Request $request);
+    abstract public function asOrchidAction(Model $model, ?Request $request): RedirectResponse;
 }
