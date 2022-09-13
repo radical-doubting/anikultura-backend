@@ -42,7 +42,7 @@ trait AsOrchidAction
     private function validateRequest(Request $request): void
     {
         if (! method_exists($this, 'rules')) {
-            return;    
+            return;
         }
 
         $rules = $this->rules();
