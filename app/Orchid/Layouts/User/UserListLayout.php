@@ -57,7 +57,7 @@ class UserListLayout extends AnikulturaListLayout
                         ->list([
 
                             Link::make(__('Edit'))
-                                ->route('platform.systems.users.edit', $user->id)
+                                ->route('platform.systems.users.edit', [$user->id])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
