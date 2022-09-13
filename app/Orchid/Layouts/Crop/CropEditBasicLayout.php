@@ -33,7 +33,7 @@ class CropEditBasicLayout extends Rows
                 ->type('text')
                 ->max(255)
                 ->required()
-                ->title(__('Croup Group'))
+                ->title(__('Crop Group'))
                 ->placeholder(__('Group')),
 
             Input::make('crop.variety')
