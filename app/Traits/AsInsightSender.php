@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Helpers\InsightsHelper;
+use Illuminate\Database\Eloquent\Model;
 
 trait AsInsightSender
 {
@@ -24,5 +25,5 @@ trait AsInsightSender
         $this->sendInsights($model, true);
     }
 
-    abstract private function sendInsights($model, bool $shouldIncrement);
+    abstract private function sendInsights(Model $model, bool $shouldIncrement);
 }

@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0.2",
         "ext-redis": "*",
+        "arquivei/laravel-prometheus-exporter": "^3.0",
         "chelout/laravel-relationship-events": "^1.5",
         "cloudinary-labs/cloudinary-laravel": "^1.0",
         "cviebrock/eloquent-sluggable": "^9.0",
@@ -54,6 +55,9 @@
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-install-cmd": [
+            "./setup-agent.sh"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
