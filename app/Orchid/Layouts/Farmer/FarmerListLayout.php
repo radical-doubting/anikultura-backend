@@ -71,7 +71,7 @@ class FarmerListLayout extends Table
                             Button::make(__('Delete'))
                                 ->icon('trash')
                                 ->method('remove')
-                                ->confirm(__('Once the farmer is deleted, all of its resources and data will be permanently deleted.'))
+                                ->confirm(__('Once the farmer profile is deleted, all of its resources and data will be permanently deleted.'))
                                 ->parameters([
                                     'id' => $farmer->id,
                                 ]),

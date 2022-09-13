@@ -22,8 +22,8 @@ class FarmerEditScreen extends Screen
 
     public function __construct()
     {
-        $this->name = __('Create Farmer');
-        $this->description = __('Create a new farmer');
+        $this->name = __('Enroll Farmer');
+        $this->description = __('Enroll a new farmer');
     }
 
     /**
