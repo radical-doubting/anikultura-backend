@@ -6,6 +6,7 @@ use App\Actions\User\CreateUser;
 use App\Models\Farmer\Farmer;
 use App\Models\User;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -38,7 +39,7 @@ class CreateFarmer
         $createdAccount->refresh();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $this->validateIfFarmerAccountExistsAlready($model, $request);
 

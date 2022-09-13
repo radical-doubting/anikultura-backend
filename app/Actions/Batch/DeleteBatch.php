@@ -13,12 +13,12 @@ class DeleteBatch
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Batch $batch)
+    public function handle(Batch $batch): bool
     {
-        $batch->delete();
+        return $batch->delete();
     }
 
-    public function asOrchidAction($model, Request $request = null)
+    public function asOrchidAction(mixed $model, ?Request $request)
     {
         $this->handle($model);
 
