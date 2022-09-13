@@ -11,6 +11,8 @@ use Orchid\Screen\TD;
 
 class CropListLayout extends AnikulturaListLayout
 {
+    protected $target = 'crops';
+
     protected function columns(): iterable
     {
         return [
