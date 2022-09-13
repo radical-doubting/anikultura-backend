@@ -2,44 +2,78 @@
 
 namespace App\Observers\FarmerReport;
 
-use App\Actions\Insights\CreateCensusMetric;
-use App\Actions\Insights\Crop\CreateCropEstimationMetric;
-use App\Models\FarmerReport\FarmerReport;
+use App\Helpers\InsightsHelper;
 use App\Traits\AsInsightSender;
+use Illuminate\Database\Eloquent\Model;
 
 class FarmerReportObserver
 {
     use AsInsightSender;
 
-    private function sendInsights($farmerReport, bool $shouldIncrement)
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
-        $this->dispatchCensusMetric($farmerReport, $shouldIncrement);
+        $this->createCensusMetric($model, $shouldIncrement);
+        $this->createEstimatedYieldMetric($model, $shouldIncrement);
+    }
 
-        if ($farmerReport->isPlanted()) {
-            CreateCropEstimationMetric::dispatch($farmerReport);
+    private function createCensusMetric(Model $model, bool $shouldIncrement): void
+    {
+        $labels = [
+            'crop' => $model->crop->slug,
+            'seed_stage' => $model->seedStage->slug,
+            'region' => $model->farmland->batch->region->slug,
+            'province' => $model->farmland->batch->province->slug,
+            'municity' => $model->farmland->batch->municity->slug,
+        ];
+
+        if ($shouldIncrement) {
+            InsightsHelper::incrementGauge('farmer_report_total', $labels);
+        } else {
+            InsightsHelper::decrementGauge('farmer_report_total', $labels);
         }
     }
 
-    private function dispatchCensusMetric($model, bool $shouldIncrement)
+    private function createEstimatedYieldMetric(Model $model, bool $shouldIncrement): void
     {
-        CreateCensusMetric::dispatch(
-            [
-                'model' => [
-                    'id' => $model->id,
-                    'class' => FarmerReport::class,
-                ],
-                'point' => [
-                    'increment' => $shouldIncrement,
-                    'measurement' => 'census-farmer-report',
-                    'tags' => [
-                        'crop' => 'id',
-                        'seed_stage' => 'id',
-                        'farmland.batch.region' => 'id',
-                        'farmland.batch.province' => 'id',
-                        'farmland.batch.municity' => 'id',
-                    ],
-                ],
-            ]
-        );
+        if (! $model->isPlanted()) {
+            return;
+        }
+
+        $estimatedYieldAmount = $this->convertKgToGrams($model->estimated_yield_amount);
+        $estimatedYieldDateLower = $model->estimated_yield_date_lower_bound;
+        $estimatedYieldDateUpper = $model->estimated_yield_date_upper_bound;
+
+        $labels = [
+            'crop' => $model->crop->slug,
+            'region' => $model->farmland->batch->region->slug,
+            'province' => $model->farmland->batch->province->slug,
+            'municity' => $model->farmland->batch->municity->slug,
+            'yield_date_earliest' => $this->getEstimatedDateTag($estimatedYieldDateLower),
+            'yield_date_latest' => $this->getEstimatedDateTag($estimatedYieldDateUpper),
+        ];
+
+        if ($shouldIncrement) {
+            InsightsHelper::incrementGauge(
+                'farmer_report_estimated_yield_grams',
+                $labels,
+                $estimatedYieldAmount
+            );
+        } else {
+            InsightsHelper::decrementGauge(
+                'farmer_report_estimated_yield_grams',
+                $labels,
+                $estimatedYieldAmount
+            );
+        }
+    }
+
+    private function convertKgToGrams(float $kg): float
+    {
+        return $kg * 1000;
+    }
+
+    private function getEstimatedDateTag(string $estimatedDate): string
+    {
+        return date('m-Y', strtotime($estimatedDate));
     }
 }

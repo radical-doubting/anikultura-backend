@@ -2,8 +2,7 @@
 
 namespace App\Observers\Site;
 
-use App\Actions\Insights\CreateCensusMetric;
-use App\Models\Site\Region;
+use App\Helpers\InsightsHelper;
 use App\Traits\AsInsightSender;
 
 class RegionObserver
@@ -12,17 +11,10 @@ class RegionObserver
 
     private function sendInsights($model, bool $shouldIncrement)
     {
-        CreateCensusMetric::dispatch(
-            [
-                'model' => [
-                    'id' => $model->id,
-                    'class' => Region::class,
-                ],
-                'point' => [
-                    'increment' => $shouldIncrement,
-                    'measurement' => 'census-region',
-                ],
-            ]
-        );
+        if ($shouldIncrement) {
+            InsightsHelper::incrementGauge('region_total');
+        } else {
+            InsightsHelper::decrementGauge('region_total');
+        }
     }
 }

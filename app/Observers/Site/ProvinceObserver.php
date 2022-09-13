@@ -2,30 +2,24 @@
 
 namespace App\Observers\Site;
 
-use App\Actions\Insights\CreateCensusMetric;
-use App\Models\Site\Province;
+use App\Helpers\InsightsHelper;
 use App\Traits\AsInsightSender;
+use Illuminate\Database\Eloquent\Model;
 
 class ProvinceObserver
 {
     use AsInsightSender;
 
-    private function sendInsights($model, bool $shouldIncrement)
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
-        CreateCensusMetric::dispatch(
-            [
-                'model' => [
-                    'id' => $model->id,
-                    'class' => Province::class,
-                ],
-                'point' => [
-                    'increment' => $shouldIncrement,
-                    'measurement' => 'census-province',
-                    'tags' => [
-                        'region' => 'id',
-                    ],
-                ],
-            ]
-        );
+        $labels = [
+            'region' => $model->region->slug,
+        ];
+
+        if ($shouldIncrement) {
+            InsightsHelper::incrementGauge('province_total', $labels);
+        } else {
+            InsightsHelper::decrementGauge('province_total', $labels);
+        }
     }
 }
