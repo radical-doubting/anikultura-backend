@@ -5,27 +5,14 @@ namespace App\Orchid\Layouts\Batch;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
-use Orchid\Screen\Field;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Layouts\Rows;
 
-class BatchEditSiteLayout extends Rows
+class BatchEditSiteLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
         return [
             Group::make([
@@ -34,7 +21,6 @@ class BatchEditSiteLayout extends Rows
                     ->required()
                     ->title('Region')
                     ->placeholder(__('Region')),
-
                 Relation::make('batch.province_id')
                     ->fromModel(Province::class, 'name')
                     ->required()
@@ -47,7 +33,6 @@ class BatchEditSiteLayout extends Rows
                     ->required()
                     ->title('Municity')
                     ->placeholder(__('Municity')),
-
                 Input::make('batch.barangay')
                     ->type('text')
                     ->max(255)
