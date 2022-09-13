@@ -14,6 +14,7 @@ class CropListScreen extends AnikulturaListScreen
     {
         return __('Crop Types');
     }
+
     public function query(): array
     {
         return [

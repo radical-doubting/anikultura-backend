@@ -15,6 +15,7 @@ class FarmlandListScreen extends AnikulturaListScreen
     {
         return __('Farmlands');
     }
+
     public function query(): array
     {
         return [

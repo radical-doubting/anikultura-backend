@@ -14,6 +14,7 @@ class FarmerReportListScreen extends AnikulturaListScreen
     {
         return __('Farmer Report');
     }
+
     public function query(): array
     {
         return [

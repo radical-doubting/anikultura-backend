@@ -15,6 +15,7 @@ class BatchListScreen extends AnikulturaListScreen
     {
         return __('Batches');
     }
+
     public function query(): array
     {
         return [
