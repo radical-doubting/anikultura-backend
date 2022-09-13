@@ -87,10 +87,10 @@ class PlatformProvider extends OrchidServiceProvider
                 ->list([
                     Menu::make('English')
                         ->icon('location-pin')
-                        ->route('lang.switch', 'en'),
+                        ->route('lang.switch', ['lang' => 'en']),
                     Menu::make('Tagalog')
                         ->icon('location-pin')
-                        ->route('lang.switch', 'fil_PH'),
+                        ->route('lang.switch', ['lang' => 'fil_PH']),
                 ]),
         ];
     }
