@@ -5,6 +5,7 @@ namespace App\Actions\Batch;
 use App\Http\Resources\Batch\BatchSeedAllocationResource;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
+use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -31,7 +32,7 @@ class RetrieveFarmerSeedAllocation
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request)
+    public function asController(ActionRequest $request): JsonResponse
     {
         $user = auth('api')->user();
 

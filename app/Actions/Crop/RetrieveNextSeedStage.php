@@ -5,6 +5,7 @@ namespace App\Actions\Crop;
 use App\Http\Resources\Crop\SeedStageResource;
 use App\Models\Crop\SeedStage;
 use App\Models\Farmland\Farmland;
+use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -41,7 +42,7 @@ class RetrieveNextSeedStage
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request)
+    public function asController(ActionRequest $request): JsonResponse
     {
         $user = auth('api')->user();
 

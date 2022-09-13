@@ -6,6 +6,7 @@ use App\Http\Resources\Crop\SeedStageResource;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
+use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -13,7 +14,7 @@ class RetrieveFarmerSeedStage
 {
     use AsAction;
 
-    public function handle($farmer, $farmland)
+    public function handle($farmer, Farmland $farmland)
     {
         Farmer::query()->whereHas('farmlands', function ($q) use ($farmland) {
             $q->where('id', $farmland->id);
@@ -45,7 +46,7 @@ class RetrieveFarmerSeedStage
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request)
+    public function asController(ActionRequest $request): JsonResponse
     {
         $user = auth('api')->user();
 

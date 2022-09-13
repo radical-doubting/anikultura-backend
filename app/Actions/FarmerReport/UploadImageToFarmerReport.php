@@ -5,6 +5,7 @@ namespace App\Actions\FarmerReport;
 use App\Actions\Crop\RetrieveFarmerSeedStage;
 use App\Actions\Crop\RetrieveNextSeedStage;
 use App\Models\FarmerReport\FarmerReport;
+use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -53,7 +54,7 @@ class UploadImageToFarmerReport
      *     @OA\Response(response="422", description="Validation errors occured", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request)
+    public function asController(ActionRequest $request): JsonResponse
     {
         $farmer = auth('api')->user();
 

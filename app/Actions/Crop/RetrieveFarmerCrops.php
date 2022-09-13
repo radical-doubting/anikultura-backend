@@ -5,6 +5,7 @@ namespace App\Actions\Crop;
 use App\Http\Resources\Crop\CropResource;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
+use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -33,7 +34,7 @@ class RetrieveFarmerCrops
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request)
+    public function asController(ActionRequest $request): JsonResponse
     {
         $user = auth('api')->user();
 

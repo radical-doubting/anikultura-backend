@@ -3,6 +3,7 @@
 namespace App\Actions\Farmer;
 
 use App\Models\Farmer\FarmerProfile;
+use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -30,7 +31,7 @@ class UpdateFarmerTutorialState
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request)
+    public function asController(ActionRequest $request): JsonResponse
     {
         $user = auth('api')->user();
 
