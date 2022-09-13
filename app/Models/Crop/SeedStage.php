@@ -2,6 +2,7 @@
 
 namespace App\Models\Crop;
 
+use App\Models\FarmerReport\FarmerReport;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

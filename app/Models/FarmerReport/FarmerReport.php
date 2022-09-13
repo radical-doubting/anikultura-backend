@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Filters\Filterable;
 
 class FarmerReport extends Model
