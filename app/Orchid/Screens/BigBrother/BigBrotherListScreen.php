@@ -10,18 +10,10 @@ use Orchid\Screen\Actions\Link;
 
 class BigBrotherListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Big Brothers';
-
-    /**
-     * Query data.
-     *
-     * @return array
-     */
+    public function name(): string
+    {
+        return __('Batches');
+    }
     public function query(): array
     {
         return [

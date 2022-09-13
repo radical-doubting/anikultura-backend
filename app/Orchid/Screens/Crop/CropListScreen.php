@@ -10,18 +10,10 @@ use Orchid\Screen\Actions\Link;
 
 class CropListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Crop Types';
-
-    /**
-     * Query data.
-     *
-     * @return array
-     */
+    public function name(): string
+    {
+        return __('Crop Types');
+    }
     public function query(): array
     {
         return [

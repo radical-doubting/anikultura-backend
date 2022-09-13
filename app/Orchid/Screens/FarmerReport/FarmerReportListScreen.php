@@ -10,18 +10,10 @@ use Orchid\Screen\Actions\Link;
 
 class FarmerReportListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Farmer Report';
-
-    /**
-     * Query data.
-     *
-     * @return array
-     */
+    public function name(): string
+    {
+        return __('Farmer Report');
+    }
     public function query(): array
     {
         return [
