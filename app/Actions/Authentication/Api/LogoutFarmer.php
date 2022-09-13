@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Authentication;
+namespace App\Actions\Authentication\Api;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cookie;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Farmer;
+namespace App\Actions\Farmer\Api;
 
 use App\Models\Farmer\FarmerProfile;
 use Illuminate\Http\JsonResponse;

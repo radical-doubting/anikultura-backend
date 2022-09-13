@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Batch;
+namespace App\Actions\Batch\Api;
 
 use App\Http\Resources\Batch\BatchSeedAllocationResource;
 use App\Models\Batch\BatchSeedAllocation;

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Actions\FarmerReport;
+namespace App\Actions\FarmerReport\Api;
 
-use App\Actions\Crop\RetrieveFarmerSeedStage;
-use App\Actions\Crop\RetrieveNextSeedStage;
+use App\Actions\Crop\Api\RetrieveFarmerSeedStage;
+use App\Actions\Crop\Api\RetrieveNextSeedStage;
 use App\Models\FarmerReport\FarmerReport;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;

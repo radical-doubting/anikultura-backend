@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Authentication;
+namespace App\Actions\Authentication\Api;
 
 use App\Http\Resources\Farmer\FarmerResource;
 use Lorisleiva\Actions\Concerns\AsAction;

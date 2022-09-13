@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Crop;
+namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\CropResource;
 use App\Models\Batch\BatchSeedAllocation;
