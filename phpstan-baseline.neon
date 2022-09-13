@@ -21,16 +21,6 @@ parameters:
 			path: app/Console/Commands/TruncateAllTables.php
 
 		-
-			message: "#^Class App\\\\Models\\\\Crop\\\\FarmerReport not found\\.$#"
-			count: 1
-			path: app/Models/Crop/SeedStage.php
-
-		-
-			message: "#^Class App\\\\Models\\\\FarmerReport\\\\Attachment not found\\.$#"
-			count: 1
-			path: app/Models/FarmerReport/FarmerReport.php
-
-		-
 			message: "#^Call to an undefined method Orchid\\\\Screen\\\\Fields\\\\Relation\\:\\:empty\\(\\)\\.$#"
 			count: 1
 			path: app/Orchid/Filters/Batch/BatchFilter.php
