@@ -5,7 +5,7 @@ namespace Tests\Unit\Actions\Site\Province;
 use App\Actions\Site\Province\DeleteProvince;
 use App\Models\Site\Province;
 use Mockery;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class DeleteProvinceTest extends TestCase
 {

@@ -5,7 +5,7 @@ namespace Tests\Unit\Actions\Site\Region;
 use App\Actions\Site\Region\CreateRegion;
 use App\Models\Site\Region;
 use Mockery;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class CreateRegionTest extends TestCase
 {
