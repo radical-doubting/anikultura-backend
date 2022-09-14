@@ -8,22 +8,16 @@ use Orchid\Screen\Screen;
 
 abstract class AnikulturaListScreen extends Screen
 {
-    public function __construct()
+    public function description(): string
     {
-        $this->middleware(function ($request, $next) {
-            $screenName = strtolower($this->name());
-            $programName = Config::get('anikultura.programFullName');
+        $screenName = strtolower($this->name());
+        $programName = Config::get('anikultura.programFullName');
 
-            $this->description = (__('A list of all ')).$screenName.(__(' under the ')).$programName;
-
-            return $next($request);
-        });
+        return __('A list of all ').$screenName.(__(' under the ')).$programName;
     }
 
     /**
-     * Views.
-     *
-     * @return Layout[]|array<int, string>
+     * @return string[]|Layout[]
      */
-    abstract public function layout(): array;
+    abstract public function layout(): iterable;
 }
