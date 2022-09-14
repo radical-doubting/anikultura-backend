@@ -14,6 +14,10 @@ runs:
     - name: Lint application
       run: composer lint
       shell: bash
+    
+    - name: Analyze code
+      run: ./vendor/bin/phpstan analyze
+      shell: bash
 
     - name: Run unit tests
       run: php artisan test --testsuite=Unit
