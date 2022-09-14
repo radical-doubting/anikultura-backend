@@ -59,7 +59,6 @@ class FarmerEditJobEducationLayout extends AnikulturaEditLayout
 
                 Select::make('farmer_profile.nc_passer_status')
                     ->title(__('Is an MC Passer?'))
-                    ->placeholder(__('Is an MC Passer?'))
                     ->options(['Yes', 'No']),
             ]),
         ];
