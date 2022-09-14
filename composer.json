@@ -67,7 +67,7 @@
             "@php artisan orchid:publish --ansi"
         ],
         "lint": [
-            ".pint --test"
+            "pint --test"
         ],
         "lint-fix": [
             "pint"
