@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\Home\HomeScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserEditScreen;
@@ -23,8 +23,7 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 // Main
-// PlatformScreen::class
-Route::screen('/main', PlatformScreen::class)
+Route::screen('/main', HomeScreen::class)
     ->name('platform.main');
 
 // Platform > Profile
