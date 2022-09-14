@@ -27,6 +27,8 @@ class FarmerEditScreen extends AnikulturaEditScreen
 
     public ?FarmerAddress $farmerAddress;
 
+    protected $createVerb = 'Enroll';
+
     public function resourceName(): string
     {
         return __('farmer');
