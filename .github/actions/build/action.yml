@@ -16,7 +16,7 @@ runs:
       shell: bash
     
     - name: Analyze code
-      run: ./vendor/bin/phpstan analyze
+      run: composer analyze
       shell: bash
 
     - name: Run unit tests
