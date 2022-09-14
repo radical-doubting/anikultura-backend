@@ -7,6 +7,10 @@ use Orchid\Screen\Screen;
 
 abstract class AnikulturaEditScreen extends Screen
 {
+    protected $createVerb = 'Create';
+
+    protected $editVerb = 'Edit';
+
     /**
      * Name of the resource.
      */
@@ -26,8 +30,8 @@ abstract class AnikulturaEditScreen extends Screen
         ];
 
         return $this->exists()
-            ? __('Edit :resource', $replace)
-            : __('Create :resource', $replace);
+            ? __("$this->editVerb :resource", $replace)
+            : __("$this->createVerb :resource", $replace);
     }
 
     public function description(): string
@@ -37,8 +41,8 @@ abstract class AnikulturaEditScreen extends Screen
         ];
 
         return $this->exists()
-            ? __('Edit :resource details', $replace)
-            : __('Create a new :resource', $replace);
+            ? __("$this->editVerb :resource details", $replace)
+            : __("$this->createVerb a new :resource", $replace);
     }
 
     public function commandBar(): array
