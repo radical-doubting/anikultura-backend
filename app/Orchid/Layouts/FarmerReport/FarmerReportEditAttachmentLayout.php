@@ -9,7 +9,7 @@ class FarmerReportEditAttachmentLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
-        $currentReport = $this->query['farmer_report'];
+        $currentReport = $this->query->get('farmerReport');
         $media = $currentReport->fetchAllMedia();
         $fileUrl = 'http://placehold.jp/ababab/ffffff/150x150.png?text=No%20image%20attached';
 

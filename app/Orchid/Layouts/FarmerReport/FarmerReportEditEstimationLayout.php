@@ -10,7 +10,7 @@ class FarmerReportEditEstimationLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
-        $currentReport = $this->query['farmer_report'];
+        $currentReport = $this->query->get('farmerReport');
         $isPlanted = false;
         $disclaimer = __('Estimation data is available when this report reaches the Seeds Planted stage.');
 
@@ -28,7 +28,7 @@ class FarmerReportEditEstimationLayout extends AnikulturaEditLayout
         }
 
         return [
-            Input::make('farmer_report.estimated_yield_amount')
+            Input::make('farmerReport.estimated_yield_amount')
                 ->title($isPlanted ? __('Estimated Yield Amount (kg)') : '')
                 ->readonly()
                 ->mask([
@@ -43,14 +43,14 @@ class FarmerReportEditEstimationLayout extends AnikulturaEditLayout
                 ->hidden(! $isPlanted),
 
             Group::make([
-                Input::make('farmer_report.estimated_yield_date_lower_bound')
+                Input::make('farmerReport.estimated_yield_date_lower_bound')
                     ->title($isPlanted ? __('Estimated Yield Date (Earliest)') : '')
                     ->type('date')
                     ->readonly()
                     ->help($isPlanted ? __('The earliest date that this crop could reach maturity.') : '')
                     ->style('color: black')
                     ->hidden(! $isPlanted),
-                Input::make('farmer_report.estimated_yield_date_upper_bound')
+                Input::make('farmerReport.estimated_yield_date_upper_bound')
                     ->title($isPlanted ? __('Estimated Yield Date (Latest)') : '')
                     ->type('date')
                     ->readonly()

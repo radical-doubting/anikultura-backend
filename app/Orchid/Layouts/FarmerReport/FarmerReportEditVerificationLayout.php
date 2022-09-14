@@ -12,13 +12,13 @@ class FarmerReportEditVerificationLayout extends AnikulturaEditLayout
     protected function fields(): iterable
     {
         return [
-            CheckBox::make('farmer_report.verified')
+            CheckBox::make('farmerReport.verified')
                 ->required()
                 ->sendTrueOrFalse()
                 ->title(__('Verification Status'))
                 ->placeholder(__('This farmer report is considered as valid')),
 
-            Relation::make('farmer_report.verified_by')
+            Relation::make('farmerReport.verified_by')
                 ->fromModel(ManagementUser::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullNameWithRole')

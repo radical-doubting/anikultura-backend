@@ -15,10 +15,10 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
-        $currentReport = $this->query['farmer_report'];
+        $currentReport = $this->query->get('farmerReport');
         $isHarvested = false;
 
-        $farmlandRelationField = Relation::make('farmer_report.farmland_id')
+        $farmlandRelationField = Relation::make('farmerReport.farmland_id')
             ->fromModel(Farmland::class, 'name')
             ->displayAppend('fullName')
             ->required()
@@ -31,7 +31,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
         }
 
         return [
-            Relation::make('farmer_report.reported_by')
+            Relation::make('farmerReport.reported_by')
                 ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullName')
@@ -40,7 +40,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
                 ->title(__('Reported by'))
                 ->placeholder(__('Reported by')),
 
-            Relation::make('farmer_report.seed_stage_id')
+            Relation::make('farmerReport.seed_stage_id')
                 ->fromModel(SeedStage::class, 'name')
                 ->required()
                 ->title(__('Seed Stage'))
@@ -49,14 +49,14 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
             Group::make([
                 $farmlandRelationField,
 
-                Relation::make('farmer_report.crop_id')
+                Relation::make('farmerReport.crop_id')
                     ->fromModel(Crop::class, 'name')
                     ->required()
                     ->title(__('Crop'))
                     ->placeholder(__('Crop')),
             ]),
 
-            Input::make('farmer_report.volume_kg')
+            Input::make('farmerReport.volume_kg')
                 ->type('number')
                 ->max(255)
                 ->title($isHarvested ? __('Yield Volume (kg)') : '')

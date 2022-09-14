@@ -14,16 +14,18 @@ class CreateFarmerReport
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(FarmerReport $farmerReport, array $farmerReportData)
+    public function handle(FarmerReport $farmerReport, array $farmerReportData): FarmerReport
     {
         $farmerReport
             ->fill($farmerReportData)
             ->save();
+
+        return $farmerReport->refresh();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $farmerReportData = $request->get('farmer_report');
+        $farmerReportData = $request->get('farmerReport');
 
         $this->handle($model, $farmerReportData);
 
@@ -35,19 +37,19 @@ class CreateFarmerReport
     public function rules(): array
     {
         return [
-            'farmer_report.reported_by' => [
+            'farmerReport.reported_by' => [
                 'required',
             ],
-            'farmer_report.farmland_id' => [
+            'farmerReport.farmland_id' => [
                 'required',
             ],
-            'farmer_report.seed_stage_id' => [
+            'farmerReport.seed_stage_id' => [
                 'required',
             ],
-            'farmer_report.crop_id' => [
+            'farmerReport.crop_id' => [
                 'required',
             ],
-            'farmer_report.volume_kg' => [
+            'farmerReport.volume_kg' => [
                 'numeric',
                 'nullable',
             ],
