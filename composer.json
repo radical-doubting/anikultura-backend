@@ -76,7 +76,7 @@
             "phpunit"
         ],
         "analyze": [
-            "phpstan --ansi --memory-limit 256M"
+            "phpstan --ansi --memory-limit=256M"
         ]
     },
     "extra": {
