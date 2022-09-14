@@ -33,7 +33,7 @@ class BigBrotherEditScreen extends AnikulturaEditScreen
     {
         return [
             'bigBrother' => $bigBrother,
-            'bigBrotherProfile' => $bigBrother?->profile,
+            'bigBrotherProfile' => $bigBrother->profile,
         ];
     }
 
