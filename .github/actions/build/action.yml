@@ -20,7 +20,7 @@ runs:
       shell: bash
 
     - name: Run unit tests
-      run: php artisan test --testsuite=Unit
+      run: ./vendor/bin/phpunit --testsuite=Unit
       shell: bash
 
     - name: Generate application key
@@ -44,5 +44,5 @@ runs:
       shell: bash
 
     - name: Run feature tests
-      run: php artisan test --testsuite=Feature
+      run: ./vendor/bin/phpunit --testsuite=Feature
       shell: bash
