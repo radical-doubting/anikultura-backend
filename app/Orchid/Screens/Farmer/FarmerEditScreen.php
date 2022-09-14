@@ -23,9 +23,9 @@ class FarmerEditScreen extends AnikulturaEditScreen
 {
     public Farmer $farmer;
 
-    public FarmerProfile $farmerProfile;
+    public ?FarmerProfile $farmerProfile;
 
-    public FarmerAddress $farmerAddress;
+    public ?FarmerAddress $farmerAddress;
 
     public function resourceName(): string
     {
@@ -40,7 +40,7 @@ class FarmerEditScreen extends AnikulturaEditScreen
     public function query(Farmer $farmer): array
     {
         $farmerProfile = $farmer->profile;
-        $farmerAddress = $farmerProfile->farmerAddress;
+        $farmerAddress = $farmerProfile?->farmerAddress;
 
         return [
             'farmer' => $farmer,
