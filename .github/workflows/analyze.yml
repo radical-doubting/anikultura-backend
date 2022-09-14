@@ -27,8 +27,11 @@ jobs:
       - name: Lint application
         run: ./vendor/bin/pint
 
+      - name: Install larastan
+        run: composer require nunomaduro/larastan:^2.0 --dev
+
       - name: Analyze code
-        run: phpstan
+        run: phpstan analyse
 
       - name: Run unit tests
         run: phpunit --testsuite=Unit
