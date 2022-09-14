@@ -14,34 +14,34 @@ class FarmerEditAddressLayout extends AnikulturaEditLayout
     {
         return [
             Group::make([
-                Input::make('farmer_address.house_number')
+                Input::make('farmerAddress.house_number')
                     ->title(__('House Number'))
                     ->placeholder(__('House Number'))
                     ->required(),
 
-                Input::make('farmer_address.street')
+                Input::make('farmerAddress.street')
                     ->title(__('Street'))
                     ->placeholder(__('Street'))
                     ->required(),
 
-                Input::make('farmer_address.barangay')
+                Input::make('farmerAddress.barangay')
                     ->title(__('Barangay'))
                     ->placeholder(__('Barangay'))
                     ->required(),
             ]),
 
             Group::make([
-                Input::make('farmer_address.municity')
+                Input::make('farmerAddress.municity')
                     ->title(__('Municipality / City'))
                     ->placeholder(__('Municipality / City'))
                     ->required(),
 
-                Input::make('farmer_address.province')
+                Input::make('farmerAddress.province')
                     ->title(__('Province'))
                     ->placeholder(__('Province'))
                     ->required(),
 
-                Relation::make('farmer_address.region_id')
+                Relation::make('farmerAddress.region_id')
                     ->fromModel(Region::class, 'name')
                     ->required()
                     ->title(__('Region'))

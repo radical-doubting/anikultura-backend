@@ -14,24 +14,24 @@ class FarmerEditSalaryLayout extends AnikulturaEditLayout
     {
         return [
             Group::make([
-                Select::make('farmer_profile.salary_periodicity')
+                Select::make('farmerProfile.salary_periodicity')
                     ->title('Salary Periodicity')
                     ->options(['Everyday', 'Monthly', 'Annually', 'Every 15 Days', 'Every 3 Months', 'Every 6 Months'])
                     ->required(),
 
-                Input::make('farmer_profile.estimated_salary')
+                Input::make('farmerProfile.estimated_salary')
                     ->title('Estimated Salary')
                     ->type('number')
                     ->placeholder(__('PHP'))
                     ->required(),
             ]),
 
-            Select::make('farmer_profile.social_status')
+            Select::make('farmerProfile.social_status')
                 ->title('Is the farmer poor?')
                 ->options(['Yes', 'No'])
                 ->required(),
 
-            TextArea::make('farmer_profile.social_status_reason')
+            TextArea::make('farmerProfile.social_status_reason')
                 ->title('Why do you think so?')
                 ->required(),
         ];

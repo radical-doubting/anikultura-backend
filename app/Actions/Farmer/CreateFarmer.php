@@ -44,9 +44,9 @@ class CreateFarmer
         $this->validateIfFarmerAccountExistsAlready($model, $request);
 
         $this->handle($model, [
-            'account' => $request->get('user'),
-            'profile' => $request->get('farmer_profile'),
-            'address' => $request->get('farmer_address'),
+            'account' => $request->get('farmer'),
+            'profile' => $request->get('farmerProfile'),
+            'address' => $request->get('farmerAddress'),
         ]);
 
         Toast::info(__('Farmer profile was saved successfully!'));
@@ -60,11 +60,11 @@ class CreateFarmer
         $emailShouldBeUnique = Rule::unique(Farmer::class, 'email')->ignore($farmer);
 
         $request->validate([
-            'user.name' => [
+            'farmer.name' => [
                 'required',
                 $userNameShouldBeUnique,
             ],
-            'user.email' => [
+            'farmer.email' => [
                 $emailShouldBeUnique,
             ],
         ]);
@@ -73,103 +73,103 @@ class CreateFarmer
     public function rules(): array
     {
         return [
-            'farmer_profile.gender' => [
+            'farmerProfile.gender' => [
                 'required',
             ],
 
-            'farmer_profile.civil_status' => [
+            'farmerProfile.civil_status' => [
                 'required',
             ],
 
-            'farmer_profile.birthday' => [
+            'farmerProfile.birthday' => [
                 'required',
             ],
 
-            'farmer_profile.age' => [
+            'farmerProfile.age' => [
                 'required',
             ],
 
-            'farmer_profile.quantity_family_members' => [
+            'farmerProfile.quantity_family_members' => [
                 'required',
             ],
 
-            'farmer_profile.quantity_dependents' => [
+            'farmerProfile.quantity_dependents' => [
                 'required',
             ],
 
-            'farmer_profile.quantity_working_dependents' => [
+            'farmerProfile.quantity_working_dependents' => [
                 'required',
             ],
 
-            'farmer_profile.highest_educational_status' => [
+            'farmerProfile.highest_educational_status' => [
                 'required',
             ],
 
-            'farmer_profile.college_course' => [
+            'farmerProfile.college_course' => [
                 'required',
             ],
 
-            'farmer_profile.current_job' => [
+            'farmerProfile.current_job' => [
                 'required',
             ],
 
-            'farmer_profile.farming_years' => [
+            'farmerProfile.farming_years' => [
                 'required',
             ],
 
-            'farmer_profile.usual_crops_planted' => [
+            'farmerProfile.usual_crops_planted' => [
                 'required',
             ],
 
-            'farmer_profile.affiliated_organization' => [
+            'farmerProfile.affiliated_organization' => [
                 'required',
             ],
 
-            'farmer_profile.tesda_training_joined' => [
+            'farmerProfile.tesda_training_joined' => [
                 'required',
             ],
 
-            'farmer_profile.nc_passer_status' => [
+            'farmerProfile.nc_passer_status' => [
                 'required',
             ],
 
-            'farmer_profile.salary_periodicity' => [
+            'farmerProfile.salary_periodicity' => [
                 'required',
             ],
 
-            'farmer_profile.estimated_salary' => [
+            'farmerProfile.estimated_salary' => [
                 'required',
             ],
 
-            'farmer_profile.social_status' => [
+            'farmerProfile.social_status' => [
                 'required',
             ],
 
-            'farmer_profile.social_status_reason' => [
+            'farmerProfile.social_status_reason' => [
                 'required',
             ],
 
-            'farmer_address.house_number' => [
+            'farmerAddress.house_number' => [
                 'required',
             ],
 
-            'farmer_address.street' => [
+            'farmerAddress.street' => [
                 'required',
             ],
 
-            'farmer_address.barangay' => [
+            'farmerAddress.barangay' => [
                 'required',
             ],
 
-            'farmer_address.municity' => [
+            'farmerAddress.municity' => [
                 'required',
             ],
 
-            'farmer_address.province' => [
+            'farmerAddress.province' => [
                 'required',
             ],
 
-            'farmer_address.region_id' => [
+            'farmerAddress.region_id' => [
                 'required',
             ],
         ];
