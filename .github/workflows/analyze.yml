@@ -16,7 +16,8 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
-          tools: composer:v2, phpstan, phpunit
+          extensions: "dom, curl, libxml, mbstring, zip, fileinfo"
+          tools: composer:v2, phpunit
 
       - name: Check Composer configuration
         run: composer validate --strict
