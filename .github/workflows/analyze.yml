@@ -32,7 +32,7 @@ jobs:
         run: composer require nunomaduro/larastan:^2.0 --dev
 
       - name: Analyze code
-        run: ./vendor/bin/phpstan analyse
+        run: ./vendor/bin/phpstan analyse --ansi --memory-limit 256M
 
       - name: Run unit tests
         run: phpunit --testsuite=Unit
