@@ -32,7 +32,7 @@ jobs:
         run: composer require nunomaduro/larastan:^2.0 --dev
 
       - name: Analyze code
-        run: phpstan analyse
+        run: ./vendor/bin/phpstan analyse
 
       - name: Run unit tests
         run: phpunit --testsuite=Unit
