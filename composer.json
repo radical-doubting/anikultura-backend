@@ -76,7 +76,7 @@
             "./vendor/bin/phpunit"
         ],
         "analyze": [
-            "./vendor/bin/phpstan analyze -v"
+            "./vendor/bin/phpstan -v"
         ]
     },
     "extra": {
