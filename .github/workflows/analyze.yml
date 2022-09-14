@@ -7,12 +7,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          tools: "composer:v2"
+
+      - name: Check Composer configuration
+        run: composer validate --strict
 
       - name: Install dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
