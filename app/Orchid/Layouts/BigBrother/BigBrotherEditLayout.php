@@ -10,12 +10,12 @@ class BigBrotherEditLayout extends AnikulturaEditLayout
     protected function fields(): iterable
     {
         return [
-            Input::make('big_brother_profile.organization_name')
+            Input::make('bigBrotherProfile.organization_name')
                 ->title(__('Affiliated Organization'))
                 ->placeholder(__('Affiliated Organization'))
                 ->required(),
 
-            Input::make('big_brother_profile.age')
+            Input::make('bigBrotherProfile.age')
                 ->title(__('Age'))
                 ->type('number')
                 ->placeholder(__('Age'))

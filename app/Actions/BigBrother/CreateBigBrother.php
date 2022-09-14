@@ -39,11 +39,11 @@ class CreateBigBrother
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->validateIfFarmerAccountExistsAlready($model, $request);
+        $this->validateIfBigBrotherAccountExistsAlready($model, $request);
 
         $this->handle($model, [
-            'account' => $request->get('user'),
-            'profile' => $request->get('big_brother_profile'),
+            'account' => $request->get('bigBrother'),
+            'profile' => $request->get('bigBrotherProfile'),
         ]);
 
         Toast::info(__('Big brother was saved successfully!'));
@@ -51,17 +51,17 @@ class CreateBigBrother
         return redirect()->route('platform.big-brothers');
     }
 
-    private function validateIfFarmerAccountExistsAlready($bigBrother, Request $request)
+    private function validateIfBigBrotherAccountExistsAlready($bigBrother, Request $request)
     {
         $userNameShouldBeUnique = Rule::unique(BigBrother::class, 'name')->ignore($bigBrother);
         $emailShouldBeUnique = Rule::unique(BigBrother::class, 'email')->ignore($bigBrother);
 
         $request->validate([
-            'user.name' => [
+            'bigBrother.name' => [
                 'required',
                 $userNameShouldBeUnique,
             ],
-            'user.email' => [
+            'bigBrother.email' => [
                 $emailShouldBeUnique,
             ],
         ]);
@@ -70,10 +70,10 @@ class CreateBigBrother
     public function rules(): array
     {
         return [
-            'big_brother_profile.age' => [
+            'bigBrotherProfile.age' => [
                 'required',
             ],
-            'big_brother_profile.organization_name' => [
+            'bigBrotherProfile.organization_name' => [
                 'required',
             ],
         ];
