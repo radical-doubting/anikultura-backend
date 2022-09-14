@@ -1,4 +1,4 @@
-name: Build, lint, and test application
+name: Build and run integration tests on application
 
 runs:
   using: composite
@@ -9,18 +9,6 @@ runs:
 
     - name: Install dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      shell: bash
-
-    - name: Lint application
-      run: composer lint
-      shell: bash
-    
-    - name: Analyze code
-      run: composer analyze
-      shell: bash
-
-    - name: Run unit tests
-      run: ./vendor/bin/phpunit --testsuite=Unit
       shell: bash
 
     - name: Generate application key
