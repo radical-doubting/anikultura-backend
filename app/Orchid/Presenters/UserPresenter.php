@@ -18,7 +18,9 @@ class UserPresenter extends Presenter implements Searchable, Personable
 
     public function title(): string
     {
-        return $this->entity->fullName;
+        $fullName = $this->entity->fullName;
+
+        return is_null($fullName) ? $this->entity->name : $fullName;
     }
 
     public function subTitle(): string
