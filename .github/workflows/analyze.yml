@@ -26,13 +26,13 @@ jobs:
         run: composer require laravel/pint --dev
 
       - name: Lint application
-        run: ./vendor/bin/pint
+        run: composer lint
 
       - name: Install larastan
         run: composer require nunomaduro/larastan:^2.0 --dev
 
       - name: Analyze code
-        run: ./vendor/bin/phpstan analyse --ansi --memory-limit 256M
+        run: composer analyze
 
       - name: Run unit tests
         run: phpunit --testsuite=Unit

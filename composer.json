@@ -67,16 +67,16 @@
             "@php artisan orchid:publish --ansi"
         ],
         "lint": [
-            "./vendor/bin/pint --test"
+            ".pint --test"
         ],
         "lint-fix": [
-            "./vendor/bin/pint"
+            "pint"
         ],
         "test": [
-            "./vendor/bin/phpunit"
+            "phpunit"
         ],
         "analyze": [
-            "./vendor/bin/phpstan -v"
+            "phpstan --ansi --memory-limit 256M"
         ]
     },
     "extra": {
