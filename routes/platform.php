@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Actions\User\SwitchLanguage;
 use App\Orchid\Screens\Home\HomeScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
@@ -21,6 +22,10 @@ use Tabuna\Breadcrumbs\Trail;
 | contains the need "dashboard" middleware group. Now create something great!
 |
 */
+
+// Language Toggle
+Route::get('language/{language}', SwitchLanguage::class)
+    ->name('platform.language.switch');
 
 // Main
 Route::screen('/main', HomeScreen::class)

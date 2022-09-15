@@ -82,15 +82,15 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles'),
 
-            Menu::make('Language')
-                ->icon('refresh')
+            Menu::make(__('Languages'))
+                ->icon('bubbles')
                 ->list([
-                    Menu::make('English')
-                        ->icon('location-pin')
-                        ->route('lang.switch', ['lang' => 'en']),
-                    Menu::make('Tagalog')
-                        ->icon('location-pin')
-                        ->route('lang.switch', ['lang' => 'fil_PH']),
+                    Menu::make(__('English'))
+                        ->icon('bubble')
+                        ->route('platform.language.switch', ['language' => 'en']),
+                    Menu::make(__('Filipino'))
+                        ->icon('bubble')
+                        ->route('platform.language.switch', ['language' => 'fil_PH']),
                 ]),
         ];
     }
