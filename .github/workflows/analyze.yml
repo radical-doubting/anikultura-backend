@@ -5,7 +5,7 @@ on:
     branches: [master, staging]
 
 jobs:
-  build:
+  analyze:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,23 +16,20 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
-          extensions: "dom, curl, libxml, mbstring, zip, fileinfo"
-          tools: composer:v2, phpunit
+          tools: composer:v2
+          extensions: redis
 
       - name: Check Composer configuration
         run: composer validate --strict
 
-      - name: Install pint
-        run: composer require laravel/pint --dev
+      - name: Install dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Lint application
         run: composer lint
 
-      - name: Install larastan
-        run: composer require nunomaduro/larastan:^2.0 --dev
-
       - name: Analyze code
-        run: composer analyze
+        run: ./vendor/bin/phpstan analyze --debug --no-progress --no-interaction --ansi
 
       - name: Run unit tests
         run: phpunit --testsuite=Unit
