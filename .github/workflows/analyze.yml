@@ -7,6 +7,8 @@ on:
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    env:
+      JWT_SECRET: secret
 
     steps:
       - name: Check out repository code
@@ -23,13 +25,13 @@ jobs:
         run: composer validate --strict
 
       - name: Install dependencies
-        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+        run: composer install --ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
       - name: Lint application
-        run: composer lint
+        run: ./vendor/bin/pint --test
 
       - name: Analyze code
-        run: ./vendor/bin/phpstan analyze --debug --no-progress --no-interaction --ansi
+        run: ./vendor/bin/phpstan analyze --ansi --no-interaction --no-progress
 
       - name: Run unit tests
-        run: phpunit --testsuite=Unit
+        run: ./vendor/bin/phpunit --testsuite=Unit
