@@ -9,7 +9,12 @@ use PHPUnit\Framework\TestCase;
 
 class CreateRegionTest extends TestCase
 {
-    public function testShouldCreateRegion()
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
+
+    public function testShouldCreateRegion(): void
     {
         $mockRegion = Mockery::mock(Region::class)->makePartial();
         $mockRegion->shouldReceive('save')->once()->andReturn(true);

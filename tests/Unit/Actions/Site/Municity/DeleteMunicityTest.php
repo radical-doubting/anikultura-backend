@@ -9,7 +9,12 @@ use PHPUnit\Framework\TestCase;
 
 class DeleteMunicityTest extends TestCase
 {
-    public function testShouldDeleteMunicity()
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
+
+    public function testShouldDeleteMunicity(): void
     {
         $mockMunicity = Mockery::mock(Municity::class)->makePartial();
         $mockMunicity->shouldReceive('delete')->once()->andReturn(true);

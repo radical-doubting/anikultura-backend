@@ -9,7 +9,12 @@ use PHPUnit\Framework\TestCase;
 
 class DeleteRegionTest extends TestCase
 {
-    public function testShouldDeleteRegion()
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
+
+    public function testShouldDeleteRegion(): void
     {
         $mockRegion = Mockery::mock(Region::class)->makePartial();
         $mockRegion->shouldReceive('delete')->once()->andReturn(true);
