@@ -8,7 +8,7 @@ runs:
       shell: bash
 
     - name: Install dependencies
-      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --quiet
       shell: bash
 
     - name: Generate application key
