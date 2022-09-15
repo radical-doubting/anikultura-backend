@@ -7,6 +7,7 @@ use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandFiltersLayout;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class FarmlandListScreen extends AnikulturaListScreen
@@ -26,11 +27,6 @@ class FarmlandListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -40,11 +36,6 @@ class FarmlandListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
@@ -53,15 +44,7 @@ class FarmlandListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a farmland.
-     *
-     * @param  Farmland  $farmland
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Farmland $farmland)
+    public function remove(Farmland $farmland): RedirectResponse
     {
         return DeleteFarmland::runOrchidAction($farmland, null);
     }
