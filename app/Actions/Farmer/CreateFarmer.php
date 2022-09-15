@@ -4,6 +4,8 @@ namespace App\Actions\Farmer;
 
 use App\Actions\User\CreateUser;
 use App\Models\Farmer\Farmer;
+use App\Models\Farmer\FarmerAddress;
+use App\Models\Farmer\FarmerProfile;
 use App\Models\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
@@ -17,26 +19,62 @@ class CreateFarmer
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Farmer $farmer, array $farmerData)
-    {
-        $createdAccountId = CreateUser::run($farmer, $farmerData['account']);
-        $createdAccount = User::find($createdAccountId);
-
-        $this->createProfile($createdAccount, $farmerData['profile']);
-
-        CreateFarmerAddress::run($createdAccount->profile, $farmerData['address']);
+    public function __construct(
+        protected CreateUser $createUser,
+        protected CreateFarmerProfile $createFarmerProfile,
+        protected CreateFarmerAddress $createFarmerAddress
+    ) {
     }
 
-    private function createProfile(User $createdAccount, $profileData)
+    public function handle(Farmer $farmer, array $farmerData): Farmer
     {
-        $farmerProfileId = CreateFarmerProfile::run($createdAccount->profile, $profileData);
+        $createdAccount = $this->createUser->handle(
+            $farmer,
+            $farmerData['account']
+        );
 
+        $farmerProfile = $this->createProfileOrUpdate($createdAccount);
+
+        $updatedFarmerProfile = $this->createFarmerProfile->handle(
+            $farmerProfile,
+            $farmerData['profile']
+        );
+
+        $this->updateProfileType($createdAccount, $updatedFarmerProfile);
+
+        $farmerAddress = $this->createFarmerAddressOrUpdate($updatedFarmerProfile);
+
+        $this->createFarmerAddress->handle(
+            $updatedFarmerProfile,
+            $farmerAddress,
+            $farmerData['address']
+        );
+
+        return $farmer->refresh();
+    }
+
+    private function createProfileOrUpdate(User $user): FarmerProfile
+    {
+        $farmerProfile = $user->profile;
+
+        return is_null($farmerProfile) ? new FarmerProfile() : $farmerProfile;
+    }
+
+    private function updateProfileType(User $createdAccount, FarmerProfile $farmerProfile): void
+    {
         $createdAccount->update([
-            'profile_id' => $farmerProfileId,
+            'profile_id' => $farmerProfile->id,
             'profile_type' => Farmer::$profilePath,
         ]);
 
         $createdAccount->refresh();
+    }
+
+    private function createFarmerAddressOrUpdate(FarmerProfile $farmerProfile): FarmerAddress
+    {
+        $farmerAddress = $farmerProfile->farmerAddress;
+
+        return is_null($farmerAddress) ? new FarmerAddress() : $farmerAddress;
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
@@ -54,7 +92,7 @@ class CreateFarmer
         return redirect()->route('platform.farmers');
     }
 
-    private function validateIfFarmerAccountExistsAlready($farmer, Request $request)
+    private function validateIfFarmerAccountExistsAlready(Farmer $farmer, Request $request): void
     {
         $userNameShouldBeUnique = Rule::unique(Farmer::class, 'name')->ignore($farmer);
         $emailShouldBeUnique = Rule::unique(Farmer::class, 'email')->ignore($farmer);
