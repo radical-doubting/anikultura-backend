@@ -7,6 +7,7 @@ use App\Traits\AsOrchidAction;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
+use App\Events\ReadyForHarvestEvent;
 
 class CreateFarmerReport
 {
@@ -18,6 +19,10 @@ class CreateFarmerReport
         $farmerReport
             ->fill($farmerReportData)
             ->save();
+        
+        if ($farmerReport->isHarvested() == true) {
+            event(new ReadyForHarvestEvent($farmerReport));
+        }
     }
 
     public function asOrchidAction($model, ?Request $request)
