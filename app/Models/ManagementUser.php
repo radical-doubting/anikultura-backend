@@ -7,11 +7,6 @@ use App\Models\BigBrother\BigBrother;
 
 class ManagementUser extends User
 {
-    /**
-     * The database table used by the model.
-     *
-     * @var string
-     */
     protected $table = 'users';
 
     public static function boot()

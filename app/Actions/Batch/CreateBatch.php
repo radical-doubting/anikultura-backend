@@ -4,6 +4,7 @@ namespace App\Actions\Batch;
 
 use App\Models\Batch\Batch;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -13,7 +14,7 @@ class CreateBatch
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Batch $batch, $batchData)
+    public function handle(Batch $batch, array $batchData): Batch
     {
         $batch
             ->fill($batchData)
@@ -24,9 +25,11 @@ class CreateBatch
         $batch
             ->farmers()
             ->sync($farmers);
+
+        return $batch;
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $batchData = $request->get('batch');
 

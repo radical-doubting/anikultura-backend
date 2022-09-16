@@ -9,7 +9,12 @@ use PHPUnit\Framework\TestCase;
 
 class CreateProvinceTest extends TestCase
 {
-    public function testShouldCreateProvince()
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
+
+    public function testShouldCreateProvince(): void
     {
         $mockProvince = Mockery::mock(Province::class)->makePartial();
         $mockProvince->shouldReceive('save')->once()->andReturn(true);

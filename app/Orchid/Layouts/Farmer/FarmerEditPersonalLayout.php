@@ -2,49 +2,36 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use Orchid\Screen\Field;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
-use Orchid\Screen\Layouts\Rows;
 
-class FarmerEditPersonalLayout extends Rows
+class FarmerEditPersonalLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
         return [
             Group::make([
-                Select::make('farmer_profile.gender')
+                Select::make('farmerProfile.gender')
                     ->title(__('Gender'))
                     ->required()
                     ->options(['Male', 'Female', "I'd rather not say."]),
 
-                Select::make('farmer_profile.civil_status')
+                Select::make('farmerProfile.civil_status')
                     ->title(__('Civil Status'))
                     ->required()
                     ->options(['Single', 'Married', 'Widow', 'Annuled', 'Separated']),
             ]),
 
             Group::make([
-                Input::make('farmer_profile.birthday')
+                Input::make('farmerProfile.birthday')
                     ->type('date')
                     ->title(__('Birthdate'))
                     ->placeholder(__('Birthdate'))
                     ->required(),
 
-                Input::make('farmer_profile.age')
+                Input::make('farmerProfile.age')
                     ->type('number')
                     ->title(__('Age'))
                     ->placeholder(__('Age'))
@@ -52,19 +39,19 @@ class FarmerEditPersonalLayout extends Rows
             ]),
 
             Group::make([
-                Input::make('farmer_profile.quantity_family_members')
+                Input::make('farmerProfile.quantity_family_members')
                     ->type('number')
                     ->title(__('Number of Family Members'))
                     ->placeholder(__('Number of Family Members'))
                     ->required(),
 
-                Input::make('farmer_profile.quantity_dependents')
+                Input::make('farmerProfile.quantity_dependents')
                     ->type('number')
                     ->title(__('Number of Dependents'))
                     ->placeholder(__('Number of Dependents'))
                     ->required(),
 
-                Input::make('farmer_profile.quantity_working_dependents')
+                Input::make('farmerProfile.quantity_working_dependents')
                     ->type('number')
                     ->title(__('Number of Working Dependents'))
                     ->placeholder(__('Number of Working Dependents'))

@@ -4,6 +4,9 @@ namespace App\Http\Resources\Farmer;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\Farmer\Farmer
+ */
 class FarmerResource extends JsonResource
 {
     public function toArray($request)

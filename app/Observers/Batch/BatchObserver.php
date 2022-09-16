@@ -11,7 +11,10 @@ class BatchObserver
 {
     use AsInsightSender;
 
-    private function sendInsights(Model $model, bool $shouldIncrement)
+    /**
+     * @param  Batch  $model
+     */
+    private function sendInsights(Model $model, bool $shouldIncrement): void
     {
         $labels = [
             'region' => $model->region->slug,

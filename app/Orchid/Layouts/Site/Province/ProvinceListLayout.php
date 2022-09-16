@@ -3,38 +3,17 @@
 namespace App\Orchid\Layouts\Site\Province;
 
 use App\Models\Site\Province;
+use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class ProvinceListLayout extends Table
+class ProvinceListLayout extends AnikulturaListLayout
 {
-    /**
-     * Data source.
-     *
-     * The name of the key to fetch it from the query.
-     * The results of which will be elements of the table.
-     *
-     * @var string
-     */
     protected $target = 'provinces';
 
-    /**
-     * @return bool
-     */
-    protected function striped(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the table cells to be displayed.
-     *
-     * @return TD[]
-     */
-    protected function columns(): array
+    protected function columns(): iterable
     {
         return [
             TD::make('name', __('Name'))
@@ -42,13 +21,13 @@ class ProvinceListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Province $province) {
                     return Link::make($province->name)
-                        ->route('platform.sites.provinces.edit', $province->id);
+                        ->route('platform.sites.provinces.edit', [$province->id]);
                 }),
 
             TD::make('region', __('Region'))
                 ->render(function (Province $province) {
                     return Link::make($province->region->fullName)
-                        ->route('platform.sites.provinces.edit', $province->id);
+                        ->route('platform.sites.provinces.edit', [$province->id]);
                 }),
 
             TD::make(__('Actions'))
@@ -60,7 +39,7 @@ class ProvinceListLayout extends Table
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.sites.provinces.edit', $province->id)
+                                ->route('platform.sites.provinces.edit', [$province->id])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))

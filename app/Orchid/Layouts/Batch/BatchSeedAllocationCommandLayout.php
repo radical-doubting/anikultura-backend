@@ -2,37 +2,23 @@
 
 namespace App\Orchid\Layouts\Batch;
 
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
-use Orchid\Screen\Layouts\Rows;
 use Orchid\Support\Color;
 
-class BatchSeedAllocationCommandLayout extends Rows
+class BatchSeedAllocationCommandLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
     protected function fields(): array
     {
         $currentBatch = $this->query['batch'];
 
         $link = Link::make(__('Allocate seeds'))
             ->type(Color::DEFAULT())
-            ->right()
-            ->icon('orchid-old');
+            ->icon('plus-alt');
 
         if ($currentBatch->exists) {
-            $link->route('platform.batch-seed-allocations.create', $currentBatch);
+            $link->route('platform.batch-seed-allocations.create', [$currentBatch]);
         }
 
         return [

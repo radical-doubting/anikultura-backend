@@ -9,8 +9,8 @@ class DeleteFarmerProfile
 {
     use AsAction;
 
-    public function handle(FarmerProfile $farmerProfile)
+    public function handle(FarmerProfile $farmerProfile): bool
     {
-        $farmerProfile->delete();
+        return $farmerProfile->delete();
     }
 }

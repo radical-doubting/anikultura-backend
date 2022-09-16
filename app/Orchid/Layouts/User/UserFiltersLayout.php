@@ -3,14 +3,10 @@
 namespace App\Orchid\Layouts\User;
 
 use App\Orchid\Filters\RoleFilter;
-use Orchid\Filters\Filter;
-use Orchid\Screen\Layouts\Selection;
+use App\Orchid\Layouts\AnikulturaFilterLayout;
 
-class UserFiltersLayout extends Selection
+class UserFiltersLayout extends AnikulturaFilterLayout
 {
-    /**
-     * @return string[]|Filter[]
-     */
     public function filters(): array
     {
         return [

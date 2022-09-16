@@ -13,7 +13,10 @@ use App\Models\ManagementUser;
 use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
+use Orchid\Attachment\Models\Attachment;
 use Orchid\Filters\Filterable;
 
 class FarmerReport extends Model
@@ -74,22 +77,22 @@ class FarmerReport extends Model
         });
     }
 
-    public function farmer()
+    public function farmer(): BelongsTo
     {
         return $this->belongsTo(Farmer::class, 'reported_by');
     }
 
-    public function verifier()
+    public function verifier(): BelongsTo
     {
         return $this->belongsTo(ManagementUser::class, 'verified_by');
     }
 
-    public function image()
+    public function image(): HasOne
     {
         return $this->hasOne(Attachment::class, 'id', 'image')->withDefault();
     }
 
-    public function seedStage()
+    public function seedStage(): BelongsTo
     {
         return $this->belongsTo(SeedStage::class);
     }
@@ -119,12 +122,12 @@ class FarmerReport extends Model
             ->id;
     }
 
-    public function farmland()
+    public function farmland(): BelongsTo
     {
         return $this->belongsTo(Farmland::class);
     }
 
-    public function crop()
+    public function crop(): BelongsTo
     {
         return $this->belongsTo(Crop::class);
     }

@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Role;
 
-use Orchid\Screen\Field;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Layouts\Rows;
 
-class RoleEditLayout extends Rows
+class RoleEditLayout extends AnikulturaEditLayout
 {
-    /**
-     * Views.
-     *
-     * @return Field[]
-     */
-    public function fields(): array
+    public function fields(): iterable
     {
         return [
             Input::make('role.name')

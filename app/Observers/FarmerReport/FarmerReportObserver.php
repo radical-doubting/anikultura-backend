@@ -3,6 +3,7 @@
 namespace App\Observers\FarmerReport;
 
 use App\Helpers\InsightsHelper;
+use App\Models\FarmerReport\FarmerReport;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,12 +11,18 @@ class FarmerReportObserver
 {
     use AsInsightSender;
 
-    private function sendInsights(Model $model, bool $shouldIncrement)
+    /**
+     * @param  FarmerReport  $model
+     */
+    private function sendInsights(Model $model, bool $shouldIncrement): void
     {
         $this->createCensusMetric($model, $shouldIncrement);
         $this->createEstimatedYieldMetric($model, $shouldIncrement);
     }
 
+    /**
+     * @param  FarmerReport  $model
+     */
     private function createCensusMetric(Model $model, bool $shouldIncrement): void
     {
         $labels = [
@@ -33,6 +40,9 @@ class FarmerReportObserver
         }
     }
 
+    /**
+     * @param  FarmerReport  $model
+     */
     private function createEstimatedYieldMetric(Model $model, bool $shouldIncrement): void
     {
         if (! $model->isPlanted()) {

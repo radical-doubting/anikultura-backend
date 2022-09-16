@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 trait AsInsightSender
 {
-    public function created($model)
+    public function created(mixed $model): void
     {
         if (InsightsHelper::isObserverSaveMode()) {
             return;
@@ -16,7 +16,7 @@ trait AsInsightSender
         $this->sendInsights($model, true);
     }
 
-    public function saved($model)
+    public function saved(mixed $model): void
     {
         if (! InsightsHelper::isObserverSaveMode()) {
             return;
@@ -25,5 +25,5 @@ trait AsInsightSender
         $this->sendInsights($model, true);
     }
 
-    abstract private function sendInsights(Model $model, bool $shouldIncrement);
+    abstract private function sendInsights(Model $model, bool $shouldIncrement): void;
 }

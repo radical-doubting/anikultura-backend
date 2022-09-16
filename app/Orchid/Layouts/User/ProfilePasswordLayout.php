@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
-use Orchid\Screen\Field;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Password;
-use Orchid\Screen\Layouts\Rows;
 
-class ProfilePasswordLayout extends Rows
+class ProfilePasswordLayout extends AnikulturaEditLayout
 {
-    /**
-     * Views.
-     *
-     * @return Field[]
-     */
-    public function fields(): array
+    public function fields(): iterable
     {
         return [
             Password::make('old_password')
