@@ -7,6 +7,9 @@ use App\Http\Resources\Crop\CropResource;
 use App\Http\Resources\Crop\SeedStageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\FarmerReport\FarmerReport
+ */
 class FarmerReportResource extends JsonResource
 {
     public function toArray($request)

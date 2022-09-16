@@ -12,72 +12,42 @@ use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
 use App\Orchid\Layouts\Batch\BatchSeedAllocationCommandLayout;
 use App\Orchid\Layouts\Batch\BatchSeedAllocationListLayout;
+use App\Orchid\Screens\AnikulturaEditScreen;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
-class BatchEditScreen extends Screen
+class BatchEditScreen extends AnikulturaEditScreen
 {
-    protected $exists;
+    public Batch $batch;
 
-    public function __construct()
+    public Collection $batchSeedAllocations;
+
+    public function resourceName(): string
     {
-        $this->name = __('Create Batch');
-        $this->description = __('Create a new batch');
+        return __('batch');
     }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
+    public function exists(): bool
+    {
+        return $this->batch->exists;
+    }
+
     public function query(Batch $batch): array
     {
-        $this->batch = $batch;
-        $this->exists = $batch->exists;
-
-        if ($this->exists) {
-            $this->name = __('Edit Batch');
-            $this->description = __('Edit batch details');
-        }
-
         return [
             'batch' => $batch,
             'batchSeedAllocations' => $batch->seedAllocations,
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
-    public function commandBar(): array
-    {
-        return [
-            Button::make(__('Remove'))
-                ->icon('trash')
-                ->confirm(__('Once the batch is deleted, all of its resources and data will be permanently deleted.'))
-                ->method('removeBatch')
-                ->canSee($this->exists),
-
-            Button::make(__('Save'))
-                ->icon('check')
-                ->method('save'),
-        ];
-    }
-
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         $tabs = [
-            'Batch Information' => [
+            __('Batch Information') => [
                 Layout::block(BatchEditLayout::class)
                     ->title(__('Batch Information'))
                     ->description(__('Basic information of this batch')),
@@ -96,8 +66,8 @@ class BatchEditScreen extends Screen
             ],
         ];
 
-        if ($this->exists) {
-            $tabs['Seeds Allocation'] = [
+        if ($this->exists()) {
+            $tabs[__('Seeds Allocation')] = [
                 Layout::block(BatchSeedAllocationCommandLayout::class)
                     ->title(__('Seeds Allocation'))
                     ->description(__('Seeds distributed to each farmer in this batch')),
@@ -106,44 +76,21 @@ class BatchEditScreen extends Screen
         }
 
         return [
-            Layout::tabs($tabs)->activeTab('Batch Information'),
+            Layout::tabs($tabs)->activeTab(__('Batch Information')),
         ];
     }
 
-    /**
-     * Remove a batch.
-     *
-     * @param  Batch  $batch
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function removeBatch(Batch $batch)
+    public function removeBatch(Batch $batch): RedirectResponse
     {
         return DeleteBatch::runOrchidAction($batch, null);
     }
 
-    /**
-     * Remove a batch seed allocation.
-     *
-     * @param  BatchSeedAllocation  $batchSeedAllocation
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function removeBatchSeedAllocation(BatchSeedAllocation $batchSeedAllocation)
+    public function removeBatchSeedAllocation(BatchSeedAllocation $batchSeedAllocation): RedirectResponse
     {
         return DeleteBatchSeedAllocation::runOrchidAction($batchSeedAllocation, null);
     }
 
-    /**
-     * Save a batch.
-     *
-     * @param  Batch  $batch
-     * @param  Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function save(Batch $batch, Request $request)
+    public function save(Batch $batch, Request $request): RedirectResponse
     {
         return CreateBatch::runOrchidAction($batch, $request);
     }
