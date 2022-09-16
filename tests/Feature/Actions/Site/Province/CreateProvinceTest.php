@@ -19,7 +19,7 @@ beforeEach(function () {
 it('should add a site province', function () {
     $provinceData = [
         'name' => 'Laguna',
-        'region_id' => 1,
+        'region_id' => Region::firstWhere('name', 'National Capital Region')->id,
     ];
 
     /**
@@ -47,12 +47,12 @@ it('should add a site province', function () {
 it('should update a site province', function () {
     $existingProvince = Province::create([
         'name' => 'Laguna',
-        'region_id' => 1,
+        'region_id' => Region::firstWhere('name', 'National Capital Region')->id,
     ]);
 
     $provinceData = [
         'name' => 'Quezon',
-        'region_id' => 2,
+        'region_id' => Region::firstWhere('name', 'Calabarzon')->id,
     ];
 
     /**

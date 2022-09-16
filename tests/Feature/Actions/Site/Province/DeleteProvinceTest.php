@@ -14,7 +14,7 @@ beforeEach(function () {
 it('should delete an existing site province', function () {
     $provinceData = [
         'name' => 'Laguna',
-        'region_id' => 1,
+        'region_id' => Region::firstWhere('name', 'National Capital Region')->id,
     ];
 
     $existingProvince = Province::create($provinceData);

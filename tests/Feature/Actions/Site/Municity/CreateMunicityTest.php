@@ -6,32 +6,32 @@ use App\Models\Site\Province;
 use App\Models\Site\Region;
 
 beforeEach(function () {
-    Region::create([
+    $regionA = Region::create([
         'name' => 'National Capital Region',
         'short_name' => 'NCR',
     ]);
 
-    Region::create([
+    $regionB = Region::create([
         'name' => 'Calabarzon',
         'short_name' => 'Region IV-A',
     ]);
 
     Province::create([
         'name' => 'Laguna',
-        'region_id' => 1,
+        'region_id' => $regionA->id,
     ]);
 
     Province::create([
         'name' => 'Quezon',
-        'region_id' => 2,
+        'region_id' => $regionB->id,
     ]);
 });
 
 it('should add a site municipality or city', function () {
     $municityData = [
         'name' => 'Santa Rosa',
-        'province_id' => 1,
-        'region_id' => 1,
+        'province_id' => Province::firstWhere('name', 'Laguna')->id,
+        'region_id' => Region::firstWhere('name', 'National Capital Region')->id,
     ];
 
     /**
@@ -60,14 +60,14 @@ it('should add a site municipality or city', function () {
 it('should update a site municipality or city', function () {
     $existingMunicity = Municity::create([
         'name' => 'Santa Rosa',
-        'province_id' => 1,
-        'region_id' => 1,
+        'province_id' => Province::firstWhere('name', 'Laguna')->id,
+        'region_id' => Region::firstWhere('name', 'National Capital Region')->id,
     ]);
 
     $municityData = [
         'name' => 'Sampaloc',
-        'province_id' => 2,
-        'region_id' => 2,
+        'province_id' => Province::firstWhere('name', 'Quezon')->id,
+        'region_id' => Region::firstWhere('name', 'Calabarzon')->id,
     ];
 
     /**

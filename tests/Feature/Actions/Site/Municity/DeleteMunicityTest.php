@@ -6,22 +6,22 @@ use App\Models\Site\Province;
 use App\Models\Site\Region;
 
 beforeEach(function () {
-    Region::create([
+    $region = Region::create([
         'name' => 'National Capital Region',
         'short_name' => 'NCR',
     ]);
 
     Province::create([
         'name' => 'Laguna',
-        'region_id' => 1,
+        'region_id' => $region->id,
     ]);
 });
 
 it('should delete an existing site municipality or city', function () {
     $municityData = [
         'name' => 'Santa Rosa',
-        'province_id' => 1,
-        'region_id' => 1,
+        'province_id' => Province::firstWhere('name', 'Laguna')->id,
+        'region_id' => Region::firstWhere('name', 'National Capital Region')->id,
     ];
 
     $existingProvince = Municity::create($municityData);
