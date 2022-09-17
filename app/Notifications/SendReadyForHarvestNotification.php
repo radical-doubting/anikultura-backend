@@ -5,6 +5,9 @@ namespace App\Notifications;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use App\Models\FarmerReport\FarmerReport;
+use Orchid\Platform\Notifications\DashboardMessage;
+use Orchid\Platform\Notifications\DashboardChannel;
+
 class SendReadyForHarvestNotification extends Notification
 {
     use Queueable;
@@ -18,17 +21,15 @@ class SendReadyForHarvestNotification extends Notification
 
     public function via($notifiable)
     {
-        return ['database'];
+        return [DashboardChannel::class];
     }
 
-    public function toArray($notifiable)
+    public function toDashboard($notifiable)
     {
-        return [
-            'seedStageSlug' => $this->farmerReport->seedStage->slug,
-            'farmlandLocation' => $this->farmerReport->farmland->name,
-            'farmerLastName' => $this->farmerReport->farmer->last_name,
-            'farmerMiddleName' => $this->farmerReport->farmer->middle_name,
-            'farmerFirstName' => $this->farmerReport->farmer->first_name,
-        ];
+        $fullName = $this->farmerReport->farmer->fullName;
+        
+        return (new DashboardMessage())
+            ->title($fullName . " is ready for harvest!")
+            ->message($this->farmerReport->farmland->name,);
     }
 }
