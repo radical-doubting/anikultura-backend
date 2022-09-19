@@ -16,7 +16,13 @@ class DeleteMunicity
 
     public function handle(Municity $municity): bool
     {
-        return  $municity->delete();
+        $isDeleted = $municity->delete();
+
+        if (is_null($isDeleted)) {
+            return false;
+        }
+
+        return $isDeleted;
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
