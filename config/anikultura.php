@@ -37,4 +37,15 @@ return [
     */
     'organizationName' => env('ANIKULTURA_ORGANIZATION_NAME', 'Anikultura Organization'),
     'organizationUrl' => env('ANIKULTURA_ORGANIZATION_URL', 'http://example.com'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Headless
+    |--------------------------------------------------------------------------
+    |
+    | Here you may specify whether the platform will not serve an management
+    | dashboard.
+    |
+    */
+    'isHeadless' => env('ANIKULTURA_HEADLESS', false),
 ];
