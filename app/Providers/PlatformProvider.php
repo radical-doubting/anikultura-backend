@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid;
+namespace App\Providers;
 
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;

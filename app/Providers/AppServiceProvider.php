@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Anikultura;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Crop\Crop;
@@ -30,6 +31,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind('anikultura', function () {
+            return new Anikultura();
+        });
     }
 
     /**
