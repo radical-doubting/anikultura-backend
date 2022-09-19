@@ -16,13 +16,7 @@ class DeleteProvince
 
     public function handle(Province $province): bool
     {
-        $isDeleted = $province->delete();
-
-        if (is_null($isDeleted)) {
-            return false;
-        }
-
-        return $isDeleted;
+        return $province->delete();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse

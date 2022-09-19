@@ -16,13 +16,7 @@ class DeleteRegion
 
     public function handle(Region $region): bool
     {
-        $isDeleted = $region->delete();
-
-        if (is_null($isDeleted)) {
-            return false;
-        }
-
-        return $isDeleted;
+        return $region->delete();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse

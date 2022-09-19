@@ -147,7 +147,7 @@ return [
      * Only set this to true if you understand the possible consequences.
      */
 
-    'onUpdate' => true,
+    'onUpdate' => false,
 
     /*
      * If the default slug engine of cocur/slugify is used, this array of

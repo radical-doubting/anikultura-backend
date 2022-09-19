@@ -34,4 +34,4 @@ jobs:
         run: ./vendor/bin/phpstan analyze --ansi --no-interaction --no-progress
 
       - name: Run unit tests
-        run: ./vendor/bin/pest --testsuite=Unit
+        run: ./vendor/bin/phpunit --testsuite=Unit

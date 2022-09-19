@@ -32,5 +32,5 @@ runs:
       shell: bash
 
     - name: Run feature tests
-      run: ./vendor/bin/pest --testsuite=Feature
+      run: ./vendor/bin/phpunit --testsuite=Feature
       shell: bash
