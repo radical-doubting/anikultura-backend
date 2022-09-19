@@ -4,11 +4,8 @@ namespace App\Actions\Farmer;
 
 use App\Actions\User\CreateUser;
 use App\Models\Farmer\Farmer;
-use App\Models\Farmer\FarmerAddress;
-use App\Models\Farmer\FarmerProfile;
 use App\Models\User;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -19,72 +16,36 @@ class CreateFarmer
     use AsAction;
     use AsOrchidAction;
 
-    public function __construct(
-        protected CreateUser $createUser,
-        protected CreateFarmerProfile $createFarmerProfile,
-        protected CreateFarmerAddress $createFarmerAddress
-    ) {
+    public function handle(Farmer $farmer, array $farmerData)
+    {
+        $createdAccountId = CreateUser::run($farmer, $farmerData['account']);
+        $createdAccount = User::find($createdAccountId);
+
+        $this->createProfile($createdAccount, $farmerData['profile']);
+
+        CreateFarmerAddress::run($createdAccount->profile, $farmerData['address']);
     }
 
-    public function handle(Farmer $farmer, array $farmerData): Farmer
+    private function createProfile(User $createdAccount, $profileData)
     {
-        $createdAccount = $this->createUser->handle(
-            $farmer,
-            $farmerData['account']
-        );
+        $farmerProfileId = CreateFarmerProfile::run($createdAccount->profile, $profileData);
 
-        $farmerProfile = $this->createProfileOrUpdate($createdAccount);
-
-        $updatedFarmerProfile = $this->createFarmerProfile->handle(
-            $farmerProfile,
-            $farmerData['profile']
-        );
-
-        $this->updateProfileType($createdAccount, $updatedFarmerProfile);
-
-        $farmerAddress = $this->createFarmerAddressOrUpdate($updatedFarmerProfile);
-
-        $this->createFarmerAddress->handle(
-            $updatedFarmerProfile,
-            $farmerAddress,
-            $farmerData['address']
-        );
-
-        return $farmer->refresh();
-    }
-
-    private function createProfileOrUpdate(User $user): FarmerProfile
-    {
-        $farmerProfile = $user->profile;
-
-        return is_null($farmerProfile) ? new FarmerProfile() : $farmerProfile;
-    }
-
-    private function updateProfileType(User $createdAccount, FarmerProfile $farmerProfile): void
-    {
         $createdAccount->update([
-            'profile_id' => $farmerProfile->id,
+            'profile_id' => $farmerProfileId,
             'profile_type' => Farmer::$profilePath,
         ]);
 
         $createdAccount->refresh();
     }
 
-    private function createFarmerAddressOrUpdate(FarmerProfile $farmerProfile): FarmerAddress
-    {
-        $farmerAddress = $farmerProfile->farmerAddress;
-
-        return is_null($farmerAddress) ? new FarmerAddress() : $farmerAddress;
-    }
-
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, ?Request $request)
     {
         $this->validateIfFarmerAccountExistsAlready($model, $request);
 
         $this->handle($model, [
-            'account' => $request->get('farmer'),
-            'profile' => $request->get('farmerProfile'),
-            'address' => $request->get('farmerAddress'),
+            'account' => $request->get('user'),
+            'profile' => $request->get('farmer_profile'),
+            'address' => $request->get('farmer_address'),
         ]);
 
         Toast::info(__('Farmer profile was saved successfully!'));
@@ -92,17 +53,17 @@ class CreateFarmer
         return redirect()->route('platform.farmers');
     }
 
-    private function validateIfFarmerAccountExistsAlready(Farmer $farmer, Request $request): void
+    private function validateIfFarmerAccountExistsAlready($farmer, Request $request)
     {
         $userNameShouldBeUnique = Rule::unique(Farmer::class, 'name')->ignore($farmer);
         $emailShouldBeUnique = Rule::unique(Farmer::class, 'email')->ignore($farmer);
 
         $request->validate([
-            'farmer.name' => [
+            'user.name' => [
                 'required',
                 $userNameShouldBeUnique,
             ],
-            'farmer.email' => [
+            'user.email' => [
                 $emailShouldBeUnique,
             ],
         ]);
@@ -111,103 +72,103 @@ class CreateFarmer
     public function rules(): array
     {
         return [
-            'farmerProfile.gender' => [
+            'farmer_profile.gender' => [
                 'required',
             ],
 
-            'farmerProfile.civil_status' => [
+            'farmer_profile.civil_status' => [
                 'required',
             ],
 
-            'farmerProfile.birthday' => [
+            'farmer_profile.birthday' => [
                 'required',
             ],
 
-            'farmerProfile.age' => [
+            'farmer_profile.age' => [
                 'required',
             ],
 
-            'farmerProfile.quantity_family_members' => [
+            'farmer_profile.quantity_family_members' => [
                 'required',
             ],
 
-            'farmerProfile.quantity_dependents' => [
+            'farmer_profile.quantity_dependents' => [
                 'required',
             ],
 
-            'farmerProfile.quantity_working_dependents' => [
+            'farmer_profile.quantity_working_dependents' => [
                 'required',
             ],
 
-            'farmerProfile.highest_educational_status' => [
+            'farmer_profile.highest_educational_status' => [
                 'required',
             ],
 
-            'farmerProfile.college_course' => [
+            'farmer_profile.college_course' => [
                 'required',
             ],
 
-            'farmerProfile.current_job' => [
+            'farmer_profile.current_job' => [
                 'required',
             ],
 
-            'farmerProfile.farming_years' => [
+            'farmer_profile.farming_years' => [
                 'required',
             ],
 
-            'farmerProfile.usual_crops_planted' => [
+            'farmer_profile.usual_crops_planted' => [
                 'required',
             ],
 
-            'farmerProfile.affiliated_organization' => [
+            'farmer_profile.affiliated_organization' => [
                 'required',
             ],
 
-            'farmerProfile.tesda_training_joined' => [
+            'farmer_profile.tesda_training_joined' => [
                 'required',
             ],
 
-            'farmerProfile.nc_passer_status' => [
+            'farmer_profile.nc_passer_status' => [
                 'required',
             ],
 
-            'farmerProfile.salary_periodicity' => [
+            'farmer_profile.salary_periodicity' => [
                 'required',
             ],
 
-            'farmerProfile.estimated_salary' => [
+            'farmer_profile.estimated_salary' => [
                 'required',
             ],
 
-            'farmerProfile.social_status' => [
+            'farmer_profile.social_status' => [
                 'required',
             ],
 
-            'farmerProfile.social_status_reason' => [
+            'farmer_profile.social_status_reason' => [
                 'required',
             ],
 
-            'farmerAddress.house_number' => [
+            'farmer_address.house_number' => [
                 'required',
             ],
 
-            'farmerAddress.street' => [
+            'farmer_address.street' => [
                 'required',
             ],
 
-            'farmerAddress.barangay' => [
+            'farmer_address.barangay' => [
                 'required',
             ],
 
-            'farmerAddress.municity' => [
+            'farmer_address.municity' => [
                 'required',
             ],
 
-            'farmerAddress.province' => [
+            'farmer_address.province' => [
                 'required',
             ],
 
-            'farmerAddress.region_id' => [
+            'farmer_address.region_id' => [
                 'required',
             ],
         ];

@@ -3,6 +3,7 @@
 namespace App\Actions\Insights;
 
 use App\Helpers\InsightsHelper;
+use GeTracker\InfluxDBLaravel\Facades\InfluxDB;
 use InfluxDB2\WriteApi;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -22,6 +23,6 @@ class CreateInsightMetric
 
     private function getWriteApi(): WriteApi
     {
-        return app('influxdb')->createWriteApi();
+        return InfluxDB::createWriteApi();
     }
 }

@@ -2,39 +2,57 @@
 
 namespace App\Actions\User;
 
-use App\Actions\Authentication\HashPassword;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class CreateUser
 {
     use AsAction;
 
-    public function __construct(
-        protected HashPassword $hashPassword
-    ) {
-    }
-
-    public function handle(User $user, array $userData): User
+    public function handle(User $user, $userData)
     {
-        $cleanedUserData = $this->handlePassword($userData);
-
-        $user->fill($cleanedUserData)->save();
-
-        return $user->refresh();
-    }
-
-    private function handlePassword(array $userData): array
-    {
-        $plaintextPassword = $userData['password'];
-
-        if (empty($plaintextPassword)) {
-            unset($userData['password']);
+        if (! $user->exists) {
+            return $this->createNewUser($userData);
         } else {
-            $hashedPassword = $this->hashPassword->handle($plaintextPassword);
-            $userData['password'] = $hashedPassword;
+            return $this->updateExistingUser($user, $userData);
+        }
+    }
+
+    private function createNewUser($userData)
+    {
+        $newUser = new User($userData);
+        $newUser->password = $this->hashPassword($userData['password']);
+        $newUser->save();
+
+        return $newUser->id;
+    }
+
+    private function updateExistingUser($user, $userData)
+    {
+        $updatedUserDataData = $this->updatePassword($userData);
+        $user->update($updatedUserDataData);
+
+        return $user->id;
+    }
+
+    private function updatePassword($userData)
+    {
+        $password = $userData['password'];
+
+        if (empty($password)) {
+            unset($userData['password']);
+
+            return $userData;
         }
 
+        $userData['password'] = $this->hashPassword($password);
+
         return $userData;
+    }
+
+    private function hashPassword(string $plainTextPassword)
+    {
+        return Hash::make($plainTextPassword);
     }
 }

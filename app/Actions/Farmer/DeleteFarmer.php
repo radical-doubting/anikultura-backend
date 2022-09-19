@@ -4,7 +4,6 @@ namespace App\Actions\Farmer;
 
 use App\Models\Farmer\Farmer;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -14,12 +13,12 @@ class DeleteFarmer
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Farmer $farmer): bool
+    public function handle(Farmer $farmer)
     {
-        return $farmer->delete();
+        $farmer->delete();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, ?Request $request)
     {
         $this->handle($model);
 

@@ -4,20 +4,26 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
-use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Actions\ModalToggle;
 use Orchid\Screen\Layouts\Persona;
+use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class UserListLayout extends AnikulturaListLayout
+class UserListLayout extends Table
 {
+    /**
+     * @var string
+     */
     public $target = 'users';
 
-    public function columns(): iterable
+    /**
+     * @return TD[]
+     */
+    public function columns(): array
     {
         return [
             TD::make('name', __('Name'))
@@ -57,7 +63,7 @@ class UserListLayout extends AnikulturaListLayout
                         ->list([
 
                             Link::make(__('Edit'))
-                                ->route('platform.systems.users.edit', [$user->id])
+                                ->route('platform.systems.users.edit', $user->id)
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))

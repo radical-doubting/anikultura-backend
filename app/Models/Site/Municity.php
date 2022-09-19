@@ -5,16 +5,17 @@ namespace App\Models\Site;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
 
-/**
- * @property string $slug
- */
 class Municity extends Model
 {
     use Filterable, HasFactory, Sluggable;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'province_id',
@@ -47,7 +48,7 @@ class Municity extends Model
     /**
      * Get the province that owns this municity.
      */
-    public function province(): BelongsTo
+    public function province()
     {
         return $this->belongsTo(Province::class);
     }
@@ -55,7 +56,7 @@ class Municity extends Model
     /**
      * Get the region that owns this municity.
      */
-    public function region(): BelongsTo
+    public function region()
     {
         return $this->belongsTo(Region::class);
     }

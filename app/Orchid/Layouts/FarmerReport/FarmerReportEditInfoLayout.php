@@ -6,19 +6,32 @@ use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
-use App\Orchid\Layouts\AnikulturaEditLayout;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Layouts\Rows;
 
-class FarmerReportEditInfoLayout extends AnikulturaEditLayout
+class FarmerReportEditInfoLayout extends Rows
 {
-    protected function fields(): iterable
+    /**
+     * Used to create the title of a group of form elements.
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * Get the fields elements to be displayed.
+     *
+     * @return Field[]
+     */
+    protected function fields(): array
     {
-        $currentReport = $this->query->get('farmerReport');
+        $currentReport = $this->query['farmer_report'];
         $isHarvested = false;
 
-        $farmlandRelationField = Relation::make('farmerReport.farmland_id')
+        $farmlandRelationField = Relation::make('farmer_report.farmland_id')
             ->fromModel(Farmland::class, 'name')
             ->displayAppend('fullName')
             ->required()
@@ -31,7 +44,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
         }
 
         return [
-            Relation::make('farmerReport.reported_by')
+            Relation::make('farmer_report.reported_by')
                 ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullName')
@@ -40,7 +53,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
                 ->title(__('Reported by'))
                 ->placeholder(__('Reported by')),
 
-            Relation::make('farmerReport.seed_stage_id')
+            Relation::make('farmer_report.seed_stage_id')
                 ->fromModel(SeedStage::class, 'name')
                 ->required()
                 ->title(__('Seed Stage'))
@@ -49,14 +62,14 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
             Group::make([
                 $farmlandRelationField,
 
-                Relation::make('farmerReport.crop_id')
+                Relation::make('farmer_report.crop_id')
                     ->fromModel(Crop::class, 'name')
                     ->required()
                     ->title(__('Crop'))
                     ->placeholder(__('Crop')),
             ]),
 
-            Input::make('farmerReport.volume_kg')
+            Input::make('farmer_report.volume_kg')
                 ->type('number')
                 ->max(255)
                 ->title($isHarvested ? __('Yield Volume (kg)') : '')

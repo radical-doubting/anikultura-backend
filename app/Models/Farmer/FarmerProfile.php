@@ -4,8 +4,6 @@ namespace App\Models\Farmer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -13,6 +11,11 @@ class FarmerProfile extends Model
 {
     use Filterable, HasFactory, AsSource;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'tutorial_done',
         'gender',
@@ -58,12 +61,12 @@ class FarmerProfile extends Model
         'created_at',
     ];
 
-    public function farmerAddress(): HasOne
+    public function farmerAddress()
     {
         return $this->hasOne(FarmerAddress::class);
     }
 
-    public function user(): MorphOne
+    public function user()
     {
         return $this->morphOne(Farmer::class, 'profile');
     }

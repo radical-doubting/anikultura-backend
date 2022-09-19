@@ -7,7 +7,6 @@ use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchFiltersLayout;
 use App\Orchid\Layouts\Batch\BatchListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
-use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class BatchListScreen extends AnikulturaListScreen
@@ -28,6 +27,11 @@ class BatchListScreen extends AnikulturaListScreen
         ];
     }
 
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
     public function commandBar(): array
     {
         return [
@@ -37,6 +41,11 @@ class BatchListScreen extends AnikulturaListScreen
         ];
     }
 
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
     public function layout(): array
     {
         return [
@@ -45,7 +54,15 @@ class BatchListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Batch $batch): RedirectResponse
+    /**
+     * Remove a batch.
+     *
+     * @param  Batch  $batch
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function remove(Batch $batch)
     {
         return DeleteBatch::runOrchidAction($batch, null);
     }

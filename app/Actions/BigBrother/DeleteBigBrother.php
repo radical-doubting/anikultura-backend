@@ -4,7 +4,6 @@ namespace App\Actions\BigBrother;
 
 use App\Models\BigBrother\BigBrother;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -14,12 +13,12 @@ class DeleteBigBrother
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(BigBrother $bigBrother): bool
+    public function handle(BigBrother $bigBrother)
     {
-        return $bigBrother->delete();
+        $bigBrother->delete();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, ?Request $request)
     {
         $this->handle($model);
 

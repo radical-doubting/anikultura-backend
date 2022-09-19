@@ -6,7 +6,6 @@ use App\Actions\Site\Region\DeleteRegion;
 use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
-use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class RegionListScreen extends AnikulturaListScreen
@@ -41,7 +40,15 @@ class RegionListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Region $region): RedirectResponse
+    /**
+     * Remove a region.
+     *
+     * @param  Region  $region
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function remove(Region $region)
     {
         return DeleteRegion::runOrchidAction($region, null);
     }

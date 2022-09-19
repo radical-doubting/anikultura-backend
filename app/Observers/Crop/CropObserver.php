@@ -3,7 +3,6 @@
 namespace App\Observers\Crop;
 
 use App\Helpers\InsightsHelper;
-use App\Models\Crop\Crop;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,10 +10,7 @@ class CropObserver
 {
     use AsInsightSender;
 
-    /**
-     * @param  Crop  $model
-     */
-    private function sendInsights(Model $model, bool $shouldIncrement): void
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
         $profitPerKg = $model->profit_per_kg;
         $netProfitCostRatio = $model->net_profit_cost_ratio;

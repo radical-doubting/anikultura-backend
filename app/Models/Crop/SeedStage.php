@@ -2,20 +2,20 @@
 
 namespace App\Models\Crop;
 
-use App\Models\FarmerReport\FarmerReport;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 
-/**
- * @property string $slug
- */
 class SeedStage extends Model
 {
     use Filterable, HasFactory, Sluggable;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
     ];
@@ -40,7 +40,7 @@ class SeedStage extends Model
         'name',
     ];
 
-    public function farmerReport(): HasMany
+    public function farmerReport()
     {
         return $this->hasMany(FarmerReport::class);
     }

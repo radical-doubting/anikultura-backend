@@ -9,12 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class CreateMunicityTest extends TestCase
 {
-    public function tearDown(): void
-    {
-        Mockery::close();
-    }
-
-    public function testShouldCreateMunicity(): void
+    public function testShouldCreateMunicity()
     {
         $mockMunicity = Mockery::mock(Municity::class)->makePartial();
         $mockMunicity->shouldReceive('save')->once()->andReturn(true);

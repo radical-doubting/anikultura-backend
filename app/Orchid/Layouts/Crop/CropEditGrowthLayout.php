@@ -2,13 +2,26 @@
 
 namespace App\Orchid\Layouts\Crop;
 
-use App\Orchid\Layouts\AnikulturaEditLayout;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
+use Orchid\Screen\Layouts\Rows;
 
-class CropEditGrowthLayout extends AnikulturaEditLayout
+class CropEditGrowthLayout extends Rows
 {
-    protected function fields(): iterable
+    /**
+     * Used to create the title of a group of form elements.
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * Get the fields elements to be displayed.
+     *
+     * @return Field[]
+     */
+    protected function fields(): array
     {
         return [
             Input::make('crop.yield_per_ha')

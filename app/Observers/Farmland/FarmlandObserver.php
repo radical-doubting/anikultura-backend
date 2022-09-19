@@ -3,7 +3,6 @@
 namespace App\Observers\Farmland;
 
 use App\Helpers\InsightsHelper;
-use App\Models\Farmland\Farmland;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,10 +10,7 @@ class FarmlandObserver
 {
     use AsInsightSender;
 
-    /**
-     * @param  Farmland  $model
-     */
-    private function sendInsights(Model $model, bool $shouldIncrement): void
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
         $labels = [
             'type' => $model->type->slug,

@@ -9,8 +9,8 @@ class DeleteBigBrotherProfile
 {
     use AsAction;
 
-    public function handle(BigBrotherProfile $bigBrotherProfile): bool
+    public function handle(BigBrotherProfile $bigBrotherProfile)
     {
-        return $bigBrotherProfile->delete();
+        $bigBrotherProfile->delete();
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Observers\Batch;
 
 use App\Helpers\InsightsHelper;
-use App\Models\Batch\BatchSeedAllocation;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,10 +10,7 @@ class BatchSeedAllocationObserver
 {
     use AsInsightSender;
 
-    /**
-     * @param  BatchSeedAllocation  $model
-     */
-    private function sendInsights(Model $model, bool $shouldIncrement): void
+    private function sendInsights(Model $model, bool $shouldIncrement)
     {
         $labels = [
             'crop' => $model->crop->slug,

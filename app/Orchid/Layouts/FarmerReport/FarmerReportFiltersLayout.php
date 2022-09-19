@@ -4,11 +4,15 @@ namespace App\Orchid\Layouts\FarmerReport;
 
 use App\Orchid\Filters\Crop\CropFilter;
 use App\Orchid\Filters\Crop\SeedStageFilter;
-use App\Orchid\Layouts\AnikulturaFilterLayout;
+use Orchid\Filters\Filter;
+use Orchid\Screen\Layouts\Selection;
 
-class FarmerReportFiltersLayout extends AnikulturaFilterLayout
+class FarmerReportFiltersLayout extends Selection
 {
-    public function filters(): iterable
+    /**
+     * @return string[]|Filter[]
+     */
+    public function filters(): array
     {
         return [
             CropFilter::class,

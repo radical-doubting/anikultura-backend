@@ -6,7 +6,6 @@ use App\Actions\User\CreateUser;
 use App\Models\BigBrother\BigBrother;
 use App\Models\User;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -37,13 +36,13 @@ class CreateBigBrother
         $createdAccount->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, ?Request $request)
     {
-        $this->validateIfBigBrotherAccountExistsAlready($model, $request);
+        $this->validateIfFarmerAccountExistsAlready($model, $request);
 
         $this->handle($model, [
-            'account' => $request->get('bigBrother'),
-            'profile' => $request->get('bigBrotherProfile'),
+            'account' => $request->get('user'),
+            'profile' => $request->get('big_brother_profile'),
         ]);
 
         Toast::info(__('Big brother was saved successfully!'));
@@ -51,17 +50,17 @@ class CreateBigBrother
         return redirect()->route('platform.big-brothers');
     }
 
-    private function validateIfBigBrotherAccountExistsAlready($bigBrother, Request $request)
+    private function validateIfFarmerAccountExistsAlready($bigBrother, Request $request)
     {
         $userNameShouldBeUnique = Rule::unique(BigBrother::class, 'name')->ignore($bigBrother);
         $emailShouldBeUnique = Rule::unique(BigBrother::class, 'email')->ignore($bigBrother);
 
         $request->validate([
-            'bigBrother.name' => [
+            'user.name' => [
                 'required',
                 $userNameShouldBeUnique,
             ],
-            'bigBrother.email' => [
+            'user.email' => [
                 $emailShouldBeUnique,
             ],
         ]);
@@ -70,10 +69,10 @@ class CreateBigBrother
     public function rules(): array
     {
         return [
-            'bigBrotherProfile.age' => [
+            'big_brother_profile.age' => [
                 'required',
             ],
-            'bigBrotherProfile.organization_name' => [
+            'big_brother_profile.organization_name' => [
                 'required',
             ],
         ];

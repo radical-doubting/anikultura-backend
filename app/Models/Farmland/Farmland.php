@@ -7,8 +7,6 @@ use App\Models\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Orchid\Filters\Filterable;
 
 class Farmland extends Model
@@ -66,7 +64,7 @@ class Farmland extends Model
     /**
      * Get the type of this farmland.
      */
-    public function type(): BelongsTo
+    public function type()
     {
         return $this->belongsTo(FarmlandType::class);
     }
@@ -74,7 +72,7 @@ class Farmland extends Model
     /**
      * Get the status of this farmland.
      */
-    public function status(): BelongsTo
+    public function status()
     {
         return $this->belongsTo(FarmlandStatus::class);
     }
@@ -82,7 +80,7 @@ class Farmland extends Model
     /**
      * Get the batch of this farmland.
      */
-    public function batch(): BelongsTo
+    public function batch()
     {
         return $this->belongsTo(Batch::class);
     }
@@ -90,7 +88,7 @@ class Farmland extends Model
     /**
      * Get the watering systems of this farmland.
      */
-    public function wateringSystems(): BelongsToMany
+    public function wateringSystems()
     {
         return $this->belongsToMany(WateringSystem::class, 'farmland_watering_systems');
     }
@@ -98,7 +96,7 @@ class Farmland extends Model
     /**
      * Get the crop buyers of this farmland.
      */
-    public function cropBuyers(): BelongsToMany
+    public function cropBuyers()
     {
         return $this->belongsToMany(CropBuyer::class, 'farmland_crop_buyers');
     }
@@ -106,7 +104,7 @@ class Farmland extends Model
     /**
      * Get the farmer users of this farmland.
      */
-    public function farmers(): BelongsToMany
+    public function farmers()
     {
         return $this->belongsToMany(Farmer::class, 'farmland_farmers', 'farmland_id', 'farmer_id');
     }

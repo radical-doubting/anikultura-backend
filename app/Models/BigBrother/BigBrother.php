@@ -5,12 +5,16 @@ namespace App\Models\BigBrother;
 use App\Models\Batch\Batch;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BigBrother extends User
 {
     public static $profilePath = 'App\Models\BigBrother\BigBrotherProfile';
 
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
     protected $table = 'users';
 
     public static function boot()
@@ -29,7 +33,7 @@ class BigBrother extends User
         });
     }
 
-    public function batches(): BelongsToMany
+    public function batches()
     {
         return $this->belongsToMany(Batch::class, 'batch_farmers', 'farmer_id', 'batch_id');
     }

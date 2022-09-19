@@ -4,7 +4,6 @@ namespace App\Actions\Site\Region;
 
 use App\Models\Site\Region;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -19,7 +18,7 @@ class DeleteRegion
         return $region->delete();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, ?Request $request)
     {
         $this->handle($model);
 

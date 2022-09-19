@@ -4,7 +4,6 @@ namespace App\Actions\FarmerReport;
 
 use App\Models\FarmerReport\FarmerReport;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -14,18 +13,16 @@ class CreateFarmerReport
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(FarmerReport $farmerReport, array $farmerReportData): FarmerReport
+    public function handle(FarmerReport $farmerReport, $farmerReportData)
     {
         $farmerReport
             ->fill($farmerReportData)
             ->save();
-
-        return $farmerReport->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, ?Request $request)
     {
-        $farmerReportData = $request->get('farmerReport');
+        $farmerReportData = $request->get('farmer_report');
 
         $this->handle($model, $farmerReportData);
 
@@ -37,19 +34,19 @@ class CreateFarmerReport
     public function rules(): array
     {
         return [
-            'farmerReport.reported_by' => [
+            'farmer_report.reported_by' => [
                 'required',
             ],
-            'farmerReport.farmland_id' => [
+            'farmer_report.farmland_id' => [
                 'required',
             ],
-            'farmerReport.seed_stage_id' => [
+            'farmer_report.seed_stage_id' => [
                 'required',
             ],
-            'farmerReport.crop_id' => [
+            'farmer_report.crop_id' => [
                 'required',
             ],
-            'farmerReport.volume_kg' => [
+            'farmer_report.volume_kg' => [
                 'numeric',
                 'nullable',
             ],

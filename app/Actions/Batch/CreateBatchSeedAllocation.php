@@ -4,7 +4,6 @@ namespace App\Actions\Batch;
 
 use App\Models\Batch\BatchSeedAllocation;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -14,16 +13,14 @@ class CreateBatchSeedAllocation
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(BatchSeedAllocation $batchSeedAllocation, array $batchSeedAllocationData): BatchSeedAllocation
+    public function handle(BatchSeedAllocation $batchSeedAllocation, $batchSeedAllocationData)
     {
         $batchSeedAllocation
             ->fill($batchSeedAllocationData)
             ->save();
-
-        return $batchSeedAllocation->refresh();
     }
 
-    public function asOrchidAction(mixed $models, ?Request $request): RedirectResponse
+    public function asOrchidAction($models, ?Request $request)
     {
         $batchSeedAllocationData = $request->get('batchSeedAllocation');
         $batch = $models['batch'];

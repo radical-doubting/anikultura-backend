@@ -4,7 +4,6 @@ namespace App\Models\Farmer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FarmerAddress extends Model
 {
@@ -20,7 +19,7 @@ class FarmerAddress extends Model
         'farmer_profile_id',
     ];
 
-    public function farmerProfile(): BelongsTo
+    public function farmerProfile()
     {
         return $this->belongsTo(FarmerProfile::class);
     }

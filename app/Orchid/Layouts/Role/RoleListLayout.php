@@ -4,16 +4,22 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Role;
 
-use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Platform\Models\Role;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class RoleListLayout extends AnikulturaListLayout
+class RoleListLayout extends Table
 {
+    /**
+     * @var string
+     */
     public $target = 'roles';
 
-    public function columns(): iterable
+    /**
+     * @return TD[]
+     */
+    public function columns(): array
     {
         return [
             TD::make('name', __('Name'))
@@ -22,7 +28,7 @@ class RoleListLayout extends AnikulturaListLayout
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Role $role) {
                     return Link::make($role->name)
-                        ->route('platform.systems.roles.edit', [$role->id]);
+                        ->route('platform.systems.roles.edit', $role->id);
                 }),
 
             TD::make('slug', __('Slug'))

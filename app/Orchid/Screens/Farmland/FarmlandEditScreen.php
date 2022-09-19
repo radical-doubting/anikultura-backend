@@ -8,48 +8,86 @@ use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandEditBasicLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
 use App\Orchid\Layouts\Farmland\FarmlandEditOtherLayout;
-use App\Orchid\Screens\AnikulturaEditScreen;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
-class FarmlandEditScreen extends AnikulturaEditScreen
+class FarmlandEditScreen extends Screen
 {
-    public Farmland $farmland;
+    /**
+     * Display header name.
+     *
+     * @var string
+     */
+    public $name = 'Edit Farmland';
 
-    public function resourceName(): string
-    {
-        return __('farmland');
-    }
+    /**
+     * Display header description.
+     *
+     * @var string|null
+     */
+    public $description = 'Edit farmland details';
 
-    public function exists(): bool
-    {
-        return $this->farmland->exists;
-    }
-
+    /**
+     * Query data.
+     *
+     * @return array
+     */
     public function query(Farmland $farmland): array
     {
+        $this->farmland = $farmland;
+
+        if (! $farmland->exists) {
+            $this->name = 'Create Farmland';
+            $this->description = 'Create a new farmland';
+        }
+
         return [
             'farmland' => $farmland,
         ];
     }
 
-    public function layout(): iterable
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
+    public function commandBar(): array
+    {
+        return [
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the farmland is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->farmland->exists),
+
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
+        ];
+    }
+
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
+    public function layout(): array
     {
         return [
             Layout::block(FarmlandEditBasicLayout::class)
-                ->title(__('Basic Information'))
-                ->description(__('This information collects farmlands basic information')),
+                ->title('Basic Information')
+                ->description('This information collects farmlands basic information'),
 
             Layout::block(FarmlandEditMemberLayout::class)
-                ->title(__('Farmers'))
-                ->description(_('This information assigns the farmers to this farmland')),
+                ->title('Farmers')
+                ->description('This information assigns the farmers to this farmland'),
 
             Layout::block(FarmlandEditOtherLayout::class)
-                ->title(__('Other Information'))
-                ->description(__('This information collects other farmland information'))
+                ->title('Other Information')
+                ->description('This information collects other farmland information')
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
@@ -59,12 +97,27 @@ class FarmlandEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function save(Farmland $farmland, Request $request): RedirectResponse
+    /**
+     * Save a farmland.
+     *
+     * @param  Farmland  $farmland
+     * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(Farmland $farmland, Request $request)
     {
         return CreateFarmland::runOrchidAction($farmland, $request);
     }
 
-    public function remove(Farmland $farmland): RedirectResponse
+    /**
+     * Remove a farmland.
+     *
+     * @param  Farmland  $farmland
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function remove(Farmland $farmland)
     {
         return DeleteFarmland::runOrchidAction($farmland, null);
     }

@@ -4,20 +4,29 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\Role;
 
-use App\Orchid\Layouts\AnikulturaEditLayout;
 use Illuminate\Support\Collection;
 use Orchid\Platform\Models\User;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Group;
+use Orchid\Screen\Layouts\Rows;
+use Throwable;
 
-class RolePermissionLayout extends AnikulturaEditLayout
+class RolePermissionLayout extends Rows
 {
     /**
      * @var User|null
      */
     private $user;
 
-    public function fields(): iterable
+    /**
+     * Views.
+     *
+     * @return Field[]
+     *
+     * @throws Throwable
+     */
+    public function fields(): array
     {
         $this->user = $this->query->get('user');
 

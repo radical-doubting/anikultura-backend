@@ -3,11 +3,15 @@
 namespace App\Orchid\Layouts\Site\Province;
 
 use App\Orchid\Filters\Site\RegionFilter;
-use App\Orchid\Layouts\AnikulturaFilterLayout;
+use Orchid\Filters\Filter;
+use Orchid\Screen\Layouts\Selection;
 
-class ProvinceFiltersLayout extends AnikulturaFilterLayout
+class ProvinceFiltersLayout extends Selection
 {
-    public function filters(): iterable
+    /**
+     * @return string[]|Filter[]
+     */
+    public function filters(): array
     {
         return [
             RegionFilter::class,

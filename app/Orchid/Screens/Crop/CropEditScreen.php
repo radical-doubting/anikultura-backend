@@ -8,35 +8,68 @@ use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropEditBasicLayout;
 use App\Orchid\Layouts\Crop\CropEditGrowthLayout;
 use App\Orchid\Layouts\Crop\CropEditPriceLayout;
-use App\Orchid\Screens\AnikulturaEditScreen;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
-class CropEditScreen extends AnikulturaEditScreen
+class CropEditScreen extends Screen
 {
-    public Crop $crop;
+    protected $exists = false;
 
-    public function resourceName(): string
+    public function __construct()
     {
-        return __('crop type');
+        $this->name = __('Create Crop');
+        $this->description = __('Create a new crop type');
     }
 
-    public function exists(): bool
-    {
-        return $this->crop->exists;
-    }
-
+    /**
+     * Query data.
+     *
+     * @return array
+     */
     public function query(Crop $crop): array
     {
+        $this->crop = $crop;
+        $this->exists = $crop->exists;
+
+        if (! $crop->exists) {
+            $this->name = __('Edit Crop');
+            $this->description = __('Edit crop type details');
+        }
+
         return [
             'crop' => $crop,
         ];
     }
 
-    public function layout(): iterable
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
+    public function commandBar(): array
+    {
+        return [
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the crop type is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->exists),
+
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
+        ];
+    }
+
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
+    public function layout(): array
     {
         return [
             Layout::block(CropEditBasicLayout::class)
@@ -59,12 +92,27 @@ class CropEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Crop $crop): RedirectResponse
+    /**
+     * Remove a crop.
+     *
+     * @param  Crop  $crop
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function remove(Crop $crop)
     {
         return DeleteCrop::runOrchidAction($crop, null);
     }
 
-    public function save(Crop $crop, Request $request): RedirectResponse
+    /**
+     * Save a crop.
+     *
+     * @param  Crop  $crop
+     * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(Crop $crop, Request $request)
     {
         return CreateCrop::runOrchidAction($crop, $request);
     }

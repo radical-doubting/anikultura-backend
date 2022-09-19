@@ -9,12 +9,19 @@ class CreateFarmerProfile
 {
     use AsAction;
 
-    public function handle(FarmerProfile $farmerProfile, array $farmerProfileData): FarmerProfile
+    public function handle(?FarmerProfile $farmerProfile, $farmerProfileData)
     {
-        $farmerProfile
-            ->fill($farmerProfileData)
-            ->save();
+        if (is_null($farmerProfile)) {
+            $newFarmerProfile = new FarmerProfile($farmerProfileData);
+            $newFarmerProfile->save();
 
-        return $farmerProfile->refresh();
+            return $newFarmerProfile->id;
+        } else {
+            $farmerProfile
+                ->fill($farmerProfileData)
+                ->save();
+
+            return $farmerProfile->id;
+        }
     }
 }

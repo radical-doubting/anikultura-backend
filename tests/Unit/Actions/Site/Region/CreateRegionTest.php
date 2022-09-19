@@ -5,16 +5,11 @@ namespace Tests\Unit\Actions\Site\Region;
 use App\Actions\Site\Region\CreateRegion;
 use App\Models\Site\Region;
 use Mockery;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class CreateRegionTest extends TestCase
 {
-    public function tearDown(): void
-    {
-        Mockery::close();
-    }
-
-    public function testShouldCreateRegion(): void
+    public function testShouldCreateRegion()
     {
         $mockRegion = Mockery::mock(Region::class)->makePartial();
         $mockRegion->shouldReceive('save')->once()->andReturn(true);

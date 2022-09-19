@@ -25,6 +25,11 @@ class FarmerReportListScreen extends AnikulturaListScreen
         ];
     }
 
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
     public function commandBar(): array
     {
         return [
@@ -34,6 +39,11 @@ class FarmerReportListScreen extends AnikulturaListScreen
         ];
     }
 
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
     public function layout(): array
     {
         return [

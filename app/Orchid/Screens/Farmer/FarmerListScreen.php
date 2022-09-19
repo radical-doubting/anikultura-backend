@@ -6,7 +6,6 @@ use App\Actions\Farmer\DeleteFarmer;
 use App\Models\Farmer\Farmer;
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
-use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class FarmerListScreen extends AnikulturaListScreen
@@ -26,6 +25,11 @@ class FarmerListScreen extends AnikulturaListScreen
         ];
     }
 
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
     public function commandBar(): array
     {
         return [
@@ -35,6 +39,11 @@ class FarmerListScreen extends AnikulturaListScreen
         ];
     }
 
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
     public function layout(): array
     {
         return [
@@ -42,7 +51,15 @@ class FarmerListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Farmer $farmer): RedirectResponse
+    /**
+     * Remove a farmer.
+     *
+     * @param  Farmer  $farmer
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function remove(Farmer $farmer)
     {
         return DeleteFarmer::runOrchidAction($farmer, null);
     }

@@ -3,13 +3,26 @@
 namespace App\Orchid\Layouts\Site\Province;
 
 use App\Models\Site\Region;
-use App\Orchid\Layouts\AnikulturaEditLayout;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Layouts\Rows;
 
-class ProvinceEditLayout extends AnikulturaEditLayout
+class ProvinceEditLayout extends Rows
 {
-    protected function fields(): iterable
+    /**
+     * Used to create the title of a group of form elements.
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * Get the fields elements to be displayed.
+     *
+     * @return Field[]
+     */
+    protected function fields(): array
     {
         return [
             Input::make('province.name')

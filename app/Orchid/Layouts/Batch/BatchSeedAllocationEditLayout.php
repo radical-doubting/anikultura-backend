@@ -4,13 +4,26 @@ namespace App\Orchid\Layouts\Batch;
 
 use App\Models\Crop\Crop;
 use App\Models\Farmer\Farmer;
-use App\Orchid\Layouts\AnikulturaEditLayout;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Layouts\Rows;
 
-class BatchSeedAllocationEditLayout extends AnikulturaEditLayout
+class BatchSeedAllocationEditLayout extends Rows
 {
+    /**
+     * Used to create the title of a group of form elements.
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * Get the fields elements to be displayed.
+     *
+     * @return Field[]
+     */
     protected function fields(): array
     {
         $currentBatchId = $this->query['batch']->id;
@@ -24,12 +37,14 @@ class BatchSeedAllocationEditLayout extends AnikulturaEditLayout
                 ->required()
                 ->title(__('Farmer'))
                 ->placeholder(__('Farmer')),
+
             Group::make([
                 Relation::make('batchSeedAllocation.crop_id')
                     ->fromModel(Crop::class, 'name')
                     ->required()
                     ->title(__('Crop'))
                     ->placeholder(__('Crop')),
+
                 Input::make('batchSeedAllocation.seed_amount')
                     ->type('number')
                     ->required()

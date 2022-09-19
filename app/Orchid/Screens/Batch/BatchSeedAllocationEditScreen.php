@@ -7,28 +7,22 @@ use App\Actions\Batch\DeleteBatchSeedAllocation;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Orchid\Layouts\Batch\BatchSeedAllocationEditLayout;
-use App\Orchid\Screens\AnikulturaEditScreen;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
 use Orchid\Support\Facades\Dashboard;
 use Orchid\Support\Facades\Layout;
 
-class BatchSeedAllocationEditScreen extends AnikulturaEditScreen
+class BatchSeedAllocationEditScreen extends Screen
 {
-    public Batch $batch;
+    protected $exists = false;
 
-    public BatchSeedAllocation $batchSeedAllocation;
-
-    public function resourceName(): string
+    public function __construct()
     {
-        return __('batch seed allocation');
-    }
-
-    public function exists(): bool
-    {
-        return $this->batchSeedAllocation->exists;
+        $this->name = __('Create Batch Seed Allocation');
+        $this->description = __('Create a new batch seed allocation');
     }
 
     public function handle(Request $request, ...$parameters)
@@ -59,14 +53,53 @@ class BatchSeedAllocationEditScreen extends AnikulturaEditScreen
         );
     }
 
+    /**
+     * Query data.
+     *
+     * @return array
+     */
     public function query(Batch $batch, BatchSeedAllocation $batchSeedAllocation): array
     {
+        $this->batch = $batch;
+        $this->batchSeedAllocation = $batchSeedAllocation;
+        $this->exists = $batchSeedAllocation->exists;
+
+        if ($this->exists) {
+            $this->name = __('Edit Batch Seed Allocation');
+            $this->description = __('Edit a batch seed allocation details');
+        }
+
         return [
             'batch' => $batch,
             'batchSeedAllocation' => $batchSeedAllocation,
         ];
     }
 
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
+    public function commandBar(): array
+    {
+        return [
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the Batch Seed Allocation is deleted, all of its resouces and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->exists),
+
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
+        ];
+    }
+
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
     public function layout(): array
     {
         return [
@@ -76,12 +109,27 @@ class BatchSeedAllocationEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Batch $batch, BatchSeedAllocation $batchSeedAllocation): RedirectResponse
+    /**
+     * Remove a batch seed allocation.
+     *
+     * @param  BatchSeedAllocation  $batchSeedAllocation
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function remove(Batch $batch, BatchSeedAllocation $batchSeedAllocation)
     {
         return DeleteBatchSeedAllocation::runOrchidAction($batchSeedAllocation, null);
     }
 
-    public function save(Batch $batch, BatchSeedAllocation $batchSeedAllocation, Request $request): RedirectResponse
+    /**
+     * Save a batch seed allocation.
+     *
+     * @param  BatchSeedAllocation  $batchSeedAllocation
+     * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(Batch $batch, BatchSeedAllocation $batchSeedAllocation, Request $request)
     {
         return CreateBatchSeedAllocation::runOrchidAction([
             'batch' => $batch,

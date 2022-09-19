@@ -4,7 +4,6 @@ namespace App\Actions\Crop;
 
 use App\Models\Crop\Crop;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -14,16 +13,14 @@ class CreateCrop
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Crop $crop, array $cropData): Crop
+    public function handle(Crop $crop, $cropData)
     {
         $crop
             ->fill($cropData)
             ->save();
-
-        return $crop->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, ?Request $request)
     {
         $cropData = $request->get('crop');
 

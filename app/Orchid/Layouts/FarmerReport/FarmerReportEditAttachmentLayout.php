@@ -2,14 +2,27 @@
 
 namespace App\Orchid\Layouts\FarmerReport;
 
-use App\Orchid\Layouts\AnikulturaEditLayout;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Picture;
+use Orchid\Screen\Layouts\Rows;
 
-class FarmerReportEditAttachmentLayout extends AnikulturaEditLayout
+class FarmerReportEditAttachmentLayout extends Rows
 {
-    protected function fields(): iterable
+    /**
+     * Used to create the title of a group of form elements.
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * Get the fields elements to be displayed.
+     *
+     * @return Field[]
+     */
+    protected function fields(): array
     {
-        $currentReport = $this->query->get('farmerReport');
+        $currentReport = $this->query['farmer_report'];
         $media = $currentReport->fetchAllMedia();
         $fileUrl = 'http://placehold.jp/ababab/ffffff/150x150.png?text=No%20image%20attached';
 

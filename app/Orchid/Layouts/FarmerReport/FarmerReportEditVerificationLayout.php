@@ -3,22 +3,35 @@
 namespace App\Orchid\Layouts\FarmerReport;
 
 use App\Models\ManagementUser;
-use App\Orchid\Layouts\AnikulturaEditLayout;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Layouts\Rows;
 
-class FarmerReportEditVerificationLayout extends AnikulturaEditLayout
+class FarmerReportEditVerificationLayout extends Rows
 {
-    protected function fields(): iterable
+    /**
+     * Used to create the title of a group of form elements.
+     *
+     * @var string|null
+     */
+    protected $title;
+
+    /**
+     * Get the fields elements to be displayed.
+     *
+     * @return Field[]
+     */
+    protected function fields(): array
     {
         return [
-            CheckBox::make('farmerReport.verified')
+            CheckBox::make('farmer_report.verified')
                 ->required()
                 ->sendTrueOrFalse()
                 ->title(__('Verification Status'))
                 ->placeholder(__('This farmer report is considered as valid')),
 
-            Relation::make('farmerReport.verified_by')
+            Relation::make('farmer_report.verified_by')
                 ->fromModel(ManagementUser::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullNameWithRole')

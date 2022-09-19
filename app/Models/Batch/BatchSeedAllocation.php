@@ -6,13 +6,17 @@ use App\Models\Crop\Crop;
 use App\Models\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
 
 class BatchSeedAllocation extends Model
 {
     use Filterable, HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'batch_id',
         'farmer_id',
@@ -41,17 +45,17 @@ class BatchSeedAllocation extends Model
         'farmschool_name',
     ];
 
-    public function batch(): BelongsTo
+    public function batch()
     {
         return $this->belongsTo(Batch::class);
     }
 
-    public function farmer(): BelongsTo
+    public function farmer()
     {
         return $this->belongsTo(Farmer::class);
     }
 
-    public function crop(): BelongsTo
+    public function crop()
     {
         return $this->belongsTo(Crop::class);
     }

@@ -4,13 +4,19 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
-use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Platform\Models\Role;
+use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Select;
+use Orchid\Screen\Layouts\Rows;
 
-class UserRoleLayout extends AnikulturaEditLayout
+class UserRoleLayout extends Rows
 {
-    public function fields(): iterable
+    /**
+     * Views.
+     *
+     * @return Field[]
+     */
+    public function fields(): array
     {
         return [
             Select::make('user.roles.')

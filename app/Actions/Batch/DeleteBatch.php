@@ -4,7 +4,6 @@ namespace App\Actions\Batch;
 
 use App\Models\Batch\Batch;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -14,12 +13,12 @@ class DeleteBatch
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Batch $batch): bool
+    public function handle(Batch $batch)
     {
-        return $batch->delete();
+        $batch->delete();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, Request $request = null)
     {
         $this->handle($model);
 

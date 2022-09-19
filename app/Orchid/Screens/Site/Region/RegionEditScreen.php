@@ -6,31 +6,49 @@ use App\Actions\Site\Region\CreateRegion;
 use App\Actions\Site\Region\DeleteRegion;
 use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionEditLayout;
-use App\Orchid\Screens\AnikulturaEditScreen;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
-class RegionEditScreen extends AnikulturaEditScreen
+class RegionEditScreen extends Screen
 {
     public Region $region;
 
-    public function resourceName(): string
+    public function name(): string
     {
-        return __('region');
+        return $this->region->exists
+            ? __('Edit region')
+            : __('Create region');
     }
 
-    public function exists(): bool
+    public function description(): string
     {
-        return $this->region->exists;
+        return $this->region->exists
+            ? __('Edit region details')
+            : __('Create a new region');
     }
 
     public function query(Region $region): array
     {
         return [
             'region' => $region,
+        ];
+    }
+
+    public function commandBar(): array
+    {
+        return [
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the region is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->region->exists),
+
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
         ];
     }
 
@@ -50,12 +68,27 @@ class RegionEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Region $region): RedirectResponse
+    /**
+     * Remove a region.
+     *
+     * @param  Region  $region
+     * @return \Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function remove(Region $region)
     {
         return DeleteRegion::runOrchidAction($region, null);
     }
 
-    public function save(Region $region, Request $request): RedirectResponse
+    /**
+     * Save a region.
+     *
+     * @param  Region  $region
+     * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(Region $region, Request $request)
     {
         return CreateRegion::runOrchidAction($region, $request);
     }

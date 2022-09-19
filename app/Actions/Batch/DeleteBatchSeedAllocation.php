@@ -4,7 +4,6 @@ namespace App\Actions\Batch;
 
 use App\Models\Batch\BatchSeedAllocation;
 use App\Traits\AsOrchidAction;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -14,12 +13,12 @@ class DeleteBatchSeedAllocation
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(BatchSeedAllocation $batchSeedAllocation): bool
+    public function handle(BatchSeedAllocation $batchSeedAllocation)
     {
-        return $batchSeedAllocation->delete();
+        $batchSeedAllocation->delete();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction($model, Request $request = null)
     {
         $this->handle($model);
 

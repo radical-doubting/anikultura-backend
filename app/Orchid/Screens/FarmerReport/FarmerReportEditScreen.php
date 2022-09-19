@@ -9,35 +9,68 @@ use App\Orchid\Layouts\FarmerReport\FarmerReportEditAttachmentLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditEstimationLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditInfoLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditVerificationLayout;
-use App\Orchid\Screens\AnikulturaEditScreen;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
+use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
-class FarmerReportEditScreen extends AnikulturaEditScreen
+class FarmerReportEditScreen extends Screen
 {
-    public FarmerReport $farmerReport;
+    protected $exists;
 
-    public function resourceName(): string
+    public function __construct()
     {
-        return __('farmer report');
+        $this->name = __('Create Farmer Report');
+        $this->description = __('Create a new farmer report');
     }
 
-    public function exists(): bool
-    {
-        return $this->farmerReport->exists;
-    }
-
+    /**
+     * Query data.
+     *
+     * @return array
+     */
     public function query(FarmerReport $farmerReport): array
     {
+        $this->farmerReport = $farmerReport;
+        $this->exists = $farmerReport->exists;
+
+        if ($this->exists) {
+            $this->name = __('Edit Farmer Report');
+            $this->description = __('Edit a submitted farmer report');
+        }
+
         return [
-            'farmerReport' => $farmerReport,
+            'farmer_report' => $farmerReport,
         ];
     }
 
-    public function layout(): iterable
+    /**
+     * Button commands.
+     *
+     * @return \Orchid\Screen\Action[]
+     */
+    public function commandBar(): array
+    {
+        return [
+            Button::make(__('Remove'))
+                ->icon('trash')
+                ->confirm(__('Once the farmer report is deleted, all of its resources and data will be permanently deleted.'))
+                ->method('remove')
+                ->canSee($this->exists),
+
+            Button::make(__('Save'))
+                ->icon('check')
+                ->method('save'),
+        ];
+    }
+
+    /**
+     * Views.
+     *
+     * @return \Orchid\Screen\Layout[]|string[]
+     */
+    public function layout(): array
     {
         return [
             Layout::block(FarmerReportEditInfoLayout::class)
@@ -56,18 +89,32 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
                         ->icon('check')
-                        ->canSee($this->exists())
+                        ->canSee($this->exists)
                         ->method('save')
                 ),
         ];
     }
 
-    public function save(FarmerReport $farmerReport, Request $request): RedirectResponse
+    /**
+     * Save a farmer report.
+     *
+     * @param  FarmerReport  $farmerReport
+     * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function save(FarmerReport $farmerReport, Request $request)
     {
         return CreateFarmerReport::runOrchidAction($farmerReport, $request);
     }
 
-    public function remove(FarmerReport $farmerReport): RedirectResponse
+    /**
+     * Remove a farmer report.
+     *
+     * @param  FarmerReport  $farmerReport
+     * @param  Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(FarmerReport $farmerReport)
     {
         return DeleteFarmerReport::runOrchidAction($farmerReport, null);
     }

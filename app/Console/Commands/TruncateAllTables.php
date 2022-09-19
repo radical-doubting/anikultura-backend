@@ -35,13 +35,14 @@ class TruncateAllTables extends Command
 
     /**
      * Execute the console command.
+     *
+     * @return int
      */
-    public function handle(): int
+    public function handle()
     {
         if (App::environment() === 'production') {
             $this->error('Cannot truncate production server');
-
-            return 1;
+            exit();
         }
 
         Schema::disableForeignKeyConstraints();
@@ -63,7 +64,5 @@ class TruncateAllTables extends Command
         Schema::enableForeignKeyConstraints();
 
         $this->info('Truncating tables successfully');
-
-        return 0;
     }
 }
