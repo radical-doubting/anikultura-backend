@@ -26,13 +26,16 @@
         "laravel/tinker": "^2.5",
         "lorisleiva/laravel-actions": "^2.1",
         "orchid/platform": "^12.0",
-        "php-open-source-saver/jwt-auth": "^1.2"
+        "php-open-source-saver/jwt-auth": "^2.0"
     },
     "require-dev": {
         "laravel/pint": "^1.1",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^6.1",
+        "nunomaduro/larastan": "^2.0",
+        "pestphp/pest": "^1.22",
+        "pestphp/pest-plugin-laravel": "^1.2",
         "phpunit/phpunit": "^9.3.3",
         "spatie/laravel-ignition": "^1.0"
     },
@@ -66,13 +69,16 @@
             "@php artisan orchid:publish --ansi"
         ],
         "lint": [
-            "./vendor/bin/pint --test"
+            "pint --test"
         ],
         "lint-fix": [
-            "./vendor/bin/pint"
+            "pint"
         ],
         "test": [
-            "./vendor/bin/phpunit"
+            "phpunit"
+        ],
+        "analyze": [
+            "phpstan"
         ]
     },
     "extra": {
@@ -83,7 +89,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
