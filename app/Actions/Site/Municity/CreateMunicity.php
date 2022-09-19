@@ -18,7 +18,7 @@ class CreateMunicity
     {
         $municity->fill($municityData)->save();
 
-        return $municity;
+        return $municity->refresh();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
