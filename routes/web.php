@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Config;
+use App\Facades\Anikultura;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    if (Config::get('anikultura.isHeadless')) {
+    if (Anikultura::isHeadless()) {
         return response()->json([
             'headless' => true,
         ]);

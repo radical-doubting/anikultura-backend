@@ -233,6 +233,7 @@ return [
         'JWTFactory' => PHPOpenSourceSaver\JWTAuth\Facades\JWTFactory::class,
         'Alert' => Orchid\Support\Facades\Alert::class,
         'Dashboard' => Orchid\Support\Facades\Dashboard::class,
+        'Anikultura' => App\Facades\Anikultura::class,
     ],
 
 ];

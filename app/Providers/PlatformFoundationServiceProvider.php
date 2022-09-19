@@ -2,26 +2,26 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Config;
+use App\Facades\Anikultura;
 use Orchid\Platform\Providers\FoundationServiceProvider as ServiceProvider;
 
 class PlatformFoundationServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        if (Config::get('anikultura.isHeadless')) {
+        if (Anikultura::isHeadless()) {
             return;
         }
 
         parent::boot();
     }
 
-    public function provides(): array
+    public function register(): void
     {
-        if (Config::get('anikultura.isHeadless')) {
-            return [];
-        } else {
-            return parent::provides();
+        if (Anikultura::isHeadless()) {
+            return;
         }
+
+        parent::register();
     }
 }
