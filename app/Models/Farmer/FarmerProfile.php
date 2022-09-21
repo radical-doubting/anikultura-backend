@@ -88,6 +88,11 @@ class FarmerProfile extends Model
         return $this->belongsTo(SocialStatus::class);
     }
 
+    public function ncPasserStatus(): BelongsTo
+    {
+        return $this->belongsTo(NCPasserStatus::class);
+    }
+
     public function user(): MorphOne
     {
         return $this->morphOne(Farmer::class, 'profile');

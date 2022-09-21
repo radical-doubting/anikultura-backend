@@ -17,6 +17,7 @@ use Database\Seeders\Farmer\FarmerProfileSeeder;
 use Database\Seeders\Farmer\FarmerReportSeeder;
 use Database\Seeders\Farmer\FarmerSeeder;
 use Database\Seeders\Farmer\GenderSeeder;
+use Database\Seeders\Farmer\NCPasserStatusSeeder;
 use Database\Seeders\Farmer\SalaryPeriodicitySeeder;
 use Database\Seeders\Farmer\SocialStatusSeeder;
 use Database\Seeders\Farmland\FarmlandSeeder;
@@ -59,6 +60,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EducationalStatusSeeder::class);
         $this->call(SalaryPeriodicitySeeder::class);
         $this->call(SocialStatusSeeder::class);
+        $this->call(NCPasserStatusSeeder::class);
 
         $this->call(FarmerProfileSeeder::class);
         $this->call(FarmerAddressSeeder::class);

@@ -6,6 +6,7 @@ use App\Models\Farmer\CivilStatus;
 use App\Models\Farmer\EducationalStatus;
 use App\Models\Farmer\FarmerProfile;
 use App\Models\Farmer\Gender;
+use App\Models\Farmer\NCPasserStatus;
 use App\Models\Farmer\SalaryPeriodicity;
 use App\Models\Farmer\SocialStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -41,7 +42,7 @@ class FarmerProfileFactory extends Factory
             'usual_crops_planted' => $this->faker->numberBetween(10, 20),
             'affiliated_organization' => $this->faker->company(),
             'tesda_training_joined' => $this->faker->company(),
-            'nc_passer_status' => $this->faker->numberBetween(0, 1),
+            'nc_passer_status_id' => NCPasserStatus::all()->random()->id,
             'salary_periodicity_id' => SalaryPeriodicity::all()->random()->id,
             'estimated_salary' => $this->faker->numberBetween(2000, 7000),
             'social_status_id' => SocialStatus::all()->random()->id,

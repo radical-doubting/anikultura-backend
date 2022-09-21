@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('usual_crops_planted');
             $table->string('affiliated_organization')->nullable();
             $table->string('tesda_training_joined')->nullable();
-            $table->boolean('nc_passer_status');
             $table->string('social_status_reason');
 
             $table->unsignedBigInteger('gender_id');
@@ -62,6 +61,13 @@ return new class extends Migration
             $table->foreign('social_status_id')
                 ->references('id')
                 ->on('social_statuses')
+                ->restrictOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unsignedBigInteger('nc_passer_status_id');
+            $table->foreign('nc_passer_status_id')
+                ->references('id')
+                ->on('nc_passer_statuses')
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
