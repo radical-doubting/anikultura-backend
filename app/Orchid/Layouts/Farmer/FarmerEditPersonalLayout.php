@@ -15,12 +15,12 @@ class FarmerEditPersonalLayout extends AnikulturaEditLayout
     {
         return [
             Group::make([
-                Select::make('farmerProfile.gender')
+                Select::make('farmerProfile.gender_id')
                     ->fromModel(Gender::class, 'name')
                     ->title(__('Gender'))
                     ->required(),
 
-                Select::make('farmerProfile.civil_status')
+                Select::make('farmerProfile.civil_status_id')
                     ->fromModel(CivilStatus::class, 'name')
                     ->title(__('Civil Status'))
                     ->required(),

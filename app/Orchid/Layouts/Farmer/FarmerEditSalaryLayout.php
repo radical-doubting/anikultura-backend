@@ -16,7 +16,7 @@ class FarmerEditSalaryLayout extends AnikulturaEditLayout
     {
         return [
             Group::make([
-                Select::make('farmerProfile.salary_periodicity')
+                Select::make('farmerProfile.salary_periodicity_id')
                     ->fromModel(SalaryPeriodicity::class, 'name')
                     ->title(__('Salary Periodicity'))
                     ->required(),
@@ -28,7 +28,7 @@ class FarmerEditSalaryLayout extends AnikulturaEditLayout
                     ->required(),
             ]),
 
-            Select::make('farmerProfile.social_status')
+            Select::make('farmerProfile.social_status_id')
                 ->fromModel(SocialStatus::class, 'name')
                 ->title(__('Social Status'))
                 ->required(),
