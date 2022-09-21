@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
+use App\Models\Farmer\CivilStatus;
+use App\Models\Farmer\Gender;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
@@ -14,14 +16,14 @@ class FarmerEditPersonalLayout extends AnikulturaEditLayout
         return [
             Group::make([
                 Select::make('farmerProfile.gender')
+                    ->fromModel(Gender::class, 'name')
                     ->title(__('Gender'))
-                    ->required()
-                    ->options(['Male', 'Female', "I'd rather not say."]),
+                    ->required(),
 
                 Select::make('farmerProfile.civil_status')
+                    ->fromModel(CivilStatus::class, 'name')
                     ->title(__('Civil Status'))
-                    ->required()
-                    ->options(['Single', 'Married', 'Widow', 'Annuled', 'Separated']),
+                    ->required(),
             ]),
 
             Group::make([
@@ -29,12 +31,6 @@ class FarmerEditPersonalLayout extends AnikulturaEditLayout
                     ->type('date')
                     ->title(__('Birthdate'))
                     ->placeholder(__('Birthdate'))
-                    ->required(),
-
-                Input::make('farmerProfile.age')
-                    ->type('number')
-                    ->title(__('Age'))
-                    ->placeholder(__('Age'))
                     ->required(),
             ]),
 
