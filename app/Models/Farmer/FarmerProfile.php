@@ -29,7 +29,7 @@ class FarmerProfile extends Model
         'usual_crops_planted',
         'affiliated_organization',
         'tesda_training_joined',
-        'nc_passer_status',
+        'nc_passer_status_id',
         'salary_periodicity_id',
         'estimated_salary',
         'social_status_id',
