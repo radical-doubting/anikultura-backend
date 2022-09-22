@@ -14,6 +14,15 @@ class FarmerProfileSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            GenderSeeder::class,
+            CivilStatusSeeder::class,
+            EducationalStatusSeeder::class,
+            SalaryPeriodicitySeeder::class,
+            SocialStatusSeeder::class,
+            NCPasserStatusSeeder::class,
+        ]);
+
         FarmerProfile::factory()->count(10)->create();
     }
 }
