@@ -2,51 +2,40 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use Orchid\Screen\Field;
+use App\Models\Farmer\SalaryPeriodicity;
+use App\Models\Farmer\SocialStatus;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Select;
 use Orchid\Screen\Fields\TextArea;
-use Orchid\Screen\Layouts\Rows;
 
-class FarmerEditSalaryLayout extends Rows
+class FarmerEditSalaryLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
         return [
             Group::make([
-                Select::make('farmer_profile.salary_periodicity')
-                    ->title('Salary Periodicity')
-                    ->options(['Everyday', 'Monthly', 'Annually', 'Every 15 Days', 'Every 3 Months', 'Every 6 Months'])
+                Select::make('farmerProfile.salary_periodicity_id')
+                    ->fromModel(SalaryPeriodicity::class, 'name')
+                    ->title(__('Salary Periodicity'))
                     ->required(),
 
-                Input::make('farmer_profile.estimated_salary')
+                Input::make('farmerProfile.estimated_salary')
                     ->title('Estimated Salary')
                     ->type('number')
                     ->placeholder(__('PHP'))
                     ->required(),
             ]),
 
-            Select::make('farmer_profile.social_status')
-                ->title('Is the farmer poor?')
-                ->options(['Yes', 'No'])
+            Select::make('farmerProfile.social_status_id')
+                ->fromModel(SocialStatus::class, 'name')
+                ->title(__('Social Status'))
                 ->required(),
 
-            TextArea::make('farmer_profile.social_status_reason')
-                ->title('Why do you think so?')
-                ->required(),
+            TextArea::make('farmerProfile.social_status_reason')
+                ->title(__('Social Status Reason'))
+                ->help(__('Why do you think the farmer has this social status?')),
         ];
     }
 }

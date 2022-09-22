@@ -1,17 +1,23 @@
 <?php
 
-use App\Actions\Authentication\LoginFarmer;
-use App\Actions\Authentication\LogoutFarmer;
-use App\Actions\Batch\RetrieveFarmerSeedAllocation;
-use App\Actions\Crop\RetrieveFarmerCrops;
-use App\Actions\Crop\RetrieveFarmerSeedStage;
-use App\Actions\Crop\RetrieveNextSeedStage;
-use App\Actions\Farmer\RetrieveFarmerTutorialState;
-use App\Actions\Farmer\UpdateFarmerTutorialState;
-use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
-use App\Actions\FarmerReport\SubmitFarmerReport;
-use App\Actions\FarmerReport\UploadImageToFarmerReport;
-use App\Actions\Farmland\RetrieveFarmerFarmlands;
+declare(strict_types=1);
+
+use App\Actions\Authentication\Api\LoginFarmer;
+use App\Actions\Authentication\Api\LogoutFarmer;
+use App\Actions\Batch\Api\RetrieveFarmerSeedAllocation;
+use App\Actions\Crop\Api\RetrieveFarmerCrops;
+use App\Actions\Crop\Api\RetrieveFarmerSeedStage;
+use App\Actions\Crop\Api\RetrieveNextSeedStage;
+use App\Actions\Farmer\Api\RetrieveFarmerLanguage;
+use App\Actions\Farmer\Api\RetrieveFarmerTutorialState;
+use App\Actions\Farmer\Api\UpdateFarmerLanguage;
+use App\Actions\Farmer\Api\UpdateFarmerTutorialState;
+use App\Actions\FarmerReport\Api\RetrieveFarmerSubmittedReports;
+use App\Actions\FarmerReport\Api\SubmitFarmerReport;
+use App\Actions\FarmerReport\Api\UploadImageToFarmerReport;
+use App\Actions\Farmland\Api\RetrieveFarmerFarmlands;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,8 +29,6 @@ use App\Actions\Farmland\RetrieveFarmerFarmlands;
 |
 */
 
-use Illuminate\Support\Facades\Route;
-
 Route::group(['as' => 'api.'], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', LoginFarmer::class)->name('login');
@@ -34,6 +38,8 @@ Route::group(['as' => 'api.'], function () {
     Route::group(['prefix' => 'farmers', 'middleware' => 'auth:api'], function () {
         Route::get('/tutorial', RetrieveFarmerTutorialState::class);
         Route::patch('/tutorial', UpdateFarmerTutorialState::class);
+        Route::get('/language', RetrieveFarmerLanguage::class);
+        Route::patch('/language', UpdateFarmerLanguage::class);
     });
 
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {

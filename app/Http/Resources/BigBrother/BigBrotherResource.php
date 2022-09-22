@@ -4,6 +4,9 @@ namespace App\Http\Resources\BigBrother;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\BigBrother\BigBrother
+ */
 class BigBrotherResource extends JsonResource
 {
     public function toArray($request)

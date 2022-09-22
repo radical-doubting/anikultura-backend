@@ -23,5 +23,7 @@
         <server name="SESSION_DRIVER" value="array" />
         <server name="TELESCOPE_ENABLED" value="false" />
         <server name="INFLUXDB_ENABLED" value="false" />
+        <server name="ANIKULTURA_HEADLESS" value="false" />
+        <server name="PROMETHEUS_STORAGE_ADAPTER" value="memory" />
     </php>
 </phpunit>

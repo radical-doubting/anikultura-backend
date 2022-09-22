@@ -4,6 +4,7 @@ namespace App\Actions\Site\Municity;
 
 use App\Models\Site\Municity;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -17,10 +18,10 @@ class CreateMunicity
     {
         $municity->fill($municityData)->save();
 
-        return $municity;
+        return $municity->refresh();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $municityData = $request->get('municity');
 

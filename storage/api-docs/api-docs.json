@@ -26,7 +26,7 @@
                     "auth"
                 ],
                 "description": "Login to acquire an authentication token",
-                "operationId": "091c07df1b57039447ff9c1de1c2c25b",
+                "operationId": "36f0bcf86738f6ec62f6ca166fa43165",
                 "requestBody": {
                     "description": "Pass user credentials",
                     "required": true,
@@ -96,7 +96,7 @@
                     "auth"
                 ],
                 "description": "Logout from current authenticated session",
-                "operationId": "4ea2b6cfb3b88d1a8748c15668ccfa83",
+                "operationId": "27cd4e2d48a3f73d894c4834e4b82604",
                 "responses": {
                     "200": {
                         "description": "Successful logout",
@@ -123,7 +123,7 @@
                     "crops"
                 ],
                 "description": "Get the allocated seeds of the logged in farmer",
-                "operationId": "3d90f9f54f922e560c378c9ec1c6f3dc",
+                "operationId": "f040454776564edc6e13b540b930e3e9",
                 "responses": {
                     "200": {
                         "description": "The allocated seeds",
@@ -150,7 +150,7 @@
                     "crops"
                 ],
                 "description": "Get the current crops of the logged in farmer",
-                "operationId": "5ade082c33866cc5b85198dbfba03be3",
+                "operationId": "06d09797e7a39bacc8fd0ad9ea6df07e",
                 "responses": {
                     "200": {
                         "description": "The current crops",
@@ -177,7 +177,7 @@
                     "crops"
                 ],
                 "description": "Get the current seed stage of the logged in farmer",
-                "operationId": "54bd361f055c2c0eeebf48943605c0d5",
+                "operationId": "442ec1357ece8d70c38f05f9512919b8",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -221,7 +221,7 @@
                     "crops"
                 ],
                 "description": "Get the next seed stage of the logged in farmer",
-                "operationId": "1a45147e3841fa735e4441eadb610c6b",
+                "operationId": "7ef59a557df3ba6691646184b57242d6",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -259,13 +259,81 @@
                 }
             }
         },
+        "/farmers/language": {
+            "get": {
+                "tags": [
+                    "farmers"
+                ],
+                "description": "Get the current language preference of the logged in farmer",
+                "operationId": "b278227a79c4aeaa9fd4266fd6d2d47e",
+                "responses": {
+                    "200": {
+                        "description": "The language preference",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "farmers"
+                ],
+                "description": "Update the language preference of the logged in farmer",
+                "operationId": "8ec40af7b9c94e5864822bcdebece226",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "language": {
+                                        "type": "string",
+                                        "example": "en"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful update",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/farmers/tutorial": {
             "get": {
                 "tags": [
                     "farmers"
                 ],
                 "description": "Get the current tutorial state of the logged in farmer",
-                "operationId": "b819e5b6365464fe5938444654041d2a",
+                "operationId": "ab0651cffffbbafdc4395ca8e7d92df8",
                 "responses": {
                     "200": {
                         "description": "The tutorial state",
@@ -290,7 +358,7 @@
                     "farmers"
                 ],
                 "description": "Update the tutorial state of the logged in farmer",
-                "operationId": "2bf3a108f55ee082f8b60cc7b284a4bc",
+                "operationId": "a4b592b600ba3b3f43b17bf773d39845",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -333,7 +401,7 @@
                     "farmer-reports"
                 ],
                 "description": "Get the submitted farmer reports of the logged in farmer",
-                "operationId": "db70405a84f1463e2e188cf6b8982482",
+                "operationId": "8565cb07b551ec43c674ae8b21ff2810",
                 "parameters": [
                     {
                         "name": "farmlandId",
@@ -367,7 +435,7 @@
                     "farmer-reports"
                 ],
                 "description": "Submit a farming report with logged in farmer",
-                "operationId": "b0b0cbb75920a20eb8c8ddb2d78cc62d",
+                "operationId": "457a393b51e876064179a323dc93e50c",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -426,7 +494,7 @@
                     "farmer-reports"
                 ],
                 "description": "Upload an image to farmer report",
-                "operationId": "8a145d034af9c15526987390bc2a6ef3",
+                "operationId": "7ecdc8be22a79d90a7dd225a0317143d",
                 "parameters": [
                     {
                         "name": "farmerReportId",
@@ -479,7 +547,7 @@
                     "farmlands"
                 ],
                 "description": "Get the associated farmlands of the logged in farmer",
-                "operationId": "c56c3666d86d9dd2bed885aff96beab6",
+                "operationId": "0fa449de791367f98f88a3fda6396eaf",
                 "responses": {
                     "200": {
                         "description": "The associated farmlands",
@@ -522,8 +590,5 @@
             "name": "farmer-reports",
             "description": "Endpoints related with farmer reports such as submitting and retrieving their history."
         }
-    ],
-    "security": [
-        []
     ]
 }

@@ -78,7 +78,7 @@ class CreateCropEstimationMetric
 
     private function retrieveNewAmount(
         string $key,
-        int $estimatedYieldAmount,
+        float $estimatedYieldAmount,
         string $estimatedYieldDateUpperTag,
         string $estimatedYieldDateLowerTag,
         Crop $crop,

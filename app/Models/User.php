@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Orchid\Platform\Models\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
@@ -29,22 +30,12 @@ class User extends Authenticatable implements JWTSubject
         'profile_type',
     ];
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
         'permissions',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'permissions' => 'array',
         'email_verified_at' => 'datetime',
@@ -94,7 +85,7 @@ class User extends Authenticatable implements JWTSubject
         return "{$this->first_name} {$this->last_name} ({$this->name}) - $roles";
     }
 
-    public function profile()
+    public function profile(): MorphTo
     {
         return $this->morphTo();
     }

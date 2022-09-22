@@ -4,6 +4,7 @@ namespace App\Actions\Farmland;
 
 use App\Models\Farmland\Farmland;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -13,7 +14,7 @@ class CreateFarmland
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Farmland $farmland, $farmlandData)
+    public function handle(Farmland $farmland, array $farmlandData): Farmland
     {
         $farmland
             ->fill($farmlandData)
@@ -30,9 +31,11 @@ class CreateFarmland
         $farmland
             ->farmers()
             ->sync($farmlandData['farmers']);
+
+        return $farmland->refresh();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $farmlandData = $request->get('farmland');
 

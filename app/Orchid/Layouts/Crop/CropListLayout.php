@@ -3,38 +3,17 @@
 namespace App\Orchid\Layouts\Crop;
 
 use App\Models\Crop\Crop;
+use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class CropListLayout extends Table
+class CropListLayout extends AnikulturaListLayout
 {
-    /**
-     * Data source.
-     *
-     * The name of the key to fetch it from the query.
-     * The results of which will be elements of the table.
-     *
-     * @var string
-     */
     protected $target = 'crops';
 
-    /**
-     * @return bool
-     */
-    protected function striped(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the table cells to be displayed.
-     *
-     * @return TD[]
-     */
-    protected function columns(): array
+    protected function columns(): iterable
     {
         return [
             TD::make('name', __('Name of Crop'))
@@ -43,7 +22,7 @@ class CropListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Crop $crop) {
                     return Link::make($crop->name)
-                        ->route('platform.crops.edit', $crop->id);
+                        ->route('platform.crops.edit', [$crop->id]);
                 }),
             TD::make('group', __('Group'))
                 ->sort()
@@ -51,7 +30,7 @@ class CropListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Crop $crop) {
                     return Link::make($crop->group)
-                        ->route('platform.crops.edit', $crop->id);
+                        ->route('platform.crops.edit', [$crop->id]);
                 }),
             TD::make('variety', __('Variety'))
                 ->sort()
@@ -59,7 +38,7 @@ class CropListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Crop $crop) {
                     return Link::make($crop->variety)
-                        ->route('platform.crops.edit', $crop->id);
+                        ->route('platform.crops.edit', [$crop->id]);
                 }),
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
@@ -70,7 +49,7 @@ class CropListLayout extends Table
                         ->list([
 
                             Link::make(__('Edit'))
-                                ->route('platform.crops.edit', $crop->id)
+                                ->route('platform.crops.edit', [$crop->id])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))

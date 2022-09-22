@@ -2,5 +2,5 @@
 
 return [
     'en' => 'English',
-    'fil_PH' => 'Tagalog',
+    'fil_PH' => 'Filipino',
 ];

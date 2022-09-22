@@ -2,27 +2,14 @@
 
 namespace App\Orchid\Layouts\User;
 
-use Orchid\Screen\Field;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Password;
-use Orchid\Screen\Layouts\Rows;
 
-class UserEditLayout extends Rows
+class UserEditLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
         $user = $this->query->get('user');
         $hasUser = is_null($user) ? false : $user->exists;

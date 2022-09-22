@@ -7,6 +7,7 @@ use App\Models\Site\Municity;
 use App\Orchid\Layouts\Site\Municity\MunicityFiltersLayout;
 use App\Orchid\Layouts\Site\Municity\MunicityListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class MunicityListScreen extends AnikulturaListScreen
@@ -45,15 +46,7 @@ class MunicityListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a municity.
-     *
-     * @param  Municity  $municity
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Municity $municity)
+    public function remove(Municity $municity): RedirectResponse
     {
         return DeleteMunicity::runOrchidAction($municity, null);
     }

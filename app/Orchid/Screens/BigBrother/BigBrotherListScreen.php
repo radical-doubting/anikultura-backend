@@ -6,13 +6,14 @@ use App\Actions\BigBrother\DeleteBigBrother;
 use App\Models\BigBrother\BigBrother;
 use App\Orchid\Layouts\BigBrother\BigBrotherListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class BigBrotherListScreen extends AnikulturaListScreen
 {
     public function name(): string
     {
-        return __('Batches');
+        return __('Big Brothers');
     }
 
     public function query(): array
@@ -24,11 +25,6 @@ class BigBrotherListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -39,11 +35,6 @@ class BigBrotherListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
@@ -51,15 +42,7 @@ class BigBrotherListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a big brother.
-     *
-     * @param  BigBrother  $bigBrother
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(BigBrother $bigBrother)
+    public function remove(BigBrother $bigBrother): RedirectResponse
     {
         return DeleteBigBrother::runOrchidAction($bigBrother, null);
     }

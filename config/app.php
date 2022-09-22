@@ -174,6 +174,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\PlatformFoundationServiceProvider::class,
         PHPOpenSourceSaver\JWTAuth\Providers\LaravelServiceProvider::class,
         Arquivei\LaravelPrometheusExporter\PrometheusServiceProvider::class,
     ],
@@ -230,6 +231,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'JWTAuth' => PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => PHPOpenSourceSaver\JWTAuth\Facades\JWTFactory::class,
+        'Alert' => Orchid\Support\Facades\Alert::class,
+        'Dashboard' => Orchid\Support\Facades\Dashboard::class,
+        'Anikultura' => App\Facades\Anikultura::class,
     ],
 
 ];

@@ -4,6 +4,7 @@ namespace App\Actions\Site\Municity;
 
 use App\Models\Site\Municity;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -15,10 +16,16 @@ class DeleteMunicity
 
     public function handle(Municity $municity): bool
     {
-        return  $municity->delete();
+        $isDeleted = $municity->delete();
+
+        if (is_null($isDeleted)) {
+            return false;
+        }
+
+        return $isDeleted;
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $this->handle($model);
 

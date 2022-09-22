@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -10,24 +9,16 @@ trait AsOrchidAction
 {
     /**
      * A static helper that runs the action as an Orchid business logic.
-     *
-     * @param  Model  $model
-     * @param  Request  $request
-     * @return RedirectResponse
      */
-    public static function runOrchidAction($model, ?Request $request)
+    public static function runOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         return static::make()->handleAsOrchidAction($model, $request);
     }
 
     /**
      * Runs the action as an Orchid business logic.
-     *
-     * @param  Model  $model
-     * @param  Request  $request
-     * @return RedirectResponse
      */
-    public function handleAsOrchidAction($model, ?Request $request)
+    public function handleAsOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         if (isset($request)) {
             $this->validateRequest($request);
@@ -41,9 +32,13 @@ trait AsOrchidAction
      */
     private function validateRequest(Request $request): void
     {
+        if (! method_exists($this, 'rules')) {
+            return;
+        }
+
         $rules = $this->rules();
 
-        if (! isset($rules)) {
+        if (! is_array($rules)) {
             return;
         }
 
@@ -52,10 +47,6 @@ trait AsOrchidAction
 
     /**
      * Runs the action as an Orchid business logic.
-     *
-     * @param  Model  $model
-     * @param  Request  $request
-     * @return RedirectResponse
      */
-    abstract public function asOrchidAction($model, ?Request $request);
+    abstract public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse;
 }

@@ -5,15 +5,11 @@ namespace App\Orchid\Layouts\Farmland;
 use App\Orchid\Filters\Batch\BatchFilter;
 use App\Orchid\Filters\Farmland\FarmlandStatusFilter;
 use App\Orchid\Filters\Farmland\FarmlandTypeFilter;
-use Orchid\Filters\Filter;
-use Orchid\Screen\Layouts\Selection;
+use App\Orchid\Layouts\AnikulturaFilterLayout;
 
-class FarmlandFiltersLayout extends Selection
+class FarmlandFiltersLayout extends AnikulturaFilterLayout
 {
-    /**
-     * @return string[]|Filter[]
-     */
-    public function filters(): array
+    public function filters(): iterable
     {
         return [
             BatchFilter::class,

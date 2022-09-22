@@ -7,6 +7,7 @@ use App\Models\Site\Province;
 use App\Orchid\Layouts\Site\Province\ProvinceFiltersLayout;
 use App\Orchid\Layouts\Site\Province\ProvinceListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class ProvinceListScreen extends AnikulturaListScreen
@@ -44,15 +45,7 @@ class ProvinceListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a province.
-     *
-     * @param  Province  $province
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Province $province)
+    public function remove(Province $province): RedirectResponse
     {
         return DeleteProvince::runOrchidAction($province, null);
     }

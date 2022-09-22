@@ -10,29 +10,19 @@ class CreateFarmerAddress
 {
     use AsAction;
 
-    public function handle(FarmerProfile $farmerProfile, $farmerAddressData)
-    {
-        $farmerProfileId = $farmerProfile->id;
-        $existingFarmerAddress = $farmerProfile->farmerAddress();
+    public function handle(
+        FarmerProfile $farmerProfile,
+        FarmerAddress $farmerAddress,
+        array $farmerAddressData
+    ): FarmerAddress {
+        $farmerAddress
+            ->farmerProfile()
+            ->associate($farmerProfile);
 
-        if (! $existingFarmerAddress->exists()) {
-            $this->createNewFarmerAddress($existingFarmerAddress, $farmerAddressData, $farmerProfileId);
+        $farmerAddress
+            ->fill($farmerAddressData)
+            ->save();
 
-            return;
-        }
-
-        $this->updateExistingFarmerAddress($existingFarmerAddress, $farmerAddressData);
-    }
-
-    private function createNewFarmerAddress($existingFarmerAddress, $farmerAddressData, $farmerProfileId)
-    {
-        $newFarmerAddress = new FarmerAddress($farmerAddressData);
-        $newFarmerAddress['farmer_profile_id'] = $farmerProfileId;
-        $existingFarmerAddress->save($newFarmerAddress);
-    }
-
-    private function updateExistingFarmerAddress($existingFarmerAddress, $farmerAddressData)
-    {
-        $existingFarmerAddress->update($farmerAddressData);
+        return $farmerAddress->refresh();
     }
 }

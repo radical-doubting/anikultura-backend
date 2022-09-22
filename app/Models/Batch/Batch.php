@@ -11,17 +11,18 @@ use Chelout\RelationshipEvents\Traits\HasRelationshipObservables;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Batch extends Model
 {
     use Filterable, HasFactory, HasBelongsToManyEvents, HasRelationshipObservables, Sluggable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'farmschool_name',
         'assigned_site',
@@ -61,27 +62,27 @@ class Batch extends Model
         parent::boot();
     }
 
-    public function region()
+    public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
     }
 
-    public function province()
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
     }
 
-    public function municity()
+    public function municity(): BelongsTo
     {
         return $this->belongsTo(Municity::class);
     }
 
-    public function farmers()
+    public function farmers(): BelongsToMany
     {
         return $this->belongsToMany(Farmer::class, 'batch_farmers', 'batch_id', 'farmer_id');
     }
 
-    public function seedAllocations()
+    public function seedAllocations(): HasMany
     {
         return $this->hasMany(BatchSeedAllocation::class);
     }

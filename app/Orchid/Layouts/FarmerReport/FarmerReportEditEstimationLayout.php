@@ -2,29 +2,17 @@
 
 namespace App\Orchid\Layouts\FarmerReport;
 
-use Orchid\Screen\Field;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Layouts\Rows;
 
-class FarmerReportEditEstimationLayout extends Rows
+class FarmerReportEditEstimationLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
-        $currentReport = $this->query['farmer_report'];
+        $currentReport = $this->query->get('farmerReport');
         $isPlanted = false;
+        $disclaimer = __('Estimation data is available when this report reaches the Seeds Planted stage.');
 
         if ($currentReport->exists) {
             $farmland = $currentReport->farmland;
@@ -34,42 +22,40 @@ class FarmerReportEditEstimationLayout extends Rows
             $cropName = $currentReport->crop->name;
             $isPlanted = $currentReport->isPlanted();
 
-            $disclaimer = __("The estimated yield assuming that the entire $farmlandHectares hectare(s) of $farmlandName has only $cropName planted.");
+            if ($isPlanted) {
+                $disclaimer = __("The estimated yield assuming that the entire $farmlandHectares hectare(s) of $farmlandName has only $cropName planted.");
+            }
         }
 
         return [
-            Input::make('farmer_report.estimated_yield_amount')
-                ->readonly()
-                ->style('color: black')
+            Input::make('farmerReport.estimated_yield_amount')
                 ->title($isPlanted ? __('Estimated Yield Amount (kg)') : '')
-                ->placeholder(__('Estimated Yield Amount (kg)'))
-                ->help($isPlanted ? $disclaimer : 'Estimation data is available when this report reaches the Seeds Planted stage.')
-                ->hidden(! $isPlanted)
+                ->readonly()
                 ->mask([
                     'alias' => 'currency',
                     'suffix' => ' kg',
                     'groupSeparator' => ',',
                     'digitsOptional' => false,
                     'removeMaskOnSubmit' => true,
-                ]),
+                ])
+                ->help($disclaimer)
+                ->style('color: black')
+                ->hidden(! $isPlanted),
 
             Group::make([
-                Input::make('farmer_report.estimated_yield_date_lower_bound')
-                    ->type('date')
-                    ->readonly()
-                    ->style('color: black')
+                Input::make('farmerReport.estimated_yield_date_lower_bound')
                     ->title($isPlanted ? __('Estimated Yield Date (Earliest)') : '')
-                    ->placeholder(__('Estimated Yield Amount (Earliest)'))
-                    ->help($isPlanted ? __('The earliest date that this crop could reach maturity.') : '')
-                    ->hidden(! $isPlanted),
-
-                Input::make('farmer_report.estimated_yield_date_upper_bound')
                     ->type('date')
                     ->readonly()
+                    ->help($isPlanted ? __('The earliest date that this crop could reach maturity.') : '')
                     ->style('color: black')
+                    ->hidden(! $isPlanted),
+                Input::make('farmerReport.estimated_yield_date_upper_bound')
                     ->title($isPlanted ? __('Estimated Yield Date (Latest)') : '')
-                    ->placeholder(__('Estimated Yield Amount (Latest)'))
+                    ->type('date')
+                    ->readonly()
                     ->help($isPlanted ? __('The latest date that this crop could reach maturity.') : '')
+                    ->style('color: black')
                     ->hidden(! $isPlanted),
             ]),
         ];

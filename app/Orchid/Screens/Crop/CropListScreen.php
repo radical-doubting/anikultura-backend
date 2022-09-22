@@ -6,6 +6,7 @@ use App\Actions\Crop\DeleteCrop;
 use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;
 
 class CropListScreen extends AnikulturaListScreen
@@ -24,11 +25,6 @@ class CropListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
@@ -39,11 +35,6 @@ class CropListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
@@ -51,15 +42,7 @@ class CropListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a crop.
-     *
-     * @param  Crop  $crop
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Crop $crop)
+    public function remove(Crop $crop): RedirectResponse
     {
         return DeleteCrop::runOrchidAction($crop, null);
     }
