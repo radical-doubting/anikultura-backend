@@ -16,8 +16,6 @@ class FarmerFactory extends Factory
      */
     protected $model = Farmer::class;
 
-    private static $nextProfileId = 1;
-
     /**
      * Define the model's default state.
      *
@@ -40,7 +38,6 @@ class FarmerFactory extends Factory
             'middle_name' => $middleName,
             'last_name' => $lastName,
             'profile_type' => 'App\Models\Farmer\FarmerProfile',
-            'profile_id' => self::$nextProfileId++,
         ];
 
         return $data;

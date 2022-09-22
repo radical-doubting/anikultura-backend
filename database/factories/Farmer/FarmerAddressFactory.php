@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FarmerAddressFactory extends Factory
 {
-    private static $nextProfileId = 1;
-
     /**
      * The name of the factory's corresponding model.
      *
@@ -30,7 +28,6 @@ class FarmerAddressFactory extends Factory
             'barangay' => $this->faker->streetName,
             'municity' => $this->faker->city,
             'province' => $this->faker->state,
-            'farmer_profile_id' => self::$nextProfileId++,
             'region_id' => Region::all()->random()->id,
         ];
     }

@@ -3,6 +3,7 @@
 namespace Database\Seeders\Admin;
 
 use App\Models\Admin\Admin;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Orchid\Platform\Models\Role;
 
@@ -21,6 +22,9 @@ class AdminSeeder extends Seeder
 
         Admin::factory()
             ->count(1)
+            ->sequence(fn (Sequence $sequence) => [
+                'profile_id' => $sequence->index + 1,
+            ])
             ->create()
             ->each(function (Admin $admin) use ($adminRoleId) {
                 $admin->roles()->attach($adminRoleId);

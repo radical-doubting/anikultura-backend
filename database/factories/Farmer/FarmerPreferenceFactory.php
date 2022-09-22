@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class FarmerPreferenceFactory extends Factory
 {
-    private static $nextProfileId = 1;
-
     /**
      * Define the model's default state.
      *
@@ -19,7 +17,6 @@ class FarmerPreferenceFactory extends Factory
     public function definition()
     {
         return [
-            'farmer_profile_id' => self::$nextProfileId++,
             'tutorial_done' => false,
             'language' => 'en',
         ];
