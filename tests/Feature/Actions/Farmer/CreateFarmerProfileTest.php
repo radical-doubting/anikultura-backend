@@ -67,6 +67,16 @@ it('should add a farmer profile', function () {
     expect($createdFarmerProfile->ncPasserStatus->name)->toBe($ncPasserStatus->name);
     expect($createdFarmerProfile->salaryPeriodicity->name)->toBe($salaryPeriodicity->name);
     expect($createdFarmerProfile->socialStatus->name)->toBe($socialStatus->name);
+    expect($createdFarmerProfile->birthday)->toBe('1990-11-12');
+    expect($createdFarmerProfile->quantity_family_members)->toBe(3);
+    expect($createdFarmerProfile->quantity_working_dependents)->toBe(2);
+    expect($createdFarmerProfile->current_job)->toBe('Acme Job');
+    expect($createdFarmerProfile->farming_years)->toBe(5);
+    expect($createdFarmerProfile->usual_crops_planted)->toBe('10');
+    expect($createdFarmerProfile->affiliated_organization)->toBe('Acme Company');
+    expect($createdFarmerProfile->tesda_training_joined)->toBe('Acme Training');
+    expect($createdFarmerProfile->estimated_salary)->toBe(12000.0);
+    expect($createdFarmerProfile->social_status_reason)->toBe('An example reason');
     expect($createdFarmerProfile->created_at)->toBeTruthy();
     expect($createdFarmerProfile->updated_at)->toBeTruthy();
 
