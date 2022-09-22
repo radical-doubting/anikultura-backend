@@ -16,6 +16,10 @@ class FarmerPreference extends Model
         'language',
     ];
 
+    protected $casts = [
+        'tutorial_done' => 'bool',
+    ];
+
     public function farmerProfile(): BelongsTo
     {
         return $this->belongsTo(FarmerProfile::class);
