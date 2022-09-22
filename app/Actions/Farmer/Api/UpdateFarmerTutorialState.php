@@ -11,9 +11,13 @@ class UpdateFarmerTutorialState
 {
     use AsAction;
 
-    public function handle(FarmerProfile $farmerProfile, bool $tutorialDone)
+    public function handle(FarmerProfile $farmerProfile, bool $tutorialDone): void
     {
-        $farmerProfile->update(['tutorial_done' => $tutorialDone]);
+        $farmerProfile
+            ->preference
+            ->update([
+                'tutorial_done' => $tutorialDone,
+            ]);
     }
 
     /**

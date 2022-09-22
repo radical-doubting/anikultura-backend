@@ -10,10 +10,17 @@ use Database\Seeders\BigBrother\BigBrotherSeeder;
 use Database\Seeders\Crop\CropBuyerSeeder;
 use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\Crop\SeedStageSeeder;
+use Database\Seeders\Farmer\CivilStatusSeeder;
+use Database\Seeders\Farmer\EducationalStatusSeeder;
 use Database\Seeders\Farmer\FarmerAddressSeeder;
+use Database\Seeders\Farmer\FarmerPreferenceSeeder;
 use Database\Seeders\Farmer\FarmerProfileSeeder;
-use Database\Seeders\Farmer\FarmerReportSeeder;
 use Database\Seeders\Farmer\FarmerSeeder;
+use Database\Seeders\Farmer\GenderSeeder;
+use Database\Seeders\Farmer\NCPasserStatusSeeder;
+use Database\Seeders\Farmer\SalaryPeriodicitySeeder;
+use Database\Seeders\Farmer\SocialStatusSeeder;
+use Database\Seeders\FarmerReport\FarmerReportSeeder;
 use Database\Seeders\Farmland\FarmlandSeeder;
 use Database\Seeders\Farmland\FarmlandStatusSeeder;
 use Database\Seeders\Farmland\FarmlandTypeSeeder;
@@ -47,13 +54,25 @@ class DatabaseSeeder extends Seeder
 
         // Data (in order)
         $this->call(CropSeeder::class);
-        $this->call(FarmerSeeder::class);
+
+        $this->call(GenderSeeder::class);
+        $this->call(CivilStatusSeeder::class);
+        $this->call(EducationalStatusSeeder::class);
+        $this->call(SalaryPeriodicitySeeder::class);
+        $this->call(SocialStatusSeeder::class);
+        $this->call(NCPasserStatusSeeder::class);
         $this->call(FarmerProfileSeeder::class);
+        $this->call(FarmerSeeder::class);
+
+        $this->call(FarmerPreferenceSeeder::class);
         $this->call(FarmerAddressSeeder::class);
-        $this->call(BigBrotherSeeder::class);
+
         $this->call(BigBrotherProfileSeeder::class);
-        $this->call(AdminSeeder::class);
+        $this->call(BigBrotherSeeder::class);
+
         $this->call(AdminProfileSeeder::class);
+        $this->call(AdminSeeder::class);
+
         $this->call(BatchSeeder::class);
         $this->call(FarmlandSeeder::class);
         $this->call(FarmerReportSeeder::class);

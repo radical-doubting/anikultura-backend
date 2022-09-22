@@ -3,6 +3,8 @@
 namespace Database\Seeders\Farmer;
 
 use App\Models\Farmer\FarmerAddress;
+use App\Models\Farmer\FarmerProfile;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class FarmerAddressSeeder extends Seeder
@@ -14,6 +16,13 @@ class FarmerAddressSeeder extends Seeder
      */
     public function run()
     {
-        FarmerAddress::factory()->count(10)->create();
+        $profiles = FarmerProfile::all();
+
+        FarmerAddress::factory()
+            ->count(10)
+            ->sequence(fn (Sequence $sequence) => [
+                'farmer_profile_id' => $profiles->get($sequence->index),
+            ])
+            ->create();
     }
 }

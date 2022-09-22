@@ -11,9 +11,9 @@ class RetrieveFarmerTutorialState
 {
     use AsAction;
 
-    public function handle(FarmerProfile $farmerProfile)
+    public function handle(FarmerProfile $farmerProfile): bool
     {
-        return $farmerProfile->tutorial_done;
+        return $farmerProfile->preference->tutorial_done;
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
+use App\Models\Farmer\EducationalStatus;
+use App\Models\Farmer\NCPasserStatus;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
@@ -13,15 +15,14 @@ class FarmerEditJobEducationLayout extends AnikulturaEditLayout
     {
         return [
             Group::make([
-                Select::make('farmerProfile.highest_educational_status')
+                Select::make('farmerProfile.educational_status_id')
+                    ->fromModel(EducationalStatus::class, 'name')
                     ->title(__('Highest Educational Status'))
-                    ->options(['Elementary', 'High School', 'College'])
                     ->required(),
 
                 Input::make('farmerProfile.college_course')
                     ->title(__('College Course'))
-                    ->placeholder(__('College Course'))
-                    ->required(),
+                    ->placeholder(__('College Course')),
             ]),
 
             Group::make([
@@ -57,9 +58,10 @@ class FarmerEditJobEducationLayout extends AnikulturaEditLayout
                     ->placeholder(__('TESDA Training Joined'))
                     ->required(),
 
-                Select::make('farmerProfile.nc_passer_status')
-                    ->title(__('Is an MC Passer?'))
-                    ->options(['Yes', 'No']),
+                Select::make('farmerProfile.nc_passer_status_id')
+                    ->fromModel(NCPasserStatus::class, 'name')
+                    ->title(__('Is an NC Passer?'))
+                    ->required(),
             ]),
         ];
     }

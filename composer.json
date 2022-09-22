@@ -75,7 +75,10 @@
             "pint"
         ],
         "test": [
-            "phpunit"
+            "pest"
+        ],
+        "test-dev": [
+            "pest --configuration phpunit-sqlite.xml"
         ],
         "analyze": [
             "phpstan"
