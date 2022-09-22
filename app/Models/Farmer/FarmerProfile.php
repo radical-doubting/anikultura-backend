@@ -57,6 +57,10 @@ class FarmerProfile extends Model
         'created_at',
     ];
 
+    protected $casts = [
+        'estimated_salary' => 'float',
+    ];
+
     public function farmerAddress(): HasOne
     {
         return $this->hasOne(FarmerAddress::class);
