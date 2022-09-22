@@ -54,7 +54,6 @@ class DatabaseSeeder extends Seeder
 
         // Data (in order)
         $this->call(CropSeeder::class);
-        $this->call(FarmerSeeder::class);
 
         $this->call(GenderSeeder::class);
         $this->call(CivilStatusSeeder::class);
@@ -62,14 +61,18 @@ class DatabaseSeeder extends Seeder
         $this->call(SalaryPeriodicitySeeder::class);
         $this->call(SocialStatusSeeder::class);
         $this->call(NCPasserStatusSeeder::class);
-
         $this->call(FarmerProfileSeeder::class);
+        $this->call(FarmerSeeder::class);
+
         $this->call(FarmerPreferenceSeeder::class);
         $this->call(FarmerAddressSeeder::class);
-        $this->call(BigBrotherSeeder::class);
+
         $this->call(BigBrotherProfileSeeder::class);
-        $this->call(AdminSeeder::class);
+        $this->call(BigBrotherSeeder::class);
+
         $this->call(AdminProfileSeeder::class);
+        $this->call(AdminSeeder::class);
+
         $this->call(BatchSeeder::class);
         $this->call(FarmlandSeeder::class);
         $this->call(FarmerReportSeeder::class);
