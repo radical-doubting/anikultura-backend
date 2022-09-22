@@ -19,6 +19,7 @@ it('should login farmer', function () {
 
     $response
         ->assertStatus(200)
+        ->assertCookie('token')
         ->assertJson([
             'tokenType' => 'bearer',
             'expiresIn' => 3600,
