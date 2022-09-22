@@ -11,7 +11,7 @@ class LogoutFarmer
 {
     use AsAction;
 
-    public function handle()
+    public function handle(): void
     {
         auth('api')->logout();
     }

@@ -10,7 +10,7 @@ class LoginFarmer
 {
     use AsAction;
 
-    public function handle($username, $password)
+    public function handle(string $username, string $password): ?array
     {
         // Match request body with User model attributes
         $token = auth('api')->attempt([
@@ -56,7 +56,7 @@ class LoginFarmer
 
         $authPayload = $this->handle($username, $password);
 
-        if (! $authPayload) {
+        if (is_null($authPayload)) {
             return response()->json(['message' => 'Invalid login credentials'], 401);
         }
 

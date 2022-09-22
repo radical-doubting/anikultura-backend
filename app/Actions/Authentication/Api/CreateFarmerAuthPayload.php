@@ -10,7 +10,7 @@ class CreateFarmerAuthPayload
 {
     use AsAction;
 
-    public function handle($token)
+    public function handle(string $token): array
     {
         return [
             'accessToken' => $token,
