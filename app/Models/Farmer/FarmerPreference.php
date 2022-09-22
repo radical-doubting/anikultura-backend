@@ -4,6 +4,7 @@ namespace App\Models\Farmer;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FarmerPreference extends Model
 {
@@ -14,4 +15,9 @@ class FarmerPreference extends Model
         'tutorial_done',
         'language',
     ];
+
+    public function farmerProfile(): BelongsTo
+    {
+        return $this->belongsTo(FarmerProfile::class);
+    }
 }
