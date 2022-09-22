@@ -13,7 +13,7 @@ class RetrieveFarmerTutorialState
 
     public function handle(FarmerProfile $farmerProfile)
     {
-        return $farmerProfile->tutorial_done;
+        return $farmerProfile->preference->tutorial_done;
     }
 
     /**

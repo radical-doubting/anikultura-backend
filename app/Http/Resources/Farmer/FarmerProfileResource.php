@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Farmer;
 
+use App\Models\Farmer\FarmerPreference;
 use App\Models\Farmer\Gender;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -17,8 +18,14 @@ class FarmerProfileResource extends JsonResource
          */
         $gender = $this->gender;
 
+        /**
+         * @var FarmerPreference
+         */
+        $preference = $this->preference;
+
         return [
-            'isTutorialDone' => $this->tutorial_done,
+            'isTutorialDone' => $preference->tutorial_done,
+            'language' => $preference->language,
             'gender' => $gender->name,
             'birthday' => $this->birthday,
             'affiliatedOrganization' => $this->affiliated_organization,

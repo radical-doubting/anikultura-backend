@@ -13,6 +13,7 @@ use Database\Seeders\Crop\SeedStageSeeder;
 use Database\Seeders\Farmer\CivilStatusSeeder;
 use Database\Seeders\Farmer\EducationalStatusSeeder;
 use Database\Seeders\Farmer\FarmerAddressSeeder;
+use Database\Seeders\Farmer\FarmerPreferenceSeeder;
 use Database\Seeders\Farmer\FarmerProfileSeeder;
 use Database\Seeders\Farmer\FarmerReportSeeder;
 use Database\Seeders\Farmer\FarmerSeeder;
@@ -63,6 +64,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NCPasserStatusSeeder::class);
 
         $this->call(FarmerProfileSeeder::class);
+        $this->call(FarmerPreferenceSeeder::class);
         $this->call(FarmerAddressSeeder::class);
         $this->call(BigBrotherSeeder::class);
         $this->call(BigBrotherProfileSeeder::class);

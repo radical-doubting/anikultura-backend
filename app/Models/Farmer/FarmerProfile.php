@@ -15,7 +15,6 @@ class FarmerProfile extends Model
     use Filterable, HasFactory, AsSource;
 
     protected $fillable = [
-        'tutorial_done',
         'gender_id',
         'civil_status_id',
         'birthday',
@@ -91,6 +90,11 @@ class FarmerProfile extends Model
     public function ncPasserStatus(): BelongsTo
     {
         return $this->belongsTo(NCPasserStatus::class);
+    }
+
+    public function preference(): HasOne
+    {
+        return $this->hasOne(FarmerPreference::class);
     }
 
     public function user(): MorphOne
