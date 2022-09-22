@@ -1,14 +1,8 @@
 <?php
 
 use App\Models\Farmer\Farmer;
-use PHPOpenSourceSaver\JWTAuth\Facades\JWTAuth;
-
-use function Pest\Laravel\actingAs;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\seed;
-use function Pest\Laravel\withCookie;
-use function Pest\Laravel\withCookies;
-use function Pest\Laravel\withUnencryptedCookies;
 
 beforeEach(function () {
     seed();
