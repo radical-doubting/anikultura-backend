@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Orchid\Support\Testing\DynamicTestScreen;
+use Orchid\Support\Testing\ScreenTesting;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +21,8 @@ uses(RefreshDatabase::class)
         'Feature/Actions',
         'Feature/Orchid'
     );
+uses(ScreenTesting::class)
+    ->in('Feature/Orchid');
 
 /*
 |--------------------------------------------------------------------------
@@ -46,7 +50,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function screen(?string $name = null): DynamicTestScreen
 {
-    // ..
+    return test()->screen($name);
 }
