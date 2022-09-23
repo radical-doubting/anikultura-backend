@@ -1,23 +1,9 @@
 <?php
 
-namespace Tests\Feature\Orchid\Screens;
+it('should show login screen', function () {
+    $screen = screen('platform.login');
 
-use Orchid\Support\Testing\ScreenTesting;
-use Tests\TestCase;
-
-class LoginScreenTest extends TestCase
-{
-    use ScreenTesting;
-
-    /**
-     * A basic test example.
-     */
-    public function testShouldShowScreen()
-    {
-        $screen = $this->screen('platform.login');
-
-        $screen->display()
-            ->assertSee('Login')
-            ->assertSee('Sign in to your account');
-    }
-}
+    $screen->display()
+        ->assertSee('Login')
+        ->assertSee('Sign in to your account');
+});
