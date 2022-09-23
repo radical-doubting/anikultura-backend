@@ -9,9 +9,7 @@ use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\Farmer\FarmerSeeder;
 use Database\Seeders\FarmerReport\FarmerReportSeeder;
 use Database\Seeders\Farmland\FarmlandSeeder;
-use Database\Seeders\Site\MunicitySeeder;
-use Database\Seeders\Site\ProvinceSeeder;
-use Database\Seeders\Site\RegionSeeder;
+use Database\Seeders\Site\SiteSeeder;
 use Database\Seeders\User\RoleSeeder;
 use Illuminate\Database\Seeder;
 
@@ -24,9 +22,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(RegionSeeder::class);
-        $this->call(ProvinceSeeder::class);
-        $this->call(MunicitySeeder::class);
+        $this->call(SiteSeeder::class);
 
         $this->call(RoleSeeder::class);
         $this->call(FarmerSeeder::class);
