@@ -36,26 +36,26 @@ Route::group(['as' => 'api.'], function () {
     });
 
     Route::group(['prefix' => 'farmers', 'middleware' => 'auth:api'], function () {
-        Route::get('/tutorial', RetrieveFarmerTutorialState::class);
-        Route::patch('/tutorial', UpdateFarmerTutorialState::class);
-        Route::get('/language', RetrieveFarmerLanguage::class);
-        Route::patch('/language', UpdateFarmerLanguage::class);
+        Route::get('/tutorial', RetrieveFarmerTutorialState::class)->name('tutorial');
+        Route::patch('/tutorial', UpdateFarmerTutorialState::class)->name('tutorial.update');
+        Route::get('/language', RetrieveFarmerLanguage::class)->name('language');
+        Route::patch('/language', UpdateFarmerLanguage::class)->name('language.update');
     });
 
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {
-        Route::post('/', SubmitFarmerReport::class);
-        Route::post('/{farmerReportId}/upload', UploadImageToFarmerReport::class);
-        Route::get('/{farmlandId}', RetrieveFarmerSubmittedReports::class);
+        Route::post('/', SubmitFarmerReport::class)->name('reports.submit');
+        Route::post('/{farmerReportId}/upload', UploadImageToFarmerReport::class)->name('reports.upload');
+        Route::get('/{farmlandId}', RetrieveFarmerSubmittedReports::class)->name('reports');
     });
 
     Route::group(['prefix' => 'crops', 'middleware' => 'auth:api'], function () {
-        Route::get('/', RetrieveFarmerCrops::class);
-        Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class);
-        Route::post('/next-seed-stage', RetrieveNextSeedStage::class);
-        Route::post('/current-seed-stage', RetrieveCurrentSeedStage::class);
+        Route::get('/', RetrieveFarmerCrops::class)->name('crops');
+        Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class)->name('seeds.allocation');
+        Route::post('/next-seed-stage', RetrieveNextSeedStage::class)->name('seeds.next-stage');
+        Route::post('/current-seed-stage', RetrieveCurrentSeedStage::class)->name('seeds.current-stage');
     });
 
     Route::group(['prefix' => 'farmlands', 'middleware' => 'auth:api'], function () {
-        Route::get('/', RetrieveFarmerFarmlands::class);
+        Route::get('/', RetrieveFarmerFarmlands::class)->name('farmlands');
     });
 });
