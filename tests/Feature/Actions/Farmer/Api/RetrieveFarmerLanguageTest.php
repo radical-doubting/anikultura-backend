@@ -15,8 +15,8 @@ it('should return language preference', function () {
         ->getJson('/api/farmers/language');
 
     $response
-        ->assertStatus(200)
         ->assertJson([
             'language' => 'en',
-        ]);
+        ])
+        ->assertStatus(200);
 });

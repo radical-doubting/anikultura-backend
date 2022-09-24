@@ -15,8 +15,8 @@ it('should return tutorial done', function () {
         ->getJson('/api/farmers/tutorial');
 
     $response
-        ->assertStatus(200)
         ->assertJson([
             'isTutorialDone' => false,
-        ]);
+        ])
+        ->assertStatus(200);
 });

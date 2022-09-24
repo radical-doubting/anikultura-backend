@@ -21,10 +21,10 @@ it('should update language preference', function () {
         ]);
 
     $response
-        ->assertStatus(200)
         ->assertJson([
             'message' => 'Successfully updated language preference',
-        ]);
+        ])
+        ->assertStatus(200);
 
     /**
      * @var FarmerPreference

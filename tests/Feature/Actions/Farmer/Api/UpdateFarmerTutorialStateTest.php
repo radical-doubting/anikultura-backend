@@ -21,10 +21,10 @@ it('should update tutorial state', function () {
         ]);
 
     $response
-        ->assertStatus(200)
         ->assertJson([
             'message' => 'Successfully updated tutorial state',
-        ]);
+        ])
+        ->assertStatus(200);
 
     /**
      * @var FarmerPreference
