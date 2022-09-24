@@ -16,6 +16,12 @@ class FarmerSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            FarmerProfileSeeder::class,
+            FarmerPreferenceSeeder::class,
+            FarmerAddressSeeder::class,
+        ]);
+
         $profiles = FarmerProfile::all();
 
         Farmer::factory()

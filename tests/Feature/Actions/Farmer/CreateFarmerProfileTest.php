@@ -14,14 +14,17 @@ use Database\Seeders\Farmer\GenderSeeder;
 use Database\Seeders\Farmer\NCPasserStatusSeeder;
 use Database\Seeders\Farmer\SalaryPeriodicitySeeder;
 use Database\Seeders\Farmer\SocialStatusSeeder;
+use function Pest\Laravel\assertDatabaseCount;
+use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\seed;
 
 beforeEach(function () {
-    $this->seed(GenderSeeder::class);
-    $this->seed(CivilStatusSeeder::class);
-    $this->seed(EducationalStatusSeeder::class);
-    $this->seed(SalaryPeriodicitySeeder::class);
-    $this->seed(SocialStatusSeeder::class);
-    $this->seed(NCPasserStatusSeeder::class);
+    seed(GenderSeeder::class);
+    seed(CivilStatusSeeder::class);
+    seed(EducationalStatusSeeder::class);
+    seed(SalaryPeriodicitySeeder::class);
+    seed(SocialStatusSeeder::class);
+    seed(NCPasserStatusSeeder::class);
 });
 
 it('should add a farmer profile', function () {
@@ -79,7 +82,8 @@ it('should add a farmer profile', function () {
     expect($createdFarmerProfile->social_status_reason)->toBe('An example reason');
     expect($createdFarmerProfile->created_at)->toBeTruthy();
     expect($createdFarmerProfile->updated_at)->toBeTruthy();
+    expect($createdFarmerProfile->preference)->toBeTruthy();
 
-    $this->assertDatabaseCount('farmer_profiles', 1);
-    $this->assertDatabaseHas('farmer_profiles', $farmerProfileData);
+    assertDatabaseCount('farmer_profiles', 1);
+    assertDatabaseHas('farmer_profiles', $farmerProfileData);
 });

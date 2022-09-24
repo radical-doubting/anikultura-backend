@@ -17,6 +17,10 @@ class BigBrotherSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            BigBrotherProfileSeeder::class,
+        ]);
+
         $profiles = BigBrotherProfile::all();
 
         $bigBrotherRoleId = Role::where('slug', 'big-brother')

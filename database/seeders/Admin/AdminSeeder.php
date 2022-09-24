@@ -17,6 +17,10 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            AdminProfileSeeder::class,
+        ]);
+
         $profiles = AdminProfile::all();
 
         $adminRoleId = Role::where('slug', 'admin')

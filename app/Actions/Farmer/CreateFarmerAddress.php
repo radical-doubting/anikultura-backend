@@ -4,6 +4,7 @@ namespace App\Actions\Farmer;
 
 use App\Models\Farmer\FarmerAddress;
 use App\Models\Farmer\FarmerProfile;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class CreateFarmerAddress
@@ -14,7 +15,13 @@ class CreateFarmerAddress
         FarmerProfile $farmerProfile,
         FarmerAddress $farmerAddress,
         array $farmerAddressData
-    ): FarmerAddress {
+    ): ?FarmerAddress {
+        if (! $farmerProfile->exists) {
+            throw new ModelNotFoundException(
+                'Cannot add farmer address on non-existent farmer profile'
+            );
+        }
+
         $farmerAddress
             ->farmerProfile()
             ->associate($farmerProfile);
