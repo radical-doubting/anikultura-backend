@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Notifications\Notifiable;
 use Orchid\Platform\Models\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-    
+
     /**
      * The attributes that are mass assignable.
      *

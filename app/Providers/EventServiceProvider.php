@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\ReadyForHarvestEvent;
+use App\Listeners\SendReadyForHarvestListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use App\Events\ReadyForHarvestEvent;
-use App\Listeners\SendReadyForHarvestListener;
 
 class EventServiceProvider extends ServiceProvider
 {

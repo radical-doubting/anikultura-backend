@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use Illuminate\Support\Facades\Notification;
 use App\Models\User;
 use App\Notifications\SendReadyForHarvestNotification;
+use Illuminate\Support\Facades\Notification;
 
 class SendReadyForHarvestListener
 {
@@ -19,7 +19,7 @@ class SendReadyForHarvestListener
         $admins = User::whereHas('roles', function ($query) {
             $query->where('id', 1);
         })->get();
-    
+
         Notification::send($admins, new SendReadyForHarvestNotification($event->farmerReport));
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Events;
 
+use App\Models\FarmerReport\FarmerReport;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\Models\FarmerReport\FarmerReport;
 
 class ReadyForHarvestEvent
 {
