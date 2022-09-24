@@ -7,6 +7,7 @@ use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\TD;
 
 class FarmerListLayout extends AnikulturaListLayout
@@ -16,23 +17,12 @@ class FarmerListLayout extends AnikulturaListLayout
     protected function columns(): iterable
     {
         return [
-            TD::make('firstname', __('First Name'))
-                ->render(function (Farmer $farmer) {
-                    return Link::make($farmer->first_name)
-                        ->route('platform.farmers.edit', [$farmer->id]);
-                }),
-
-            TD::make('middlename', __('Middle Name'))
-                ->render(function (Farmer $farmer) {
-                    return Link::make($farmer->middle_name)
-                        ->route('platform.farmers.edit', [$farmer->id]);
-                }),
-
-            TD::make('lastname', __('Last Name'))
+            TD::make('name', __('Name'))
+                ->sort()
                 ->cantHide()
+                ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmer $farmer) {
-                    return Link::make($farmer->last_name)
-                        ->route('platform.farmers.edit', [$farmer->id]);
+                    return new Persona($farmer->presenter());
                 }),
 
             TD::make(__('Actions'))
