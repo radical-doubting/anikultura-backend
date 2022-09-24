@@ -2,11 +2,11 @@
 
 namespace App\Actions\FarmerReport\Api;
 
-use App\Actions\Crop\Api\RetrieveFarmerSeedStage;
-use App\Actions\Crop\Api\RetrieveNextSeedStage;
 use App\Http\Resources\FarmerReport\FarmerReportResource;
+use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -15,13 +15,19 @@ class SubmitFarmerReport
 {
     use AsAction;
 
-    public function handle($farmer, $farmerReportData)
+    public function __construct(
+        protected ValidateSeedStage $validateSeedStage
+    ) {
+    }
+
+    public function handle(Farmer $farmer, array $farmerReportData): FarmerReport
     {
         $farmland = Farmland::findOrFail($farmerReportData['farmlandId']);
-        $currentSeedStage = RetrieveFarmerSeedStage::run($farmer, $farmland);
-        $nextSeedStage = RetrieveNextSeedStage::run($currentSeedStage);
 
-        abort_if(is_null($nextSeedStage), 400, 'No next seed stage');
+        $nextSeedStage = $this->validateSeedStage->handle(
+            $farmer,
+            $farmland
+        );
 
         $farmerReport = FarmerReport::create([
             'reported_by' => $farmer->id,
@@ -56,17 +62,24 @@ class SubmitFarmerReport
      */
     public function asController(ActionRequest $request): JsonResponse
     {
+        /**
+         * @var Farmer
+         */
         $farmer = auth('api')->user();
 
         $farmerReportData = $request->get('farmerReport');
 
-        $createdFarmerReport = $this->handle($farmer, $farmerReportData);
+        try {
+            $createdFarmerReport = $this->handle($farmer, $farmerReportData);
 
-        return response()->json(
-            new FarmerReportResource(
-                $createdFarmerReport->fresh()
-            )
-        );
+            return response()->json(
+                new FarmerReportResource(
+                    $createdFarmerReport->fresh()
+                )
+            );
+        } catch (Exception $exception) {
+            return abort(400, $exception->getMessage());
+        }
     }
 
     public function rules(): array

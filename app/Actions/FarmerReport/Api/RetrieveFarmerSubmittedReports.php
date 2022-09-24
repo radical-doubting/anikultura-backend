@@ -13,7 +13,7 @@ class RetrieveFarmerSubmittedReports
 {
     use AsAction;
 
-    public function handle($farmer, $farmlandId)
+    public function handle(Farmer $farmer, int $farmlandId): array
     {
         $farmerReports = FarmerReport::with([
             'crop',
@@ -44,11 +44,14 @@ class RetrieveFarmerSubmittedReports
      */
     public function asController(ActionRequest $request): JsonResponse
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
         $farmlandId = $request->route('farmlandId');
 
-        $farmerReports = $this->handle($user, $farmlandId);
+        $farmerReports = $this->handle($farmer, $farmlandId);
 
         return response()->json(FarmerReportResource::collection($farmerReports));
     }

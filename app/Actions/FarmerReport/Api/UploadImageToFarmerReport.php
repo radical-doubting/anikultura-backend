@@ -2,9 +2,8 @@
 
 namespace App\Actions\FarmerReport\Api;
 
-use App\Actions\Crop\Api\RetrieveFarmerSeedStage;
-use App\Actions\Crop\Api\RetrieveNextSeedStage;
 use App\Models\FarmerReport\FarmerReport;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -13,15 +12,17 @@ class UploadImageToFarmerReport
 {
     use AsAction;
 
-    public function handle(FarmerReport $farmerReport, $imageFile)
+    public function __construct(
+        protected ValidateSeedStage $validateSeedStage
+    ) {
+    }
+
+    public function handle(FarmerReport $farmerReport, array $imageFile): void
     {
-        $farmer = $farmerReport->farmer;
-        $farmland = $farmerReport->farmland;
-
-        $currentSeedStage = RetrieveFarmerSeedStage::run($farmer, $farmland);
-        $nextSeedStage = RetrieveNextSeedStage::run($currentSeedStage);
-
-        abort_if(is_null($nextSeedStage), 400, 'No next seed stage');
+        $this->validateSeedStage->handle(
+            $farmerReport->farmer,
+            $farmerReport->farmland
+        );
 
         $farmerReport->attachMedia($imageFile);
     }
@@ -56,19 +57,21 @@ class UploadImageToFarmerReport
      */
     public function asController(ActionRequest $request): JsonResponse
     {
-        $farmer = auth('api')->user();
-
         $farmerReportId = $request->route('farmerReportId');
 
         $farmerReport = FarmerReport::findOrFail($farmerReportId);
 
         $imageFile = $request->file('image');
 
-        $this->handle($farmerReport, $imageFile);
+        try {
+            $this->handle($farmerReport, $imageFile);
 
-        return response()->json(
-            ['message' => 'Succesfully uploaded']
-        );
+            return response()->json(
+                ['message' => 'Succesfully uploaded']
+            );
+        } catch (Exception $exception) {
+            return abort(400, $exception->getMessage());
+        }
     }
 
     public function rules(): array
