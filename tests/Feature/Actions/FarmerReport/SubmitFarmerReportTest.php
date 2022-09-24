@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\Batch\Batch;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
@@ -57,20 +56,16 @@ it('should submit a farmer report', function () {
             ],
         ]);
 
+    $response
+        ->assertJson([
+            'isVerified' => false,
+        ]);
+
+    assertDatabaseCount('farmer_reports', 1);
+
     $farmerReport = FarmerReport::first();
     expect($farmerReport->reported_by)->toBe($farmer->id);
     expect($farmerReport->volume_kg)->toBe(10.23);
-
-    $resourceResponse = FarmerReportResource::make($farmerReport)
-        ->response()
-        ->getData(true);
-
-    $response
-        ->assertExactJson(
-            $resourceResponse['data']
-        );
-
-    assertDatabaseCount('farmer_reports', 1);
 });
 
 it('should not submit a farmer report to a non-belonging farmland', function () {
