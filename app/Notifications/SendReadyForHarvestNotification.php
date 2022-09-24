@@ -19,7 +19,6 @@ class SendReadyForHarvestNotification extends Notification
     public function __construct(FarmerReport $farmerReport)
     {
         $this->farmerReport = $farmerReport;
-        $this->reportId = $farmerReport->id;
     }
 
     public function via($notifiable)
