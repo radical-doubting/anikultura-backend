@@ -144,40 +144,13 @@
                 }
             }
         },
-        "/crops": {
-            "get": {
-                "tags": [
-                    "crops"
-                ],
-                "description": "Get the current crops of the logged in farmer",
-                "operationId": "06d09797e7a39bacc8fd0ad9ea6df07e",
-                "responses": {
-                    "200": {
-                        "description": "The current crops",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthenticated",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/crops/current-seed-stage": {
             "post": {
                 "tags": [
                     "crops"
                 ],
                 "description": "Get the current seed stage of the logged in farmer",
-                "operationId": "442ec1357ece8d70c38f05f9512919b8",
+                "operationId": "df2aadfcf8c43860cc4de1ee36f5106e",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -198,6 +171,33 @@
                 "responses": {
                     "200": {
                         "description": "The current seed stage",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/crops": {
+            "get": {
+                "tags": [
+                    "crops"
+                ],
+                "description": "Get the current crops of the logged in farmer",
+                "operationId": "06d09797e7a39bacc8fd0ad9ea6df07e",
+                "responses": {
+                    "200": {
+                        "description": "The current crops",
                         "content": {
                             "application/json": {
                                 "schema": {}
@@ -434,11 +434,25 @@
                 "tags": [
                     "farmer-reports"
                 ],
-                "description": "Submit a farming report with logged in farmer",
+                "description": "Submit a farmer report with the logged in farmer. It needs both image file and data JSON.",
                 "operationId": "457a393b51e876064179a323dc93e50c",
                 "requestBody": {
                     "required": true,
                     "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "image"
+                                ],
+                                "properties": {
+                                    "image": {
+                                        "description": "proof image to upload",
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
                         "application/json": {
                             "schema": {
                                 "properties": {
@@ -493,7 +507,7 @@
                 "tags": [
                     "farmer-reports"
                 ],
-                "description": "Upload an image to farmer report",
+                "description": "Upload an image to farmer report. It needs both image file and farmerReport JSON.",
                 "operationId": "7ecdc8be22a79d90a7dd225a0317143d",
                 "parameters": [
                     {
@@ -514,6 +528,33 @@
                                     "image": {
                                         "description": "proof image to upload",
                                         "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "farmerReport": {
+                                        "properties": {
+                                            "farmlandId": {
+                                                "type": "integer",
+                                                "format": "int",
+                                                "example": "1"
+                                            },
+                                            "cropId": {
+                                                "type": "integer",
+                                                "format": "int",
+                                                "example": "1"
+                                            },
+                                            "volumeKg": {
+                                                "type": "number",
+                                                "format": "double",
+                                                "example": "10.23"
+                                            }
+                                        },
+                                        "type": "object"
                                     }
                                 },
                                 "type": "object"

@@ -8,6 +8,10 @@ use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -20,8 +24,11 @@ class SubmitFarmerReport
     ) {
     }
 
-    public function handle(Farmer $farmer, array $farmerReportData): FarmerReport
-    {
+    public function handle(
+        Farmer $farmer,
+        array $farmerReportData,
+        UploadedFile $imageFile
+    ): FarmerReport {
         $farmland = Farmland::findOrFail($farmerReportData['farmlandId']);
 
         $nextSeedStage = $this->validateSeedStage->handle(
@@ -37,17 +44,52 @@ class SubmitFarmerReport
             'volume_kg' => $farmerReportData['volumeKg'],
         ]);
 
+        Storage::put('reports', $imageFile);
+
         return $farmerReport;
+    }
+
+    private function validateReportData(array $farmerReportData): void
+    {
+        $validator = Validator::make($farmerReportData, [
+            'farmlandId' => [
+                'required',
+                'integer',
+            ],
+            'cropId' => [
+                'required',
+                'integer',
+            ],
+            'volumeKg' => [
+                'numeric',
+                'nullable',
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
     }
 
     /**
      * @OA\Post(
      *     path="/farmer-reports",
-     *     description="Submit a farming report with logged in farmer",
+     *     description="Submit a farmer report with the logged in farmer. It needs both image file and data JSON.",
      *     tags={"farmer-reports"},
      *     @OA\RequestBody(
      *       required=true,
-     *       @OA\JsonContent(
+     *        @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="proof image to upload",
+     *                     property="image",
+     *                     type="file",
+     *                ),
+     *                 required={"image"}
+     *             )
+     *         ),
+     *        @OA\JsonContent(
      *          @OA\Property(
      *             property="farmerReport",
      *             @OA\Property(property="farmlandId", type="int", format="int", example="1"),
@@ -67,10 +109,13 @@ class SubmitFarmerReport
          */
         $farmer = auth('api')->user();
 
-        $farmerReportData = $request->get('farmerReport');
+        $farmerReportData = json_decode($request->get('data'), true);
+        $this->validateReportData($farmerReportData);
+
+        $imageFile = $request->file('image');
 
         try {
-            $createdFarmerReport = $this->handle($farmer, $farmerReportData);
+            $createdFarmerReport = $this->handle($farmer, $farmerReportData, $imageFile);
 
             return response()->json(
                 new FarmerReportResource(
@@ -85,17 +130,13 @@ class SubmitFarmerReport
     public function rules(): array
     {
         return [
-            'farmerReport.farmlandId' => [
-                'required',
-                'integer',
+            'image' => [
+                'mimes:jpeg,jpg,bmp,png',
+                'max:10240',
             ],
-            'farmerReport.cropId' => [
+            'data' => [
                 'required',
-                'integer',
-            ],
-            'farmerReport.volumeKg' => [
-                'numeric',
-                'nullable',
+                'json',
             ],
         ];
     }

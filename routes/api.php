@@ -14,7 +14,6 @@ use App\Actions\Farmer\Api\UpdateFarmerLanguage;
 use App\Actions\Farmer\Api\UpdateFarmerTutorialState;
 use App\Actions\FarmerReport\Api\RetrieveFarmerSubmittedReports;
 use App\Actions\FarmerReport\Api\SubmitFarmerReport;
-use App\Actions\FarmerReport\Api\UploadImageToFarmerReport;
 use App\Actions\Farmland\Api\RetrieveFarmerFarmlands;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +43,6 @@ Route::group(['as' => 'api.'], function () {
 
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {
         Route::post('/', SubmitFarmerReport::class)->name('reports.submit');
-        Route::post('/{farmerReportId}/upload', UploadImageToFarmerReport::class)->name('reports.upload');
         Route::get('/{farmlandId}', RetrieveFarmerSubmittedReports::class)->name('reports');
     });
 

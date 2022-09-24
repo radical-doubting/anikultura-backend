@@ -14,11 +14,15 @@ use Database\Seeders\Farmland\FarmlandTypeSeeder;
 use Database\Seeders\Farmland\WateringSystemSeeder;
 use Database\Seeders\Site\SiteSeeder;
 use Database\Seeders\User\RoleSeeder;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
+    Storage::fake();
+
     seed(SiteSeeder::class);
     seed(RoleSeeder::class);
     seed(FarmerSeeder::class);
@@ -53,11 +57,12 @@ it('should submit a farmer report', function () {
 
     $response = actingAs($farmer, 'api')
         ->postJson(route('api.reports.submit'), [
-            'farmerReport' => [
+            'image' => UploadedFile::fake()->image('crop.jpg'),
+            'data' => json_encode([
                 'farmlandId' => $farmland->id,
-                'cropId' => $crop->id,
+                'cropId' => Crop::first()->id,
                 'volumeKg' => 10.23,
-            ],
+            ]),
         ]);
 
     $response
@@ -101,11 +106,12 @@ it('should not submit a farmer report to a non-belonging farmland', function () 
 
     $response = actingAs($farmer, 'api')
         ->postJson(route('api.reports.submit'), [
-            'farmerReport' => [
+            'image' => UploadedFile::fake()->image('crop.jpg'),
+            'data' => json_encode([
                 'farmlandId' => $farmland->id,
                 'cropId' => Crop::first()->id,
                 'volumeKg' => 10.23,
-            ],
+            ]),
         ]);
 
     $response
