@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Batch\Batch;
+use App\Models\Crop\Crop;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
@@ -51,7 +52,7 @@ it('should submit a farmer report', function () {
         ->postJson('/api/farmer-reports', [
             'farmerReport' => [
                 'farmlandId' => $farmland->id,
-                'cropId' => 1,
+                'cropId' => Crop::first()->id,
                 'volumeKg' => 10.23,
             ],
         ]);
@@ -59,7 +60,8 @@ it('should submit a farmer report', function () {
     $response
         ->assertJson([
             'isVerified' => false,
-        ]);
+        ])
+        ->assertStatus(200);
 
     assertDatabaseCount('farmer_reports', 1);
 
@@ -90,7 +92,7 @@ it('should not submit a farmer report to a non-belonging farmland', function () 
         ->postJson('/api/farmer-reports', [
             'farmerReport' => [
                 'farmlandId' => $farmland->id,
-                'cropId' => 1,
+                'cropId' => Crop::first()->id,
                 'volumeKg' => 10.23,
             ],
         ]);
