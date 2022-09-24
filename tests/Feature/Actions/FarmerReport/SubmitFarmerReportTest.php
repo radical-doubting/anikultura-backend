@@ -2,6 +2,7 @@
 
 use App\Models\Batch\Batch;
 use App\Models\Crop\Crop;
+use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
@@ -47,12 +48,14 @@ it('should submit a farmer report', function () {
         ->create();
 
     $farmland->farmers()->attach($farmer->id);
+    $crop = Crop::first();
+    $seedStage = SeedStage::initialStage();
 
     $response = actingAs($farmer, 'api')
         ->postJson('/api/farmer-reports', [
             'farmerReport' => [
                 'farmlandId' => $farmland->id,
-                'cropId' => Crop::first()->id,
+                'cropId' => $crop->id,
                 'volumeKg' => 10.23,
             ],
         ]);
@@ -60,6 +63,14 @@ it('should submit a farmer report', function () {
     $response
         ->assertJson([
             'isVerified' => false,
+            'crop' => [
+                'id' => $crop->id,
+                'name' => $crop->name,
+            ],
+            'seedStage' => [
+                'id' => $seedStage->id,
+                'name' => $seedStage->name,
+            ],
         ])
         ->assertStatus(200);
 
