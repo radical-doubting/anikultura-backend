@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
+use App\Models\User;
 use App\Orchid\Layouts\AnikulturaListLayout;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
