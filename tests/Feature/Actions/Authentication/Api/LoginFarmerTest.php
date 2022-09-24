@@ -12,7 +12,7 @@ beforeEach(function () {
 it('should login farmer', function () {
     $farmer = Farmer::first();
 
-    $response = postJson('/api/auth/login', [
+    $response = postJson(route('api.login'), [
         'username' => $farmer->name,
         'password' => 'password',
     ]);

@@ -16,7 +16,7 @@ it('should update language preference', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
-        ->patchJson('/api/farmers/language', [
+        ->patchJson(route('api.language.update'), [
             'language' => 'fil_PH',
         ]);
 

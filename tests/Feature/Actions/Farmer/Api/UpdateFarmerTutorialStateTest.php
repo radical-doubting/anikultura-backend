@@ -16,7 +16,7 @@ it('should update tutorial state', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
-        ->patchJson('/api/farmers/tutorial', [
+        ->patchJson(route('api.tutorial.update'), [
             'tutorialDone' => true,
         ]);
 

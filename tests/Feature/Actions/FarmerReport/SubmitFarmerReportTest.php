@@ -52,7 +52,7 @@ it('should submit a farmer report', function () {
     $seedStage = SeedStage::initialStage();
 
     $response = actingAs($farmer, 'api')
-        ->postJson('/api/farmer-reports', [
+        ->postJson(route('api.reports.submit'), [
             'farmerReport' => [
                 'farmlandId' => $farmland->id,
                 'cropId' => $crop->id,
@@ -100,7 +100,7 @@ it('should not submit a farmer report to a non-belonging farmland', function () 
         ->create();
 
     $response = actingAs($farmer, 'api')
-        ->postJson('/api/farmer-reports', [
+        ->postJson(route('api.reports.submit'), [
             'farmerReport' => [
                 'farmlandId' => $farmland->id,
                 'cropId' => Crop::first()->id,

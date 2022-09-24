@@ -12,7 +12,7 @@ it('should return language preference', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
-        ->getJson('/api/farmers/language');
+        ->getJson(route('api.language'));
 
     $response
         ->assertJson([

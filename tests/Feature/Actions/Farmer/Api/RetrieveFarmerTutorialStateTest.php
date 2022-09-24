@@ -12,7 +12,7 @@ it('should return tutorial done', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
-        ->getJson('/api/farmers/tutorial');
+        ->getJson(route('api.tutorial'));
 
     $response
         ->assertJson([

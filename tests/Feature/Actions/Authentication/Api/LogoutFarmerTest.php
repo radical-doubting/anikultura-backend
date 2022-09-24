@@ -16,7 +16,7 @@ it('should logout farmer', function () {
         'password' => 'password',
     ]);
 
-    $response = postJson('/api/auth/logout');
+    $response = postJson(route('api.logout'));
 
     $response
         ->assertJson([
