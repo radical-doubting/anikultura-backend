@@ -44,7 +44,7 @@ class RetrieveCurrentSeedStage
         }
     }
 
-    private function getCurrentSeedStage(FarmerReport $farmerReport): ?SeedStage
+    private function getCurrentSeedStage(?FarmerReport $farmerReport): ?SeedStage
     {
         return is_null($farmerReport) ? null : $farmerReport->seedStage;
     }
