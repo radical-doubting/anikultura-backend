@@ -12,7 +12,7 @@
             </p>
         </div>
         <div class="d-none d-lg-block col align-self-center text-end text-muted p-4">
-            <img src="/img/ani-logo-icon.png" style="margin-right: 5px; max-width: 150px;" type="image/png">
+            <img src="/img/ani-logo-color.png" style="margin-right: 5px; max-width: 111px;" type="image/png">
         </div>
     </div>
 
