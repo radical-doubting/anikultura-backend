@@ -22,10 +22,7 @@ class RetrieveNextSeedStage
     public function handle(?SeedStage $currentSeedStage): ?SeedStage
     {
         if (is_null($currentSeedStage)) {
-            $initialSeedStage = SeedStage::where('slug', 'starter-kit-received')
-                ->first();
-
-            return $initialSeedStage;
+            return SeedStage::initialStage();
         } else {
             return $this->getNextSeedStage($currentSeedStage);
         }

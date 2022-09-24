@@ -40,6 +40,12 @@ class SeedStage extends Model
         'name',
     ];
 
+    public static function initialStage(): SeedStage
+    {
+        return SeedStage::where('slug', 'starter-kit-received')
+            ->first();
+    }
+
     public function farmerReport(): HasMany
     {
         return $this->hasMany(FarmerReport::class);
