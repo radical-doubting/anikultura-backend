@@ -1,11 +1,12 @@
 <?php
 
 use App\Facades\Anikultura;
+use function Pest\Laravel\get;
 
 it('should return json if app is headless', function () {
     Anikultura::shouldReceive('isHeadless')->andReturnTrue();
 
-    $response = $this->get('/');
+    $response = get('/');
     $response
         ->assertStatus(200)
         ->assertJson([
@@ -16,7 +17,7 @@ it('should return json if app is headless', function () {
 it('should redirect if app is not headless', function () {
     Anikultura::shouldReceive('isHeadless')->andReturnFalse();
 
-    $response = $this->get('/');
+    $response = get('/');
     $response
         ->assertRedirect(route('platform.login'));
 });
