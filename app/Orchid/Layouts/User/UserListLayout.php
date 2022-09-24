@@ -44,8 +44,9 @@ class UserListLayout extends AnikulturaListLayout
 
             TD::make('updated_at', __('Last Edit'))
                 ->sort()
+                ->filter(TD::FILTER_DATE)
                 ->render(function (User $user) {
-                    return $user->updated_at->toDateTimeString();
+                    return $user->updated_at;
                 }),
 
             TD::make(__('Actions'))
