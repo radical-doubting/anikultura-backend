@@ -5,8 +5,8 @@ declare(strict_types=1);
 use App\Actions\Authentication\Api\LoginFarmer;
 use App\Actions\Authentication\Api\LogoutFarmer;
 use App\Actions\Batch\Api\RetrieveFarmerSeedAllocation;
+use App\Actions\Crop\Api\RetrieveCurrentSeedStage;
 use App\Actions\Crop\Api\RetrieveFarmerCrops;
-use App\Actions\Crop\Api\RetrieveFarmerSeedStage;
 use App\Actions\Crop\Api\RetrieveNextSeedStage;
 use App\Actions\Farmer\Api\RetrieveFarmerLanguage;
 use App\Actions\Farmer\Api\RetrieveFarmerTutorialState;
@@ -52,7 +52,7 @@ Route::group(['as' => 'api.'], function () {
         Route::get('/', RetrieveFarmerCrops::class);
         Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class);
         Route::post('/next-seed-stage', RetrieveNextSeedStage::class);
-        Route::post('/current-seed-stage', RetrieveFarmerSeedStage::class);
+        Route::post('/current-seed-stage', RetrieveCurrentSeedStage::class);
     });
 
     Route::group(['prefix' => 'farmlands', 'middleware' => 'auth:api'], function () {
