@@ -4,6 +4,7 @@ namespace App\Actions\Farmer;
 
 use App\Models\Farmer\Farmer;
 use App\Traits\AsOrchidAction;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -21,7 +22,13 @@ class DeleteFarmer
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->handle($model);
+        try {
+            $this->handle($model);
+        } catch (Exception $exception) {
+            Toast::error(__('Error: delete the submitted reports of this farmer first'));
+
+            return redirect()->back();
+        }
 
         Toast::info(__('Farmer was removed successfully!'));
 

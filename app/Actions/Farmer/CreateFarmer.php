@@ -89,7 +89,7 @@ class CreateFarmer
 
         Toast::info(__('Farmer profile was saved successfully!'));
 
-        return redirect()->route('platform.farmers');
+        return redirect()->back();
     }
 
     private function validateIfFarmerAccountExistsAlready(Farmer $farmer, Request $request): void
@@ -139,9 +139,7 @@ class CreateFarmer
                 'required',
             ],
 
-            'farmerProfile.college_course' => [
-                'required',
-            ],
+            'farmerProfile.college_course' => [],
 
             'farmerProfile.current_job' => [
                 'required',
