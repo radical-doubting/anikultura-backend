@@ -29,8 +29,14 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $casts = [
+        'name' => 'string',
+        'first_name' => 'string',
+        'middle_name' => 'string',
+        'last_name' => 'string',
         'permissions' => 'array',
         'email_verified_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
 
     /**
@@ -46,6 +52,8 @@ class User extends Authenticatable implements JWTSubject
         'last_name',
         'email',
         'permissions',
+        'updated_at',
+        'created_at',
     ];
 
     /**
@@ -56,6 +64,9 @@ class User extends Authenticatable implements JWTSubject
     protected $allowedSorts = [
         'id',
         'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'updated_at',
         'created_at',
