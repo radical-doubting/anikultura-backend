@@ -4,6 +4,7 @@ namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\SeedStageResource;
 use App\Models\Crop\SeedStage;
+use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
@@ -13,18 +14,28 @@ class RetrieveNextSeedStage
 {
     use AsAction;
 
-    public function handle($currentSeedStage)
+    public function __construct(
+        protected RetrieveCurrentSeedStage $retrieveCurrentSeedStage
+    ) {
+    }
+
+    public function handle(?SeedStage $currentSeedStage): ?SeedStage
     {
         if (is_null($currentSeedStage)) {
-            return SeedStage::where('slug', 'starter-kit-received')
+            $initialSeedStage = SeedStage::where('slug', 'starter-kit-received')
                 ->first();
-        }
 
-        if ($currentSeedStage->slug === 'marketable') {
-            return null;
+            return $initialSeedStage;
+        } else {
+            return $this->getNextSeedStage($currentSeedStage);
         }
+    }
 
-        return SeedStage::findOrFail($currentSeedStage->id + 1);
+    private function getNextSeedStage(SeedStage $currentSeedStage): ?SeedStage
+    {
+        $nextId = $currentSeedStage->id + 1;
+
+        return SeedStage::find($nextId);
     }
 
     /**
@@ -44,12 +55,19 @@ class RetrieveNextSeedStage
      */
     public function asController(ActionRequest $request): JsonResponse
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
         $farmlandId = $request->get('farmlandId');
         $farmland = Farmland::findOrFail($farmlandId);
 
-        $currentSeedStage = RetrieveFarmerSeedStage::run($user, $farmland);
+        $currentSeedStage = $this->retrieveCurrentSeedStage->handle(
+            $farmer,
+            $farmland
+        );
+
         $nextSeedStage = $this->handle($currentSeedStage);
 
         if (is_null($nextSeedStage)) {

@@ -6,6 +6,7 @@ use App\Http\Resources\Crop\CropResource;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -13,7 +14,7 @@ class RetrieveFarmerCrops
 {
     use AsAction;
 
-    public function handle($farmer)
+    public function handle(Farmer $farmer): Collection
     {
         $crops = BatchSeedAllocation::with([
             'crop:id,name',
@@ -36,9 +37,12 @@ class RetrieveFarmerCrops
      */
     public function asController(ActionRequest $request): JsonResponse
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
-        $crops = $this->handle($user);
+        $crops = $this->handle($farmer);
 
         return response()->json(CropResource::collection($crops));
     }
