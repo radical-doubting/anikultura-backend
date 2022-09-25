@@ -7,6 +7,7 @@ use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use App\Models\User;
 use App\Orchid\Presenters\FarmerPresenter;
+use App\Orchid\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -48,7 +49,7 @@ class Farmer extends User
         return $this->hasMany(FarmerReport::class, 'reported_by');
     }
 
-    public function presenter()
+    public function presenter(): UserPresenter
     {
         return new FarmerPresenter($this);
     }
