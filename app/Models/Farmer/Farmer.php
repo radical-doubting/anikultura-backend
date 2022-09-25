@@ -3,6 +3,7 @@
 namespace App\Models\Farmer;
 
 use App\Models\Batch\Batch;
+use App\Models\Batch\BatchSeedAllocation;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use App\Models\User;
@@ -47,6 +48,11 @@ class Farmer extends User
     public function farmerReports(): HasMany
     {
         return $this->hasMany(FarmerReport::class, 'reported_by');
+    }
+
+    public function seedAllocations(): HasMany
+    {
+        return $this->hasMany(BatchSeedAllocation::class, 'farmer_id');
     }
 
     public function presenter(): UserPresenter

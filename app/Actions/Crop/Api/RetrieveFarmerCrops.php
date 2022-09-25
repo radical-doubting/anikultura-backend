@@ -3,7 +3,6 @@
 namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\CropResource;
-use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Collection;
@@ -16,14 +15,7 @@ class RetrieveFarmerCrops
 
     public function handle(Farmer $farmer): Collection
     {
-        $crops = BatchSeedAllocation::with([
-            'crop:id,name',
-        ])->where('farmer_id', $farmer->id)
-            ->get()
-            ->pluck('crop')
-            ->unique();
-
-        return $crops;
+        return $farmer->seedAllocations->pluck('crop')->unique();
     }
 
     /**
