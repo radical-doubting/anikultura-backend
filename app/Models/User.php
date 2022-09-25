@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
 use Orchid\Platform\Models\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, HasLocalePreference
 {
     use Notifiable;
 
@@ -28,6 +29,7 @@ class User extends Authenticatable implements JWTSubject
         'permissions',
         'profile_id',
         'profile_type',
+        'locale',
     ];
 
     protected $hidden = [
@@ -108,5 +110,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function preferredLocale(): ?string
+    {
+        return $this->locale;
     }
 }
