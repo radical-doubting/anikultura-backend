@@ -51,6 +51,11 @@ class SeedStage extends Model
         return $this->hasMany(FarmerReport::class);
     }
 
+    public function nextStage(): ?SeedStage
+    {
+        return SeedStage::find($this->id + 1);
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *

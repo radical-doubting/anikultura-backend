@@ -24,15 +24,8 @@ class RetrieveNextSeedStage
         if (is_null($currentSeedStage)) {
             return SeedStage::initialStage();
         } else {
-            return $this->getNextSeedStage($currentSeedStage);
+            return $currentSeedStage->nextStage();
         }
-    }
-
-    private function getNextSeedStage(SeedStage $currentSeedStage): ?SeedStage
-    {
-        $nextId = $currentSeedStage->id + 1;
-
-        return SeedStage::find($nextId);
     }
 
     /**
