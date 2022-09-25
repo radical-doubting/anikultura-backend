@@ -3,8 +3,8 @@
 namespace App\Actions\Batch\Api;
 
 use App\Http\Resources\Batch\BatchSeedAllocationResource;
-use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -13,14 +13,9 @@ class RetrieveFarmerSeedAllocation
 {
     use AsAction;
 
-    public function handle($farmer)
+    public function handle(Farmer $farmer): Collection
     {
-        $seedAllocations = BatchSeedAllocation::with([
-            'batch',
-            'crop',
-        ])->where('farmer_id', $farmer->id)->get();
-
-        return $seedAllocations;
+        return $farmer->seedAllocations;
     }
 
     /**
