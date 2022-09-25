@@ -31,7 +31,7 @@ class SendReadyForHarvestNotification extends Notification
         $fullName = $this->farmerReport->farmer->fullName;
 
         return (new DashboardMessage())
-            ->title($fullName.' is ready for harvest!')
+            ->title(__(':farmer is ready for harvest!', ['farmer' => $fullName]))
             ->message($this->farmerReport->farmland->name)
             ->action(route('platform.farmer-reports.edit', [$this->farmerReport->id]));
     }
