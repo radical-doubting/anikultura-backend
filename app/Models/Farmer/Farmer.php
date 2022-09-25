@@ -3,11 +3,13 @@
 namespace App\Models\Farmer;
 
 use App\Models\Batch\Batch;
+use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use App\Models\User;
 use App\Orchid\Presenters\FarmerPresenter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Farmer extends User
 {
@@ -39,6 +41,11 @@ class Farmer extends User
     public function farmlands(): BelongsToMany
     {
         return $this->belongsToMany(Farmland::class, 'farmland_farmers', 'farmer_id', 'farmland_id');
+    }
+
+    public function farmerReports(): HasMany
+    {
+        return $this->hasMany(FarmerReport::class, 'reported_by');
     }
 
     public function presenter()
