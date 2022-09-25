@@ -64,7 +64,7 @@ class RetrieveCurrentSeedStage
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): JsonResponse|SeedStageResource
     {
         /**
          * @var Farmer
@@ -79,7 +79,7 @@ class RetrieveCurrentSeedStage
         if (is_null($currentSeedStage)) {
             return response()->json(null);
         } else {
-            return response()->json(new SeedStageResource($currentSeedStage));
+            return SeedStageResource::make($currentSeedStage);
         }
     }
 
@@ -89,6 +89,7 @@ class RetrieveCurrentSeedStage
             'farmlandId' => [
                 'required',
                 'integer',
+                'exists:farmlands,id',
             ],
         ];
     }
