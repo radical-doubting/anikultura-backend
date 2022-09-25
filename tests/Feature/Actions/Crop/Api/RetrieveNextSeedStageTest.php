@@ -123,7 +123,7 @@ it('should return error if retrieving seed stage from non-existent farmland', fu
 
     $response = actingAs($farmer, 'api')
         ->postJson(
-            route('api.seeds.current-stage'),
+            route('api.seeds.next-stage'),
             [
                 'farmlandId' => -1,
             ]
