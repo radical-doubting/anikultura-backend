@@ -3,6 +3,7 @@
 namespace App\Actions\Farmer\Api;
 
 use App\Models\Farmer\FarmerProfile;
+use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\ActionRequest;
@@ -11,6 +12,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class UpdateFarmerLanguage
 {
     use AsAction;
+    use AsApiResponder;
 
     public function handle(FarmerProfile $farmerProfile, string $language): void
     {
@@ -44,7 +46,7 @@ class UpdateFarmerLanguage
 
         $this->handle($user->profile, $language);
 
-        return response()->json(['message' => 'Successfully updated language preference']);
+        return $this->respondWithSuccess('Successfully updated language preference');
     }
 
     public function rules(): array
