@@ -2,6 +2,7 @@
 
 namespace App\Actions\Authentication\Api;
 
+use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cookie;
 use Lorisleiva\Actions\ActionRequest;
@@ -10,6 +11,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class LogoutFarmer
 {
     use AsAction;
+    use AsApiResponder;
 
     public function handle(): void
     {
@@ -33,8 +35,7 @@ class LogoutFarmer
     {
         $this->handle();
 
-        return response()
-            ->json(['message' => 'Successfully logged out'])
+        return $this->respondWithSuccess('Successfully logged out')
             ->withCookie(Cookie::forget('token'));
     }
 }

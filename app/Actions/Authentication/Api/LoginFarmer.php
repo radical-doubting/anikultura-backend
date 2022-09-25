@@ -2,6 +2,7 @@
 
 namespace App\Actions\Authentication\Api;
 
+use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -9,6 +10,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class LoginFarmer
 {
     use AsAction;
+    use AsApiResponder;
 
     public function handle(string $username, string $password): ?array
     {
@@ -48,7 +50,7 @@ class LoginFarmer
     public function asController(ActionRequest $request): JsonResponse
     {
         if (auth('api')->user()) {
-            return response()->json(['message' => 'Already logged in'], 400);
+            return $this->respondWithError('Already logged in', 400);
         }
 
         $username = $request->get('username');
@@ -57,7 +59,7 @@ class LoginFarmer
         $authPayload = $this->handle($username, $password);
 
         if (is_null($authPayload)) {
-            return response()->json(['message' => 'Invalid login credentials'], 401);
+            return  $this->respondWithError('Invalid login credentials', 401);
         }
 
         $authCookie = cookie('token', $authPayload['accessToken'], $authPayload['expiresIn']);
