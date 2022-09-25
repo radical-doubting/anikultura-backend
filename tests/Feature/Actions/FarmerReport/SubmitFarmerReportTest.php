@@ -46,10 +46,9 @@ it('should submit a farmer report', function () {
      * @var Farmland
      */
     $farmland = Farmland::factory()
-        ->sequence(fn () => [
+        ->create([
             'batch_id' => $batch->id,
-        ])
-        ->create();
+        ]);
 
     $farmland->farmers()->attach($farmer->id);
     $crop = Crop::first();
@@ -99,10 +98,9 @@ it('should not submit a farmer report to a non-belonging farmland', function () 
      * @var Farmland
      */
     $farmland = Farmland::factory()
-        ->sequence(fn () => [
+        ->create([
             'batch_id' => $batch->id,
-        ])
-        ->create();
+        ]);
 
     $response = actingAs($farmer, 'api')
         ->postJson(route('api.reports.submit'), [
