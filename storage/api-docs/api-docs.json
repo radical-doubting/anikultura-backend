@@ -41,12 +41,12 @@
                                     "username": {
                                         "type": "string",
                                         "format": "string",
-                                        "example": "user1"
+                                        "example": "user"
                                     },
                                     "password": {
                                         "type": "string",
                                         "format": "password",
-                                        "example": "PassWord12345"
+                                        "example": "password"
                                     }
                                 },
                                 "type": "object"

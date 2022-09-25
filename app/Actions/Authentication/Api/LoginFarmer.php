@@ -37,8 +37,8 @@ class LoginFarmer
      *       description="Pass user credentials",
      *       @OA\JsonContent(
      *          required={"email","password"},
-     *          @OA\Property(property="username", type="string", format="string", example="user1"),
-     *          @OA\Property(property="password", type="string", format="password", example="PassWord12345"),
+     *          @OA\Property(property="username", type="string", format="string", example="user"),
+     *          @OA\Property(property="password", type="string", format="password", example="password"),
      *       ),
      *     ),
      *     @OA\Response(response="200", description="Successful login with returned authentication token", @OA\JsonContent()),
