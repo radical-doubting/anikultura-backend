@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\FarmerReport\Api;
+namespace App\Actions\Crop;
 
 use App\Actions\Crop\Api\RetrieveCurrentSeedStage;
 use App\Actions\Crop\Api\RetrieveNextSeedStage;
