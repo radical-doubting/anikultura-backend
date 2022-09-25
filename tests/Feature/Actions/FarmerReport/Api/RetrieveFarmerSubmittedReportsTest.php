@@ -2,6 +2,7 @@
 
 use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\Batch\Batch;
+use App\Models\BigBrother\BigBrother;
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
@@ -79,5 +80,114 @@ it('should retrieve submitted farmer reports', function () {
         ->assertExactJson(
             $resource->response()->getData(true)
         )
+        ->assertStatus(200);
+});
+
+it('should retrieve submitted farmer reports with estimated metrics', function () {
+    /**
+     * @var Farmer
+     */
+    $farmer = Farmer::first();
+    $farmland = Farmland::first();
+    $seedStage = SeedStage::firstWhere('slug', 'seeds-planted');
+    $crop = Crop::first();
+
+    FarmerReport::factory()->create([
+        'reported_by' => $farmer,
+        'farmland_id' => $farmland,
+        'seed_stage_id' => $seedStage,
+        'crop_id' => $crop,
+    ]);
+
+    $response = actingAs($farmer, 'api')
+        ->getJson(route('api.reports', [
+            $farmland->id,
+        ]));
+
+    $response
+        ->assertJsonStructure([
+            'data' => [
+                [
+                    'estimatedProfit',
+                    'estimatedYieldAmount',
+                    'estimatedYieldDateEarliest',
+                    'estimatedYieldDateLatest',
+                ],
+            ],
+        ])
+        ->assertStatus(200);
+});
+
+it('should retrieve submitted farmer reports with verifier', function () {
+    /**
+     * @var Farmer
+     */
+    $farmer = Farmer::first();
+    $farmland = Farmland::first();
+    $bigBrother = BigBrother::first();
+    $seedStage = SeedStage::initialStage();
+    $crop = Crop::first();
+
+    FarmerReport::factory()->create([
+        'reported_by' => $farmer,
+        'verified' => true,
+        'verified_by' => $bigBrother,
+        'farmland_id' => $farmland,
+        'seed_stage_id' => $seedStage,
+        'crop_id' => $crop,
+    ]);
+
+    $response = actingAs($farmer, 'api')
+        ->getJson(route('api.reports', [
+            $farmland->id,
+        ]));
+
+    $response
+        ->assertJson([
+            'data' => [
+                [
+                    'isVerified' => true,
+                ],
+            ],
+        ])
+        ->assertJsonStructure([
+            'data' => [
+                [
+                    'verifier',
+                ],
+            ],
+        ])
+        ->assertStatus(200);
+});
+
+it('should retrieve submitted farmer reports with actual volume', function () {
+    /**
+     * @var Farmer
+     */
+    $farmer = Farmer::first();
+    $farmland = Farmland::first();
+    $seedStage = SeedStage::firstWhere('slug', 'crops-harvested');
+    $crop = Crop::first();
+
+    FarmerReport::factory()->create([
+        'reported_by' => $farmer,
+        'farmland_id' => $farmland,
+        'seed_stage_id' => $seedStage,
+        'crop_id' => $crop,
+    ]);
+
+    $response = actingAs($farmer, 'api')
+        ->getJson(route('api.reports', [
+            $farmland->id,
+        ]));
+
+    $response
+        ->assertJsonStructure([
+            'data' => [
+                [
+                    'actualVolumeKgProduced',
+                ],
+            ],
+        ])
         ->assertStatus(200);
 });
