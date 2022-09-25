@@ -66,17 +66,19 @@ it('should submit a farmer report', function () {
 
     $response
         ->assertJson([
-            'isVerified' => false,
-            'crop' => [
-                'id' => $crop->id,
-                'name' => $crop->name,
-            ],
-            'seedStage' => [
-                'id' => $seedStage->id,
-                'name' => $seedStage->name,
+            'data' => [
+                'isVerified' => false,
+                'crop' => [
+                    'id' => $crop->id,
+                    'name' => $crop->name,
+                ],
+                'seedStage' => [
+                    'id' => $seedStage->id,
+                    'name' => $seedStage->name,
+                ],
             ],
         ])
-        ->assertStatus(200);
+        ->assertStatus(201);
 
     assertDatabaseCount('farmer_reports', 1);
 

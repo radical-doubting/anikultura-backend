@@ -7,7 +7,6 @@ use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use Exception;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +35,9 @@ class SubmitFarmerReport
             $farmland
         );
 
+        /**
+         * @var FarmerReport
+         */
         $farmerReport = FarmerReport::create([
             'reported_by' => $farmer->id,
             'seed_stage_id' => $nextSeedStage->id,
@@ -46,7 +48,7 @@ class SubmitFarmerReport
 
         Storage::put('reports', $imageFile);
 
-        return $farmerReport;
+        return $farmerReport->refresh();
     }
 
     private function validateReportData(array $farmerReportData): void
@@ -102,7 +104,7 @@ class SubmitFarmerReport
      *     @OA\Response(response="422", description="Validation errors occured", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): FarmerReportResource
     {
         /**
          * @var Farmer
@@ -117,11 +119,7 @@ class SubmitFarmerReport
         try {
             $createdFarmerReport = $this->handle($farmer, $farmerReportData, $imageFile);
 
-            return response()->json(
-                new FarmerReportResource(
-                    $createdFarmerReport->fresh()
-                )
-            );
+            return FarmerReportResource::make($createdFarmerReport);
         } catch (Exception $exception) {
             return abort(400, $exception->getMessage());
         }

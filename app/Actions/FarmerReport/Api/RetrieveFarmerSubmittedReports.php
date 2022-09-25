@@ -7,7 +7,7 @@ use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -44,7 +44,7 @@ class RetrieveFarmerSubmittedReports
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): AnonymousResourceCollection
     {
         /**
          * @var Farmer
@@ -56,6 +56,6 @@ class RetrieveFarmerSubmittedReports
 
         $farmerReports = $this->handle($farmer, $farmland);
 
-        return response()->json(FarmerReportResource::collection($farmerReports));
+        return FarmerReportResource::collection($farmerReports);
     }
 }
