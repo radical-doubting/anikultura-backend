@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -17,19 +18,26 @@ class UpdateLocale
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! Session()->has('applocale')) {
-            App::setLocale(config('app.fallback_locale'));
+        $auth = auth('web');
 
-            return $next($request);
-        }
-
-        $currentLocale = Session()->get('applocale');
-        $configuredLanguages = config('languages');
-
-        if (array_key_exists($currentLocale, $configuredLanguages)) {
-            App::setLocale($currentLocale);
+        if ($auth->check()) {
+            $this->updateLanguage($auth->user());
         }
 
         return $next($request);
+    }
+
+    private function updateLanguage(User $user): void
+    {
+        $locale = $user->preferredLocale();
+
+        if ($this->hasValidLanguage($locale)) {
+            App::setLocale($locale);
+        }
+    }
+
+    private function hasValidLanguage(string $locale): bool
+    {
+        return array_key_exists($locale, config('languages'));
     }
 }
