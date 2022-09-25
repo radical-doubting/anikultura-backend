@@ -90,22 +90,12 @@ it('should retrieve current seed stage if submitted a report', function () {
 
 it('should return error if retrieving stage from non-existent farmland', function () {
     $farmer = Farmer::first();
-    $farmland = Farmland::first();
-    $seedStage = SeedStage::initialStage();
-    $crop = Crop::first();
-
-    FarmerReport::factory()->create([
-        'reported_by' => $farmer,
-        'farmland_id' => $farmland,
-        'seed_stage_id' => $seedStage,
-        'crop_id' => $crop,
-    ]);
 
     $response = actingAs($farmer, 'api')
         ->postJson(
             route('api.seeds.current-stage'),
             [
-                'farmlandId' => 2,
+                'farmlandId' => -1,
             ]
         );
 
