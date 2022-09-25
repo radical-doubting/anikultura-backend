@@ -2,6 +2,7 @@
 
 namespace App\Actions\FarmerReport;
 
+use App\Events\ReadyForHarvestEvent;
 use App\Models\FarmerReport\FarmerReport;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
@@ -19,6 +20,10 @@ class CreateFarmerReport
         $farmerReport
             ->fill($farmerReportData)
             ->save();
+
+        if ($farmerReport->isHarvested() == true) {
+            event(new ReadyForHarvestEvent($farmerReport));
+        }
 
         return $farmerReport->refresh();
     }
