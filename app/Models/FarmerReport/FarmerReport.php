@@ -45,6 +45,7 @@ class FarmerReport extends Model
     ];
 
     protected $casts = [
+        'verified' => 'bool',
         'volume_kg' => 'float',
         'estimated_profit' => 'float',
         'estimated_yield_amount' => 'float',
