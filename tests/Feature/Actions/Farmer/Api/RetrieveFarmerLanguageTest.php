@@ -11,12 +11,11 @@ beforeEach(function () {
 
 it('should return language preference', function () {
     $farmer = Farmer::first();
-    $farmerPreference = $farmer->profile->preference;
 
     $response = actingAs($farmer, 'api')
         ->getJson(route('api.language'));
 
-    $resource = LanguageResource::make($farmerPreference);
+    $resource = LanguageResource::make($farmer);
 
     $response
         ->assertExactJson(

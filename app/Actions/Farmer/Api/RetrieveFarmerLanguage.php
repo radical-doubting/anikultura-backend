@@ -3,7 +3,7 @@
 namespace App\Actions\Farmer\Api;
 
 use App\Http\Resources\Farmer\LanguageResource;
-use App\Models\Farmer\FarmerPreference;
+use App\Models\Farmer\Farmer;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -11,9 +11,9 @@ class RetrieveFarmerLanguage
 {
     use AsAction;
 
-    public function handle(FarmerPreference $farmerPreference): string
+    public function handle(Farmer $farmer): string
     {
-        return $farmerPreference->language;
+        return $farmer->preferredLocale();
     }
 
     /**
@@ -27,12 +27,13 @@ class RetrieveFarmerLanguage
      */
     public function asController(ActionRequest $request): LanguageResource
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
-        $farmerPreference = $user->profile->preference;
+        $this->handle($farmer);
 
-        $this->handle($farmerPreference);
-
-        return LanguageResource::make($farmerPreference);
+        return LanguageResource::make($farmer);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Farmer\Api;
 
-use App\Models\Farmer\FarmerProfile;
+use App\Models\Farmer\Farmer;
 use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
@@ -14,12 +14,11 @@ class UpdateFarmerLanguage
     use AsAction;
     use AsApiResponder;
 
-    public function handle(FarmerProfile $farmerProfile, string $language): void
+    public function handle(Farmer $farmer, string $language): void
     {
-        $farmerProfile
-            ->preference
+        $farmer
             ->update([
-                'language' => $language,
+                'locale' => $language,
             ]);
     }
 
@@ -40,11 +39,14 @@ class UpdateFarmerLanguage
      */
     public function asController(ActionRequest $request): JsonResponse
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
         $language = $request->get('language');
 
-        $this->handle($user->profile, $language);
+        $this->handle($farmer, $language);
 
         return $this->respondWithSuccess('Successfully updated language preference');
     }
