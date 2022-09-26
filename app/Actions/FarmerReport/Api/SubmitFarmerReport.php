@@ -36,7 +36,7 @@ class SubmitFarmerReport
             $farmland
         );
 
-        $fileName = Storage::put('reports', $imageFile);
+        $fileName = Storage::putFile('reports', $imageFile);
 
         $photoUrl = Storage::url($fileName);
 
