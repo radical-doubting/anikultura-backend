@@ -36,6 +36,10 @@ class SubmitFarmerReport
             $farmland
         );
 
+        $fileName = Storage::put('reports', $imageFile);
+
+        $photoUrl = Storage::url($fileName);
+
         /**
          * @var FarmerReport
          */
@@ -45,9 +49,8 @@ class SubmitFarmerReport
             'farmland_id' => $farmland->id,
             'crop_id' => $farmerReportData['cropId'],
             'volume_kg' => $farmerReportData['volumeKg'],
+            'photo_url' => $photoUrl,
         ]);
-
-        Storage::put('reports', $imageFile);
 
         return $farmerReport->refresh();
     }

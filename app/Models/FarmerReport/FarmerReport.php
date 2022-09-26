@@ -31,6 +31,7 @@ class FarmerReport extends Model
         'verified',
         'verified_by',
         'volume_kg',
+        'photo_url',
     ];
 
     protected $allowedFilters = [
