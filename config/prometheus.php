@@ -66,6 +66,7 @@ return [
         'redis' => [
             'host' => env('PROMETHEUS_REDIS_HOST', 'localhost'),
             'port' => env('PROMETHEUS_REDIS_PORT', 6379),
+            'password' => env('PROMETHEUS_REDIS_PASSWORD', null),
             'database' => env('PROMETHEUS_REDIS_DATABASE', 0),
             'timeout' => env('PROMETHEUS_REDIS_TIMEOUT', 0.1),
             'read_timeout' => env('PROMETHEUS_REDIS_READ_TIMEOUT', 10),
