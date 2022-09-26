@@ -18,7 +18,6 @@ class FarmerPreferenceFactory extends Factory
     {
         return [
             'tutorial_done' => false,
-            'language' => 'en',
         ];
     }
 }
