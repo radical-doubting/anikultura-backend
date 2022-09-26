@@ -12,11 +12,15 @@ it('should return tutorial done', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
-        ->getJson('/api/farmers/tutorial');
+        ->getJson(route('api.tutorial'));
 
     $response
-        ->assertStatus(200)
-        ->assertJson([
-            'isTutorialDone' => false,
-        ]);
+        ->assertExactJson(
+            [
+                'data' => [
+                    'isTutorialDone' => false,
+                ],
+            ]
+        )
+        ->assertStatus(200);
 });

@@ -3,32 +3,50 @@
 namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\SeedStageResource;
+use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
+use Exception;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
-class RetrieveFarmerSeedStage
+class RetrieveCurrentSeedStage
 {
     use AsAction;
 
-    public function handle($farmer, Farmland $farmland)
+    public function handle(Farmer $farmer, Farmland $farmland): ?SeedStage
     {
-        Farmer::query()->whereHas('farmlands', function ($q) use ($farmland) {
-            $q->where('id', $farmland->id);
-        })->findOrFail($farmer->id);
+        $this->validateFarmerBelongingToFarmland($farmer, $farmland);
 
         $farmerReport = FarmerReport::orderBy('seed_stage_id', 'DESC')
             ->where('reported_by', $farmer->id)
             ->where('farmland_id', $farmland->id)
             ->first();
 
-        $currentSeedStage = is_null($farmerReport) ?
-            null : $farmerReport->seedStage;
+        return $this->getCurrentSeedStage($farmerReport);
+    }
 
-        return $currentSeedStage;
+    private function validateFarmerBelongingToFarmland(
+        Farmer $farmer,
+        Farmland $farmland
+    ): void {
+        $query = Farmer::query()->whereHas(
+            'farmlands',
+            fn ($q) => $q->where('id', $farmland->id)
+        );
+
+        $farmer = $query->find($farmer->id);
+
+        if (is_null($farmer)) {
+            throw new Exception('Farmer does not belong to farmland');
+        }
+    }
+
+    private function getCurrentSeedStage(?FarmerReport $farmerReport): ?SeedStage
+    {
+        return is_null($farmerReport) ? null : $farmerReport->seedStage;
     }
 
     /**
@@ -46,19 +64,22 @@ class RetrieveFarmerSeedStage
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): JsonResponse|SeedStageResource
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
         $farmlandId = $request->get('farmlandId');
         $farmland = Farmland::findOrFail($farmlandId);
 
-        $currentSeedStage = $this->handle($user, $farmland);
+        $currentSeedStage = $this->handle($farmer, $farmland);
 
         if (is_null($currentSeedStage)) {
             return response()->json(null);
         } else {
-            return response()->json(new SeedStageResource($currentSeedStage));
+            return SeedStageResource::make($currentSeedStage);
         }
     }
 
@@ -68,6 +89,7 @@ class RetrieveFarmerSeedStage
             'farmlandId' => [
                 'required',
                 'integer',
+                'exists:farmlands,id',
             ],
         ];
     }

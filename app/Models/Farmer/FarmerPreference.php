@@ -13,7 +13,6 @@ class FarmerPreference extends Model
     protected $fillable = [
         'farmer_profile_id',
         'tutorial_done',
-        'language',
     ];
 
     protected $casts = [

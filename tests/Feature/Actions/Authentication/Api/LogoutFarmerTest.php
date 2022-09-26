@@ -16,21 +16,21 @@ it('should logout farmer', function () {
         'password' => 'password',
     ]);
 
-    $response = postJson('/api/auth/logout');
+    $response = postJson(route('api.logout'));
 
     $response
-        ->assertStatus(200)
         ->assertJson([
             'message' => 'Successfully logged out',
-        ]);
+        ])
+        ->assertStatus(200);
 });
 
 it('should not logout unauthenticated farmer', function () {
     $response = postJson('/api/auth/logout');
 
     $response
-        ->assertStatus(401)
         ->assertJson([
             'message' => 'Unauthenticated.',
-        ]);
+        ])
+        ->assertStatus(401);
 });

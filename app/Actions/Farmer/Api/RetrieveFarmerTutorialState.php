@@ -2,8 +2,8 @@
 
 namespace App\Actions\Farmer\Api;
 
-use App\Models\Farmer\FarmerProfile;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\Farmer\TutorialStateResource;
+use App\Models\Farmer\FarmerPreference;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -11,9 +11,9 @@ class RetrieveFarmerTutorialState
 {
     use AsAction;
 
-    public function handle(FarmerProfile $farmerProfile): bool
+    public function handle(FarmerPreference $farmerPreference): bool
     {
-        return $farmerProfile->preference->tutorial_done;
+        return $farmerPreference->tutorial_done;
     }
 
     /**
@@ -25,12 +25,14 @@ class RetrieveFarmerTutorialState
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): TutorialStateResource
     {
         $user = auth('api')->user();
 
-        $isTutorialDone = $this->handle($user->profile);
+        $farmerPreference = $user->profile->preference;
 
-        return response()->json(['isTutorialDone' => $isTutorialDone]);
+        $this->handle($farmerPreference);
+
+        return new TutorialStateResource($farmerPreference);
     }
 }

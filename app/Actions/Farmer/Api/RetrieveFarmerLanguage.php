@@ -2,8 +2,8 @@
 
 namespace App\Actions\Farmer\Api;
 
-use App\Models\Farmer\FarmerProfile;
-use Illuminate\Http\JsonResponse;
+use App\Http\Resources\Farmer\LanguageResource;
+use App\Models\Farmer\Farmer;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -11,9 +11,9 @@ class RetrieveFarmerLanguage
 {
     use AsAction;
 
-    public function handle(FarmerProfile $farmerProfile): string
+    public function handle(Farmer $farmer): string
     {
-        return $farmerProfile->preference->language;
+        return $farmer->preferredLocale();
     }
 
     /**
@@ -25,12 +25,15 @@ class RetrieveFarmerLanguage
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): LanguageResource
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
-        $language = $this->handle($user->profile);
+        $this->handle($farmer);
 
-        return response()->json(['language' => $language]);
+        return LanguageResource::make($farmer);
     }
 }

@@ -2,12 +2,16 @@
 
 namespace App\Actions\FarmerReport\Api;
 
-use App\Actions\Crop\Api\RetrieveFarmerSeedStage;
-use App\Actions\Crop\Api\RetrieveNextSeedStage;
+use App\Actions\Crop\ValidateSeedStage;
 use App\Http\Resources\FarmerReport\FarmerReportResource;
+use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
-use Illuminate\Http\JsonResponse;
+use Exception;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -15,33 +19,83 @@ class SubmitFarmerReport
 {
     use AsAction;
 
-    public function handle($farmer, $farmerReportData)
-    {
+    public function __construct(
+        protected ValidateSeedStage $validateSeedStage
+    ) {
+    }
+
+    public function handle(
+        Farmer $farmer,
+        array $farmerReportData,
+        UploadedFile $imageFile
+    ): FarmerReport {
         $farmland = Farmland::findOrFail($farmerReportData['farmlandId']);
-        $currentSeedStage = RetrieveFarmerSeedStage::run($farmer, $farmland);
-        $nextSeedStage = RetrieveNextSeedStage::run($currentSeedStage);
 
-        abort_if(is_null($nextSeedStage), 400, 'No next seed stage');
+        $nextSeedStage = $this->validateSeedStage->handle(
+            $farmer,
+            $farmland
+        );
 
+        $fileName = Storage::putFile('reports', $imageFile);
+
+        $photoUrl = Storage::url($fileName);
+
+        /**
+         * @var FarmerReport
+         */
         $farmerReport = FarmerReport::create([
             'reported_by' => $farmer->id,
             'seed_stage_id' => $nextSeedStage->id,
             'farmland_id' => $farmland->id,
             'crop_id' => $farmerReportData['cropId'],
             'volume_kg' => $farmerReportData['volumeKg'],
+            'photo_url' => $photoUrl,
         ]);
 
-        return $farmerReport;
+        return $farmerReport->refresh();
+    }
+
+    private function validateReportData(array $farmerReportData): void
+    {
+        $validator = Validator::make($farmerReportData, [
+            'farmlandId' => [
+                'required',
+                'integer',
+            ],
+            'cropId' => [
+                'required',
+                'integer',
+            ],
+            'volumeKg' => [
+                'numeric',
+                'nullable',
+            ],
+        ]);
+
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
     }
 
     /**
      * @OA\Post(
      *     path="/farmer-reports",
-     *     description="Submit a farming report with logged in farmer",
+     *     description="Submit a farmer report with the logged in farmer. It needs both image file and data JSON.",
      *     tags={"farmer-reports"},
      *     @OA\RequestBody(
      *       required=true,
-     *       @OA\JsonContent(
+     *        @OA\MediaType(
+     *             mediaType="multipart/form-data",
+     *             @OA\Schema(
+     *                 @OA\Property(
+     *                     description="proof image to upload",
+     *                     property="image",
+     *                     type="file",
+     *                ),
+     *                 required={"image"}
+     *             )
+     *         ),
+     *        @OA\JsonContent(
      *          @OA\Property(
      *             property="farmerReport",
      *             @OA\Property(property="farmlandId", type="int", format="int", example="1"),
@@ -54,35 +108,37 @@ class SubmitFarmerReport
      *     @OA\Response(response="422", description="Validation errors occured", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): FarmerReportResource
     {
+        /**
+         * @var Farmer
+         */
         $farmer = auth('api')->user();
 
-        $farmerReportData = $request->get('farmerReport');
+        $farmerReportData = json_decode($request->get('data'), true);
+        $this->validateReportData($farmerReportData);
 
-        $createdFarmerReport = $this->handle($farmer, $farmerReportData);
+        $imageFile = $request->file('image');
 
-        return response()->json(
-            new FarmerReportResource(
-                $createdFarmerReport->fresh()
-            )
-        );
+        try {
+            $createdFarmerReport = $this->handle($farmer, $farmerReportData, $imageFile);
+
+            return FarmerReportResource::make($createdFarmerReport);
+        } catch (Exception $exception) {
+            return abort(400, $exception->getMessage());
+        }
     }
 
     public function rules(): array
     {
         return [
-            'farmerReport.farmlandId' => [
-                'required',
-                'integer',
+            'image' => [
+                'mimes:jpeg,jpg,bmp,png',
+                'max:10240',
             ],
-            'farmerReport.cropId' => [
+            'data' => [
                 'required',
-                'integer',
-            ],
-            'farmerReport.volumeKg' => [
-                'numeric',
-                'nullable',
+                'json',
             ],
         ];
     }

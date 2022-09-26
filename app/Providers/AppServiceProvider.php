@@ -14,7 +14,8 @@ use App\Models\Site\Region;
 use App\Observers\Batch\BatchObserver;
 use App\Observers\Batch\BatchSeedAllocationObserver;
 use App\Observers\Crop\CropObserver;
-use App\Observers\FarmerReport\FarmerReportObserver;
+use App\Observers\FarmerReport\FarmerReportHarvestedObserver;
+use App\Observers\FarmerReport\FarmerReportInsightObserver;
 use App\Observers\Farmland\FarmlandObserver;
 use App\Observers\Site\MunicityObserver;
 use App\Observers\Site\ProvinceObserver;
@@ -47,26 +48,26 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        $this->registerObservers();
+        $this->registerDomainObservers();
+        $this->registerInsightObservers();
     }
 
-    /**
-     * Register application observers by Filename and Model.
-     */
-    private function registerObservers()
+    private function registerInsightObservers(): void
     {
-        // Site observers
         Region::observe(RegionObserver::class);
         Province::observe(ProvinceObserver::class);
         Municity::observe(MunicityObserver::class);
 
-        // Batch and farmer enrollment observers
         Batch::observe(BatchObserver::class);
         BatchSeedAllocation::observe(BatchSeedAllocationObserver::class);
 
-        // Farmland observer
         Farmland::observe(FarmlandObserver::class);
         Crop::observe(CropObserver::class);
-        FarmerReport::observe(FarmerReportObserver::class);
+        FarmerReport::observe(FarmerReportInsightObserver::class);
+    }
+
+    private function registerDomainObservers(): void
+    {
+        FarmerReport::observe(FarmerReportHarvestedObserver::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\SeedStageResource;
 use App\Models\Crop\SeedStage;
+use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
@@ -13,18 +14,18 @@ class RetrieveNextSeedStage
 {
     use AsAction;
 
-    public function handle($currentSeedStage)
+    public function __construct(
+        protected RetrieveCurrentSeedStage $retrieveCurrentSeedStage
+    ) {
+    }
+
+    public function handle(?SeedStage $currentSeedStage): ?SeedStage
     {
         if (is_null($currentSeedStage)) {
-            return SeedStage::where('slug', 'starter-kit-received')
-                ->first();
+            return SeedStage::initialStage();
+        } else {
+            return $currentSeedStage->nextStage();
         }
-
-        if ($currentSeedStage->slug === 'marketable') {
-            return null;
-        }
-
-        return SeedStage::findOrFail($currentSeedStage->id + 1);
     }
 
     /**
@@ -42,20 +43,27 @@ class RetrieveNextSeedStage
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): JsonResponse|SeedStageResource
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
         $farmlandId = $request->get('farmlandId');
         $farmland = Farmland::findOrFail($farmlandId);
 
-        $currentSeedStage = RetrieveFarmerSeedStage::run($user, $farmland);
+        $currentSeedStage = $this->retrieveCurrentSeedStage->handle(
+            $farmer,
+            $farmland
+        );
+
         $nextSeedStage = $this->handle($currentSeedStage);
 
         if (is_null($nextSeedStage)) {
             return response()->json(null);
         } else {
-            return response()->json(new SeedStageResource($nextSeedStage));
+            return SeedStageResource::make($nextSeedStage);
         }
     }
 
@@ -65,6 +73,7 @@ class RetrieveNextSeedStage
             'farmlandId' => [
                 'required',
                 'integer',
+                'exists:farmlands,id',
             ],
         ];
     }

@@ -25,7 +25,6 @@ class FarmerProfileResource extends JsonResource
 
         return [
             'isTutorialDone' => $preference->tutorial_done,
-            'language' => $preference->language,
             'gender' => $gender->name,
             'birthday' => $this->birthday,
             'affiliatedOrganization' => $this->affiliated_organization,

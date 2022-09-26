@@ -31,6 +31,7 @@ class FarmerReport extends Model
         'verified',
         'verified_by',
         'volume_kg',
+        'photo_url',
     ];
 
     protected $allowedFilters = [
@@ -45,6 +46,7 @@ class FarmerReport extends Model
     ];
 
     protected $casts = [
+        'verified' => 'bool',
         'volume_kg' => 'float',
         'estimated_profit' => 'float',
         'estimated_yield_amount' => 'float',

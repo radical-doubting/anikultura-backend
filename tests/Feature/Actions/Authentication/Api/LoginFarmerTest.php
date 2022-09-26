@@ -12,18 +12,18 @@ beforeEach(function () {
 it('should login farmer', function () {
     $farmer = Farmer::first();
 
-    $response = postJson('/api/auth/login', [
+    $response = postJson(route('api.login'), [
         'username' => $farmer->name,
         'password' => 'password',
     ]);
 
     $response
-        ->assertStatus(200)
-        ->assertCookie('token')
         ->assertJson([
             'tokenType' => 'bearer',
             'expiresIn' => 3600,
-        ]);
+        ])
+        ->assertCookie('token')
+        ->assertStatus(200);
 });
 
 it('should not login a farmer with wrong password', function () {
@@ -35,10 +35,10 @@ it('should not login a farmer with wrong password', function () {
     ]);
 
     $response
-        ->assertStatus(401)
         ->assertJson([
             'message' => 'Invalid login credentials',
-        ]);
+        ])
+        ->assertStatus(401);
 });
 
 it('should not login a non-existent farmer', function () {
@@ -48,10 +48,10 @@ it('should not login a non-existent farmer', function () {
     ]);
 
     $response
-        ->assertStatus(401)
         ->assertJson([
             'message' => 'Invalid login credentials',
-        ]);
+        ])
+        ->assertStatus(401);
 });
 
 it('should not login an already logged in farmer', function () {
@@ -64,8 +64,8 @@ it('should not login an already logged in farmer', function () {
         ]);
 
     $response
-        ->assertStatus(400)
         ->assertJson([
             'message' => 'Already logged in',
-        ]);
+        ])
+        ->assertStatus(400);
 });

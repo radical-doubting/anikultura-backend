@@ -31,7 +31,6 @@ it('should add a farmer preference', function () {
 
     expect($createdFarmerPreference->id)->toBeTruthy();
     expect($createdFarmerPreference->tutorial_done)->toBe(false);
-    expect($createdFarmerPreference->language)->toBe('en');
 });
 
 it('should not add a farmer preference on non-existent profile', function () {

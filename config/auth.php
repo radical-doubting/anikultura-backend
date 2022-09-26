@@ -43,7 +43,7 @@ return [
 
         'api' => [
             'driver' => 'jwt',
-            'provider' => 'users',
+            'provider' => 'farmers',
             'hash' => false,
         ],
     ],
@@ -69,6 +69,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'farmers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Farmer\Farmer::class,
         ],
 
         // 'users' => [
