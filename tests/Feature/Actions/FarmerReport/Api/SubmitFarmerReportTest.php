@@ -85,6 +85,7 @@ it('should submit a farmer report', function () {
     $farmerReport = FarmerReport::first();
     expect($farmerReport->reported_by)->toBe($farmer->id);
     expect($farmerReport->volume_kg)->toBe(10.23);
+    expect($farmerReport->photo_url)->toContain('/storage/reports');
 });
 
 it('should not submit a farmer report to a non-belonging farmland', function () {
