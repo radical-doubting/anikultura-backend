@@ -8,7 +8,7 @@ beforeEach(function () {
     seed();
 });
 
-it('should update language preference', function () {
+it('should update language preference', function (string $language) {
     /**
      * @var Farmer
      */
@@ -16,7 +16,7 @@ it('should update language preference', function () {
 
     $response = actingAs($farmer, 'api')
         ->patchJson(route('api.language.update'), [
-            'language' => 'fil_PH',
+            'language' => $language,
         ]);
 
     $response
@@ -25,5 +25,5 @@ it('should update language preference', function () {
         ])
         ->assertStatus(200);
 
-    expect($farmer->preferredLocale())->toBe('fil_PH');
-});
+    expect($farmer->preferredLocale())->toBe($language);
+})->with(['en', 'fil_PH', 'ceb']);
