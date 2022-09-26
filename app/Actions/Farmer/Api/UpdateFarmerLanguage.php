@@ -56,7 +56,7 @@ class UpdateFarmerLanguage
         return [
             'language' => [
                 'required',
-                Rule::in(['en', 'fil_PH']),
+                Rule::in(['en', 'fil_PH', 'ceb']),
             ],
         ];
     }
