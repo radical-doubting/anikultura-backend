@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Resources\Farmer\LanguageResource;
 use App\Models\Farmer\Farmer;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
@@ -15,11 +14,11 @@ it('should return language preference', function () {
     $response = actingAs($farmer, 'api')
         ->getJson(route('api.language'));
 
-    $resource = LanguageResource::make($farmer);
-
     $response
-        ->assertExactJson(
-            $resource->response()->getData(true)
-        )
+        ->assertExactJson([
+            'data' => [
+                'language' => 'en',
+            ],
+        ])
         ->assertStatus(200);
 });
