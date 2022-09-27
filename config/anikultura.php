@@ -54,11 +54,10 @@ return [
     | Insights
     |--------------------------------------------------------------------------
     |
-    | Here insights exporting can be enabled or not. The insights mode define
-    | what model event to generate metrics from. It can be `save` or `create`.
-    | It can also be set to `none` to disable insights.
+    | The insights mode define what model event to generate metrics from. It
+    | can be `save` or `create`. It can also be set to `none` to disable
+    | insights entirely.
     |
     */
-    'insightsEnabled' => env('ANIKULTURA_INSIGHTS_ENABLED', true),
-    'insightsMode' => env('ANIKULTURA_INSIGHTS_MODE', 'create'),
+    'insightsMode' => env('ANIKULTURA_INSIGHTS_MODE', 'none'),
 ];
