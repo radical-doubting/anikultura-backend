@@ -48,4 +48,17 @@ return [
     |
     */
     'isHeadless' => env('ANIKULTURA_HEADLESS', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Insights
+    |--------------------------------------------------------------------------
+    |
+    | Here insights exporting can be enabled or not. The insights mode define
+    | what model event to generate metrics from. It can be `save` or `create`.
+    | It can also be set to `none` to disable insights.
+    |
+    */
+    'insightsEnabled' => env('ANIKULTURA_INSIGHTS_ENABLED', true),
+    'insightsMode' => env('ANIKULTURA_INSIGHTS_MODE', 'create'),
 ];

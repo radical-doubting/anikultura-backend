@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Enums\InsightsMode;
 use Illuminate\Support\Facades\Config;
 
 class Anikultura
@@ -11,5 +12,12 @@ class Anikultura
         $isHeadlessValue = Config::get('anikultura.isHeadless');
 
         return filter_var($isHeadlessValue, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    public function getInsightsMode(): InsightsMode
+    {
+        $insightsModeValue = Config::get('anikultura.insightsMode');
+
+        return InsightsMode::from($insightsModeValue);
     }
 }
