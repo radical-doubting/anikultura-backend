@@ -35,6 +35,7 @@ return [
     | use on its management dashboard.
     |
     */
+
     'organizationName' => env('ANIKULTURA_ORGANIZATION_NAME', 'Anikultura Organization'),
     'organizationUrl' => env('ANIKULTURA_ORGANIZATION_URL', 'http://example.com'),
 
@@ -47,6 +48,7 @@ return [
     | dashboard.
     |
     */
+
     'isHeadless' => env('ANIKULTURA_HEADLESS', false),
 
     /*
@@ -59,5 +61,6 @@ return [
     | insights entirely.
     |
     */
+
     'insightsMode' => env('ANIKULTURA_INSIGHTS_MODE', 'none'),
 ];
