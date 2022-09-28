@@ -23,7 +23,7 @@
         <server name="SESSION_DRIVER" value="array" />
         <server name="TELESCOPE_ENABLED" value="false" />
         <server name="ANIKULTURA_HEADLESS" value="false" />
-        <server name="ANIKULTURA_INSIGHTS_MODE" value="none" />
+        <server name="ANIKULTURA_INSIGHTS_MODE" value="create" />
         <server name="PROMETHEUS_STORAGE_ADAPTER" value="memory" />
     </php>
 </phpunit>
