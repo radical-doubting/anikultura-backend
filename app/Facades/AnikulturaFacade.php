@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static bool isInsightsEnabled()
  * @method static \App\Enums\InsightsMode getInsightsMode()
  */
-class Anikultura extends Facade
+class AnikulturaFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {

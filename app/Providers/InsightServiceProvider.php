@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Facades\Anikultura;
+use App\Facades\AnikulturaFacade as Anikultura;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Crop\Crop;

@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use App\Enums\InsightsMode;
-use App\Facades\Anikultura;
+use App\Facades\AnikulturaFacade as Anikultura;
 use Illuminate\Database\Eloquent\Model;
 
 trait AsInsightSender
