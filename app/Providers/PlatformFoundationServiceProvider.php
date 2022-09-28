@@ -13,6 +13,11 @@ class PlatformFoundationServiceProvider extends ServiceProvider
             return;
         }
 
+        $this->bootOrchidPlatform();
+    }
+
+    public function bootOrchidPlatform(): void
+    {
         parent::boot();
     }
 
@@ -22,6 +27,11 @@ class PlatformFoundationServiceProvider extends ServiceProvider
             return;
         }
 
+        $this->registerOrchidPlatform();
+    }
+
+    public function registerOrchidPlatform(): void
+    {
         parent::register();
     }
 }
