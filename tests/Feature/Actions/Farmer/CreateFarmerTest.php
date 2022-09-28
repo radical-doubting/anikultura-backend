@@ -29,7 +29,7 @@ beforeEach(function () {
     seed(NCPasserStatusSeeder::class);
 });
 
-it('should add a farmer', function () {
+it('adds a farmer', function () {
     $gender = Gender::all()->random();
     $civilStatus = CivilStatus::all()->random();
     $educationalStatus = EducationalStatus::all()->random();

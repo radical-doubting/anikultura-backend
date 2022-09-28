@@ -40,7 +40,7 @@ beforeEach(function () {
     $farmland->farmers()->attach($farmer->id);
 });
 
-it('should retrieve no seed allocations if actually none', function () {
+it('retrieves no seed allocations if actually none', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
@@ -55,7 +55,7 @@ it('should retrieve no seed allocations if actually none', function () {
         ->assertStatus(200);
 });
 
-it('should retrieve seed allocations if actually has', function () {
+it('retrieves seed allocations if actually has', function () {
     $farmer = Farmer::first();
     $batch = Batch::first();
     $crop = Crop::first();

@@ -8,7 +8,7 @@ beforeEach(function () {
     seed();
 });
 
-it('should return language preference', function () {
+it('returns language preference', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')

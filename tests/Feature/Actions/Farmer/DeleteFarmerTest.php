@@ -20,7 +20,7 @@ beforeEach(function () {
     seed(FarmlandSeeder::class);
 });
 
-it('should delete a farmer', function () {
+it('deletes a farmer', function () {
     /**
      * @var Farmer
      */

@@ -14,7 +14,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should show list screen', function () {
+it('shows list screen', function () {
     $screen = screen('platform.sites.provinces')->actingAs(Admin::first());
 
     $screen->display()

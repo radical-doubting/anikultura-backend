@@ -17,7 +17,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should delete an existing site municipality or city', function () {
+it('deletes an existing site municipality or city', function () {
     $municityData = [
         'name' => 'Santa Rosa',
         'province_id' => Province::firstWhere('name', 'Laguna')->id,

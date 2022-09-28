@@ -22,7 +22,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should show create screen', function () {
+it('shows create screen', function () {
     $screen = screen('platform.sites.municities.create')->actingAs(Admin::first());
 
     $screen->display()
@@ -31,7 +31,7 @@ it('should show create screen', function () {
         ->assertSee(__('Save'));
 });
 
-it('should show edit screen', function () {
+it('shows edit screen', function () {
     $municity = Municity::factory()->count(1)->create()[0];
 
     $screen = screen('platform.sites.municities.edit')

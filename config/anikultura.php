@@ -35,6 +35,7 @@ return [
     | use on its management dashboard.
     |
     */
+
     'organizationName' => env('ANIKULTURA_ORGANIZATION_NAME', 'Anikultura Organization'),
     'organizationUrl' => env('ANIKULTURA_ORGANIZATION_URL', 'http://example.com'),
 
@@ -47,5 +48,19 @@ return [
     | dashboard.
     |
     */
+
     'isHeadless' => env('ANIKULTURA_HEADLESS', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Insights
+    |--------------------------------------------------------------------------
+    |
+    | The insights mode define what model event to generate metrics from. It
+    | can be `save` or `create`. It can also be set to `none` to disable
+    | insights entirely.
+    |
+    */
+
+    'insightsMode' => env('ANIKULTURA_INSIGHTS_MODE', 'none'),
 ];

@@ -31,7 +31,7 @@ beforeEach(function () {
     $batch->farmers()->attach($farmer->id);
 });
 
-it('should retrieve no farmlands if actually has none', function () {
+it('retrieves no farmlands if actually has none', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
@@ -46,7 +46,7 @@ it('should retrieve no farmlands if actually has none', function () {
         ->assertStatus(200);
 });
 
-it('should retrieve farmlands if actually has', function () {
+it('retrieves farmlands if actually has', function () {
     $farmer = Farmer::first();
     $batch = Batch::first();
 

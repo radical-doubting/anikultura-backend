@@ -7,7 +7,7 @@ use App\Models\Crop\Crop;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
-class CropObserver
+class CropInsightObserver
 {
     use AsInsightSender;
 

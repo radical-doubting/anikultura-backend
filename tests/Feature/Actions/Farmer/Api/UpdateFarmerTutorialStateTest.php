@@ -9,7 +9,7 @@ beforeEach(function () {
     seed();
 });
 
-it('should update tutorial state', function () {
+it('updates tutorial state', function () {
     /**
      * @var Farmer
      */

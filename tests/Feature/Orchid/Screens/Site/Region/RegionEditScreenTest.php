@@ -15,7 +15,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should show create screen', function () {
+it('shows create screen', function () {
     $screen = screen('platform.sites.regions.create')->actingAs(Admin::first());
 
     $screen->display()
@@ -24,7 +24,7 @@ it('should show create screen', function () {
         ->assertSee(__('Save'));
 });
 
-it('should show edit screen', function () {
+it('shows edit screen', function () {
     $region = Region::create([
         'name' => 'National Capital Region',
         'short_name' => 'NCR',

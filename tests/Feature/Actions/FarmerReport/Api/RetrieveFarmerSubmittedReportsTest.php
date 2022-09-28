@@ -51,7 +51,7 @@ beforeEach(function () {
     $farmland->farmers()->attach($farmer->id);
 });
 
-it('should retrieve submitted farmer reports', function () {
+it('retrieves submitted farmer reports', function () {
     /**
      * @var Farmer
      */
@@ -83,7 +83,7 @@ it('should retrieve submitted farmer reports', function () {
         ->assertStatus(200);
 });
 
-it('should retrieve submitted farmer reports with estimated metrics', function () {
+it('retrieves submitted farmer reports with estimated metrics', function () {
     /**
      * @var Farmer
      */
@@ -118,7 +118,7 @@ it('should retrieve submitted farmer reports with estimated metrics', function (
         ->assertStatus(200);
 });
 
-it('should retrieve submitted farmer reports with verifier', function () {
+it('retrieves submitted farmer reports with verifier', function () {
     /**
      * @var Farmer
      */
@@ -160,7 +160,7 @@ it('should retrieve submitted farmer reports with verifier', function () {
         ->assertStatus(200);
 });
 
-it('should retrieve submitted farmer reports with actual volume', function () {
+it('retrieves submitted farmer reports with actual volume', function () {
     /**
      * @var Farmer
      */

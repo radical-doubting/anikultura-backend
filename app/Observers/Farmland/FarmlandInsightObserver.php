@@ -7,7 +7,7 @@ use App\Models\Farmland\Farmland;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
-class FarmlandObserver
+class FarmlandInsightObserver
 {
     use AsInsightSender;
 

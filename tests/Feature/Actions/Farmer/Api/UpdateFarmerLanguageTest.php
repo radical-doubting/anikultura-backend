@@ -8,7 +8,7 @@ beforeEach(function () {
     seed();
 });
 
-it('should update language preference', function (string $language) {
+it('updates language preference', function (string $language) {
     /**
      * @var Farmer
      */

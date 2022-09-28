@@ -21,7 +21,7 @@ beforeEach(function () {
     seed(NCPasserStatusSeeder::class);
 });
 
-it('should add a farmer preference', function () {
+it('adds a farmer preference', function () {
     $farmerProfile = FarmerProfile::factory()->create();
 
     /**

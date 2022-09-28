@@ -41,7 +41,7 @@ beforeEach(function () {
     $farmland->farmers()->attach($farmer->id);
 });
 
-it('should retrieve no next seed stage if at last stage', function () {
+it('retrieves no next seed stage if at last stage', function () {
     $farmer = Farmer::first();
     $farmland = Farmland::first();
     $seedStage = SeedStage::firstWhere('slug', 'marketable');
@@ -67,7 +67,7 @@ it('should retrieve no next seed stage if at last stage', function () {
         ->assertStatus(200);
 });
 
-it('should retrieve next seed stage if submitted a report', function () {
+it('retrieves next seed stage if submitted a report', function () {
     $farmer = Farmer::first();
     $farmland = Farmland::first();
     $seedStage = SeedStage::initialStage();
@@ -97,7 +97,7 @@ it('should retrieve next seed stage if submitted a report', function () {
         ->assertStatus(200);
 });
 
-it('should retrieve next seed stage if no submitted a report', function () {
+it('retrieves next seed stage if no submitted a report', function () {
     $farmer = Farmer::first();
     $farmland = Farmland::first();
 
@@ -118,7 +118,7 @@ it('should retrieve next seed stage if no submitted a report', function () {
         ->assertStatus(200);
 });
 
-it('should return error if retrieving seed stage from non-existent farmland', function () {
+it('returns error if retrieving seed stage from non-existent farmland', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')

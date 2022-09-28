@@ -7,7 +7,7 @@ use App\Models\Batch\Batch;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
-class BatchObserver
+class BatchInsightObserver
 {
     use AsInsightSender;
 

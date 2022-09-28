@@ -3,7 +3,7 @@
 use App\Actions\Site\Region\CreateRegion;
 use App\Models\Site\Region;
 
-it('should add a site region', function () {
+it('adds a site region', function () {
     $regionData = [
         'name' => 'National Capital Region',
         'short_name' => 'NCR',
@@ -30,7 +30,7 @@ it('should add a site region', function () {
     $this->assertDatabaseHas('regions', $regionData);
 });
 
-it('should update a site region', function () {
+it('updates a site region', function () {
     $existingRegion = Region::create([
         'name' => 'National Capital Region',
         'short_name' => 'NCR',

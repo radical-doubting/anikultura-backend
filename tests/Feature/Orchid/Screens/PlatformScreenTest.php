@@ -14,7 +14,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should show platform screen', function () {
+it('shows platform screen', function () {
     $screen = screen('platform.main')->actingAs(Admin::first());
 
     $screen->display()

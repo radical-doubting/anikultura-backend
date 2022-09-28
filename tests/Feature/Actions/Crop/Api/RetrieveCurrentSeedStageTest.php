@@ -41,7 +41,7 @@ beforeEach(function () {
     $farmland->farmers()->attach($farmer->id);
 });
 
-it('should retrieve no current seed stage if no submitted reports', function () {
+it('retrieves no current seed stage if no submitted reports', function () {
     $farmer = Farmer::first();
     $farmland = Farmland::first();
 
@@ -58,7 +58,7 @@ it('should retrieve no current seed stage if no submitted reports', function () 
         ->assertStatus(200);
 });
 
-it('should retrieve current seed stage if submitted a report', function () {
+it('retrieves current seed stage if submitted a report', function () {
     $farmer = Farmer::first();
     $farmland = Farmland::first();
     $seedStage = SeedStage::initialStage();
@@ -88,7 +88,7 @@ it('should retrieve current seed stage if submitted a report', function () {
         ->assertStatus(200);
 });
 
-it('should return error if retrieving stage from non-existent farmland', function () {
+it('returns error if retrieving stage from non-existent farmland', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')
@@ -106,7 +106,7 @@ it('should return error if retrieving stage from non-existent farmland', functio
         ->assertStatus(422);
 });
 
-it('should return error on non-belonging farmland', function () {
+it('returns error on non-belonging farmland', function () {
     $farmer = Farmer::first();
     $batch = Batch::first();
 
