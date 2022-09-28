@@ -14,6 +14,11 @@ class Anikultura
         return filter_var($isHeadlessValue, FILTER_VALIDATE_BOOLEAN);
     }
 
+    public function isInsightsEnabled(): bool
+    {
+        return $this->getInsightsMode() !== InsightsMode::NONE;
+    }
+
     public function getInsightsMode(): InsightsMode
     {
         $insightsModeValue = Config::get('anikultura.insightsMode');

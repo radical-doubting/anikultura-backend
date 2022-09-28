@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Facade;
 
 /**
  * @method static bool isHeadless()
+ * @method static bool isInsightsEnabled()
  * @method static \App\Enums\InsightsMode getInsightsMode()
  */
 class Anikultura extends Facade
