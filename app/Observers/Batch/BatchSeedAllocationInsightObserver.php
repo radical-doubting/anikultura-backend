@@ -7,7 +7,7 @@ use App\Models\Batch\BatchSeedAllocation;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
-class BatchSeedAllocationObserver
+class BatchSeedAllocationInsightObserver
 {
     use AsInsightSender;
 

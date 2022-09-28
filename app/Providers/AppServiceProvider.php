@@ -11,15 +11,15 @@ use App\Models\Farmland\Farmland;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
-use App\Observers\Batch\BatchObserver;
-use App\Observers\Batch\BatchSeedAllocationObserver;
-use App\Observers\Crop\CropObserver;
+use App\Observers\Batch\BatchInsightObserver;
+use App\Observers\Batch\BatchSeedAllocationInsightObserver;
+use App\Observers\Crop\CropInsightObserver;
 use App\Observers\FarmerReport\FarmerReportHarvestedObserver;
 use App\Observers\FarmerReport\FarmerReportInsightObserver;
-use App\Observers\Farmland\FarmlandObserver;
-use App\Observers\Site\MunicityObserver;
-use App\Observers\Site\ProvinceObserver;
-use App\Observers\Site\RegionObserver;
+use App\Observers\Farmland\FarmlandInsightObserver;
+use App\Observers\Site\MunicityInsightObserver;
+use App\Observers\Site\ProvinceInsightObserver;
+use App\Observers\Site\RegionInsightObserver;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
@@ -54,15 +54,15 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerInsightObservers(): void
     {
-        Region::observe(RegionObserver::class);
-        Province::observe(ProvinceObserver::class);
-        Municity::observe(MunicityObserver::class);
+        Region::observe(RegionInsightObserver::class);
+        Province::observe(ProvinceInsightObserver::class);
+        Municity::observe(MunicityInsightObserver::class);
 
-        Batch::observe(BatchObserver::class);
-        BatchSeedAllocation::observe(BatchSeedAllocationObserver::class);
+        Batch::observe(BatchInsightObserver::class);
+        BatchSeedAllocation::observe(BatchSeedAllocationInsightObserver::class);
 
-        Farmland::observe(FarmlandObserver::class);
-        Crop::observe(CropObserver::class);
+        Farmland::observe(FarmlandInsightObserver::class);
+        Crop::observe(CropInsightObserver::class);
         FarmerReport::observe(FarmerReportInsightObserver::class);
     }
 

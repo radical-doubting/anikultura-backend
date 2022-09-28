@@ -1,30 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Observers\Site;
 
 use App\Helpers\InsightsHelper;
-use App\Models\Site\Municity;
+use App\Models\Site\Province;
 use App\Traits\AsInsightSender;
 use Illuminate\Database\Eloquent\Model;
 
-class MunicityObserver
+class ProvinceInsightObserver
 {
     use AsInsightSender;
 
     /**
-     * @param  Municity  $model
+     * @param  Province  $model
      */
     private function sendInsights(Model $model, bool $shouldIncrement): void
     {
         $labels = [
             'region' => $model->region->slug,
-            'province' => $model->province->slug,
         ];
 
         if ($shouldIncrement) {
-            InsightsHelper::incrementGauge('municipality_city_total', $labels);
+            InsightsHelper::incrementGauge('province_total', $labels);
         } else {
-            InsightsHelper::decrementGauge('municipality_city_total', $labels);
+            InsightsHelper::decrementGauge('province_total', $labels);
         }
     }
 }
