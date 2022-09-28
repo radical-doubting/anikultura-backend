@@ -26,7 +26,7 @@ beforeEach(function () {
     seed(NCPasserStatusSeeder::class);
 });
 
-it('should add a farmer address', function () {
+it('adds a farmer address', function () {
     $farmerProfile = FarmerProfile::factory()->create();
     $region = Region::firstWhere('name', 'Calabarzon');
 

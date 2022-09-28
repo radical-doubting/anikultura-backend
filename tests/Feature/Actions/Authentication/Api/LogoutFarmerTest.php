@@ -8,7 +8,7 @@ beforeEach(function () {
     seed();
 });
 
-it('should logout farmer', function () {
+it('log outs farmer', function () {
     $farmer = Farmer::first();
 
     auth('api')->attempt([
@@ -25,7 +25,7 @@ it('should logout farmer', function () {
         ->assertStatus(200);
 });
 
-it('should not logout unauthenticated farmer', function () {
+it('does not log out unauthenticated farmer', function () {
     $response = postJson('/api/auth/logout');
 
     $response

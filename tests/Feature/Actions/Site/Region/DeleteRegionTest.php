@@ -3,7 +3,7 @@
 use App\Actions\Site\Region\DeleteRegion;
 use App\Models\Site\Region;
 
-it('should delete an existing site region', function () {
+it('deletes an existing site region', function () {
     $regionData = [
         'name' => 'National Capital Region',
         'short_name' => 'NCR',

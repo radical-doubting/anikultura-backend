@@ -3,7 +3,7 @@
 use App\Facades\AnikulturaFacade as Anikultura;
 use function Pest\Laravel\get;
 
-it('should return json if app is headless', function () {
+it('returns json if app is headless', function () {
     Anikultura::shouldReceive('isHeadless')->andReturnTrue();
 
     $response = get('/');
@@ -14,7 +14,7 @@ it('should return json if app is headless', function () {
         ]);
 });
 
-it('should redirect if app is not headless', function () {
+it('redirects if app is not headless', function () {
     Anikultura::shouldReceive('isHeadless')->andReturnFalse();
 
     $response = get('/');

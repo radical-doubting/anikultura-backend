@@ -9,7 +9,7 @@ beforeEach(function () {
     seed();
 });
 
-it('should login farmer', function () {
+it('shows farmer', function () {
     $farmer = Farmer::first();
 
     $response = postJson(route('api.login'), [
@@ -26,7 +26,7 @@ it('should login farmer', function () {
         ->assertStatus(200);
 });
 
-it('should not login a farmer with wrong password', function () {
+it('does not login a farmer with wrong password', function () {
     $farmer = Farmer::first();
 
     $response = postJson('/api/auth/login', [
@@ -41,7 +41,7 @@ it('should not login a farmer with wrong password', function () {
         ->assertStatus(401);
 });
 
-it('should not login a non-existent farmer', function () {
+it('does not login a non-existent farmer', function () {
     $response = postJson('/api/auth/login', [
         'username' => 'nonexistentfarmeruser',
         'password' => 'password',
@@ -54,7 +54,7 @@ it('should not login a non-existent farmer', function () {
         ->assertStatus(401);
 });
 
-it('should not login an already logged in farmer', function () {
+it('does not login an already logged in farmer', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')

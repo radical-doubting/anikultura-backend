@@ -1,6 +1,6 @@
 <?php
 
-it('should show login screen', function () {
+it('shows login screen', function () {
     $screen = screen('platform.login');
 
     $screen->display()

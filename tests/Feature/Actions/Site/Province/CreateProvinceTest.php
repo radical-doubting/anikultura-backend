@@ -16,7 +16,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should add a site province', function () {
+it('adds a site province', function () {
     $provinceData = [
         'name' => 'Laguna',
         'region_id' => Region::firstWhere('name', 'National Capital Region')->id,
@@ -44,7 +44,7 @@ it('should add a site province', function () {
     $this->assertDatabaseHas('provinces', $provinceData);
 });
 
-it('should update a site province', function () {
+it('updates a site province', function () {
     $existingProvince = Province::create([
         'name' => 'Laguna',
         'region_id' => Region::firstWhere('name', 'National Capital Region')->id,

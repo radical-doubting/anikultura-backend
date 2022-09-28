@@ -15,14 +15,14 @@ beforeEach(function () {
     ]);
 });
 
-it('should show list screen', function () {
+it('shows list screen', function () {
     $screen = screen('platform.sites.regions')->actingAs(Admin::first());
 
     $screen->display()
         ->assertSee(__('Region'));
 });
 
-it('should show region in list screen', function () {
+it('shows region in list screen', function () {
     Region::create([
         'name' => 'Some Example Region',
         'short_name' => 'SER',

@@ -8,7 +8,7 @@ beforeEach(function () {
     seed();
 });
 
-it('should return tutorial done', function () {
+it('returns tutorial done', function () {
     $farmer = Farmer::first();
 
     $response = actingAs($farmer, 'api')

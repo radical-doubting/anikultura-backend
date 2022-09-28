@@ -11,7 +11,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should delete an existing site province', function () {
+it('deletes an existing site province', function () {
     $provinceData = [
         'name' => 'Laguna',
         'region_id' => Region::firstWhere('name', 'National Capital Region')->id,

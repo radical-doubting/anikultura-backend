@@ -33,7 +33,7 @@ beforeEach(function () {
     seed(WateringSystemSeeder::class);
 });
 
-it('should submit a farmer report', function () {
+it('submits a farmer report', function () {
     $farmer = Farmer::first();
 
     /**
@@ -88,7 +88,7 @@ it('should submit a farmer report', function () {
     expect($farmerReport->photo_url)->toContain('/storage/reports');
 });
 
-it('should not submit a farmer report to a non-belonging farmland', function () {
+it('does not submit a farmer report to a non-belonging farmland', function () {
     $farmer = Farmer::first();
 
     /**
