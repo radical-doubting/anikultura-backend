@@ -38,8 +38,6 @@ services:
     image: "grafana/grafana:9.1.0"
     ports:
       - "3000:3000"
-    depends_on:
-      - influxdb
     volumes:
       - grafana-data:/var/lib/grafana
     networks:

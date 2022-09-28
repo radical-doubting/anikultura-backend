@@ -14,5 +14,4 @@ yarn-error.log
 database.env
 .php-cs-fixer.cache
 .vscode
-influxdb.env
 agent-linux-amd64
