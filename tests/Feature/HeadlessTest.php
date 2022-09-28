@@ -1,6 +1,6 @@
 <?php
 
-use App\Facades\Anikultura;
+use App\Facades\AnikulturaFacade as Anikultura;
 use function Pest\Laravel\get;
 
 it('should return json if app is headless', function () {
