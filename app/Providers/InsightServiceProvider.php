@@ -32,7 +32,7 @@ class InsightServiceProvider extends ServiceProvider
         $this->registerInsightObservers();
     }
 
-    private function registerInsightObservers(): void
+    public function registerInsightObservers(): void
     {
         Region::observe(RegionInsightObserver::class);
         Province::observe(ProvinceInsightObserver::class);
