@@ -10,7 +10,6 @@ use App\Models\Crop\SeedStage;
 use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use App\Models\ManagementUser;
-use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,7 +20,7 @@ use Orchid\Filters\Filterable;
 
 class FarmerReport extends Model
 {
-    use Filterable, HasFactory, MediaAlly;
+    use Filterable, HasFactory;
 
     protected $fillable = [
         'reported_by',
