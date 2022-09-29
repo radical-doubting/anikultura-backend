@@ -36,6 +36,6 @@ class LoggingObserver
     {
         $singular = Str::singular($model->getTable());
 
-        return Str::ucfirst($singular);
+        return Str::headline($singular);
     }
 }
