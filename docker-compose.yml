@@ -66,6 +66,15 @@ services:
       - prometheus-data:/prometheus
     networks:
       - sail
+  loki:
+    image: grafana/loki:2.6.0
+    command: -config.file=/etc/loki/config.yml
+    volumes:
+      - ./loki-config.yml:/etc/loki/config.yml
+    ports:
+      - "3100:3100"
+    networks:
+      - sail
 networks:
   sail:
     driver: bridge
