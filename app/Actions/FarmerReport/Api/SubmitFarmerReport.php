@@ -9,6 +9,7 @@ use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use Exception;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
@@ -51,6 +52,8 @@ class SubmitFarmerReport
             'volume_kg' => $farmerReportData['volumeKg'],
             'photo_url' => $photoUrl,
         ]);
+
+        Log::info('Farmer submitted a report');
 
         return $farmerReport->refresh();
     }
