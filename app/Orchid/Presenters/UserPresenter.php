@@ -41,7 +41,7 @@ class UserPresenter extends Presenter implements Searchable, Personable
     {
         $hash = md5(strtolower(trim($this->entity->email)));
 
-        return "https://www.gravatar.com/avatar/$hash?d=mp";
+        return "https://source.boringavatars.com/beam/120/$hash?colors=A69A90,4A403D,FFF1C1,FACF7D,EA804C";
     }
 
     public function perSearchShow(): int
