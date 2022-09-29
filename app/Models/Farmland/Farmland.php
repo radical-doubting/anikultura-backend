@@ -4,6 +4,7 @@ namespace App\Models\Farmland;
 
 use App\Models\Batch\Batch;
 use App\Models\Farmer\Farmer;
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Orchid\Filters\Filterable;
 
 class Farmland extends Model
 {
-    use HasFactory, Filterable;
+    use HasFactory, Filterable, Loggable;
 
     protected $fillable = [
         'name',

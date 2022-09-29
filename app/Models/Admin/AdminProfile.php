@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
@@ -9,7 +10,7 @@ use Orchid\Screen\AsSource;
 
 class AdminProfile extends Model
 {
-    use Filterable, HasFactory, AsSource;
+    use Filterable, HasFactory, AsSource, Loggable;
 
     protected $fillable = [
         'age',

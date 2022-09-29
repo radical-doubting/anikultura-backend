@@ -4,6 +4,7 @@ namespace App\Actions\Authentication\Api;
 
 use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -21,6 +22,8 @@ class LoginFarmer
         ]);
 
         if (! $token) {
+            Log::error('Farmer failed to login');
+
             return null;
         }
 

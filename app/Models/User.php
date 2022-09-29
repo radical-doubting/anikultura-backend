@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\Loggable;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject, HasLocalePreference
 {
-    use Notifiable;
+    use Notifiable, Loggable;
 
     /**
      * The attributes that are mass assignable.
