@@ -19,7 +19,8 @@ uses(Tests\TestCase::class)->in('Feature');
 uses(RefreshDatabase::class)
     ->in(
         'Feature/Actions',
-        'Feature/Orchid'
+        'Feature/Orchid',
+        'Feature/Traits'
     );
 uses(ScreenTesting::class)
     ->in('Feature/Orchid');
