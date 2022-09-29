@@ -9,48 +9,37 @@ use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\Site\ProvinceSeeder;
 use Database\Seeders\Site\RegionSeeder;
 use Database\Seeders\User\RoleSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchid\Support\Testing\ScreenTesting;
-use Tests\TestCase;
+use function Pest\Laravel\seed;
 
-class MunicityEditScreenTest extends TestCase
-{
-    use RefreshDatabase, ScreenTesting;
+beforeEach(function () {
+    seed([
+        RoleSeeder::class,
+        AdminSeeder::class,
+        AdminProfileSeeder::class,
+        RegionSeeder::class,
+        ProvinceSeeder::class,
 
-    public function setUp(): void
-    {
-        parent::setUp();
+    ]);
+});
 
-        $this->seed([
-            RoleSeeder::class,
-            AdminSeeder::class,
-            AdminProfileSeeder::class,
-            RegionSeeder::class,
-            ProvinceSeeder::class,
-        ]);
-    }
+it('shows create screen', function () {
+    $screen = screen('platform.sites.municities.create')->actingAs(Admin::first());
 
-    public function testShouldShowCreateScreen(): void
-    {
-        $screen = $this->screen('platform.sites.municities.create')->actingAs(Admin::first());
+    $screen->display()
+        ->assertSee(__('Create'))
+        ->assertSee(__('Municipality or City Information'))
+        ->assertSee(__('Save'));
+});
 
-        $screen->display()
-            ->assertSee(__('Create'))
-            ->assertSee(__('Municipality or City Information'))
-            ->assertSee(__('Save'));
-    }
+it('shows edit screen', function () {
+    $municity = Municity::factory()->count(1)->create()[0];
 
-    public function testShouldShowEditScreen(): void
-    {
-        $municity = Municity::factory()->count(1)->create()[0];
+    $screen = screen('platform.sites.municities.edit')
+        ->parameters([$municity->id])
+        ->actingAs(Admin::first());
 
-        $screen = $this->screen('platform.sites.municities.edit')
-            ->parameters([$municity->id])
-            ->actingAs(Admin::first());
-
-        $screen->display()
-            ->assertSee(__('Edit Municipality or City'))
-            ->assertSee(__('Remove'))
-            ->assertSee(__('Save'));
-    }
-}
+    $screen->display()
+        ->assertSee(__('Edit Municipality or City'))
+        ->assertSee(__('Remove'))
+        ->assertSee(__('Save'));
+});

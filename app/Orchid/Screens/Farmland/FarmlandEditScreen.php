@@ -45,7 +45,7 @@ class FarmlandEditScreen extends AnikulturaEditScreen
 
             Layout::block(FarmlandEditMemberLayout::class)
                 ->title(__('Farmers'))
-                ->description(_('This information assigns the farmers to this farmland')),
+                ->description(__('This information assigns the farmers to this farmland')),
 
             Layout::block(FarmlandEditOtherLayout::class)
                 ->title(__('Other Information'))

@@ -4,8 +4,8 @@ namespace App\Actions\Farmland\Api;
 
 use App\Http\Resources\Farmland\FarmlandResource;
 use App\Models\Farmer\Farmer;
-use App\Models\Farmland\Farmland;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -13,13 +13,9 @@ class RetrieveFarmerFarmlands
 {
     use AsAction;
 
-    public function handle($farmer)
+    public function handle(Farmer $farmer): Collection
     {
-        $farmlands = Farmland::whereHas('farmers', function ($q) use ($farmer) {
-            $q->where('farmer_id', $farmer->id);
-        })->get(['id', 'name', 'hectares_size']);
-
-        return $farmlands;
+        return $farmer->farmlands;
     }
 
     /**
@@ -31,12 +27,12 @@ class RetrieveFarmerFarmlands
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): AnonymousResourceCollection
     {
         $user = auth('api')->user();
 
         $farmlands = $this->handle($user);
 
-        return response()->json(FarmlandResource::collection($farmlands));
+        return FarmlandResource::collection($farmlands);
     }
 }

@@ -5,7 +5,9 @@ namespace App\Actions\FarmerReport\Api;
 use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
-use Illuminate\Http\JsonResponse;
+use App\Models\Farmland\Farmland;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -13,13 +15,13 @@ class RetrieveFarmerSubmittedReports
 {
     use AsAction;
 
-    public function handle($farmer, $farmlandId)
+    public function handle(Farmer $farmer, Farmland $farmland): Collection
     {
         $farmerReports = FarmerReport::with([
             'crop',
             'verifier',
             'seedStage',
-        ])->where('farmland_id', $farmlandId)
+        ])->where('farmland_id', $farmland->id)
             ->where('reported_by', $farmer->id)
             ->orderBy('created_at', 'ASC')
             ->orderBy('seed_stage_id', 'DESC')
@@ -42,14 +44,18 @@ class RetrieveFarmerSubmittedReports
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): AnonymousResourceCollection
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
         $farmlandId = $request->route('farmlandId');
+        $farmland = Farmland::findOrFail($farmlandId);
 
-        $farmerReports = $this->handle($user, $farmlandId);
+        $farmerReports = $this->handle($farmer, $farmland);
 
-        return response()->json(FarmerReportResource::collection($farmerReports));
+        return FarmerReportResource::collection($farmerReports);
     }
 }

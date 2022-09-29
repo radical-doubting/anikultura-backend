@@ -317,5 +317,7 @@
     "You are now impersonating this user" : "Kinakatawan mo na ang user na ito.",
     "Back to my account" : "Bumalik na sa aking account",
     "Create" : "Magdagdag",
-    "Edit Roles" : "I-edit ang Role"
+    "Edit Roles" : "I-edit ang Role",
+
+    ":farmer is ready for harvest!": "Handa na ang pananim ni :farmer!"
 }

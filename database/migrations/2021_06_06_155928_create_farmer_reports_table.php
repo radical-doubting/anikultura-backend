@@ -20,7 +20,9 @@ return new class extends Migration
                 ->nullable();
             $table->foreign('reported_by')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->restrictOnDelete()
+                ->restrictOnUpdate();
 
             $table->unsignedBigInteger('seed_stage_id')
                 ->nullable();

@@ -1,34 +1,23 @@
 <?php
 
-namespace Tests\Feature\Orchid\Screens;
-
 use App\Models\Admin\Admin;
 use Database\Seeders\Admin\AdminProfileSeeder;
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\User\RoleSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchid\Support\Testing\ScreenTesting;
-use Tests\TestCase;
+use function Pest\Laravel\seed;
 
-class PlatformScreenTest extends TestCase
-{
-    use RefreshDatabase, ScreenTesting;
+beforeEach(function () {
+    seed([
+        RoleSeeder::class,
+        AdminSeeder::class,
+        AdminProfileSeeder::class,
+    ]);
+});
 
-    /**
-     * @group platform
-     */
-    public function testShouldShowScreen()
-    {
-        $this->seed([
-            RoleSeeder::class,
-            AdminSeeder::class,
-            AdminProfileSeeder::class,
-        ]);
+it('shows platform screen', function () {
+    $screen = screen('platform.main')->actingAs(Admin::first());
 
-        $screen = $this->screen('platform.main')->actingAs(Admin::first());
-
-        $screen->display()
-            ->assertSee('Empowering')
-            ->assertSee('Analytics Dashboard');
-    }
-}
+    $screen->display()
+        ->assertSee('Empowering')
+        ->assertSee('Analytics Dashboard');
+});

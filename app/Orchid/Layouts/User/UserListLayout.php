@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Orchid\Layouts\User;
 
+use App\Models\User;
 use App\Orchid\Layouts\AnikulturaListLayout;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
@@ -44,8 +44,9 @@ class UserListLayout extends AnikulturaListLayout
 
             TD::make('updated_at', __('Last Edit'))
                 ->sort()
+                ->filter(TD::FILTER_DATE)
                 ->render(function (User $user) {
-                    return $user->updated_at->toDateTimeString();
+                    return $user->updated_at;
                 }),
 
             TD::make(__('Actions'))

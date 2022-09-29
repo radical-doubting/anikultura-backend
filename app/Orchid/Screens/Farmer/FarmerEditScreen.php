@@ -53,32 +53,46 @@ class FarmerEditScreen extends AnikulturaEditScreen
 
     public function layout(): iterable
     {
+        $tabs = [
+            __('Account Information') => [
+                Layout::block(FarmerEditAccountLayout::class)
+                    ->title(__('Account Information'))
+                    ->description(__("This information collects farmer's account information."))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ],
+
+            __('Profile Information') => [
+                Layout::block(FarmerEditPersonalLayout::class)
+                    ->title(__('Personal Information'))
+                    ->description(__("This information collects farmer's personal information.")),
+
+                Layout::block(FarmerEditAddressLayout::class)
+                    ->title(__('Address Information'))
+                    ->description(__("This information collects farmer's address information.")),
+
+                Layout::block(FarmerEditJobEducationLayout::class)
+                    ->title(__('Job and Education Information'))
+                    ->description(__("This information collects farmer's job and education information.")),
+
+                Layout::block(FarmerEditSalaryLayout::class)
+                    ->title(__('Salary Information'))
+                    ->description(__("This information collects farmer's salary information."))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ],
+        ];
+
         return [
-            Layout::block(FarmerEditAccountLayout::class)
-                ->title(__('Account Information'))
-                ->description(__("This information collects farmer's account information.")),
-
-            Layout::block(FarmerEditPersonalLayout::class)
-                ->title(__('Personal Information'))
-                ->description(__("This information collects farmer's personal information.")),
-
-            Layout::block(FarmerEditAddressLayout::class)
-                ->title(__('Address Information'))
-                ->description(__("This information collects farmer's address information.")),
-
-            Layout::block(FarmerEditJobEducationLayout::class)
-                ->title(__('Job and Education Information'))
-                ->description(__("This information collects farmer's job and education information.")),
-
-            Layout::block(FarmerEditSalaryLayout::class)
-                ->title(__('Salary Information'))
-                ->description(__("This information collects farmer's salary information."))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::DEFAULT())
-                        ->icon('check')
-                        ->method('save')
-                ),
+            Layout::tabs($tabs)->activeTab(__('Account Information')),
         ];
     }
 

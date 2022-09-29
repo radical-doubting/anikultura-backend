@@ -3,9 +3,9 @@
 namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\CropResource;
-use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Farmer\Farmer;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Collection;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -13,16 +13,9 @@ class RetrieveFarmerCrops
 {
     use AsAction;
 
-    public function handle($farmer)
+    public function handle(Farmer $farmer): Collection
     {
-        $crops = BatchSeedAllocation::with([
-            'crop:id,name',
-        ])->where('farmer_id', $farmer->id)
-            ->get()
-            ->pluck('crop')
-            ->unique();
-
-        return $crops;
+        return $farmer->seedAllocations->pluck('crop')->unique();
     }
 
     /**
@@ -34,12 +27,15 @@ class RetrieveFarmerCrops
      *     @OA\Response(response="401", description="Unauthenticated", @OA\JsonContent()),
      * )
      */
-    public function asController(ActionRequest $request): JsonResponse
+    public function asController(ActionRequest $request): AnonymousResourceCollection
     {
-        $user = auth('api')->user();
+        /**
+         * @var Farmer
+         */
+        $farmer = auth('api')->user();
 
-        $crops = $this->handle($user);
+        $crops = $this->handle($farmer);
 
-        return response()->json(CropResource::collection($crops));
+        return CropResource::collection($crops);
     }
 }

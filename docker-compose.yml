@@ -34,22 +34,10 @@ services:
       - sailpgsql:/var/lib/postgresql/data/
     networks:
       - sail
-  influxdb:
-    image: "influxdb:2.0-alpine"
-    ports:
-      - "8086:8086"
-    env_file:
-      - ./docker/influxdb.env
-    volumes:
-      - influxdb-data:/var/lib/influxdb2
-    networks:
-      - sail
   grafana:
     image: "grafana/grafana:9.1.0"
     ports:
       - "3000:3000"
-    depends_on:
-      - influxdb
     volumes:
       - grafana-data:/var/lib/grafana
     networks:
@@ -78,12 +66,20 @@ services:
       - prometheus-data:/prometheus
     networks:
       - sail
+  loki:
+    image: grafana/loki:2.6.0
+    command: -config.file=/etc/loki/config.yml
+    volumes:
+      - ./loki-config.yml:/etc/loki/config.yml
+    ports:
+      - "3100:3100"
+    networks:
+      - sail
 networks:
   sail:
     driver: bridge
 volumes:
   sailpgsql:
-  influxdb-data:
   grafana-data:
   redis-data:
   prometheus-data:

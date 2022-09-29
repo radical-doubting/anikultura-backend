@@ -17,6 +17,13 @@ class FarmlandSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            FarmlandTypeSeeder::class,
+            FarmlandStatusSeeder::class,
+
+            WateringSystemSeeder::class,
+        ]);
+
         Farmland::factory()->count(10)->create();
 
         $wateringSystems = WateringSystem::all();

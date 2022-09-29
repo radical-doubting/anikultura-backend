@@ -15,7 +15,7 @@ class CreateUserTest extends TestCase
         Mockery::close();
     }
 
-    public function testShouldAvoidUpdatingEmptyPassword(): void
+    public function testAvoidUpdatingEmptyPassword(): void
     {
         /**
          * @var \Mockery\Mock&User

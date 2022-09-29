@@ -16,8 +16,6 @@ class BigBrotherFactory extends Factory
      */
     protected $model = BigBrother::class;
 
-    private static $nextProfileId = 1;
-
     /**
      * Define the model's default state.
      *
@@ -40,7 +38,6 @@ class BigBrotherFactory extends Factory
             'middle_name' => $middleName,
             'last_name' => $lastName,
             'profile_type' => 'App\Models\BigBrother\BigBrotherProfile',
-            'profile_id' => self::$nextProfileId++,
         ];
 
         return $data;

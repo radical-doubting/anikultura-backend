@@ -16,8 +16,6 @@ class AdminFactory extends Factory
      */
     protected $model = Admin::class;
 
-    private static $nextProfileId = 1;
-
     /**
      * Define the model's default state.
      *
@@ -40,7 +38,6 @@ class AdminFactory extends Factory
             'middle_name' => $middleName,
             'last_name' => $lastName,
             'profile_type' => 'App\Models\Admin\AdminProfile',
-            'profile_id' => self::$nextProfileId++,
         ];
 
         return $data;

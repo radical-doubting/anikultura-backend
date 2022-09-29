@@ -89,7 +89,7 @@ class CreateFarmer
 
         Toast::info(__('Farmer profile was saved successfully!'));
 
-        return redirect()->route('platform.farmers');
+        return redirect()->back();
     }
 
     private function validateIfFarmerAccountExistsAlready(Farmer $farmer, Request $request): void
@@ -111,19 +111,15 @@ class CreateFarmer
     public function rules(): array
     {
         return [
-            'farmerProfile.gender' => [
+            'farmerProfile.gender_id' => [
                 'required',
             ],
 
-            'farmerProfile.civil_status' => [
+            'farmerProfile.civil_status_id' => [
                 'required',
             ],
 
             'farmerProfile.birthday' => [
-                'required',
-            ],
-
-            'farmerProfile.age' => [
                 'required',
             ],
 
@@ -139,13 +135,11 @@ class CreateFarmer
                 'required',
             ],
 
-            'farmerProfile.highest_educational_status' => [
+            'farmerProfile.educational_status_id' => [
                 'required',
             ],
 
-            'farmerProfile.college_course' => [
-                'required',
-            ],
+            'farmerProfile.college_course' => [],
 
             'farmerProfile.current_job' => [
                 'required',
@@ -167,11 +161,11 @@ class CreateFarmer
                 'required',
             ],
 
-            'farmerProfile.nc_passer_status' => [
+            'farmerProfile.nc_passer_status_id' => [
                 'required',
             ],
 
-            'farmerProfile.salary_periodicity' => [
+            'farmerProfile.salary_periodicity_id' => [
                 'required',
             ],
 
@@ -179,7 +173,7 @@ class CreateFarmer
                 'required',
             ],
 
-            'farmerProfile.social_status' => [
+            'farmerProfile.social_status_id' => [
                 'required',
             ],
 

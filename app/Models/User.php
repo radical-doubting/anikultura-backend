@@ -2,12 +2,22 @@
 
 namespace App\Models;
 
+use App\Traits\Loggable;
+use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Notifications\Notifiable;
 use Orchid\Platform\Models\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable implements JWTSubject, HasLocalePreference
 {
+    use Notifiable, Loggable;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'name',
         'first_name',
@@ -20,6 +30,7 @@ class User extends Authenticatable implements JWTSubject
         'permissions',
         'profile_id',
         'profile_type',
+        'locale',
     ];
 
     protected $hidden = [
@@ -29,8 +40,14 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $casts = [
+        'name' => 'string',
+        'first_name' => 'string',
+        'middle_name' => 'string',
+        'last_name' => 'string',
         'permissions' => 'array',
         'email_verified_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'created_at' => 'datetime',
     ];
 
     /**
@@ -46,6 +63,8 @@ class User extends Authenticatable implements JWTSubject
         'last_name',
         'email',
         'permissions',
+        'updated_at',
+        'created_at',
     ];
 
     /**
@@ -56,6 +75,9 @@ class User extends Authenticatable implements JWTSubject
     protected $allowedSorts = [
         'id',
         'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'email',
         'updated_at',
         'created_at',
@@ -67,14 +89,14 @@ class User extends Authenticatable implements JWTSubject
 
     public function getFullNameAttribute()
     {
-        return "{$this->first_name} {$this->last_name} ({$this->name})";
+        return "{$this->first_name} {$this->last_name}";
     }
 
     public function getFullNameWithRoleAttribute()
     {
         $roles = $this->roles->pluck('name')->implode(' / ');
 
-        return "{$this->first_name} {$this->last_name} ({$this->name}) - $roles";
+        return "{$this->first_name} {$this->last_name} - $roles";
     }
 
     public function profile(): MorphTo
@@ -100,5 +122,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function preferredLocale(): ?string
+    {
+        return $this->locale;
     }
 }

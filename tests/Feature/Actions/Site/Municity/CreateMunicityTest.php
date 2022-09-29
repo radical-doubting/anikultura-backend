@@ -27,7 +27,7 @@ beforeEach(function () {
     ]);
 });
 
-it('should add a site municipality or city', function () {
+it('adds a site municipality or city', function () {
     $municityData = [
         'name' => 'Santa Rosa',
         'province_id' => Province::firstWhere('name', 'Laguna')->id,
@@ -57,7 +57,7 @@ it('should add a site municipality or city', function () {
     $this->assertDatabaseHas('municities', $municityData);
 });
 
-it('should update a site municipality or city', function () {
+it('updates a site municipality or city', function () {
     $existingMunicity = Municity::create([
         'name' => 'Santa Rosa',
         'province_id' => Province::firstWhere('name', 'Laguna')->id,

@@ -13,7 +13,7 @@ class BigBrotherListScreen extends AnikulturaListScreen
 {
     public function name(): string
     {
-        return __('Batches');
+        return __('Big Brothers');
     }
 
     public function query(): array

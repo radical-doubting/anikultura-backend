@@ -3,6 +3,7 @@
 namespace App\Actions\Farmer\Api;
 
 use App\Models\Farmer\FarmerProfile;
+use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -10,10 +11,15 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class UpdateFarmerTutorialState
 {
     use AsAction;
+    use AsApiResponder;
 
-    public function handle(FarmerProfile $farmerProfile, bool $tutorialDone)
+    public function handle(FarmerProfile $farmerProfile, bool $tutorialDone): void
     {
-        $farmerProfile->update(['tutorial_done' => $tutorialDone]);
+        $farmerProfile
+            ->preference
+            ->update([
+                'tutorial_done' => $tutorialDone,
+            ]);
     }
 
     /**
@@ -39,7 +45,7 @@ class UpdateFarmerTutorialState
 
         $this->handle($user->profile, $tutorialDone);
 
-        return response()->json(['message' => 'Successfully updated tutorial state']);
+        return $this->respondWithSuccess('Successfully updated tutorial state');
     }
 
     public function rules(): array
