@@ -6,6 +6,7 @@ use App\Models\Farmer\Farmer;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
+use App\Traits\Loggable;
 use Chelout\RelationshipEvents\Concerns\HasBelongsToManyEvents;
 use Chelout\RelationshipEvents\Traits\HasRelationshipObservables;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -22,6 +23,7 @@ use Orchid\Filters\Filterable;
 class Batch extends Model
 {
     use Filterable, HasFactory, HasBelongsToManyEvents, HasRelationshipObservables, Sluggable;
+    use Loggable;
 
     protected $fillable = [
         'farmschool_name',

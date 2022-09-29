@@ -5,6 +5,7 @@ namespace App\Models\Crop;
 use App\Actions\Crop\CalculateNetProfitCostRatio;
 use App\Actions\Crop\CalculateNetReturns;
 use App\Actions\Crop\CalculateProfitPerKilogram;
+use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,7 @@ use Orchid\Filters\Filterable;
  */
 class Crop extends Model
 {
-    use Filterable, HasFactory, Sluggable;
+    use Filterable, HasFactory, Sluggable, Loggable;
 
     protected $fillable = [
         'id',

@@ -2,6 +2,7 @@
 
 namespace App\Models\Farmer;
 
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,7 +13,7 @@ use Orchid\Screen\AsSource;
 
 class FarmerProfile extends Model
 {
-    use Filterable, HasFactory, AsSource;
+    use Filterable, HasFactory, AsSource, Loggable;
 
     protected $fillable = [
         'gender_id',

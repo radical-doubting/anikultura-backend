@@ -2,6 +2,7 @@
 
 namespace App\Models\Site;
 
+use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,7 +14,7 @@ use Orchid\Filters\Filterable;
  */
 class Province extends Model
 {
-    use Filterable, HasFactory, Sluggable;
+    use Filterable, HasFactory, Sluggable, Loggable;
 
     protected $fillable = [
         'name',

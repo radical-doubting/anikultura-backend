@@ -2,6 +2,7 @@
 
 namespace App\Models\BigBrother;
 
+use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -10,7 +11,7 @@ use Orchid\Screen\AsSource;
 
 class BigBrotherProfile extends Model
 {
-    use Filterable, HasFactory, AsSource;
+    use Filterable, HasFactory, AsSource, Loggable;
 
     protected $fillable = [
         'age',
