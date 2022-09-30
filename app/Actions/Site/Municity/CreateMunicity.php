@@ -27,7 +27,7 @@ class CreateMunicity
 
         $this->handle($model, $municityData);
 
-        Toast::info(__('Municity was saved successfully!'));
+        Toast::info(__('Municipality or city was saved successfully!'));
 
         return redirect()->route('platform.sites.municities');
     }

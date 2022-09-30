@@ -29,7 +29,7 @@ class DeleteMunicity
     {
         $this->handle($model);
 
-        Toast::info(__('Municity was removed successfully!'));
+        Toast::info(__('Municipality or city was removed successfully!'));
 
         return redirect()->route('platform.sites.municities');
     }
