@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Admin\Admin;
+use App\Models\BigBrother\BigBrother;
+use App\Models\Farmer\Farmer;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -148,8 +151,9 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerSearchModels(): array
     {
         return [
-            // ...Models
-            // \App\Models\User::class
+            Admin::class,
+            BigBrother::class,
+            Farmer::class,
         ];
     }
 }
