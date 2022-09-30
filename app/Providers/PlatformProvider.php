@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Admin\Admin;
-use App\Models\BigBrother\BigBrother;
-use App\Models\Farmer\Farmer;
 use Orchid\Platform\Dashboard;
 use Orchid\Platform\ItemPermission;
 use Orchid\Platform\OrchidServiceProvider;
@@ -142,18 +139,6 @@ class PlatformProvider extends OrchidServiceProvider
             ItemPermission::group(__('Farmer Reports'))
                 ->addPermission('platform.farmer-reports.read', __('Read Farmer Reports'))
                 ->addPermission('platform.farmer-reports.edit', __('Edit Farmer Reports')),
-        ];
-    }
-
-    /**
-     * @return string[]
-     */
-    public function registerSearchModels(): array
-    {
-        return [
-            Admin::class,
-            BigBrother::class,
-            Farmer::class,
         ];
     }
 }
