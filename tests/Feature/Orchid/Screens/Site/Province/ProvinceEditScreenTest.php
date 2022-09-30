@@ -29,7 +29,7 @@ it('shows create screen', function () {
 });
 
 it('shows an existing province from the edit screen', function () {
-    $province = Province::factory()->count(1)->create()[0];
+    $province = Province::factory()->createOne();
 
     $screen = screen('platform.sites.provinces.edit')
         ->parameters([$province->id])
@@ -44,8 +44,11 @@ it('shows an existing province from the edit screen', function () {
 });
 
 it('creates a province from the create screen', function () {
-    $province = Province::factory()->count(1)->create()[0];
-    $provinceData = $province->only('name', 'region_id');
+    $province = Province::factory()->makeOne();
+    $provinceData = $province->only(
+        'name',
+        'region_id'
+    );
 
     $screen = screen('platform.sites.provinces.create')
         ->actingAs(Admin::first());
@@ -60,8 +63,11 @@ it('creates a province from the create screen', function () {
 });
 
 it('deletes an existing province from the edit screen', function () {
-    $province = Province::factory()->count(1)->create()[0];
-    $provinceData = $province->only('name', 'region_id');
+    $province = Province::factory()->createOne();
+    $provinceData = $province->only(
+        'name',
+        'region_id'
+    );
 
     $screen = screen('platform.sites.provinces.edit')
         ->parameters([$province->id])
