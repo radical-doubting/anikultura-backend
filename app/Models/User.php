@@ -132,7 +132,7 @@ class User extends Authenticatable implements JWTSubject, HasLocalePreference
 
     public function searchableAs(): string
     {
-        return 'users_name_unique';
+        return 'users_first_name_middle_name_last_name_index';
     }
 
     public function toSearchableArray(): array
