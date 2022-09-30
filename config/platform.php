@@ -194,6 +194,7 @@ return [
         App\Models\Admin\Admin::class,
         App\Models\BigBrother\BigBrother::class,
         App\Models\Farmer\Farmer::class,
+        App\Models\Farmland\Farmland::class,
     ],
 
     /*
