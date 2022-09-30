@@ -4,20 +4,20 @@ declare(strict_types=1);
 
 namespace App\Orchid\Presenters;
 
-class FarmerPresenter extends UserPresenter
+class AdminPresenter extends UserPresenter
 {
     public function label(): string
     {
-        return __('Farmers');
+        return __('Administrators');
     }
 
     public function subTitle(): string
     {
-        return __('Farmer');
+        return __('Administrator');
     }
 
     public function url(): string
     {
-        return route('platform.farmers.edit', $this->entity);
+        return route('platform.systems.users.edit', $this->entity);
     }
 }

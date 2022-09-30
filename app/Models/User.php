@@ -6,12 +6,13 @@ use App\Traits\Loggable;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 use Orchid\Platform\Models\User as Authenticatable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject, HasLocalePreference
 {
-    use Notifiable, Loggable;
+    use Notifiable, Loggable, Searchable;
 
     /**
      * The attributes that are mass assignable.
@@ -127,5 +128,20 @@ class User extends Authenticatable implements JWTSubject, HasLocalePreference
     public function preferredLocale(): ?string
     {
         return $this->locale;
+    }
+
+    public function searchableAs(): string
+    {
+        return 'users_first_name_middle_name_last_name_index';
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'first_name' => $this->first_name,
+            'middle_name' => $this->middle_name,
+            'last_name' => $this->last_name,
+        ];
     }
 }

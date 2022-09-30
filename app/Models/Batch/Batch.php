@@ -6,6 +6,7 @@ use App\Models\Farmer\Farmer;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
+use App\Orchid\Presenters\Batch\BatchPresenter;
 use App\Traits\Loggable;
 use Chelout\RelationshipEvents\Concerns\HasBelongsToManyEvents;
 use Chelout\RelationshipEvents\Traits\HasRelationshipObservables;
@@ -15,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 use Orchid\Filters\Filterable;
 
 /**
@@ -22,8 +24,13 @@ use Orchid\Filters\Filterable;
  */
 class Batch extends Model
 {
-    use Filterable, HasFactory, HasBelongsToManyEvents, HasRelationshipObservables, Sluggable;
-    use Loggable;
+    use Filterable,
+        HasFactory,
+        HasBelongsToManyEvents,
+        HasRelationshipObservables,
+        Sluggable,
+        Loggable,
+        Searchable;
 
     protected $fillable = [
         'farmschool_name',
@@ -33,8 +40,6 @@ class Batch extends Model
         'province_id',
         'municity_id',
         'barangay',
-        'farmer_names,',
-
     ];
 
     /**
@@ -101,5 +106,22 @@ class Batch extends Model
                 'source' => 'farmschool_name',
             ],
         ];
+    }
+
+    public function searchableAs(): string
+    {
+        return 'batches_farmschool_name_index';
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'farmschool_name' => $this->farmschool_name,
+        ];
+    }
+
+    public function presenter(): BatchPresenter
+    {
+        return new BatchPresenter($this);
     }
 }

@@ -4,17 +4,19 @@ namespace App\Models\Farmland;
 
 use App\Models\Batch\Batch;
 use App\Models\Farmer\Farmer;
+use App\Orchid\Presenters\Farmland\FarmlandPresenter;
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Laravel\Scout\Searchable;
 use Orchid\Filters\Filterable;
 
 class Farmland extends Model
 {
-    use HasFactory, Filterable, Loggable;
+    use HasFactory, Filterable, Loggable, Searchable;
 
     protected $fillable = [
         'name',
@@ -110,5 +112,22 @@ class Farmland extends Model
     public function farmers(): BelongsToMany
     {
         return $this->belongsToMany(Farmer::class, 'farmland_farmers', 'farmland_id', 'farmer_id');
+    }
+
+    public function searchableAs(): string
+    {
+        return 'farmlands_name_index';
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+        ];
+    }
+
+    public function presenter(): FarmlandPresenter
+    {
+        return new FarmlandPresenter($this);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Models\Admin;
 
 use App\Models\User;
+use App\Orchid\Presenters\AdminPresenter;
+use App\Orchid\Presenters\UserPresenter;
 
 class Admin extends User
 {
@@ -17,5 +19,10 @@ class Admin extends User
         static::addGlobalScope(function ($query) {
             $query->where('profile_type', self::$profilePath);
         });
+    }
+
+    public function presenter(): UserPresenter
+    {
+        return new AdminPresenter($this);
     }
 }
