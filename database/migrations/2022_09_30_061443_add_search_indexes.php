@@ -25,7 +25,7 @@ return new class extends Migration
             $table->index([
                 'first_name',
                 'middle_name',
-                'last_name'
+                'last_name',
             ]);
         });
     }
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->dropIndex([
                 'first_name',
                 'middle_name',
-                'last_name'
+                'last_name',
             ]);
         });
 
