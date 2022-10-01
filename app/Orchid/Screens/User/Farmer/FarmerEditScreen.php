@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens\Farmer;
+namespace App\Orchid\Screens\User\Farmer;
 
 use App\Actions\User\Farmer\CreateFarmer;
 use App\Actions\User\Farmer\DeleteFarmer;
