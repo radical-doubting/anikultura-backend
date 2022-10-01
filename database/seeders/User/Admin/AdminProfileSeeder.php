@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Admin;
+namespace Database\Seeders\User\Admin;
 
 use App\Models\User\Admin\AdminProfile;
 use Illuminate\Database\Seeder;

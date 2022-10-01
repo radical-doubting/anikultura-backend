@@ -8,7 +8,7 @@ use App\Models\Crop\SeedStage;
 use App\Models\User\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
-use Database\Seeders\Admin\AdminSeeder;
+use Database\Seeders\User\Admin\AdminSeeder;
 use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\Farmland\FarmlandStatusSeeder;

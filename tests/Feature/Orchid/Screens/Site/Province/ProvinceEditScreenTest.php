@@ -2,8 +2,8 @@
 
 use App\Models\User\Admin\Admin;
 use App\Models\Site\Province;
-use Database\Seeders\Admin\AdminProfileSeeder;
-use Database\Seeders\Admin\AdminSeeder;
+use Database\Seeders\User\Admin\AdminProfileSeeder;
+use Database\Seeders\User\Admin\AdminSeeder;
 use Database\Seeders\Site\RegionSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseHas;
