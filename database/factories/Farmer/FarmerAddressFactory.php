@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Farmer;
 
-use App\Models\Farmer\FarmerAddress;
+use App\Models\User\Farmer\FarmerAddress;
 use App\Models\Site\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

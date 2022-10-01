@@ -3,7 +3,7 @@
 namespace App\Actions\Farmer\Api;
 
 use App\Http\Resources\Farmer\TutorialStateResource;
-use App\Models\Farmer\FarmerPreference;
+use App\Models\User\Farmer\FarmerPreference;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 

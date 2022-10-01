@@ -4,7 +4,7 @@ namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\SeedStageResource;
 use App\Models\Crop\SeedStage;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;

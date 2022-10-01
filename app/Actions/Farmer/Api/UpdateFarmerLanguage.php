@@ -2,7 +2,7 @@
 
 namespace App\Actions\Farmer\Api;
 
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;

@@ -3,7 +3,7 @@
 namespace App\Actions\Batch\Api;
 
 use App\Http\Resources\Batch\BatchSeedAllocationResource;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Lorisleiva\Actions\ActionRequest;

@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Farmer\Farmer;
-use App\Models\Farmer\FarmerPreference;
+use App\Models\User\Farmer\Farmer;
+use App\Models\User\Farmer\FarmerPreference;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
 

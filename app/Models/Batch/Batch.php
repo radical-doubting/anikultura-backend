@@ -2,7 +2,7 @@
 
 namespace App\Models\Batch;
 
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;

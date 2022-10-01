@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\SalaryPeriodicity;
-use App\Models\Farmer\SocialStatus;
+use App\Models\User\Farmer\SalaryPeriodicity;
+use App\Models\User\Farmer\SocialStatus;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;

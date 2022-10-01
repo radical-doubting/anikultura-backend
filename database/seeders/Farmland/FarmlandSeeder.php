@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Farmland;
 
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\CropBuyer;
 use App\Models\Farmland\Farmland;
 use App\Models\Farmland\WateringSystem;

@@ -1,8 +1,8 @@
 <?php
 
 use App\Actions\Farmer\CreateFarmerAddress;
-use App\Models\Farmer\FarmerAddress;
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\FarmerAddress;
+use App\Models\User\Farmer\FarmerProfile;
 use App\Models\Site\Region;
 use Database\Seeders\Farmer\CivilStatusSeeder;
 use Database\Seeders\Farmer\EducationalStatusSeeder;

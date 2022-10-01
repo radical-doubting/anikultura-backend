@@ -4,7 +4,7 @@ use App\Http\Resources\Crop\CropResource;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\Crop\Crop;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\Crop\CropSeeder;

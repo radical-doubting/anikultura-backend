@@ -4,7 +4,7 @@ namespace App\Actions\FarmerReport\Api;
 
 use App\Actions\Crop\ValidateSeedStage;
 use App\Http\Resources\FarmerReport\FarmerReportResource;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use Exception;

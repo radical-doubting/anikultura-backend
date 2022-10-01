@@ -2,8 +2,8 @@
 
 namespace Database\Seeders\Farmer;
 
-use App\Models\Farmer\FarmerAddress;
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\FarmerAddress;
+use App\Models\User\Farmer\FarmerProfile;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 

@@ -2,7 +2,7 @@
 
 use App\Http\Resources\Farmland\FarmlandResource;
 use App\Models\Batch\Batch;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\Crop\CropSeeder;

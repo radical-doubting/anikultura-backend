@@ -3,7 +3,7 @@
 namespace App\Actions\Crop\Api;
 
 use App\Http\Resources\Crop\CropResource;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Collection;
 use Lorisleiva\Actions\ActionRequest;

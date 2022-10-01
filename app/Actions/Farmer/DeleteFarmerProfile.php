@@ -2,7 +2,7 @@
 
 namespace App\Actions\Farmer;
 
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\FarmerProfile;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class DeleteFarmerProfile

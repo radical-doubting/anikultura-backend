@@ -2,7 +2,7 @@
 
 namespace App\Actions\Farmer\Api;
 
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\FarmerProfile;
 use App\Traits\AsApiResponder;
 use Illuminate\Http\JsonResponse;
 use Lorisleiva\Actions\ActionRequest;

@@ -2,7 +2,7 @@
 
 namespace App\Actions\Farmer;
 
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Traits\AsOrchidAction;
 use Exception;
 use Illuminate\Http\RedirectResponse;

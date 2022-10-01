@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Farmer;
 
-use App\Models\Farmer\NCPasserStatus;
+use App\Models\User\Farmer\NCPasserStatus;
 use Illuminate\Database\Seeder;
 
 class NCPasserStatusSeeder extends Seeder

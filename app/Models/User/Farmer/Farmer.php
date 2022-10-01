@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Farmer;
+namespace App\Models\User\Farmer;
 
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Farmer extends User
 {
-    public static $profilePath = 'App\Models\Farmer\FarmerProfile';
+    public static $profilePath = 'App\Models\User\Farmer\FarmerProfile';
 
     protected $table = 'users';
 

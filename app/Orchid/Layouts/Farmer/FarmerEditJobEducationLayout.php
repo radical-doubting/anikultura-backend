@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\EducationalStatus;
-use App\Models\Farmer\NCPasserStatus;
+use App\Models\User\Farmer\EducationalStatus;
+use App\Models\User\Farmer\NCPasserStatus;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;

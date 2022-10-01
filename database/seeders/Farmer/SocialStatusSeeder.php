@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Farmer;
 
-use App\Models\Farmer\SocialStatus;
+use App\Models\User\Farmer\SocialStatus;
 use Illuminate\Database\Seeder;
 
 class SocialStatusSeeder extends Seeder

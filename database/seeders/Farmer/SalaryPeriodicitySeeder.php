@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Farmer;
 
-use App\Models\Farmer\SalaryPeriodicity;
+use App\Models\User\Farmer\SalaryPeriodicity;
 use Illuminate\Database\Seeder;
 
 class SalaryPeriodicitySeeder extends Seeder

@@ -3,9 +3,9 @@
 namespace App\Actions\Farmer;
 
 use App\Actions\User\CreateUser;
-use App\Models\Farmer\Farmer;
-use App\Models\Farmer\FarmerAddress;
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\Farmer;
+use App\Models\User\Farmer\FarmerAddress;
+use App\Models\User\Farmer\FarmerProfile;
 use App\Models\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;

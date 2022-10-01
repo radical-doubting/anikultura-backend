@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Layouts\Farmer;
 
-use App\Models\Farmer\CivilStatus;
-use App\Models\Farmer\Gender;
+use App\Models\User\Farmer\CivilStatus;
+use App\Models\User\Farmer\Gender;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;

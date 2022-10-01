@@ -3,7 +3,7 @@
 use App\Models\Batch\Batch;
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use Database\Seeders\Admin\AdminSeeder;

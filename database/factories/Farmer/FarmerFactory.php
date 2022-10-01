@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Farmer;
 
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +37,7 @@ class FarmerFactory extends Factory
             'first_name' => $firstName,
             'middle_name' => $middleName,
             'last_name' => $lastName,
-            'profile_type' => 'App\Models\Farmer\FarmerProfile',
+            'profile_type' => 'App\Models\User\Farmer\FarmerProfile',
         ];
 
         return $data;

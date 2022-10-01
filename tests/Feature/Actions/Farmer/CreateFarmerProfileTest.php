@@ -1,13 +1,13 @@
 <?php
 
 use App\Actions\Farmer\CreateFarmerProfile;
-use App\Models\Farmer\CivilStatus;
-use App\Models\Farmer\EducationalStatus;
-use App\Models\Farmer\FarmerProfile;
-use App\Models\Farmer\Gender;
-use App\Models\Farmer\NCPasserStatus;
-use App\Models\Farmer\SalaryPeriodicity;
-use App\Models\Farmer\SocialStatus;
+use App\Models\User\Farmer\CivilStatus;
+use App\Models\User\Farmer\EducationalStatus;
+use App\Models\User\Farmer\FarmerProfile;
+use App\Models\User\Farmer\Gender;
+use App\Models\User\Farmer\NCPasserStatus;
+use App\Models\User\Farmer\SalaryPeriodicity;
+use App\Models\User\Farmer\SocialStatus;
 use Database\Seeders\Farmer\CivilStatusSeeder;
 use Database\Seeders\Farmer\EducationalStatusSeeder;
 use Database\Seeders\Farmer\GenderSeeder;

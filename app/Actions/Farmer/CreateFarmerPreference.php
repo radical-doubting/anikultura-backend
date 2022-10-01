@@ -2,8 +2,8 @@
 
 namespace App\Actions\Farmer;
 
-use App\Models\Farmer\FarmerPreference;
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\FarmerPreference;
+use App\Models\User\Farmer\FarmerProfile;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Lorisleiva\Actions\Concerns\AsAction;
 

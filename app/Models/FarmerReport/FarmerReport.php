@@ -7,7 +7,7 @@ use App\Actions\Crop\CalculateExpectedYieldAmount;
 use App\Actions\Crop\CalculateExpectedYieldDate;
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
 use App\Models\ManagementUser;
 use App\Traits\Loggable;

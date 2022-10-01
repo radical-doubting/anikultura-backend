@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Farmer;
+namespace App\Models\User\Farmer;
 
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

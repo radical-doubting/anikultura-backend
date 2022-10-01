@@ -5,7 +5,7 @@ namespace Database\Factories\Farmer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Farmer\FarmerPreference>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User\Farmer\FarmerPreference>
  */
 class FarmerPreferenceFactory extends Factory
 {

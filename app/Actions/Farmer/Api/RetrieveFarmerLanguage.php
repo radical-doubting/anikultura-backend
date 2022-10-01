@@ -3,7 +3,7 @@
 namespace App\Actions\Farmer\Api;
 
 use App\Http\Resources\Farmer\LanguageResource;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 

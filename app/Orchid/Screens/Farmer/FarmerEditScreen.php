@@ -4,9 +4,9 @@ namespace App\Orchid\Screens\Farmer;
 
 use App\Actions\Farmer\CreateFarmer;
 use App\Actions\Farmer\DeleteFarmer;
-use App\Models\Farmer\Farmer;
-use App\Models\Farmer\FarmerAddress;
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\Farmer;
+use App\Models\User\Farmer\FarmerAddress;
+use App\Models\User\Farmer\FarmerProfile;
 use App\Orchid\Layouts\Farmer\FarmerEditAccountLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\Farmer\FarmerEditJobEducationLayout;

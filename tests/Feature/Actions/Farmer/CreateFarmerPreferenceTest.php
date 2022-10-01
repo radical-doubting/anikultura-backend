@@ -1,8 +1,8 @@
 <?php
 
 use App\Actions\Farmer\CreateFarmerPreference;
-use App\Models\Farmer\FarmerPreference;
-use App\Models\Farmer\FarmerProfile;
+use App\Models\User\Farmer\FarmerPreference;
+use App\Models\User\Farmer\FarmerProfile;
 use Database\Seeders\Farmer\CivilStatusSeeder;
 use Database\Seeders\Farmer\EducationalStatusSeeder;
 use Database\Seeders\Farmer\GenderSeeder;
