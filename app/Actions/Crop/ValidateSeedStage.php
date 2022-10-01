@@ -5,8 +5,8 @@ namespace App\Actions\Crop;
 use App\Actions\Crop\Api\RetrieveCurrentSeedStage;
 use App\Actions\Crop\Api\RetrieveNextSeedStage;
 use App\Models\Crop\SeedStage;
-use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
+use App\Models\User\Farmer\Farmer;
 use Exception;
 use Lorisleiva\Actions\Concerns\AsAction;
 

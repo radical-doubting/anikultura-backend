@@ -2,19 +2,19 @@
 
 use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\Batch\Batch;
-use App\Models\User\BigBrother\BigBrother;
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
-use App\Models\User\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
-use Database\Seeders\User\Admin\AdminSeeder;
+use App\Models\User\BigBrother\BigBrother;
+use App\Models\User\Farmer\Farmer;
 use Database\Seeders\Crop\CropSeeder;
-use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\Farmland\FarmlandStatusSeeder;
 use Database\Seeders\Farmland\FarmlandTypeSeeder;
 use Database\Seeders\Farmland\WateringSystemSeeder;
 use Database\Seeders\Site\SiteSeeder;
+use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;

@@ -2,8 +2,8 @@
 
 namespace Database\Factories\User\Farmer;
 
-use App\Models\User\Farmer\FarmerAddress;
 use App\Models\Site\Region;
+use App\Models\User\Farmer\FarmerAddress;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class FarmerAddressFactory extends Factory

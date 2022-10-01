@@ -4,8 +4,8 @@ namespace App\Orchid\Layouts\FarmerReport;
 
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
-use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
+use App\Models\User\Farmer\Farmer;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;

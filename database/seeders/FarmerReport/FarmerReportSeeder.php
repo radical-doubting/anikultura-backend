@@ -4,9 +4,9 @@ namespace Database\Seeders\FarmerReport;
 
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
-use App\Models\User\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
+use App\Models\User\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 

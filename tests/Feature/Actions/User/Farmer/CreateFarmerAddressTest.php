@@ -1,16 +1,16 @@
 <?php
 
 use App\Actions\User\Farmer\CreateFarmerAddress;
+use App\Models\Site\Region;
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;
-use App\Models\Site\Region;
+use Database\Seeders\Site\RegionSeeder;
 use Database\Seeders\User\Farmer\CivilStatusSeeder;
 use Database\Seeders\User\Farmer\EducationalStatusSeeder;
 use Database\Seeders\User\Farmer\GenderSeeder;
 use Database\Seeders\User\Farmer\NCPasserStatusSeeder;
 use Database\Seeders\User\Farmer\SalaryPeriodicitySeeder;
 use Database\Seeders\User\Farmer\SocialStatusSeeder;
-use Database\Seeders\Site\RegionSeeder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;

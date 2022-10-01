@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\User\Admin\Admin;
 use App\Models\Site\Region;
+use App\Models\User\Admin\Admin;
 use Database\Seeders\User\Admin\AdminProfileSeeder;
 use Database\Seeders\User\Admin\AdminSeeder;
 use Database\Seeders\User\RoleSeeder;
