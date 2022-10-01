@@ -4,7 +4,7 @@ namespace Tests\Unit\Actions\User;
 
 use App\Actions\Authentication\HashPassword;
 use App\Actions\User\CreateUser;
-use App\Models\User;
+use App\Models\User\User;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 

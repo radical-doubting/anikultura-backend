@@ -6,7 +6,7 @@ use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
-use App\Models\User;
+use App\Models\User\User;
 use App\Orchid\Presenters\FarmerPresenter;
 use App\Orchid\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Builder;

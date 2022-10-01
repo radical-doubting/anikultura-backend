@@ -2,7 +2,7 @@
 
 namespace App\Models\Admin;
 
-use App\Models\User;
+use App\Models\User\User;
 use App\Orchid\Presenters\AdminPresenter;
 use App\Orchid\Presenters\UserPresenter;
 

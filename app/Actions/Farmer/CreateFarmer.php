@@ -6,7 +6,7 @@ use App\Actions\User\CreateUser;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;
-use App\Models\User;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

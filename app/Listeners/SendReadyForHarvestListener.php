@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Models\User;
+use App\Models\User\User;
 use App\Notifications\SendReadyForHarvestNotification;
 use Illuminate\Support\Facades\Notification;
 

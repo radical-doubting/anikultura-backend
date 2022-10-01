@@ -3,7 +3,7 @@
 namespace App\Models\BigBrother;
 
 use App\Models\Batch\Batch;
-use App\Models\User;
+use App\Models\User\User;
 use App\Orchid\Presenters\BigBrotherPresenter;
 use App\Orchid\Presenters\UserPresenter;
 use Illuminate\Database\Eloquent\Builder;

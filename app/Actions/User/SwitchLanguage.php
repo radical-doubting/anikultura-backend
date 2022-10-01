@@ -2,7 +2,7 @@
 
 namespace App\Actions\User;
 
-use App\Models\User;
+use App\Models\User\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
