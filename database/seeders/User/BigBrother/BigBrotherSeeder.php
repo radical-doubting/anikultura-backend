@@ -6,7 +6,7 @@ use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Orchid\Platform\Models\Role;
+use App\Models\User\Role;
 
 class BigBrotherSeeder extends Seeder
 {

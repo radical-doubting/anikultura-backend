@@ -6,7 +6,7 @@ use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Orchid\Platform\Models\Role;
+use App\Models\User\Role;
 
 class AdminSeeder extends Seeder
 {

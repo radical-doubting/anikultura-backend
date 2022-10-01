@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\User;
 
 use App\Orchid\Layouts\AnikulturaEditLayout;
-use Orchid\Platform\Models\Role;
+use App\Models\User\Role;
 use Orchid\Screen\Fields\Select;
 
 class UserRoleLayout extends AnikulturaEditLayout

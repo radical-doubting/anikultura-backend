@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Orchid\Layouts\Role;
 
 use App\Orchid\Layouts\AnikulturaListLayout;
-use Orchid\Platform\Models\Role;
+use App\Models\User\Role;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\TD;
 

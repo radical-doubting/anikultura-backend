@@ -3,7 +3,7 @@
 namespace Database\Seeders\User;
 
 use Illuminate\Database\Seeder;
-use Orchid\Platform\Models\Role;
+use App\Models\User\Role;
 
 class RoleSeeder extends Seeder
 {
