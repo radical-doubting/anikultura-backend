@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 use App\Traits\Loggable;
 use Illuminate\Contracts\Translation\HasLocalePreference;
