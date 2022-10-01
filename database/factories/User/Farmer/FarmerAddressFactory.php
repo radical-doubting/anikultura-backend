@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\Farmer;
+namespace Database\Factories\User\Farmer;
 
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\Site\Region;
