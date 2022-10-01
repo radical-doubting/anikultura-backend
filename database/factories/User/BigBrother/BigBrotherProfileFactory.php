@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\BigBrother;
+namespace Database\Factories\User\BigBrother;
 
 use App\Models\User\BigBrother\BigBrotherProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
