@@ -8,7 +8,7 @@ use App\Orchid\Presenters\UserPresenter;
 
 class Admin extends User
 {
-    public static $profilePath = 'App\Models\User\Admin\AdminProfile';
+    public const PROFILE_PATH = 'App\Models\User\Admin\AdminProfile';
 
     protected $table = 'users';
 
@@ -17,7 +17,7 @@ class Admin extends User
         parent::boot();
 
         static::addGlobalScope(function ($query) {
-            $query->where('profile_type', self::$profilePath);
+            $query->where('profile_type', self::PROFILE_PATH);
         });
     }
 

@@ -15,7 +15,7 @@ class ManagementUser extends User
 
         static::addGlobalScope(function ($query) {
             $query->where('profile_type', BigBrother::PROFILE_PATH);
-            $query->orWhere('profile_type', Admin::$profilePath);
+            $query->orWhere('profile_type', Admin::PROFILE_PATH);
         });
     }
 }
