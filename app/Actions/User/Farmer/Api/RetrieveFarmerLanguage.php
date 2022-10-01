@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Farmer\Api;
+namespace App\Actions\User\Farmer\Api;
 
 use App\Http\Resources\Farmer\LanguageResource;
 use App\Models\User\Farmer\Farmer;

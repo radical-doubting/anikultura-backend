@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Farmer;
+namespace App\Actions\User\Farmer;
 
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;

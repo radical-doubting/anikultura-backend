@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Farmer\DeleteFarmer;
+use App\Actions\User\Farmer\DeleteFarmer;
 use App\Models\User\Farmer\Farmer;
 use Database\Seeders\Batch\BatchSeeder;
 use Database\Seeders\Crop\CropSeeder;

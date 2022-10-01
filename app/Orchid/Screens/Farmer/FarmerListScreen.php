@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Actions\Farmer\DeleteFarmer;
+use App\Actions\User\Farmer\DeleteFarmer;
 use App\Models\User\Farmer\Farmer;
 use App\Orchid\Layouts\Farmer\FarmerListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;

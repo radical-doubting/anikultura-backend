@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Screens\Farmer;
 
-use App\Actions\Farmer\CreateFarmer;
-use App\Actions\Farmer\DeleteFarmer;
+use App\Actions\User\Farmer\CreateFarmer;
+use App\Actions\User\Farmer\DeleteFarmer;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;

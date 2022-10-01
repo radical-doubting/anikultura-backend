@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Farmer\CreateFarmerProfile;
+use App\Actions\User\Farmer\CreateFarmerProfile;
 use App\Models\User\Farmer\CivilStatus;
 use App\Models\User\Farmer\EducationalStatus;
 use App\Models\User\Farmer\FarmerProfile;

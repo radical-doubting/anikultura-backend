@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Farmer\Api;
+namespace App\Actions\User\Farmer\Api;
 
 use App\Models\User\Farmer\Farmer;
 use App\Traits\AsApiResponder;

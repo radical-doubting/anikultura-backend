@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Farmer\Api;
+namespace App\Actions\User\Farmer\Api;
 
 use App\Http\Resources\Farmer\TutorialStateResource;
 use App\Models\User\Farmer\FarmerPreference;

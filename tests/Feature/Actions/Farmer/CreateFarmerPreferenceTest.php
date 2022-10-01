@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Farmer\CreateFarmerPreference;
+use App\Actions\User\Farmer\CreateFarmerPreference;
 use App\Models\User\Farmer\FarmerPreference;
 use App\Models\User\Farmer\FarmerProfile;
 use Database\Seeders\User\Farmer\CivilStatusSeeder;

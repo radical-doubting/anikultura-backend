@@ -1,6 +1,6 @@
 <?php
 
-use App\Actions\Farmer\CreateFarmerAddress;
+use App\Actions\User\Farmer\CreateFarmerAddress;
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;
 use App\Models\Site\Region;
