@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\Batch\BatchSeeder;
-use Database\Seeders\BigBrother\BigBrotherSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\FarmerReport\FarmerReportSeeder;

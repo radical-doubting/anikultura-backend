@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\BigBrother;
+namespace Database\Seeders\User\BigBrother;
 
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
