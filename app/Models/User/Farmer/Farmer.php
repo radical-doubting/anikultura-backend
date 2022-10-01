@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Farmer extends User
 {
-    public static $profilePath = 'App\Models\User\Farmer\FarmerProfile';
+    public const PROFILE_PATH = 'App\Models\User\Farmer\FarmerProfile';
 
     protected $table = 'users';
 
@@ -24,7 +24,7 @@ class Farmer extends User
         parent::boot();
 
         static::addGlobalScope(function ($query) {
-            $query->where('profile_type', self::$profilePath);
+            $query->where('profile_type', self::PROFILE_PATH);
         });
     }
 

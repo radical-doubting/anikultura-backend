@@ -48,7 +48,7 @@ class UserListScreen extends Screen
                 ->filters()
                 ->filtersApplySelection(UserFiltersLayout::class)
                 ->defaultSort('id', 'desc')
-                ->where('profile_type', '!=', Farmer::$profilePath)
+                ->where('profile_type', '!=', Farmer::PROFILE_PATH)
                 ->paginate(),
         ];
     }

@@ -64,7 +64,7 @@ class CreateFarmer
     {
         $createdAccount->update([
             'profile_id' => $farmerProfile->id,
-            'profile_type' => Farmer::$profilePath,
+            'profile_type' => Farmer::PROFILE_PATH,
         ]);
 
         $createdAccount->refresh();
