@@ -4,7 +4,7 @@ namespace App\Orchid\Screens\User\Farmer;
 
 use App\Actions\User\Farmer\DeleteFarmer;
 use App\Models\User\Farmer\Farmer;
-use App\Orchid\Layouts\Farmer\FarmerListLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;

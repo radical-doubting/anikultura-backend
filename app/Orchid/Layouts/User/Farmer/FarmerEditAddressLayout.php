@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Layouts\Farmer;
+namespace App\Orchid\Layouts\User\Farmer;
 
 use App\Models\Site\Region;
 use App\Orchid\Layouts\AnikulturaEditLayout;

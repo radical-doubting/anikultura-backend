@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Layouts\Farmer;
+namespace App\Orchid\Layouts\User\Farmer;
 
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
