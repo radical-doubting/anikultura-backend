@@ -31,7 +31,7 @@ class CreateBigBrother
 
         $createdAccount->update([
             'profile_id' => $bigBrotherProfileId,
-            'profile_type' => BigBrother::$profilePath,
+            'profile_type' => BigBrother::PROFILE_PATH,
         ]);
 
         $createdAccount->refresh();

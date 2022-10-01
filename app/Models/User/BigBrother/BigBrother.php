@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BigBrother extends User
 {
-    public static $profilePath = 'App\Models\User\BigBrother\BigBrotherProfile';
+    public const PROFILE_PATH = 'App\Models\User\BigBrother\BigBrotherProfile';
 
     protected $table = 'users';
 
@@ -20,7 +20,7 @@ class BigBrother extends User
         parent::boot();
 
         static::addGlobalScope(function ($query) {
-            $query->where('profile_type', self::$profilePath);
+            $query->where('profile_type', self::PROFILE_PATH);
         });
     }
 
