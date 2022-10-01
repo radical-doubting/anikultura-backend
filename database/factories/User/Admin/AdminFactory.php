@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Factories\Admin;
+namespace Database\Factories\User\Admin;
 
 use App\Models\User\Admin\Admin;
 use Carbon\Carbon;
