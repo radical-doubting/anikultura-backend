@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models\User\Admin;
 
 use App\Models\User\User;
 use App\Orchid\Presenters\AdminPresenter;
@@ -8,7 +8,7 @@ use App\Orchid\Presenters\UserPresenter;
 
 class Admin extends User
 {
-    public static $profilePath = 'App\Models\Admin\AdminProfile';
+    public static $profilePath = 'App\Models\User\Admin\AdminProfile';
 
     protected $table = 'users';
 

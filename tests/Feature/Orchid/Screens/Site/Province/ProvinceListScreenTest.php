@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Admin\Admin;
+use App\Models\User\Admin\Admin;
 use Database\Seeders\Admin\AdminProfileSeeder;
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\User\RoleSeeder;

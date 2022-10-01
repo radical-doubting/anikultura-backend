@@ -2,8 +2,8 @@
 
 namespace Database\Seeders\Admin;
 
-use App\Models\Admin\Admin;
-use App\Models\Admin\AdminProfile;
+use App\Models\User\Admin\Admin;
+use App\Models\User\Admin\AdminProfile;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Orchid\Platform\Models\Role;

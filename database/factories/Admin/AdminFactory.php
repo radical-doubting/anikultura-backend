@@ -2,7 +2,7 @@
 
 namespace Database\Factories\Admin;
 
-use App\Models\Admin\Admin;
+use App\Models\User\Admin\Admin;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +37,7 @@ class AdminFactory extends Factory
             'first_name' => $firstName,
             'middle_name' => $middleName,
             'last_name' => $lastName,
-            'profile_type' => 'App\Models\Admin\AdminProfile',
+            'profile_type' => 'App\Models\User\Admin\AdminProfile',
         ];
 
         return $data;

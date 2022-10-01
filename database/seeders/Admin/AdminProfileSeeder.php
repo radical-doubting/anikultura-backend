@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\Admin;
 
-use App\Models\Admin\AdminProfile;
+use App\Models\User\Admin\AdminProfile;
 use Illuminate\Database\Seeder;
 
 class AdminProfileSeeder extends Seeder

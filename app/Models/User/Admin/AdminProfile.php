@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models\User\Admin;
 
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

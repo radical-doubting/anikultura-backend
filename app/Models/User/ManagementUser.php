@@ -2,7 +2,7 @@
 
 namespace App\Models\User;
 
-use App\Models\Admin\Admin;
+use App\Models\User\Admin\Admin;
 use App\Models\User\BigBrother\BigBrother;
 
 class ManagementUser extends User

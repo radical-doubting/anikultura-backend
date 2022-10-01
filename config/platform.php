@@ -191,7 +191,7 @@ return [
     */
 
     'search' => [
-        App\Models\Admin\Admin::class,
+        App\Models\User\Admin\Admin::class,
         App\Models\User\BigBrother\BigBrother::class,
         App\Models\User\Farmer\Farmer::class,
         App\Models\Farmland\Farmland::class,

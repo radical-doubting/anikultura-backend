@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Admin\Admin;
+use App\Models\User\Admin\Admin;
 use App\Models\Site\Province;
 use Database\Seeders\Admin\AdminProfileSeeder;
 use Database\Seeders\Admin\AdminSeeder;
