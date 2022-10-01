@@ -2,7 +2,7 @@
 
 namespace Database\Factories\BigBrother;
 
-use App\Models\BigBrother\BigBrotherProfile;
+use App\Models\User\BigBrother\BigBrotherProfile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class BigBrotherProfileFactory extends Factory

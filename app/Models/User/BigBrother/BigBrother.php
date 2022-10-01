@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\BigBrother;
+namespace App\Models\User\BigBrother;
 
 use App\Models\Batch\Batch;
 use App\Models\User\User;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class BigBrother extends User
 {
-    public static $profilePath = 'App\Models\BigBrother\BigBrotherProfile';
+    public static $profilePath = 'App\Models\User\BigBrother\BigBrotherProfile';
 
     protected $table = 'users';
 

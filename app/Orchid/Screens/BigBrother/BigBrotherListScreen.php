@@ -3,7 +3,7 @@
 namespace App\Orchid\Screens\BigBrother;
 
 use App\Actions\BigBrother\DeleteBigBrother;
-use App\Models\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrother;
 use App\Orchid\Layouts\BigBrother\BigBrotherListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;

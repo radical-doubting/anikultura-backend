@@ -2,7 +2,7 @@
 
 namespace App\Actions\BigBrother;
 
-use App\Models\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrother;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

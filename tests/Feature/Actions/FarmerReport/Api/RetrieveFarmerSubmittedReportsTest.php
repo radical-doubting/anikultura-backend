@@ -2,7 +2,7 @@
 
 use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\Batch\Batch;
-use App\Models\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrother;
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
 use App\Models\User\Farmer\Farmer;

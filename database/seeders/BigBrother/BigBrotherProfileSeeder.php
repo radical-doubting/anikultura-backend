@@ -2,7 +2,7 @@
 
 namespace Database\Seeders\BigBrother;
 
-use App\Models\BigBrother\BigBrotherProfile;
+use App\Models\User\BigBrother\BigBrotherProfile;
 use Illuminate\Database\Seeder;
 
 class BigBrotherProfileSeeder extends Seeder

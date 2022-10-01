@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\BigBrother;
 
-use App\Models\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrother;
 use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;

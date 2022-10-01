@@ -4,8 +4,8 @@ namespace App\Orchid\Screens\BigBrother;
 
 use App\Actions\BigBrother\CreateBigBrother;
 use App\Actions\BigBrother\DeleteBigBrother;
-use App\Models\BigBrother\BigBrother;
-use App\Models\BigBrother\BigBrotherProfile;
+use App\Models\User\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Orchid\Layouts\BigBrother\BigBrotherEditAccountLayout;
 use App\Orchid\Layouts\BigBrother\BigBrotherEditLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;

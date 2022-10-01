@@ -2,7 +2,7 @@
 
 namespace Database\Factories\BigBrother;
 
-use App\Models\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrother;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -37,7 +37,7 @@ class BigBrotherFactory extends Factory
             'first_name' => $firstName,
             'middle_name' => $middleName,
             'last_name' => $lastName,
-            'profile_type' => 'App\Models\BigBrother\BigBrotherProfile',
+            'profile_type' => 'App\Models\User\BigBrother\BigBrotherProfile',
         ];
 
         return $data;

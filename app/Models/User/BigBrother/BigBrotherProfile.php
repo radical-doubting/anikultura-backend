@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\BigBrother;
+namespace App\Models\User\BigBrother;
 
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

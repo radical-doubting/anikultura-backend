@@ -3,7 +3,7 @@
 namespace App\Actions\BigBrother;
 
 use App\Actions\User\CreateUser;
-use App\Models\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;

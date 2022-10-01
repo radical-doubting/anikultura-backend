@@ -2,7 +2,7 @@
 
 namespace App\Actions\BigBrother;
 
-use App\Models\BigBrother\BigBrotherProfile;
+use App\Models\User\BigBrother\BigBrotherProfile;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class CreateBigBrotherProfile
