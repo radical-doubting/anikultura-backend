@@ -2,8 +2,8 @@
 
 namespace App\Orchid\Screens\BigBrother;
 
-use App\Actions\BigBrother\CreateBigBrother;
-use App\Actions\BigBrother\DeleteBigBrother;
+use App\Actions\User\BigBrother\CreateBigBrother;
+use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Orchid\Layouts\BigBrother\BigBrotherEditAccountLayout;

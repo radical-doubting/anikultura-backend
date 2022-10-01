@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Screens\BigBrother;
 
-use App\Actions\BigBrother\DeleteBigBrother;
+use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
 use App\Orchid\Layouts\BigBrother\BigBrotherListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;

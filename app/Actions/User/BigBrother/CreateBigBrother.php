@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\BigBrother;
+namespace App\Actions\User\BigBrother;
 
 use App\Actions\User\CreateUser;
 use App\Models\User\BigBrother\BigBrother;
