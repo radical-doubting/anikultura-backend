@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Screens\BigBrother;
+namespace App\Orchid\Screens\User\BigBrother;
 
 use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
