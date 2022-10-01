@@ -4,7 +4,7 @@ use App\Actions\Farmer\DeleteFarmer;
 use App\Models\User\Farmer\Farmer;
 use Database\Seeders\Batch\BatchSeeder;
 use Database\Seeders\Crop\CropSeeder;
-use Database\Seeders\Farmer\FarmerSeeder;
+use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\Farmland\FarmlandSeeder;
 use Database\Seeders\Site\SiteSeeder;
 use Database\Seeders\User\RoleSeeder;

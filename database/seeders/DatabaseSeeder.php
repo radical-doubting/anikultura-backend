@@ -6,7 +6,7 @@ use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\Batch\BatchSeeder;
 use Database\Seeders\BigBrother\BigBrotherSeeder;
 use Database\Seeders\Crop\CropSeeder;
-use Database\Seeders\Farmer\FarmerSeeder;
+use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\FarmerReport\FarmerReportSeeder;
 use Database\Seeders\Farmland\FarmlandSeeder;
 use Database\Seeders\Site\SiteSeeder;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders\Farmer;
+namespace Database\Seeders\User\Farmer;
 
 use App\Models\User\Farmer\NCPasserStatus;
 use Illuminate\Database\Seeder;

@@ -3,12 +3,12 @@
 use App\Actions\Farmer\CreateFarmerPreference;
 use App\Models\User\Farmer\FarmerPreference;
 use App\Models\User\Farmer\FarmerProfile;
-use Database\Seeders\Farmer\CivilStatusSeeder;
-use Database\Seeders\Farmer\EducationalStatusSeeder;
-use Database\Seeders\Farmer\GenderSeeder;
-use Database\Seeders\Farmer\NCPasserStatusSeeder;
-use Database\Seeders\Farmer\SalaryPeriodicitySeeder;
-use Database\Seeders\Farmer\SocialStatusSeeder;
+use Database\Seeders\User\Farmer\CivilStatusSeeder;
+use Database\Seeders\User\Farmer\EducationalStatusSeeder;
+use Database\Seeders\User\Farmer\GenderSeeder;
+use Database\Seeders\User\Farmer\NCPasserStatusSeeder;
+use Database\Seeders\User\Farmer\SalaryPeriodicitySeeder;
+use Database\Seeders\User\Farmer\SocialStatusSeeder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use function Pest\Laravel\seed;
 

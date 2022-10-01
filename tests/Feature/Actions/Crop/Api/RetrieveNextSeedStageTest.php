@@ -9,7 +9,7 @@ use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use Database\Seeders\Admin\AdminSeeder;
 use Database\Seeders\Crop\CropSeeder;
-use Database\Seeders\Farmer\FarmerSeeder;
+use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\Farmland\FarmlandStatusSeeder;
 use Database\Seeders\Farmland\FarmlandTypeSeeder;
 use Database\Seeders\Farmland\WateringSystemSeeder;
