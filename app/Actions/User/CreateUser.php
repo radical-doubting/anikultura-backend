@@ -3,7 +3,7 @@
 namespace App\Actions\User;
 
 use App\Actions\Authentication\HashPassword;
-use App\Models\User;
+use App\Models\User\User;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class CreateUser

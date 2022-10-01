@@ -2,10 +2,10 @@
 
 namespace App\Models\Batch;
 
-use App\Models\Farmer\Farmer;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
+use App\Models\User\Farmer\Farmer;
 use App\Orchid\Presenters\Batch\BatchPresenter;
 use App\Traits\Loggable;
 use Chelout\RelationshipEvents\Concerns\HasBelongsToManyEvents;

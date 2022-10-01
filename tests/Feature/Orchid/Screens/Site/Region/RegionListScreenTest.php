@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Admin\Admin;
 use App\Models\Site\Region;
-use Database\Seeders\Admin\AdminProfileSeeder;
-use Database\Seeders\Admin\AdminSeeder;
+use App\Models\User\Admin\Admin;
+use Database\Seeders\User\Admin\AdminProfileSeeder;
+use Database\Seeders\User\Admin\AdminSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\seed;
 

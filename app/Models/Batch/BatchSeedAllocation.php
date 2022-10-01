@@ -3,7 +3,7 @@
 namespace App\Models\Batch;
 
 use App\Models\Crop\Crop;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

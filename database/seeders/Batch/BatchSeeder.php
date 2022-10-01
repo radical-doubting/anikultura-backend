@@ -3,7 +3,7 @@
 namespace Database\Seeders\Batch;
 
 use App\Models\Batch\Batch;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use Illuminate\Database\Seeder;
 
 class BatchSeeder extends Seeder

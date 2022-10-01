@@ -2,12 +2,12 @@
 
 namespace App\Http\Resources\Farmer;
 
-use App\Models\Farmer\FarmerPreference;
-use App\Models\Farmer\Gender;
+use App\Models\User\Farmer\FarmerPreference;
+use App\Models\User\Farmer\Gender;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin \App\Models\Farmer\FarmerProfile
+ * @mixin \App\Models\User\Farmer\FarmerProfile
  */
 class FarmerProfileResource extends JsonResource
 {

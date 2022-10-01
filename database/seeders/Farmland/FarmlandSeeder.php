@@ -2,10 +2,10 @@
 
 namespace Database\Seeders\Farmland;
 
-use App\Models\Farmer\Farmer;
 use App\Models\Farmland\CropBuyer;
 use App\Models\Farmland\Farmland;
 use App\Models\Farmland\WateringSystem;
+use App\Models\User\Farmer\Farmer;
 use Illuminate\Database\Seeder;
 
 class FarmlandSeeder extends Seeder

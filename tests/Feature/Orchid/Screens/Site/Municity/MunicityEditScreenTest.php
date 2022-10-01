@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Orchid\Screens\Site\Municity;
 
-use App\Models\Admin\Admin;
 use App\Models\Site\Municity;
-use Database\Seeders\Admin\AdminProfileSeeder;
-use Database\Seeders\Admin\AdminSeeder;
+use App\Models\User\Admin\Admin;
 use Database\Seeders\Site\ProvinceSeeder;
 use Database\Seeders\Site\RegionSeeder;
+use Database\Seeders\User\Admin\AdminProfileSeeder;
+use Database\Seeders\User\Admin\AdminSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;

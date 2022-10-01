@@ -3,7 +3,7 @@
 namespace App\Models\Farmland;
 
 use App\Models\Batch\Batch;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Orchid\Presenters\Farmland\FarmlandPresenter;
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Builder;

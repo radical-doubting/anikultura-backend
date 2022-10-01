@@ -5,7 +5,7 @@ namespace App\Http\Resources\Farmer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin \App\Models\Farmer\Farmer
+ * @mixin \App\Models\User\Farmer\Farmer
  */
 class FarmerResource extends JsonResource
 {
