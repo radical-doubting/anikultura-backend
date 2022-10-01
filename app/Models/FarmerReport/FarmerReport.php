@@ -9,7 +9,7 @@ use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
 use App\Models\User\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
-use App\Models\ManagementUser;
+use App\Models\User\ManagementUser;
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
