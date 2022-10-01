@@ -4,7 +4,7 @@ namespace App\Orchid\Screens\User\BigBrother;
 
 use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
-use App\Orchid\Layouts\BigBrother\BigBrotherListLayout;
+use App\Orchid\Layouts\User\BigBrother\BigBrotherListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Link;

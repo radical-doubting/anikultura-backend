@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Orchid\Layouts\BigBrother;
+namespace App\Orchid\Layouts\User\BigBrother;
 
 use App\Models\User\BigBrother\BigBrother;
 use App\Orchid\Layouts\AnikulturaListLayout;
