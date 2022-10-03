@@ -16,18 +16,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Grafana URL
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify the Grafana URL that the platform will use on the
-    | dashboard home page.
-    |
-    */
-
-    'grafanaUrl' => env('ANIKULTURA_GRAFANA_URL', 'http://example.com'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Organization Details
     |--------------------------------------------------------------------------
     |

@@ -25,8 +25,8 @@
                 <span class="ms-3 text-dark">{{__('Analytics Dashboard')}}</span>
             </h3>
             <p class="ms-md-5 ps-md-1">
-                {{__("See more insights in the platform. The Grafana analytics dashboard is accessible")  }} <a
-                    href="{{ Config::get('anikultura.grafanaUrl') }}" target="_blank" class="text-u-l">{{__("here")  }}</a>.
+                {{__("See more detailed insights in the platform")  }} <a
+                    href="{{ Config::get('anikultura.insightsUrl.home') }}" target="_blank" class="text-u-l">{{__("here")  }}</a>.
             </p>
         </div>
     </div>
