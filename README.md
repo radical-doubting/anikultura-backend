@@ -4,6 +4,7 @@
 
 [![Analysis and unit tests](https://github.com/radical-doubting/anikultura-backend/actions/workflows/analyze.yml/badge.svg)](https://github.com/radical-doubting/anikultura-backend/actions/workflows/analyze.yml)
 [![Integration tests](https://github.com/radical-doubting/anikultura-backend/actions/workflows/integration.yml/badge.svg)](https://github.com/radical-doubting/anikultura-backend/actions/workflows/integration.yml)
+[![codecov](https://codecov.io/gh/radical-doubting/anikultura-backend/branch/master/graph/badge.svg?token=HDPR23M8EY)](https://codecov.io/gh/radical-doubting/anikultura-backend)
 
 A Laravel back-end for Anikultura. Its management dashboards are powered by Laravel Orchid. It serves a REST API for the farmer dashboard. It exports Prometheus metrics for insights.
 
