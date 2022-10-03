@@ -2,6 +2,7 @@
 
 namespace App\Orchid\Screens\FarmerReport;
 
+use App\Helpers\InsightsHelper;
 use App\Models\FarmerReport\FarmerReport;
 use App\Orchid\Layouts\FarmerReport\FarmerReportFiltersLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportListLayout;
@@ -31,6 +32,7 @@ class FarmerReportListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.farmer-reports.create'),
+            InsightsHelper::makeLink('farmerReport'),
         ];
     }
 

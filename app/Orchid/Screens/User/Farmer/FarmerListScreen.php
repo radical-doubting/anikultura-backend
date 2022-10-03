@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\User\Farmer;
 
 use App\Actions\User\Farmer\DeleteFarmer;
+use App\Helpers\InsightsHelper;
 use App\Models\User\Farmer\Farmer;
 use App\Orchid\Layouts\User\Farmer\FarmerListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
@@ -32,6 +33,7 @@ class FarmerListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.farmers.create'),
+            InsightsHelper::makeLink('farmer'),
         ];
     }
 

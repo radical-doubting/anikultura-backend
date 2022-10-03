@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Batch;
 
 use App\Actions\Batch\DeleteBatch;
+use App\Helpers\InsightsHelper;
 use App\Models\Batch\Batch;
 use App\Orchid\Layouts\Batch\BatchFiltersLayout;
 use App\Orchid\Layouts\Batch\BatchListLayout;
@@ -34,6 +35,7 @@ class BatchListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.batches.create'),
+            InsightsHelper::makeLink('batch'),
         ];
     }
 

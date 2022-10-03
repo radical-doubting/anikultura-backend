@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Site\Region;
 
 use App\Actions\Site\Region\DeleteRegion;
+use App\Helpers\InsightsHelper;
 use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
@@ -31,6 +32,7 @@ class RegionListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.sites.regions.create'),
+            InsightsHelper::makeLink('site'),
         ];
     }
 
