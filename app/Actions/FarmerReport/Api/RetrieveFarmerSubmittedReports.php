@@ -3,9 +3,9 @@
 namespace App\Actions\FarmerReport\Api;
 
 use App\Http\Resources\FarmerReport\FarmerReportResource;
-use App\Models\Farmer\Farmer;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
+use App\Models\User\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Lorisleiva\Actions\ActionRequest;

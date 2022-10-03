@@ -141,15 +141,4 @@ class PlatformProvider extends OrchidServiceProvider
                 ->addPermission('platform.farmer-reports.edit', __('Edit Farmer Reports')),
         ];
     }
-
-    /**
-     * @return string[]
-     */
-    public function registerSearchModels(): array
-    {
-        return [
-            // ...Models
-            // \App\Models\User::class
-        ];
-    }
 }

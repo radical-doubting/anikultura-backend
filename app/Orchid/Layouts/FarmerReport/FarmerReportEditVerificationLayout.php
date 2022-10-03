@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\FarmerReport;
 
-use App\Models\ManagementUser;
+use App\Models\User\ManagementUser;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\CheckBox;
 use Orchid\Screen\Fields\Relation;

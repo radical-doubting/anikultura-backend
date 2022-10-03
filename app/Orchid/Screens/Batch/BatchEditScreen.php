@@ -26,6 +26,8 @@ class BatchEditScreen extends AnikulturaEditScreen
 
     public Collection $batchSeedAllocations;
 
+    protected $removeMethod = 'removeBatch';
+
     public function resourceName(): string
     {
         return __('batch');

@@ -3,7 +3,7 @@
 namespace App\Actions\Farmland\Api;
 
 use App\Http\Resources\Farmland\FarmlandResource;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Lorisleiva\Actions\ActionRequest;

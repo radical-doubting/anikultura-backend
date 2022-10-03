@@ -2,7 +2,7 @@
 
 namespace App\Orchid\Layouts\Farmland;
 
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Relation;
 

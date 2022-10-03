@@ -5,7 +5,7 @@ namespace App\Http\Resources\BigBrother;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin \App\Models\BigBrother\BigBrother
+ * @mixin \App\Models\User\BigBrother\BigBrother
  */
 class BigBrotherResource extends JsonResource
 {

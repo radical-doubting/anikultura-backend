@@ -8,12 +8,12 @@ class FarmerPresenter extends UserPresenter
 {
     public function label(): string
     {
-        return 'Farmers';
+        return __('Farmers');
     }
 
     public function subTitle(): string
     {
-        return 'Farmer';
+        return __('Farmer');
     }
 
     public function url(): string

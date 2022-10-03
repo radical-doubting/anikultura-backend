@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Site\Province;
 
 use App\Actions\Site\Province\DeleteProvince;
+use App\Helpers\InsightsHelper;
 use App\Models\Site\Province;
 use App\Orchid\Layouts\Site\Province\ProvinceFiltersLayout;
 use App\Orchid\Layouts\Site\Province\ProvinceListLayout;
@@ -34,6 +35,7 @@ class ProvinceListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.sites.provinces.create'),
+            InsightsHelper::makeLink('site'),
         ];
     }
 
