@@ -11,6 +11,10 @@ abstract class AnikulturaEditScreen extends Screen
 
     protected $editVerb = 'Edit';
 
+    protected $saveMethod = 'save';
+
+    protected $removeMethod = 'remove';
+
     /**
      * Name of the resource.
      */
@@ -58,11 +62,11 @@ abstract class AnikulturaEditScreen extends Screen
             Button::make(__('Remove'))
                 ->icon('trash')
                 ->confirm($confirmText)
-                ->method('remove')
+                ->method($this->removeMethod)
                 ->canSee($this->exists()),
             Button::make(__('Save'))
                 ->icon('check')
-                ->method('save'),
+                ->method($this->saveMethod),
         ];
     }
 }
