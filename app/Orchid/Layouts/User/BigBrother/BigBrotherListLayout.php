@@ -7,6 +7,7 @@ use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
+use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\TD;
 
 class BigBrotherListLayout extends AnikulturaListLayout
@@ -16,23 +17,11 @@ class BigBrotherListLayout extends AnikulturaListLayout
     protected function columns(): iterable
     {
         return [
-            TD::make('firstname', __('First Name'))
-                ->render(function (BigBrother $bigBrother) {
-                    return Link::make($bigBrother->first_name)
-                        ->route('platform.big-brothers.edit', [$bigBrother->id]);
-                }),
-
-            TD::make('middlename', __('Middle Name'))
-                ->render(function (BigBrother $bigBrother) {
-                    return Link::make($bigBrother->middle_name)
-                        ->route('platform.big-brothers.edit', [$bigBrother->id]);
-                }),
-
-            TD::make('lastname', __('Last Name'))
+            TD::make('name', __('Name'))
+                ->sort()
                 ->cantHide()
                 ->render(function (BigBrother $bigBrother) {
-                    return Link::make($bigBrother->last_name)
-                        ->route('platform.big-brothers.edit', [$bigBrother->id]);
+                    return new Persona($bigBrother->presenter());
                 }),
 
             TD::make(__('Actions'))
