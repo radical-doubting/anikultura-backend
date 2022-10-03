@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Site\Municity;
 
 use App\Actions\Site\Municity\DeleteMunicity;
+use App\Helpers\InsightsHelper;
 use App\Models\Site\Municity;
 use App\Orchid\Layouts\Site\Municity\MunicityFiltersLayout;
 use App\Orchid\Layouts\Site\Municity\MunicityListLayout;
@@ -35,6 +36,7 @@ class MunicityListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.sites.municities.create'),
+            InsightsHelper::makeLink('site'),
         ];
     }
 

@@ -4,9 +4,9 @@ namespace Database\Seeders\User\BigBrother;
 
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
+use App\Models\User\Role;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Orchid\Platform\Models\Role;
 
 class BigBrotherSeeder extends Seeder
 {

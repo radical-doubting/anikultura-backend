@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\Role;
 
+use App\Models\User\Role;
 use App\Orchid\Layouts\Role\RoleListLayout;
-use Orchid\Platform\Models\Role;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;

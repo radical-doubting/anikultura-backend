@@ -16,18 +16,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Grafana URL
-    |--------------------------------------------------------------------------
-    |
-    | Here you may specify the Grafana URL that the platform will use on the
-    | dashboard home page.
-    |
-    */
-
-    'grafanaUrl' => env('ANIKULTURA_GRAFANA_URL', 'http://example.com'),
-
-    /*
-    |--------------------------------------------------------------------------
     | Organization Details
     |--------------------------------------------------------------------------
     |
@@ -63,4 +51,14 @@ return [
     */
 
     'insightsMode' => env('ANIKULTURA_INSIGHTS_MODE', 'none'),
+
+    'insightsUrl' => [
+        'home' => env('ANIKULTURA_INSIGHTS_HOME_URL', '#'),
+        'batch' => env('ANIKULTURA_INSIGHTS_BATCH_URL', '#'),
+        'crop' => env('ANIKULTURA_INSIGHTS_CROP_URL', '#'),
+        'farmer' => env('ANIKULTURA_INSIGHTS_FARMER_URL', '#'),
+        'farmerReport' => env('ANIKULTURA_INSIGHTS_FARMER_REPORT_URL', '#'),
+        'farmland' => env('ANIKULTURA_INSIGHTS_FARMLAND_URL', '#'),
+        'site' => env('ANIKULTURA_INSIGHTS_SITE_URL', '#'),
+    ],
 ];

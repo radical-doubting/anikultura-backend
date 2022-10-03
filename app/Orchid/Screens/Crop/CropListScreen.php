@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Crop;
 
 use App\Actions\Crop\DeleteCrop;
+use App\Helpers\InsightsHelper;
 use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
@@ -31,7 +32,7 @@ class CropListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.crops.create'),
-
+            InsightsHelper::makeLink('crop'),
         ];
     }
 

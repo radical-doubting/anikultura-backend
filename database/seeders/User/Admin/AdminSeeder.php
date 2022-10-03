@@ -4,9 +4,9 @@ namespace Database\Seeders\User\Admin;
 
 use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
+use App\Models\User\Role;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Orchid\Platform\Models\Role;
 
 class AdminSeeder extends Seeder
 {

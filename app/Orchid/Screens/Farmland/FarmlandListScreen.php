@@ -3,6 +3,7 @@
 namespace App\Orchid\Screens\Farmland;
 
 use App\Actions\Farmland\DeleteFarmland;
+use App\Helpers\InsightsHelper;
 use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandFiltersLayout;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
@@ -33,6 +34,7 @@ class FarmlandListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.farmlands.create'),
+            InsightsHelper::makeLink('farmland'),
         ];
     }
 
