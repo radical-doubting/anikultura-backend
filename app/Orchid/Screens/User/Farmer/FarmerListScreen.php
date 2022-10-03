@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\User\Farmer;
 use App\Actions\User\Farmer\DeleteFarmer;
 use App\Helpers\InsightsHelper;
 use App\Models\User\Farmer\Farmer;
+use App\Orchid\Layouts\User\Farmer\FarmerFiltersLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
@@ -22,6 +23,7 @@ class FarmerListScreen extends AnikulturaListScreen
         return [
             'farmers' => Farmer::with('profile')
                 ->filters()
+                ->filtersApplySelection(FarmerFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -40,6 +42,7 @@ class FarmerListScreen extends AnikulturaListScreen
     public function layout(): array
     {
         return [
+            FarmerFiltersLayout::class,
             FarmerListLayout::class,
         ];
     }

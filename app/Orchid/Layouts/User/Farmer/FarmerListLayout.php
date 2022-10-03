@@ -20,7 +20,6 @@ class FarmerListLayout extends AnikulturaListLayout
             TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()
-                ->filter(TD::FILTER_TEXT)
                 ->render(function (Farmer $farmer) {
                     return new Persona($farmer->presenter());
                 }),
