@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JWT_SECRET: secret
+      SCOUT_DRIVER: database
 
     steps:
       - name: Check out repository code
