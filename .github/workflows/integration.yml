@@ -5,21 +5,6 @@ on:
     branches: [master, staging]
 
 jobs:
-  sqlite:
-    runs-on: ubuntu-latest
-    container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.1
-
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-
-      - name: Build and run integration tests on application
-        uses: ./.github/actions/integration
-        env:
-          DB_CONNECTION: sqlite
-          DB_DATABASE: ":memory:"
-
   postgresql:
     runs-on: ubuntu-latest
     container:
