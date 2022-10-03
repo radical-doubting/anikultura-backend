@@ -1,0 +1,35 @@
+name: Code coverage upload
+
+on:
+  pull_request:
+    branches: [master, staging]
+
+jobs:
+  coverage:
+    runs-on: ubuntu-latest
+    env:
+      JWT_SECRET: secret
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          tools: composer:v2
+          extensions: redis
+          coverage: xdebug
+
+      - name: Check Composer configuration
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --quiet
+
+      - name: Run unit tests
+        run: ./vendor/bin/pest --configuration=phpunit-sqlite.xml --coverage-clover=coverage.xml
+
+      - name: Upload coverage reports to Codecov with GitHub Action
+        uses: codecov/codecov-action@v3
