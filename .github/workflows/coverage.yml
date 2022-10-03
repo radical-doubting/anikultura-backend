@@ -7,9 +7,6 @@ on:
 jobs:
   coverage:
     runs-on: ubuntu-latest
-    env:
-      JWT_SECRET: secret
-      SCOUT_DRIVER: database
 
     steps:
       - name: Check out repository code
@@ -23,11 +20,20 @@ jobs:
           extensions: redis
           coverage: xdebug
 
+      - name: Copy .env from .env.ci
+        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+
       - name: Check Composer configuration
         run: composer validate --strict
 
       - name: Install dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --quiet
+
+      - name: Generate application key
+        run: php artisan key:generate
+
+      - name: Set directory permissions
+        run: chmod -R 777 storage bootstrap/cache
 
       - name: Run all tests
         run: ./vendor/bin/pest --configuration=phpunit-sqlite.xml --coverage-clover=coverage.xml
