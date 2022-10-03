@@ -26,6 +26,7 @@ runs:
     - name: Run database seeders
       run: php artisan db:seed
       shell: bash
+      if: ${{ env.DB_CONNECTION != 'sqlite' }}
 
     - name: Generate Swagger documentation
       run: php artisan l5-swagger:generate
