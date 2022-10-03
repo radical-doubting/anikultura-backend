@@ -32,11 +32,7 @@ return new class extends Migration
     private function addSlugColumnToTable(string $sluggedTableName)
     {
         Schema::table($sluggedTableName, function (Blueprint $table) {
-            $column = $table->string('slug')->nullable(false)->unique();
-
-            if (config('database.default') === 'sqlite') {
-                $column->default('');
-            }
+            $table->string('slug')->nullable(false)->unique();
         });
     }
 
