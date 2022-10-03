@@ -4,6 +4,7 @@ namespace App\Orchid\Screens\User\BigBrother;
 
 use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
+use App\Orchid\Layouts\User\BigBrother\BigBrotherFiltersLayout;
 use App\Orchid\Layouts\User\BigBrother\BigBrotherListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
@@ -20,6 +21,7 @@ class BigBrotherListScreen extends AnikulturaListScreen
     {
         return [
             'big_brothers' => BigBrother::filters()
+                ->filtersApplySelection(BigBrotherFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
@@ -38,6 +40,7 @@ class BigBrotherListScreen extends AnikulturaListScreen
     public function layout(): array
     {
         return [
+            BigBrotherFiltersLayout::class,
             BigBrotherListLayout::class,
         ];
     }
