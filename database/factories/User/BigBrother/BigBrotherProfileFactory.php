@@ -23,7 +23,7 @@ class BigBrotherProfileFactory extends Factory
     {
         return [
             'age' => $this->faker->numberBetween(30, 70),
-            'organization_name' => $this->faker->company(),
+            'organization_name' => $this->faker->unique()->company(),
         ];
     }
 }

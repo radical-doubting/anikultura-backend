@@ -20,7 +20,6 @@ class FarmlandSeeder extends Seeder
         $this->call([
             FarmlandTypeSeeder::class,
             FarmlandStatusSeeder::class,
-
             WateringSystemSeeder::class,
         ]);
 

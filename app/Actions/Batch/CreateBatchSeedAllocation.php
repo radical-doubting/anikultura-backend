@@ -45,7 +45,6 @@ class CreateBatchSeedAllocation
             'batchSeedAllocation.farmer_id' => [
                 'required',
             ],
-
             'batchSeedAllocation.seed_amount' => [
                 'required',
             ],
