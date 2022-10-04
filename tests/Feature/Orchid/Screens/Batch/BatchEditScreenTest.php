@@ -42,6 +42,10 @@ it('shows an existing batch from the edit screen', function () {
 
     $screen->display()
         ->assertSee('Edit batch')
+        ->assertSee('Batch Information')
+        ->assertSee('Seeds Allocation')
+        ->assertSee('Batch Site')
+        ->assertSee('Batch Farmers')
         ->assertSee('Remove')
         ->assertSee('Save')
         ->assertSee($batch->farmschool_name);
