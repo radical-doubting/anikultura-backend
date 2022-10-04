@@ -22,7 +22,7 @@ beforeEach(function () {
     ]);
 });
 
-it('shows create batch', function () {
+it('shows create screen', function () {
     $screen = screen('platform.batches.create')->actingAs(Admin::first());
 
     $screen->display()
