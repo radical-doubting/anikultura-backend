@@ -109,7 +109,7 @@ it('creates a farmland from the create screen', function () {
     ]);
 });
 
-it('deletes an farmland region from the edit screen', function () {
+it('deletes an existing farmland from the edit screen', function () {
     $farmland = Farmland::factory()->createOne();
 
     $farmlandData = $farmland->only(

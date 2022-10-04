@@ -84,7 +84,7 @@ it('creates a batch from the create screen', function () {
     ]);
 });
 
-it('deletes an batch region from the edit screen', function () {
+it('deletes an existing batch from the edit screen', function () {
     $batch = Batch::factory()->createOne();
 
     $batchData = $batch->only(
