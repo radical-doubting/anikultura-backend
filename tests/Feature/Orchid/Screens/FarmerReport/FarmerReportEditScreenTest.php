@@ -60,7 +60,7 @@ it('shows an existing farmer report from the edit screen', function () {
         ->assertSee($farmerReport->farmer->first_name);
 });
 
-it('creates a farmland from the create screen', function () {
+it('creates a farmer report from the create screen', function () {
     $screen = screen('platform.farmer-reports.create')
         ->actingAs(Admin::first());
 
