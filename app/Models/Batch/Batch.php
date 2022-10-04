@@ -34,8 +34,6 @@ class Batch extends Model
 
     protected $fillable = [
         'farmschool_name',
-        'assigned_site',
-        'number_seeds_distributed',
         'region_id',
         'province_id',
         'municity_id',
