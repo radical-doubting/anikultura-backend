@@ -6,8 +6,6 @@ use App\Actions\User\SwitchLanguage;
 use App\Orchid\Screens\Home\HomeScreen;
 use App\Orchid\Screens\Role\RoleEditScreen;
 use App\Orchid\Screens\Role\RoleListScreen;
-use App\Orchid\Screens\User\UserEditScreen;
-use App\Orchid\Screens\User\UserListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -38,28 +36,6 @@ Route::screen('profile', UserProfileScreen::class)
         return $trail
             ->parent('platform.index')
             ->push(__('Profile'), route('platform.profile'));
-    });
-
-// Platform > System > Users
-Route::screen('users/{user}/edit', UserEditScreen::class)
-    ->name('platform.systems.users.edit');
-
-// Platform > System > Users > Create
-Route::screen('users/create', UserEditScreen::class)
-    ->name('platform.systems.users.create')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.systems.users')
-            ->push(__('Create'), route('platform.systems.users.create'));
-    });
-
-// Platform > System > Users > User
-Route::screen('users', UserListScreen::class)
-    ->name('platform.systems.users')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.index')
-            ->push(__('Users'), route('platform.systems.users'));
     });
 
 // Platform > System > Roles > Role
