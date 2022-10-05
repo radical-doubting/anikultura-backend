@@ -8,6 +8,7 @@ use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
 use App\Orchid\Layouts\User\Admin\AdminEditAccountLayout;
 use App\Orchid\Layouts\User\Admin\AdminEditProfileLayout;
+use App\Orchid\Layouts\User\Admin\AdminRolePermissionLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,9 +34,12 @@ class AdminEditScreen extends AnikulturaEditScreen
 
     public function query(Admin $admin): array
     {
+        $admin->load(['roles']);
+
         return [
             'admin' => $admin,
             'adminProfile' => $admin->profile,
+            'permission' => $admin->getStatusPermission(),
         ];
     }
 
@@ -62,6 +66,19 @@ class AdminEditScreen extends AnikulturaEditScreen
                         Button::make(__('Save'))
                             ->type(Color::DEFAULT())
                             ->icon('check')
+                            ->method('save')
+                    ),
+            ],
+
+            __('Permissions') => [
+                Layout::block(AdminRolePermissionLayout::class)
+                    ->title(__('Permissions'))
+                    ->description(__('Allow the administrator to perform some actions that are not provided for by his or her roles'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->canSee($this->exists())
                             ->method('save')
                     ),
             ],
