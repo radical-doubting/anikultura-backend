@@ -94,5 +94,6 @@ require 'platform/batches.php';
 require 'platform/sites.php';
 require 'platform/farmers.php';
 require 'platform/big_brothers.php';
+require 'platform/admins.php';
 require 'platform/farmlands.php';
 require 'platform/crops.php';
