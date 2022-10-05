@@ -28,7 +28,7 @@ class CreateAdmin
     {
         $createdAccount = $this->createUser->handle(
             $admin,
-            $adminData['account']
+            $this->handlePermissions($adminData['account']),
         );
 
         $adminProfile = $this->createProfileOrUpdate($createdAccount);
@@ -41,6 +41,20 @@ class CreateAdmin
         $this->updateProfileType($createdAccount, $updatedAdminProfile);
 
         return $admin->refresh();
+    }
+
+    private function handlePermissions(array $accountData): array
+    {
+        $permissions = collect($accountData['permissions'])
+            ->map(function ($value, $key) {
+                return [base64_decode($key) => $value];
+            })
+            ->collapse()
+            ->toArray();
+
+        $accountData['permissions'] = $permissions;
+
+        return $accountData;
     }
 
     private function createProfileOrUpdate(User $createdAccount): AdminProfile
@@ -92,6 +106,9 @@ class CreateAdmin
     {
         return [
             'adminProfile.age' => [
+                'required',
+            ],
+            'admin.permissions' => [
                 'required',
             ],
         ];
