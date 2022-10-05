@@ -4,6 +4,7 @@ namespace App\Actions\User\BigBrother;
 
 use App\Actions\User\CreateUser;
 use App\Models\User\BigBrother\BigBrother;
+use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
@@ -17,24 +18,44 @@ class CreateBigBrother
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(BigBrother $bigBrother, array $bigBrotherData)
-    {
-        $createdAccountId = CreateUser::run($bigBrother, $bigBrotherData['account']);
-        $createdAccount = User::find($createdAccountId);
-
-        $this->createProfile($createdAccount, $bigBrotherData['profile']);
+    public function __construct(
+        protected CreateUser $createUser,
+        protected CreateBigBrotherProfile $createBigBrotherProfile,
+    ) {
     }
 
-    private function createProfile(User $createdAccount, $profileData)
+    public function handle(BigBrother $bigBrother, array $bigBrotherData): BigBrother
     {
-        $bigBrotherProfileId = CreateBigBrotherProfile::run($createdAccount->profile, $profileData);
+        $createdAccount = $this->createUser->handle(
+            $bigBrother,
+            $bigBrotherData['account']
+        );
 
+        $bigBrotherProfile = $this->createProfileOrUpdate($createdAccount);
+
+        $updatedBigBrotherProfile = $this->createBigBrotherProfile->handle(
+            $bigBrotherProfile,
+            $bigBrotherData['profile']
+        );
+
+        $this->updateProfileType($createdAccount, $updatedBigBrotherProfile);
+
+        return $bigBrother->refresh();
+    }
+
+    private function createProfileOrUpdate(User $createdAccount): BigBrotherProfile
+    {
+        $bigBrotherProfile = $createdAccount->profile;
+
+        return is_null($bigBrotherProfile) ? new BigBrotherProfile() : $bigBrotherProfile;
+    }
+
+    private function updateProfileType(User $createdAccount, BigBrotherProfile $bigBrotherProfile)
+    {
         $createdAccount->update([
-            'profile_id' => $bigBrotherProfileId,
+            'profile_id' => $bigBrotherProfile->id,
             'profile_type' => BigBrother::PROFILE_PATH,
         ]);
-
-        $createdAccount->refresh();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse

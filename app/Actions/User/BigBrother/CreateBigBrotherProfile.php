@@ -9,19 +9,14 @@ class CreateBigBrotherProfile
 {
     use AsAction;
 
-    public function handle(?BigBrotherProfile $bigBrotherProfile, $bigBrotherProfileData)
-    {
-        if (is_null($bigBrotherProfile)) {
-            $newBigBrotherProfile = new BigBrotherProfile($bigBrotherProfileData);
-            $newBigBrotherProfile->save();
+    public function handle(
+        BigBrotherProfile $bigBrotherProfile,
+        array $bigBrotherProfileData
+    ): BigBrotherProfile {
+        $bigBrotherProfile
+            ->fill($bigBrotherProfileData)
+            ->save();
 
-            return $newBigBrotherProfile->id;
-        } else {
-            $bigBrotherProfile
-                ->fill($bigBrotherProfileData)
-                ->save();
-
-            return $bigBrotherProfile->id;
-        }
+        return $bigBrotherProfile->refresh();
     }
 }
