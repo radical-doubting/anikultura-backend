@@ -26,6 +26,8 @@ class RoleSeeder extends Seeder
                     'platform.systems.settings' => 1,
                     'platform.sites.read' => 1,
                     'platform.sites.edit' => 1,
+                    'platform.admins.read' => 1,
+                    'platform.admins.edit' => 1,
                     'platform.big-brothers.read' => 1,
                     'platform.big-brothers.edit' => 1,
                     'platform.farmers.read' => 1,
