@@ -8,6 +8,7 @@ use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
 use App\Orchid\Layouts\User\Admin\AdminEditAccountLayout;
 use App\Orchid\Layouts\User\Admin\AdminEditProfileLayout;
+use App\Orchid\Layouts\User\Admin\AdminPasswordLayout;
 use App\Orchid\Layouts\User\Admin\AdminRolePermissionLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
@@ -50,6 +51,16 @@ class AdminEditScreen extends AnikulturaEditScreen
                 Layout::block(AdminEditAccountLayout::class)
                     ->title(__('Account Information'))
                     ->description(__('This information collects administrator\'s account information.'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+
+                Layout::block(AdminPasswordLayout::class)
+                    ->title(__('Password'))
+                    ->description(__('Ensure the account is using a long, random password to stay secure.'))
                     ->commands(
                         Button::make(__('Save'))
                             ->type(Color::DEFAULT())

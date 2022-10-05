@@ -5,19 +5,11 @@ namespace App\Orchid\Layouts\User\Admin;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Password;
 
 class AdminEditAccountLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
-        $admin = $this->query->get('admin');
-        $hasAdmin = is_null($admin) ? false : $admin->exists;
-
-        $passwordPlaceholder = $hasAdmin
-            ? __('Leave empty to keep current password')
-            : __('Enter the password to be set');
-
         return [
             Group::make([
                 Input::make('admin.first_name')
@@ -40,11 +32,6 @@ class AdminEditAccountLayout extends AnikulturaEditLayout
                     ->title(__('Username'))
                     ->placeholder(__('Username'))
                     ->required(),
-
-                Password::make('admin.password')
-                    ->title(__('Password'))
-                    ->placeholder($passwordPlaceholder)
-                    ->required(! $hasAdmin),
             ]),
 
             Group::make([
