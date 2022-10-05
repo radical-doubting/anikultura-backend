@@ -26,37 +26,33 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             Menu::make('Site Management')
-                ->icon('organization')
-                ->title('Navigation')
+                ->icon('map')
+                ->title('Management')
                 ->list([
                     Menu::make('Regions')
-                        ->icon('location-pin')
+                        ->icon('map')
                         ->route('platform.sites.regions'),
                     Menu::make('Provinces')
-                        ->icon('location-pin')
+                        ->icon('map')
                         ->route('platform.sites.provinces'),
                     Menu::make('Municipalities and Cities')
-                        ->icon('location-pin')
+                        ->icon('map')
                         ->route('platform.sites.municities'),
                 ])
                 ->permission('platform.sites.read'),
             Menu::make('Farmer Management')
                 ->icon('people')
                 ->list([
-                    Menu::make('Big Brothers')
-                        ->icon('graduation')
-                        ->route('platform.big-brothers')
-                        ->permission('platform.big-brothers.read'),
                     Menu::make('Farmers')
                         ->icon('user')
                         ->route('platform.farmers')
                         ->permission('platform.farmers.read'),
                     Menu::make('Farmlands')
-                        ->icon('full-screen')
+                        ->icon('frame')
                         ->route('platform.farmlands')
                         ->permission('platform.farmlands.read'),
                     Menu::make('Batches')
-                        ->icon('module')
+                        ->icon('organization')
                         ->route('platform.batches')
                         ->permission('platform.batches.read'),
                 ]),
@@ -67,22 +63,28 @@ class PlatformProvider extends OrchidServiceProvider
                 ->permission('platform.crops.read'),
 
             Menu::make('Farmer Reports Management')
-                ->icon('docs')
+                ->icon('task')
                 ->route('platform.farmer-reports')
                 ->permission('platform.farmer-reports.read'),
 
-            Menu::make(__('Users'))
-                ->icon('user')
-                ->route('platform.systems.users')
-                ->permission('platform.systems.users')
-                ->title(__('Access rights')),
+            Menu::make('Administrative Management')
+                ->icon('building')
+                ->list([
+                    Menu::make('Big Brothers')
+                        ->icon('graduation')
+                        ->route('platform.big-brothers')
+                        ->permission('platform.big-brothers.read'),
+                    Menu::make(__('Users'))
+                        ->icon('user')
+                        ->route('platform.systems.users')
+                        ->permission('platform.systems.users'),
+                    Menu::make(__('Roles'))
+                        ->icon('lock')
+                        ->route('platform.systems.roles')
+                        ->permission('platform.systems.roles'),
+                ]),
 
-            Menu::make(__('Roles'))
-                ->icon('lock')
-                ->route('platform.systems.roles')
-                ->permission('platform.systems.roles'),
-
-            Menu::make(__('Languages'))
+            Menu::make(__('Language'))
                 ->icon('bubbles')
                 ->list([
                     Menu::make(__('English'))
@@ -91,7 +93,8 @@ class PlatformProvider extends OrchidServiceProvider
                     Menu::make(__('Filipino'))
                         ->icon('bubble')
                         ->route('platform.language.switch', ['language' => 'fil_PH']),
-                ]),
+                ])
+                ->title(__('Preferences')),
         ];
     }
 
