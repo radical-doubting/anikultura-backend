@@ -74,7 +74,7 @@ class PlatformProvider extends OrchidServiceProvider
                         ->icon('graduation')
                         ->route('platform.big-brothers')
                         ->permission('platform.big-brothers.read'),
-                    Menu::make(__('Users'))
+                    Menu::make(__('Administrators'))
                         ->icon('user')
                         ->route('platform.systems.users')
                         ->permission('platform.systems.users'),
