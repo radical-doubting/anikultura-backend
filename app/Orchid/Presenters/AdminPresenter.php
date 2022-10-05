@@ -18,6 +18,6 @@ class AdminPresenter extends UserPresenter
 
     public function url(): string
     {
-        return route('platform.systems.users.edit', $this->entity);
+        return route('platform.admins.edit', $this->entity);
     }
 }
