@@ -33,7 +33,7 @@ class BigBrotherListLayout extends AnikulturaListLayout
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.farmers.edit', [$bigBrother->id])
+                                ->route('platform.big-brothers.edit', [$bigBrother->id])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
