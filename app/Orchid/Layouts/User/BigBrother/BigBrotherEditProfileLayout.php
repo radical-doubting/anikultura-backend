@@ -5,7 +5,7 @@ namespace App\Orchid\Layouts\User\BigBrother;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Input;
 
-class BigBrotherEditLayout extends AnikulturaEditLayout
+class BigBrotherEditProfileLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {

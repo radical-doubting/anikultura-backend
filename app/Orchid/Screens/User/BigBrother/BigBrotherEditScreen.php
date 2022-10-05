@@ -7,7 +7,7 @@ use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Orchid\Layouts\User\BigBrother\BigBrotherEditAccountLayout;
-use App\Orchid\Layouts\User\BigBrother\BigBrotherEditLayout;
+use App\Orchid\Layouts\User\BigBrother\BigBrotherEditProfileLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -55,7 +55,7 @@ class BigBrotherEditScreen extends AnikulturaEditScreen
             ],
 
             __('Profile Information') => [
-                Layout::block(BigBrotherEditLayout::class)
+                Layout::block(BigBrotherEditProfileLayout::class)
                     ->title(__('Personal Information'))
                     ->description(__('Update big brother\'s  information'))
                     ->commands(
