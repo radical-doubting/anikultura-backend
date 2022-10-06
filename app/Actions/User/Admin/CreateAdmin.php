@@ -74,7 +74,7 @@ class CreateAdmin
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->validateIfBigBrotherAccountExistsAlready($model, $request);
+        $this->validateIfAdminAccountExistsAlready($model, $request);
 
         $this->handle($model, [
             'account' => $request->get('admin'),
@@ -86,7 +86,7 @@ class CreateAdmin
         return redirect()->route('platform.admins');
     }
 
-    private function validateIfBigBrotherAccountExistsAlready($admin, Request $request)
+    private function validateIfAdminAccountExistsAlready($admin, Request $request)
     {
         $userNameShouldBeUnique = Rule::unique(Admin::class, 'name')->ignore($admin);
         $emailShouldBeUnique = Rule::unique(Admin::class, 'email')->ignore($admin);
