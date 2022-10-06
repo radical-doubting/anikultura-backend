@@ -23,23 +23,19 @@ class BigBrotherFactory extends Factory
      */
     public function definition()
     {
-        $firstName = $this->faker->unique()->firstName();
-        $middleName = $this->faker->lastName();
-        $lastName = $this->faker->lastName();
+        $firstName = $this->faker->unique()->firstName;
         $randomNumber = $this->faker->numberBetween(1, 99);
         $username = strtolower("$firstName$randomNumber");
 
-        $data = [
+        return [
             'name' => $username,
             'email' => "$username@smfi.ph",
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password'),
             'first_name' => $firstName,
-            'middle_name' => $middleName,
-            'last_name' => $lastName,
-            'profile_type' => 'App\Models\User\BigBrother\BigBrotherProfile',
+            'middle_name' => $this->faker->lastName,
+            'last_name' => $this->faker->lastName,
+            'profile_type' => BigBrother::PROFILE_PATH,
         ];
-
-        return $data;
     }
 }
