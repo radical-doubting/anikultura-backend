@@ -16,6 +16,8 @@ class DeleteAdmin
 
     public function handle(Admin $admin): bool
     {
+        $admin->profile->delete();
+
         return $admin->delete();
     }
 
