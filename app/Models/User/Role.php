@@ -14,4 +14,16 @@ class Role extends BaseModel
     protected $casts = [
         'permissions' => 'array',
     ];
+
+    public static function admin(): Role
+    {
+        return Role::where('slug', 'admin')
+            ->first();
+    }
+
+    public static function bigBrother(): Role
+    {
+        return Role::where('slug', 'big-brother')
+            ->first();
+    }
 }

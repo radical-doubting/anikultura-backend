@@ -2,26 +2,25 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\User;
+namespace App\Orchid\Layouts\User\Admin;
 
 use App\Orchid\Layouts\AnikulturaEditLayout;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Fields\Password;
 
-class UserPasswordLayout extends AnikulturaEditLayout
+class AdminPasswordLayout extends AnikulturaEditLayout
 {
     public function fields(): iterable
     {
-        /** @var User $user */
-        $user = $this->query->get('user');
-        $placeholder = $user->exists
+        $admin = $this->query->get('admin');
+
+        $placeholder = $admin->exists
             ? __('Leave empty to keep current password')
             : __('Enter the password to be set');
 
         return [
-            Password::make('user.password')
+            Password::make('admin.password')
                 ->placeholder($placeholder)
-                ->required(! $user->exists)
+                ->required(! $admin->exists)
                 ->title(__('Password')),
         ];
     }

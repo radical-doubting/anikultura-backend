@@ -7,10 +7,12 @@ use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Orchid\Layouts\User\BigBrother\BigBrotherEditAccountLayout;
-use App\Orchid\Layouts\User\BigBrother\BigBrotherEditLayout;
+use App\Orchid\Layouts\User\BigBrother\BigBrotherEditProfileLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Orchid\Screen\Actions\Button;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
 class BigBrotherEditScreen extends AnikulturaEditScreen
@@ -39,14 +41,34 @@ class BigBrotherEditScreen extends AnikulturaEditScreen
 
     public function layout(): iterable
     {
-        return [
-            Layout::block(BigBrotherEditAccountLayout::class)
-                ->title(__('Account Information'))
-                ->description(__('This information collects big brother\'s account information.')),
+        $tabs = [
+            __('Account Information') => [
+                Layout::block(BigBrotherEditAccountLayout::class)
+                    ->title(__('Account Information'))
+                    ->description(__('This information collects big brother\'s account information.'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ],
 
-            Layout::block(BigBrotherEditLayout::class)
-                ->title(__('Basic Information'))
-                ->description(__('Update big brother\'s  information')),
+            __('Profile Information') => [
+                Layout::block(BigBrotherEditProfileLayout::class)
+                    ->title(__('Personal Information'))
+                    ->description(__('Update big brother\'s  information'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ],
+        ];
+
+        return [
+            Layout::tabs($tabs)->activeTab(__('Account Information')),
         ];
     }
 

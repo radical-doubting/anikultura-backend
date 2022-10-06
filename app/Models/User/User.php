@@ -25,7 +25,6 @@ class User extends Authenticatable implements JWTSubject, HasLocalePreference
         'middle_name',
         'last_name',
         'contact_number',
-        'username',
         'email',
         'password',
         'permissions',

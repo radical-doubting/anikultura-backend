@@ -87,9 +87,11 @@ class CreateFarmer
             'address' => $request->get('farmerAddress'),
         ]);
 
-        Toast::info(__('Farmer profile was saved successfully!'));
+        Toast::info(__('Farmer was saved successfully!'));
 
-        return redirect()->back();
+        return redirect()->route('platform.farmers.edit', [
+            $model->id,
+        ]);
     }
 
     private function validateIfFarmerAccountExistsAlready(Farmer $farmer, Request $request): void

@@ -1,32 +1,32 @@
 <?php
 
-namespace App\Actions\User\BigBrother;
+namespace App\Actions\User\Admin;
 
-use App\Models\User\BigBrother\BigBrother;
+use App\Models\User\Admin\Admin;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
-class DeleteBigBrother
+class DeleteAdmin
 {
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(BigBrother $bigBrother): bool
+    public function handle(Admin $admin): bool
     {
-        $bigBrother->profile->delete();
+        $admin->profile->delete();
 
-        return $bigBrother->delete();
+        return $admin->delete();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $this->handle($model);
 
-        Toast::info(__('Big brother was removed successfully!'));
+        Toast::info(__('Administrator was removed successfully!'));
 
-        return redirect()->route('platform.big-brothers');
+        return redirect()->route('platform.admins');
     }
 }
