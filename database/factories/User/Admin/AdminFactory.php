@@ -23,9 +23,7 @@ class AdminFactory extends Factory
      */
     public function definition()
     {
-        $firstName = $this->faker->unique()->firstName();
-        $middleName = $this->faker->lastName();
-        $lastName = $this->faker->lastName();
+        $firstName = $this->faker->unique()->firstName;
         $randomNumber = $this->faker->numberBetween(1, 99);
         $username = strtolower("$firstName$randomNumber");
 
@@ -35,8 +33,8 @@ class AdminFactory extends Factory
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password'),
             'first_name' => $firstName,
-            'middle_name' => $middleName,
-            'last_name' => $lastName,
+            'middle_name' => $this->faker->lastName,
+            'last_name' => $this->faker->lastName,
             'profile_type' => Admin::PROFILE_PATH,
         ];
 
