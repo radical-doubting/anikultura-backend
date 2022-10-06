@@ -16,6 +16,8 @@ class DeleteBigBrother
 
     public function handle(BigBrother $bigBrother): bool
     {
+        $bigBrother->profile->delete();
+
         return $bigBrother->delete();
     }
 
