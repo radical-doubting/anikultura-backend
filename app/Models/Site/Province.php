@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
+use Illuminate\Database\Eloquent\Builder;
 
 /**
  * @property string $slug
@@ -63,5 +64,17 @@ class Province extends Model
                 'source' => 'name',
             ],
         ];
+    }
+
+    /**
+     * @param Builder $query
+     *
+     * @return Builder
+     */
+    public function scopeProvinceBelongToRegion(Builder $query, $regionId)
+    {
+        return $query->whereHas('region', function ($q) use ($regionId) {
+            $q->whereIn('id', [$regionId]);
+        });
     }
 }
