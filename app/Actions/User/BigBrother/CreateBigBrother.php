@@ -5,6 +5,7 @@ namespace App\Actions\User\BigBrother;
 use App\Actions\User\CreateUser;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
+use App\Models\User\Role;
 use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
@@ -56,6 +57,8 @@ class CreateBigBrother
             'profile_id' => $bigBrotherProfile->id,
             'profile_type' => BigBrother::PROFILE_PATH,
         ]);
+
+        $createdAccount->roles()->sync(Role::bigBrother());
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
