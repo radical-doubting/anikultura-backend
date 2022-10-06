@@ -2,6 +2,7 @@
 
 use App\Actions\User\Admin\CreateAdmin;
 use App\Models\User\Admin\Admin;
+use App\Models\User\Role;
 use Database\Seeders\User\RoleSeeder;
 use Illuminate\Support\Facades\Hash;
 use function Pest\Laravel\assertDatabaseCount;
@@ -67,5 +68,10 @@ it('adds an admin', function () {
     assertDatabaseCount('admin_profiles', 1);
     assertDatabaseHas('admin_profiles', [
         'age' => 31,
+    ]);
+
+    assertDatabaseHas('role_users', [
+        'user_id' => $createdAdmin->id,
+        'role_id' => Role::admin()->id,
     ]);
 });
