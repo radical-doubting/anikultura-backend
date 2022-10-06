@@ -72,9 +72,7 @@ class CreateAdmin
             'profile_type' => Admin::PROFILE_PATH,
         ]);
 
-        $createdAccount->roles()->sync(
-            Role::admin()->id
-        );
+        $createdAccount->roles()->sync(Role::admin());
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
