@@ -5,6 +5,7 @@ namespace App\Actions\User\Admin;
 use App\Actions\User\CreateUser;
 use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
+use App\Models\User\Role;
 use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
@@ -70,6 +71,10 @@ class CreateAdmin
             'profile_id' => $adminProfile->id,
             'profile_type' => Admin::PROFILE_PATH,
         ]);
+
+        $createdAccount->roles()->sync(
+            Role::admin()->id
+        );
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
