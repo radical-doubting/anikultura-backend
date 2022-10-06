@@ -3,6 +3,8 @@ name: Code coverage upload
 on:
   pull_request:
     branches: [master, staging]
+  push:
+    branches: [master, staging]
 
 jobs:
   coverage:
