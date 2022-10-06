@@ -23,9 +23,7 @@ class AdminSeeder extends Seeder
 
         $profiles = AdminProfile::all();
 
-        $adminRoleId = Role::where('slug', 'admin')
-            ->first()
-            ->id;
+        $adminRoleId = Role::admin()->id;
 
         Admin::factory()
             ->count(1)
@@ -33,8 +31,8 @@ class AdminSeeder extends Seeder
                 'profile_id' => $profiles->get($sequence->index),
             ])
             ->create()
-            ->each(function (Admin $admin) use ($adminRoleId) {
-                $admin->roles()->attach($adminRoleId);
-            });
+            ->each(
+                fn (Admin $admin) => $admin->roles()->attach($adminRoleId)
+            );
     }
 }

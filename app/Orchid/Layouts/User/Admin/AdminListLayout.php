@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Orchid\Layouts\User\BigBrother;
+namespace App\Orchid\Layouts\User\Admin;
 
-use App\Models\User\BigBrother\BigBrother;
+use App\Models\User\Admin\Admin;
 use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -10,9 +10,9 @@ use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\TD;
 
-class BigBrotherListLayout extends AnikulturaListLayout
+class AdminListLayout extends AnikulturaListLayout
 {
-    protected $target = 'big_brothers';
+    protected $target = 'admin';
 
     protected function columns(): iterable
     {
@@ -20,28 +20,28 @@ class BigBrotherListLayout extends AnikulturaListLayout
             TD::make('name', __('Name'))
                 ->sort()
                 ->cantHide()
-                ->render(function (BigBrother $bigBrother) {
-                    return new Persona($bigBrother->presenter());
+                ->render(function (Admin $admin) {
+                    return new Persona($admin->presenter());
                 }),
 
             TD::make(__('Actions'))
                 ->align(TD::ALIGN_CENTER)
                 ->cantHide()
                 ->width('100px')
-                ->render(function (BigBrother $bigBrother) {
+                ->render(function (Admin $admin) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.big-brothers.edit', [$bigBrother->id])
+                                ->route('platform.admins.edit', [$admin->id])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))
                                 ->icon('trash')
                                 ->method('remove')
-                                ->confirm(__('Once the big brother is deleted, all of its resources and data will be permanently deleted.'))
+                                ->confirm(__('Once the administrator is deleted, all of its resources and data will be permanently deleted.'))
                                 ->parameters([
-                                    'id' => $bigBrother->id,
+                                    'id' => $admin->id,
                                 ]),
                         ]);
                 }),

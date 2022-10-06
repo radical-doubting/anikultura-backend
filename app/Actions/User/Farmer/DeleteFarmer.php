@@ -17,6 +17,8 @@ class DeleteFarmer
 
     public function handle(Farmer $farmer): bool
     {
+        $farmer->profile->delete();
+
         return $farmer->delete();
     }
 

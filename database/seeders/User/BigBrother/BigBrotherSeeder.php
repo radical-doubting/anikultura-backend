@@ -23,9 +23,7 @@ class BigBrotherSeeder extends Seeder
 
         $profiles = BigBrotherProfile::all();
 
-        $bigBrotherRoleId = Role::where('slug', 'big-brother')
-            ->first()
-            ->id;
+        $bigBrotherRoleId = Role::bigBrother()->id;
 
         BigBrother::factory()
             ->count(10)
@@ -33,8 +31,10 @@ class BigBrotherSeeder extends Seeder
                 'profile_id' => $profiles->get($sequence->index),
             ])
             ->create()
-            ->each(function (BigBrother $bigBrother) use ($bigBrotherRoleId) {
-                $bigBrother->roles()->attach($bigBrotherRoleId);
-            });
+            ->each(
+                fn (BigBrother $bigBrother) => $bigBrother
+                    ->roles()
+                    ->attach($bigBrotherRoleId)
+            );
     }
 }
