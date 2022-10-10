@@ -45,6 +45,9 @@ class CreateBatch
         return [
             'batch.farmschool_name' => [
                 'required',
+                'alpha_dash',
+                'min:3',
+                'max:70',
             ],
             'batch.region_id' => [
                 'required',
