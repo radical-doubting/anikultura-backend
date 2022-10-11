@@ -28,7 +28,7 @@ class FarmerReport extends Model
         'seed_stage_id',
         'farmland_id',
         'crop_id',
-        'verified',
+        'status_id',
         'verified_by',
         'volume_kg',
         'photo_url',
@@ -97,6 +97,11 @@ class FarmerReport extends Model
     public function seedStage(): BelongsTo
     {
         return $this->belongsTo(SeedStage::class);
+    }
+
+    public function status(): BelongsTo
+    {
+        return $this->belongsTo(FarmerReportStatus::class);
     }
 
     public function isPlanted()
