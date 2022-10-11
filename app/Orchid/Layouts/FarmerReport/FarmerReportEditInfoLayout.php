@@ -22,6 +22,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
             ->fromModel(Farmland::class, 'name')
             ->displayAppend('fullName')
             ->required()
+            ->disabled()
             ->title(__('Farmland'))
             ->placeholder(__('Farmland'));
 
@@ -36,6 +37,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullName')
                 ->required()
+                ->disabled()
                 ->help(__('The farmer who submitted this farming report'))
                 ->title(__('Reported by'))
                 ->placeholder(__('Reported by')),
@@ -43,6 +45,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
             Relation::make('farmerReport.seed_stage_id')
                 ->fromModel(SeedStage::class, 'name')
                 ->required()
+                ->disabled()
                 ->title(__('Seed Stage'))
                 ->placeholder(__('Seed Stage')),
 
@@ -52,13 +55,14 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
                 Relation::make('farmerReport.crop_id')
                     ->fromModel(Crop::class, 'name')
                     ->required()
+                    ->disabled()
                     ->title(__('Crop'))
                     ->placeholder(__('Crop')),
             ]),
 
             Input::make('farmerReport.volume_kg')
                 ->type('number')
-                ->max(255)
+                ->disabled()
                 ->title($isHarvested ? __('Yield Volume (kg)') : '')
                 ->placeholder(__('Yield Volume (kg)'))
                 ->hidden(! $isHarvested),
