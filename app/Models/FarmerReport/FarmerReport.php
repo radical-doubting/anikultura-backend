@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Cache;
 use Orchid\Attachment\Models\Attachment;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property int $status_id
+ */
 class FarmerReport extends Model
 {
     use Filterable, HasFactory, Loggable;
@@ -104,7 +107,7 @@ class FarmerReport extends Model
         return $this->belongsTo(FarmerReportStatus::class);
     }
 
-    public function isPlanted()
+    public function isPlanted(): bool
     {
         $plantedId = (int) Cache::rememberForever('seed_stages:planted_id', function () {
             return $this->getSeedStageFromSlug('seeds-planted');
@@ -113,7 +116,7 @@ class FarmerReport extends Model
         return (int) $this->seed_stage_id === $plantedId;
     }
 
-    public function isHarvested()
+    public function isHarvested(): bool
     {
         $cropHarvestedId = (int) Cache::rememberForever('seed_stages:crops_harvested_id', function () {
             return $this->getSeedStageFromSlug('crops-harvested');
@@ -124,7 +127,7 @@ class FarmerReport extends Model
 
     public function isValid(): bool
     {
-        return $this->status_id === FarmerReportStatus::valid()->id;
+        return (int) $this->status_id === FarmerReportStatus::valid()->id;
     }
 
     private function getSeedStageFromSlug(string $slug)
