@@ -13,7 +13,6 @@ class CropEditGrowthLayout extends AnikulturaEditLayout
         return [
             Input::make('crop.yield_per_ha')
                 ->type('text')
-                ->max(255)
                 ->required()
                 ->title(__('Yield per Hectare (kg/ha)'))
                 ->placeholder(__('Yield per Hectare (kg/ha)')),
