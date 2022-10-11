@@ -13,9 +13,19 @@ class FarmerReportStatus extends Model
         'name',
     ];
 
+    public static function unverified(): FarmerReportStatus
+    {
+        return FarmerReportStatus::firstWhere('slug', 'unverified');
+    }
+
     public static function valid(): FarmerReportStatus
     {
         return FarmerReportStatus::firstWhere('slug', 'valid');
+    }
+
+    public static function invalid(): FarmerReportStatus
+    {
+        return FarmerReportStatus::firstWhere('slug', 'invalid');
     }
 
     /**
