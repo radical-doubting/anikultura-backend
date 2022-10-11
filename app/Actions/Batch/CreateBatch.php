@@ -45,22 +45,32 @@ class CreateBatch
         return [
             'batch.farmschool_name' => [
                 'required',
-                'alpha_dash',
+                'alpha_num_space_dash',
                 'min:3',
                 'max:70',
             ],
             'batch.region_id' => [
                 'required',
+                'integer',
+                'exists:regions,id',
             ],
             'batch.province_id' => [
                 'required',
+                'integer',
+                'exists:provinces,id',
             ],
             'batch.municity_id' => [
                 'required',
+                'integer',
+                'exists:municities,id',
             ],
             'batch.farmers' => [
                 'required',
                 'array',
+            ],
+            'batch.farmers.*' => [
+                'integer',
+                'exists:users,id',
             ],
         ];
     }
