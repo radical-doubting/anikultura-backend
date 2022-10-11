@@ -4,6 +4,8 @@ namespace App\Traits;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 trait AsOrchidAction
 {
@@ -42,7 +44,20 @@ trait AsOrchidAction
             return;
         }
 
+        if (config('app.debug')) {
+            $this->debugValidation($request, $rules);
+        }
+
         $request->validate($rules);
+    }
+
+    private function debugValidation(Request $request, array $rules)
+    {
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            Log::error($validator->failed());
+        }
     }
 
     /**
