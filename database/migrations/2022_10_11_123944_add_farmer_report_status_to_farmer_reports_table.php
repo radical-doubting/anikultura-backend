@@ -18,7 +18,12 @@ return new class extends Migration
         });
 
         Schema::table('farmer_reports', function (Blueprint $table) {
-            $table->unsignedBigInteger('status_id');
+            $statusColumn = $table->unsignedBigInteger('status_id');
+
+            if (config('database.default') === 'sqlite') {
+                $statusColumn->nullable();
+            }
+
             $table->foreign('status_id')
                 ->references('id')
                 ->on('farmer_report_statuses')
