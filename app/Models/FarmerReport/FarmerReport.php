@@ -122,6 +122,11 @@ class FarmerReport extends Model
         return (int) $this->seed_stage_id === $cropHarvestedId;
     }
 
+    public function isValid(): bool
+    {
+        return $this->status_id === FarmerReportStatus::valid()->id;
+    }
+
     private function getSeedStageFromSlug(string $slug)
     {
         return SeedStage::where('slug', $slug)

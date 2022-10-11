@@ -13,6 +13,11 @@ class FarmerReportStatus extends Model
         'name',
     ];
 
+    public static function valid(): FarmerReportStatus
+    {
+        return FarmerReportStatus::firstWhere('slug', 'valid');
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *
