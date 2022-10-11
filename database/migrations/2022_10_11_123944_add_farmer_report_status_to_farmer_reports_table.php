@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::table('farmer_reports', function (Blueprint $table) {
             $table->dropColumn('verified');
+        });
 
+        Schema::table('farmer_reports', function (Blueprint $table) {
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')
                 ->references('id')
@@ -35,7 +37,9 @@ return new class extends Migration
         Schema::table('farmer_reports', function (Blueprint $table) {
             $table->dropColumn('status_id');
             $table->dropForeign('status_id');
+        });
 
+        Schema::table('farmer_reports', function (Blueprint $table) {
             $table->boolean('verified')
                 ->default(false);
         });
