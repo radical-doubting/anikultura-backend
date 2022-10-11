@@ -37,9 +37,14 @@ class CreateProvince
         return [
             'province.name' => [
                 'required',
+                'alpha_num_space_dash',
+                'min:3',
+                'max:70',
             ],
             'province.region_id' => [
                 'required',
+                'integer',
+                'exists:regions,id',
             ],
         ];
     }
