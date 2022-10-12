@@ -56,7 +56,7 @@ class MunicityEditScreen extends AnikulturaEditScreen
     }
 
     public function save(Municity $municity, Request $request): RedirectResponse
-    {   
+    {
         return CreateMunicity::runOrchidAction($municity, $request);
     }
 }

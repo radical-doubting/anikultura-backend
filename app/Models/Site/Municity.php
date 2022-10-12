@@ -81,7 +81,7 @@ class Municity extends Model
     public function regionBelongToProvince($province_id)
     {
         $this->province_id = $province_id;
-        
+
         $regionIdinJSON = Region::whereHas('province', function ($query) {
             $query->where('id', '=', $this->province_id);
         })->get('id');

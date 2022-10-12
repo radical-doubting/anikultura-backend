@@ -30,7 +30,7 @@ class CreateMunicity
         $municityData['region_id'] = $data;
 
         $this->handle($model, $municityData);
-        
+
         Toast::info(__('Municipality or city was saved successfully!'));
 
         return redirect()->route('platform.sites.municities');
