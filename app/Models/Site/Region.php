@@ -7,6 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
+use App\Models\Site\Province;
 
 /**
  * @property string $slug
@@ -46,6 +47,17 @@ class Region extends Model
         'created_at',
     ];
 
+    /**
+     * Get the province in regions.
+     */
+    public function province()
+    {
+        return $this->hasMany(Province::class);
+    }
+
+    /**
+     * Get full name of regions.
+     */
     public function getFullNameAttribute()
     {
         return "{$this->short_name} - {$this->name}";

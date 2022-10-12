@@ -74,4 +74,20 @@ class Municity extends Model
             ],
         ];
     }
+
+    /**
+     * Get the region that owns the municity province
+     */
+    public function regionBelongToProvince($province_id)
+    {
+        $this->province_id = $province_id;
+        
+        $regionIdinJSON = Region::whereHas('province', function ($query) {
+            $query->where('id', '=', $this->province_id);
+        })->get('id');
+
+        $regionId = json_decode($regionIdinJSON, true);
+
+        return $regionId[0]['id'];
+    }
 }

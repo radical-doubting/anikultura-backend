@@ -5,7 +5,7 @@ namespace App\Orchid\Screens\Site\Municity;
 use App\Actions\Site\Municity\CreateMunicity;
 use App\Actions\Site\Municity\DeleteMunicity;
 use App\Models\Site\Municity;
-use App\Orchid\Layouts\Site\Municity\MunicityListenerLayout;
+use App\Orchid\Layouts\Site\Municity\MunicityEditLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -34,35 +34,29 @@ class MunicityEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Municity $municity): RedirectResponse
-    {
-        return DeleteMunicity::runOrchidAction($municity, null);
-    }
-
-    public function save(Municity $municity, Request $request): RedirectResponse
-    {
-        return CreateMunicity::runOrchidAction($municity, $request);
-    }
-
-    public function asyncGetRegionId(int $regionId = null)
-    {
-        return [
-            'regionId' => $regionId,
-        ];
-    }
-
     public function layout(): iterable
     {
         return [
-            Layout::block(MunicityListenerLayout::class)
+            Layout::block(MunicityEditLayout::class)
                 ->title(__('Municipality or City Information'))
                 ->description(__('Update the municipality or city\'s details.'))
                 ->commands(
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
                         ->icon('check')
+                        ->canSee($this->exists())
                         ->method('save')
                 ),
         ];
+    }
+
+    public function remove(Municity $municity): RedirectResponse
+    {
+        return DeleteMunicity::runOrchidAction($municity, null);
+    }
+
+    public function save(Municity $municity, Request $request): RedirectResponse
+    {   
+        return CreateMunicity::runOrchidAction($municity, $request);
     }
 }
