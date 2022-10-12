@@ -7,6 +7,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
+use App\Models\Site\Province;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property string $slug
@@ -49,7 +51,7 @@ class Region extends Model
     /**
      * Get the province in regions.
      */
-    public function province()
+    public function provinces(): HasMany
     {
         return $this->hasMany(Province::class);
     }
