@@ -6,9 +6,8 @@ use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Orchid\Filters\Filterable;
-use App\Models\Site\Province;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Orchid\Filters\Filterable;
 
 /**
  * @property string $slug
