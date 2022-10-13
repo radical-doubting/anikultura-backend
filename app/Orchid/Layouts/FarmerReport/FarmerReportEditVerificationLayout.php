@@ -16,7 +16,6 @@ class FarmerReportEditVerificationLayout extends AnikulturaEditLayout
             Select::make('farmerReport.status_id')
                 ->fromModel(FarmerReportStatus::class, 'name')
                 ->title(__('Verification Status'))
-                ->placeholder(__('This farmer report is considered as valid'))
                 ->required(),
 
             Relation::make('farmerReport.verified_by')
