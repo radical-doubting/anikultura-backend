@@ -79,7 +79,7 @@ it('creates an admin from the create screen', function () {
         ->method('save', [
             'admin' => [
                 ...$adminData,
-                'password' => 'password',
+                'password' => 'SuperSecurePassword1!',
                 'permissions' => $permissions,
             ],
             'adminProfile' => $adminProfileData,

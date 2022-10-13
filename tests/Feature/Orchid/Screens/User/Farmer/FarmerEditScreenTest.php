@@ -119,7 +119,7 @@ it('creates a farmer from the create screen', function () {
         ->method('save', [
             'farmer' => [
                 ...$farmerData,
-                'password' => 'password',
+                'password' => 'SuperSecurePassword1!',
             ],
             'farmerProfile' => $farmerProfileData,
             'farmerAddress' => $farmerAddressData,

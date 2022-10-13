@@ -72,7 +72,7 @@ it('creates a big brother from the create screen', function () {
         ->method('save', [
             'bigBrother' => [
                 ...$bigBrotherData,
-                'password' => 'password',
+                'password' => 'SuperSecurePassword1!',
             ],
             'bigBrotherProfile' => $bigBrotherProfileData,
         ])
