@@ -100,6 +100,10 @@ class CreateBigBrother
             'bigBrotherProfile.organization_name' => [
                 'required',
             ],
+            'bigBrother.password' => [
+                'nullable',
+                PasswordRuleHelper::getRule(),
+            ],
         ];
     }
 }
