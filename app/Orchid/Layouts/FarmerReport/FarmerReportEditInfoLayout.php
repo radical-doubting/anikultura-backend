@@ -17,27 +17,28 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
     {
         $currentReport = $this->query->get('farmerReport');
         $isHarvested = false;
+        $isEditScreen = $currentReport->exists;
 
         $farmlandRelationField = Relation::make('farmerReport.farmland_id')
             ->fromModel(Farmland::class, 'name')
             ->displayAppend('fullName')
             ->required()
-            ->disabled()
+            ->disabled($isEditScreen)
             ->title(__('Farmland'))
             ->placeholder(__('Farmland'));
 
-        if ($currentReport->exists) {
+        if ($isEditScreen) {
             $isHarvested = $currentReport->isHarvested();
             $farmlandRelationField->applyScope('farmerBelongToFarmland', $currentReport->farmer->id);
         }
 
-        return [
+        $fields = [
             Relation::make('farmerReport.reported_by')
                 ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullName')
                 ->required()
-                ->disabled()
+                ->disabled($isEditScreen)
                 ->help(__('The farmer who submitted this farming report'))
                 ->title(__('Reported by'))
                 ->placeholder(__('Reported by')),
@@ -45,7 +46,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
             Relation::make('farmerReport.seed_stage_id')
                 ->fromModel(SeedStage::class, 'name')
                 ->required()
-                ->disabled()
+                ->disabled($isEditScreen)
                 ->title(__('Seed Stage'))
                 ->placeholder(__('Seed Stage')),
 
@@ -55,17 +56,52 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
                 Relation::make('farmerReport.crop_id')
                     ->fromModel(Crop::class, 'name')
                     ->required()
-                    ->disabled()
+                    ->disabled($isEditScreen)
                     ->title(__('Crop'))
                     ->placeholder(__('Crop')),
             ]),
 
             Input::make('farmerReport.volume_kg')
                 ->type('number')
-                ->disabled()
-                ->title($isHarvested ? __('Yield Volume (kg)') : '')
+                ->canSee($isHarvested)
+                ->disabled($isEditScreen)
+                ->title(__('Yield Volume (kg)'))
                 ->placeholder(__('Yield Volume (kg)'))
                 ->hidden(! $isHarvested),
+        ];
+
+        if ($currentReport->exists) {
+            array_push(
+                $fields,
+                Group::make($this->getHiddenFields())
+            );
+        }
+
+        return $fields;
+    }
+
+    private function getHiddenFields(): array
+    {
+        return [
+            Input::make('farmerReport.reported_by')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.seed_stage_id')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.farmland_id')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.crop_id')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.volume_kg')
+                ->type('hidden')
+                ->style('display: none;'),
         ];
     }
 }
