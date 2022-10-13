@@ -10,6 +10,7 @@ use App\Models\User\Farmer\FarmerProfile;
 use App\Orchid\Layouts\User\Farmer\FarmerEditAccountLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditAddressLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditJobEducationLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerEditPasswordLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditPersonalLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditSalaryLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
@@ -58,6 +59,16 @@ class FarmerEditScreen extends AnikulturaEditScreen
                 Layout::block(FarmerEditAccountLayout::class)
                     ->title(__('Account Information'))
                     ->description(__("This information collects farmer's account information."))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+
+                Layout::block(FarmerEditPasswordLayout::class)
+                    ->title(__('Password'))
+                    ->description(__('Ensure the account is using a long, random password to stay secure.'))
                     ->commands(
                         Button::make(__('Save'))
                             ->type(Color::DEFAULT())

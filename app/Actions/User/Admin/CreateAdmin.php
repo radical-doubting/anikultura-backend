@@ -3,6 +3,7 @@
 namespace App\Actions\User\Admin;
 
 use App\Actions\User\CreateUser;
+use App\Helpers\PasswordRuleHelper;
 use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
 use App\Models\User\Role;
@@ -89,7 +90,7 @@ class CreateAdmin
         return redirect()->route('platform.admins');
     }
 
-    private function validateIfAdminAccountExistsAlready($admin, Request $request)
+    private function validateIfAdminAccountExistsAlready(Admin $admin, Request $request): void
     {
         $userNameShouldBeUnique = Rule::unique(Admin::class, 'name')->ignore($admin);
         $emailShouldBeUnique = Rule::unique(Admin::class, 'email')->ignore($admin);
@@ -100,6 +101,7 @@ class CreateAdmin
                 $userNameShouldBeUnique,
             ],
             'admin.email' => [
+                'email',
                 $emailShouldBeUnique,
             ],
         ]);
@@ -113,6 +115,10 @@ class CreateAdmin
             ],
             'admin.permissions' => [
                 'required',
+            ],
+            'admin.password' => [
+                'nullable',
+                PasswordRuleHelper::getRule(),
             ],
         ];
     }

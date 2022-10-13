@@ -22,10 +22,15 @@ class FarmerEditSalaryLayout extends AnikulturaEditLayout
                     ->required(),
 
                 Input::make('farmerProfile.estimated_salary')
+                    ->required()
                     ->title('Estimated Salary')
-                    ->type('number')
-                    ->placeholder(__('PHP'))
-                    ->required(),
+                    ->mask([
+                        'alias' => 'currency',
+                        'prefix' => 'PHP ',
+                        'groupSeparator' => ',',
+                        'digitsOptional' => false,
+                        'removeMaskOnSubmit' => true,
+                    ]),
             ]),
 
             Select::make('farmerProfile.social_status_id')

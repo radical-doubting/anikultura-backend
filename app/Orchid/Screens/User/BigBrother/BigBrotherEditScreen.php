@@ -7,6 +7,7 @@ use App\Actions\User\BigBrother\DeleteBigBrother;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Orchid\Layouts\User\BigBrother\BigBrotherEditAccountLayout;
+use App\Orchid\Layouts\User\BigBrother\BigBrotherEditPasswordLayout;
 use App\Orchid\Layouts\User\BigBrother\BigBrotherEditProfileLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
@@ -46,6 +47,16 @@ class BigBrotherEditScreen extends AnikulturaEditScreen
                 Layout::block(BigBrotherEditAccountLayout::class)
                     ->title(__('Account Information'))
                     ->description(__('This information collects big brother\'s account information.'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+
+                Layout::block(BigBrotherEditPasswordLayout::class)
+                    ->title(__('Password'))
+                    ->description(__('Ensure the account is using a long, random password to stay secure.'))
                     ->commands(
                         Button::make(__('Save'))
                             ->type(Color::DEFAULT())

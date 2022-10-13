@@ -41,9 +41,14 @@ class CreateMunicity
         return [
             'municity.name' => [
                 'required',
+                'alpha_num_space_dash',
+                'min:3',
+                'max:70',
             ],
             'municity.province_id' => [
                 'required',
+                'integer',
+                'exists:provinces,id',
             ],
         ];
     }

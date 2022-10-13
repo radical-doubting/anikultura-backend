@@ -3,6 +3,7 @@
 namespace App\Actions\User\BigBrother;
 
 use App\Actions\User\CreateUser;
+use App\Helpers\PasswordRuleHelper;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Models\User\Role;
@@ -75,7 +76,7 @@ class CreateBigBrother
         return redirect()->route('platform.big-brothers');
     }
 
-    private function validateIfBigBrotherAccountExistsAlready($bigBrother, Request $request)
+    private function validateIfBigBrotherAccountExistsAlready(BigBrother $bigBrother, Request $request): void
     {
         $userNameShouldBeUnique = Rule::unique(BigBrother::class, 'name')->ignore($bigBrother);
         $emailShouldBeUnique = Rule::unique(BigBrother::class, 'email')->ignore($bigBrother);
@@ -86,6 +87,7 @@ class CreateBigBrother
                 $userNameShouldBeUnique,
             ],
             'bigBrother.email' => [
+                'email',
                 $emailShouldBeUnique,
             ],
         ]);
@@ -99,6 +101,10 @@ class CreateBigBrother
             ],
             'bigBrotherProfile.organization_name' => [
                 'required',
+            ],
+            'bigBrother.password' => [
+                'nullable',
+                PasswordRuleHelper::getRule(),
             ],
         ];
     }

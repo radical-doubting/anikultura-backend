@@ -12,7 +12,6 @@ class BatchEditLayout extends AnikulturaEditLayout
         return [
             Input::make('batch.farmschool_name')
                 ->type('text')
-                ->max(255)
                 ->required()
                 ->title(__('Farmschool Name'))
                 ->placeholder(__('Farmschool Name')),

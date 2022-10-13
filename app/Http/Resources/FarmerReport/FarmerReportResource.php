@@ -14,10 +14,12 @@ class FarmerReportResource extends JsonResource
 {
     public function toArray($request)
     {
+        $isValid = $this->isValid();
+
         return [
             'id' => $this->id,
-            'isVerified' => $this->verified,
-            $this->mergeWhen($this->verified, [
+            'isVerified' => $isValid,
+            $this->mergeWhen($isValid, [
                 'verifier' => new BigBrotherResource($this->verifier),
             ]),
             $this->mergeWhen($this->isHarvested(), [

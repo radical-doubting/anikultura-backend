@@ -18,14 +18,12 @@ class CropEditBasicLayout extends AnikulturaEditLayout
 
             Input::make('crop.group')
                 ->type('text')
-                ->max(255)
                 ->required()
                 ->title(__('Crop Group'))
                 ->placeholder(__('Group')),
 
             Input::make('crop.variety')
                 ->type('text')
-                ->max(255)
                 ->required()
                 ->title(__('Crop Variety'))
                 ->placeholder(__('Variety')),

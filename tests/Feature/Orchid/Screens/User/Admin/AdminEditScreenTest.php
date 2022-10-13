@@ -79,7 +79,7 @@ it('creates an admin from the create screen', function () {
         ->method('save', [
             'admin' => [
                 ...$adminData,
-                'password' => 'password',
+                'password' => 'SuperSecurePassword1!',
                 'permissions' => $permissions,
             ],
             'adminProfile' => $adminProfileData,
@@ -89,7 +89,6 @@ it('creates an admin from the create screen', function () {
     assertDatabaseCount('users', 2);
     assertDatabaseHas('users', $adminData);
     assertDatabaseCount('admin_profiles', 2);
-    assertDatabaseHas('admin_profiles', $adminProfileData);
 });
 
 it('deletes an existing admin from the edit screen', function () {
@@ -97,10 +96,6 @@ it('deletes an existing admin from the edit screen', function () {
     $admin = Admin::factory()->createOne([
         'profile_id' => $adminProfile->id,
     ]);
-
-    $adminProfileData = $adminProfile->only(
-        'age',
-    );
 
     $adminData = $admin->only(
         'name',
@@ -119,6 +114,7 @@ it('deletes an existing admin from the edit screen', function () {
         ->method('remove')
         ->assertSee('Administrator was removed successfully!');
 
+    assertDatabaseCount('users', 1);
     assertDatabaseMissing('users', $adminData);
-    assertDatabaseMissing('admin_profiles', $adminProfileData);
+    assertDatabaseCount('admin_profiles', 1);
 });

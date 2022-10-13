@@ -37,9 +37,15 @@ class CreateRegion
         return [
             'region.name' => [
                 'required',
+                'alpha_num_space_dash',
+                'min:3',
+                'max:70',
             ],
             'region.short_name' => [
                 'required',
+                'alpha_num_space_dash',
+                'min:3',
+                'max:10',
             ],
         ];
     }

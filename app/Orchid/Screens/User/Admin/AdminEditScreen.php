@@ -7,8 +7,8 @@ use App\Actions\User\Admin\DeleteAdmin;
 use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
 use App\Orchid\Layouts\User\Admin\AdminEditAccountLayout;
+use App\Orchid\Layouts\User\Admin\AdminEditPasswordLayout;
 use App\Orchid\Layouts\User\Admin\AdminEditProfileLayout;
-use App\Orchid\Layouts\User\Admin\AdminPasswordLayout;
 use App\Orchid\Layouts\User\Admin\AdminRolePermissionLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
@@ -58,7 +58,7 @@ class AdminEditScreen extends AnikulturaEditScreen
                             ->method('save')
                     ),
 
-                Layout::block(AdminPasswordLayout::class)
+                Layout::block(AdminEditPasswordLayout::class)
                     ->title(__('Password'))
                     ->description(__('Ensure the account is using a long, random password to stay secure.'))
                     ->commands(

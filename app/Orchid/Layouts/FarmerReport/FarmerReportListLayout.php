@@ -18,29 +18,29 @@ class FarmerReportListLayout extends AnikulturaListLayout
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->farmer->fullName)
-                        ->route('platform.farmer-reports.edit', [$farmer_report->id]);
+                ->render(function (FarmerReport $farmerReport) {
+                    return Link::make($farmerReport->farmer->fullName)
+                        ->route('platform.farmer-reports.edit', [$farmerReport->id]);
                 }),
             TD::make('seed_stage', __('Seed Stage'))
                 ->sort()
                 ->cantHide()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->seedStage->name)
-                        ->route('platform.farmer-reports.edit', [$farmer_report->id]);
+                ->render(function (FarmerReport $farmerReport) {
+                    return Link::make($farmerReport->seedStage->name)
+                        ->route('platform.farmer-reports.edit', [$farmerReport->id]);
                 }),
             TD::make('crop', __('Crop'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
-                ->render(function (FarmerReport $farmer_report) {
-                    return Link::make($farmer_report->crop->name)
-                        ->route('platform.farmer-reports.edit', [$farmer_report->id]);
+                ->render(function (FarmerReport $farmerReport) {
+                    return Link::make($farmerReport->crop->name)
+                        ->route('platform.farmer-reports.edit', [$farmerReport->id]);
                 }),
             TD::make('created_at', __('Reported at'))
                 ->sort()
-                ->render(function (FarmerReport $farmer_report) {
-                    return $farmer_report->created_at->toDateTimeString();
+                ->render(function (FarmerReport $farmerReport) {
+                    return $farmerReport->created_at->toDateTimeString();
                 }),
         ];
     }

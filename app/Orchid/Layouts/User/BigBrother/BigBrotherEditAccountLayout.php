@@ -5,19 +5,11 @@ namespace App\Orchid\Layouts\User\BigBrother;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Password;
 
 class BigBrotherEditAccountLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
-        $bigBrother = $this->query->get('bigBrother');
-        $hasbigBrother = is_null($bigBrother) ? false : $bigBrother->exists;
-
-        $passwordPlaceholder = $hasbigBrother
-            ? __('Leave empty to keep current password')
-            : __('Enter the password to be set');
-
         return [
             Group::make([
                 Input::make('bigBrother.first_name')
@@ -40,11 +32,6 @@ class BigBrotherEditAccountLayout extends AnikulturaEditLayout
                     ->title(__('Username'))
                     ->placeholder(__('Username'))
                     ->required(),
-
-                Password::make('bigBrother.password')
-                    ->title(__('Password'))
-                    ->placeholder($passwordPlaceholder)
-                    ->required(! $hasbigBrother),
             ]),
 
             Group::make([
