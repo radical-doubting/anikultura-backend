@@ -90,7 +90,7 @@ class CreateAdmin
         return redirect()->route('platform.admins');
     }
 
-    private function validateIfAdminAccountExistsAlready($admin, Request $request)
+    private function validateIfAdminAccountExistsAlready(Admin $admin, Request $request): void
     {
         $userNameShouldBeUnique = Rule::unique(Admin::class, 'name')->ignore($admin);
         $emailShouldBeUnique = Rule::unique(Admin::class, 'email')->ignore($admin);
@@ -101,6 +101,7 @@ class CreateAdmin
                 $userNameShouldBeUnique,
             ],
             'admin.email' => [
+                'email',
                 $emailShouldBeUnique,
             ],
         ]);

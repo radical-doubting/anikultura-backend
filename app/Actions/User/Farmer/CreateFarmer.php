@@ -106,6 +106,7 @@ class CreateFarmer
                 $userNameShouldBeUnique,
             ],
             'farmer.email' => [
+                'email',
                 $emailShouldBeUnique,
             ],
         ]);

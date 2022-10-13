@@ -76,7 +76,7 @@ class CreateBigBrother
         return redirect()->route('platform.big-brothers');
     }
 
-    private function validateIfBigBrotherAccountExistsAlready($bigBrother, Request $request)
+    private function validateIfBigBrotherAccountExistsAlready(BigBrother $bigBrother, Request $request): void
     {
         $userNameShouldBeUnique = Rule::unique(BigBrother::class, 'name')->ignore($bigBrother);
         $emailShouldBeUnique = Rule::unique(BigBrother::class, 'email')->ignore($bigBrother);
@@ -87,6 +87,7 @@ class CreateBigBrother
                 $userNameShouldBeUnique,
             ],
             'bigBrother.email' => [
+                'email',
                 $emailShouldBeUnique,
             ],
         ]);
