@@ -81,7 +81,6 @@ it('creates a big brother from the create screen', function () {
     assertDatabaseCount('users', 2);
     assertDatabaseHas('users', $bigBrotherData);
     assertDatabaseCount('big_brother_profiles', 1);
-    assertDatabaseHas('big_brother_profiles', $bigBrotherProfileData);
 });
 
 it('deletes an existing big brother from the edit screen', function () {
@@ -89,11 +88,6 @@ it('deletes an existing big brother from the edit screen', function () {
     $bigBrother = BigBrother::factory()->createOne([
         'profile_id' => $bigBrotherProfile->id,
     ]);
-
-    $bigBrotherProfileData = $bigBrotherProfile->only(
-        'age',
-        'organization_name',
-    );
 
     $bigBrotherData = $bigBrother->only(
         'name',
@@ -112,6 +106,7 @@ it('deletes an existing big brother from the edit screen', function () {
         ->method('remove')
         ->assertSee('Big brother was removed successfully!');
 
+    assertDatabaseCount('users', 1);
     assertDatabaseMissing('users', $bigBrotherData);
-    assertDatabaseMissing('big_brother_profiles', $bigBrotherProfileData);
+    assertDatabaseCount('big_brother_profiles', 0);
 });
