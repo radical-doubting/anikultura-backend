@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         // Match alphanumeric, dashes, and numbers
         Validator::extend(
             'alpha_num_space_dash',
-            fn ($attribute, $value) => preg_match('/^[\pL\s\d-]+$/u', $value)
+            fn ($attribute, $value) => preg_match('/^[\pL\s\d\'-]+$/u', $value)
         );
     }
 }
