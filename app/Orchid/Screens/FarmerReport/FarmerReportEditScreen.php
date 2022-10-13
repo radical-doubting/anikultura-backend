@@ -44,9 +44,6 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
                 Layout::block(FarmerReportEditInfoLayout::class)
                     ->title(__('Report Information'))
                     ->description(__('Update the report information')),
-                Layout::block(FarmerReportEditAttachmentLayout::class)
-                    ->title(__('Attachment Information'))
-                    ->description(__('View the report attachments')),
                 Layout::block(FarmerReportEditVerificationLayout::class)
                     ->title(__('Verification'))
                     ->description(__('Update the report verification status'))
@@ -57,6 +54,11 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
                             ->canSee($this->exists())
                             ->method('save')
                     ),
+            ],
+            __('Attachment Information') => [
+                Layout::block(FarmerReportEditAttachmentLayout::class)
+                    ->title(__('Attachment Information'))
+                    ->description(__('View the report attachments')),
             ],
             __('Estimation Information') => [
                 Layout::block(FarmerReportEditEstimationLayout::class)
