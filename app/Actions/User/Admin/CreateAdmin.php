@@ -3,6 +3,7 @@
 namespace App\Actions\User\Admin;
 
 use App\Actions\User\CreateUser;
+use App\Helpers\PasswordRuleHelper;
 use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
 use App\Models\User\Role;
@@ -113,6 +114,10 @@ class CreateAdmin
             ],
             'admin.permissions' => [
                 'required',
+            ],
+            'admin.password' => [
+                'nullable',
+                PasswordRuleHelper::getRule(),
             ],
         ];
     }
