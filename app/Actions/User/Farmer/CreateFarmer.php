@@ -3,6 +3,7 @@
 namespace App\Actions\User\Farmer;
 
 use App\Actions\User\CreateUser;
+use App\Helpers\PasswordRuleHelper;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;
@@ -260,6 +261,11 @@ class CreateFarmer
                 'required',
                 'integer',
                 'exists:regions,id',
+            ],
+
+            'farmer.password' => [
+                'nullable',
+                PasswordRuleHelper::getRule(),
             ],
         ];
     }
