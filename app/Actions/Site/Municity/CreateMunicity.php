@@ -25,6 +25,10 @@ class CreateMunicity
     {
         $municityData = $request->get('municity');
 
+        $data = $model->regionBelongToProvince($municityData['province_id']);
+
+        $municityData['region_id'] = $data;
+
         $this->handle($model, $municityData);
 
         Toast::info(__('Municipality or city was saved successfully!'));
@@ -45,11 +49,6 @@ class CreateMunicity
                 'required',
                 'integer',
                 'exists:provinces,id',
-            ],
-            'municity.region_id' => [
-                'required',
-                'integer',
-                'exists:regions,id',
             ],
         ];
     }
