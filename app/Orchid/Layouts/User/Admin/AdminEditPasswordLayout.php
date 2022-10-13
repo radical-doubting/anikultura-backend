@@ -7,7 +7,7 @@ namespace App\Orchid\Layouts\User\Admin;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Password;
 
-class AdminPasswordLayout extends AnikulturaEditLayout
+class AdminEditPasswordLayout extends AnikulturaEditLayout
 {
     public function fields(): iterable
     {
