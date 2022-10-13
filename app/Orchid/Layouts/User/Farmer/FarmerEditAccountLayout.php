@@ -5,19 +5,11 @@ namespace App\Orchid\Layouts\User\Farmer;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Password;
 
 class FarmerEditAccountLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
-        $farmer = $this->query->get('farmer');
-        $hasFarmer = is_null($farmer) ? false : $farmer->exists;
-
-        $passwordPlaceholder = $hasFarmer
-            ? __('Leave empty to keep current password')
-            : __('Enter the password to be set');
-
         return [
             Group::make([
                 Input::make('farmer.first_name')
@@ -40,11 +32,6 @@ class FarmerEditAccountLayout extends AnikulturaEditLayout
                     ->title(__('Username'))
                     ->placeholder(__('Username'))
                     ->required(),
-
-                Password::make('farmer.password')
-                    ->title(__('Password'))
-                    ->placeholder($passwordPlaceholder)
-                    ->required(! $hasFarmer),
             ]),
 
             Group::make([
