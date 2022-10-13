@@ -44,16 +44,14 @@ it('shows an existing municipality or city from the edit screen', function () {
         ->assertSee('Remove')
         ->assertSee('Save')
         ->assertSee($municity->name)
-        ->assertSee($municity->province->name)
-        ->assertSee($municity->region->name);
+        ->assertSee($municity->province->name);
 });
 
 it('creates a municipality or city from the create screen', function () {
     $municity = Municity::factory()->makeOne();
     $municityData = $municity->only(
         'name',
-        'province_id',
-        'region_id'
+        'province_id'
     );
 
     $screen = screen('platform.sites.municities.create')
