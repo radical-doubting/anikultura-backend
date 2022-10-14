@@ -54,9 +54,16 @@ class Farmland extends Model
         'hectares_size' => 'float',
     ];
 
-    public function getFullNameAttribute()
+    public function getFullNameAttribute(): string
     {
-        return "{$this->name} - {$this->batch->farmschool_name}";
+        $batch = $this->batch;
+        $farmlandSchoolName = __('No batch');
+
+        if (! is_null($batch)) {
+            $farmlandSchoolName = $batch->farmschool_name;
+        }
+
+        return "{$this->name} - {$farmlandSchoolName}";
     }
 
     public function scopeFarmerBelongToFarmland(Builder $query, $farmerId)
