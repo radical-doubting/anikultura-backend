@@ -59,7 +59,8 @@ class BatchEditScreen extends AnikulturaEditScreen
                     ->description(__('The assigned site location of this batch')),
                 Layout::block(BatchEditFarmlandLayout::class)
                     ->title(__('Batch Farmlands'))
-                    ->description(__('The farmlands who belong to this batch')),
+                    ->description(__('The farmlands who belong to this batch'))
+                    ->canSee($this->exists()),
                 Layout::block(BatchEditFarmersLayout::class)
                     ->title(__('Batch Farmers'))
                     ->description(__('The farmers who belong to this batch'))
