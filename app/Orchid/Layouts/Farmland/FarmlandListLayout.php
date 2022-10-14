@@ -27,7 +27,14 @@ class FarmlandListLayout extends AnikulturaListLayout
 
             TD::make('batch_id', __('Batch'))
                 ->render(function (Farmland $farmland) {
-                    return Link::make($farmland->batch->farmschool_name)
+                    $batch = $farmland->batch;
+                    $farmlandSchoolName = __('No batch');
+
+                    if (! is_null($batch)) {
+                        $farmlandSchoolName = $batch->farmschool_name;
+                    }
+
+                    return Link::make($farmlandSchoolName)
                         ->route('platform.farmlands.edit', [$farmland->id]);
                 }),
 
