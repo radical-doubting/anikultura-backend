@@ -42,7 +42,6 @@ class FarmlandEditBasicLayout extends AnikulturaEditLayout
             ]),
 
             Input::make('farmland.hectares_size')
-                ->type('number')
                 ->required()
                 ->title(__('Size (ha)'))
                 ->placeholder(__('Size in hectares')),
