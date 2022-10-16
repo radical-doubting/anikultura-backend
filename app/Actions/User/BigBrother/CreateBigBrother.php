@@ -84,6 +84,7 @@ class CreateBigBrother
         $request->validate([
             'bigBrother.name' => [
                 'required',
+                'alpha_num',
                 $userNameShouldBeUnique,
             ],
             'bigBrother.email' => [

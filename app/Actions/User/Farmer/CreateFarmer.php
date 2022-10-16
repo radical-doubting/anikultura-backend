@@ -103,6 +103,7 @@ class CreateFarmer
         $request->validate([
             'farmer.name' => [
                 'required',
+                'alpha_num',
                 $userNameShouldBeUnique,
             ],
             'farmer.email' => [

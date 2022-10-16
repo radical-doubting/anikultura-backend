@@ -92,6 +92,7 @@ class UserProfileScreen extends Screen
         $request->validate([
             'user.name' => [
                 'required',
+                'alpha_num',
             ],
             'user.email' => [
                 'required',

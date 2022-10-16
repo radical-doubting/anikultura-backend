@@ -98,6 +98,7 @@ class CreateAdmin
         $request->validate([
             'admin.name' => [
                 'required',
+                'alpha_num',
                 $userNameShouldBeUnique,
             ],
             'admin.email' => [
