@@ -110,7 +110,7 @@ class UserProfileScreen extends Screen
     public function changePassword(Request $request): void
     {
         $request->validate([
-            'old_password' => 'required|password:web',
+            'old_password' => 'required|current_password:web',
             'password' => 'required|confirmed',
         ]);
 
