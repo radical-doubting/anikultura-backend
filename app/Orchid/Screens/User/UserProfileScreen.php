@@ -4,20 +4,17 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
-use App\Helpers\PasswordRuleHelper;
+use App\Actions\User\ChangePassword;
+use App\Actions\User\EditUserProfile;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
 use App\Orchid\Layouts\User\ProfileUserEditLayout;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use Orchid\Platform\Models\User;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class UserProfileScreen extends Screen
 {
@@ -86,55 +83,13 @@ class UserProfileScreen extends Screen
         ];
     }
 
-    /**
-     * @param  Request  $request
-     */
     public function save(Request $request): RedirectResponse
     {
-        $request->validate([
-            'user.name' => [
-                'required',
-                'alpha_num',
-            ],
-            'user.email' => [
-                'required',
-                'email',
-                Rule::unique(User::class, 'email')->ignore($request->user()),
-            ],
-        ]);
-
-        $request->user()
-            ->fill($request->get('user'))
-            ->save();
-
-        Toast::info(__('Profile updated.'));
-
-        return redirect()->route('platform.profile');
+        return EditUserProfile::runOrchidAction(null, $request);
     }
 
-    /**
-     * @param  Request  $request
-     */
     public function changePassword(Request $request): RedirectResponse
     {
-        $request->validate([
-            'old_password' => [
-                'required',
-                'current_password:web',
-            ],
-            'password' => [
-                'required',
-                'confirmed',
-                PasswordRuleHelper::getRule(),
-            ],
-        ]);
-
-        tap($request->user(), function ($user) use ($request) {
-            $user->password = Hash::make($request->get('password'));
-        })->save();
-
-        Toast::info(__('Password changed.'));
-
-        return redirect()->route('platform.profile');
+        return ChangePassword::runOrchidAction(null, $request);
     }
 }
