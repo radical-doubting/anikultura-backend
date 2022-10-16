@@ -7,6 +7,7 @@ namespace App\Orchid\Screens\User;
 use App\Helpers\PasswordRuleHelper;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
 use App\Orchid\Layouts\User\ProfileUserEditLayout;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
@@ -88,7 +89,7 @@ class UserProfileScreen extends Screen
     /**
      * @param  Request  $request
      */
-    public function save(Request $request): void
+    public function save(Request $request): RedirectResponse
     {
         $request->validate([
             'user.name' => [
@@ -107,12 +108,14 @@ class UserProfileScreen extends Screen
             ->save();
 
         Toast::info(__('Profile updated.'));
+
+        return redirect()->route('platform.profile');
     }
 
     /**
      * @param  Request  $request
      */
-    public function changePassword(Request $request): void
+    public function changePassword(Request $request): RedirectResponse
     {
         $request->validate([
             'old_password' => [
@@ -131,5 +134,7 @@ class UserProfileScreen extends Screen
         })->save();
 
         Toast::info(__('Password changed.'));
+
+        return redirect()->route('platform.profile');
     }
 }
