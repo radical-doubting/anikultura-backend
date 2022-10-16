@@ -5,18 +5,11 @@ namespace App\Orchid\Layouts\User;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\Password;
 
-class UserEditLayout extends AnikulturaEditLayout
+class ProfileUserEditLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
-        $user = $this->query->get('user');
-        $hasUser = is_null($user) ? false : $user->exists;
-        $passwordPlaceholder = $hasUser
-            ? __('Leave empty to keep current password')
-            : __('Enter the password to be set');
-
         return [
             Group::make([
                 Input::make('user.first_name')
@@ -39,11 +32,6 @@ class UserEditLayout extends AnikulturaEditLayout
                     ->title(__('Username'))
                     ->placeholder(__('Username'))
                     ->required(),
-
-                Password::make('user.password')
-                    ->title(__('Password'))
-                    ->placeholder($passwordPlaceholder)
-                    ->required(! $hasUser),
             ]),
 
             Group::make([
