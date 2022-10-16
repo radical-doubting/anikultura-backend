@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Orchid\Screens\User;
 
+use App\Helpers\PasswordRuleHelper;
 use App\Orchid\Layouts\User\ProfilePasswordLayout;
 use App\Orchid\Layouts\User\ProfileUserEditLayout;
 use Illuminate\Http\Request;
@@ -120,6 +121,7 @@ class UserProfileScreen extends Screen
             'password' => [
                 'required',
                 'confirmed',
+                PasswordRuleHelper::getRule(),
             ],
         ]);
 
