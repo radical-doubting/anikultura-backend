@@ -3,7 +3,7 @@
 namespace App\Actions\User\Farmer;
 
 use App\Actions\User\CreateUser;
-use App\Helpers\PasswordRuleHelper;
+use App\Actions\User\ValidateUserAccount;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;
@@ -11,7 +11,6 @@ use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
@@ -23,7 +22,8 @@ class CreateFarmer
     public function __construct(
         protected CreateUser $createUser,
         protected CreateFarmerProfile $createFarmerProfile,
-        protected CreateFarmerAddress $createFarmerAddress
+        protected CreateFarmerAddress $createFarmerAddress,
+        protected ValidateUserAccount $validateUserAccount,
     ) {
     }
 
@@ -80,7 +80,12 @@ class CreateFarmer
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->validateIfFarmerAccountExistsAlready($model, $request);
+        $this->validateUserAccount->handle(
+            $model,
+            'farmer',
+            Farmer::class,
+            $request
+        );
 
         $this->handle($model, [
             'account' => $request->get('farmer'),
@@ -92,24 +97,6 @@ class CreateFarmer
 
         return redirect()->route('platform.farmers.edit', [
             $model->id,
-        ]);
-    }
-
-    private function validateIfFarmerAccountExistsAlready(Farmer $farmer, Request $request): void
-    {
-        $userNameShouldBeUnique = Rule::unique(Farmer::class, 'name')->ignore($farmer);
-        $emailShouldBeUnique = Rule::unique(Farmer::class, 'email')->ignore($farmer);
-
-        $request->validate([
-            'farmer.name' => [
-                'required',
-                'alpha_num',
-                $userNameShouldBeUnique,
-            ],
-            'farmer.email' => [
-                'email',
-                $emailShouldBeUnique,
-            ],
         ]);
     }
 
@@ -263,11 +250,6 @@ class CreateFarmer
                 'required',
                 'integer',
                 'exists:regions,id',
-            ],
-
-            'farmer.password' => [
-                'nullable',
-                PasswordRuleHelper::getRule(),
             ],
         ];
     }

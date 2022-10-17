@@ -3,7 +3,7 @@
 namespace App\Actions\User\Admin;
 
 use App\Actions\User\CreateUser;
-use App\Helpers\PasswordRuleHelper;
+use App\Actions\User\ValidateUserAccount;
 use App\Models\User\Admin\Admin;
 use App\Models\User\Admin\AdminProfile;
 use App\Models\User\Role;
@@ -11,7 +11,6 @@ use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
@@ -23,6 +22,7 @@ class CreateAdmin
     public function __construct(
         protected CreateUser $createUser,
         protected CreateAdminProfile $createAdminProfile,
+        protected ValidateUserAccount $validateUserAccount,
     ) {
     }
 
@@ -78,7 +78,12 @@ class CreateAdmin
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->validateIfAdminAccountExistsAlready($model, $request);
+        $this->validateUserAccount->handle(
+            $model,
+            'admin',
+            Admin::class,
+            $request
+        );
 
         $this->handle($model, [
             'account' => $request->get('admin'),
@@ -90,24 +95,6 @@ class CreateAdmin
         return redirect()->route('platform.admins');
     }
 
-    private function validateIfAdminAccountExistsAlready(Admin $admin, Request $request): void
-    {
-        $userNameShouldBeUnique = Rule::unique(Admin::class, 'name')->ignore($admin);
-        $emailShouldBeUnique = Rule::unique(Admin::class, 'email')->ignore($admin);
-
-        $request->validate([
-            'admin.name' => [
-                'required',
-                'alpha_num',
-                $userNameShouldBeUnique,
-            ],
-            'admin.email' => [
-                'email',
-                $emailShouldBeUnique,
-            ],
-        ]);
-    }
-
     public function rules(): array
     {
         return [
@@ -116,10 +103,6 @@ class CreateAdmin
             ],
             'admin.permissions' => [
                 'required',
-            ],
-            'admin.password' => [
-                'nullable',
-                PasswordRuleHelper::getRule(),
             ],
         ];
     }
