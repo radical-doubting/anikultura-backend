@@ -21,7 +21,6 @@ class RoleSeeder extends Seeder
                 'permissions' => [
                     'platform.index' => 1,
                     'platform.roles' => 1,
-                    'platform.systems.users' => 1,
                     'platform.systems.attachment' => 1,
                     'platform.systems.settings' => 1,
                     'platform.sites.read' => 1,

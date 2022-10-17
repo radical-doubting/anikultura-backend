@@ -117,8 +117,7 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             ItemPermission::group(__('System'))
-                ->addPermission('platform.roles', __('Roles'))
-                ->addPermission('platform.systems.users', __('Users')),
+                ->addPermission('platform.roles', __('Roles')),
             ItemPermission::group(__('Sites'))
                 ->addPermission('platform.sites.read', __('Read Sites'))
                 ->addPermission('platform.sites.edit', __('Edit Sites')),
