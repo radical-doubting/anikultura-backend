@@ -26,19 +26,19 @@ class ValidateUserAccount
             "$userType.first_name" => [
                 'required',
                 'alpha_num_space_dash',
-                'min:3',
+                'min:1',
                 'max:35',
             ],
             "$userType.middle_name" => [
                 'nullable',
                 'alpha_num_space_dash',
-                'min:3',
+                'min:1',
                 'max:35',
             ],
             "$userType.last_name" => [
                 'required',
                 'alpha_num_space_dash',
-                'min:3',
+                'min:1',
                 'max:35',
             ],
             "$userType.email" => [
