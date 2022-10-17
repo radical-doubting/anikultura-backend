@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Actions\User\SwitchLanguage;
 use App\Orchid\Screens\Home\HomeScreen;
-use App\Orchid\Screens\Role\RoleEditScreen;
-use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\User\Role\RoleEditScreen;
+use App\Orchid\Screens\User\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
@@ -40,29 +40,29 @@ Route::screen('profile', UserProfileScreen::class)
 
 // Platform > System > Roles > Role
 Route::screen('roles/{roles}/edit', RoleEditScreen::class)
-    ->name('platform.systems.roles.edit')
+    ->name('platform.roles.edit')
     ->breadcrumbs(function (Trail $trail, $role) {
         return $trail
-            ->parent('platform.systems.roles')
-            ->push(__('Edit Role'), route('platform.systems.roles.edit', $role));
+            ->parent('platform.roles')
+            ->push(__('Edit Role'), route('platform.roles.edit', $role));
     });
 
 // Platform > System > Roles > Create
 Route::screen('roles/create', RoleEditScreen::class)
-    ->name('platform.systems.roles.create')
+    ->name('platform.roles.create')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
-            ->parent('platform.systems.roles')
-            ->push(__('Create Role'), route('platform.systems.roles.create'));
+            ->parent('platform.roles')
+            ->push(__('Create Role'), route('platform.roles.create'));
     });
 
 // Platform > System > Roles
 Route::screen('roles', RoleListScreen::class)
-    ->name('platform.systems.roles')
+    ->name('platform.roles')
     ->breadcrumbs(function (Trail $trail) {
         return $trail
             ->parent('platform.index')
-            ->push(__('Roles'), route('platform.systems.roles'));
+            ->push(__('Roles'), route('platform.roles'));
     });
 
 require 'platform/farmer_reports.php';

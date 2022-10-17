@@ -34,21 +34,30 @@ trait AsOrchidAction
      */
     private function validateRequest(Request $request): void
     {
-        if (! method_exists($this, 'rules')) {
-            return;
-        }
-
         $rules = $this->rules();
-
-        if (! is_array($rules)) {
-            return;
-        }
+        $messages = $this->getValidationMessages();
+        $attributes = $this->getValidationAttributes();
 
         if (config('app.debug')) {
             $this->debugValidation($request, $rules);
         }
 
-        $request->validate($rules);
+        $request->validate($rules, $messages, $attributes);
+    }
+
+    public function rules(): array
+    {
+        return [];
+    }
+
+    public function getValidationMessages(): array
+    {
+        return [];
+    }
+
+    public function getValidationAttributes(): array
+    {
+        return [];
     }
 
     private function debugValidation(Request $request, array $rules)

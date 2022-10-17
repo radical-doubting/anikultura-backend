@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User\Admin\Admin;
+use App\Models\User\Role;
 use Database\Seeders\User\Admin\AdminSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\seed;
@@ -13,17 +14,17 @@ beforeEach(function () {
 });
 
 it('shows list screen', function () {
-    $screen = screen('platform.admins')->actingAs(Admin::first());
+    $screen = screen('platform.roles')->actingAs(Admin::first());
 
     $screen->display()
-        ->assertSee('Administrators');
+        ->assertSee('Roles');
 });
 
-it('shows admin in list screen', function () {
-    $admin = Admin::first();
-    $screen = screen('platform.admins')->actingAs($admin);
+it('shows role in list screen', function () {
+    $role = Role::first();
+
+    $screen = screen('platform.roles')->actingAs(Admin::first());
 
     $screen->display()
-        ->assertSee($admin->first_name)
-        ->assertSee($admin->last_name);
+        ->assertSee($role->name);
 });

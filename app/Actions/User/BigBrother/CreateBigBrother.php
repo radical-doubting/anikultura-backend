@@ -3,7 +3,7 @@
 namespace App\Actions\User\BigBrother;
 
 use App\Actions\User\CreateUser;
-use App\Helpers\PasswordRuleHelper;
+use App\Actions\User\ValidateUserAccount;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use App\Models\User\Role;
@@ -11,7 +11,6 @@ use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
@@ -23,6 +22,7 @@ class CreateBigBrother
     public function __construct(
         protected CreateUser $createUser,
         protected CreateBigBrotherProfile $createBigBrotherProfile,
+        protected ValidateUserAccount $validateUserAccount,
     ) {
     }
 
@@ -64,7 +64,12 @@ class CreateBigBrother
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->validateIfBigBrotherAccountExistsAlready($model, $request);
+        $this->validateUserAccount->handle(
+            $model,
+            'bigBrother',
+            BigBrother::class,
+            $request
+        );
 
         $this->handle($model, [
             'account' => $request->get('bigBrother'),
@@ -76,24 +81,6 @@ class CreateBigBrother
         return redirect()->route('platform.big-brothers');
     }
 
-    private function validateIfBigBrotherAccountExistsAlready(BigBrother $bigBrother, Request $request): void
-    {
-        $userNameShouldBeUnique = Rule::unique(BigBrother::class, 'name')->ignore($bigBrother);
-        $emailShouldBeUnique = Rule::unique(BigBrother::class, 'email')->ignore($bigBrother);
-
-        $request->validate([
-            'bigBrother.name' => [
-                'required',
-                'alpha_num',
-                $userNameShouldBeUnique,
-            ],
-            'bigBrother.email' => [
-                'email',
-                $emailShouldBeUnique,
-            ],
-        ]);
-    }
-
     public function rules(): array
     {
         return [
@@ -102,10 +89,6 @@ class CreateBigBrother
             ],
             'bigBrotherProfile.organization_name' => [
                 'required',
-            ],
-            'bigBrother.password' => [
-                'nullable',
-                PasswordRuleHelper::getRule(),
             ],
         ];
     }
