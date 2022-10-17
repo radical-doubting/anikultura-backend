@@ -23,7 +23,7 @@ class DeleteRole
     {
         $this->handle($model);
 
-        Toast::info(__('Role was removed'));
+        Toast::info(__('Role was removed successfully!'));
 
         return redirect()->route('platform.roles');
     }

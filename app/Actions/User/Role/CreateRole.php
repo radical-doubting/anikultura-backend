@@ -40,7 +40,7 @@ class CreateRole
 
         $this->handle($model, $roleData, $permissions);
 
-        Toast::info(__('Role was saved'));
+        Toast::info(__('Role was saved successfully!'));
 
         return redirect()->route('platform.roles');
     }
