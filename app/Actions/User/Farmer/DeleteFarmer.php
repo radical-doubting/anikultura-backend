@@ -2,13 +2,14 @@
 
 namespace App\Actions\User\Farmer;
 
+use App\Helpers\ToastHelper;
 use App\Models\User\Farmer\Farmer;
 use App\Traits\AsOrchidAction;
-use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
+use PDOException;
 
 class DeleteFarmer
 {
@@ -26,10 +27,12 @@ class DeleteFarmer
     {
         try {
             $this->handle($model);
-        } catch (Exception $exception) {
-            Toast::error(__('Error: delete the submitted reports of this farmer first'));
+        } catch (PDOException $exception) {
+            ToastHelper::showReferenceDeleteError('farmer');
 
-            return redirect()->back();
+            return redirect()->route('platform.farmers.edit', [
+                $model->id,
+            ]);
         }
 
         Toast::info(__('Farmer was removed successfully!'));
