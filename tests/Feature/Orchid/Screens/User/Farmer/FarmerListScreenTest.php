@@ -17,7 +17,7 @@ it('shows list screen', function () {
     $screen = screen('platform.farmers')->actingAs(Admin::first());
 
     $screen->display()
-        ->assertSee('Big Brother');
+        ->assertSee('Farmers');
 });
 
 it('shows farmer in list screen', function () {
