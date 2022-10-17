@@ -35,7 +35,7 @@ class RoleEditScreen extends Screen
     /**
      * @var string
      */
-    public $permission = 'platform.systems.roles';
+    public $permission = 'platform.roles';
 
     /**
      * @var bool

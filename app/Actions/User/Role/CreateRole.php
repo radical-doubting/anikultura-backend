@@ -42,7 +42,7 @@ class CreateRole
 
         Toast::info(__('Role was saved'));
 
-        return redirect()->route('platform.systems.roles');
+        return redirect()->route('platform.roles');
     }
 
     private function validateIfRoleAlreadyExists(Role $role, Request $request): void

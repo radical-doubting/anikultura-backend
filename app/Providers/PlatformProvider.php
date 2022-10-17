@@ -80,8 +80,8 @@ class PlatformProvider extends OrchidServiceProvider
                         ->permission('platform.admins.read'),
                     Menu::make(__('Roles'))
                         ->icon('lock')
-                        ->route('platform.systems.roles')
-                        ->permission('platform.systems.roles'),
+                        ->route('platform.roles')
+                        ->permission('platform.roles'),
                 ]),
 
             Menu::make(__('Language'))
@@ -117,7 +117,7 @@ class PlatformProvider extends OrchidServiceProvider
     {
         return [
             ItemPermission::group(__('System'))
-                ->addPermission('platform.systems.roles', __('Roles'))
+                ->addPermission('platform.roles', __('Roles'))
                 ->addPermission('platform.systems.users', __('Users')),
             ItemPermission::group(__('Sites'))
                 ->addPermission('platform.sites.read', __('Read Sites'))

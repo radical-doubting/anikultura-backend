@@ -25,6 +25,6 @@ class DeleteRole
 
         Toast::info(__('Role was removed'));
 
-        return redirect()->route('platform.systems.roles');
+        return redirect()->route('platform.roles');
     }
 }

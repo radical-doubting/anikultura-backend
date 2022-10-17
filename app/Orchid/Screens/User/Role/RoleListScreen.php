@@ -29,7 +29,7 @@ class RoleListScreen extends Screen
     /**
      * @var string
      */
-    public $permission = 'platform.systems.roles';
+    public $permission = 'platform.roles';
 
     /**
      * Query data.
@@ -53,7 +53,7 @@ class RoleListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->href(route('platform.systems.roles.create')),
+                ->href(route('platform.roles.create')),
         ];
     }
 
