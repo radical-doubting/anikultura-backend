@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Orchid\Presenters\User\UserPresenter;
 use App\Traits\Loggable;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -142,5 +143,10 @@ class User extends Authenticatable implements JWTSubject, HasLocalePreference
             'middle_name' => $this->middle_name,
             'last_name' => $this->last_name,
         ];
+    }
+
+    public function presenter(): UserPresenter
+    {
+        return new UserPresenter($this);
     }
 }

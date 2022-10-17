@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Presenters;
+namespace App\Orchid\Presenters\User;
 
 class AdminPresenter extends UserPresenter
 {
