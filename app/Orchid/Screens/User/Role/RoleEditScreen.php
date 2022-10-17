@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
 class RoleEditScreen extends Screen
@@ -65,15 +66,24 @@ class RoleEditScreen extends Screen
      */
     public function commandBar(): array
     {
+        $confirmText = __(
+            'This is an extremely destructive action! Once the role is deleted, all users with this role will lose permission to access the system entirely.',
+            [
+                'resource' => 'role',
+            ]
+        );
+
         return [
+            Button::make(__('Remove'))
+                ->type(Color::DANGER())
+                ->icon('trash')
+                ->confirm($confirmText)
+                ->method('remove')
+                ->canSee($this->exist),
+
             Button::make(__('Save'))
                 ->icon('check')
                 ->method('save'),
-
-            Button::make(__('Remove'))
-                ->icon('trash')
-                ->method('remove')
-                ->canSee($this->exist),
         ];
     }
 
