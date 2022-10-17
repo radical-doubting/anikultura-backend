@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\Role;
+namespace App\Orchid\Screens\User\Role;
 
 use App\Models\User\Role;
 use App\Orchid\Layouts\Role\RoleListLayout;

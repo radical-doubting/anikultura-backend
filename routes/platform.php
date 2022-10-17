@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 use App\Actions\User\SwitchLanguage;
 use App\Orchid\Screens\Home\HomeScreen;
-use App\Orchid\Screens\Role\RoleEditScreen;
-use App\Orchid\Screens\Role\RoleListScreen;
+use App\Orchid\Screens\User\Role\RoleEditScreen;
+use App\Orchid\Screens\User\Role\RoleListScreen;
 use App\Orchid\Screens\User\UserProfileScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
