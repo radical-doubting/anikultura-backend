@@ -319,5 +319,6 @@
     "Create" : "Magdagdag",
     "Edit Roles" : "I-edit ang Role",
 
-    ":farmer is ready for harvest!": "Handa na ang pananim ni :farmer!"
+    ":farmer is ready for harvest!": "Handa na ang pananim ni :farmer!",
+    "Cannot delete :resource that is still being referenced by other resources.": "Hindi kayang tanggalin ang :resource na ginagamit pa rin ng ibang mga resource."
 }
