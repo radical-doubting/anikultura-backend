@@ -16,36 +16,32 @@ return new class extends Migration
         Schema::create('farmer_reports', function (Blueprint $table) {
             $table->id();
 
-            $table->unsignedBigInteger('reported_by')
-                ->nullable();
+            $table->unsignedBigInteger('reported_by');
             $table->foreign('reported_by')
                 ->references('id')
                 ->on('users')
                 ->restrictOnDelete()
                 ->restrictOnUpdate();
 
-            $table->unsignedBigInteger('seed_stage_id')
-                ->nullable();
+            $table->unsignedBigInteger('seed_stage_id');
             $table->foreign('seed_stage_id')
                 ->references('id')
                 ->on('seed_stages')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedBigInteger('farmland_id')
-                ->nullable();
+            $table->unsignedBigInteger('farmland_id');
             $table->foreign('farmland_id')
                 ->references('id')
                 ->on('farmlands')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedBigInteger('crop_id')
-                ->nullable();
+            $table->unsignedBigInteger('crop_id');
             $table->foreign('crop_id')
                 ->references('id')
                 ->on('crops')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
             $table->boolean('verified')
@@ -58,7 +54,9 @@ return new class extends Migration
                 ->nullable();
             $table->foreign('verified_by')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->restrictOnDelete()
+                ->cascadeOnUpdate();
 
             $table->double('volume_kg')
                 ->nullable();
