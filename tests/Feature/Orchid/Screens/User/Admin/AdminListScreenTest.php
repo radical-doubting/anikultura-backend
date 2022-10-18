@@ -16,7 +16,7 @@ it('shows list screen', function () {
     $screen = screen('platform.admins')->actingAs(Admin::first());
 
     $screen->display()
-        ->assertSee('Admin');
+        ->assertSee('Administrators');
 });
 
 it('shows admin in list screen', function () {

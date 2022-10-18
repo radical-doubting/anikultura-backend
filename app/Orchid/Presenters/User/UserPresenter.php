@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Presenters;
+namespace App\Orchid\Presenters\User;
 
 use Laravel\Scout\Builder;
 use Orchid\Screen\Contracts\Personable;
@@ -34,7 +34,7 @@ class UserPresenter extends Presenter implements Searchable, Personable
 
     public function url(): string
     {
-        return route('platform.systems.users.edit', $this->entity);
+        return '';
     }
 
     public function image(): ?string

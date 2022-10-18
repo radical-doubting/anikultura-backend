@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\Role;
+namespace App\Orchid\Screens\User\Role;
 
 use App\Models\User\Role;
-use App\Orchid\Layouts\Role\RoleListLayout;
+use App\Orchid\Layouts\User\Role\RoleListLayout;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Screen;
@@ -29,7 +29,7 @@ class RoleListScreen extends Screen
     /**
      * @var string
      */
-    public $permission = 'platform.systems.roles';
+    public $permission = 'platform.roles';
 
     /**
      * Query data.
@@ -53,7 +53,7 @@ class RoleListScreen extends Screen
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->href(route('platform.systems.roles.create')),
+                ->href(route('platform.roles.create')),
         ];
     }
 

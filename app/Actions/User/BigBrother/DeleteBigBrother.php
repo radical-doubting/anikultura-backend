@@ -2,12 +2,14 @@
 
 namespace App\Actions\User\BigBrother;
 
+use App\Helpers\ToastHelper;
 use App\Models\User\BigBrother\BigBrother;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
+use PDOException;
 
 class DeleteBigBrother
 {
@@ -23,7 +25,15 @@ class DeleteBigBrother
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->handle($model);
+        try {
+            $this->handle($model);
+        } catch (PDOException $exception) {
+            ToastHelper::showReferenceDeleteError('big brother');
+
+            return redirect()->route('platform.big-brothers.edit', [
+                $model->id,
+            ]);
+        }
 
         Toast::info(__('Big brother was removed successfully!'));
 

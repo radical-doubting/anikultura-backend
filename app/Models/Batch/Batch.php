@@ -2,6 +2,7 @@
 
 namespace App\Models\Batch;
 
+use App\Models\Farmland\Farmland;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
@@ -90,6 +91,11 @@ class Batch extends Model
     public function seedAllocations(): HasMany
     {
         return $this->hasMany(BatchSeedAllocation::class);
+    }
+
+    public function farmlands(): HasMany
+    {
+        return $this->hasMany(Farmland::class);
     }
 
     /**

@@ -2,18 +2,20 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Screens\Role;
+namespace App\Orchid\Screens\User\Role;
 
+use App\Actions\User\Role\CreateRole;
+use App\Actions\User\Role\DeleteRole;
 use App\Models\User\Role;
-use App\Orchid\Layouts\Role\RoleEditLayout;
-use App\Orchid\Layouts\Role\RolePermissionLayout;
+use App\Orchid\Layouts\User\Role\RoleEditLayout;
+use App\Orchid\Layouts\User\Role\RolePermissionLayout;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Orchid\Screen\Action;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Screen;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class RoleEditScreen extends Screen
 {
@@ -34,7 +36,7 @@ class RoleEditScreen extends Screen
     /**
      * @var string
      */
-    public $permission = 'platform.systems.roles';
+    public $permission = 'platform.roles';
 
     /**
      * @var bool
@@ -64,15 +66,24 @@ class RoleEditScreen extends Screen
      */
     public function commandBar(): array
     {
+        $confirmText = __(
+            'This is an extremely destructive action! Once the role is deleted, all users with this role will lose permission to access the system entirely.',
+            [
+                'resource' => 'role',
+            ]
+        );
+
         return [
+            Button::make(__('Remove'))
+                ->type(Color::DANGER())
+                ->icon('trash')
+                ->confirm($confirmText)
+                ->method('remove')
+                ->canSee($this->exist),
+
             Button::make(__('Save'))
                 ->icon('check')
                 ->method('save'),
-
-            Button::make(__('Remove'))
-                ->icon('trash')
-                ->method('remove')
-                ->canSee($this->exist),
         ];
     }
 
@@ -103,29 +114,9 @@ class RoleEditScreen extends Screen
      * @param  Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(Role $role, Request $request)
+    public function save(Role $role, Request $request): RedirectResponse
     {
-        $request->validate([
-            'role.slug' => [
-                'required',
-                Rule::unique(Role::class, 'slug')->ignore($role),
-            ],
-        ]);
-
-        $role->fill($request->get('role'));
-
-        $role->permissions = collect($request->get('permissions'))
-            ->map(function ($value, $key) {
-                return [base64_decode($key) => $value];
-            })
-            ->collapse()
-            ->toArray();
-
-        $role->save();
-
-        Toast::info(__('Role was saved'));
-
-        return redirect()->route('platform.systems.roles');
+        return CreateRole::runOrchidAction($role, $request);
     }
 
     /**
@@ -134,12 +125,8 @@ class RoleEditScreen extends Screen
      *
      * @throws \Exception
      */
-    public function remove(Role $role)
+    public function remove(Role $role): RedirectResponse
     {
-        $role->delete();
-
-        Toast::info(__('Role was removed'));
-
-        return redirect()->route('platform.systems.roles');
+        return DeleteRole::runOrchidAction($role, null);
     }
 }

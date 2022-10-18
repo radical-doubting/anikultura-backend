@@ -8,6 +8,7 @@ use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use App\Models\User\Farmer\Farmer;
 use Database\Seeders\Crop\CropSeeder;
+use Database\Seeders\FarmerReport\FarmerReportStatusSeeder;
 use Database\Seeders\Farmland\FarmlandStatusSeeder;
 use Database\Seeders\Farmland\FarmlandTypeSeeder;
 use Database\Seeders\Farmland\WateringSystemSeeder;
@@ -19,14 +20,17 @@ use function Pest\Laravel\actingAs;
 use function Pest\Laravel\seed;
 
 beforeEach(function () {
-    seed(SiteSeeder::class);
-    seed(RoleSeeder::class);
-    seed(FarmerSeeder::class);
-    seed(AdminSeeder::class);
-    seed(CropSeeder::class);
-    seed(FarmlandTypeSeeder::class);
-    seed(FarmlandStatusSeeder::class);
-    seed(WateringSystemSeeder::class);
+    seed([
+        SiteSeeder::class,
+        RoleSeeder::class,
+        FarmerSeeder::class,
+        AdminSeeder::class,
+        CropSeeder::class,
+        FarmlandTypeSeeder::class,
+        FarmlandStatusSeeder::class,
+        WateringSystemSeeder::class,
+        FarmerReportStatusSeeder::class,
+    ]);
 
     $farmer = Farmer::first();
 

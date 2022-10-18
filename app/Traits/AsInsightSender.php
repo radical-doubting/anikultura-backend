@@ -26,6 +26,11 @@ trait AsInsightSender
         $this->sendInsights($model, true);
     }
 
+    public function deleted(mixed $model): void
+    {
+        $this->sendInsights($model, false);
+    }
+
     private function isModelSaveMode(): bool
     {
         return Anikultura::getInsightsMode() === InsightsMode::MODEL_SAVE;

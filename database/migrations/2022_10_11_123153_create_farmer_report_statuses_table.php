@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('application_verifications', function (Blueprint $table) {
+        Schema::create('farmer_report_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('verified_by');
-            $table->string('position');
-            $table->string('office');
-            $table->integer('contact_number');
-            $table->string('mode_of_application');
+            $table->string('name')->nullable(false)->unique();
+            $table->string('slug')->nullable(false)->unique();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('application_verifications');
+        Schema::dropIfExists('farmer_report_statuses');
     }
 };

@@ -4,6 +4,8 @@ namespace App\Traits;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 trait AsOrchidAction
 {
@@ -32,17 +34,39 @@ trait AsOrchidAction
      */
     private function validateRequest(Request $request): void
     {
-        if (! method_exists($this, 'rules')) {
-            return;
-        }
-
         $rules = $this->rules();
+        $messages = $this->getValidationMessages();
+        $attributes = $this->getValidationAttributes();
 
-        if (! is_array($rules)) {
-            return;
+        if (config('app.debug')) {
+            $this->debugValidation($request, $rules);
         }
 
-        $request->validate($rules);
+        $request->validate($rules, $messages, $attributes);
+    }
+
+    public function rules(): array
+    {
+        return [];
+    }
+
+    public function getValidationMessages(): array
+    {
+        return [];
+    }
+
+    public function getValidationAttributes(): array
+    {
+        return [];
+    }
+
+    private function debugValidation(Request $request, array $rules)
+    {
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            Log::error($validator->failed());
+        }
     }
 
     /**

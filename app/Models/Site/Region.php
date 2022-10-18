@@ -6,6 +6,7 @@ use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 
 /**
@@ -46,6 +47,17 @@ class Region extends Model
         'created_at',
     ];
 
+    /**
+     * Get the province in regions.
+     */
+    public function provinces(): HasMany
+    {
+        return $this->hasMany(Province::class);
+    }
+
+    /**
+     * Get full name of regions.
+     */
     public function getFullNameAttribute()
     {
         return "{$this->short_name} - {$this->name}";

@@ -51,27 +51,49 @@ class CreateFarmland
         return [
             'farmland.name' => [
                 'required',
+                'alpha_num_space_dash',
+                'min:3',
+                'max:70',
             ],
             'farmland.type_id' => [
                 'required',
+                'integer',
+                'exists:farmland_types,id',
             ],
             'farmland.status_id' => [
                 'required',
+                'integer',
+                'exists:farmland_statuses,id',
             ],
             'farmland.hectares_size' => [
                 'required',
+                'numeric',
+                'min:1',
+                'max:1000000',
             ],
             'farmland.wateringSystems' => [
                 'required',
                 'array',
             ],
+            'farmland.wateringSystems.*' => [
+                'integer',
+                'exists:watering_systems,id',
+            ],
             'farmland.cropBuyers' => [
                 'required',
                 'array',
             ],
+            'farmland.cropBuyers.*' => [
+                'integer',
+                'exists:crop_buyers,id',
+            ],
             'farmland.farmers' => [
                 'required',
                 'array',
+            ],
+            'farmland.farmers.*' => [
+                'integer',
+                'exists:users,id',
             ],
         ];
     }

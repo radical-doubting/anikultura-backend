@@ -6,6 +6,7 @@ use App\Models\User\Admin\Admin;
 use App\Models\User\Farmer\Farmer;
 use Database\Seeders\Batch\BatchSeeder;
 use Database\Seeders\Crop\CropSeeder;
+use Database\Seeders\FarmerReport\FarmerReportStatusSeeder;
 use Database\Seeders\Farmland\FarmlandSeeder;
 use Database\Seeders\Site\SiteSeeder;
 use Database\Seeders\User\Admin\AdminProfileSeeder;
@@ -26,6 +27,7 @@ beforeEach(function () {
         CropSeeder::class,
         BatchSeeder::class,
         FarmlandSeeder::class,
+        FarmerReportStatusSeeder::class,
     ]);
 });
 
@@ -97,6 +99,7 @@ it('creates a farmer report from the create screen', function () {
         'farmland_id',
         'crop_id',
         'volume_kg',
+        'status_id',
     );
 
     $screen
@@ -119,6 +122,7 @@ it('deletes an existing farmer report from the edit screen', function () {
         'farmland_id',
         'crop_id',
         'volume_kg',
+        'status_id',
     );
 
     $screen = screen('platform.farmer-reports.edit')

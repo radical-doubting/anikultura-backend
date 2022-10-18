@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Orchid\Layouts\Role;
+namespace App\Orchid\Layouts\User\Role;
 
 use App\Models\User\Role;
 use App\Orchid\Layouts\AnikulturaListLayout;
@@ -22,7 +22,7 @@ class RoleListLayout extends AnikulturaListLayout
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Role $role) {
                     return Link::make($role->name)
-                        ->route('platform.systems.roles.edit', [$role->id]);
+                        ->route('platform.roles.edit', [$role->id]);
                 }),
 
             TD::make('slug', __('Slug'))

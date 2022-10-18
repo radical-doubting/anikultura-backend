@@ -19,6 +19,7 @@ class FarmlandListLayout extends AnikulturaListLayout
             TD::make('name', __('Name'))
                 ->sort()
                 ->filter(TD::FILTER_TEXT)
+                ->cantHide()
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->name)
                         ->route('platform.farmlands.edit', [$farmland->id]);
@@ -26,7 +27,14 @@ class FarmlandListLayout extends AnikulturaListLayout
 
             TD::make('batch_id', __('Batch'))
                 ->render(function (Farmland $farmland) {
-                    return Link::make($farmland->batch->farmschool_name)
+                    $batch = $farmland->batch;
+                    $farmlandSchoolName = __('No batch');
+
+                    if (! is_null($batch)) {
+                        $farmlandSchoolName = $batch->farmschool_name;
+                    }
+
+                    return Link::make($farmlandSchoolName)
                         ->route('platform.farmlands.edit', [$farmland->id]);
                 }),
 
@@ -39,13 +47,6 @@ class FarmlandListLayout extends AnikulturaListLayout
             TD::make('status', __('Status'))
                 ->render(function (Farmland $farmland) {
                     return Link::make($farmland->status->name)
-                        ->route('platform.farmlands.edit', [$farmland->id]);
-                }),
-
-            TD::make('hectares_size', __('Size (ha)'))
-                ->sort()
-                ->render(function (Farmland $farmland) {
-                    return Link::make((string) $farmland->hectares_size)
                         ->route('platform.farmlands.edit', [$farmland->id]);
                 }),
 

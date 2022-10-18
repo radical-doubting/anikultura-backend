@@ -5,6 +5,7 @@ namespace App\Actions\FarmerReport\Api;
 use App\Actions\Crop\ValidateSeedStage;
 use App\Http\Resources\FarmerReport\FarmerReportResource;
 use App\Models\FarmerReport\FarmerReport;
+use App\Models\FarmerReport\FarmerReportStatus;
 use App\Models\Farmland\Farmland;
 use App\Models\User\Farmer\Farmer;
 use Exception;
@@ -48,6 +49,7 @@ class SubmitFarmerReport
             'reported_by' => $farmer->id,
             'seed_stage_id' => $nextSeedStage->id,
             'farmland_id' => $farmland->id,
+            'status_id' => FarmerReportStatus::unverified()->id,
             'crop_id' => $farmerReportData['cropId'],
             'volume_kg' => $farmerReportData['volumeKg'],
             'photo_url' => $photoUrl,

@@ -3,8 +3,8 @@
 namespace App\Models\User\Admin;
 
 use App\Models\User\User;
-use App\Orchid\Presenters\AdminPresenter;
-use App\Orchid\Presenters\UserPresenter;
+use App\Orchid\Presenters\User\AdminPresenter;
+use App\Orchid\Presenters\User\UserPresenter;
 
 class Admin extends User
 {

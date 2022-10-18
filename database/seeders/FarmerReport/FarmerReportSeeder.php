@@ -11,6 +11,10 @@ class FarmerReportSeeder extends Seeder
 {
     public function run()
     {
+        $this->call([
+            FarmerReportStatusSeeder::class,
+        ]);
+
         $farmers = Farmer::all();
 
         FarmerReport::factory()

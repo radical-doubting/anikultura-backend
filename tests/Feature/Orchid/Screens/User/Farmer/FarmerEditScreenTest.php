@@ -119,7 +119,7 @@ it('creates a farmer from the create screen', function () {
         ->method('save', [
             'farmer' => [
                 ...$farmerData,
-                'password' => 'password',
+                'password' => 'SuperSecurePassword1!',
             ],
             'farmerProfile' => $farmerProfileData,
             'farmerAddress' => $farmerAddressData,
@@ -129,49 +129,19 @@ it('creates a farmer from the create screen', function () {
     assertDatabaseCount('users', 2);
     assertDatabaseHas('users', $farmerData);
     assertDatabaseCount('farmer_profiles', 1);
-    assertDatabaseHas('farmer_profiles', $farmerProfileData);
+    assertDatabaseCount('farmer_addresses', 1);
 });
 
 it('deletes an existing farmer from the edit screen', function () {
     $farmerProfile = FarmerProfile::factory()->createOne();
 
-    $farmerAddress = FarmerAddress::factory()->createOne([
+    FarmerAddress::factory()->createOne([
         'farmer_profile_id' => $farmerProfile->id,
     ]);
 
     $farmer = Farmer::factory()->createOne([
         'profile_id' => $farmerProfile->id,
     ]);
-
-    $farmerProfileData = $farmerProfile->only(
-        'gender_id',
-        'civil_status_id',
-        'birthday',
-        'quantity_family_members',
-        'quantity_dependents',
-        'quantity_working_dependents',
-        'educational_status_id',
-        'college_course',
-        'current_job',
-        'farming_years',
-        'usual_crops_planted',
-        'affiliated_organization',
-        'tesda_training_joined',
-        'nc_passer_status_id',
-        'salary_periodicity_id',
-        'estimated_salary',
-        'social_status_id',
-        'social_status_reason',
-    );
-
-    $farmerAddressData = $farmerAddress->only(
-        'house_number',
-        'street',
-        'barangay',
-        'municity',
-        'province',
-        'region_id',
-    );
 
     $farmerData = $farmer->only(
         'name',
@@ -190,7 +160,8 @@ it('deletes an existing farmer from the edit screen', function () {
         ->method('remove')
         ->assertSee('Farmer was removed successfully!');
 
+    assertDatabaseCount('users', 1);
     assertDatabaseMissing('users', $farmerData);
-    assertDatabaseMissing('farmer_profiles', $farmerProfileData);
-    assertDatabaseMissing('farmer_addresses', $farmerAddressData);
+    assertDatabaseCount('farmer_profiles', 0);
+    assertDatabaseCount('farmer_addresses', 0);
 });

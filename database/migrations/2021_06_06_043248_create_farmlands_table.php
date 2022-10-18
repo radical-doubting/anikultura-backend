@@ -26,20 +26,18 @@ return new class extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedBigInteger('type_id')
-                ->nullable();
+            $table->unsignedBigInteger('type_id');
             $table->foreign('type_id')
                 ->references('id')
                 ->on('farmland_types')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedBigInteger('status_id')
-                ->nullable();
+            $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')
                 ->references('id')
                 ->on('farmland_statuses')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
             $table->timestamps();
