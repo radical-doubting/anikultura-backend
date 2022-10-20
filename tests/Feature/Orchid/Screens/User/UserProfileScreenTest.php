@@ -27,6 +27,8 @@ it('updates profile from the profile screen', function () {
     $screen
         ->method('save', [
             'user' => [
+                'first_name' => 'Bob',
+                'last_name' => 'Jenkins',
                 'name' => 'bobjenkins123',
                 'email' => 'bobjenkins123@email.com',
             ],
