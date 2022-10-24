@@ -72,6 +72,11 @@ class CreateFarmland
                 'min:3',
                 'max:70',
             ],
+            'farmland.batch_id' => [
+                'required',
+                'integer',
+                'exists:batches,id',
+            ],
             'farmland.type_id' => [
                 'required',
                 'integer',
