@@ -3,7 +3,9 @@
 namespace App\Actions\Farmland;
 
 use App\Models\Farmland\Farmland;
+use App\Models\User\Farmer\Farmer;
 use App\Traits\AsOrchidAction;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -28,11 +30,26 @@ class CreateFarmland
             ->cropBuyers()
             ->sync($farmlandData['cropBuyers']);
 
+        $farmerIds = $farmlandData['farmers'];
+
+        $this->validateIfFarmersBelongToBatch($farmland, $farmerIds);
+
         $farmland
             ->farmers()
-            ->sync($farmlandData['farmers']);
+            ->sync($farmerIds);
 
         return $farmland->refresh();
+    }
+
+    private function validateIfFarmersBelongToBatch(Farmland $farmland, array $farmerIds): void
+    {
+        $batchFarmers = Farmer::ofBatch($farmland->batch)->get();
+
+        foreach ($farmerIds as $farmerId) {
+            if (! $batchFarmers->contains('id', $farmerId)) {
+                throw new Exception('Farmer does not belong to batch');
+            }
+        }
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
