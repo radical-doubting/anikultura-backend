@@ -56,7 +56,15 @@ class CreateFarmland
     {
         $farmlandData = $request->get('farmland');
 
-        $this->handle($model, $farmlandData);
+        try {
+            $this->handle($model, $farmlandData);
+        } catch (Exception $exception) {
+            Toast::error($exception->getMessage());
+
+            return redirect()->route('platform.farmlands.edit', [
+                $model->id,
+            ]);
+        }
 
         Toast::info(__('Farmland was saved successfully!'));
 
