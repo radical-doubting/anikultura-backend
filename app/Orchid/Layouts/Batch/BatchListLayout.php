@@ -36,7 +36,7 @@ class BatchListLayout extends AnikulturaListLayout
                     return Link::make($batch->province->name)
                         ->route('platform.batches.edit', [$batch->id]);
                 }),
-            TD::make('municity', __('Municity'))
+            TD::make('municity', __('Municipality or City'))
                 ->sort()
                 ->render(function (Batch $batch) {
                     return Link::make($batch->municity->name)

@@ -6,7 +6,7 @@ use App\Models\User\Farmer\Farmer;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Relation;
 
-class BatchEditFarmersLayout extends AnikulturaEditLayout
+class BatchEditMemberLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {

@@ -31,8 +31,8 @@ class BatchEditSiteLayout extends AnikulturaEditLayout
                 Relation::make('batch.municity_id')
                     ->fromModel(Municity::class, 'name')
                     ->required()
-                    ->title('Municity')
-                    ->placeholder(__('Municity')),
+                    ->title('Municipality or City')
+                    ->placeholder(__('Municipality or City')),
                 Input::make('batch.barangay')
                     ->type('text')
                     ->max(255)

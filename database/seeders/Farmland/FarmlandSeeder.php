@@ -2,10 +2,11 @@
 
 namespace Database\Seeders\Farmland;
 
+use App\Models\Batch\Batch;
 use App\Models\Farmland\CropBuyer;
 use App\Models\Farmland\Farmland;
 use App\Models\Farmland\WateringSystem;
-use App\Models\User\Farmer\Farmer;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class FarmlandSeeder extends Seeder
@@ -23,13 +24,19 @@ class FarmlandSeeder extends Seeder
             WateringSystemSeeder::class,
         ]);
 
-        Farmland::factory()->count(10)->create();
+        $batches = Batch::all();
+
+        Farmland::factory()
+            ->count(10)
+            ->sequence(fn (Sequence $sequence) => [
+                'batch_id' => $batches->get($sequence->index),
+            ])
+            ->create();
 
         $wateringSystems = WateringSystem::all();
         $cropBuyers = CropBuyer::all();
-        $farmers = Farmer::all();
 
-        Farmland::all()->each(function ($farmland) use ($wateringSystems, $cropBuyers, $farmers) {
+        Farmland::all()->each(function (Farmland $farmland) use ($wateringSystems, $cropBuyers) {
             $farmland->cropBuyers()->attach(
                 $cropBuyers->random(rand(1, $cropBuyers->count()))->pluck('id')->toArray()
             );
@@ -38,9 +45,7 @@ class FarmlandSeeder extends Seeder
                 $wateringSystems->random(rand(1, $wateringSystems->count()))->pluck('id')->toArray()
             );
 
-            $farmland->farmers()->attach(
-                $farmers->random(rand(1, $farmers->count()))->pluck('id')->toArray()
-            );
+            $farmland->farmers()->attach($farmland->batch->farmers->pluck('id')->toArray());
         });
     }
 }

@@ -4,9 +4,10 @@ namespace App\Orchid\Screens\Farmland;
 
 use App\Actions\Farmland\CreateFarmland;
 use App\Actions\Farmland\DeleteFarmland;
+use App\Models\Batch\Batch;
 use App\Models\Farmland\Farmland;
 use App\Orchid\Layouts\Farmland\FarmlandEditBasicLayout;
-use App\Orchid\Layouts\Farmland\FarmlandEditMemberLayout;
+use App\Orchid\Layouts\Farmland\FarmlandEditMemberListener;
 use App\Orchid\Layouts\Farmland\FarmlandEditOtherLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
@@ -33,29 +34,51 @@ class FarmlandEditScreen extends AnikulturaEditScreen
     {
         return [
             'farmland' => $farmland,
+            'batch' => $farmland->batch,
+        ];
+    }
+
+    public function asyncRetrieveBatch(array $farmland): array
+    {
+        return [
+            'batch' => Batch::find($farmland['batch_id']),
         ];
     }
 
     public function layout(): iterable
     {
+        $tabs = [
+            __('Basic Information') => [
+
+                Layout::block(FarmlandEditBasicLayout::class)
+                    ->title(__('Basic Information'))
+                    ->description(__('This information collects farmlands basic information')),
+
+                Layout::block(FarmlandEditMemberListener::class)
+                    ->title(__('Farmers'))
+                    ->description(__('This information assigns the farmers to this farmland'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ],
+            __('Other Information') => [
+                Layout::block(FarmlandEditOtherLayout::class)
+                    ->title(__('Other Information'))
+                    ->description(__('This information collects other farmland information'))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ],
+        ];
+
         return [
-            Layout::block(FarmlandEditBasicLayout::class)
-                ->title(__('Basic Information'))
-                ->description(__('This information collects farmlands basic information')),
-
-            Layout::block(FarmlandEditMemberLayout::class)
-                ->title(__('Farmers'))
-                ->description(__('This information assigns the farmers to this farmland')),
-
-            Layout::block(FarmlandEditOtherLayout::class)
-                ->title(__('Other Information'))
-                ->description(__('This information collects other farmland information'))
-                ->commands(
-                    Button::make(__('Save'))
-                        ->type(Color::DEFAULT())
-                        ->icon('check')
-                        ->method('save')
-                ),
+            Layout::tabs($tabs)->activeTab(__('Basic Information')),
         ];
     }
 

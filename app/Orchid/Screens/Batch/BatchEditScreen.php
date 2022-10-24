@@ -7,9 +7,9 @@ use App\Actions\Batch\DeleteBatch;
 use App\Actions\Batch\DeleteBatchSeedAllocation;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
-use App\Orchid\Layouts\Batch\BatchEditFarmersLayout;
 use App\Orchid\Layouts\Batch\BatchEditFarmlandLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
+use App\Orchid\Layouts\Batch\BatchEditMemberLayout;
 use App\Orchid\Layouts\Batch\BatchEditSiteLayout;
 use App\Orchid\Layouts\Batch\BatchSeedAllocationCommandLayout;
 use App\Orchid\Layouts\Batch\BatchSeedAllocationListLayout;
@@ -61,7 +61,7 @@ class BatchEditScreen extends AnikulturaEditScreen
                     ->title(__('Batch Farmlands'))
                     ->description(__('The farmlands who belong to this batch'))
                     ->canSee($this->exists()),
-                Layout::block(BatchEditFarmersLayout::class)
+                Layout::block(BatchEditMemberLayout::class)
                     ->title(__('Batch Farmers'))
                     ->description(__('The farmers who belong to this batch'))
                     ->commands(
