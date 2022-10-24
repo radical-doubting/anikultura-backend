@@ -7,7 +7,6 @@ use App\Models\FarmerReport\FarmerReport;
 use App\Orchid\Layouts\FarmerReport\FarmerReportFiltersLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
-use Orchid\Screen\Actions\Link;
 
 class FarmerReportListScreen extends AnikulturaListScreen
 {
@@ -29,9 +28,6 @@ class FarmerReportListScreen extends AnikulturaListScreen
     public function commandBar(): array
     {
         return [
-            Link::make(__('Add'))
-                ->icon('plus')
-                ->route('platform.farmer-reports.create'),
             InsightsHelper::makeLink('farmerReport'),
         ];
     }
