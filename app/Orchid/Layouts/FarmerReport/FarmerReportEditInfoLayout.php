@@ -29,7 +29,7 @@ class FarmerReportEditInfoLayout extends AnikulturaEditLayout
 
         if ($isEditScreen) {
             $isHarvested = $currentReport->isHarvested();
-            $farmlandRelationField->applyScope('farmerBelongToFarmland', $currentReport->farmer->id);
+            $farmlandRelationField->applyScope('ofFarmer', $currentReport->farmer);
         }
 
         $fields = [
