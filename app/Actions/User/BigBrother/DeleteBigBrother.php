@@ -18,9 +18,9 @@ class DeleteBigBrother
 
     public function handle(BigBrother $bigBrother): bool
     {
-        $bigBrother->profile->delete();
+        $bigBrother->delete();
 
-        return $bigBrother->delete();
+        return $bigBrother->profile->delete();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse

@@ -18,9 +18,9 @@ class DeleteAdmin
 
     public function handle(Admin $admin): bool
     {
-        $admin->profile->delete();
+        $admin->delete();
 
-        return $admin->delete();
+        return $admin->profile->delete();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
