@@ -36,6 +36,14 @@ class Farmer extends User
         );
     }
 
+    public function scopeOfFarmland(Builder $query, Farmland $farmland): Builder
+    {
+        return $query->whereHas(
+            'farmlands',
+            fn (Builder $query) => $query->where('id', '=', $farmland->id)
+        );
+    }
+
     public function batches(): BelongsToMany
     {
         return $this->belongsToMany(Batch::class, 'batch_farmers', 'farmer_id', 'batch_id');
