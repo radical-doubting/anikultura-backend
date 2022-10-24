@@ -26,13 +26,3 @@ Route::screen('farmer-reports/{farmerReport}/edit', FarmerReportEditScreen::clas
             ->parent('platform.farmer-reports')
             ->push(__('Edit Farmer Report'), route('platform.farmer-reports.edit', $farmerReport));
     });
-
-// Farmer Reports > Create Farmer Report
-Route::screen('farmer-reports/create', FarmerReportEditScreen::class)
-    ->name('platform.farmer-reports.create')
-    ->middleware(['access:platform.farmer-reports.edit'])
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.farmer-reports')
-            ->push(__('Create Farmer Report'), route('platform.farmer-reports.create'));
-    });
