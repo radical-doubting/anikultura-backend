@@ -12,6 +12,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Route;
+use Orchid\Screen\Actions\Button;
+use Orchid\Support\Color;
 use Orchid\Support\Facades\Dashboard;
 use Orchid\Support\Facades\Layout;
 
@@ -71,8 +73,14 @@ class BatchSeedAllocationEditScreen extends AnikulturaEditScreen
     {
         return [
             Layout::block(BatchSeedAllocationEditLayout::class)
-                ->title(__('Batch Information'))
-                ->description(__('Update your batch\'s information.')),
+                ->title(__('Allocation Information'))
+                ->description(__('Update seed allocation information.'))
+                ->commands(
+                    Button::make(__('Save'))
+                        ->type(Color::DEFAULT())
+                        ->icon('check')
+                        ->method('save')
+                ),
         ];
     }
 
