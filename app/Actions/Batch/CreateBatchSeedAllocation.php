@@ -33,7 +33,10 @@ class CreateBatchSeedAllocation
 
         Toast::info(__('Batch seed allocation was saved successfully!'));
 
-        return redirect()->route('platform.batches.edit', $batch);
+        return redirect()->route('platform.batches.edit', [
+            'batch' => $batch,
+            'seeds' => true,
+        ]);
     }
 
     public function rules(): array
