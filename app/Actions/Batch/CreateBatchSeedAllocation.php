@@ -44,12 +44,19 @@ class CreateBatchSeedAllocation
         return [
             'batchSeedAllocation.crop_id' => [
                 'required',
+                'integer',
+                'exists:crops,id',
             ],
             'batchSeedAllocation.farmer_id' => [
                 'required',
+                'integer',
+                'exists:users,id',
             ],
             'batchSeedAllocation.seed_amount' => [
                 'required',
+                'integer',
+                'min:1',
+                'max:999999',
             ],
         ];
     }
