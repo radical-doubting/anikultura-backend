@@ -33,7 +33,10 @@ class CreateBatchSeedAllocation
 
         Toast::info(__('Batch seed allocation was saved successfully!'));
 
-        return redirect()->route('platform.batches.edit', $batch);
+        return redirect()->route('platform.batches.edit', [
+            'batch' => $batch,
+            'seeds' => true,
+        ]);
     }
 
     public function rules(): array
@@ -41,12 +44,19 @@ class CreateBatchSeedAllocation
         return [
             'batchSeedAllocation.crop_id' => [
                 'required',
+                'integer',
+                'exists:crops,id',
             ],
             'batchSeedAllocation.farmer_id' => [
                 'required',
+                'integer',
+                'exists:users,id',
             ],
             'batchSeedAllocation.seed_amount' => [
                 'required',
+                'integer',
+                'min:1',
+                'max:999999',
             ],
         ];
     }

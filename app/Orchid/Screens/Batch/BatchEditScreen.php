@@ -82,8 +82,10 @@ class BatchEditScreen extends AnikulturaEditScreen
             ];
         }
 
+        $activeTab = request()->get('seeds') ? __('Seeds Allocation') : __('Batch Information');
+
         return [
-            Layout::tabs($tabs)->activeTab(__('Batch Information')),
+            Layout::tabs($tabs)->activeTab($activeTab),
         ];
     }
 
