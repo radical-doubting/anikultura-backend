@@ -6,7 +6,6 @@ use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
 
@@ -14,6 +13,11 @@ class EditUserProfile
 {
     use AsAction;
     use AsOrchidAction;
+
+    public function __construct(
+        protected ValidateUserAccount $validateUserAccount,
+    ) {
+    }
 
     public function handle(User $user, array $userData): void
     {
@@ -29,7 +33,12 @@ class EditUserProfile
          */
         $user = $request->user();
 
-        $this->validateIfUserEmailExistsAlready($user, $request);
+        $this->validateUserAccount->handle(
+            $user,
+            'user',
+            User::class,
+            $request
+        );
 
         $userData = $request->get('user');
 
@@ -38,22 +47,5 @@ class EditUserProfile
         Toast::info(__('Profile updated.'));
 
         return redirect()->route('platform.profile');
-    }
-
-    private function validateIfUserEmailExistsAlready(User $user, Request $request): void
-    {
-        $emailShouldBeUnique = Rule::unique(User::class, 'email')->ignore($user);
-
-        $request->validate([
-            'user.name' => [
-                'required',
-                'alpha_num',
-            ],
-            'user.email' => [
-                'required',
-                'email',
-                $emailShouldBeUnique,
-            ],
-        ]);
     }
 }

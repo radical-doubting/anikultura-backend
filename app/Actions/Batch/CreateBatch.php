@@ -20,13 +20,11 @@ class CreateBatch
             ->fill($batchData)
             ->save();
 
-        $farmers = $batchData['farmers'];
-
         $batch
             ->farmers()
-            ->sync($farmers);
+            ->sync($batchData['farmers']);
 
-        return $batch;
+        return $batch->refresh();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse

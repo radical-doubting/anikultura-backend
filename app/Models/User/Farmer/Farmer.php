@@ -28,11 +28,20 @@ class Farmer extends User
         });
     }
 
-    public function scopeFarmerBelongToBatch(Builder $query, $batchId)
+    public function scopeOfBatch(Builder $query, Batch $batch): Builder
     {
-        return $query->whereHas('batches', function ($q) use ($batchId) {
-            $q->where('id', '=', $batchId);
-        });
+        return $query->whereHas(
+            'batches',
+            fn (Builder $query) => $query->where('id', '=', $batch->id)
+        );
+    }
+
+    public function scopeOfFarmland(Builder $query, Farmland $farmland): Builder
+    {
+        return $query->whereHas(
+            'farmlands',
+            fn (Builder $query) => $query->where('id', '=', $farmland->id)
+        );
     }
 
     public function batches(): BelongsToMany

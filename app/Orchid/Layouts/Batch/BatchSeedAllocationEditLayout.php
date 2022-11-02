@@ -13,14 +13,14 @@ class BatchSeedAllocationEditLayout extends AnikulturaEditLayout
 {
     protected function fields(): array
     {
-        $currentBatchId = $this->query['batch']->id;
+        $batch = $this->query->get('batch');
 
         return [
             Relation::make('batchSeedAllocation.farmer_id')
                 ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('full_name')
-                ->applyScope('farmerBelongToBatch', $currentBatchId)
+                ->applyScope('ofBatch', $batch)
                 ->required()
                 ->title(__('Farmer'))
                 ->placeholder(__('Farmer')),

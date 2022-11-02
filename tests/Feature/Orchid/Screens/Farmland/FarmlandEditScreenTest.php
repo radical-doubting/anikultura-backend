@@ -4,7 +4,6 @@ use App\Models\Farmland\CropBuyer;
 use App\Models\Farmland\Farmland;
 use App\Models\Farmland\WateringSystem;
 use App\Models\User\Admin\Admin;
-use App\Models\User\Farmer\Farmer;
 use Database\Seeders\Batch\BatchSeeder;
 use Database\Seeders\Crop\CropSeeder;
 use Database\Seeders\Farmland\FarmlandStatusSeeder;
@@ -76,7 +75,7 @@ it('creates a farmland from the create screen', function () {
         'hectares_size',
     );
 
-    $randomFarmerId = Farmer::all()->random()->id;
+    $randomFarmerId = $farmland->batch->farmers->first()->id;
     $randomCropBuyerId = CropBuyer::all()->random()->id;
     $randomWateringSystemId = WateringSystem::all()->random()->id;
 

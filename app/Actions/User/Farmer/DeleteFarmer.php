@@ -18,9 +18,9 @@ class DeleteFarmer
 
     public function handle(Farmer $farmer): bool
     {
-        $farmer->profile->delete();
+        $farmer->delete();
 
-        return $farmer->delete();
+        return $farmer->profile->delete();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse

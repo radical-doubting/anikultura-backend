@@ -49,6 +49,10 @@ class ValidateUserAccount
                 'nullable',
                 PasswordRuleHelper::getRule(),
             ],
+            "$userType.contact_number" => [
+                'nullable',
+                'digits:11',
+            ],
         ]);
     }
 }

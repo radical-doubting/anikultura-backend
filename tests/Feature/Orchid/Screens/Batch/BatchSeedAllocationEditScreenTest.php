@@ -33,7 +33,7 @@ it('shows create batch seed allocation screen', function () {
 
     $screen->display()
         ->assertSee('Create batch seed allocation')
-        ->assertSee('Batch Information')
+        ->assertSee('Allocation Information')
         ->assertSee('Save');
 });
 
@@ -53,7 +53,7 @@ it('shows an existing batch seed allocation from the edit screen', function () {
 
     $screen->display()
         ->assertSee('Edit batch seed allocation')
-        ->assertSee('Batch Information')
+        ->assertSee('Allocation Information')
         ->assertSee('Remove')
         ->assertSee('Save')
         ->assertSee($batchSeedAllocation->farmer->first_name)

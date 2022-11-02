@@ -1,13 +1,16 @@
 .git
+.gitattributes
 .gitignore
 .github
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
-/storage/framework/cache
-/storage/framework/views
-/storage/app
+/storage/framework/cache/*
+/storage/framework/views/*
+/storage/framework/logs/*
+/storage/framework/testing/*
+/storage/app/**/*
 /docker
 /tests
 /vendor
@@ -25,3 +28,4 @@ phpunit.xml
 .phpstorm.meta.php
 .editorconfig
 *.log
+agent-linux-amd64

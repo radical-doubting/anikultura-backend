@@ -32,12 +32,7 @@ class RetrieveCurrentSeedStage
         Farmer $farmer,
         Farmland $farmland
     ): void {
-        $query = Farmer::query()->whereHas(
-            'farmlands',
-            fn ($q) => $q->where('id', $farmland->id)
-        );
-
-        $farmer = $query->find($farmer->id);
+        $farmer = Farmer::ofFarmland($farmland)->find($farmer->id);
 
         if (is_null($farmer)) {
             throw new Exception('Farmer does not belong to farmland');

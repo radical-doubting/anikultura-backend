@@ -66,11 +66,12 @@ class Farmland extends Model
         return "{$this->name} - {$farmlandSchoolName}";
     }
 
-    public function scopeFarmerBelongToFarmland(Builder $query, $farmerId)
+    public function scopeOfFarmer(Builder $query, Farmer $farmer): Builder
     {
-        return $query->whereHas('farmers', function ($q) use ($farmerId) {
-            $q->whereIn('id', [$farmerId]);
-        });
+        return $query->whereHas(
+            'farmers',
+            fn (Builder $query) => $query->whereIn('id', [$farmer->id])
+        );
     }
 
     /**
