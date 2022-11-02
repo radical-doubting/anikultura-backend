@@ -26,7 +26,9 @@ RUN find /www -type d -exec chmod -R 555 {} \; \
     && find /www/storage /www/bootstrap/cache -type d -exec chmod -R 755 {} \; \
     && find /www/storage /www/bootstrap/cache -type f -exec chmod -R 644 {} \;
 
-RUN composer install --no-dev --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+RUN chmod +x setup-agent.sh
+
+RUN composer install --no-dev --no-ansi --no-interaction --no-progress --prefer-dist
 
 EXPOSE 80
 EXPOSE 443
