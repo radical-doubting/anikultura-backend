@@ -28,11 +28,12 @@ it('shows create screen', function () {
 });
 
 it('shows an existing admin from the edit screen', function () {
+    $loggedInAdmin = Admin::first();
     $admin = Admin::factory()->createOne();
 
     $screen = screen('platform.admins.edit')
         ->parameters([$admin->id])
-        ->actingAs(Admin::first());
+        ->actingAs($loggedInAdmin);
 
     $screen->display()
         ->assertSee('Edit administrator')
@@ -92,6 +93,7 @@ it('creates an admin from the create screen', function () {
 });
 
 it('deletes an existing admin from the edit screen', function () {
+    $loggedInAdmin = Admin::first();
     $adminProfile = AdminProfile::factory()->createOne();
     $admin = Admin::factory()->createOne([
         'profile_id' => $adminProfile->id,
@@ -108,7 +110,7 @@ it('deletes an existing admin from the edit screen', function () {
 
     $screen = screen('platform.admins.edit')
         ->parameters([$admin->id])
-        ->actingAs(Admin::first());
+        ->actingAs($loggedInAdmin);
 
     $screen
         ->method('remove')
