@@ -13,6 +13,8 @@ use App\Orchid\Layouts\User\Farmer\FarmerEditJobEducationLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditPasswordLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditPersonalLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditSalaryLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerListBatchLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerListFarmlandLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -49,6 +51,8 @@ class FarmerEditScreen extends AnikulturaEditScreen
             'farmer' => $farmer,
             'farmerProfile' => $farmerProfile,
             'farmerAddress' => $farmerAddress,
+            'batches' => $farmer->batches,
+            'farmlands' => $farmer->farmlands,
         ];
     }
 
@@ -101,6 +105,18 @@ class FarmerEditScreen extends AnikulturaEditScreen
                     ),
             ],
         ];
+
+        if ($this->exists()) {
+            $tabs[__('Assignment Information')] = [
+                Layout::block(FarmerListBatchLayout::class)
+                    ->title(__('Batches'))
+                    ->description(__('This farmer belongs to the following batches.')),
+
+                Layout::block(FarmerListFarmlandLayout::class)
+                    ->title(__('Farmlands'))
+                    ->description(__('This farmer belongs to the following farmlands.')),
+            ];
+        }
 
         return [
             Layout::tabs($tabs)->activeTab(__('Account Information')),
