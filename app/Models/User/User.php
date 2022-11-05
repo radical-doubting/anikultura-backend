@@ -149,4 +149,9 @@ class User extends Authenticatable implements JWTSubject, HasLocalePreference
     {
         return new UserPresenter($this);
     }
+
+    public function isAdministrator(): bool
+    {
+        return $this->inRole('admin');
+    }
 }
