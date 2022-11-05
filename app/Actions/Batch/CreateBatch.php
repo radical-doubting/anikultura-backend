@@ -24,6 +24,10 @@ class CreateBatch
             ->farmers()
             ->sync($batchData['farmers']);
 
+        $batch
+            ->bigBrothers()
+            ->sync($batchData['bigBrothers']);
+
         return $batch->refresh();
     }
 
@@ -67,6 +71,14 @@ class CreateBatch
                 'array',
             ],
             'batch.farmers.*' => [
+                'integer',
+                'exists:users,id',
+            ],
+            'batch.bigBrothers' => [
+                'required',
+                'array',
+            ],
+            'batch.bigBrothers.*' => [
                 'integer',
                 'exists:users,id',
             ],
