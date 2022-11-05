@@ -8,11 +8,13 @@ use App\Models\Site\Province;
 use App\Models\Site\Region;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
+use App\Models\User\User;
 use App\Orchid\Presenters\Batch\BatchPresenter;
 use App\Traits\Loggable;
 use Chelout\RelationshipEvents\Concerns\HasBelongsToManyEvents;
 use Chelout\RelationshipEvents\Traits\HasRelationshipObservables;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -67,6 +69,14 @@ class Batch extends Model
     protected static function boot()
     {
         parent::boot();
+    }
+
+    public function scopeOfBigBrother(Builder $query, User $user): Builder
+    {
+        return $query->whereHas(
+            'bigBrothers',
+            fn (Builder $query) => $query->where('big_brother_id', '=', $user->id)
+        );
     }
 
     public function region(): BelongsTo
