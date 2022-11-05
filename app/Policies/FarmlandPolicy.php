@@ -26,7 +26,7 @@ class FarmlandPolicy
 
     public function view(User $user, Farmland $farmland): bool
     {
-        return $farmland->batch->bigBrothers->contains($user->id);
+        return $this->belongsToFarmland($user, $farmland);
     }
 
     public function create(User $user): bool
@@ -36,11 +36,22 @@ class FarmlandPolicy
 
     public function update(User $user, Farmland $farmland): bool
     {
-        return $farmland->batch->bigBrothers->contains($user->id);
+        return $this->belongsToFarmland($user, $farmland);
     }
 
     public function delete(User $user, Farmland $farmland): bool
     {
         return $user->isAdministrator();
+    }
+
+    private function belongsToFarmland(User $user, Farmland $farmland): bool
+    {
+        $batch = $farmland->batch;
+
+        if (is_null($batch)) {
+            return false;
+        } else {
+            return $batch->bigBrothers->contains($user->id);
+        }
     }
 }
