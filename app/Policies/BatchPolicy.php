@@ -26,7 +26,7 @@ class BatchPolicy
 
     public function view(User $user, Batch $batch): bool
     {
-        return $batch->bigBrothers->contains($user->id);
+        return $this->belongsToBatch($user, $batch);
     }
 
     public function create(User $user): bool
@@ -36,11 +36,16 @@ class BatchPolicy
 
     public function update(User $user, Batch $batch): bool
     {
-        return $batch->bigBrothers->contains($user->id);
+        return $this->belongsToBatch($user, $batch);
     }
 
     public function delete(User $user, Batch $batch): bool
     {
         return $user->isAdministrator();
+    }
+
+    private function belongsToBatch(User $user, Batch $batch): bool
+    {
+        return $batch->bigBrothers->contains($user->id);
     }
 }
