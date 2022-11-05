@@ -2,10 +2,11 @@
 
 use App\Models\Batch\Batch;
 use App\Models\User\Admin\Admin;
+use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
 use Database\Seeders\Site\SiteSeeder;
-use Database\Seeders\User\Admin\AdminProfileSeeder;
 use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\Farmer\FarmerSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseHas;
@@ -16,7 +17,7 @@ beforeEach(function () {
     seed([
         RoleSeeder::class,
         AdminSeeder::class,
-        AdminProfileSeeder::class,
+        BigBrotherSeeder::class,
         SiteSeeder::class,
         FarmerSeeder::class,
     ]);
@@ -29,7 +30,7 @@ it('shows create screen', function () {
         ->assertSee('Create batch')
         ->assertSee('Batch Information')
         ->assertSee('Batch Site')
-        ->assertSee('Batch Farmers')
+        ->assertSee('Batch Members')
         ->assertSee('Save');
 });
 
@@ -45,7 +46,7 @@ it('shows an existing batch from the edit screen', function () {
         ->assertSee('Batch Information')
         ->assertSee('Seeds Allocation')
         ->assertSee('Batch Site')
-        ->assertSee('Batch Farmers')
+        ->assertSee('Batch Members')
         ->assertSee('Remove')
         ->assertSee('Save')
         ->assertSee($batch->farmschool_name);
@@ -66,6 +67,7 @@ it('creates a batch from the create screen', function () {
     );
 
     $randomFarmerId = Farmer::all()->random()->id;
+    $randomBigBrotherId = BigBrother::all()->random()->id;
 
     $screen
         ->method('save', [
@@ -73,6 +75,9 @@ it('creates a batch from the create screen', function () {
                 ...$batchData,
                 'farmers' => [
                     $randomFarmerId,
+                ],
+                'bigBrothers' => [
+                    $randomBigBrotherId,
                 ],
             ],
         ])
