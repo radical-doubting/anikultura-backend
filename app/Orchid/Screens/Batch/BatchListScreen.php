@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\Batch;
 use App\Actions\Batch\DeleteBatch;
 use App\Helpers\InsightsHelper;
 use App\Models\Batch\Batch;
+use App\Models\User\User;
 use App\Orchid\Layouts\Batch\BatchFiltersLayout;
 use App\Orchid\Layouts\Batch\BatchListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
@@ -20,8 +21,20 @@ class BatchListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $query = Batch::query();
+
+        if ($user->cannot('viewAny', Batch::class)) {
+            $query = $query->ofBigBrother($user);
+        }
+
         return [
-            'batches' => Batch::filters()
+            'batches' => $query
+                ->filters()
                 ->filtersApplySelection(BatchFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),

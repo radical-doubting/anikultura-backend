@@ -41,6 +41,8 @@ class BatchEditScreen extends AnikulturaEditScreen
 
     public function query(Batch $batch): array
     {
+        $this->authorize('view', $batch);
+
         return [
             'batch' => $batch,
             'batchSeedAllocations' => $batch->seedAllocations,
