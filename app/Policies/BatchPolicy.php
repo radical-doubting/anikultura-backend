@@ -14,6 +14,8 @@ class BatchPolicy
     {
         if ($user->isAdministrator()) {
             return true;
+        } else {
+            return null;
         }
     }
 
