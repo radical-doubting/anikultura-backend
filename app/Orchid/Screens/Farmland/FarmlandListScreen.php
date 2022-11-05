@@ -20,8 +20,20 @@ class FarmlandListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $query = Farmland::query();
+
+        if ($user->cannot('viewAny', Farmland::class)) {
+            $query = $query->ofBigBrother($user);
+        }
+
         return [
-            'farmlands' => Farmland::filters()
+            'farmlands' => $query
+                ->filters()
                 ->filtersApplySelection(FarmlandFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),

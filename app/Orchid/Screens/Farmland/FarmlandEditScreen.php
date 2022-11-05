@@ -32,6 +32,8 @@ class FarmlandEditScreen extends AnikulturaEditScreen
 
     public function query(Farmland $farmland): array
     {
+        $this->authorize('view', $farmland);
+
         return [
             'farmland' => $farmland,
             'batch' => $farmland->batch,
