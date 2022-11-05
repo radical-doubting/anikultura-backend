@@ -22,7 +22,6 @@ class BatchListScreen extends AnikulturaListScreen
     {
         return [
             'batches' => Batch::filters()
-                ->filters()
                 ->filtersApplySelection(BatchFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
