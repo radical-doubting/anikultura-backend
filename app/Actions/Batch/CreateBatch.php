@@ -3,6 +3,7 @@
 namespace App\Actions\Batch;
 
 use App\Models\Batch\Batch;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -83,5 +84,15 @@ class CreateBatch
                 'exists:users,id',
             ],
         ];
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $model);
     }
 }

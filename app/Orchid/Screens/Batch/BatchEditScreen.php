@@ -91,9 +91,9 @@ class BatchEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function removeBatch(Batch $batch): RedirectResponse
+    public function removeBatch(Batch $batch, Request $request): RedirectResponse
     {
-        return DeleteBatch::runOrchidAction($batch, null);
+        return DeleteBatch::runOrchidAction($batch, $request);
     }
 
     public function removeBatchSeedAllocation(BatchSeedAllocation $batchSeedAllocation): RedirectResponse
