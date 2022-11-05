@@ -2,23 +2,21 @@
 
 namespace App\Providers;
 
+use App\Models\Batch\Batch;
+use App\Policies\BatchPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        Batch::class => BatchPolicy::class,
     ];
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
-
-        //
     }
 }
