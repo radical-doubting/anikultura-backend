@@ -62,8 +62,8 @@ class BatchEditScreen extends AnikulturaEditScreen
                     ->description(__('The farmlands who belong to this batch'))
                     ->canSee($this->exists()),
                 Layout::block(BatchEditMemberLayout::class)
-                    ->title(__('Batch Farmers'))
-                    ->description(__('The farmers who belong to this batch'))
+                    ->title(__('Batch Members'))
+                    ->description(__('The members who belong to this batch'))
                     ->commands(
                         Button::make(__('Save'))
                             ->type(Color::DEFAULT())
