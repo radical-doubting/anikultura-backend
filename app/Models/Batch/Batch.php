@@ -88,6 +88,11 @@ class Batch extends Model
         return $this->belongsToMany(Farmer::class, 'batch_farmers', 'batch_id', 'farmer_id');
     }
 
+    public function bigBrothers(): BelongsToMany
+    {
+        return $this->belongsToMany(Farmer::class, 'batch_big_brothers', 'batch_id', 'big_brother_id');
+    }
+
     public function seedAllocations(): HasMany
     {
         return $this->hasMany(BatchSeedAllocation::class);
