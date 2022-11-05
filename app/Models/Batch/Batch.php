@@ -6,6 +6,7 @@ use App\Models\Farmland\Farmland;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
+use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
 use App\Orchid\Presenters\Batch\BatchPresenter;
 use App\Traits\Loggable;
@@ -90,7 +91,7 @@ class Batch extends Model
 
     public function bigBrothers(): BelongsToMany
     {
-        return $this->belongsToMany(Farmer::class, 'batch_big_brothers', 'batch_id', 'big_brother_id');
+        return $this->belongsToMany(BigBrother::class, 'batch_big_brothers', 'batch_id', 'big_brother_id');
     }
 
     public function seedAllocations(): HasMany
