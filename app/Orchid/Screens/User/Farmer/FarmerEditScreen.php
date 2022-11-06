@@ -9,6 +9,7 @@ use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;
 use App\Orchid\Layouts\User\Farmer\FarmerEditAccountLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditAddressLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerEditAssignmentLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditJobEducationLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditPasswordLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditPersonalLayout;
@@ -117,6 +118,18 @@ class FarmerEditScreen extends AnikulturaEditScreen
                 Layout::block(FarmerListFarmlandLayout::class)
                     ->title(__('Farmlands'))
                     ->description(__('This farmer belongs to the following farmlands.')),
+            ];
+        } else {
+            $tabs[__('Assignment Information')] = [
+                Layout::block(FarmerEditAssignmentLayout::class)
+                    ->title(__('Assignment Information'))
+                    ->description(__("This information collects farmer's assignment information."))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
             ];
         }
 
