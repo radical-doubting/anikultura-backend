@@ -27,6 +27,11 @@ abstract class AnikulturaEditScreen extends Screen
 
     abstract public function layout(): iterable;
 
+    public function canSeeRemove(): bool
+    {
+        return $this->exists();
+    }
+
     public function name(): string
     {
         $replace = [
@@ -63,7 +68,7 @@ abstract class AnikulturaEditScreen extends Screen
                 ->icon('trash')
                 ->confirm($confirmText)
                 ->method($this->removeMethod)
-                ->canSee($this->exists()),
+                ->canSee($this->canSeeRemove()),
             Button::make(__('Save'))
                 ->icon('check')
                 ->method($this->saveMethod),
