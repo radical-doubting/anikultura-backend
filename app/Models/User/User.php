@@ -154,4 +154,9 @@ class User extends Authenticatable implements JWTSubject, HasLocalePreference
     {
         return $this->inRole('admin');
     }
+
+    public function isBigBrother(): bool
+    {
+        return $this->inRole('big-brother');
+    }
 }
