@@ -43,10 +43,16 @@ class BatchListScreen extends AnikulturaListScreen
 
     public function commandBar(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.batches.create'),
+                ->route('platform.batches.create')
+                ->canSee($user->can('create', Batch::class)),
             InsightsHelper::makeLink('batch'),
         ];
     }

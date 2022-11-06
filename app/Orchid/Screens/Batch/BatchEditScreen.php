@@ -7,6 +7,7 @@ use App\Actions\Batch\DeleteBatch;
 use App\Actions\Batch\DeleteBatchSeedAllocation;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
+use App\Models\User\User;
 use App\Orchid\Layouts\Batch\BatchEditFarmlandLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditMemberLayout;
@@ -47,6 +48,16 @@ class BatchEditScreen extends AnikulturaEditScreen
             'batch' => $batch,
             'batchSeedAllocations' => $batch->seedAllocations,
         ];
+    }
+
+    public function canSeeRemove(): bool
+    {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        return $this->exists() && $user->can('delete', $this->batch);
     }
 
     public function layout(): array
