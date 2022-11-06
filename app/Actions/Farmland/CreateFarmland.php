@@ -19,13 +19,13 @@ class CreateFarmland
 
     public function handle(Farmland $farmland, array $farmlandData, User $user): Farmland
     {
+        $farmland->fill($farmlandData);
+
         if ($user->isBigBrother()) {
             $this->validateIfBigBrotherBelongsToBatch($farmland, $user);
         }
 
-        $farmland
-            ->fill($farmlandData)
-            ->save();
+        $farmland->save();
 
         $farmland
             ->wateringSystems()
@@ -78,9 +78,13 @@ class CreateFarmland
         } catch (Exception $exception) {
             Toast::error($exception->getMessage());
 
-            return redirect()->route('platform.farmlands.edit', [
-                $model->id,
-            ]);
+            if ($model->exists) {
+                return redirect()->route('platform.farmlands.edit', [
+                    $model->id,
+                ]);
+            } else {
+                return redirect()->route('platform.farmlands.create');
+            }
         }
 
         Toast::info(__('Farmland was saved successfully!'));
