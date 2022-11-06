@@ -161,6 +161,11 @@ class FarmerReport extends Model
         return (int) $this->status_id === FarmerReportStatus::valid()->id;
     }
 
+    public function isUnverified(): bool
+    {
+        return (int) $this->status_id === FarmerReportStatus::unverified()->id;
+    }
+
     private function getSeedStageFromSlug(string $slug)
     {
         return SeedStage::where('slug', $slug)
