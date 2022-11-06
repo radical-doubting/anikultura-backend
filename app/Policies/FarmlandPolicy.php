@@ -26,7 +26,11 @@ class FarmlandPolicy
 
     public function view(User $user, Farmland $farmland): bool
     {
-        return $this->belongsToFarmland($user, $farmland);
+        if ($farmland->exists) {
+            return $this->belongsToFarmland($user, $farmland);
+        } else {
+            return $user->isAdministrator() || $user->isBigBrother();
+        }
     }
 
     public function create(User $user): bool
