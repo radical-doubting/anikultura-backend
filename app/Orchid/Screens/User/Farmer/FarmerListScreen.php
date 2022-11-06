@@ -10,6 +10,7 @@ use App\Orchid\Layouts\User\Farmer\FarmerFiltersLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class FarmerListScreen extends AnikulturaListScreen
@@ -59,8 +60,8 @@ class FarmerListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Farmer $farmer): RedirectResponse
+    public function remove(Farmer $farmer, Request $request): RedirectResponse
     {
-        return DeleteFarmer::runOrchidAction($farmer, null);
+        return DeleteFarmer::runOrchidAction($farmer, $request);
     }
 }
