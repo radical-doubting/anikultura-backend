@@ -88,8 +88,8 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
         return CreateFarmerReport::runOrchidAction($farmerReport, $request);
     }
 
-    public function remove(FarmerReport $farmerReport): RedirectResponse
+    public function remove(FarmerReport $farmerReport, Request $request): RedirectResponse
     {
-        return DeleteFarmerReport::runOrchidAction($farmerReport, null);
+        return DeleteFarmerReport::runOrchidAction($farmerReport, $request);
     }
 }
