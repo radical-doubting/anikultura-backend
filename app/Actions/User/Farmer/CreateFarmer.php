@@ -42,6 +42,7 @@ class CreateFarmer
         );
 
         $this->updateProfileType($createdAccount, $updatedFarmerProfile);
+        $this->createFarmerAssignment($farmer, $farmerData);
 
         $farmerAddress = $this->createFarmerAddressOrUpdate($updatedFarmerProfile);
 
@@ -78,6 +79,45 @@ class CreateFarmer
         return is_null($farmerAddress) ? new FarmerAddress() : $farmerAddress;
     }
 
+    private function createFarmerAssignment(Farmer $farmer, array $farmerData): void
+    {
+        if (! array_key_exists('assignment', $farmerData)) {
+            return;
+        }
+
+        $assignmentData = $farmerData['assignment'];
+
+        $farmer
+            ->batches()
+            ->sync($assignmentData['batches']);
+
+        $farmer
+            ->farmlands()
+            ->sync($assignmentData['farmlands']);
+    }
+
+    private function validateFarmerAssignment(Farmer $farmer, Request $request): void
+    {
+        $request->validate([
+            'farmerAssignment.batches' => [
+                'required',
+                'array',
+            ],
+            'farmerAssignment.batches.*' => [
+                'integer',
+                'exists:batches,id',
+            ],
+            'farmerAssignment.farmlands' => [
+                'required',
+                'array',
+            ],
+            'farmerAssignment.farmlands.*' => [
+                'integer',
+                'exists:farmlands,id',
+            ],
+        ]);
+    }
+
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $this->validateUserAccount->handle(
@@ -87,11 +127,18 @@ class CreateFarmer
             $request
         );
 
-        $this->handle($model, [
+        $farmerData = [
             'account' => $request->get('farmer'),
             'profile' => $request->get('farmerProfile'),
             'address' => $request->get('farmerAddress'),
-        ]);
+        ];
+
+        if (! $model->exists) {
+            $this->validateFarmerAssignment($model, $request);
+            $farmerData['assignment'] = $request->get('farmerAssignment');
+        }
+
+        $this->handle($model, $farmerData);
 
         Toast::info(__('Farmer was saved successfully!'));
 
