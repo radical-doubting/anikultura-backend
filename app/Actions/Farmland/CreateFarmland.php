@@ -17,8 +17,12 @@ class CreateFarmland
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Farmland $farmland, array $farmlandData): Farmland
+    public function handle(Farmland $farmland, array $farmlandData, User $user): Farmland
     {
+        if ($user->isBigBrother()) {
+            $this->validateIfBigBrotherBelongsToBatch($farmland, $user);
+        }
+
         $farmland
             ->fill($farmlandData)
             ->save();
@@ -53,6 +57,13 @@ class CreateFarmland
         }
     }
 
+    private function validateIfBigBrotherBelongsToBatch(Farmland $farmland, User $user): void
+    {
+        if (! $farmland->batch->bigBrothers->contains('id', $user->id)) {
+            throw new Exception('Big Brother does not belong to batch');
+        }
+    }
+
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         /**
@@ -60,14 +71,10 @@ class CreateFarmland
          */
         $user = $request->user();
 
-        if ($user->isAdministrator()) {
-            $this->validateBatch($request);
-        }
-
         $farmlandData = $request->get('farmland');
 
         try {
-            $this->handle($model, $farmlandData);
+            $this->handle($model, $farmlandData, $user);
         } catch (Exception $exception) {
             Toast::error($exception->getMessage());
 
@@ -81,17 +88,6 @@ class CreateFarmland
         return redirect()->route('platform.farmlands');
     }
 
-    private function validateBatch(Request $request): void
-    {
-        $request->validate([
-            'farmland.batch_id' => [
-                'required',
-                'integer',
-                'exists:batches,id',
-            ],
-        ]);
-    }
-
     public function rules(): array
     {
         return [
@@ -100,6 +96,11 @@ class CreateFarmland
                 'alpha_num_space_dash',
                 'min:3',
                 'max:70',
+            ],
+            'farmland.batch_id' => [
+                'required',
+                'integer',
+                'exists:batches,id',
             ],
             'farmland.type_id' => [
                 'required',

@@ -20,6 +20,16 @@ class FarmlandEditBasicLayout extends AnikulturaEditLayout
          */
         $user = auth()->user();
 
+        $batchRelationField = Relation::make('farmland.batch_id')
+            ->fromModel(Batch::class, 'farmschool_name')
+            ->required()
+            ->title('Batch')
+            ->placeholder(__('Batch'));
+
+        if ($user->isBigBrother()) {
+            $batchRelationField = $batchRelationField->applyScope('ofBigBrother', $user);
+        }
+
         return [
             Input::make('farmland.name')
                 ->type('text')
@@ -27,12 +37,7 @@ class FarmlandEditBasicLayout extends AnikulturaEditLayout
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
 
-            Relation::make('farmland.batch_id')
-                ->fromModel(Batch::class, 'farmschool_name')
-                ->required()
-                ->title('Batch')
-                ->placeholder(__('Batch'))
-                ->canSee($user->isAdministrator()),
+            $batchRelationField,
 
             Group::make([
                 Relation::make('farmland.type_id')
