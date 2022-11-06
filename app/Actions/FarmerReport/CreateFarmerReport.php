@@ -44,7 +44,9 @@ class CreateFarmerReport
 
         Toast::info(__('Farmer report was saved successfully!'));
 
-        return redirect()->route('platform.farmer-reports');
+        return redirect()->route('platform.farmer-reports.edit', [
+            $model->id,
+        ]);
     }
 
     public function rules(): array
