@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\Farmland;
 use App\Actions\Farmland\DeleteFarmland;
 use App\Helpers\InsightsHelper;
 use App\Models\Farmland\Farmland;
+use App\Models\User\User;
 use App\Orchid\Layouts\Farmland\FarmlandFiltersLayout;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
