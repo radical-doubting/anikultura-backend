@@ -33,6 +33,8 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
 
     public function query(FarmerReport $farmerReport): array
     {
+        $this->authorize('view', $farmerReport);
+
         return [
             'farmerReport' => $farmerReport,
         ];
