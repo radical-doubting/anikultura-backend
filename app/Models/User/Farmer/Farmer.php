@@ -44,6 +44,23 @@ class Farmer extends User
         );
     }
 
+    public function scopeOfBigBrother(Builder $query, User $user): Builder
+    {
+        $nestedQuery = fn (Builder $query) => $query->where(
+            'big_brother_id',
+            '=',
+            $user->id
+        );
+
+        return $query->whereHas(
+            'batches',
+            fn (Builder $query) => $query->whereHas(
+                'bigBrothers',
+                $nestedQuery
+            )
+        );
+    }
+
     public function batches(): BelongsToMany
     {
         return $this->belongsToMany(Batch::class, 'batch_farmers', 'farmer_id', 'batch_id');
