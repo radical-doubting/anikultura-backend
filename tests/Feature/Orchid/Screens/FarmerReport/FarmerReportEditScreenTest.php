@@ -212,7 +212,7 @@ it('does not verify any farmer report from the edit screen as big brother', func
         ->assertDontSee('Farmer report was saved successfully!');
 
     assertDatabaseMissing('farmer_reports', $farmerReportData);
-})->only();
+});
 
 it('verifies a belonging farmer report from the edit screen as big brother', function () {
     $bigBrother = BigBrother::first();
