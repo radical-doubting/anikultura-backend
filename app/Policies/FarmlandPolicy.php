@@ -31,7 +31,7 @@ class FarmlandPolicy
 
     public function create(User $user): bool
     {
-        return $user->isAdministrator();
+        return $user->isAdministrator() || $user->isBigBrother();
     }
 
     public function update(User $user, Farmland $farmland): bool
@@ -41,7 +41,7 @@ class FarmlandPolicy
 
     public function delete(User $user, Farmland $farmland): bool
     {
-        return $user->isAdministrator();
+        return $user->isAdministrator() || $user->isBigBrother();
     }
 
     private function belongsToFarmland(User $user, Farmland $farmland): bool
