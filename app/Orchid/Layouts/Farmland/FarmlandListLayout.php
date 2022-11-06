@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Farmland;
 
 use App\Models\Farmland\Farmland;
+use App\Models\User\User;
 use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -15,6 +16,11 @@ class FarmlandListLayout extends AnikulturaListLayout
 
     protected function columns(): iterable
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
         return [
             TD::make('name', __('Name'))
                 ->sort()
@@ -54,7 +60,7 @@ class FarmlandListLayout extends AnikulturaListLayout
                 ->align(TD::ALIGN_CENTER)
                 ->cantHide()
                 ->width('100px')
-                ->render(function (Farmland $farmland) {
+                ->render(function (Farmland $farmland) use ($user) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
@@ -68,7 +74,8 @@ class FarmlandListLayout extends AnikulturaListLayout
                                 ->confirm(__('Once the farmland is deleted, all of its resources and data will be permanently deleted.'))
                                 ->parameters([
                                     'id' => $farmland->id,
-                                ]),
+                                ])
+                                ->canSee($user->can('delete', $farmland)),
                         ]);
                 }),
         ];

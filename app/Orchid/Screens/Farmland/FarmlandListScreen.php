@@ -10,6 +10,7 @@ use App\Orchid\Layouts\Farmland\FarmlandFiltersLayout;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class FarmlandListScreen extends AnikulturaListScreen
@@ -59,8 +60,8 @@ class FarmlandListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Farmland $farmland): RedirectResponse
+    public function remove(Farmland $farmland, Request $request): RedirectResponse
     {
-        return DeleteFarmland::runOrchidAction($farmland, null);
+        return DeleteFarmland::runOrchidAction($farmland, $request);
     }
 }
