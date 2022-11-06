@@ -3,6 +3,7 @@
 namespace App\Orchid\Layouts\Batch;
 
 use App\Models\Batch\Batch;
+use App\Models\User\User;
 use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
@@ -15,6 +16,11 @@ class BatchListLayout extends AnikulturaListLayout
 
     protected function columns(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
         return [
             TD::make('farmschool_name', __('Farmschool Name'))
                 ->sort()
@@ -46,7 +52,7 @@ class BatchListLayout extends AnikulturaListLayout
                 ->align(TD::ALIGN_CENTER)
                 ->cantHide()
                 ->width('100px')
-                ->render(function (Batch $batch) {
+                ->render(function (Batch $batch) use ($user) {
                     return DropDown::make()
                         ->icon('options-vertical')
                         ->list([
@@ -60,7 +66,8 @@ class BatchListLayout extends AnikulturaListLayout
                                 ->confirm(__('Once the batch is deleted, all of its resources and data will be permanently deleted.'))
                                 ->parameters([
                                     'id' => $batch->id,
-                                ]),
+                                ])
+                                ->canSee($user->can('delete', $batch)),
                         ]);
                 }),
         ];

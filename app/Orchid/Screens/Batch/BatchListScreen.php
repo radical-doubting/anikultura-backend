@@ -10,6 +10,7 @@ use App\Orchid\Layouts\Batch\BatchFiltersLayout;
 use App\Orchid\Layouts\Batch\BatchListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class BatchListScreen extends AnikulturaListScreen
@@ -65,8 +66,8 @@ class BatchListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Batch $batch): RedirectResponse
+    public function remove(Batch $batch, Request $request): RedirectResponse
     {
-        return DeleteBatch::runOrchidAction($batch, null);
+        return DeleteBatch::runOrchidAction($batch, $request);
     }
 }
