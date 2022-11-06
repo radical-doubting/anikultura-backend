@@ -4,6 +4,7 @@ namespace App\Orchid\Layouts\Batch;
 
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
+use App\Models\User\User;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Relation;
 
@@ -11,6 +12,11 @@ class BatchEditMemberLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
         return [
             Relation::make('batch.farmers.')
                 ->fromModel(Farmer::class, 'name')
@@ -30,7 +36,8 @@ class BatchEditMemberLayout extends AnikulturaEditLayout
                 ->multiple()
                 ->help(__('Search the name of this batch\'s big brothers'))
                 ->title(__('Big Brothers'))
-                ->placeholder(__('Big Brothers')),
+                ->placeholder(__('Big Brothers'))
+                ->canSee($user->isAdministrator()),
         ];
     }
 }

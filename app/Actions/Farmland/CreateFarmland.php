@@ -4,6 +4,7 @@ namespace App\Actions\Farmland;
 
 use App\Models\Farmland\Farmland;
 use App\Models\User\Farmer\Farmer;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -54,6 +55,15 @@ class CreateFarmland
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        if ($user->isAdministrator()) {
+            $this->validateBatch($request);
+        }
+
         $farmlandData = $request->get('farmland');
 
         try {
@@ -71,6 +81,17 @@ class CreateFarmland
         return redirect()->route('platform.farmlands');
     }
 
+    private function validateBatch(Request $request): void
+    {
+        $request->validate([
+            'farmland.batch_id' => [
+                'required',
+                'integer',
+                'exists:batches,id',
+            ],
+        ]);
+    }
+
     public function rules(): array
     {
         return [
@@ -79,11 +100,6 @@ class CreateFarmland
                 'alpha_num_space_dash',
                 'min:3',
                 'max:70',
-            ],
-            'farmland.batch_id' => [
-                'required',
-                'integer',
-                'exists:batches,id',
             ],
             'farmland.type_id' => [
                 'required',

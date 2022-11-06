@@ -5,6 +5,7 @@ namespace App\Orchid\Layouts\Farmland;
 use App\Models\Batch\Batch;
 use App\Models\Farmland\FarmlandStatus;
 use App\Models\Farmland\FarmlandType;
+use App\Models\User\User;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
@@ -14,6 +15,11 @@ class FarmlandEditBasicLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
         return [
             Input::make('farmland.name')
                 ->type('text')
@@ -25,7 +31,8 @@ class FarmlandEditBasicLayout extends AnikulturaEditLayout
                 ->fromModel(Batch::class, 'farmschool_name')
                 ->required()
                 ->title('Batch')
-                ->placeholder(__('Batch')),
+                ->placeholder(__('Batch'))
+                ->canSee($user->isAdministrator()),
 
             Group::make([
                 Relation::make('farmland.type_id')

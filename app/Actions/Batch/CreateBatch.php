@@ -15,7 +15,7 @@ class CreateBatch
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Batch $batch, array $batchData): Batch
+    public function handle(Batch $batch, array $batchData, User $user): Batch
     {
         $batch
             ->fill($batchData)
@@ -25,22 +25,47 @@ class CreateBatch
             ->farmers()
             ->sync($batchData['farmers']);
 
-        $batch
-            ->bigBrothers()
-            ->sync($batchData['bigBrothers']);
+        if ($user->isAdministrator()) {
+            $batch
+                ->bigBrothers()
+                ->sync($batchData['bigBrothers']);
+        }
 
         return $batch->refresh();
     }
 
     public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        if ($user->isAdministrator()) {
+            $this->validateBigBrothers($request);
+        }
+
         $batchData = $request->get('batch');
 
-        $this->handle($model, $batchData);
+        $this->handle($model, $batchData, $user);
 
         Toast::info(__('Batch was saved successfully!'));
 
         return redirect()->route('platform.batches');
+    }
+
+    private function validateBigBrothers(Request $request): void
+    {
+        $request->validate([
+            'batch.bigBrothers' => [
+                'required',
+                'array',
+            ],
+            'batch.bigBrothers.*' => [
+                'integer',
+                'exists:users,id',
+            ],
+        ]);
     }
 
     public function rules(): array
@@ -72,14 +97,6 @@ class CreateBatch
                 'array',
             ],
             'batch.farmers.*' => [
-                'integer',
-                'exists:users,id',
-            ],
-            'batch.bigBrothers' => [
-                'required',
-                'array',
-            ],
-            'batch.bigBrothers.*' => [
                 'integer',
                 'exists:users,id',
             ],
