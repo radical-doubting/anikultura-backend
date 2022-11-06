@@ -44,6 +44,8 @@ class FarmerEditScreen extends AnikulturaEditScreen
 
     public function query(Farmer $farmer): array
     {
+        $this->authorize('view', $farmer);
+
         $farmerProfile = $farmer->profile;
         $farmerAddress = $farmerProfile?->farmerAddress;
 
