@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Layouts\FarmerReport;
 
-use App\Models\FarmerReport\FarmerReport;
 use App\Models\FarmerReport\FarmerReportStatus;
 use App\Models\User\ManagementUser;
 use App\Orchid\Layouts\AnikulturaEditLayout;
