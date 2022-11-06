@@ -253,4 +253,14 @@ class CreateFarmer
             ],
         ];
     }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $model);
+    }
 }
