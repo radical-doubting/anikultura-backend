@@ -3,6 +3,7 @@
 use App\Models\Batch\Batch;
 use App\Models\Crop\SeedStage;
 use App\Models\FarmerReport\FarmerReport;
+use App\Models\FarmerReport\FarmerReportStatus;
 use App\Models\User\Admin\Admin;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
@@ -144,6 +145,113 @@ it('shows seed planted stage farmer report with disclaimer from the edit screen 
         ->assertSee('Save')
         ->assertSee($farmerReport->farmer->first_name)
         ->assertSee('The estimated yield assuming');
+});
+
+it('verifies any farmer report from the edit screen as admin', function () {
+    $farmerReport = FarmerReport::factory()->createOne([
+        'reported_by' => Farmer::first()->id,
+    ]);
+
+    $farmerReportData = $farmerReport->only(
+        'reported_by',
+        'seed_stage_id',
+        'farmland_id',
+        'crop_id',
+        'volume_kg',
+    );
+
+    $farmerReportData['status_id'] = FarmerReportStatus::valid()->id;
+
+    $screen = screen('platform.farmer-reports.edit')
+        ->parameters([$farmerReport->id])
+        ->actingAs(Admin::first());
+
+    $screen
+        ->method(
+            'save',
+            [
+                'farmerReport' => [
+                    ...$farmerReportData,
+                ],
+            ]
+        )
+        ->assertSee('Farmer report was saved successfully!');
+
+    assertDatabaseHas('farmer_reports', $farmerReportData);
+});
+
+it('does not verify any farmer report from the edit screen as big brother', function () {
+    $farmerReport = FarmerReport::factory()->createOne([
+        'reported_by' => Farmer::first()->id,
+    ]);
+
+    $farmerReportData = $farmerReport->only(
+        'reported_by',
+        'seed_stage_id',
+        'farmland_id',
+        'crop_id',
+        'volume_kg',
+    );
+
+    $farmerReportData['status_id'] = FarmerReportStatus::valid()->id;
+
+    $screen = screen('platform.farmer-reports.edit')
+        ->parameters([$farmerReport->id])
+        ->actingAs(BigBrother::first());
+
+    $screen
+        ->method(
+            'save',
+            [
+                'farmerReport' => [
+                    ...$farmerReportData,
+                ],
+            ]
+        )
+        ->assertDontSee('Farmer report was saved successfully!');
+
+    assertDatabaseHas('farmer_reports', $farmerReportData);
+});
+
+it('verifies a belonging farmer report from the edit screen as big brother', function () {
+    $bigBrother = BigBrother::first();
+
+    $farmerReport = FarmerReport::factory()->createOne([
+        'reported_by' => Farmer::first()->id,
+    ]);
+
+    /**
+     * @var Batch
+     */
+    $batch = $farmerReport->farmland->batch;
+    $batch->bigBrothers()->sync($bigBrother);
+
+    $farmerReportData = $farmerReport->only(
+        'reported_by',
+        'seed_stage_id',
+        'farmland_id',
+        'crop_id',
+        'volume_kg',
+    );
+
+    $farmerReportData['status_id'] = FarmerReportStatus::valid()->id;
+
+    $screen = screen('platform.farmer-reports.edit')
+        ->parameters([$farmerReport->id])
+        ->actingAs($bigBrother);
+
+    $screen
+        ->method(
+            'save',
+            [
+                'farmerReport' => [
+                    ...$farmerReportData,
+                ],
+            ]
+        )
+        ->assertSee('Farmer report was saved successfully!');
+
+    assertDatabaseHas('farmer_reports', $farmerReportData);
 });
 
 it('deletes any farmer report from the edit screen as admin', function () {
