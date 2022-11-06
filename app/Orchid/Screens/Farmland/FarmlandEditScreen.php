@@ -89,8 +89,8 @@ class FarmlandEditScreen extends AnikulturaEditScreen
         return CreateFarmland::runOrchidAction($farmland, $request);
     }
 
-    public function remove(Farmland $farmland): RedirectResponse
+    public function remove(Farmland $farmland, Request $request): RedirectResponse
     {
-        return DeleteFarmland::runOrchidAction($farmland, null);
+        return DeleteFarmland::runOrchidAction($farmland, $request);
     }
 }
