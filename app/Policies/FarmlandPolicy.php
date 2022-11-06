@@ -45,7 +45,7 @@ class FarmlandPolicy
 
     public function delete(User $user, Farmland $farmland): bool
     {
-        return $user->isAdministrator() || $user->isBigBrother();
+        return $this->belongsToFarmland($user, $farmland);
     }
 
     private function belongsToFarmland(User $user, Farmland $farmland): bool
