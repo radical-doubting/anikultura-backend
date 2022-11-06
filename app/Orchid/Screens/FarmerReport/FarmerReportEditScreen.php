@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\FarmerReport;
 use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\DeleteFarmerReport;
 use App\Models\FarmerReport\FarmerReport;
+use App\Models\User\User;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditAttachmentLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditEstimationLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditInfoLayout;
@@ -35,6 +36,16 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
         return [
             'farmerReport' => $farmerReport,
         ];
+    }
+
+    public function canSeeRemove(): bool
+    {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        return $this->exists() && $user->can('delete', $this->farmerReport);
     }
 
     public function layout(): iterable
