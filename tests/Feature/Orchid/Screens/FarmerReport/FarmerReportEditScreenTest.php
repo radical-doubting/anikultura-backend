@@ -183,6 +183,7 @@ it('verifies any farmer report from the edit screen as admin', function () {
 it('does not verify any farmer report from the edit screen as big brother', function () {
     $farmerReport = FarmerReport::factory()->createOne([
         'reported_by' => Farmer::first()->id,
+        'status_id' => FarmerReportStatus::unverified()->id,
     ]);
 
     $farmerReportData = $farmerReport->only(
@@ -210,8 +211,8 @@ it('does not verify any farmer report from the edit screen as big brother', func
         )
         ->assertDontSee('Farmer report was saved successfully!');
 
-    assertDatabaseHas('farmer_reports', $farmerReportData);
-});
+    assertDatabaseMissing('farmer_reports', $farmerReportData);
+})->only();
 
 it('verifies a belonging farmer report from the edit screen as big brother', function () {
     $bigBrother = BigBrother::first();
