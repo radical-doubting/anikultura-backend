@@ -12,6 +12,10 @@ class FarmerReportEditVerificationLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
+        $verifier = $this->query->get('farmerReport.verified_by');
+
+        $hasVerifier = ! is_null($verifier);
+
         return [
             Select::make('farmerReport.status_id')
                 ->fromModel(FarmerReportStatus::class, 'name')
@@ -20,12 +24,14 @@ class FarmerReportEditVerificationLayout extends AnikulturaEditLayout
 
             Relation::make('farmerReport.verified_by')
                 ->fromModel(ManagementUser::class, 'name')
-                ->searchColumns('first_name', 'last_name')
+                ->applyScope('')
                 ->displayAppend('fullNameWithRole')
                 ->required()
                 ->help(__('The big brother or administrator who verified this farming report'))
                 ->title(__('Verified by'))
-                ->placeholder(__('Verified by')),
+                ->placeholder(__('Verified by'))
+                ->canSee($hasVerifier)
+                ->disabled(),
         ];
     }
 }

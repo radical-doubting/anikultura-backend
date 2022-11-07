@@ -5,6 +5,7 @@ namespace App\Orchid\Layouts\Farmland;
 use App\Models\Batch\Batch;
 use App\Models\Farmland\FarmlandStatus;
 use App\Models\Farmland\FarmlandType;
+use App\Models\User\User;
 use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
@@ -14,6 +15,21 @@ class FarmlandEditBasicLayout extends AnikulturaEditLayout
 {
     protected function fields(): iterable
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $batchRelationField = Relation::make('farmland.batch_id')
+            ->fromModel(Batch::class, 'farmschool_name')
+            ->required()
+            ->title('Batch')
+            ->placeholder(__('Batch'));
+
+        if ($user->isBigBrother()) {
+            $batchRelationField = $batchRelationField->applyScope('ofBigBrother', $user);
+        }
+
         return [
             Input::make('farmland.name')
                 ->type('text')
@@ -21,11 +37,7 @@ class FarmlandEditBasicLayout extends AnikulturaEditLayout
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
 
-            Relation::make('farmland.batch_id')
-                ->fromModel(Batch::class, 'farmschool_name')
-                ->required()
-                ->title('Batch')
-                ->placeholder(__('Batch')),
+            $batchRelationField,
 
             Group::make([
                 Relation::make('farmland.type_id')

@@ -9,10 +9,13 @@ use App\Models\User\Farmer\FarmerAddress;
 use App\Models\User\Farmer\FarmerProfile;
 use App\Orchid\Layouts\User\Farmer\FarmerEditAccountLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditAddressLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerEditAssignmentLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditJobEducationLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditPasswordLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditPersonalLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerEditSalaryLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerListBatchLayout;
+use App\Orchid\Layouts\User\Farmer\FarmerListFarmlandLayout;
 use App\Orchid\Screens\AnikulturaEditScreen;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -42,6 +45,8 @@ class FarmerEditScreen extends AnikulturaEditScreen
 
     public function query(Farmer $farmer): array
     {
+        $this->authorize('view', $farmer);
+
         $farmerProfile = $farmer->profile;
         $farmerAddress = $farmerProfile?->farmerAddress;
 
@@ -49,6 +54,8 @@ class FarmerEditScreen extends AnikulturaEditScreen
             'farmer' => $farmer,
             'farmerProfile' => $farmerProfile,
             'farmerAddress' => $farmerAddress,
+            'batches' => $farmer->batches,
+            'farmlands' => $farmer->farmlands,
         ];
     }
 
@@ -102,6 +109,30 @@ class FarmerEditScreen extends AnikulturaEditScreen
             ],
         ];
 
+        if ($this->exists()) {
+            $tabs[__('Assignment Information')] = [
+                Layout::block(FarmerListBatchLayout::class)
+                    ->title(__('Batches'))
+                    ->description(__('This farmer belongs to the following batches.')),
+
+                Layout::block(FarmerListFarmlandLayout::class)
+                    ->title(__('Farmlands'))
+                    ->description(__('This farmer belongs to the following farmlands.')),
+            ];
+        } else {
+            $tabs[__('Assignment Information')] = [
+                Layout::block(FarmerEditAssignmentLayout::class)
+                    ->title(__('Assignment Information'))
+                    ->description(__("This information collects farmer's assignment information."))
+                    ->commands(
+                        Button::make(__('Save'))
+                            ->type(Color::DEFAULT())
+                            ->icon('check')
+                            ->method('save')
+                    ),
+            ];
+        }
+
         return [
             Layout::tabs($tabs)->activeTab(__('Account Information')),
         ];
@@ -112,8 +143,8 @@ class FarmerEditScreen extends AnikulturaEditScreen
         return CreateFarmer::runOrchidAction($farmer, $request);
     }
 
-    public function remove(Farmer $farmer): RedirectResponse
+    public function remove(Farmer $farmer, Request $request): RedirectResponse
     {
-        return DeleteFarmer::runOrchidAction($farmer, null);
+        return DeleteFarmer::runOrchidAction($farmer, $request);
     }
 }

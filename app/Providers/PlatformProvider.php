@@ -69,6 +69,7 @@ class PlatformProvider extends OrchidServiceProvider
 
             Menu::make('Administrative Management')
                 ->icon('building')
+                ->permission('platform.admins.read')
                 ->list([
                     Menu::make('Big Brothers')
                         ->icon('graduation')

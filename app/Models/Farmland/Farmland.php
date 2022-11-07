@@ -4,6 +4,7 @@ namespace App\Models\Farmland;
 
 use App\Models\Batch\Batch;
 use App\Models\User\Farmer\Farmer;
+use App\Models\User\User;
 use App\Orchid\Presenters\Farmland\FarmlandPresenter;
 use App\Traits\Loggable;
 use Illuminate\Database\Eloquent\Builder;
@@ -71,6 +72,20 @@ class Farmland extends Model
         return $query->whereHas(
             'farmers',
             fn (Builder $query) => $query->whereIn('id', [$farmer->id])
+        );
+    }
+
+    public function scopeOfBigBrother(Builder $query, User $user): Builder
+    {
+        $nestedQuery = fn (Builder $query) => $query->where(
+            'big_brother_id',
+            '=',
+            $user->id
+        );
+
+        return $query->whereHas(
+            'batch',
+            fn (Builder $query) => $query->whereHas('bigBrothers', $nestedQuery)
         );
     }
 

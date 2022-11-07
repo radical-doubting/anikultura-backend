@@ -5,10 +5,12 @@ namespace App\Orchid\Screens\User\Farmer;
 use App\Actions\User\Farmer\DeleteFarmer;
 use App\Helpers\InsightsHelper;
 use App\Models\User\Farmer\Farmer;
+use App\Models\User\User;
 use App\Orchid\Layouts\User\Farmer\FarmerFiltersLayout;
 use App\Orchid\Layouts\User\Farmer\FarmerListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class FarmerListScreen extends AnikulturaListScreen
@@ -20,8 +22,19 @@ class FarmerListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $query = Farmer::query();
+
+        if ($user->cannot('viewAny', Farmer::class)) {
+            $query = $query->ofBigBrother($user);
+        }
+
         return [
-            'farmers' => Farmer::with('profile')
+            'farmers' => $query
                 ->filters()
                 ->filtersApplySelection(FarmerFiltersLayout::class)
                 ->defaultSort('id')
@@ -47,8 +60,8 @@ class FarmerListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Farmer $farmer): RedirectResponse
+    public function remove(Farmer $farmer, Request $request): RedirectResponse
     {
-        return DeleteFarmer::runOrchidAction($farmer, null);
+        return DeleteFarmer::runOrchidAction($farmer, $request);
     }
 }
