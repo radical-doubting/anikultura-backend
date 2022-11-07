@@ -50,6 +50,8 @@ class RoleSeeder extends Seeder
                     'platform.index' => 1,
                     'platform.systems.attachment' => 1,
                     'platform.systems.settings' => 1,
+                    'platform.farmers.read' => 1,
+                    'platform.farmers.edit' => 1,
                     'platform.farmlands.read' => 1,
                     'platform.farmlands.edit' => 1,
                     'platform.batches.read' => 1,

@@ -24,6 +24,7 @@ trait AsOrchidAction
     {
         if (isset($request)) {
             $this->validateRequest($request);
+            $this->validateAuthorization($request, $model);
         }
 
         return $this->asOrchidAction($model, $request);
@@ -58,6 +59,18 @@ trait AsOrchidAction
     public function getValidationAttributes(): array
     {
         return [];
+    }
+
+    private function validateAuthorization(Request $request, mixed $model): void
+    {
+        if (! $this->authorize($request, $model)) {
+            abort(403, 'This action is unauthorized.');
+        }
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        return true;
     }
 
     private function debugValidation(Request $request, array $rules)

@@ -7,7 +7,6 @@ use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Layouts\Persona;
 use Orchid\Screen\TD;
 
 class BatchSeedAllocationListLayout extends AnikulturaListLayout
@@ -21,10 +20,12 @@ class BatchSeedAllocationListLayout extends AnikulturaListLayout
         return [
             TD::make('farmer', __('Farmer'))
                 ->sort()
-                ->render(function (BatchSeedAllocation $batchSeedAllocation) {
-                    $farmer = $batchSeedAllocation->farmer;
-
-                    return new Persona($farmer->presenter());
+                ->render(function (BatchSeedAllocation $batchSeedAllocation) use ($currentBatch) {
+                    return Link::make($batchSeedAllocation->farmer->fullName)
+                        ->route('platform.batch-seed-allocations.edit', [
+                            'batch' => $currentBatch,
+                            'batchSeedAllocation' => $batchSeedAllocation,
+                        ]);
                 }),
             TD::make('crop', __('Crop'))
                 ->sort()

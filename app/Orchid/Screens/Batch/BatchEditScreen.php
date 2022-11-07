@@ -7,6 +7,7 @@ use App\Actions\Batch\DeleteBatch;
 use App\Actions\Batch\DeleteBatchSeedAllocation;
 use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
+use App\Models\User\User;
 use App\Orchid\Layouts\Batch\BatchEditFarmlandLayout;
 use App\Orchid\Layouts\Batch\BatchEditLayout;
 use App\Orchid\Layouts\Batch\BatchEditMemberLayout;
@@ -41,10 +42,22 @@ class BatchEditScreen extends AnikulturaEditScreen
 
     public function query(Batch $batch): array
     {
+        $this->authorize('view', $batch);
+
         return [
             'batch' => $batch,
             'batchSeedAllocations' => $batch->seedAllocations,
         ];
+    }
+
+    public function canSeeRemove(): bool
+    {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        return $this->exists() && $user->can('delete', $this->batch);
     }
 
     public function layout(): array
@@ -62,8 +75,8 @@ class BatchEditScreen extends AnikulturaEditScreen
                     ->description(__('The farmlands who belong to this batch'))
                     ->canSee($this->exists()),
                 Layout::block(BatchEditMemberLayout::class)
-                    ->title(__('Batch Farmers'))
-                    ->description(__('The farmers who belong to this batch'))
+                    ->title(__('Batch Members'))
+                    ->description(__('The members who belong to this batch'))
                     ->commands(
                         Button::make(__('Save'))
                             ->type(Color::DEFAULT())
@@ -89,9 +102,9 @@ class BatchEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function removeBatch(Batch $batch): RedirectResponse
+    public function removeBatch(Batch $batch, Request $request): RedirectResponse
     {
-        return DeleteBatch::runOrchidAction($batch, null);
+        return DeleteBatch::runOrchidAction($batch, $request);
     }
 
     public function removeBatchSeedAllocation(BatchSeedAllocation $batchSeedAllocation): RedirectResponse

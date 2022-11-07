@@ -5,6 +5,7 @@ namespace App\Orchid\Screens\FarmerReport;
 use App\Actions\FarmerReport\CreateFarmerReport;
 use App\Actions\FarmerReport\DeleteFarmerReport;
 use App\Models\FarmerReport\FarmerReport;
+use App\Models\User\User;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditAttachmentLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditEstimationLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportEditInfoLayout;
@@ -32,9 +33,21 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
 
     public function query(FarmerReport $farmerReport): array
     {
+        $this->authorize('view', $farmerReport);
+
         return [
             'farmerReport' => $farmerReport,
         ];
+    }
+
+    public function canSeeRemove(): bool
+    {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        return $this->exists() && $user->can('delete', $this->farmerReport);
     }
 
     public function layout(): iterable
@@ -77,8 +90,8 @@ class FarmerReportEditScreen extends AnikulturaEditScreen
         return CreateFarmerReport::runOrchidAction($farmerReport, $request);
     }
 
-    public function remove(FarmerReport $farmerReport): RedirectResponse
+    public function remove(FarmerReport $farmerReport, Request $request): RedirectResponse
     {
-        return DeleteFarmerReport::runOrchidAction($farmerReport, null);
+        return DeleteFarmerReport::runOrchidAction($farmerReport, $request);
     }
 }

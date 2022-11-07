@@ -10,7 +10,9 @@ use App\Models\Crop\SeedStage;
 use App\Models\Farmland\Farmland;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\ManagementUser;
+use App\Models\User\User;
 use App\Traits\Loggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -107,6 +109,35 @@ class FarmerReport extends Model
         return $this->belongsTo(FarmerReportStatus::class);
     }
 
+    public function farmland(): BelongsTo
+    {
+        return $this->belongsTo(Farmland::class);
+    }
+
+    public function crop(): BelongsTo
+    {
+        return $this->belongsTo(Crop::class);
+    }
+
+    public function scopeOfBigBrother(Builder $query, User $user): Builder
+    {
+        $nestedBigBrothersQuery = fn (Builder $query) => $query->where(
+            'big_brother_id',
+            '=',
+            $user->id
+        );
+
+        $nestedBatchQuery = fn (Builder $query) => $query->whereHas(
+            'bigBrothers',
+            $nestedBigBrothersQuery
+        );
+
+        return $query->whereHas(
+            'farmland',
+            fn (Builder $query) => $query->whereHas('batch', $nestedBatchQuery)
+        );
+    }
+
     public function isPlanted(): bool
     {
         $plantedId = (int) Cache::rememberForever('seed_stages:planted_id', function () {
@@ -130,20 +161,15 @@ class FarmerReport extends Model
         return (int) $this->status_id === FarmerReportStatus::valid()->id;
     }
 
+    public function isUnverified(): bool
+    {
+        return (int) $this->status_id === FarmerReportStatus::unverified()->id;
+    }
+
     private function getSeedStageFromSlug(string $slug)
     {
         return SeedStage::where('slug', $slug)
             ->first()
             ->id;
-    }
-
-    public function farmland(): BelongsTo
-    {
-        return $this->belongsTo(Farmland::class);
-    }
-
-    public function crop(): BelongsTo
-    {
-        return $this->belongsTo(Crop::class);
     }
 }
