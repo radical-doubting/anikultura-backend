@@ -312,7 +312,7 @@ it('creates a farmer from the create screen as big brother', function () {
     assertDatabaseCount('farmland_farmers', 1);
 });
 
-it('deletes an existing farmer from the edit screen', function () {
+it('deletes any farmer from the edit screen as admin', function () {
     $farmerProfile = FarmerProfile::factory()->createOne();
 
     FarmerAddress::factory()->createOne([
@@ -335,6 +335,50 @@ it('deletes an existing farmer from the edit screen', function () {
     $screen = screen('platform.farmers.edit')
         ->parameters([$farmer->id])
         ->actingAs(Admin::first());
+
+    $screen
+        ->method('remove')
+        ->assertSee('Farmer was removed successfully!');
+
+    assertDatabaseCount('users', 11);
+    assertDatabaseMissing('users', $farmerData);
+    assertDatabaseCount('farmer_profiles', 0);
+    assertDatabaseCount('farmer_addresses', 0);
+});
+
+it('deletes a belonging farmer from the edit screen as big brother', function () {
+    $bigBrother = BigBrother::first();
+
+    $farmerProfile = FarmerProfile::factory()->createOne();
+
+    FarmerAddress::factory()->createOne([
+        'farmer_profile_id' => $farmerProfile->id,
+    ]);
+
+    $farmer = Farmer::factory()->createOne([
+        'profile_id' => $farmerProfile->id,
+    ]);
+
+    /**
+     * @var Batch
+     */
+    $batch = Batch::factory()->createOne();
+
+    $batch->bigBrothers()->sync($bigBrother);
+    $batch->farmers()->sync($farmer);
+
+    $farmerData = $farmer->only(
+        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
+        'email',
+        'contact_number'
+    );
+
+    $screen = screen('platform.farmers.edit')
+        ->parameters([$farmer->id])
+        ->actingAs($bigBrother);
 
     $screen
         ->method('remove')
