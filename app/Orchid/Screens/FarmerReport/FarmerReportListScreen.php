@@ -13,7 +13,7 @@ class FarmerReportListScreen extends AnikulturaListScreen
 {
     public function name(): string
     {
-        return __('Farmer Report');
+        return __('Farmer Reports');
     }
 
     public function query(): array
