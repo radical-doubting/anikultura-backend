@@ -20,7 +20,8 @@ uses(RefreshDatabase::class)
     ->in(
         'Feature/Actions',
         'Feature/Orchid',
-        'Feature/Traits'
+        'Feature/Traits',
+        'Feature/Observers',
     );
 uses(ScreenTesting::class)
     ->in('Feature/Orchid');
