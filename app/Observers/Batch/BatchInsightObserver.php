@@ -31,8 +31,10 @@ class BatchInsightObserver
 
     /**
      * Handles the farmer assigned to batch event.
+     *
+     * @param  Batch  $model
      */
-    public function belongsToManyAttached(string $relation, Batch $batch, array $farmerIds)
+    public function belongsToManyAttached(string $relation, mixed $model, array $farmerIds): void
     {
         if ($relation != 'farmers') {
             return;
@@ -41,16 +43,18 @@ class BatchInsightObserver
         $farmerAssignedCount = count($farmerIds);
 
         InsightsHelper::incrementGauge('farmer_total', [
-            'region' => $batch->region->slug,
-            'province' => $batch->province->slug,
-            'municity' => $batch->municity->slug,
+            'region' => $model->region->slug,
+            'province' => $model->province->slug,
+            'municity' => $model->municity->slug,
         ], $farmerAssignedCount);
     }
 
     /**
      * Handles the farmer unassigned to batch event.
+     *
+     * @param  Batch  $model
      */
-    public function belongsToManyDetached(string $relation, Batch $batch, array $farmerIds)
+    public function belongsToManyDetached(string $relation, mixed $model, array $farmerIds): void
     {
         if ($relation != 'farmers') {
             return;
@@ -59,9 +63,9 @@ class BatchInsightObserver
         $farmerAssignedCount = count($farmerIds);
 
         InsightsHelper::decrementGauge('farmer_total', [
-            'region' => $batch->region->slug,
-            'province' => $batch->province->slug,
-            'municity' => $batch->municity->slug,
+            'region' => $model->region->slug,
+            'province' => $model->province->slug,
+            'municity' => $model->municity->slug,
         ], $farmerAssignedCount);
     }
 }
