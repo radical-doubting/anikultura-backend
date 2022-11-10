@@ -5,6 +5,7 @@ namespace App\Models\FarmerReport;
 use App\Actions\Crop\CalculateExpectedProfitByVolume;
 use App\Actions\Crop\CalculateExpectedYieldAmount;
 use App\Actions\Crop\CalculateExpectedYieldDate;
+use App\Models\Batch\Batch;
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
 use App\Models\Farmland\Farmland;
@@ -130,6 +131,20 @@ class FarmerReport extends Model
         $nestedBatchQuery = fn (Builder $query) => $query->whereHas(
             'bigBrothers',
             $nestedBigBrothersQuery
+        );
+
+        return $query->whereHas(
+            'farmland',
+            fn (Builder $query) => $query->whereHas('batch', $nestedBatchQuery)
+        );
+    }
+
+    public function scopeOfBatch(Builder $query, Batch $batch): Builder
+    {
+        $nestedBatchQuery = fn (Builder $query) => $query->where(
+            'id',
+            '=',
+            $batch->id,
         );
 
         return $query->whereHas(

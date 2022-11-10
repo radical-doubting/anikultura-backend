@@ -4,6 +4,7 @@ namespace App\Models\Site;
 
 use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -42,6 +43,14 @@ class Province extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function scopeOfRegion(Builder $query, Region $region): Builder
+    {
+        return $query->whereHas(
+            'region',
+            fn (Builder $query) => $query->where('region_id', '=', $region->id)
+        );
+    }
 
     /**
      * Get the region that owns this province.
