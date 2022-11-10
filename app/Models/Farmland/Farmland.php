@@ -3,6 +3,7 @@
 namespace App\Models\Farmland;
 
 use App\Models\Batch\Batch;
+use App\Models\Site\Municity;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\User;
 use App\Orchid\Presenters\Farmland\FarmlandPresenter;
@@ -86,6 +87,18 @@ class Farmland extends Model
         return $query->whereHas(
             'batch',
             fn (Builder $query) => $query->whereHas('bigBrothers', $nestedQuery)
+        );
+    }
+
+    public function scopeOfMunicity(Builder $query, Municity $municity): Builder
+    {
+        return $query->whereHas(
+            'batch',
+            fn (Builder $query) => $query->where(
+                'municity_id',
+                '=',
+                $municity->id
+            )
         );
     }
 
