@@ -24,7 +24,7 @@ class CreateBatchSeedAllocation
         return $batchSeedAllocation->refresh();
     }
 
-    public function asOrchidAction(mixed $models, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $models, Request $request): RedirectResponse
     {
         $batchSeedAllocationData = $request->get('batchSeedAllocation');
         $batch = $models['batch'];

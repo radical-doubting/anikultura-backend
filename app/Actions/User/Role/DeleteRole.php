@@ -20,7 +20,7 @@ class DeleteRole
         return $role->delete();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         $this->handle($model);
 

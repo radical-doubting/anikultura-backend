@@ -34,7 +34,7 @@ class CreateBatch
         return $batch->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         /**
          * @var User

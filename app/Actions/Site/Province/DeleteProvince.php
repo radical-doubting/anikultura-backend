@@ -28,7 +28,7 @@ class DeleteProvince
         return $isDeleted;
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         try {
             $this->handle($model);

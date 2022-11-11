@@ -24,7 +24,7 @@ class CreateCrop
         return $crop->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         $cropData = $request->get('crop');
 

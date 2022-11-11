@@ -76,7 +76,7 @@ class CreateAdmin
         $createdAccount->roles()->sync(Role::admin());
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         $this->validateUserAccount->handle(
             $model,

@@ -22,7 +22,7 @@ class CreateRegion
         return $region->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         $regionData = $request->get('region');
 

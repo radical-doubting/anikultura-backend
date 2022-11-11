@@ -22,7 +22,7 @@ class CreateProvince
         return $province->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         $provinceData = $request->get('province');
 

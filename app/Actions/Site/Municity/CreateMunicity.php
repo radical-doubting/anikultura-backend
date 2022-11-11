@@ -22,7 +22,7 @@ class CreateMunicity
         return $municity->refresh();
     }
 
-    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
+    public function asOrchidAction(mixed $model, Request $request): RedirectResponse
     {
         $municityData = $request->get('municity');
 
