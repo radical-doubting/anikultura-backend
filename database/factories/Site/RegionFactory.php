@@ -21,7 +21,7 @@ class RegionFactory extends Factory
      */
     public function definition()
     {
-        $name = $this->faker->unique()->city();
+        $name = $this->faker->unique()->country();
 
         return [
             'name' => $name,
