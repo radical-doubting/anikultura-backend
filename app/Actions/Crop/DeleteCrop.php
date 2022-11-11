@@ -4,6 +4,7 @@ namespace App\Actions\Crop;
 
 use App\Helpers\ToastHelper;
 use App\Models\Crop\Crop;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -36,5 +37,15 @@ class DeleteCrop
         Toast::info(__('Crop was removed successfully!'));
 
         return redirect()->route('platform.crops');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }
