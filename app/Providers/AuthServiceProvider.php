@@ -13,7 +13,7 @@ use App\Models\User\Admin\Admin;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\Role;
-use App\Policies\BatchPolicy;
+use App\Policies\Batch\BatchPolicy;
 use App\Policies\CropPolicy;
 use App\Policies\FarmerReportPolicy;
 use App\Policies\FarmlandPolicy;
