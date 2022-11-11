@@ -4,6 +4,7 @@ namespace App\Actions\User\Admin;
 
 use App\Helpers\ToastHelper;
 use App\Models\User\Admin\Admin;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,5 +39,15 @@ class DeleteAdmin
         Toast::info(__('Administrator was removed successfully!'));
 
         return redirect()->route('platform.admins');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }

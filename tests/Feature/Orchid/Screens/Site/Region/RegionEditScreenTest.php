@@ -2,8 +2,9 @@
 
 use App\Models\Site\Region;
 use App\Models\User\Admin\Admin;
-use Database\Seeders\User\Admin\AdminProfileSeeder;
+use App\Models\User\BigBrother\BigBrother;
 use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
@@ -13,11 +14,11 @@ beforeEach(function () {
     seed([
         RoleSeeder::class,
         AdminSeeder::class,
-        AdminProfileSeeder::class,
+        BigBrotherSeeder::class,
     ]);
 });
 
-it('shows create screen', function () {
+it('shows create screen as admin', function () {
     $screen = screen('platform.sites.regions.create')->actingAs(Admin::first());
 
     $screen->display()
@@ -26,11 +27,15 @@ it('shows create screen', function () {
         ->assertSee('Save');
 });
 
-it('shows an existing region from the edit screen', function () {
-    $region = Region::create([
-        'name' => 'National Capital Region',
-        'short_name' => 'NCR',
-    ]);
+it('does not show create screen as big brother', function () {
+    $screen = screen('platform.sites.regions.create')->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('shows an existing region from the edit screen as admin', function () {
+    $region = Region::factory()->createOne();
 
     $screen = screen('platform.sites.regions.edit')
         ->parameters([$region->id])
@@ -44,14 +49,26 @@ it('shows an existing region from the edit screen', function () {
         ->assertSee($region->short_name);
 });
 
-it('creates a region from the create screen', function () {
+it('does not show an existing region from the edit screen as big brother', function () {
+    $region = Region::factory()->createOne();
+
+    $screen = screen('platform.sites.regions.edit')
+        ->parameters([$region->id])
+        ->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('creates a region from the create screen as admin', function () {
+    $region = Region::factory()->makeOne();
+    $regionData = $region->only(
+        'name',
+        'short_name'
+    );
+
     $screen = screen('platform.sites.regions.create')
         ->actingAs(Admin::first());
-
-    $regionData = [
-        'name' => 'National Capital Region',
-        'short_name' => 'NCR',
-    ];
 
     $screen
         ->method('save', [
@@ -62,13 +79,12 @@ it('creates a region from the create screen', function () {
     assertDatabaseHas('regions', $regionData);
 });
 
-it('deletes an existing region from the edit screen', function () {
-    $regionData = [
-        'name' => 'National Capital Region',
-        'short_name' => 'NCR',
-    ];
-
-    $region = Region::create($regionData);
+it('deletes an existing region from the edit screen as admin', function () {
+    $region = Region::factory()->createOne();
+    $regionData = $region->only(
+        'name',
+        'short_name'
+    );
 
     $screen = screen('platform.sites.regions.edit')
         ->parameters([$region->id])

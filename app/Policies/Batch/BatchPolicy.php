@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Policies;
+namespace App\Policies\Batch;
 
 use App\Models\Batch\Batch;
 use App\Models\User\User;

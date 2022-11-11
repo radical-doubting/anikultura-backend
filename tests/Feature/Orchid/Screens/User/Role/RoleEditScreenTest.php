@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\User\Admin\Admin;
+use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Role;
 use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
@@ -12,10 +14,11 @@ beforeEach(function () {
     seed([
         RoleSeeder::class,
         AdminSeeder::class,
+        BigBrotherSeeder::class,
     ]);
 });
 
-it('shows create screen', function () {
+it('shows create screen as admin', function () {
     $screen = screen('platform.roles.create')->actingAs(Admin::first());
 
     $screen->display()
@@ -24,7 +27,14 @@ it('shows create screen', function () {
         ->assertSee('Permission/Privilege');
 });
 
-it('shows an existing role from the edit screen', function () {
+it('does not show create screen as big brother', function () {
+    $screen = screen('platform.roles.create')->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('shows an existing role from the edit screen as admin', function () {
     $role = Role::first();
 
     $screen = screen('platform.roles.edit')
@@ -39,7 +49,18 @@ it('shows an existing role from the edit screen', function () {
         ->assertSee($role->slug);
 });
 
-it('creates a role from the create screen', function () {
+it('does not show an existing role from the edit screen as big brother', function () {
+    $role = Role::first();
+
+    $screen = screen('platform.roles.edit')
+        ->parameters([$role->id])
+        ->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('creates a role from the create screen as admin', function () {
     $screen = screen('platform.roles.create')
         ->actingAs(Admin::first());
 
@@ -58,7 +79,7 @@ it('creates a role from the create screen', function () {
     assertDatabaseHas('roles', $roleData);
 });
 
-it('deletes an existing role from the edit screen', function () {
+it('deletes an existing role from the edit screen as admin', function () {
     $roleData = [
         'name' => 'Moderator',
         'slug' => 'moderator',

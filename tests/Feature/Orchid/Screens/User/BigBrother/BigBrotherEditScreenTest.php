@@ -4,6 +4,7 @@ use App\Models\User\Admin\Admin;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\BigBrother\BigBrotherProfile;
 use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
@@ -14,10 +15,11 @@ beforeEach(function () {
     seed([
         RoleSeeder::class,
         AdminSeeder::class,
+        BigBrotherSeeder::class,
     ]);
 });
 
-it('shows create screen', function () {
+it('shows create screen as admin', function () {
     $screen = screen('platform.big-brothers.create')->actingAs(Admin::first());
 
     $screen->display()
@@ -27,7 +29,14 @@ it('shows create screen', function () {
         ->assertSee('Save');
 });
 
-it('shows an existing big brother from the edit screen', function () {
+it('does not show create screen as big brother', function () {
+    $screen = screen('platform.big-brothers.create')->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('shows an existing big brother from the edit screen as admin', function () {
     $bigBrother = BigBrother::factory()->createOne();
 
     $screen = screen('platform.big-brothers.edit')
@@ -44,7 +53,18 @@ it('shows an existing big brother from the edit screen', function () {
         ->assertSee($bigBrother->last_name);
 });
 
-it('creates a big brother from the create screen', function () {
+it('does now show an existing big brother from the edit screen as admin', function () {
+    $bigBrother = BigBrother::factory()->createOne();
+
+    $screen = screen('platform.big-brothers.edit')
+        ->parameters([$bigBrother->id])
+        ->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('creates a big brother from the create screen as admin', function () {
     $screen = screen('platform.big-brothers.create')
         ->actingAs(Admin::first());
 
@@ -78,12 +98,12 @@ it('creates a big brother from the create screen', function () {
         ])
         ->assertSee('Big brother was saved successfully!');
 
-    assertDatabaseCount('users', 2);
+    assertDatabaseCount('users', 12);
     assertDatabaseHas('users', $bigBrotherData);
-    assertDatabaseCount('big_brother_profiles', 1);
+    assertDatabaseCount('big_brother_profiles', 11);
 });
 
-it('deletes an existing big brother from the edit screen', function () {
+it('deletes an existing big brother from the edit screen as admin', function () {
     $bigBrotherProfile = BigBrotherProfile::factory()->createOne();
     $bigBrother = BigBrother::factory()->createOne([
         'profile_id' => $bigBrotherProfile->id,
@@ -106,7 +126,7 @@ it('deletes an existing big brother from the edit screen', function () {
         ->method('remove')
         ->assertSee('Big brother was removed successfully!');
 
-    assertDatabaseCount('users', 1);
+    assertDatabaseCount('users', 11);
     assertDatabaseMissing('users', $bigBrotherData);
-    assertDatabaseCount('big_brother_profiles', 0);
+    assertDatabaseCount('big_brother_profiles', 10);
 });

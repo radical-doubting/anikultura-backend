@@ -8,6 +8,7 @@ use App\Orchid\Layouts\User\BigBrother\BigBrotherFiltersLayout;
 use App\Orchid\Layouts\User\BigBrother\BigBrotherListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class BigBrotherListScreen extends AnikulturaListScreen
@@ -19,6 +20,8 @@ class BigBrotherListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', BigBrother::class);
+
         return [
             'big_brothers' => BigBrother::filters()
                 ->filtersApplySelection(BigBrotherFiltersLayout::class)
@@ -45,8 +48,8 @@ class BigBrotherListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(BigBrother $bigBrother): RedirectResponse
+    public function remove(BigBrother $bigBrother, Request $request): RedirectResponse
     {
-        return DeleteBigBrother::runOrchidAction($bigBrother, null);
+        return DeleteBigBrother::runOrchidAction($bigBrother, $request);
     }
 }

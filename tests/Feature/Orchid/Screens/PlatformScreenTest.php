@@ -1,8 +1,9 @@
 <?php
 
 use App\Models\User\Admin\Admin;
-use Database\Seeders\User\Admin\AdminProfileSeeder;
+use App\Models\User\BigBrother\BigBrother;
 use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\seed;
 
@@ -10,12 +11,20 @@ beforeEach(function () {
     seed([
         RoleSeeder::class,
         AdminSeeder::class,
-        AdminProfileSeeder::class,
+        BigBrotherSeeder::class,
     ]);
 });
 
-it('shows platform screen', function () {
+it('shows platform screen as admin', function () {
     $screen = screen('platform.main')->actingAs(Admin::first());
+
+    $screen->display()
+        ->assertSee('Empowering')
+        ->assertSee('Analytics Dashboard');
+});
+
+it('shows platform screen as big brother', function () {
+    $screen = screen('platform.main')->actingAs(BigBrother::first());
 
     $screen->display()
         ->assertSee('Empowering')

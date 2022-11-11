@@ -4,10 +4,11 @@ namespace Tests\Feature\Orchid\Screens\Site\Municity;
 
 use App\Models\Site\Municity;
 use App\Models\User\Admin\Admin;
+use App\Models\User\BigBrother\BigBrother;
 use Database\Seeders\Site\ProvinceSeeder;
 use Database\Seeders\Site\RegionSeeder;
-use Database\Seeders\User\Admin\AdminProfileSeeder;
 use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
@@ -17,13 +18,13 @@ beforeEach(function () {
     seed([
         RoleSeeder::class,
         AdminSeeder::class,
-        AdminProfileSeeder::class,
+        BigBrotherSeeder::class,
         RegionSeeder::class,
         ProvinceSeeder::class,
     ]);
 });
 
-it('shows create screen', function () {
+it('shows create screen as admin', function () {
     $screen = screen('platform.sites.municities.create')->actingAs(Admin::first());
 
     $screen->display()
@@ -32,7 +33,14 @@ it('shows create screen', function () {
         ->assertSee('Save');
 });
 
-it('shows an existing municipality or city from the edit screen', function () {
+it('does not show create screen as big brother', function () {
+    $screen = screen('platform.sites.municities.create')->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('shows an existing municipality or city from the edit screen as admin', function () {
     $municity = Municity::factory()->createOne();
 
     $screen = screen('platform.sites.municities.edit')
@@ -47,7 +55,18 @@ it('shows an existing municipality or city from the edit screen', function () {
         ->assertSee($municity->province->name);
 });
 
-it('creates a municipality or city from the create screen', function () {
+it('does not show an existing region from the edit screen as big brother', function () {
+    $municity = Municity::factory()->createOne();
+
+    $screen = screen('platform.sites.municities.edit')
+        ->parameters([$municity->id])
+        ->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('creates a municipality or city from the create screen as admin', function () {
     $municity = Municity::factory()->makeOne();
     $municityData = $municity->only(
         'name',
@@ -66,7 +85,7 @@ it('creates a municipality or city from the create screen', function () {
     assertDatabaseHas('municities', $municityData);
 });
 
-it('deletes an existing municipality or city from the edit screen', function () {
+it('deletes an existing municipality or city from the edit screen as admin', function () {
     $municity = Municity::factory()->createOne();
     $municityData = $municity->only(
         'name',

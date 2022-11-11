@@ -63,6 +63,8 @@ class BatchSeedAllocationEditScreen extends AnikulturaEditScreen
 
     public function query(Batch $batch, BatchSeedAllocation $batchSeedAllocation): array
     {
+        $this->authorize('view', [$batch, $batchSeedAllocation]);
+
         return [
             'batch' => $batch,
             'batchSeedAllocation' => $batchSeedAllocation,
@@ -84,9 +86,9 @@ class BatchSeedAllocationEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Batch $batch, BatchSeedAllocation $batchSeedAllocation): RedirectResponse
+    public function remove(Batch $batch, BatchSeedAllocation $batchSeedAllocation, Request $request): RedirectResponse
     {
-        return DeleteBatchSeedAllocation::runOrchidAction($batchSeedAllocation, null);
+        return DeleteBatchSeedAllocation::runOrchidAction($batchSeedAllocation, $request);
     }
 
     public function save(Batch $batch, BatchSeedAllocation $batchSeedAllocation, Request $request): RedirectResponse

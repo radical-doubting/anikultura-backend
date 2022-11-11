@@ -3,6 +3,7 @@
 namespace App\Actions\Batch;
 
 use App\Models\Batch\BatchSeedAllocation;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -59,5 +60,15 @@ class CreateBatchSeedAllocation
                 'max:999999',
             ],
         ];
+    }
+
+    public function authorize(Request $request, mixed $models): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $models['batchSeedAllocation']);
     }
 }

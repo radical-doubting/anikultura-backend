@@ -9,6 +9,7 @@ use App\Orchid\Layouts\Site\Municity\MunicityFiltersLayout;
 use App\Orchid\Layouts\Site\Municity\MunicityListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class MunicityListScreen extends AnikulturaListScreen
@@ -20,6 +21,8 @@ class MunicityListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', Municity::class);
+
         return [
             'municities' => Municity::with('region')
                 ->with('province')
@@ -48,8 +51,8 @@ class MunicityListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Municity $municity): RedirectResponse
+    public function remove(Municity $municity, Request $request): RedirectResponse
     {
-        return DeleteMunicity::runOrchidAction($municity, null);
+        return DeleteMunicity::runOrchidAction($municity, $request);
     }
 }

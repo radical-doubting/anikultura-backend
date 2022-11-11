@@ -4,6 +4,7 @@ namespace App\Actions\Site\Province;
 
 use App\Helpers\ToastHelper;
 use App\Models\Site\Province;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -42,5 +43,15 @@ class DeleteProvince
         Toast::info(__('Province was removed successfully!'));
 
         return redirect()->route('platform.sites.provinces');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }
