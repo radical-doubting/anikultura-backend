@@ -29,6 +29,8 @@ class ProvinceEditScreen extends AnikulturaEditScreen
 
     public function query(Province $province): array
     {
+        $this->authorize('view', $province);
+
         return [
             'province' => $province,
         ];
@@ -50,9 +52,9 @@ class ProvinceEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Province $province): RedirectResponse
+    public function remove(Province $province, Request $request): RedirectResponse
     {
-        return DeleteProvince::runOrchidAction($province, null);
+        return DeleteProvince::runOrchidAction($province, $request);
     }
 
     public function save(Province $province, Request $request): RedirectResponse

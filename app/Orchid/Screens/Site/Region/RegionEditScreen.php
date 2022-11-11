@@ -29,6 +29,8 @@ class RegionEditScreen extends AnikulturaEditScreen
 
     public function query(Region $region): array
     {
+        $this->authorize('view', $region);
+
         return [
             'region' => $region,
         ];
@@ -50,9 +52,9 @@ class RegionEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Region $region): RedirectResponse
+    public function remove(Region $region, Request $request): RedirectResponse
     {
-        return DeleteRegion::runOrchidAction($region, null);
+        return DeleteRegion::runOrchidAction($region, $request);
     }
 
     public function save(Region $region, Request $request): RedirectResponse

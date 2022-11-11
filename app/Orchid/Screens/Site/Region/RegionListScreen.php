@@ -19,6 +19,8 @@ class RegionListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', Region::class);
+
         return [
             'regions' => Region::filters()
                 ->defaultSort('id')
