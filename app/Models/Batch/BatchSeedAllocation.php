@@ -5,6 +5,7 @@ namespace App\Models\Batch;
 use App\Models\Crop\Crop;
 use App\Models\User\Farmer\Farmer;
 use App\Traits\Loggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -55,5 +56,13 @@ class BatchSeedAllocation extends Model
     public function crop(): BelongsTo
     {
         return $this->belongsTo(Crop::class);
+    }
+
+    public function scopeOfBatch(Builder $query, Batch $batch): Builder
+    {
+        return $query->whereHas(
+            'batch',
+            fn (Builder $query) => $query->where('id', '=', $batch->id)
+        );
     }
 }

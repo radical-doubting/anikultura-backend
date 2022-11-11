@@ -79,6 +79,11 @@ class Batch extends Model
         );
     }
 
+    public function scopeOfMunicity(Builder $query, Municity $municity): Builder
+    {
+        return $query->where('municity_id', '=', $municity->id);
+    }
+
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);

@@ -4,6 +4,7 @@ namespace App\Models\Site;
 
 use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -44,6 +45,14 @@ class Municity extends Model
         'updated_at',
         'created_at',
     ];
+
+    public function scopeOfProvince(Builder $query, Province $province): Builder
+    {
+        return $query->whereHas(
+            'province',
+            fn (Builder $query) => $query->where('province_id', '=', $province->id)
+        );
+    }
 
     /**
      * Get the province that owns this municity.
