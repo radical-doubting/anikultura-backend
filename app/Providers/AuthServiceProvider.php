@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Batch\Batch;
+use App\Models\Crop\Crop;
 use App\Models\FarmerReport\FarmerReport;
 use App\Models\Farmland\Farmland;
 use App\Models\Site\Municity;
@@ -13,6 +14,7 @@ use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
 use App\Models\User\Role;
 use App\Policies\BatchPolicy;
+use App\Policies\CropPolicy;
 use App\Policies\FarmerReportPolicy;
 use App\Policies\FarmlandPolicy;
 use App\Policies\Site\MunicityPolicy;
@@ -32,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         Municity::class => MunicityPolicy::class,
         Batch::class => BatchPolicy::class,
         Farmland::class => FarmlandPolicy::class,
+        Crop::class => CropPolicy::class,
         FarmerReport::class => FarmerReportPolicy::class,
         Farmer::class => FarmerPolicy::class,
         BigBrother::class => BigBrotherPolicy::class,
