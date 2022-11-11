@@ -11,6 +11,7 @@ use App\Models\Site\Region;
 use App\Models\User\Admin\Admin;
 use App\Models\User\BigBrother\BigBrother;
 use App\Models\User\Farmer\Farmer;
+use App\Models\User\Role;
 use App\Policies\BatchPolicy;
 use App\Policies\FarmerReportPolicy;
 use App\Policies\FarmlandPolicy;
@@ -20,6 +21,7 @@ use App\Policies\Site\RegionPolicy;
 use App\Policies\User\AdminPolicy;
 use App\Policies\User\BigBrotherPolicy;
 use App\Policies\User\FarmerPolicy;
+use App\Policies\User\RolePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -34,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         Farmer::class => FarmerPolicy::class,
         BigBrother::class => BigBrotherPolicy::class,
         Admin::class => AdminPolicy::class,
+        Role::class => RolePolicy::class,
     ];
 
     /**
