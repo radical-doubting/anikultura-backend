@@ -3,6 +3,7 @@
 namespace App\Actions\Site\Region;
 
 use App\Models\Site\Region;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -48,5 +49,15 @@ class CreateRegion
                 'max:10',
             ],
         ];
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $model);
     }
 }
