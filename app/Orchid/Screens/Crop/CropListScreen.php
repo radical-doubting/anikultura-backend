@@ -8,6 +8,7 @@ use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class CropListScreen extends AnikulturaListScreen
@@ -19,6 +20,8 @@ class CropListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', Crop::class);
+
         return [
             'crops' => Crop::filters()
                 ->defaultSort('id')
@@ -43,8 +46,8 @@ class CropListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Crop $crop): RedirectResponse
+    public function remove(Crop $crop, Request $request): RedirectResponse
     {
-        return DeleteCrop::runOrchidAction($crop, null);
+        return DeleteCrop::runOrchidAction($crop, $request);
     }
 }
