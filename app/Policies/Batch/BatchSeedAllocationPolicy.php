@@ -31,7 +31,7 @@ class BatchSeedAllocationPolicy
 
     public function create(User $user): bool
     {
-        return $user->isAdministrator();
+        return $user->isAdministrator() || $user->isBigBrother();
     }
 
     public function update(User $user, BatchSeedAllocation $batchSeedAllocation): bool
@@ -41,7 +41,7 @@ class BatchSeedAllocationPolicy
 
     public function delete(User $user, BatchSeedAllocation $batchSeedAllocation): bool
     {
-        return $user->isAdministrator();
+        return $this->belongsToBatch($user, $batchSeedAllocation);
     }
 
     private function belongsToBatch(User $user, BatchSeedAllocation $batchSeedAllocation): bool
