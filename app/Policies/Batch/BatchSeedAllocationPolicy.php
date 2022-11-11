@@ -46,6 +46,12 @@ class BatchSeedAllocationPolicy
 
     private function belongsToBatch(User $user, BatchSeedAllocation $batchSeedAllocation): bool
     {
-        return $batchSeedAllocation->batch->bigBrothers->contains($user->id);
+        $batch = $batchSeedAllocation->batch;
+
+        if (is_null($batch)) {
+            return false;
+        } else {
+            return $batch->bigBrothers->contains($user->id);
+        }
     }
 }
