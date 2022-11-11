@@ -62,13 +62,13 @@ class CreateBatchSeedAllocation
         ];
     }
 
-    public function authorize(Request $request, mixed $model): bool
+    public function authorize(Request $request, mixed $models): bool
     {
         /**
          * @var User
          */
         $user = $request->user();
 
-        return $user->canAny(['create', 'update'], $model);
+        return $user->canAny(['create', 'update'], $models['batchSeedAllocation']);
     }
 }
