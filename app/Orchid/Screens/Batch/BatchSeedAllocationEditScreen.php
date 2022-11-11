@@ -63,7 +63,7 @@ class BatchSeedAllocationEditScreen extends AnikulturaEditScreen
 
     public function query(Batch $batch, BatchSeedAllocation $batchSeedAllocation): array
     {
-        $this->authorize('view', $batchSeedAllocation);
+        $this->authorize('view', [$batch, $batchSeedAllocation]);
 
         return [
             'batch' => $batch,
