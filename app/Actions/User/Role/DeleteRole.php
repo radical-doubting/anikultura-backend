@@ -3,6 +3,7 @@
 namespace App\Actions\User\Role;
 
 use App\Models\User\Role;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,5 +27,15 @@ class DeleteRole
         Toast::info(__('Role was removed successfully!'));
 
         return redirect()->route('platform.roles');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }

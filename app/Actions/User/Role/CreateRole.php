@@ -3,6 +3,7 @@
 namespace App\Actions\User\Role;
 
 use App\Models\User\Role;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -68,5 +69,15 @@ class CreateRole
                 'max:35',
             ],
         ];
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $model);
     }
 }
