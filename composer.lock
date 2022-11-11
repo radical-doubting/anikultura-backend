@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a44657871c7a10b43ebd88c3648ac7df",
+    "content-hash": "67a14a8588c24cb1794f7f7f107e564d",
     "packages": [
         {
             "name": "arquivei/laravel-prometheus-exporter",
@@ -3734,21 +3734,25 @@
         },
         {
             "name": "orchid/blade-icons",
-            "version": "2.1.0",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/blade-icons.git",
-                "reference": "b067f77a831d259976f7761dbef985475804c57b"
+                "reference": "1d4f92de038c5b93c26a497fb98414056aae01c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/blade-icons/zipball/b067f77a831d259976f7761dbef985475804c57b",
-                "reference": "b067f77a831d259976f7761dbef985475804c57b",
+                "url": "https://api.github.com/repos/orchidsoftware/blade-icons/zipball/1d4f92de038c5b93c26a497fb98414056aae01c4",
+                "reference": "1d4f92de038c5b93c26a497fb98414056aae01c4",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
-                "laravel/framework": "^9.0"
+                "laravel/framework": "^9.36"
+            },
+            "conflict": {
+                "laravel/framework": "<9.36.1",
+                "orchestra/testbench": "<7.11"
             },
             "require-dev": {
                 "orchestra/testbench": "^7.0",
@@ -3780,7 +3784,7 @@
             "description": "An easy way inline SVG images in your Blade templates.",
             "support": {
                 "issues": "https://github.com/orchidsoftware/blade-icons/issues",
-                "source": "https://github.com/orchidsoftware/blade-icons/tree/2.1.0"
+                "source": "https://github.com/orchidsoftware/blade-icons/tree/3.0.0"
             },
             "funding": [
                 {
@@ -3788,7 +3792,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2022-07-09T12:15:44+00:00"
+            "time": "2022-10-21T19:46:19+00:00"
         },
         {
             "name": "orchid/icons",
@@ -3847,31 +3851,35 @@
         },
         {
             "name": "orchid/platform",
-            "version": "12.6.2",
+            "version": "13.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchidsoftware/platform.git",
-                "reference": "9f27ed69d9a18120bc43582b0cb8bb40116822dc"
+                "reference": "4d24a8025d1f3338221cffc8a78bd1bc63012925"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/9f27ed69d9a18120bc43582b0cb8bb40116822dc",
-                "reference": "9f27ed69d9a18120bc43582b0cb8bb40116822dc",
+                "url": "https://api.github.com/repos/orchidsoftware/platform/zipball/4d24a8025d1f3338221cffc8a78bd1bc63012925",
+                "reference": "4d24a8025d1f3338221cffc8a78bd1bc63012925",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "laravel/framework": "^9.0",
+                "laravel/framework": "^9.21",
                 "laravel/scout": "^9.0",
                 "myclabs/php-enum": "^1.7",
-                "orchid/blade-icons": "^2.0",
+                "orchid/blade-icons": "^2.0|^3.0",
                 "orchid/icons": "^2.0",
                 "tabuna/breadcrumbs": "^3.0",
                 "watson/active": "^6.0"
             },
+            "conflict": {
+                "laravel/framework": "<9.32.0"
+            },
             "require-dev": {
-                "doctrine/dbal": "^2.10",
+                "doctrine/dbal": "^2.10 || ^3.0",
                 "fakerphp/faker": "^1.9.1",
+                "laravel/pint": "^1.2",
                 "mockery/mockery": "~1.0",
                 "orchestra/testbench-core": "^7.0",
                 "orchestra/testbench-dusk": "^7.0",
@@ -3948,7 +3956,7 @@
                     "type": "opencollective"
                 }
             ],
-            "time": "2022-06-15T23:46:14+00:00"
+            "time": "2022-10-31T19:42:58+00:00"
         },
         {
             "name": "php-open-source-saver/jwt-auth",
