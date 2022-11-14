@@ -358,5 +358,10 @@
     "Edit batch seed allocation" : "I-edit ang Pinamahaging Buto sa pangkat",
     "Edit batch seed allocation details" : "I-edit ang detalye ng mga Pinamahaging Buto sa pangkat",
     "Allocation Information" : "Impormasyon ng Alokasyon",
-    "Update seed allocation information." : "I-update ang impormasyon ng alokasyon"
+    "Update seed allocation information." : "I-update ang impormasyon ng alokasyon",
+
+    "Create crop type" : "Magdagdag ng Uri ng Tanim",
+    "Edit crop type" : "I-edit ang Uri ng Tanim",
+    "crop type" : "uri ng pananim"
+
 }
