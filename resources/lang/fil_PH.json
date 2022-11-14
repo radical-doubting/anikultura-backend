@@ -343,5 +343,8 @@
     "This farmer belongs to the following batches." : "Ang magsasakang ito ay nabibilang sa mga sumusunod na pangkat.",
     "This farmer belongs to the following farmlands." : "Ang magsasakang ito ay nabibilang sa mga sumusunod na taniman.",
     "Once the :resource is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang :resource na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
-    "farmer" : "magsasaka"
+    "farmer" : "magsasaka",
+    "Create farmland" : "Magdagdag ng Taniman",
+    "Edit farmland" : "I-edit ang Taniman"
+
 }
