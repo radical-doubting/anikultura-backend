@@ -326,5 +326,22 @@
     "No notifications" : "Walang mga notipikasyon",
     "You currently have no notifications, but maybe they will appear later." : "Walang kasalukuyang notipikasyon, pero maaring magkaroon sa susunod.",
     "Remove all" : "Tanggalin lahat",
-    "Mark all as read" : "Markahan na nabasa na ang lahat"
+    "Mark all as read" : "Markahan na nabasa na ang lahat",
+    "View Insights" : "Tignan ang mga Insight",
+    "Administrator" : "Administrador",
+    "Social Status" : "Katayuang Panlipunan",
+    "Is an NC Passer?" : "Naipasa ba ang NC?",
+    "Social Status Reason" : "Rason ng Katayuang Panlipunan",
+    "Why do you think the farmer has this social status?" : "Bakit sa tingin mo na nasa ganitong katayuang panlipunan ang magsasaka na ito?",
+    "Assignment Information" : "Impormasyon kung saan Itinalaga",
+    "This information collects farmer's assignment information." : "Kinokolekta ng impormasyong ito ang impormasyon na kung saan itinalaga ang magsasaka.",
+    "Search the name of this farmer's batches" : "Hanapin ang pangalan ng pangkat na kinabibilangan ng magsasakang ito",
+    "Search the name of this farmer's farmlands" : "Hanapin ang pangalan ng taniman na kinabibilangan ng magsasakang ito",
+    "Enroll farmer" : "Mag-enroll ng magsasaka",
+    "Farmer was saved successfully!" : "Matagumpay na na-save ang impormasyon ng Magsasaka!",
+    "Edit farmer" : "I-edit ang Magsasaka",
+    "This farmer belongs to the following batches." : "Ang magsasakang ito ay nabibilang sa mga sumusunod na pangkat.",
+    "This farmer belongs to the following farmlands." : "Ang magsasakang ito ay nabibilang sa mga sumusunod na taniman.",
+    "Once the :resource is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang :resource na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
+    "farmer" : "magsasaka"
 }
