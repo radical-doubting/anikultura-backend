@@ -329,6 +329,7 @@
     "Mark all as read" : "Markahan na nabasa na ang lahat",
     "View Insights" : "Tignan ang mga Insight",
     "Administrator" : "Administrador",
+
     "Social Status" : "Katayuang Panlipunan",
     "Is an NC Passer?" : "Naipasa ba ang NC?",
     "Social Status Reason" : "Rason ng Katayuang Panlipunan",
@@ -344,7 +345,18 @@
     "This farmer belongs to the following farmlands." : "Ang magsasakang ito ay nabibilang sa mga sumusunod na taniman.",
     "Once the :resource is deleted, all of its resources and data will be permanently deleted." : "Kapag natanggal na ang :resource na ito, lahat ng impormasyon nito ay permanenteng mabubura.",
     "farmer" : "magsasaka",
-    "Create farmland" : "Magdagdag ng Taniman",
-    "Edit farmland" : "I-edit ang Taniman"
 
+    "Create farmland" : "Magdagdag ng Taniman",
+    "Edit farmland" : "I-edit ang Taniman",
+    "Batch Members" : "Mga Miyembro ng Pangkat",
+    "Create batch" : "Magdagdag ng Pangkat",
+    "Edit batch" : "I-edit ang Pangkat",
+    "The members who belong to this batch" : "Mga miyembro na nabibilang sa pangkat na ito",
+    "Search the name of this batch's farmers" : "Hanapin ang pangalan ng mga magsasakang nabibilang sa pangkat na ito",
+    "Search the name of this batch's big brothers" : "Hanapin ang pangalan ng mga big brothers na nabibilang sa pangkat na ito",
+    "Create batch seed allocation" : "Magdagdag ng Ipapamahaging Buto sa Pangkat",
+    "Edit batch seed allocation" : "I-edit ang Pinamahaging Buto sa pangkat",
+    "Edit batch seed allocation details" : "I-edit ang detalye ng mga Pinamahaging Buto sa pangkat",
+    "Allocation Information" : "Impormasyon ng Alokasyon",
+    "Update seed allocation information." : "I-update ang impormasyon ng alokasyon"
 }
