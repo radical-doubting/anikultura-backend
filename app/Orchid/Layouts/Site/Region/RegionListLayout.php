@@ -3,37 +3,16 @@
 namespace App\Orchid\Layouts\Site\Region;
 
 use App\Models\Site\Region;
+use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class RegionListLayout extends Table
+class RegionListLayout extends AnikulturaListLayout
 {
-    /**
-     * Data source.
-     *
-     * The name of the key to fetch it from the query.
-     * The results of which will be elements of the table.
-     *
-     * @var string
-     */
     protected $target = 'regions';
 
-    /**
-     * @return bool
-     */
-    protected function striped(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the table cells to be displayed.
-     *
-     * @return TD[]
-     */
     protected function columns(): array
     {
         return [
@@ -42,7 +21,7 @@ class RegionListLayout extends Table
                 ->filter(TD::FILTER_TEXT)
                 ->render(function (Region $region) {
                     return Link::make($region->fullName)
-                        ->route('platform.sites.regions.edit', $region->id);
+                        ->route('platform.sites.regions.edit', [$region->id]);
                 }),
 
             TD::make(__('Actions'))
@@ -54,7 +33,7 @@ class RegionListLayout extends Table
                         ->icon('options-vertical')
                         ->list([
                             Link::make(__('Edit'))
-                                ->route('platform.sites.regions.edit', $region->id)
+                                ->route('platform.sites.regions.edit', [$region->id])
                                 ->icon('pencil'),
 
                             Button::make(__('Delete'))

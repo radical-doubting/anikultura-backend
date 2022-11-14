@@ -3,30 +3,38 @@
 namespace App\Orchid\Screens\Batch;
 
 use App\Actions\Batch\DeleteBatch;
+use App\Helpers\InsightsHelper;
 use App\Models\Batch\Batch;
+use App\Models\User\User;
 use App\Orchid\Layouts\Batch\BatchFiltersLayout;
 use App\Orchid\Layouts\Batch\BatchListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class BatchListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Batches';
+    public function name(): string
+    {
+        return __('Batches');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
     public function query(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $query = Batch::query();
+
+        if ($user->cannot('viewAny', Batch::class)) {
+            $query = $query->ofBigBrother($user);
+        }
+
         return [
-            'batches' => Batch::filters()
+            'batches' => $query
                 ->filters()
                 ->filtersApplySelection(BatchFiltersLayout::class)
                 ->defaultSort('id')
@@ -34,25 +42,22 @@ class BatchListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
         return [
             Link::make(__('Add'))
                 ->icon('plus')
-                ->route('platform.batches.create'),
+                ->route('platform.batches.create')
+                ->canSee($user->can('create', Batch::class)),
+            InsightsHelper::makeLink('batch'),
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
@@ -61,16 +66,8 @@ class BatchListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a batch.
-     *
-     * @param  Batch  $batch
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Batch $batch)
+    public function remove(Batch $batch, Request $request): RedirectResponse
     {
-        return DeleteBatch::runOrchidAction($batch, null);
+        return DeleteBatch::runOrchidAction($batch, $request);
     }
 }

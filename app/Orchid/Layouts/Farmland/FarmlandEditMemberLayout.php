@@ -2,33 +2,22 @@
 
 namespace App\Orchid\Layouts\Farmland;
 
-use App\Models\Farmer\Farmer;
-use Orchid\Screen\Field;
-use Orchid\Screen\Fields\Group;
+use App\Models\User\Farmer\Farmer;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Layouts\Rows;
 
-class FarmlandEditMemberLayout extends Rows
+class FarmlandEditMemberLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
+        $batch = $this->query->get('batch');
+
         return [
             Relation::make('farmland.farmers.')
                 ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('full_name')
+                ->applyScope('ofBatch', $batch)
                 ->required()
                 ->multiple()
                 ->help(__('Search the name of this farmland\'s members'))

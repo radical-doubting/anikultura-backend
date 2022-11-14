@@ -3,55 +3,55 @@
 namespace App\Orchid\Screens\Farmland;
 
 use App\Actions\Farmland\DeleteFarmland;
+use App\Helpers\InsightsHelper;
 use App\Models\Farmland\Farmland;
+use App\Models\User\User;
 use App\Orchid\Layouts\Farmland\FarmlandFiltersLayout;
 use App\Orchid\Layouts\Farmland\FarmlandListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class FarmlandListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Farmlands';
+    public function name(): string
+    {
+        return __('Farmlands');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
     public function query(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $query = Farmland::query();
+
+        if ($user->cannot('viewAny', Farmland::class)) {
+            $query = $query->ofBigBrother($user);
+        }
+
         return [
-            'farmlands' => Farmland::filters()
+            'farmlands' => $query
+                ->filters()
                 ->filtersApplySelection(FarmlandFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.farmlands.create'),
+            InsightsHelper::makeLink('farmland'),
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
@@ -60,16 +60,8 @@ class FarmlandListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a farmland.
-     *
-     * @param  Farmland  $farmland
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Farmland $farmland)
+    public function remove(Farmland $farmland, Request $request): RedirectResponse
     {
-        return DeleteFarmland::runOrchidAction($farmland, null);
+        return DeleteFarmland::runOrchidAction($farmland, $request);
     }
 }

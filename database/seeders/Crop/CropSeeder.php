@@ -14,6 +14,11 @@ class CropSeeder extends Seeder
      */
     public function run()
     {
+        $this->call([
+            SeedStageSeeder::class,
+            CropBuyerSeeder::class,
+        ]);
+
         $crops = [
             [
                 'name' => 'Calamansi',

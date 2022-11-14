@@ -2,20 +2,21 @@
 
 namespace App\Models\Site;
 
+use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Province extends Model
 {
-    use Filterable, HasFactory, Sluggable;
+    use Filterable, HasFactory, Sluggable, Loggable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'region_id',
@@ -43,10 +44,18 @@ class Province extends Model
         'created_at',
     ];
 
+    public function scopeOfRegion(Builder $query, Region $region): Builder
+    {
+        return $query->whereHas(
+            'region',
+            fn (Builder $query) => $query->where('region_id', '=', $region->id)
+        );
+    }
+
     /**
      * Get the region that owns this province.
      */
-    public function region()
+    public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
     }

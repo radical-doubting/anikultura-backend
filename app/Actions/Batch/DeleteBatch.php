@@ -2,28 +2,50 @@
 
 namespace App\Actions\Batch;
 
+use App\Helpers\ToastHelper;
 use App\Models\Batch\Batch;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
+use PDOException;
 
 class DeleteBatch
 {
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Batch $batch)
+    public function handle(Batch $batch): bool
     {
-        $batch->delete();
+        return $batch->delete();
     }
 
-    public function asOrchidAction($model, Request $request = null)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->handle($model);
+        try {
+            $this->handle($model);
+        } catch (PDOException $exception) {
+            ToastHelper::showReferenceDeleteError('batch');
+
+            return redirect()->route('platform.batches.edit', [
+                $model->id,
+            ]);
+        }
 
         Toast::info(__('Batch was removed successfully!'));
 
         return redirect()->route('platform.batches');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }

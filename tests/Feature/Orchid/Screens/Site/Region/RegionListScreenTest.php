@@ -1,35 +1,41 @@
 <?php
 
-namespace Tests\Feature\Orchid\Screens\Site\Region;
-
-use App\Models\Admin\Admin;
-use Database\Seeders\Admin\AdminProfileSeeder;
-use Database\Seeders\Admin\AdminSeeder;
+use App\Models\Site\Region;
+use App\Models\User\Admin\Admin;
+use App\Models\User\BigBrother\BigBrother;
+use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchid\Support\Testing\ScreenTesting;
-use Tests\TestCase;
+use function Pest\Laravel\seed;
 
-class RegionListScreenTest extends TestCase
-{
-    use RefreshDatabase, ScreenTesting;
+beforeEach(function () {
+    seed([
+        RoleSeeder::class,
+        AdminSeeder::class,
+        BigBrotherSeeder::class,
+    ]);
+});
 
-    public function setUp(): void
-    {
-        parent::setUp();
+it('shows list screen as admin', function () {
+    $screen = screen('platform.sites.regions')->actingAs(Admin::first());
 
-        $this->seed([
-            RoleSeeder::class,
-            AdminSeeder::class,
-            AdminProfileSeeder::class,
-        ]);
-    }
+    $screen->display()
+        ->assertSee('Region');
+});
 
-    public function testShouldShowListScreen(): void
-    {
-        $screen = $this->screen('platform.sites.regions')->actingAs(Admin::first());
+it('does not show list screen as big brother', function () {
+    $screen = screen('platform.sites.regions')->actingAs(BigBrother::first());
 
-        $screen->display()
-            ->assertSee(__('Region'));
-    }
-}
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('shows region in list screen as admin', function () {
+    $region = Region::factory()->createOne();
+
+    $screen = screen('platform.sites.regions')->actingAs(Admin::first());
+
+    $screen->display()
+        ->assertSee($region->name)
+        ->assertSee($region->short_name);
+});

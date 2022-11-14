@@ -5,28 +5,31 @@ namespace App\Orchid\Layouts\Farmland;
 use App\Models\Batch\Batch;
 use App\Models\Farmland\FarmlandStatus;
 use App\Models\Farmland\FarmlandType;
-use Orchid\Screen\Field;
+use App\Models\User\User;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Layouts\Rows;
 
-class FarmlandEditBasicLayout extends Rows
+class FarmlandEditBasicLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $batchRelationField = Relation::make('farmland.batch_id')
+            ->fromModel(Batch::class, 'farmschool_name')
+            ->required()
+            ->title('Batch')
+            ->placeholder(__('Batch'));
+
+        if ($user->isBigBrother()) {
+            $batchRelationField = $batchRelationField->applyScope('ofBigBrother', $user);
+        }
+
         return [
             Input::make('farmland.name')
                 ->type('text')
@@ -34,11 +37,7 @@ class FarmlandEditBasicLayout extends Rows
                 ->title(__('Name'))
                 ->placeholder(__('Name')),
 
-            Relation::make('farmland.batch_id')
-                ->fromModel(Batch::class, 'farmschool_name')
-                ->required()
-                ->title('Batch')
-                ->placeholder(__('Batch')),
+            $batchRelationField,
 
             Group::make([
                 Relation::make('farmland.type_id')
@@ -55,7 +54,6 @@ class FarmlandEditBasicLayout extends Rows
             ]),
 
             Input::make('farmland.hectares_size')
-                ->type('number')
                 ->required()
                 ->title(__('Size (ha)'))
                 ->placeholder(__('Size in hectares')),

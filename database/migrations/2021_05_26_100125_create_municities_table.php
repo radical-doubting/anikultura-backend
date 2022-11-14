@@ -17,20 +17,18 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable(false)->unique();
 
-            $table->unsignedBigInteger('region_id')
-                ->nullable();
+            $table->unsignedBigInteger('region_id');
             $table->foreign('region_id')
                 ->references('id')
                 ->on('regions')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedBigInteger('province_id')
-                ->nullable();
+            $table->unsignedBigInteger('province_id');
             $table->foreign('province_id')
                 ->references('id')
                 ->on('provinces')
-                ->nullOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
 
             $table->timestamps();

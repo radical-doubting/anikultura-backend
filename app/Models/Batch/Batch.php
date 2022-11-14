@@ -2,36 +2,46 @@
 
 namespace App\Models\Batch;
 
-use App\Models\Farmer\Farmer;
+use App\Models\Farmland\Farmland;
 use App\Models\Site\Municity;
 use App\Models\Site\Province;
 use App\Models\Site\Region;
+use App\Models\User\BigBrother\BigBrother;
+use App\Models\User\Farmer\Farmer;
+use App\Models\User\User;
+use App\Orchid\Presenters\Batch\BatchPresenter;
+use App\Traits\Loggable;
 use Chelout\RelationshipEvents\Concerns\HasBelongsToManyEvents;
 use Chelout\RelationshipEvents\Traits\HasRelationshipObservables;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Scout\Searchable;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Batch extends Model
 {
-    use Filterable, HasFactory, HasBelongsToManyEvents, HasRelationshipObservables, Sluggable;
+    use Filterable,
+        HasFactory,
+        HasBelongsToManyEvents,
+        HasRelationshipObservables,
+        Sluggable,
+        Loggable,
+        Searchable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'farmschool_name',
-        'assigned_site',
-        'number_seeds_distributed',
         'region_id',
         'province_id',
         'municity_id',
         'barangay',
-        'farmer_names,',
-
     ];
 
     /**
@@ -61,29 +71,52 @@ class Batch extends Model
         parent::boot();
     }
 
-    public function region()
+    public function scopeOfBigBrother(Builder $query, User $user): Builder
+    {
+        return $query->whereHas(
+            'bigBrothers',
+            fn (Builder $query) => $query->where('big_brother_id', '=', $user->id)
+        );
+    }
+
+    public function scopeOfMunicity(Builder $query, Municity $municity): Builder
+    {
+        return $query->where('municity_id', '=', $municity->id);
+    }
+
+    public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
     }
 
-    public function province()
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
     }
 
-    public function municity()
+    public function municity(): BelongsTo
     {
         return $this->belongsTo(Municity::class);
     }
 
-    public function farmers()
+    public function farmers(): BelongsToMany
     {
         return $this->belongsToMany(Farmer::class, 'batch_farmers', 'batch_id', 'farmer_id');
     }
 
-    public function seedAllocations()
+    public function bigBrothers(): BelongsToMany
+    {
+        return $this->belongsToMany(BigBrother::class, 'batch_big_brothers', 'batch_id', 'big_brother_id');
+    }
+
+    public function seedAllocations(): HasMany
     {
         return $this->hasMany(BatchSeedAllocation::class);
+    }
+
+    public function farmlands(): HasMany
+    {
+        return $this->hasMany(Farmland::class);
     }
 
     /**
@@ -98,5 +131,22 @@ class Batch extends Model
                 'source' => 'farmschool_name',
             ],
         ];
+    }
+
+    public function searchableAs(): string
+    {
+        return 'batches_farmschool_name_index';
+    }
+
+    public function toSearchableArray(): array
+    {
+        return [
+            'farmschool_name' => $this->farmschool_name,
+        ];
+    }
+
+    public function presenter(): BatchPresenter
+    {
+        return new BatchPresenter($this);
     }
 }

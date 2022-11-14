@@ -1,54 +1,100 @@
 <?php
 
-namespace Tests\Feature\Orchid\Screens\Site\Province;
-
-use App\Models\Admin\Admin;
 use App\Models\Site\Province;
-use Database\Seeders\Admin\AdminProfileSeeder;
-use Database\Seeders\Admin\AdminSeeder;
+use App\Models\User\Admin\Admin;
+use App\Models\User\BigBrother\BigBrother;
 use Database\Seeders\Site\RegionSeeder;
+use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Orchid\Support\Testing\ScreenTesting;
-use Tests\TestCase;
+use function Pest\Laravel\assertDatabaseHas;
+use function Pest\Laravel\assertDatabaseMissing;
+use function Pest\Laravel\seed;
 
-class ProvinceEditScreenTest extends TestCase
-{
-    use RefreshDatabase, ScreenTesting;
+beforeEach(function () {
+    seed([
+        RoleSeeder::class,
+        AdminSeeder::class,
+        BigBrotherSeeder::class,
+        RegionSeeder::class,
+    ]);
+});
 
-    public function setUp(): void
-    {
-        parent::setUp();
+it('shows create screen as admin', function () {
+    $screen = screen('platform.sites.provinces.create')->actingAs(Admin::first());
 
-        $this->seed([
-            RoleSeeder::class,
-            AdminSeeder::class,
-            AdminProfileSeeder::class,
-            RegionSeeder::class,
-        ]);
-    }
+    $screen->display()
+        ->assertSee('Create province')
+        ->assertSee('Province Information')
+        ->assertSee('Save');
+});
 
-    public function testShouldShowCreateScreen(): void
-    {
-        $screen = $this->screen('platform.sites.provinces.create')->actingAs(Admin::first());
+it('does not show create screen as big brother', function () {
+    $screen = screen('platform.sites.provinces.create')->actingAs(BigBrother::first());
 
-        $screen->display()
-            ->assertSee(__('Create'))
-            ->assertSee(__('Province Information'))
-            ->assertSee(__('Save'));
-    }
+    $screen->display()
+        ->assertStatus(403);
+});
 
-    public function testShouldShowEditScreen(): void
-    {
-        $province = Province::factory()->count(1)->create()[0];
+it('shows an existing province from the edit screen as admin', function () {
+    $province = Province::factory()->createOne();
 
-        $screen = $this->screen('platform.sites.provinces.edit')
-            ->parameters([$province->id])
-            ->actingAs(Admin::first());
+    $screen = screen('platform.sites.provinces.edit')
+        ->parameters([$province->id])
+        ->actingAs(Admin::first());
 
-        $screen->display()
-            ->assertSee(__('Edit province'))
-            ->assertSee(__('Remove'))
-            ->assertSee(__('Save'));
-    }
-}
+    $screen->display()
+        ->assertSee('Edit province')
+        ->assertSee('Remove')
+        ->assertSee('Save')
+        ->assertSee($province->name)
+        ->assertSee($province->region->name);
+});
+
+it('does not show an existing region from the edit screen as big brother', function () {
+    $province = Province::factory()->createOne();
+
+    $screen = screen('platform.sites.provinces.edit')
+        ->parameters([$province->id])
+        ->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('creates a province from the create screen as admin', function () {
+    $province = Province::factory()->makeOne();
+    $provinceData = $province->only(
+        'name',
+        'region_id'
+    );
+
+    $screen = screen('platform.sites.provinces.create')
+        ->actingAs(Admin::first());
+
+    $screen
+        ->method('save', [
+            'province' => $provinceData,
+        ])
+        ->assertSee('Province was saved successfully!');
+
+    assertDatabaseHas('provinces', $provinceData);
+});
+
+it('deletes an existing province from the edit screen as admin', function () {
+    $province = Province::factory()->createOne();
+    $provinceData = $province->only(
+        'name',
+        'region_id'
+    );
+
+    $screen = screen('platform.sites.provinces.edit')
+        ->parameters([$province->id])
+        ->actingAs(Admin::first());
+
+    $screen
+        ->method('remove')
+        ->assertSee('Province was removed successfully!');
+
+    assertDatabaseMissing('provinces', $provinceData);
+});

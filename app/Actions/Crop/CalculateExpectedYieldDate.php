@@ -3,6 +3,7 @@
 namespace App\Actions\Crop;
 
 use App\Models\Crop\Crop;
+use DateInterval;
 use DateTime;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -23,8 +24,9 @@ class CalculateExpectedYieldDate
 
     private function estimateDate(DateTime $datePlanted, int $maturity)
     {
-        $date = date('Y-m-d', strtotime($datePlanted." + $maturity days"));
+        $estimatedDate = clone $datePlanted;
+        $estimatedDate->add(new DateInterval('P'.$maturity.'D'));
 
-        return strtolower($date);
+        return strtolower($estimatedDate->format('Y-m-d'));
     }
 }

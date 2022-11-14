@@ -1,3 +1,4 @@
+
 <?php
 
 return [
@@ -181,6 +182,24 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Search
+    |--------------------------------------------------------------------------
+    |
+    | List of models containing Presenter and Scout,
+    | which will appear in search results in the sidebar.
+    |
+    */
+
+    'search' => [
+        App\Models\User\Admin\Admin::class,
+        App\Models\User\BigBrother\BigBrother::class,
+        App\Models\User\Farmer\Farmer::class,
+        App\Models\Farmland\Farmland::class,
+        App\Models\Batch\Batch::class,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Hotwire Turbo
     |--------------------------------------------------------------------------
     |
@@ -194,5 +213,33 @@ return [
     'turbo' => [
         'cache' => false,
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Fallback Page
+    |--------------------------------------------------------------------------
+    |
+    | If the request does not match any route and arguments,
+    | Orchid will automatically generate its own 404 page.
+    | It can be disabled if you want to declare routes on the same
+    | domain and prefix or create your own page.
+    |
+    */
+
+    'fallback' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Service Provider
+    |--------------------------------------------------------------------------
+    |
+    | This value is a class namespace of the platform's service provider. You
+    | can override it to define a custom namespace. This may be useful if you
+    | want to place Orchid's service provider in a location different to
+    | "app/Orchid".
+    |
+    */
+
+    'provider' => \App\Providers\PlatformProvider::class,
 
 ];

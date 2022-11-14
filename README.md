@@ -2,9 +2,11 @@
 
 # anikultura-backend
 
-![laravel ci](https://github.com/Radical-Doubting/anikultura-backend/actions/workflows/laravel-ci.yml/badge.svg)
+[![Analysis and unit tests](https://github.com/radical-doubting/anikultura-backend/actions/workflows/analyze.yml/badge.svg)](https://github.com/radical-doubting/anikultura-backend/actions/workflows/analyze.yml)
+[![Integration tests](https://github.com/radical-doubting/anikultura-backend/actions/workflows/integration.yml/badge.svg)](https://github.com/radical-doubting/anikultura-backend/actions/workflows/integration.yml)
+[![codecov](https://codecov.io/gh/radical-doubting/anikultura-backend/branch/master/graph/badge.svg?token=HDPR23M8EY)](https://codecov.io/gh/radical-doubting/anikultura-backend)
 
-The Laravel 9 back-end for Anikultura: a crop monitoring system. Administrator dashboards are powered by Laravel Orchid.
+A Laravel back-end for Anikultura. Its management dashboards are powered by Laravel Orchid. It serves a REST API for the farmer dashboard. It exports Prometheus metrics for insights.
 
 ## Dependencies
 
@@ -50,3 +52,7 @@ The exact PHP and MariaDB versions can be found in [XAMPP 8.1.6](https://www.apa
 -   Open `anikultura-backend`, which is in Ubuntu again, using VS Code.
 -   A more detailed article is available [here](https://laravel.com/docs/9.x/sail).
 -   Done!
+
+## Grafana Cloud Agent
+
+This application uses the [Grafana Cloud Agent](https://grafana.com/docs/grafana-cloud/data-configuration/agent/) to send metrics and logs. See the `Makefile` for more information about the invocation of the agent.

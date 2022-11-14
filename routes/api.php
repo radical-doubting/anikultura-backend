@@ -1,17 +1,22 @@
 <?php
 
-use App\Actions\Authentication\LoginFarmer;
-use App\Actions\Authentication\LogoutFarmer;
-use App\Actions\Batch\RetrieveFarmerSeedAllocation;
-use App\Actions\Crop\RetrieveFarmerCrops;
-use App\Actions\Crop\RetrieveFarmerSeedStage;
-use App\Actions\Crop\RetrieveNextSeedStage;
-use App\Actions\Farmer\RetrieveFarmerTutorialState;
-use App\Actions\Farmer\UpdateFarmerTutorialState;
-use App\Actions\FarmerReport\RetrieveFarmerSubmittedReports;
-use App\Actions\FarmerReport\SubmitFarmerReport;
-use App\Actions\FarmerReport\UploadImageToFarmerReport;
-use App\Actions\Farmland\RetrieveFarmerFarmlands;
+declare(strict_types=1);
+
+use App\Actions\Authentication\Api\LoginFarmer;
+use App\Actions\Authentication\Api\LogoutFarmer;
+use App\Actions\Batch\Api\RetrieveFarmerSeedAllocation;
+use App\Actions\Crop\Api\RetrieveCurrentSeedStage;
+use App\Actions\Crop\Api\RetrieveFarmerCrops;
+use App\Actions\Crop\Api\RetrieveNextSeedStage;
+use App\Actions\FarmerReport\Api\RetrieveFarmerSubmittedReports;
+use App\Actions\FarmerReport\Api\SubmitFarmerReport;
+use App\Actions\Farmland\Api\RetrieveFarmerFarmlands;
+use App\Actions\User\Farmer\Api\RetrieveFarmerLanguage;
+use App\Actions\User\Farmer\Api\RetrieveFarmerTutorialState;
+use App\Actions\User\Farmer\Api\UpdateFarmerLanguage;
+use App\Actions\User\Farmer\Api\UpdateFarmerTutorialState;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,8 +28,6 @@ use App\Actions\Farmland\RetrieveFarmerFarmlands;
 |
 */
 
-use Illuminate\Support\Facades\Route;
-
 Route::group(['as' => 'api.'], function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', LoginFarmer::class)->name('login');
@@ -32,24 +35,25 @@ Route::group(['as' => 'api.'], function () {
     });
 
     Route::group(['prefix' => 'farmers', 'middleware' => 'auth:api'], function () {
-        Route::get('/tutorial', RetrieveFarmerTutorialState::class);
-        Route::patch('/tutorial', UpdateFarmerTutorialState::class);
+        Route::get('/tutorial', RetrieveFarmerTutorialState::class)->name('tutorial');
+        Route::patch('/tutorial', UpdateFarmerTutorialState::class)->name('tutorial.update');
+        Route::get('/language', RetrieveFarmerLanguage::class)->name('language');
+        Route::patch('/language', UpdateFarmerLanguage::class)->name('language.update');
     });
 
     Route::group(['prefix' => 'farmer-reports', 'middleware' => 'auth:api'], function () {
-        Route::post('/', SubmitFarmerReport::class);
-        Route::post('/{farmerReportId}/upload', UploadImageToFarmerReport::class);
-        Route::get('/{farmlandId}', RetrieveFarmerSubmittedReports::class);
+        Route::post('/', SubmitFarmerReport::class)->name('reports.submit');
+        Route::get('/{farmlandId}', RetrieveFarmerSubmittedReports::class)->name('reports');
     });
 
     Route::group(['prefix' => 'crops', 'middleware' => 'auth:api'], function () {
-        Route::get('/', RetrieveFarmerCrops::class);
-        Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class);
-        Route::post('/next-seed-stage', RetrieveNextSeedStage::class);
-        Route::post('/current-seed-stage', RetrieveFarmerSeedStage::class);
+        Route::get('/', RetrieveFarmerCrops::class)->name('crops');
+        Route::get('/seed-allocation', RetrieveFarmerSeedAllocation::class)->name('seeds.allocation');
+        Route::post('/next-seed-stage', RetrieveNextSeedStage::class)->name('seeds.next-stage');
+        Route::post('/current-seed-stage', RetrieveCurrentSeedStage::class)->name('seeds.current-stage');
     });
 
     Route::group(['prefix' => 'farmlands', 'middleware' => 'auth:api'], function () {
-        Route::get('/', RetrieveFarmerFarmlands::class);
+        Route::get('/', RetrieveFarmerFarmlands::class)->name('farmlands');
     });
 });

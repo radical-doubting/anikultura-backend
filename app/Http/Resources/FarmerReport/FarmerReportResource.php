@@ -7,14 +7,19 @@ use App\Http\Resources\Crop\CropResource;
 use App\Http\Resources\Crop\SeedStageResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\FarmerReport\FarmerReport
+ */
 class FarmerReportResource extends JsonResource
 {
     public function toArray($request)
     {
+        $isValid = $this->isValid();
+
         return [
             'id' => $this->id,
-            'isVerified' => $this->verified,
-            $this->mergeWhen($this->verified, [
+            'isVerified' => $isValid,
+            $this->mergeWhen($isValid, [
                 'verifier' => new BigBrotherResource($this->verifier),
             ]),
             $this->mergeWhen($this->isHarvested(), [

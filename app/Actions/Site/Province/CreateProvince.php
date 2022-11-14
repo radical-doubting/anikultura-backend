@@ -3,7 +3,9 @@
 namespace App\Actions\Site\Province;
 
 use App\Models\Site\Province;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -20,7 +22,7 @@ class CreateProvince
         return $province->refresh();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
         $provinceData = $request->get('province');
 
@@ -36,10 +38,25 @@ class CreateProvince
         return [
             'province.name' => [
                 'required',
+                'alpha_num_space_dash',
+                'min:3',
+                'max:70',
             ],
             'province.region_id' => [
                 'required',
+                'integer',
+                'exists:regions,id',
             ],
         ];
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $model);
     }
 }

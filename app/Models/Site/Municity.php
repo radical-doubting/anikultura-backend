@@ -2,20 +2,21 @@
 
 namespace App\Models\Site;
 
+use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Municity extends Model
 {
-    use Filterable, HasFactory, Sluggable;
+    use Filterable, HasFactory, Sluggable, Loggable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'name',
         'province_id',
@@ -45,10 +46,18 @@ class Municity extends Model
         'created_at',
     ];
 
+    public function scopeOfProvince(Builder $query, Province $province): Builder
+    {
+        return $query->whereHas(
+            'province',
+            fn (Builder $query) => $query->where('province_id', '=', $province->id)
+        );
+    }
+
     /**
      * Get the province that owns this municity.
      */
-    public function province()
+    public function province(): BelongsTo
     {
         return $this->belongsTo(Province::class);
     }
@@ -56,7 +65,7 @@ class Municity extends Model
     /**
      * Get the region that owns this municity.
      */
-    public function region()
+    public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
     }
@@ -73,5 +82,21 @@ class Municity extends Model
                 'source' => 'name',
             ],
         ];
+    }
+
+    /**
+     * Get the region that owns the municity province
+     */
+    public function regionBelongToProvince($province_id)
+    {
+        $this->province_id = $province_id;
+
+        $regionIdinJSON = Region::whereHas('provinces', function ($query) {
+            $query->where('id', '=', $this->province_id);
+        })->get('id');
+
+        $regionId = json_decode($regionIdinJSON, true);
+
+        return $regionId[0]['id'];
     }
 }

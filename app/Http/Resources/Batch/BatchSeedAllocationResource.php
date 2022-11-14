@@ -5,6 +5,9 @@ namespace App\Http\Resources\Batch;
 use App\Http\Resources\Crop\CropResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @mixin \App\Models\Batch\BatchSeedAllocation
+ */
 class BatchSeedAllocationResource extends JsonResource
 {
     public function toArray($request)

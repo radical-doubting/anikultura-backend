@@ -3,20 +3,18 @@
 namespace App\Models\Batch;
 
 use App\Models\Crop\Crop;
-use App\Models\Farmer\Farmer;
+use App\Models\User\Farmer\Farmer;
+use App\Traits\Loggable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
 
 class BatchSeedAllocation extends Model
 {
-    use Filterable, HasFactory;
+    use Filterable, HasFactory, Loggable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'batch_id',
         'farmer_id',
@@ -45,18 +43,26 @@ class BatchSeedAllocation extends Model
         'farmschool_name',
     ];
 
-    public function batch()
+    public function batch(): BelongsTo
     {
         return $this->belongsTo(Batch::class);
     }
 
-    public function farmer()
+    public function farmer(): BelongsTo
     {
         return $this->belongsTo(Farmer::class);
     }
 
-    public function crop()
+    public function crop(): BelongsTo
     {
         return $this->belongsTo(Crop::class);
+    }
+
+    public function scopeOfBatch(Builder $query, Batch $batch): Builder
+    {
+        return $query->whereHas(
+            'batch',
+            fn (Builder $query) => $query->where('id', '=', $batch->id)
+        );
     }
 }

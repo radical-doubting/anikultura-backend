@@ -3,51 +3,30 @@
 namespace App\Orchid\Layouts\Batch;
 
 use App\Models\Batch\BatchSeedAllocation;
+use App\Orchid\Layouts\AnikulturaListLayout;
 use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\DropDown;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Layouts\Persona;
-use Orchid\Screen\Layouts\Table;
 use Orchid\Screen\TD;
 
-class BatchSeedAllocationListLayout extends Table
+class BatchSeedAllocationListLayout extends AnikulturaListLayout
 {
-    /**
-     * Data source.
-     *
-     * The name of the key to fetch it from the query.
-     * The results of which will be elements of the table.
-     *
-     * @var string
-     */
     protected $target = 'batchSeedAllocations';
 
-    /**
-     * @return bool
-     */
-    protected function striped(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Get the table cells to be displayed.
-     *
-     * @return TD[]
-     */
-    protected function columns(): array
+    protected function columns(): iterable
     {
         $currentBatch = $this->query['batch'];
 
         return [
             TD::make('farmer', __('Farmer'))
                 ->sort()
-                ->render(function (BatchSeedAllocation $batchSeedAllocation) {
-                    $farmer = $batchSeedAllocation->farmer;
-
-                    return new Persona($farmer->presenter());
+                ->render(function (BatchSeedAllocation $batchSeedAllocation) use ($currentBatch) {
+                    return Link::make($batchSeedAllocation->farmer->fullName)
+                        ->route('platform.batch-seed-allocations.edit', [
+                            'batch' => $currentBatch,
+                            'batchSeedAllocation' => $batchSeedAllocation,
+                        ]);
                 }),
-
             TD::make('crop', __('Crop'))
                 ->sort()
                 ->render(function (BatchSeedAllocation $batchSeedAllocation) use ($currentBatch) {
@@ -57,18 +36,16 @@ class BatchSeedAllocationListLayout extends Table
                             'batchSeedAllocation' => $batchSeedAllocation,
                         ]);
                 }),
-
             TD::make('seed_amount', __('Seed Amount'))
                 ->sort()
                 ->render(function (BatchSeedAllocation $batchSeedAllocation) use ($currentBatch) {
-                    return Link::make($batchSeedAllocation->seed_amount)
+                    return Link::make((string) $batchSeedAllocation->seed_amount)
                         ->route('platform.batch-seed-allocations.edit', [
                             'batch' => $currentBatch,
                             'batchSeedAllocation' => $batchSeedAllocation,
                         ]);
                 }),
-
-            TD::make('updated_at', __('Last edit'))
+            TD::make('updated_at', __('Last Edit'))
                 ->sort()
                 ->render(function (BatchSeedAllocation $batchSeedAllocation) {
                     return $batchSeedAllocation->updated_at->toDateTimeString();
@@ -86,7 +63,6 @@ class BatchSeedAllocationListLayout extends Table
                                     'batchSeedAllocation' => $batchSeedAllocation,
                                 ])
                                 ->icon('pencil'),
-
                             Button::make(__('Delete'))
                                 ->icon('trash')
                                 ->method('removeBatchSeedAllocation')

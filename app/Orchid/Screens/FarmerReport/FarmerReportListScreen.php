@@ -2,55 +2,49 @@
 
 namespace App\Orchid\Screens\FarmerReport;
 
+use App\Helpers\InsightsHelper;
 use App\Models\FarmerReport\FarmerReport;
+use App\Models\User\User;
 use App\Orchid\Layouts\FarmerReport\FarmerReportFiltersLayout;
 use App\Orchid\Layouts\FarmerReport\FarmerReportListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
-use Orchid\Screen\Actions\Link;
 
 class FarmerReportListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Farmer Report';
+    public function name(): string
+    {
+        return __('Farmer Reports');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
     public function query(): array
     {
+        /**
+         * @var User
+         */
+        $user = auth()->user();
+
+        $query = FarmerReport::query();
+
+        if ($user->cannot('viewAny', FarmerReport::class)) {
+            $query = $query->ofBigBrother($user);
+        }
+
         return [
-            'farmer_reports' => FarmerReport::filters()
+            'farmer_reports' => $query
+                ->filters()
                 ->filtersApplySelection(FarmerReportFiltersLayout::class)
                 ->defaultSort('id')
                 ->paginate(),
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
-            Link::make(__('Add'))
-                ->icon('plus')
-                ->route('platform.farmer-reports.create'),
+            InsightsHelper::makeLink('farmerReport'),
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [

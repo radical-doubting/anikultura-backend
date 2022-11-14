@@ -6,49 +6,33 @@ use App\Actions\Site\Province\CreateProvince;
 use App\Actions\Site\Province\DeleteProvince;
 use App\Models\Site\Province;
 use App\Orchid\Layouts\Site\Province\ProvinceEditLayout;
+use App\Orchid\Screens\AnikulturaEditScreen;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
-class ProvinceEditScreen extends Screen
+class ProvinceEditScreen extends AnikulturaEditScreen
 {
     public Province $province;
 
-    public function name(): string
+    public function resourceName(): string
     {
-        return $this->province->exists
-            ? __('Edit province')
-            : __('Create province');
+        return __('province');
     }
 
-    public function description(): string
+    public function exists(): bool
     {
-        return $this->province->exists
-            ? __('Edit province details')
-            : __('Create a new province');
+        return $this->province->exists;
     }
 
     public function query(Province $province): array
     {
+        $this->authorize('view', $province);
+
         return [
             'province' => $province,
-        ];
-    }
-
-    public function commandBar(): array
-    {
-        return [
-            Button::make(__('Remove'))
-                ->icon('trash')
-                ->confirm(__('Once the province is deleted, all of its resources and data will be permanently deleted.'))
-                ->method('remove')
-                ->canSee($this->province->exists),
-
-            Button::make(__('Save'))
-                ->icon('check')
-                ->method('save'),
         ];
     }
 
@@ -62,33 +46,18 @@ class ProvinceEditScreen extends Screen
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
                         ->icon('check')
-                        ->canSee($this->province->exists)
+                        ->canSee($this->exists())
                         ->method('save')
                 ),
         ];
     }
 
-    /**
-     * Remove a province.
-     *
-     * @param  Province  $province
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Province $province)
+    public function remove(Province $province, Request $request): RedirectResponse
     {
-        return DeleteProvince::runOrchidAction($province, null);
+        return DeleteProvince::runOrchidAction($province, $request);
     }
 
-    /**
-     * Save a province.
-     *
-     * @param  Province  $province
-     * @param  Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function save(Province $province, Request $request)
+    public function save(Province $province, Request $request): RedirectResponse
     {
         return CreateProvince::runOrchidAction($province, $request);
     }

@@ -3,9 +3,12 @@
 namespace App\Orchid\Screens\Site\Region;
 
 use App\Actions\Site\Region\DeleteRegion;
+use App\Helpers\InsightsHelper;
 use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class RegionListScreen extends AnikulturaListScreen
@@ -17,6 +20,8 @@ class RegionListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', Region::class);
+
         return [
             'regions' => Region::filters()
                 ->defaultSort('id')
@@ -30,6 +35,7 @@ class RegionListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.sites.regions.create'),
+            InsightsHelper::makeLink('site'),
         ];
     }
 
@@ -40,16 +46,8 @@ class RegionListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a region.
-     *
-     * @param  Region  $region
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Region $region)
+    public function remove(Region $region, Request $request): RedirectResponse
     {
-        return DeleteRegion::runOrchidAction($region, null);
+        return DeleteRegion::runOrchidAction($region, $request);
     }
 }

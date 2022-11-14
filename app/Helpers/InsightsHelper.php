@@ -2,25 +2,29 @@
 
 namespace App\Helpers;
 
+use Orchid\Screen\Actions\Link;
+
 class InsightsHelper
 {
-    public static function isInsightsEnabled(): bool
+    public static function incrementGauge(string $name, array $labels = [], float $increment = 1): void
     {
-        return config('influxdb.enabled');
+        app('prometheus')->getGauge($name)->incBy($increment, $labels);
     }
 
-    public static function isObserverSaveMode(): bool
+    public static function decrementGauge(string $name, array $labels = [], float $decrement = 1): void
     {
-        return self::getObserverMode() === 'save';
+        app('prometheus')->getGauge($name)->decBy($decrement, $labels);
     }
 
-    public static function isObserverCreateMode(): bool
+    public static function makeLink(string $resource = 'home'): Link
     {
-        return self::getObserverMode() === 'create';
-    }
+        $link = config("anikultura.insightsUrl.$resource");
+        $isDefault = $link === '#';
 
-    public static function getObserverMode(): string
-    {
-        return config('influxdb.observerMode');
+        return Link::make(__('View Insights'))
+            ->icon('bulb')
+            ->href($link)
+            ->target('_blank')
+            ->canSee(! $isDefault);
     }
 }

@@ -2,57 +2,39 @@
 
 namespace App\Actions\User;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Actions\Authentication\HashPassword;
+use App\Models\User\User;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class CreateUser
 {
     use AsAction;
 
-    public function handle(User $user, $userData)
-    {
-        if (! $user->exists) {
-            return $this->createNewUser($userData);
-        } else {
-            return $this->updateExistingUser($user, $userData);
-        }
+    public function __construct(
+        protected HashPassword $hashPassword
+    ) {
     }
 
-    private function createNewUser($userData)
+    public function handle(User $user, array $userData): User
     {
-        $newUser = new User($userData);
-        $newUser->password = $this->hashPassword($userData['password']);
-        $newUser->save();
+        $cleanedUserData = $this->handlePassword($userData);
 
-        return $newUser->id;
+        $user->fill($cleanedUserData)->save();
+
+        return $user->refresh();
     }
 
-    private function updateExistingUser($user, $userData)
+    private function handlePassword(array $userData): array
     {
-        $updatedUserDataData = $this->updatePassword($userData);
-        $user->update($updatedUserDataData);
+        $plaintextPassword = $userData['password'];
 
-        return $user->id;
-    }
-
-    private function updatePassword($userData)
-    {
-        $password = $userData['password'];
-
-        if (empty($password)) {
+        if (empty($plaintextPassword)) {
             unset($userData['password']);
-
-            return $userData;
+        } else {
+            $hashedPassword = $this->hashPassword->handle($plaintextPassword);
+            $userData['password'] = $hashedPassword;
         }
-
-        $userData['password'] = $this->hashPassword($password);
 
         return $userData;
-    }
-
-    private function hashPassword(string $plainTextPassword)
-    {
-        return Hash::make($plainTextPassword);
     }
 }

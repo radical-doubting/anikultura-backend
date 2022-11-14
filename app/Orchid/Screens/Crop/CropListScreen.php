@@ -3,27 +3,25 @@
 namespace App\Orchid\Screens\Crop;
 
 use App\Actions\Crop\DeleteCrop;
+use App\Helpers\InsightsHelper;
 use App\Models\Crop\Crop;
 use App\Orchid\Layouts\Crop\CropListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class CropListScreen extends AnikulturaListScreen
 {
-    /**
-     * Display header name.
-     *
-     * @var string
-     */
-    public $name = 'Crop Types';
+    public function name(): string
+    {
+        return __('Crop Types');
+    }
 
-    /**
-     * Query data.
-     *
-     * @return array
-     */
     public function query(): array
     {
+        $this->authorize('viewAny', Crop::class);
+
         return [
             'crops' => Crop::filters()
                 ->defaultSort('id')
@@ -31,26 +29,16 @@ class CropListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Button commands.
-     *
-     * @return \Orchid\Screen\Action[]
-     */
     public function commandBar(): array
     {
         return [
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.crops.create'),
-
+            InsightsHelper::makeLink('crop'),
         ];
     }
 
-    /**
-     * Views.
-     *
-     * @return \Orchid\Screen\Layout[]|string[]
-     */
     public function layout(): array
     {
         return [
@@ -58,16 +46,8 @@ class CropListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a crop.
-     *
-     * @param  Crop  $crop
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Crop $crop)
+    public function remove(Crop $crop, Request $request): RedirectResponse
     {
-        return DeleteCrop::runOrchidAction($crop, null);
+        return DeleteCrop::runOrchidAction($crop, $request);
     }
 }

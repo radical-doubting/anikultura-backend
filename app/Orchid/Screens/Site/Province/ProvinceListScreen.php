@@ -3,10 +3,13 @@
 namespace App\Orchid\Screens\Site\Province;
 
 use App\Actions\Site\Province\DeleteProvince;
+use App\Helpers\InsightsHelper;
 use App\Models\Site\Province;
 use App\Orchid\Layouts\Site\Province\ProvinceFiltersLayout;
 use App\Orchid\Layouts\Site\Province\ProvinceListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class ProvinceListScreen extends AnikulturaListScreen
@@ -18,6 +21,8 @@ class ProvinceListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', Province::class);
+
         return [
             'provinces' => Province::with('region')
                 ->filters()
@@ -33,6 +38,7 @@ class ProvinceListScreen extends AnikulturaListScreen
             Link::make(__('Add'))
                 ->icon('plus')
                 ->route('platform.sites.provinces.create'),
+            InsightsHelper::makeLink('site'),
         ];
     }
 
@@ -44,16 +50,8 @@ class ProvinceListScreen extends AnikulturaListScreen
         ];
     }
 
-    /**
-     * Remove a province.
-     *
-     * @param  Province  $province
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Province $province)
+    public function remove(Province $province, Request $request): RedirectResponse
     {
-        return DeleteProvince::runOrchidAction($province, null);
+        return DeleteProvince::runOrchidAction($province, $request);
     }
 }

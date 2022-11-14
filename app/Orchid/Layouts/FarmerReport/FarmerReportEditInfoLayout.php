@@ -4,77 +4,104 @@ namespace App\Orchid\Layouts\FarmerReport;
 
 use App\Models\Crop\Crop;
 use App\Models\Crop\SeedStage;
-use App\Models\Farmer\Farmer;
 use App\Models\Farmland\Farmland;
-use Orchid\Screen\Field;
+use App\Models\User\Farmer\Farmer;
+use App\Orchid\Layouts\AnikulturaEditLayout;
 use Orchid\Screen\Fields\Group;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\Relation;
-use Orchid\Screen\Layouts\Rows;
 
-class FarmerReportEditInfoLayout extends Rows
+class FarmerReportEditInfoLayout extends AnikulturaEditLayout
 {
-    /**
-     * Used to create the title of a group of form elements.
-     *
-     * @var string|null
-     */
-    protected $title;
-
-    /**
-     * Get the fields elements to be displayed.
-     *
-     * @return Field[]
-     */
-    protected function fields(): array
+    protected function fields(): iterable
     {
-        $currentReport = $this->query['farmer_report'];
+        $currentReport = $this->query->get('farmerReport');
         $isHarvested = false;
+        $isEditScreen = $currentReport->exists;
 
-        $farmlandRelationField = Relation::make('farmer_report.farmland_id')
+        $farmlandRelationField = Relation::make('farmerReport.farmland_id')
             ->fromModel(Farmland::class, 'name')
             ->displayAppend('fullName')
             ->required()
+            ->disabled($isEditScreen)
             ->title(__('Farmland'))
             ->placeholder(__('Farmland'));
 
-        if ($currentReport->exists) {
+        if ($isEditScreen) {
             $isHarvested = $currentReport->isHarvested();
-            $farmlandRelationField->applyScope('farmerBelongToFarmland', $currentReport->farmer->id);
+            $farmlandRelationField->applyScope('ofFarmer', $currentReport->farmer);
         }
 
-        return [
-            Relation::make('farmer_report.reported_by')
+        $fields = [
+            Relation::make('farmerReport.reported_by')
                 ->fromModel(Farmer::class, 'name')
                 ->searchColumns('first_name', 'last_name')
                 ->displayAppend('fullName')
                 ->required()
+                ->disabled($isEditScreen)
                 ->help(__('The farmer who submitted this farming report'))
                 ->title(__('Reported by'))
                 ->placeholder(__('Reported by')),
 
-            Relation::make('farmer_report.seed_stage_id')
+            Relation::make('farmerReport.seed_stage_id')
                 ->fromModel(SeedStage::class, 'name')
                 ->required()
+                ->disabled($isEditScreen)
                 ->title(__('Seed Stage'))
                 ->placeholder(__('Seed Stage')),
 
             Group::make([
                 $farmlandRelationField,
 
-                Relation::make('farmer_report.crop_id')
+                Relation::make('farmerReport.crop_id')
                     ->fromModel(Crop::class, 'name')
                     ->required()
+                    ->disabled($isEditScreen)
                     ->title(__('Crop'))
                     ->placeholder(__('Crop')),
             ]),
 
-            Input::make('farmer_report.volume_kg')
+            Input::make('farmerReport.volume_kg')
                 ->type('number')
-                ->max(255)
-                ->title($isHarvested ? __('Yield Volume (kg)') : '')
+                ->canSee($isHarvested)
+                ->disabled($isEditScreen)
+                ->title(__('Yield Volume (kg)'))
                 ->placeholder(__('Yield Volume (kg)'))
                 ->hidden(! $isHarvested),
+        ];
+
+        if ($currentReport->exists) {
+            array_push(
+                $fields,
+                Group::make($this->getHiddenFields())
+            );
+        }
+
+        return $fields;
+    }
+
+    private function getHiddenFields(): array
+    {
+        return [
+            Input::make('farmerReport.reported_by')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.seed_stage_id')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.farmland_id')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.crop_id')
+                ->type('hidden')
+                ->style('display: none;'),
+
+            Input::make('farmerReport.volume_kg')
+                ->type('hidden')
+                ->style('display: none;'),
         ];
     }
 }

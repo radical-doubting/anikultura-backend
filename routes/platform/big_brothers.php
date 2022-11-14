@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use App\Orchid\Screens\BigBrother\BigBrotherEditScreen;
-use App\Orchid\Screens\BigBrother\BigBrotherListScreen;
+use App\Orchid\Screens\User\BigBrother\BigBrotherEditScreen;
+use App\Orchid\Screens\User\BigBrother\BigBrotherListScreen;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 

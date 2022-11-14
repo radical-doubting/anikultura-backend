@@ -5,20 +5,19 @@ namespace App\Models\Crop;
 use App\Actions\Crop\CalculateNetProfitCostRatio;
 use App\Actions\Crop\CalculateNetReturns;
 use App\Actions\Crop\CalculateProfitPerKilogram;
+use App\Traits\Loggable;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Orchid\Filters\Filterable;
 
+/**
+ * @property string $slug
+ */
 class Crop extends Model
 {
-    use Filterable, HasFactory, Sluggable;
+    use Filterable, HasFactory, Sluggable, Loggable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'id',
         'group',

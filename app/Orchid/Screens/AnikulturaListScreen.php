@@ -3,17 +3,21 @@
 namespace App\Orchid\Screens;
 
 use Illuminate\Support\Facades\Config;
+use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
 abstract class AnikulturaListScreen extends Screen
 {
-    public function __construct()
+    public function description(): string
     {
         $screenName = strtolower($this->name());
         $programName = Config::get('anikultura.programFullName');
 
-        $this->description = "A list of all $screenName under the $programName";
+        return __('A list of all ').$screenName.(__(' under the ')).$programName;
     }
 
-    abstract public function layout(): array;
+    /**
+     * @return string[]|Layout[]
+     */
+    abstract public function layout(): iterable;
 }

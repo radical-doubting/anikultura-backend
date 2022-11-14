@@ -2,28 +2,50 @@
 
 namespace App\Actions\Farmland;
 
+use App\Helpers\ToastHelper;
 use App\Models\Farmland\Farmland;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
+use PDOException;
 
 class DeleteFarmland
 {
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(Farmland $farmland)
+    public function handle(Farmland $farmland): bool
     {
-        $farmland->delete();
+        return $farmland->delete();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->handle($model);
+        try {
+            $this->handle($model);
+        } catch (PDOException $exception) {
+            ToastHelper::showReferenceDeleteError('farmland');
+
+            return redirect()->route('platform.farmlands.edit', [
+                $model->id,
+            ]);
+        }
 
         Toast::info(__('Farmland was removed successfully!'));
 
         return redirect()->route('platform.farmlands');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }

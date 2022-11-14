@@ -2,11 +2,15 @@
 
 namespace App\Actions\Crop;
 
+use App\Helpers\ToastHelper;
 use App\Models\Crop\Crop;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
+use PDOException;
 
 class DeleteCrop
 {
@@ -18,12 +22,30 @@ class DeleteCrop
         $crop->delete();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $this->handle($model);
+        try {
+            $this->handle($model);
+        } catch (PDOException $exception) {
+            ToastHelper::showReferenceDeleteError('crop');
+
+            return redirect()->route('platform.crops.edit', [
+                $model->id,
+            ]);
+        }
 
         Toast::info(__('Crop was removed successfully!'));
 
         return redirect()->route('platform.crops');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }

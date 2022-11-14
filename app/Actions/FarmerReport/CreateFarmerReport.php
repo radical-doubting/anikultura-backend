@@ -3,7 +3,9 @@
 namespace App\Actions\FarmerReport;
 
 use App\Models\FarmerReport\FarmerReport;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Orchid\Support\Facades\Toast;
@@ -13,43 +15,69 @@ class CreateFarmerReport
     use AsAction;
     use AsOrchidAction;
 
-    public function handle(FarmerReport $farmerReport, $farmerReportData)
+    public function handle(FarmerReport $farmerReport, array $farmerReportData, User $user): FarmerReport
     {
         $farmerReport
-            ->fill($farmerReportData)
-            ->save();
+            ->fill($farmerReportData);
+
+        if ($farmerReport->isUnverified()) {
+            $farmerReport->verifier()->disassociate();
+        } else {
+            $farmerReport->verifier()->associate($user);
+        }
+
+        $farmerReport->save();
+
+        return $farmerReport->refresh();
     }
 
-    public function asOrchidAction($model, ?Request $request)
+    public function asOrchidAction(mixed $model, ?Request $request): RedirectResponse
     {
-        $farmerReportData = $request->get('farmer_report');
+        /**
+         * @var User
+         */
+        $user = $request->user();
 
-        $this->handle($model, $farmerReportData);
+        $farmerReportData = $request->get('farmerReport');
+
+        $this->handle($model, $farmerReportData, $user);
 
         Toast::info(__('Farmer report was saved successfully!'));
 
-        return redirect()->route('platform.farmer-reports');
+        return redirect()->route('platform.farmer-reports.edit', [
+            $model->id,
+        ]);
     }
 
     public function rules(): array
     {
         return [
-            'farmer_report.reported_by' => [
+            'farmerReport.reported_by' => [
                 'required',
             ],
-            'farmer_report.farmland_id' => [
+            'farmerReport.farmland_id' => [
                 'required',
             ],
-            'farmer_report.seed_stage_id' => [
+            'farmerReport.seed_stage_id' => [
                 'required',
             ],
-            'farmer_report.crop_id' => [
+            'farmerReport.crop_id' => [
                 'required',
             ],
-            'farmer_report.volume_kg' => [
+            'farmerReport.volume_kg' => [
                 'numeric',
                 'nullable',
             ],
         ];
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $model);
     }
 }

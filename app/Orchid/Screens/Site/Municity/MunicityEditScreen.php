@@ -6,53 +6,37 @@ use App\Actions\Site\Municity\CreateMunicity;
 use App\Actions\Site\Municity\DeleteMunicity;
 use App\Models\Site\Municity;
 use App\Orchid\Layouts\Site\Municity\MunicityEditLayout;
+use App\Orchid\Screens\AnikulturaEditScreen;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Layout;
 
-class MunicityEditScreen extends Screen
+class MunicityEditScreen extends AnikulturaEditScreen
 {
     public Municity $municity;
 
-    public function name(): string
+    public function resourceName(): string
     {
-        return $this->municity->exists
-            ? __('Edit municipality or city')
-            : __('Create municipality or city');
+        return __('municipality or city');
     }
 
-    public function description(): string
+    public function exists(): bool
     {
-        return $this->municity->exists
-            ? __('Edit municipality or city details')
-            : __('Create a new municipality or city');
+        return $this->municity->exists;
     }
 
     public function query(Municity $municity): array
     {
+        $this->authorize('view', $municity);
+
         return [
             'municity' => $municity,
         ];
     }
 
-    public function commandBar(): array
-    {
-        return [
-            Button::make(__('Remove'))
-                ->icon('trash')
-                ->confirm(__('Once the municipality or city is deleted, all of its resources and data will be permanently deleted.'))
-                ->method('remove')
-                ->canSee($this->municity->exists),
-
-            Button::make(__('Save'))
-                ->icon('check')
-                ->method('save'),
-        ];
-    }
-
-    public function layout(): array
+    public function layout(): iterable
     {
         return [
             Layout::block(MunicityEditLayout::class)
@@ -62,33 +46,18 @@ class MunicityEditScreen extends Screen
                     Button::make(__('Save'))
                         ->type(Color::DEFAULT())
                         ->icon('check')
-                        ->canSee($this->municity->exists)
+                        ->canSee($this->exists())
                         ->method('save')
                 ),
         ];
     }
 
-    /**
-     * Remove a municity.
-     *
-     * @param  Municity  $municity
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Exception
-     */
-    public function remove(Municity $municity)
+    public function remove(Municity $municity, Request $request): RedirectResponse
     {
-        return DeleteMunicity::runOrchidAction($municity, null);
+        return DeleteMunicity::runOrchidAction($municity, $request);
     }
 
-    /**
-     * Save a municity.
-     *
-     * @param  Municity  $municity
-     * @param  Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function save(Municity $municity, Request $request)
+    public function save(Municity $municity, Request $request): RedirectResponse
     {
         return CreateMunicity::runOrchidAction($municity, $request);
     }
