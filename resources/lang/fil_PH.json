@@ -362,6 +362,9 @@
 
     "Create crop type" : "Magdagdag ng Uri ng Tanim",
     "Edit crop type" : "I-edit ang Uri ng Tanim",
-    "crop type" : "uri ng pananim"
+    "crop type" : "uri ng pananim",
+    "Edit farmer report" : "I-edit ang Report mula sa Magsasaka",
+    "Edit farmer report details" : "I-edit ang mga detalye ng report mula sa magsasaka", 
+    "farmer report" : "report ng magsasaka"
 
 }
