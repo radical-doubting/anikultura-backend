@@ -3,6 +3,7 @@
 namespace App\Actions\Site\Municity;
 
 use App\Models\Site\Municity;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -51,5 +52,15 @@ class CreateMunicity
                 'exists:provinces,id',
             ],
         ];
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->canAny(['create', 'update'], $model);
     }
 }

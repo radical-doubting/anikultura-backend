@@ -8,6 +8,7 @@ use App\Models\Site\Region;
 use App\Orchid\Layouts\Site\Region\RegionListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class RegionListScreen extends AnikulturaListScreen
@@ -19,6 +20,8 @@ class RegionListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', Region::class);
+
         return [
             'regions' => Region::filters()
                 ->defaultSort('id')
@@ -43,8 +46,8 @@ class RegionListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Region $region): RedirectResponse
+    public function remove(Region $region, Request $request): RedirectResponse
     {
-        return DeleteRegion::runOrchidAction($region, null);
+        return DeleteRegion::runOrchidAction($region, $request);
     }
 }

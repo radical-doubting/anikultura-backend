@@ -31,6 +31,8 @@ class CropEditScreen extends AnikulturaEditScreen
 
     public function query(Crop $crop): array
     {
+        $this->authorize('view', $crop);
+
         return [
             'crop' => $crop,
         ];
@@ -59,9 +61,9 @@ class CropEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Crop $crop): RedirectResponse
+    public function remove(Crop $crop, Request $request): RedirectResponse
     {
-        return DeleteCrop::runOrchidAction($crop, null);
+        return DeleteCrop::runOrchidAction($crop, $request);
     }
 
     public function save(Crop $crop, Request $request): RedirectResponse

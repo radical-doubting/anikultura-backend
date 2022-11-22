@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Batch\Batch;
 use App\Models\Batch\BatchSeedAllocation;
 use Database\Seeders\Batch\BatchSeeder;
 use Database\Seeders\Crop\CropSeeder;
@@ -18,7 +19,12 @@ beforeEach(function () {
 });
 
 it('exports metrics', function () {
-    $batchSeedAllocation = BatchSeedAllocation::factory()->createOne();
+    $batch = Batch::first();
+
+    $batchSeedAllocation = BatchSeedAllocation::factory()->createOne([
+        'batch_id' => $batch->id,
+        'farmer_id' => $batch->farmers->pluck('id')->first(),
+    ]);
 
     $batch = $batchSeedAllocation->batch;
     $crop = $batchSeedAllocation->crop;

@@ -8,6 +8,7 @@ use App\Orchid\Layouts\User\Admin\AdminFiltersLayout;
 use App\Orchid\Layouts\User\Admin\AdminListLayout;
 use App\Orchid\Screens\AnikulturaListScreen;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Link;
 
 class AdminListScreen extends AnikulturaListScreen
@@ -19,6 +20,8 @@ class AdminListScreen extends AnikulturaListScreen
 
     public function query(): array
     {
+        $this->authorize('viewAny', Admin::class);
+
         return [
             'admin' => Admin::filters()
                 ->filtersApplySelection(AdminFiltersLayout::class)
@@ -45,8 +48,8 @@ class AdminListScreen extends AnikulturaListScreen
         ];
     }
 
-    public function remove(Admin $admin): RedirectResponse
+    public function remove(Admin $admin, Request $request): RedirectResponse
     {
-        return DeleteAdmin::runOrchidAction($admin, null);
+        return DeleteAdmin::runOrchidAction($admin, $request);
     }
 }

@@ -38,6 +38,8 @@ class RoleListScreen extends Screen
      */
     public function query(): array
     {
+        $this->authorize('viewAny', Role::class);
+
         return [
             'roles' => Role::filters()->defaultSort('id', 'desc')->paginate(),
         ];

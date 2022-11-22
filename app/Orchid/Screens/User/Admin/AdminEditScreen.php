@@ -35,6 +35,8 @@ class AdminEditScreen extends AnikulturaEditScreen
 
     public function query(Admin $admin): array
     {
+        $this->authorize('view', $admin);
+
         $admin->load(['roles']);
 
         return [
@@ -100,9 +102,9 @@ class AdminEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Admin $admin): RedirectResponse
+    public function remove(Admin $admin, Request $request): RedirectResponse
     {
-        return DeleteAdmin::runOrchidAction($admin, null);
+        return DeleteAdmin::runOrchidAction($admin, $request);
     }
 
     public function save(Admin $admin, Request $request): RedirectResponse

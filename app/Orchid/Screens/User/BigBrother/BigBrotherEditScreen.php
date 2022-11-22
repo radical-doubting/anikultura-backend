@@ -34,6 +34,8 @@ class BigBrotherEditScreen extends AnikulturaEditScreen
 
     public function query(BigBrother $bigBrother): array
     {
+        $this->authorize('view', $bigBrother);
+
         return [
             'bigBrother' => $bigBrother,
             'bigBrotherProfile' => $bigBrother->profile,
@@ -83,9 +85,9 @@ class BigBrotherEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(BigBrother $bigBrother): RedirectResponse
+    public function remove(BigBrother $bigBrother, Request $request): RedirectResponse
     {
-        return DeleteBigBrother::runOrchidAction($bigBrother, null);
+        return DeleteBigBrother::runOrchidAction($bigBrother, $request);
     }
 
     public function save(BigBrother $bigBrother, Request $request): RedirectResponse

@@ -51,6 +51,8 @@ class RoleEditScreen extends Screen
      */
     public function query(Role $role): array
     {
+        $this->authorize('view', $role);
+
         $this->exist = $role->exists;
 
         return [
@@ -125,8 +127,8 @@ class RoleEditScreen extends Screen
      *
      * @throws \Exception
      */
-    public function remove(Role $role): RedirectResponse
+    public function remove(Role $role, Request $request): RedirectResponse
     {
-        return DeleteRole::runOrchidAction($role, null);
+        return DeleteRole::runOrchidAction($role, $request);
     }
 }

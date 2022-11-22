@@ -29,6 +29,8 @@ class MunicityEditScreen extends AnikulturaEditScreen
 
     public function query(Municity $municity): array
     {
+        $this->authorize('view', $municity);
+
         return [
             'municity' => $municity,
         ];
@@ -50,9 +52,9 @@ class MunicityEditScreen extends AnikulturaEditScreen
         ];
     }
 
-    public function remove(Municity $municity): RedirectResponse
+    public function remove(Municity $municity, Request $request): RedirectResponse
     {
-        return DeleteMunicity::runOrchidAction($municity, null);
+        return DeleteMunicity::runOrchidAction($municity, $request);
     }
 
     public function save(Municity $municity, Request $request): RedirectResponse

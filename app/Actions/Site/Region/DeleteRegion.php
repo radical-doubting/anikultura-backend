@@ -4,6 +4,7 @@ namespace App\Actions\Site\Region;
 
 use App\Helpers\ToastHelper;
 use App\Models\Site\Region;
+use App\Models\User\User;
 use App\Traits\AsOrchidAction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -42,5 +43,15 @@ class DeleteRegion
         Toast::info(__('Region was removed successfully!'));
 
         return redirect()->route('platform.sites.regions');
+    }
+
+    public function authorize(Request $request, mixed $model): bool
+    {
+        /**
+         * @var User
+         */
+        $user = $request->user();
+
+        return $user->can('delete', $model);
     }
 }

@@ -100,7 +100,7 @@ it('shows an existing batch from the edit screen as big brother', function () {
         ->assertSee($batch->farmschool_name);
 });
 
-it('creates a batch from the create screen', function () {
+it('creates a batch from the create screen as admin', function () {
     $screen = screen('platform.batches.create')
         ->actingAs(Admin::first());
 
@@ -137,7 +137,7 @@ it('creates a batch from the create screen', function () {
     ]);
 });
 
-it('deletes an existing batch from the edit screen', function () {
+it('deletes an existing batch from the edit screen as admin', function () {
     $batch = Batch::factory()->createOne();
 
     $batchData = $batch->only(

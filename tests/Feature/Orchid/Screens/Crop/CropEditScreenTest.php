@@ -2,8 +2,9 @@
 
 use App\Models\Crop\Crop;
 use App\Models\User\Admin\Admin;
-use Database\Seeders\User\Admin\AdminProfileSeeder;
+use App\Models\User\BigBrother\BigBrother;
 use Database\Seeders\User\Admin\AdminSeeder;
+use Database\Seeders\User\BigBrother\BigBrotherSeeder;
 use Database\Seeders\User\RoleSeeder;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\assertDatabaseMissing;
@@ -13,11 +14,11 @@ beforeEach(function () {
     seed([
         RoleSeeder::class,
         AdminSeeder::class,
-        AdminProfileSeeder::class,
+        BigBrotherSeeder::class,
     ]);
 });
 
-it('shows create screen', function () {
+it('shows create screen as admin', function () {
     $screen = screen('platform.crops.create')->actingAs(Admin::first());
 
     $screen->display()
@@ -28,7 +29,14 @@ it('shows create screen', function () {
         ->assertSee('Save');
 });
 
-it('shows an existing crop from the edit screen', function () {
+it('does not show create screen as big brother', function () {
+    $screen = screen('platform.crops.create')->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('shows an existing crop from the edit screen as admin', function () {
     $crop = Crop::factory()->createOne();
 
     $screen = screen('platform.crops.edit')
@@ -45,7 +53,18 @@ it('shows an existing crop from the edit screen', function () {
         ->assertSee($crop->name);
 });
 
-it('creates a crop from the create screen', function () {
+it('does not show an existing crop from the edit screen as big brother', function () {
+    $crop = Crop::factory()->createOne();
+
+    $screen = screen('platform.crops.edit')
+        ->parameters([$crop->id])
+        ->actingAs(BigBrother::first());
+
+    $screen->display()
+        ->assertStatus(403);
+});
+
+it('creates a crop from the create screen as admin', function () {
     $screen = screen('platform.crops.create')
         ->actingAs(Admin::first());
 
@@ -73,7 +92,7 @@ it('creates a crop from the create screen', function () {
     assertDatabaseHas('crops', $cropData);
 });
 
-it('deletes an existing crop from the edit screen', function () {
+it('deletes an existing crop from the edit screen as admin', function () {
     $crop = Crop::factory()->createOne();
 
     $cropData = $crop->only(
